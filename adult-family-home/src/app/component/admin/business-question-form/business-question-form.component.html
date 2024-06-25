@@ -1,0 +1,189 @@
+<div class="container">
+  <form [formGroup]="businessForm" (ngSubmit)="onSubmit()">
+  <h2>Basic Information</h2>
+  <div>
+    <label>Business Name:</label>
+    <input formControlName="businessName" required>
+  </div>
+  <div>
+    <label>Tagline:</label>
+    <input formControlName="tagline">
+  </div>
+  <div>
+    <label>Unique Service:</label>
+    <textarea formControlName="uniqueService"></textarea>
+  </div>
+  <div>
+    <label>Why Choose Your AFH:</label>
+    <textarea formControlName="whyChoose"></textarea>
+  </div>
+
+  <h2>Business Story and Mission</h2>
+  <div>
+    <label>Business Story:</label>
+    <textarea formControlName="businessStory"></textarea>
+  </div>
+  <div>
+    <label>Motivation:</label>
+    <textarea formControlName="motivation"></textarea>
+  </div>
+  <div>
+    <label>Mission Statement:</label>
+    <textarea formControlName="mission"></textarea>
+  </div>
+  <div>
+    <label>Vision:</label>
+    <textarea formControlName="vision"></textarea>
+  </div>
+
+  <h2>Certifications and Target Audience</h2>
+  <div>
+    <label>Certifications:</label>
+    <textarea formControlName="certifications"></textarea>
+  </div>
+  <div>
+    <label>Target Audience:</label>
+    <textarea formControlName="targetAudience"></textarea>
+  </div>
+
+  <h2>Services and Offerings</h2>
+  <div>
+    <label>Service Description:</label>
+    <textarea formControlName="services"></textarea>
+  </div>
+  <div>
+    <label>Special Programs:</label>
+    <textarea formControlName="specialPrograms"></textarea>
+  </div>
+  <div>
+    <label>Tours:</label>
+    <textarea formControlName="tours"></textarea>
+  </div>
+  <div>
+    <label>Free Consulting:</label>
+    <textarea formControlName="freeConsulting"></textarea>
+  </div>
+
+  <h2>Website Goals</h2>
+  <div>
+    <label>Primary Goal:</label>
+    <textarea formControlName="websiteGoals"></textarea>
+  </div>
+
+  <h2>Content and Photos</h2>
+  <div>
+    <label>Logo Image:</label>
+    <input type="file" (change)="onFileChange($event, 'logoImage')">
+  </div>
+  <div>
+    <label>Owner Images and Bios:</label>
+    <textarea formControlName="ownerImagesBios"></textarea>
+  </div>
+  <div>
+    <label>Staff Images and Bios:</label>
+    <textarea formControlName="staffImagesBios"></textarea>
+  </div>
+
+  <h2>Facility and Lifestyle Images</h2>
+  <div>
+    <label>Facility Images:</label>
+    <input type="file" multiple (change)="onFileChange($event, 'facilityImages')">
+  </div>
+  <div>
+    <label>Lifestyle Images:</label>
+    <input type="file" multiple (change)="onFileChange($event, 'lifestyleImages')">
+  </div>
+
+  <h2>Media and Reviews</h2>
+  <div>
+    <label>Media Features:</label>
+    <textarea formControlName="mediaFeatures"></textarea>
+  </div>
+  <div>
+    <label>Ratings:</label>
+    <textarea formControlName="ratings"></textarea>
+  </div>
+  <div>
+    <label>Testimonials:</label>
+    <textarea formControlName="testimonials"></textarea>
+  </div>
+
+  <h2>Contact Information</h2>
+  <div>
+    <label>Full Address:</label>
+    <textarea formControlName="address"></textarea>
+  </div>
+  <div>
+    <label>Phone Number:</label>
+    <input formControlName="phone">
+  </div>
+  <div>
+    <label>Fax Number:</label>
+    <input formControlName="fax">
+  </div>
+  <div>
+    <label>Email:</label>
+    <input formControlName="email">
+  </div>
+  <div>
+    <label>Business Hours:</label>
+    <textarea formControlName="businessHours"></textarea>
+  </div>
+  <div>
+    <label>Social Media Profiles:</label>
+    <textarea formControlName="socialMedia"></textarea>
+  </div>
+
+  <h2>Home Page</h2>
+  <div>
+    <label>Welcome Message:</label>
+    <textarea formControlName="welcomeMessage"></textarea>
+  </div>
+  <div>
+    <label>Key Services and Highlights:</label>
+    <textarea formControlName="keyServicesHighlights"></textarea>
+  </div>
+
+  <h2>About Us Page</h2>
+  <div>
+    <label>Team and Values:</label>
+    <textarea formControlName="teamValues"></textarea>
+  </div>
+
+  <h2>Services Page</h2>
+  <div>
+    <label>Service Benefits:</label>
+    <textarea formControlName="serviceBenefits"></textarea>
+  </div>
+  <div>
+    <label>Pricing Structure:</label>
+    <textarea formControlName="pricingStructure"></textarea>
+  </div>
+
+  <h2>Contact Us Page</h2>
+  <div>
+    <label>Contact Form Details:</label>
+    <textarea formControlName="contactFormDetails"></textarea>
+  </div>
+  <div>
+    <label>Map or Directions:</label>
+    <textarea formControlName="mapDirections"></textarea>
+  </div>
+
+  <h2>Additional Content</h2>
+  <div>
+    <label>FAQs:</label>
+    <textarea formControlName="faqs"></textarea>
+  </div>
+  <div>
+    <label>Blog or News:</label>
+    <textarea formControlName="blogNews"></textarea>
+  </div>
+  <div>
+    <label>Photo Gallery:</label>
+    <textarea formControlName="photoGallery"></textarea>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+</div>

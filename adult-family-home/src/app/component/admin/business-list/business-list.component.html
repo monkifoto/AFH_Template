@@ -1,0 +1,5 @@
+<div *ngFor="let business of businesses$ | async">
+  <h2>{{ business.businessName }}</h2>
+  <p>{{ business.tagline }}</p>
+  <!-- Display other business details here -->
+</div>
