@@ -20,45 +20,43 @@ export class BusinessQuestionFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.businessForm = this.fb.group({
-      businessName: ['', Validators.required],
-      tagline: [''],
-      uniqueService: ['', Validators.required],
-      whyChoose: ['', Validators.required],
-      businessStory: ['', Validators.required],
-      motivation: ['', Validators.required],
-      mission: ['', Validators.required],
-      vision: ['', Validators.required],
-      certifications: ['', Validators.required],
-      targetAudience: ['', Validators.required],
-      services: ['', Validators.required],
-      specialPrograms: ['', Validators.required],
-      tours: ['', Validators.required],
-      freeConsulting: ['', Validators.required],
-      websiteGoals: ['', Validators.required],
+      businessName: ['Careful Living AFH', Validators.required],
+      tagline: ['Caring with compassion'],
+      uniqueService: ['Personalized 24/7 care'],
+      whyChoose: ['We provide personalized care tailored to each resident\'s needs.'],
+      businessStory: ['Careful Living AFH was founded in 2005 by a group of healthcare professionals who wanted to provide a loving and caring environment for seniors.', Validators.required],
+      motivation: ['The motivation behind starting this business was to create a home where seniors can live comfortably and with dignity.'],
+      mission: ['Our mission is to provide exceptional care and support to our residents.', Validators.required],
+      vision: ['To be the leading provider of adult family home care in our community.', Validators.required],
+      certifications: ['Licensed by the state, Certified Nursing Assistants (CNA) on staff.', Validators.required],
+      targetAudience: ['Seniors in need of assisted living services, families looking for quality care for their loved ones.',],
+      services: ['Assisted living, personal care, medication management, daily activities.', Validators.required],
+      specialPrograms: ['Memory care, respite care, physical therapy.'],
+      tours: ['Yes, we provide tours of our facility.'],
+      freeConsulting: ['Yes, we offer free consulting services.'],
+      websiteGoals: ['To provide information, encourage visits, and offer consultation requests.', Validators.required],
       logoImage: [''],
-      ownerImagesBios: ['', Validators.required],
-      staffImagesBios: ['', Validators.required],
+      ownerImagesBios: ['John Doe, RN, Founder.', Validators.required],
+      staffImagesBios: ['Jane Smith, CNA, Head Nurse; Bob Johnson, Physical Therapist.', Validators.required],
       facilityImages: [''],
       lifestyleImages: [''],
-      mediaFeatures: ['', Validators.required],
-      ratings: ['', Validators.required],
-      testimonials: ['', Validators.required],
-      address: ['', Validators.required],
-      phone: ['', Validators.required],
-      fax: [''],
-      email: ['', Validators.required],
-      businessHours: ['', Validators.required],
-      socialMedia: ['', Validators.required],
-      welcomeMessage: ['', Validators.required],
-      keyServicesHighlights: ['', Validators.required],
-      teamValues: ['', Validators.required],
-      serviceBenefits: ['', Validators.required],
-      pricingStructure: ['', Validators.required],
-      contactFormDetails: ['', Validators.required],
-      mapDirections: ['', Validators.required],
-      faqs: ['', Validators.required],
-      blogNews: ['', Validators.required],
-      photoGallery: ['', Validators.required]
+      mediaFeatures: ['Featured in Local News, Healthcare Magazine.'],
+      ratings: ['Google: 4.8 stars, Yelp: 5 stars'],
+      testimonials: ['John Doe\'s family: "Amazing care!"'],
+      address: ['1234 Care St, Compassion City, ST 12345', Validators.required],
+      phone: ['(123) 456-7890', Validators.required],
+      fax: ['(123) 456-7891'],
+      email: ['info@carefullivingafh.com', Validators.email],
+      businessHours: ['Mon-Fri: 9am-5pm, Sat-Sun: 10am-4pm', Validators.required],
+      socialMedia: ['Facebook: facebook.com/carefullivingafh'],
+      welcomeMessage: ['Welcome to Careful Living AFH, where we care with compassion.', Validators.required],
+      keyServicesHighlights: ['24/7 care, nutritious meals, engaging activities.', Validators.required],
+      teamValues: ['Compassion, respect, integrity.', Validators.required],
+      serviceBenefits: ['Personalized care, safe environment, professional staff.', Validators.required],
+      pricingStructure: ['Contact us for pricing details.', Validators.required],
+      contactFormDetails: ['Name, Email, Phone, Message', Validators.required],
+      mapDirections: ['Included map and directions to our facility.'],
+      photoGallery: ['Gallery of our facility and events.',]
     });
   }
 
@@ -66,32 +64,34 @@ export class BusinessQuestionFormComponent implements OnInit {
     const file = event.target.files[0];
     if (file) {
       const filePath = `uploads/${file.name}`;
-      //const task = this.businessService.uploadFile(filePath, file);
+      const task = this.businessService.uploadFile(filePath, file);
 
-      // this.uploadProgress[controlName] = task.percentageChanges();
+      this.uploadProgress[controlName] = task.percentageChanges();
 
-      // task.snapshotChanges().pipe(
-      //   finalize(() => {
-      //     this.businessService.getDownloadURL(filePath).subscribe(url => {
-      //           const currentValue = this.businessForm.get('controlName')?.value;
-      //           if (Array.isArray(currentValue)) {
-      //             this.businessForm.patchValue({ [controlName]: [...currentValue, url] });
-      //           } else {
-      //             this.businessForm.patchValue({ [controlName]: url });
-      //           }
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          this.businessService.getDownloadURL(filePath).subscribe(url => {
+                const currentValue = this.businessForm.get('controlName')?.value;
+                if (Array.isArray(currentValue)) {
+                  this.businessForm.patchValue({ [controlName]: [...currentValue, url] });
+                } else {
+                  this.businessForm.patchValue({ [controlName]: url });
+                }
 
-      //     });
-      //   })
-      // ).subscribe();
+          });
+        })
+      ).subscribe();
     }
   }
 
   onSubmit(): void {
+    console.log('Submit Click', this.businessForm.valid);
     if (this.businessForm.valid) {
       const formValue: Business = this.businessForm.value;
-      // this.businessService.createBusiness(formValue)
-      //   .then(() => alert('Business details saved successfully!'))
-      //   .catch(err => console.error('Error saving business details', err));
+      console.log(formValue);
+      this.businessService.createBusiness(formValue)
+        .then(() => alert('Business details saved successfully!'))
+        .catch(err => console.error('Error saving business details', err));
     }
   }
 }

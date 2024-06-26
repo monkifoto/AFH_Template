@@ -1,187 +1,224 @@
 <div class="container">
   <form [formGroup]="businessForm" (ngSubmit)="onSubmit()">
   <h2>Basic Information</h2>
-  <div>
-    <label>Business Name:</label>
-    <input formControlName="businessName" required>
+  <div class="form-group">
+    <label for="businessName" class="required">Business Name</label>
+    <input id="businessName" formControlName="businessName" class="form-control" required>
   </div>
-  <div>
-    <label>Tagline:</label>
-    <input formControlName="tagline">
+  <div class="form-group">
+    <label for="tagline">Tagline</label>
+    <input id="tagline" formControlName="tagline" class="form-control">
   </div>
-  <div>
-    <label>Unique Service:</label>
-    <textarea formControlName="uniqueService"></textarea>
+
+  <div class="form-group">
+    <label for="uniqueService">Unique Service</label>
+    <input id="uniqueService" formControlName="uniqueService" class="form-control" >
   </div>
-  <div>
-    <label>Why Choose Your AFH:</label>
-    <textarea formControlName="whyChoose"></textarea>
+  <div class="form-group">
+    <label for="whyChoose">Why Choose Us</label>
+    <input id="whyChoose" formControlName="whyChoose" class="form-control" >
   </div>
+
 
   <h2>Business Story and Mission</h2>
-  <div>
-    <label>Business Story:</label>
-    <textarea formControlName="businessStory"></textarea>
+  <div class="form-group">
+    <label for="businessStory" class="required">Business Story</label>
+    <textarea id="businessStory" formControlName="businessStory" class="form-control" required></textarea>
   </div>
-  <div>
-    <label>Motivation:</label>
-    <textarea formControlName="motivation"></textarea>
+  <div class="form-group">
+    <label for="motivation">Motivation</label>
+    <textarea id="motivation" formControlName="motivation" class="form-control" ></textarea>
   </div>
-  <div>
-    <label>Mission Statement:</label>
-    <textarea formControlName="mission"></textarea>
+
+  <div class="form-group">
+    <label for="mission" class="required">Mission</label>
+    <textarea id="mission" formControlName="mission" class="form-control" required></textarea>
   </div>
-  <div>
-    <label>Vision:</label>
-    <textarea formControlName="vision"></textarea>
+
+  <div class="form-group">
+    <label for="vision" class="required">Vision</label>
+    <textarea id="vision" formControlName="vision" class="form-control" required></textarea>
   </div>
+
 
   <h2>Certifications and Target Audience</h2>
-  <div>
-    <label>Certifications:</label>
-    <textarea formControlName="certifications"></textarea>
+  <div class="form-group">
+    <label for="certifications" class="required">Certifications</label>
+    <textarea id="certifications" formControlName="certifications" class="form-control" required></textarea>
   </div>
-  <div>
-    <label>Target Audience:</label>
-    <textarea formControlName="targetAudience"></textarea>
+
+  <div class="form-group">
+    <label for="targetAudience">Target Audience</label>
+    <textarea id="targetAudience" formControlName="targetAudience" class="form-control" ></textarea>
   </div>
+
 
   <h2>Services and Offerings</h2>
-  <div>
-    <label>Service Description:</label>
-    <textarea formControlName="services"></textarea>
-  </div>
-  <div>
-    <label>Special Programs:</label>
-    <textarea formControlName="specialPrograms"></textarea>
-  </div>
-  <div>
-    <label>Tours:</label>
-    <textarea formControlName="tours"></textarea>
-  </div>
-  <div>
-    <label>Free Consulting:</label>
-    <textarea formControlName="freeConsulting"></textarea>
+  <div class="form-group">
+    <label for="services" class="required">Services</label>
+    <textarea id="services" formControlName="services" class="form-control" required></textarea>
   </div>
 
+  <div class="form-group">
+    <label for="specialPrograms" >Special Programs</label>
+    <textarea id="specialPrograms" formControlName="specialPrograms" class="form-control" ></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="tours" >Tours</label>
+    <textarea id="tours" formControlName="tours" class="form-control" ></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="freeConsulting">Free Consulting</label>
+    <textarea id="freeConsulting" formControlName="freeConsulting" class="form-control" ></textarea>
+  </div>
+
+
   <h2>Website Goals</h2>
-  <div>
-    <label>Primary Goal:</label>
-    <textarea formControlName="websiteGoals"></textarea>
+  <div class="form-group">
+    <label for="websiteGoals" class="required">Website Goals</label>
+    <textarea id="websiteGoals" formControlName="websiteGoals" class="form-control" required></textarea>
   </div>
 
   <h2>Content and Photos</h2>
-  <div>
-    <label>Logo Image:</label>
-    <input type="file" (change)="onFileChange($event, 'logoImage')">
+  <div class="form-group">
+    <label for="logoImage" class="required">Logo Image</label>
+    <input type="file" id="logoImage" (change)="onFileChange($event, 'logoImage')" class="form-control">
+    <ng-container *ngIf="uploadProgress['logoImage'] | async as progress">
+      <div class="progress">
+        <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+      </div>
+    </ng-container>
   </div>
-  <div>
-    <label>Owner Images and Bios:</label>
-    <textarea formControlName="ownerImagesBios"></textarea>
+
+  <div class="form-group">
+    <label for="ownerImagesBios" class="required">Owner Images and Bios</label>
+    <textarea id="ownerImagesBios" formControlName="ownerImagesBios" class="form-control" required></textarea>
   </div>
-  <div>
-    <label>Staff Images and Bios:</label>
-    <textarea formControlName="staffImagesBios"></textarea>
+
+  <div class="form-group">
+    <label for="staffImagesBios" class="required">Staff Images and Bios</label>
+    <textarea id="staffImagesBios" formControlName="staffImagesBios" class="form-control" required></textarea>
   </div>
 
   <h2>Facility and Lifestyle Images</h2>
-  <div>
-    <label>Facility Images:</label>
-    <input type="file" multiple (change)="onFileChange($event, 'facilityImages')">
+  <div class="form-group">
+    <label for="facilityImages" class="required">Facility Images</label>
+    <input type="file" id="facilityImages" (change)="onFileChange($event, 'facilityImages')" class="form-control">
+    <ng-container *ngIf="uploadProgress['facilityImages'] | async as progress">
+      <div class="progress">
+        <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+      </div>
+    </ng-container>
   </div>
-  <div>
-    <label>Lifestyle Images:</label>
-    <input type="file" multiple (change)="onFileChange($event, 'lifestyleImages')">
+
+  <div class="form-group">
+    <label for="lifestyleImages" class="required">Lifestyle Images</label>
+    <input type="file" id="lifestyleImages" (change)="onFileChange($event, 'lifestyleImages')" class="form-control">
+    <ng-container *ngIf="uploadProgress['lifestyleImages'] | async as progress">
+      <div class="progress">
+        <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+      </div>
+    </ng-container>
   </div>
+
 
   <h2>Media and Reviews</h2>
-  <div>
-    <label>Media Features:</label>
-    <textarea formControlName="mediaFeatures"></textarea>
+  <div class="form-group">
+    <label for="mediaFeatures">Media Features</label>
+    <textarea id="mediaFeatures" formControlName="mediaFeatures" class="form-control" ></textarea>
   </div>
-  <div>
-    <label>Ratings:</label>
-    <textarea formControlName="ratings"></textarea>
+
+  <div class="form-group">
+    <label for="ratings">Ratings</label>
+    <textarea id="ratings" formControlName="ratings" class="form-control" ></textarea>
   </div>
-  <div>
-    <label>Testimonials:</label>
-    <textarea formControlName="testimonials"></textarea>
+
+  <div class="form-group">
+    <label for="testimonials">Testimonials</label>
+    <textarea id="testimonials" formControlName="testimonials" class="form-control"></textarea>
   </div>
+
 
   <h2>Contact Information</h2>
-  <div>
-    <label>Full Address:</label>
-    <textarea formControlName="address"></textarea>
-  </div>
-  <div>
-    <label>Phone Number:</label>
-    <input formControlName="phone">
-  </div>
-  <div>
-    <label>Fax Number:</label>
-    <input formControlName="fax">
-  </div>
-  <div>
-    <label>Email:</label>
-    <input formControlName="email">
-  </div>
-  <div>
-    <label>Business Hours:</label>
-    <textarea formControlName="businessHours"></textarea>
-  </div>
-  <div>
-    <label>Social Media Profiles:</label>
-    <textarea formControlName="socialMedia"></textarea>
+
+  <div class="form-group">
+    <label for="address" class="required">Address</label>
+    <textarea id="address" formControlName="address" class="form-control" required></textarea>
   </div>
 
-  <h2>Home Page</h2>
-  <div>
-    <label>Welcome Message:</label>
-    <textarea formControlName="welcomeMessage"></textarea>
+  <div class="form-group">
+    <label for="phone" class="required">Phone</label>
+    <input id="phone" formControlName="phone" class="form-control" required>
   </div>
-  <div>
-    <label>Key Services and Highlights:</label>
-    <textarea formControlName="keyServicesHighlights"></textarea>
+
+  <div class="form-group">
+    <label for="fax">Fax</label>
+    <input id="fax" formControlName="fax" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="email" class="required">Email</label>
+    <input id="email" formControlName="email" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label for="businessHours" class="required">Business Hours</label>
+    <textarea id="businessHours" formControlName="businessHours" class="form-control" required></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="socialMedia">Social Media</label>
+    <textarea id="socialMedia" formControlName="socialMedia" class="form-control" ></textarea>
+  </div>
+
+
+  <h2>Home Page</h2>
+
+  <div class="form-group">
+    <label for="welcomeMessage">Welcome Message</label>
+    <textarea id="welcomeMessage" formControlName="welcomeMessage" class="form-control" required></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="keyServicesHighlights" class="required">Key Services and Highlights</label>
+    <textarea id="keyServicesHighlights" formControlName="keyServicesHighlights" class="form-control" required></textarea>
   </div>
 
   <h2>About Us Page</h2>
-  <div>
-    <label>Team and Values:</label>
-    <textarea formControlName="teamValues"></textarea>
-  </div>
+
+    <div class="form-group">
+      <label for="teamValues" class="required">Team and Values</label>
+      <textarea id="teamValues" formControlName="teamValues" class="form-control" required></textarea>
+    </div>
 
   <h2>Services Page</h2>
-  <div>
-    <label>Service Benefits:</label>
-    <textarea formControlName="serviceBenefits"></textarea>
+  <div class="form-group">
+    <label for="serviceBenefits" class="required">Service Benefits</label>
+    <textarea id="serviceBenefits" formControlName="serviceBenefits" class="form-control" required></textarea>
   </div>
-  <div>
-    <label>Pricing Structure:</label>
-    <textarea formControlName="pricingStructure"></textarea>
+  <div class="form-group">
+    <label for="pricingStructure" class="required">Pricing Structure</label>
+    <textarea id="pricingStructure" formControlName="pricingStructure" class="form-control" required></textarea>
   </div>
 
   <h2>Contact Us Page</h2>
-  <div>
-    <label>Contact Form Details:</label>
-    <textarea formControlName="contactFormDetails"></textarea>
+  <div class="form-group">
+    <label for="contactFormDetails" class="required">Contact Form Details</label>
+    <textarea id="contactFormDetails" formControlName="contactFormDetails" class="form-control" required></textarea>
   </div>
-  <div>
-    <label>Map or Directions:</label>
-    <textarea formControlName="mapDirections"></textarea>
+
+  <div class="form-group">
+    <label for="mapDirections">Map and Directions</label>
+    <textarea id="mapDirections" formControlName="mapDirections" class="form-control" ></textarea>
   </div>
 
   <h2>Additional Content</h2>
-  <div>
-    <label>FAQs:</label>
-    <textarea formControlName="faqs"></textarea>
-  </div>
-  <div>
-    <label>Blog or News:</label>
-    <textarea formControlName="blogNews"></textarea>
-  </div>
-  <div>
-    <label>Photo Gallery:</label>
-    <textarea formControlName="photoGallery"></textarea>
+
+  <div class="form-group">
+    <label for="photoGallery">Photo Gallery:</label>
+    <textarea formControlName="photoGallery" class="form-control" ></textarea>
   </div>
 
   <button type="submit">Submit</button>

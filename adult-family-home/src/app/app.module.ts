@@ -19,6 +19,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { provideStorage, getStorage} from '@angular/fire/storage';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SplitCommaPipe } from './pipe/split-comma.pipe';
 
 
 
@@ -32,7 +33,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NavigationComponent,
     BusinessFormComponent,
     BusinessListComponent,
-    BusinessQuestionFormComponent
+    BusinessQuestionFormComponent,
+    SplitCommaPipe
   ],
   imports: [
     BrowserModule,

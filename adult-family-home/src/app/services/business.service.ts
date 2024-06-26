@@ -14,6 +14,7 @@ export class BusinessService {
 
   // Create a new business
   createBusiness(business: Business): Promise<void> {
+    console.log('Business Created');
     const id = this.afs.createId();
     return this.afs.doc(`${this.basePath}/${id}`).set({ ...business, id });
   }
