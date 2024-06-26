@@ -1,7 +1,7 @@
-<div class="hero">
+<div class="hero"  *ngIf="business">
   <div class="hero-overlay">
-    <h1>Welcome to Our Adult Family Home</h1>
-    <p>Providing compassionate care and a loving environment</p>
+    <h1>Welcome to {{business.businessName}}</h1>
+    <p>{{business.tagline}}</p>
   </div>
 </div>
 
@@ -11,15 +11,7 @@
     <div class="feature-list">
       <div class="feature-item">
         <h3>Feature 1</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </div>
-      <div class="feature-item">
-        <h3>Feature 2</h3>
-        <p>Nullam non nisi est sit amet facilisis magna etiam tempor orci.</p>
-      </div>
-      <div class="feature-item">
-        <h3>Feature 3</h3>
-        <p>Praesent elementum facilisis leo vel fringilla est ullamcorper.</p>
+        <!-- <p>{{ business.uniqueService }}</p> -->
       </div>
     </div>
   </section>
@@ -29,15 +21,7 @@
     <div class="reasons-list">
       <div class="reason-item">
         <h3>Reason 1</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </div>
-      <div class="reason-item">
-        <h3>Reason 2</h3>
-        <p>Nullam non nisi est sit amet facilisis magna etiam tempor orci.</p>
-      </div>
-      <div class="reason-item">
-        <h3>Reason 3</h3>
-        <p>Praesent elementum facilisis leo vel fringilla est ullamcorper.</p>
+        <!-- <p>{{ business.whyChoose }}</p> -->
       </div>
     </div>
   </section>

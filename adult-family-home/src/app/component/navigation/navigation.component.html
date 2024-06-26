@@ -1,8 +1,15 @@
 <nav>
-  <ul>
-    <li><a routerLink="/">Home</a></li>
-    <li><a routerLink="/about-us">About Us</a></li>
-    <li><a routerLink="/services">Services</a></li>
-    <li><a routerLink="/contact-us">Contact Us</a></li>
-  </ul>
+  <div class="nav-container">
+    <div class="logo">
+      <img *ngIf="business?.logoImage" [src]="business?.logoImage" alt="Business Logo">
+      <span *ngIf="!business?.logoImage">AFH Business</span>
+    </div>
+    <div class="menu-icon" (click)="toggleMenu()">&#9776;</div>
+    <ul [class.active]="menuActive">
+      <li (click)="navigateTo('home')">Home</li>
+      <li (click)="navigateTo('services')">Services</li>
+      <li (click)="navigateTo('about-us')">About Us</li>
+      <li (click)="navigateTo('contact-us')">Contact</li>
+    </ul>
+  </div>
 </nav>
