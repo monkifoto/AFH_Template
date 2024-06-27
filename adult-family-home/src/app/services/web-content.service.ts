@@ -7,7 +7,7 @@ import { Business } from '../model/business-questions.model';
   providedIn: 'root'
 })
 export class WebContentService {
-  private defaultBusinessId = 'St95t3fx6YQmakMhdu3W';
+  private defaultBusinessId = 'vfCMoPjAu2ROVBbKvk0D';
   constructor(private firestore: AngularFirestore) { }
 
   // getBusinessData(id:string): Observable<any> {
@@ -20,9 +20,8 @@ export class WebContentService {
   // }
   getBusinessData(id:string): Observable<Business | undefined> {
     if (id == null || id == undefined || id == ''){
-      id = 'ZLD5TNBA4lwnCqGYI73T';
+      id = this.defaultBusinessId;
     }
-   // const businessId = 'ZLD5TNBA4lwnCqGYI73T';
     console.log(`Fetching business data for ID: ${id}`);
     return this.firestore.collection('businesses').doc<Business>(id).snapshotChanges().pipe(
       map((action: { payload: { data: () => any; id: any; }; }) => {

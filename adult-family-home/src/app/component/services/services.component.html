@@ -8,17 +8,21 @@
 
   <div class="container">
     <section class="services-list">
-      <h2>Our Comprehensive Services</h2>
-      <div class="service-item" *ngFor="let service of business.services.split(',')">
-        <div class="service-icon">
-          <img src="/assets/service-icon.png" alt="Service Icon">
-        </div>
-        <div class="service-content">
-          <h3>{{ service }}</h3>
-          <p>{{ business.serviceBenefits }}</p>
-        </div>
-      </div>
+      <img src="/assets/care.svg" alt="Service Icon"><h2>Our Comprehensive Services</h2>
+      <ul  *ngFor="let service of business.services.split(',')">
+        <li><h3>{{ service }}</h3></li>
+      </ul>
     </section>
+
+    <section class="services-list">
+      <img src="/assets/care.svg" alt="Service Icon"><h2>Our Benefits</h2>
+      <ul *ngFor="let service of business.serviceBenefits.split(',')">
+         <li> <h3>{{ service }}</h3></li>
+      </ul>
+    </section>
+
+
+
 
     <section class="special-programs">
       <h2>Special Programs</h2>

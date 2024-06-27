@@ -15,9 +15,8 @@ export class AboutUsComponent implements OnInit{
   constructor(private webContent: WebContentService, private route: ActivatedRoute,){}
 
   ngOnInit(): void {
-    // const businessId = 'ZLD5TNBA4lwnCqGYI73T';
     this.route.queryParams.subscribe(params => {
-      const businessId = params['id'] || this.webContent.getDefaultBusinessData();
+      let businessId = params['id'] ;
       this.webContent.getBusinessData(businessId).subscribe(data => {
         if(data)
         this.business = data;

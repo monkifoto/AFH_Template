@@ -14,13 +14,13 @@ export class NavigationComponent implements OnInit{
   businessId: string = '';
   business: Business | undefined;
   menuActive: boolean = false;
+  menuOpen: boolean = false;
 
   constructor(private route: ActivatedRoute, private router: Router, private content: WebContentService) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.businessId = params['id'] || '';
-      const businessId = this.businessId || this.content.getDefaultBusinessData();
+      this.businessId = params['id'];
       this.content.getBusinessData(this.businessId).subscribe(data => {
         this.business = data;
       });
@@ -29,12 +29,19 @@ export class NavigationComponent implements OnInit{
 
   navigateTo(page: string): void {
     const queryParams = this.businessId ? { id: this.businessId } : {};
+    this.closeMenu();
     this.router.navigate([`/${page}`], { queryParams });
+
   }
 
 
-toggleMenu(): void {
-  this.menuActive = !this.menuActive;
-}
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu() {
+    this.menuOpen = false;
+  }
+
 
 }
