@@ -121,10 +121,18 @@ max-height: 70px;
   .navbar-container {
     justify-content: flex-start;
   }
-
+  .nav-item{
+    font-size: 2rem;
+    color: white;
+  }
   .logo {
     order: 2;
     margin-left: auto;
+  }
+
+  .logo img {
+    margin-left: auto;
+    height: 40px;
   }
 
   .menu-icon {
