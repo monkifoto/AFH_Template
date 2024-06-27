@@ -37,18 +37,37 @@ section {
   border-radius: 8px;
 }
 
+/* Mission and Vision Section Styling */
 .mission-vision {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  margin-bottom: 50px;
 }
 
 .mission, .vision {
-  width: 48%;
-  background: #f1f1f1;
-  padding: 20px;
+  background: #f9f9f9;
   border-radius: 8px;
+  margin: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  flex: 1 1 calc(50% - 20px);
+  box-sizing: border-box;
 }
 
+.mission img, .vision img {
+  max-width: 350px;
+}
+
+
+.mission h2, .vision h2 {
+  font-size: 1.5em;
+  margin: 0 0 10px;
+}
+
+.mission p, .vision p {
+  font-size: 1em;
+  color: #666;
+}
 .team {
   text-align: center;
 }
@@ -88,4 +107,26 @@ section {
 .team-info p {
   font-size: 0.9em;
   color: #666;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .mission-vision {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .team-member {
+    flex: 1 1 calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .team-member {
+    flex: 1 1 100%;
+  }
+
+  .hero h1 {
+    font-size: 2em;
+  }
 }
