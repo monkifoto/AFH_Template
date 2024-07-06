@@ -5,6 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SplitCommaPipe implements PipeTransform {
   transform(value: string): any[] {
+    console.log(value);
     return value ? JSON.parse(value) : [];
   }
 }

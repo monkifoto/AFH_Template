@@ -39,4 +39,5 @@ export interface Business {
   faqs: string;
   blogNews: string;
   photoGallery: string;
+  mapIframe: string;
 }

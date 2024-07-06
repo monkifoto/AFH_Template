@@ -5,24 +5,43 @@
   </div>
 </div>
 
-<div class="container">
+<!-- <div class="container">
   <section class="features">
     <h2>Our Unique Features</h2>
     <div class="feature-list">
       <div class="feature-item">
-        <h3>Feature 1</h3>
-        <!-- <p>{{ business.uniqueService }}</p> -->
+        <div class="container" [innerHTML]=" business.uniqueService"></div>
       </div>
     </div>
-  </section>
+  </section> -->
 
-  <section class="why-choose-us">
+  <div class="features-section">
+    <h2>Our Unique Features</h2>
+    <div class="feature-list">
+      <div *ngFor="let feature of business.uniqueService.split('|')" class="feature-item">
+        <div class="container" [innerHTML]="feature"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="features-section">
+    <h2>Why Choose Us</h2>
+    <div class="feature-list">
+      <div *ngFor="let feature of business.whyChoose.split('|')" class="feature-item">
+        <div class="container" [innerHTML]="feature"></div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- <section class="why-choose-us">
     <h2>Why Choose Us</h2>
     <div class="reasons-list">
       <div class="reason-item">
-        <h3>Reason 1</h3>
-        <!-- <p>{{ business.whyChoose }}</p> -->
+        <div class="container" [innerHTML]=" business.whyChoose"></div>
       </div>
     </div>
   </section>
-</div>
+ -->
+
+
