@@ -1,14 +1,23 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable, map } from 'rxjs';
 import { Business } from '../model/business-questions.model';
+
+export interface Employee {
+  id?: string;
+  name: string;
+  role: string;
+  bio: string;
+  photoPath: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebContentService {
   private defaultBusinessId = 'vfCMoPjAu2ROVBbKvk0D';
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) { }
 
   // getBusinessData(id:string): Observable<any> {
   //   console.log('WebContent Service call');
@@ -40,5 +49,15 @@ export class WebContentService {
 
   getDefaultBusinessData(): Observable<Business | undefined> {
     return this.getBusinessData(this.defaultBusinessId);
+  }
+
+
+  getEmployees(): Observable<Employee[]> {
+    return this.firestore.collection<Employee>('employees').valueChanges({ idField: 'id' });
+  }
+
+  getEmployeePhoto(photoPath: string): Observable<string> {
+    const ref = this.storage.ref(photoPath);
+    return ref.getDownloadURL();
   }
 }

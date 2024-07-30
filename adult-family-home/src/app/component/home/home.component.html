@@ -1,20 +1,11 @@
-<div class="hero"  *ngIf="business">
+<div class="hero" *ngIf="business">
   <div class="hero-overlay">
     <h1>Welcome to {{business.businessName}}</h1>
     <p>{{business.tagline}}</p>
   </div>
 </div>
 
-<!-- <div class="container">
-  <section class="features">
-    <h2>Our Unique Features</h2>
-    <div class="feature-list">
-      <div class="feature-item">
-        <div class="container" [innerHTML]=" business.uniqueService"></div>
-      </div>
-    </div>
-  </section> -->
-
+<div class="features-container">
   <div class="features-section">
     <h2>Our Unique Features</h2>
     <div class="feature-list">
@@ -29,19 +20,7 @@
     <div class="feature-list">
       <div *ngFor="let feature of business.whyChoose.split('|')" class="feature-item">
         <div class="container" [innerHTML]="feature"></div>
-
       </div>
     </div>
   </div>
-
-  <!-- <section class="why-choose-us">
-    <h2>Why Choose Us</h2>
-    <div class="reasons-list">
-      <div class="reason-item">
-        <div class="container" [innerHTML]=" business.whyChoose"></div>
-      </div>
-    </div>
-  </section>
- -->
-
-
+</div>

@@ -16,6 +16,7 @@ export interface Business {
   freeConsulting: string;
   websiteGoals: string;
   logoImage?: string;
+  logoText?:string;
   ownerImagesBios: string;
   staffImagesBios: string;
   facilityImages?: string[];

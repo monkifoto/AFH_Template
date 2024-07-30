@@ -8,19 +8,19 @@
   <div class="container">
     <section class="business-story">
       <h2>Our Story</h2>
-      <p>{{ business.businessStory }}</p>
+      <div [innerHTML]="business.businessStory"></div>
     </section>
 
     <section class="mission-vision">
       <div class="mission">
         <img [src]="business.lifestyleImages"/>
         <h3>Our Mission</h3>
-        <p>{{ business.mission }}</p>
+        <div [innerHTML]="business.mission"></div>
       </div>
       <div class="vision">
         <img [src]="business.facilityImages"/>
         <h3>Our Vision</h3>
-        <p>{{ business.vision }}</p>
+        <div [innerHTML]="business.vision"></div>
       </div>
     </section>
 

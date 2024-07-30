@@ -32,11 +32,11 @@
     <section class="tours-consulting">
       <div class="tours">
         <h2>Tours</h2>
-        <p>{{ business.tours }}</p>
+       <div [innerHTML]=" business.tours"></div>
       </div>
       <div class="consulting">
         <h2>Free Consulting</h2>
-        <p>{{ business.freeConsulting }}</p>
+        <div [innerHTML]=" business.freeConsulting"></div>
       </div>
     </section>
   </div>

@@ -1,9 +1,9 @@
 .hero-services {
-  background-image: url('/assets/splash.jpg');
+  background: url('../../../assets/sharedAssets/istockphoto-1335866199-2048x2048.jpg') no-repeat center center/cover;
   background-size: cover;
   background-position: center;
   position: relative;
-  height: 300px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,8 +47,8 @@
 }
 
 .special-programs, .tours-consulting {
-  background: #f1f1f1;
-  padding: 20px;
+  background: #f9f9f9;
+  padding: 50px;
   border-radius: 8px;
   margin-bottom: 40px;
 }
@@ -56,11 +56,13 @@
 .tours-consulting {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px; /* Adjust the gap between the sections if needed */
 }
 
 .tours, .consulting {
   flex: 1;
-  margin-right: 20px;
+  margin-right: 40px;
 }
 
 .tours:last-child, .consulting:last-child {
@@ -96,6 +98,14 @@ body {
   .service-item {
     flex: 1 1 calc(50% - 20px);
   }
+  .tours-consulting {
+    flex-direction: column;
+  }
+
+  .tours,
+  .consulting {
+    min-width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -105,5 +115,13 @@ body {
 
   .hero h1 {
     font-size: 2em;
+  }
+  .tours-consulting {
+    flex-direction: column;
+  }
+
+  .tours,
+  .consulting {
+    min-width: 100%;
   }
 }
