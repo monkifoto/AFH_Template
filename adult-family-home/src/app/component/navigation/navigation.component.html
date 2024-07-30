@@ -1,11 +1,21 @@
 <nav class="navbar">
   <div class="navbar-container">
     <div class="logo">
+      <img class="logoImage" *ngIf="business?.logoImage" [src]="business?.logoImage" alt="Business Logo">
+      <span class="number">#1</span>
+      <div class="text">
+          <div class="top">HELPING HAND</div>
+          <div class="bottom">ADULT FAMILY HOME</div>
+      </div>
+  </div>
+    <!-- <div class="logo">
       <a routerLink="/">
-      <img *ngIf="business?.logoImage" [src]="business?.logoImage" alt="Business Logo">
+
+
+      <span class="logoText" *ngIf="business?.logoText">{{business?.logoText}}</span>
       <span *ngIf="!business?.logoImage">AFH Business</span>
       </a>
-    </div>
+    </div> -->
   <div class="menu-icon" (click)="toggleMenu()">
       <!-- <i class="fa" [ngClass]="{'fa-bars': !menuOpen, 'fa-times': menuOpen}"></i> -->
       <div class="bar1" [ngClass]="{'open-bar1': menuOpen}"></div>

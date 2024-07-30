@@ -18,9 +18,9 @@
           <h3>Phone</h3>
           <p>{{ business.phone }}</p>
         </div>
-        <div class="contact-item">
+        <div class="contact-item" *ngIf="business.email">
           <h3>Email</h3>
-          <p>{{ business.email }}</p>
+          <p><a href="mailto:{{ business.email }}">{{business.email}}</a></p>
         </div>
         <div class="contact-item" *ngIf="business.fax">
           <h3>Fax</h3>
@@ -28,7 +28,7 @@
         </div>
         <div class="contact-item" *ngIf="business.socialMedia">
           <h3>Social Media</h3>
-          <p>{{ business.socialMedia }}</p>
+          <p><a href="{{ business.socialMedia }}">{{business.socialMedia}}</a></p>
         </div>
         <div>
           <h3>Visitation Hours</h3>
@@ -68,8 +68,8 @@
       <h2>Find Us Here</h2>
       <div class="map-container">
         <!-- needs to come from the database-->
-        <div class="container" [innerHTML]="business.mapIframe"></div>
-        <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7460.530516506536!2d-122.18471088983462!3d47.54600478154801!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x549069117965856f%3A0xa36b023f16c07440!2s11805%20SE%2064th%20St%2C%20Bellevue%2C%20WA%2098006!5e0!3m2!1sen!2sus!4v1719851446084!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+        <!-- <div class="container" [innerHTML]="business.mapIframe"></div> -->
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7460.530516506536!2d-122.18471088983462!3d47.54600478154801!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x549069117965856f%3A0xa36b023f16c07440!2s11805%20SE%2064th%20St%2C%20Bellevue%2C%20WA%2098006!5e0!3m2!1sen!2sus!4v1719851446084!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </section>
   </div>

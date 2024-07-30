@@ -1,9 +1,9 @@
 .hero-about {
-  background-image: url('/assets/splash.jpg');
+  background: url('../../../assets/sharedAssets/istockphoto-1207318385-2048x2048.jpg') no-repeat center center/cover;
   background-size: cover;
   background-position: center;
   position: relative;
-  height: 300px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,7 +55,8 @@ section {
 }
 
 .mission img, .vision img {
-  max-width: 350px;
+  /* max-width: 350px; */
+  width: 100%;
 }
 
 
