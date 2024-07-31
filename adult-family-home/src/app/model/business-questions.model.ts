@@ -1,5 +1,5 @@
 export interface Business {
-  id?: string;
+  id: string;
   businessName: string;
   tagline?: string;
   uniqueService: string;
@@ -16,7 +16,7 @@ export interface Business {
   freeConsulting: string;
   websiteGoals: string;
   logoImage?: string;
-  logoText?:string;
+  logoText?: string;
   ownerImagesBios: string;
   staffImagesBios: string;
   facilityImages?: string[];
@@ -41,4 +41,14 @@ export interface Business {
   blogNews: string;
   photoGallery: string;
   mapIframe: string;
+  employees?: Employee[];
+  isActive: boolean;
+}
+
+export interface Employee {
+  id: string;
+  name: string;
+  role: string;
+  bio: string;
+  photoURL: string;
 }

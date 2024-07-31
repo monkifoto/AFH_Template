@@ -1,0 +1,9 @@
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2024 #1 Helping Hand AFH. All Rights Reserved. Design by <a href="www.monkifoto.com">Monkifoto</a></p>
+    <p *ngIf="business$ | async as business">
+      <span>Phone: {{ business.phone }}</span> |
+      <span>Email: {{ business.email }}</span>
+    </p>
+  </div>
+</footer>

@@ -21,6 +21,9 @@ import { provideStorage, getStorage} from '@angular/fire/storage';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SplitCommaPipe } from './pipe/split-comma.pipe';
 import { MeetTheTeamComponent } from './component/meet-the-team/meet-the-team.component';
+import { FooterComponent } from './component/footer/footer.component';
+import { EditBusinessComponent } from './component/admin/edit-business/edit-business.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -36,10 +39,13 @@ import { MeetTheTeamComponent } from './component/meet-the-team/meet-the-team.co
     BusinessListComponent,
     BusinessQuestionFormComponent,
     SplitCommaPipe,
-    MeetTheTeamComponent
+    MeetTheTeamComponent,
+    FooterComponent,
+    EditBusinessComponent
   ],
   imports: [
     BrowserModule,
+    RouterModule,
     AppRoutingModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
@@ -49,9 +55,7 @@ import { MeetTheTeamComponent } from './component/meet-the-team/meet-the-team.co
     provideFirestore(()=>getFirestore()),
     provideStorage(()=> getStorage()),
     ReactiveFormsModule,
-    FormsModule
-
-
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

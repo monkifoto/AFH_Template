@@ -25,9 +25,15 @@ export class BusinessService {
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Business;
         const id = a.payload.doc.id;
-        return { id, ...data };
+        // Remove the existing id property if present
+        const { id: _, ...rest } = data;
+        return { id, ...rest };
       }))
     );
+  }
+
+  getAllBusinesses(): Observable<Business[]> {
+    return this.afs.collection<Business>(this.basePath).valueChanges({ idField: 'id' });
   }
 
   // Get a single business by id
@@ -54,4 +60,9 @@ export class BusinessService {
   getDownloadURL(filePath: string): Observable<string> {
     return this.storage.ref(filePath).getDownloadURL();
   }
+
+
+
+
+
 }

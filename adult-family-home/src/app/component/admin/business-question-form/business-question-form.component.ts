@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { BusinessService } from 'src/app/services/business.service';
 import { Business } from 'src/app/model/business-questions.model';
 import { Observable } from 'rxjs';
@@ -56,8 +56,46 @@ export class BusinessQuestionFormComponent implements OnInit {
       pricingStructure: ['Contact us for pricing details.', Validators.required],
       contactFormDetails: ['Name, Email, Phone, Message', Validators.required],
       mapDirections: ['Included map and directions to our facility.'],
-      photoGallery: ['Gallery of our facility and events.',]
+      photoGallery: ['Gallery of our facility and events.',],
+      employees: this.fb.array([])
     });
+  }
+
+  employees(): FormArray {
+    return this.businessForm.get('employees') as FormArray;
+  }
+
+  addEmployee(): void {
+    const employeeForm = this.fb.group({
+      id: [''],
+      name: [''],
+      role: [''],
+      bio: [''],
+      photoURL: ['']
+    });
+    this.employees().push(employeeForm);
+  }
+
+  removeEmployee(index: number): void {
+    this.employees().removeAt(index);
+  }
+
+  onEmployeeFileChange(event: any, index: number): void {
+    const file = event.target.files[0];
+    if (file) {
+      const filePath = `employees/${file.name}`;
+      const task = this.businessService.uploadFile(filePath, file);
+
+      this.uploadProgress[`employee_${index}`] = task.percentageChanges();
+
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          this.businessService.getDownloadURL(filePath).subscribe(url => {
+            this.employees().at(index).patchValue({ photoURL: url });
+          });
+        })
+      ).subscribe();
+    }
   }
 
   onFileChange(event: any, controlName: string) {

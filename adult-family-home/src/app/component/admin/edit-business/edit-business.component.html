@@ -1,0 +1,252 @@
+<!-- business-edit.component.html -->
+<div class="container">
+  <h1>Edit Business Information</h1>
+  <form [formGroup]="businessForm" (ngSubmit)="onSubmit()">
+
+    <!-- Basic Information -->
+    <h2>Basic Information</h2>
+    <div class="form-group">
+      <label for="businessName" class="required">Business Name</label>
+      <input id="businessName" formControlName="businessName" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="tagline">Tagline</label>
+      <input id="tagline" formControlName="tagline" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="uniqueService">Unique Service</label>
+      <input id="uniqueService" formControlName="uniqueService" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="whyChoose">Why Choose Us</label>
+      <input id="whyChoose" formControlName="whyChoose" class="form-control">
+    </div>
+
+    <!-- Business Story and Mission -->
+    <h2>Business Story and Mission</h2>
+    <div class="form-group">
+      <label for="businessStory" class="required">Business Story</label>
+      <textarea id="businessStory" formControlName="businessStory" class="form-control" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="motivation">Motivation</label>
+      <textarea id="motivation" formControlName="motivation" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="mission" class="required">Mission</label>
+      <textarea id="mission" formControlName="mission" class="form-control" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="vision" class="required">Vision</label>
+      <textarea id="vision" formControlName="vision" class="form-control" required></textarea>
+    </div>
+
+    <!-- Certifications and Target Audience -->
+    <h2>Certifications and Target Audience</h2>
+    <div class="form-group">
+      <label for="certifications" class="required">Certifications</label>
+      <textarea id="certifications" formControlName="certifications" class="form-control" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="targetAudience">Target Audience</label>
+      <textarea id="targetAudience" formControlName="targetAudience" class="form-control"></textarea>
+    </div>
+
+    <!-- Services and Offerings -->
+    <h2>Services and Offerings</h2>
+    <div class="form-group">
+      <label for="services" class="required">Services</label>
+      <textarea id="services" formControlName="services" class="form-control" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="specialPrograms">Special Programs</label>
+      <textarea id="specialPrograms" formControlName="specialPrograms" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="tours">Tours</label>
+      <textarea id="tours" formControlName="tours" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="freeConsulting">Free Consulting</label>
+      <textarea id="freeConsulting" formControlName="freeConsulting" class="form-control"></textarea>
+    </div>
+
+    <!-- Website Goals -->
+    <h2>Website Goals</h2>
+    <div class="form-group">
+      <label for="websiteGoals" class="required">Website Goals</label>
+      <textarea id="websiteGoals" formControlName="websiteGoals" class="form-control" required></textarea>
+    </div>
+
+    <!-- Content and Photos -->
+    <h2>Content and Photos</h2>
+    <div class="form-group">
+      <label for="logoImage" class="required">Logo Image</label>
+      <input type="file" id="logoImage" (change)="onFileChange($event, 'logoImage')" class="form-control">
+      <ng-container *ngIf="uploadProgress['logoImage'] | async as progress">
+        <div class="progress">
+          <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="form-group">
+      <label for="ownerImagesBios" class="required">Owner Images and Bios</label>
+      <textarea id="ownerImagesBios" formControlName="ownerImagesBios" class="form-control" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="staffImagesBios" class="required">Staff Images and Bios</label>
+      <textarea id="staffImagesBios" formControlName="staffImagesBios" class="form-control" required></textarea>
+    </div>
+
+    <!-- Facility and Lifestyle Images -->
+    <h2>Facility and Lifestyle Images</h2>
+    <div class="form-group">
+      <label for="facilityImages" class="required">Facility Images</label>
+      <input type="file" id="facilityImages" (change)="onFileChange($event, 'facilityImages')" class="form-control">
+      <ng-container *ngIf="uploadProgress['facilityImages'] | async as progress">
+        <div class="progress">
+          <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="form-group">
+      <label for="lifestyleImages" class="required">Lifestyle Images</label>
+      <input type="file" id="lifestyleImages" (change)="onFileChange($event, 'lifestyleImages')" class="form-control">
+      <ng-container *ngIf="uploadProgress['lifestyleImages'] | async as progress">
+        <div class="progress">
+          <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Media and Reviews -->
+    <h2>Media and Reviews</h2>
+    <div class="form-group">
+      <label for="mediaFeatures">Media Features</label>
+      <textarea id="mediaFeatures" formControlName="mediaFeatures" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="ratings">Ratings</label>
+      <textarea id="ratings" formControlName="ratings" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="testimonials">Testimonials</label>
+      <textarea id="testimonials" formControlName="testimonials" class="form-control"></textarea>
+    </div>
+
+    <!-- Contact Information -->
+    <h2>Contact Information</h2>
+    <div class="form-group">
+      <label for="address" class="required">Address</label>
+      <textarea id="address" formControlName="address" class="form-control" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="phone" class="required">Phone</label>
+      <input id="phone" formControlName="phone" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="fax">Fax</label>
+      <input id="fax" formControlName="fax" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="email" class="required">Email</label>
+      <input id="email" formControlName="email" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="businessHours" class="required">Business Hours</label>
+      <textarea id="businessHours" formControlName="businessHours" class="form-control" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="socialMedia">Social Media</label>
+      <textarea id="socialMedia" formControlName="socialMedia" class="form-control"></textarea>
+    </div>
+
+    <!-- Home Page -->
+    <h2>Home Page</h2>
+    <div class="form-group">
+      <label for="welcomeMessage">Welcome Message</label>
+      <textarea id="welcomeMessage" formControlName="welcomeMessage" class="form-control" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="keyServicesHighlights" class="required">Key Services and Highlights</label>
+      <textarea id="keyServicesHighlights" formControlName="keyServicesHighlights" class="form-control" required></textarea>
+    </div>
+
+    <!-- About Us Page -->
+    <h2>About Us Page</h2>
+    <div class="form-group">
+      <label for="teamValues" class="required">Team and Values</label>
+      <textarea id="teamValues" formControlName="teamValues" class="form-control" required></textarea>
+    </div>
+
+    <!-- Services Page -->
+    <h2>Services Page</h2>
+    <div class="form-group">
+      <label for="serviceBenefits" class="required">Service Benefits</label>
+      <textarea id="serviceBenefits" formControlName="serviceBenefits" class="form-control" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="pricingStructure" class="required">Pricing Structure</label>
+      <textarea id="pricingStructure" formControlName="pricingStructure" class="form-control" required></textarea>
+    </div>
+
+    <!-- Contact Us Page -->
+    <h2>Contact Us Page</h2>
+    <div class="form-group">
+      <label for="contactFormDetails" class="required">Contact Form Details</label>
+      <textarea id="contactFormDetails" formControlName="contactFormDetails" class="form-control" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="mapDirections">Map and Directions</label>
+      <textarea id="mapDirections" formControlName="mapDirections" class="form-control"></textarea>
+    </div>
+
+    <!-- Additional Content -->
+    <h2>Additional Content</h2>
+    <div class="form-group">
+      <label for="photoGallery">Photo Gallery:</label>
+      <textarea id="photoGallery" formControlName="photoGallery" class="form-control"></textarea>
+    </div>
+
+    <h2>Employee Profiles</h2>
+    <div formArrayName="employees">
+      <div *ngFor="let employee of employees().controls; let i = index" [formGroupName]="i" class="employee-card">
+        <div class="form-group">
+          <label for="employeeName-{{i}}">Employee Name</label>
+          <input id="employeeName-{{i}}" formControlName="name" class="form-control" placeholder="Enter employee name">
+        </div>
+
+        <div class="form-group">
+          <label for="employeeRole-{{i}}">Role</label>
+          <input id="employeeRole-{{i}}" formControlName="role" class="form-control" placeholder="Enter employee role">
+        </div>
+
+        <div class="form-group">
+          <label for="employeeBio-{{i}}">Bio</label>
+          <textarea id="employeeBio-{{i}}" formControlName="bio" class="form-control" rows="3" placeholder="Enter employee bio"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="employeePhoto-{{i}}">Photo</label>
+          <input type="file" id="employeePhoto-{{i}}" (change)="onEmployeeFileChange($event, i)" class="form-control">
+          <ng-container *ngIf="uploadProgress['employee_' + i] | async as progress">
+            <div class="progress">
+              <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+            </div>
+          </ng-container>
+        </div>
+
+        <div *ngIf="employee.get('photoURL')?.value">
+          <img [src]="employee.get('photoURL')?.value" alt="Employee Photo" class="employee-photo">
+        </div>
+
+        <button type="button" (click)="removeEmployee(i)" class="remove-button">Remove Employee</button>
+      </div>
+    </div>
+    <button type="button" (click)="addEmployee()">Add Employee</button>
+
+
+    <!-- Submit Button -->
+    <button type="submit">Submit</button>
+  </form>
+</div>
