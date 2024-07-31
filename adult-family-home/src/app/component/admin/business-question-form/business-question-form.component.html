@@ -221,6 +221,37 @@
     <textarea formControlName="photoGallery" class="form-control" ></textarea>
   </div>
 
+
+  <h2>Employee Profiles</h2>
+  <div formArrayName="employees">
+    <div *ngFor="let employee of employees().controls; let i = index" [formGroupName]="i">
+      <div class="form-group">
+        <label for="employeeName">Employee Name</label>
+        <input id="employeeName" formControlName="name" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="employeeRole">Role</label>
+        <input id="employeeRole" formControlName="role" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="employeeBio">Bio</label>
+        <textarea id="employeeBio" formControlName="bio" class="form-control"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="employeePhoto">Photo</label>
+        <input type="file" id="employeePhoto" (change)="onEmployeeFileChange($event, i)" class="form-control">
+        <ng-container *ngIf="uploadProgress['employee_' + i] | async as progress">
+          <div class="progress">
+            <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+          </div>
+        </ng-container>
+      </div>
+      <button type="button" (click)="removeEmployee(i)">Remove Employee</button>
+    </div>
+  </div>
+  <button type="button" (click)="addEmployee()">Add Employee</button>
+
+
   <button type="submit">Submit</button>
 </form>
 </div>

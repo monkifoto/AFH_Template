@@ -9,7 +9,53 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  business!: Business;
+  business: Business = {
+    // Provide default values for the properties if needed
+    businessName: '',
+    tagline: '',
+    uniqueService: '',
+    whyChoose: '',
+    businessStory: '',
+    motivation: '',
+    mission: '',
+    vision: '',
+    certifications: '',
+    targetAudience: '',
+    services: '',
+    specialPrograms: '',
+    tours: '',
+    freeConsulting: '',
+    websiteGoals: '',
+    logoImage: '',
+    ownerImagesBios: '',
+    staffImagesBios: '',
+    facilityImages: [],
+    lifestyleImages: [],
+    mediaFeatures: '',
+    ratings: '',
+    testimonials: '',
+    address: '',
+    phone: '',
+    fax: '',
+    email: '',
+    businessHours: '',
+    socialMedia: '',
+    welcomeMessage: '',
+    keyServicesHighlights: '',
+    teamValues: '',
+    serviceBenefits: '',
+    pricingStructure: '',
+    contactFormDetails: '',
+    mapDirections: '',
+    photoGallery: '',
+    employees: [],
+    id: '',
+    faqs: '',
+    blogNews: '',
+    mapIframe: '',
+    isActive: false
+  };
+
 
   constructor(private webContent: WebContentService, private route: ActivatedRoute){}
 
