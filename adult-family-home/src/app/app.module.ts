@@ -24,6 +24,7 @@ import { MeetTheTeamComponent } from './component/meet-the-team/meet-the-team.co
 import { FooterComponent } from './component/footer/footer.component';
 import { EditBusinessComponent } from './component/admin/edit-business/edit-business.component';
 import { RouterModule } from '@angular/router';
+import { HeroCarouselComponent } from './component/hero-carousel/hero-carousel.component';
 
 
 
@@ -41,7 +42,8 @@ import { RouterModule } from '@angular/router';
     SplitCommaPipe,
     MeetTheTeamComponent,
     FooterComponent,
-    EditBusinessComponent
+    EditBusinessComponent,
+    HeroCarouselComponent
   ],
   imports: [
     BrowserModule,
