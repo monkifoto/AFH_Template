@@ -1,0 +1,56 @@
+<!-- <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" *ngIf="business">
+  <div class="carousel-inner">
+    <div
+      class="carousel-item"
+      *ngFor="let image of business.heroImages; let i = index"
+      [class.active]="i === 0">
+      <img [src]="image" class="d-block w-100" alt="Hero Image">
+      <div class="carousel-caption d-none d-md-block hero-overlay">
+        <h1>Welcome to {{ business.businessName }}</h1>
+        <p>{{ business.tagline }}</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div> -->
+<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" *ngIf="business">
+
+  <!-- Indicators -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+
+  <!-- Carousel Items -->
+  <div class="carousel-inner">
+    <div
+      *ngFor="let image of business.heroImages; let i = index"
+      class="carousel-item"
+      [class.active]="i === 0"
+    >
+      <img [src]="image" class="d-block w-100" alt="Hero Image">
+      <div class="carousel-caption d-none d-md-block hero-overlay">
+        <h1>Welcome to {{ business.businessName }}</h1>
+        <p>{{ business.tagline }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>

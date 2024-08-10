@@ -1,9 +1,12 @@
-<div class="hero" *ngIf="business">
+<!-- <div class="hero" *ngIf="business">
   <div class="hero-overlay">
     <h1>Welcome to {{business.businessName}}</h1>
     <p>{{business.tagline}}</p>
   </div>
-</div>
+</div> -->
+
+<app-hero-carousel [businessID]="business.id"></app-hero-carousel>
+
 
 <div class="features-container">
   <div class="features-section">
