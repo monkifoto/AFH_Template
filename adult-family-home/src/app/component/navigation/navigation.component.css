@@ -1,7 +1,30 @@
+/* Navbar container */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  height: 70px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
+/* Logo styling */
 .logo {
   display: flex;
   align-items: flex-start;
+  max-height: 70px;
+}
+
+.logo img {
+  max-height: 70px;
+}
+
+.logo a {
+  font-size: 34px;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--button-color);
 }
 
 .number {
@@ -32,13 +55,12 @@
 .bottom {
   font-size: 1rem;
   letter-spacing: .3rem;
-  color: var(--accent-color)
+  color: var(--accent-color);
 }
 
-
+/* Navbar styling */
 .navbar {
   background-color: var(--nav-background-color);
-  /* position: fixed; */
   width: 100%;
   top: 0;
   left: 0;
@@ -46,43 +68,7 @@
   z-index: 1000;
 }
 
-.navbar-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  height: 70px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.logoText{
-  display: inline-block;
-  position: absolute;
-  color: #0f0f0e;
-  margin-top: 10px;
-  height: 70px;
-  vertical-align: middle;
-  /* border: 1px solid red; */
-}
-
-.logo {
-max-height: 70px;
-/* border: solid 1px red; */
-}
-
-.logo img {
-  max-height: 70px;
-  }
-
-.logo a {
-  font-size: 34px;
-  font-weight: bold;
-  text-decoration: none;
-  color: var(--button-color);
-  text-decoration: none;
-}
-
+/* Navigation menu styling */
 .nav-menu {
   list-style: none;
   margin: 0;
@@ -102,11 +88,10 @@ max-height: 70px;
   text-transform: uppercase;
   font-size: 18px;
   font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 500;
-    font-style: bold;
+  font-weight: 500;
 }
 
+/* Mobile menu icon styling */
 .menu-icon {
   position: absolute;
   display: none;
@@ -145,6 +130,7 @@ max-height: 70px;
   background-color: white;
 }
 
+/* Mobile navigation menu active state */
 .nav-menu.active {
   position: fixed;
   top: 0;
@@ -152,7 +138,7 @@ max-height: 70px;
   width: 100%;
   height: 100vh;
   background-color: var(--nav-active-background);
-  opacity: .9;
+  opacity: 0.9;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -165,27 +151,27 @@ max-height: 70px;
   margin: 20px 0;
 }
 
+/* Mobile-specific adjustments */
 @media (max-width: 768px) {
   .navbar-container {
-    justify-content: flex-start;
+    justify-content: space-between; /* Maintain space between logo and menu icon */
+    width: 100%;
   }
-  .nav-item{
-    font-size: 2rem;
-    color: white;
-  }
+
   .logo {
     order: 2;
-    margin-left: auto;
+    margin-left: auto; /* Align logo to the right */
   }
 
   .logo img {
-    margin-left: auto;
     height: 40px;
+    margin-left: 0; /* Reset margin to avoid unnecessary spacing */
   }
 
   .menu-icon {
     display: flex;
     order: 1;
+    margin-right: auto; /* Align menu icon to the left */
   }
 
   .nav-menu {
@@ -206,13 +192,6 @@ max-height: 70px;
   }
 
   .nav-menu li a {
-    color: var(--nav-text-color);
-    text-decoration: none;
-    text-transform: uppercase;
-    font-family: "Montserrat", sans-serif;
-      font-optical-sizing: auto;
-      font-weight: 200;
-      font-style: normal;
     color: var(--nav-active-text);
     font-size: 24px;
   }
@@ -243,9 +222,8 @@ max-height: 70px;
   }
 
   .bottom {
-    font-size: .75rem;
-    letter-spacing: .2rem;
-    color: var(--accent-color)
+    font-size: 0.75rem;
+    letter-spacing: 0.2rem;
+    color: var(--accent-color);
   }
-
 }
