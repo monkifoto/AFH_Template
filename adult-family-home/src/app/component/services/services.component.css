@@ -93,6 +93,10 @@ body {
   text-align: center;
 }
 
+.service_image{
+  max-width: 500px;
+}
+
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .service-item {
