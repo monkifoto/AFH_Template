@@ -1,0 +1,9 @@
+<div class="hero-overlay">
+  <h1>Our Home Gallery</h1>
+</div>
+
+<div class="gallery">
+  <div *ngFor="let image of images$ | async" class="gallery-item">
+    <img [src]="image.url" alt="Gallery Image">
+  </div>
+</div>

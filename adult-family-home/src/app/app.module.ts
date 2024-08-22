@@ -25,6 +25,8 @@ import { FooterComponent } from './component/footer/footer.component';
 import { EditBusinessComponent } from './component/admin/edit-business/edit-business.component';
 import { RouterModule } from '@angular/router';
 import { HeroCarouselComponent } from './component/hero-carousel/hero-carousel.component';
+import { PhotoGalleryComponent } from './component/photo-gallery/photo-gallery.component';
+import { PhotoGalleryUploadComponent } from './component/admin/photo-gallery-upload/photo-gallery-upload.component';
 
 
 
@@ -43,7 +45,9 @@ import { HeroCarouselComponent } from './component/hero-carousel/hero-carousel.c
     MeetTheTeamComponent,
     FooterComponent,
     EditBusinessComponent,
-    HeroCarouselComponent
+    HeroCarouselComponent,
+    PhotoGalleryComponent,
+    PhotoGalleryUploadComponent
   ],
   imports: [
     BrowserModule,

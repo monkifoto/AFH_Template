@@ -127,4 +127,9 @@ export class WebContentService {
       })
     );
   }
+
+  getBusinessGalleryImagesById(businessId: string): Observable<any[]> {
+    return this.firestore.collection('businesses').doc(businessId)
+      .collection('gallery').valueChanges();
+  }
 }
