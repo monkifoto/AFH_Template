@@ -208,6 +208,16 @@
       <textarea id="photoGallery" formControlName="photoGallery" class="form-control"></textarea>
     </div>
 
+     <!-- Additional Content -->
+     <h2>Additional Content</h2>
+     <div class="form-group">
+       <label for="photoGallery">Photo Gallery:</label>
+       <a [routerLink]="['/gallery-upload']" [queryParams]="{ id: businessId }" class="btn btn-primary">
+         Upload Photos to Gallery
+       </a>
+     </div>
+
+
     <h2>Employee Profiles</h2>
     <div formArrayName="employees">
       <div *ngFor="let employee of employees().controls; let i = index" [formGroupName]="i" class="employee-card">

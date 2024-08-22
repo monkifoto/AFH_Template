@@ -1,0 +1,29 @@
+.upload-container {
+  margin: 20px;
+}
+
+.progress-container {
+  width: 200px;
+  height: 20px;
+  background-color: #f3f3f3;
+  margin-bottom: 5px;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #4caf50;
+  text-align: center;
+  color: white;
+}
+
+.thumbnail {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: auto;
+}

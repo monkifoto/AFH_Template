@@ -4,6 +4,7 @@ import { BusinessService } from 'src/app/services/business.service';
 import { Business } from 'src/app/model/business-questions.model';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -13,12 +14,19 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./business-question-form.component.css']
 })
 export class BusinessQuestionFormComponent implements OnInit {
+  // @Input()
+  businessId!: string;
   businessForm!: FormGroup;
   uploadProgress: { [key: string]: Observable<number | undefined> } = {};
 
-  constructor( private fb: FormBuilder, private businessService: BusinessService ) { }
+  constructor( private fb: FormBuilder, private businessService: BusinessService ,  private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    this.route.queryParams.subscribe(params => {
+      this.businessId = params['id'];
+    });
+
     this.businessForm = this.fb.group({
       businessName: ['Careful Living AFH', Validators.required],
       tagline: ['Caring with compassion'],
@@ -83,7 +91,8 @@ export class BusinessQuestionFormComponent implements OnInit {
   onEmployeeFileChange(event: any, index: number): void {
     const file = event.target.files[0];
     if (file) {
-      const filePath = `employees/${file.name}`;
+      const filePath = `businesses/${this.businessId}/employees/${file.name}`;
+     // const filePath = `employees/${file.name}`;
       const task = this.businessService.uploadFile(filePath, file);
 
       this.uploadProgress[`employee_${index}`] = task.percentageChanges();

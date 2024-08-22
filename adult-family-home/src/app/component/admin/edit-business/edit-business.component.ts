@@ -96,7 +96,7 @@ export class EditBusinessComponent implements OnInit {
   onEmployeeFileChange(event: any, index: number): void {
     const file = event.target.files[0];
     if (file) {
-      const filePath = `employees/${this.businessId}/${file.name}`;
+      const filePath = `businesses/${this.businessId}/employees/${file.name}`;
       const task = this.businessService.uploadFile(filePath, file);
 
       this.uploadProgress[`employee_${index}`] = task.percentageChanges();

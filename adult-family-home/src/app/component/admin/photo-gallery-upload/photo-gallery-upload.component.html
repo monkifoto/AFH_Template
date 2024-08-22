@@ -1,0 +1,14 @@
+<div class="upload-container">
+  <input type="file" multiple (change)="uploadFiles($event)" />
+
+  <div *ngFor="let fileName of uploadedImages | keyvalue">
+    <div *ngIf="uploadProgress[fileName.key] | async as progress">
+      <div class="progress-container">
+        <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+      </div>
+    </div>
+    <div class="thumbnail" *ngIf="uploadedImages[fileName.key]">
+      <img [src]="uploadedImages[fileName.key]" alt="{{fileName.key}}" />
+    </div>
+  </div>
+</div>
