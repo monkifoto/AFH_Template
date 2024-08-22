@@ -10,6 +10,7 @@
   color: white;
   text-align: center;
 }
+
 .hero-overlay {
   position: absolute;
   top: 0;
@@ -20,15 +21,14 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: rgba(0, 0, 0, 0.5); /* Dark semi-transparent overlay */
+  background: rgba(0, 0, 0, 0.5);
   color: white;
-  /* text-align: center; */
-  font-family: 'Playfair Display', serif; /* Elegant font */
+  font-family: 'Playfair Display', serif;
 }
 
 .hero-overlay h1 {
-  font-size: 5rem;
-  letter-spacing: 0.5rem;
+  font-size: 4rem;
+  letter-spacing: 0.3rem;
   text-transform: uppercase;
   font-weight: 700;
   margin: 0;
@@ -49,11 +49,13 @@ section {
   padding: 50px 20px;
   border-radius: 8px;
 }
+
 .business-team {
   background: #f9f9f9;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 12px;
 }
+
 /* Mission and Vision Section Styling */
 .mission-vision {
   display: flex;
@@ -72,26 +74,26 @@ section {
 }
 
 .mission img, .vision img {
-  /* max-width: 350px; */
   width: 100%;
 }
 
 .business-story h2 {
-  font-size: 2.5em;
+  font-size: 2.5rem;
   margin-bottom: 30px;
   color: #333;
 }
 
 .mission h2, .vision h2 {
-  font-size: 2.5em;
+  font-size: 2.5rem;
   margin-bottom: 30px;
   color: #333;
 }
 
 .mission p, .vision p {
-  font-size: 1em;
+  font-size: 1rem;
   color: #666;
 }
+
 .team {
   text-align: center;
 }
@@ -125,40 +127,72 @@ section {
 
 .team-info h3 {
   margin: 10px 0 5px;
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
 
 .team-info p {
-  font-size: 0.9em;
+  font-size: 0.9rem;
   color: #666;
 }
 
-
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
+  .hero-overlay h1 {
+    font-size: 3rem;
+  }
+
   .mission-vision {
     flex-direction: column;
     align-items: center;
   }
 
-  .team-member {
-    flex: 1 1 calc(50% - 20px);
+  .mission, .vision {
+    width: 100%;
+    padding: 30px 20px;
+    margin: 20px 0;
+  }
+
+  .business-story h2, .mission h2, .vision h2 {
+    font-size: 2rem;
   }
 }
 
 @media (max-width: 480px) {
-  .team-member {
-    flex: 1 1 100%;
+  .hero-overlay h1 {
+    font-size: 2.5rem;
+    letter-spacing: 0.2rem;
   }
 
-  .hero h1 {
-    font-size: 2em;
+  .mission-vision {
+    margin-bottom: 20px;
+  }
+
+  .mission, .vision {
+    padding: 20px 10px;
+  }
+
+  .business-story h2, .mission h2, .vision h2 {
+    font-size: 1.8rem;
+  }
+
+  .team-item {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .team-item img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .team-info h3 {
+    font-size: 1rem;
+  }
+
+  .team-info p {
+    font-size: 0.8rem;
   }
 }
-
-
-
-
 
 .heading-container {
   text-align: center;

@@ -11,8 +11,6 @@
   text-align: center;
 }
 
-
-
 .hero-overlay {
   position: absolute;
   top: 0;
@@ -23,20 +21,18 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: rgba(0, 0, 0, 0.5); /* Dark semi-transparent overlay */
+  background: rgba(0, 0, 0, 0.5);
   color: white;
-  /* text-align: center; */
-  font-family: 'Playfair Display', serif; /* Elegant font */
+  font-family: 'Playfair Display', serif;
 }
 
 .hero-overlay h1 {
-  font-size: 5rem;
+  font-size: 4rem;
   letter-spacing: 0.5rem;
   text-transform: uppercase;
   font-weight: 700;
   margin: 0;
 }
-
 
 .container {
   max-width: 1200px;
@@ -47,7 +43,7 @@
 .services-list {
   background: #f9f9f9;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-bottom: 40px;
 }
 
@@ -57,6 +53,8 @@
   margin-bottom: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
 }
 
 .service-item h3 {
@@ -65,7 +63,7 @@
 
 .special-programs, .tours-consulting {
   background: #f9f9f9;
-  padding: 50px;
+  padding: 30px;
   border-radius: 8px;
   margin-bottom: 40px;
 }
@@ -74,7 +72,7 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 20px; /* Adjust the gap between the sections if needed */
+  gap: 20px;
 }
 
 .tours, .consulting {
@@ -86,11 +84,6 @@
   margin-right: 0;
 }
 
-.service-item {
-  display: flex;
-  align-items: center;
-}
-
 .service-icon {
   flex: 0 0 50px;
   margin-right: 20px;
@@ -99,14 +92,13 @@
 .service-content {
   flex: 1;
 }
-.service_heading{
+
+.service_heading {
   padding-top: 2rem;
   padding-bottom: 1rem;
 }
 
-
-/* General Styling */
-body {
+.body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
@@ -116,46 +108,9 @@ body {
   text-align: center;
 }
 
-.service_image{
-  max-width: 500px;
+.service_image {
+  max-width: 100%;
 }
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-  .service-item {
-    flex: 1 1 calc(50% - 20px);
-  }
-  .tours-consulting {
-    flex-direction: column;
-  }
-
-  .tours,
-  .consulting {
-    min-width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .service-item {
-    flex: 1 1 100%;
-  }
-
-  .hero h1 {
-    font-size: 2em;
-  }
-  .tours-consulting {
-    flex-direction: column;
-  }
-
-  .tours,
-  .consulting {
-    min-width: 100%;
-  }
-}
-
-
-
-
 
 .heading-container {
   text-align: center;
@@ -174,7 +129,6 @@ body {
   z-index: 1;
   display: inline-block;
   padding: 10px 20px;
-  width: 400px;
   background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -200,4 +154,68 @@ body {
   background-color: #FF6F61;
   transform: translateX(-50%);
   z-index: 2;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .hero-overlay h1 {
+    font-size: 3rem;
+  }
+
+  .special-programs, .tours-consulting {
+    padding: 20px;
+  }
+
+  .tours-consulting {
+    flex-direction: column;
+    margin-right: 0;
+  }
+
+  .tours, .consulting {
+    margin-right: 0;
+    min-width: 100%;
+  }
+
+  .service-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .service_heading {
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .styled-heading {
+    font-size: 1.5rem;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-overlay h1 {
+    font-size: 2rem;
+  }
+
+  .tours-consulting {
+    padding: 10px;
+  }
+
+  .special-programs {
+    padding: 10px;
+  }
+
+  .service_heading {
+    padding-top: 0.5rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .styled-heading {
+    font-size: 1.25rem;
+    padding: 6px 12px;
+  }
+
+  .service-item {
+    padding: 15px;
+  }
 }
