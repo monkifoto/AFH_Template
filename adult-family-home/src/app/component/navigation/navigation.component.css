@@ -53,13 +53,14 @@
 }
 
 .bottom {
+  margin-top: -10px;
   font-size: 1rem;
   letter-spacing: .3rem;
   color: var(--accent-color);
 }
 
 /* Navbar styling */
-.navbar {
+.navbar_ {
   background-color: var(--nav-background-color);
   width: 100%;
   top: 0;

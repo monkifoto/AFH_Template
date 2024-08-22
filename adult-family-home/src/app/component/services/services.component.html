@@ -9,15 +9,15 @@
   <div class="container">
     <section class="services-list">
       <img src="/assets/care.svg" alt="Service Icon"><h2>Our Comprehensive Services</h2>
-      <ul  *ngFor="let service of business.services.split(',')">
-        <li><h3>{{ service }}</h3></li>
+      <ul >
+        <li  *ngFor="let service of business.services.split(',')"><h3>{{ service }}</h3></li>
       </ul>
     </section>
 
     <section class="services-list">
       <img src="/assets/care.svg" alt="Service Icon"><h2>Our Benefits</h2>
-      <ul *ngFor="let service of business.serviceBenefits.split(',')">
-         <li> <h3>{{ service }}</h3></li>
+      <ul >
+         <li *ngFor="let service of business.serviceBenefits.split(',')"> <h3>{{ service }}</h3></li>
       </ul>
     </section>
 
@@ -26,19 +26,23 @@
 
     <section class="special-programs">
       <h2>Special Programs</h2>
-      <p>{{ business.specialPrograms }}</p>
+      <h3>{{ business.specialPrograms }}</h3>
     </section>
 
     <section class="tours-consulting">
       <div class="tours">
         <img class="service_image" src="../../../assets/sharedAssets/image_fx_ (3).jpg">
-        <h2>Tours</h2>
-       <div [innerHTML]=" business.tours"></div>
+        <div class="heading-container">
+          <h2 class="styled-heading">Tours</h2>
+        </div>
+       <div class="services_txt garamond" [innerHTML]=" business.tours"></div>
       </div>
       <div class="consulting">
         <img class="service_image" src="../../../assets/sharedAssets/image_fx_ (1).jpg">
-        <h2>Free Consulting</h2>
-        <div [innerHTML]=" business.freeConsulting"></div>
+        <div class="heading-container">
+          <h2 class="styled-heading">Free Consulting</h2>
+        </div>
+        <div class="services_txt garamond " [innerHTML]=" business.freeConsulting"></div>
       </div>
     </section>
   </div>
