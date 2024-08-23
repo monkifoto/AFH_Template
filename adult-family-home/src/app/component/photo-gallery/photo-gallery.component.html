@@ -1,9 +1,14 @@
-<div class="hero-overlay">
-  <h1>Our Home Gallery</h1>
-</div>
+<div *ngIf="business">
+  <div class="hero-contact">
+    <div class="hero-overlay">
+      <h1>Our Home</h1>
+      <p>We're here to answer any questions you have</p>
+    </div>
+  </div>
 
 <div class="gallery">
   <div *ngFor="let image of images$ | async" class="gallery-item">
     <img [src]="image.url" alt="Gallery Image">
   </div>
+</div>
 </div>
