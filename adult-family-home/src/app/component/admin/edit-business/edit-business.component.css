@@ -182,3 +182,105 @@ button:hover {
   text-align: center;
   line-height: 20px;
 }
+
+
+/* General Tab Container */
+.nav-tabs {
+  border-bottom: 2px solid #ddd;
+}
+
+/* Tab Items */
+.nav-tabs .nav-item {
+  margin-bottom: -2px;
+}
+
+.nav-tabs .nav-link {
+  background-color: #f8f9fa; /* Light gray background */
+  color: #495057; /* Dark text */
+  border: 1px solid transparent;
+  border-radius: 0.25rem 0.25rem 0 0;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Active Tab */
+.nav-tabs .nav-link.active {
+  background-color: #343a40; /* Dark gray background */
+  color: #ffffff; /* Light text */
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+/* Hover State for Tabs */
+.nav-tabs .nav-link:hover {
+  background-color: #e9ecef; /* Slightly darker gray on hover */
+  border-color: #dee2e6 #dee2e6 #fff;
+  color: #343a40; /* Dark text on hover */
+}
+
+/* Tab Content Area */
+.tab-content {
+  border: 1px solid #dee2e6;
+  border-top: none; /* Align with active tab */
+  padding: 15px;
+  background-color: #ffffff; /* White background for content */
+}
+
+/* Tab Content Heading */
+.tab-content h2 {
+  border-bottom: 2px solid #343a40; /* Dark gray underline for section headings */
+  color: #343a40; /* Match with active tab color */
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+/* Form Group Labels */
+.form-group label {
+  font-weight: bold;
+  color: #495057;
+}
+
+/* Form Controls */
+.form-control {
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+  padding: 10px;
+}
+
+/* Required Field Asterisk */
+label.required::after {
+  content: " *";
+  color: #d9534f; /* Red color for required asterisk */
+}
+
+/* Submit Button */
+button[type="submit"] {
+  background-color: #007bff; /* Bootstrap primary color */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Remove Employee Button */
+button[type="button"] {
+  background-color: #dc3545; /* Bootstrap danger color */
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 0.25rem;
+  margin-top: 10px;
+}
+
+button[type="button"]:hover {
+  background-color: #c82333; /* Darker shade on hover */
+}
+
+/* Progress Bar Styling */
+.progress-bar {
+  background-color: #28a745; /* Green color for progress */
+}
