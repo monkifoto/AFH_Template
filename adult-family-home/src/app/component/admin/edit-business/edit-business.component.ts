@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { BusinessService } from 'src/app/services/business.service';
+import { UploadService } from 'src/app/services/upload.service';  // Import the UploadService
 import { Business } from 'src/app/model/business-questions.model';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -19,6 +20,7 @@ export class EditBusinessComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private businessService: BusinessService,
+    private uploadService: UploadService,  // Inject the UploadService
     private route: ActivatedRoute
   ) { }
 
@@ -96,14 +98,13 @@ export class EditBusinessComponent implements OnInit {
   onEmployeeFileChange(event: any, index: number): void {
     const file = event.target.files[0];
     if (file) {
-      const filePath = `businesses/${this.businessId}/employees/${file.name}`;
-      const task = this.businessService.uploadFile(filePath, file);
+      const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, 'employee');
 
-      this.uploadProgress[`employee_${index}`] = task.percentageChanges();
+      this.uploadProgress[`employee_${index}`] = uploadProgress;
 
-      task.snapshotChanges().pipe(
+      downloadUrl.pipe(
         finalize(() => {
-          this.businessService.getDownloadURL(filePath).subscribe(url => {
+          downloadUrl.subscribe(url => {
             this.employees().at(index).patchValue({ photoURL: url });
           });
         })
@@ -114,14 +115,24 @@ export class EditBusinessComponent implements OnInit {
   onFileChange(event: any, field: string): void {
     const file = event.target.files[0];
     if (file) {
-      const filePath = `${field}/${this.businessId}/${file.name}`;
-      const task = this.businessService.uploadFile(filePath, file);
+      let location: 'gallery' | 'employee' | 'business';
 
-      this.uploadProgress[field] = task.percentageChanges();
+      // Determine location based on the field
+      if (field === 'photoGallery') {
+        location = 'gallery';
+      } else if (field === 'logoImage' || field === 'facilityImages' || field === 'lifestyleImages') {
+        location = 'business';
+      } else {
+        location = 'employee';
+      }
 
-      task.snapshotChanges().pipe(
+      const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, location);
+
+      this.uploadProgress[field] = uploadProgress;
+
+      downloadUrl.pipe(
         finalize(() => {
-          this.businessService.getDownloadURL(filePath).subscribe(url => {
+          downloadUrl.subscribe(url => {
             this.businessForm.patchValue({ [field]: url });
           });
         })

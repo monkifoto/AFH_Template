@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
   selector: 'app-photo-gallery-upload',
@@ -16,10 +17,12 @@ export class PhotoGalleryUploadComponent implements OnInit {
 
   uploadProgress: { [key: string]: Observable<number> } = {};  // Track progress for each file
   uploadedImages: { [key: string]: string } = {};  // Store the uploaded image URLs
+  filesToUpload: File[] = [];  // Files selected for upload
 
   constructor(
     private storage: AngularFireStorage,
     private firestore: AngularFirestore,
+    private uploadService: UploadService,
     private route: ActivatedRoute
   ) {}
 
@@ -32,29 +35,33 @@ export class PhotoGalleryUploadComponent implements OnInit {
   uploadFiles(event: any) {
     const files: File[] = event.target.files;
     for (let file of files) {
-      this.uploadFile(file);
+      const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, 'gallery');
+      this.uploadProgress[file.name] = uploadProgress;
+      downloadUrl.subscribe((url: string) => {
+        this.uploadedImages[file.name] = url;
+      });
     }
   }
 
-  private uploadFile(file: File) {
-    const filePath = `businesses/${this.businessId}/gallery/${file.name}`;
-    const fileRef = this.storage.ref(filePath);
-    const task: AngularFireUploadTask = this.storage.upload(filePath, file);
-
-    // Observe percentage changes
-    this.uploadProgress[file.name] = task.percentageChanges().pipe(
-      map(progress => progress ?? 0) // Provide a default value if progress is undefined
-    );
-
-    // Get notified when the download URL is available
-    task.snapshotChanges().pipe(
-      finalize(() => {
-        fileRef.getDownloadURL().subscribe((url) => {
-          this.firestore.collection('businesses').doc(this.businessId)
-            .collection('gallery').add({ url });
-          this.uploadedImages[file.name] = url;  // Store the uploaded image URL
-        });
-      })
-    ).subscribe();
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.dataTransfer!.dropEffect = 'copy';
   }
+
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const files: File[] = Array.from(event.dataTransfer!.files);
+    this.filesToUpload = files;
+
+    this.uploadFiles({ target: { files } });
+  }
+
 }
