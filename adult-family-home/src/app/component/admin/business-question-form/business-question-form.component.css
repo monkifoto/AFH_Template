@@ -46,9 +46,9 @@ button {
   display: block;
   width: 100%;
   padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
+  background-color: white;
+  color: darkslategrey;
+  border: solid 1px darkslategrey;;
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
@@ -56,11 +56,123 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: lightcoral;
 }
 
 .form-group label.required::after {
   content: " *";
   color: red;
   margin-left: 5px;
+}
+
+textarea {
+  height: calc(1.5em * 10); /* Set height based on line height and row count */
+  resize: vertical; /* Allow users to resize vertically, if needed */
+  padding: 8px; /* Add some padding for better text spacing */
+  font-size: 1rem; /* Adjust font size as needed */
+  line-height: 1.5; /* Ensure line height is consistent */
+  border: 1px solid #ced4da; /* Border style */
+  border-radius: 4px; /* Slight rounding of corners */
+  box-sizing: border-box; /* Ensure padding and border are included in the width/height */
+}
+
+/* General Tab Container */
+.nav-tabs {
+  border-bottom: 2px solid #aeaeae;
+}
+
+/* Tab Items */
+.nav-tabs .nav-item {
+  margin-bottom: -2px;
+}
+
+.nav-tabs .nav-link {
+  background-color: #e6e6e6; /* Light gray background */
+  color: #282828; /* Dark text */
+  border: 1px solid transparent;
+  border-radius: 0.25rem 0.25rem 0 0;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Active Tab */
+.nav-tabs .nav-link.active {
+  background-color: #6f6f6f; /* Dark gray background */
+  color: #ffffff; /* Light text */
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+/* Hover State for Tabs */
+.nav-tabs .nav-link:hover {
+  background-color: #e9ecef; /* Slightly darker gray on hover */
+  border-color: #dee2e6 #dee2e6 #fff;
+  color: #343a40; /* Dark text on hover */
+}
+
+/* Tab Content Area */
+.tab-content {
+  border: 1px solid #dee2e6;
+  border-top: none; /* Align with active tab */
+  padding: 15px;
+  background-color: #ffffff; /* White background for content */
+}
+
+/* Tab Content Heading */
+.tab-content h2 {
+  border-bottom: 2px solid #343a40; /* Dark gray underline for section headings */
+  color: #343a40; /* Match with active tab color */
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+/* Form Group Labels */
+.form-group label {
+  font-weight: bold;
+  color: #495057;
+}
+
+/* Form Controls */
+.form-control {
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+  padding: 10px;
+}
+
+/* Required Field Asterisk */
+label.required::after {
+  content: " *";
+  color: #d9534f; /* Red color for required asterisk */
+}
+
+/* Submit Button */
+button[type="submit"] {
+  background-color: #007bff; /* Bootstrap primary color */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Remove Employee Button */
+button[type="button"] {
+  background-color: #dc3545; /* Bootstrap danger color */
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 0.25rem;
+  margin-top: 10px;
+}
+
+button[type="button"]:hover {
+  background-color: #c82333; /* Darker shade on hover */
+}
+
+/* Progress Bar Styling */
+.progress-bar {
+  background-color: #28a745; /* Green color for progress */
 }

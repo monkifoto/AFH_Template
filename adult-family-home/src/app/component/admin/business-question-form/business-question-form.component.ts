@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { BusinessService } from 'src/app/services/business.service';
+import { UploadService } from 'src/app/services/upload.service'; // Import the UploadService
 import { Business } from 'src/app/model/business-questions.model';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-
-
 
 @Component({
   selector: 'app-business-question-form',
@@ -14,15 +13,18 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./business-question-form.component.css']
 })
 export class BusinessQuestionFormComponent implements OnInit {
-  // @Input()
   businessId!: string;
   businessForm!: FormGroup;
   uploadProgress: { [key: string]: Observable<number | undefined> } = {};
 
-  constructor( private fb: FormBuilder, private businessService: BusinessService ,  private route: ActivatedRoute) { }
+  constructor(
+    private fb: FormBuilder,
+    private businessService: BusinessService,
+    private uploadService: UploadService,  // Inject the UploadService
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-
     this.route.queryParams.subscribe(params => {
       this.businessId = params['id'];
     });
@@ -38,7 +40,7 @@ export class BusinessQuestionFormComponent implements OnInit {
       vision: ['Elderly Home Care is a perfect alternative for seniors who can no longer live on their own, but want to maintain their independence in a warm, friendly home-like atmosphere with 24-hour tender compassionate care. We are conveniently located 10 minutes away from Evergreen Hospital in Bellevue, bordering Kirkland', Validators.required],
       certifications: ['Licensed by the state, Certified Nursing Assistants (CNA) on staff.', Validators.required],
       targetAudience: ['Seniors in need of assisted living services, families looking for quality care for their loved ones.',],
-      services: ['24-hour supervision and assistancer , Medication management , Vital signs monitoring , Assistance with daily living activities such as dressing, bathing, grooming , Partial or full incontinence care support , Assistance with walking, transferring and eating , Three nutritious home-cooked meals and snacks daily , Special diets , Laundry and housekeeping , Personalized activities programs , Entertainment provided by outside vendors', Validators.required],
+      services: ['24-hour supervision and assistance , Medication management , Vital signs monitoring , Assistance with daily living activities such as dressing, bathing, grooming , Partial or full incontinence care support , Assistance with walking, transferring and eating , Three nutritious home-cooked meals and snacks daily , Special diets , Laundry and housekeeping , Personalized activities programs , Entertainment provided by outside vendors', Validators.required],
       specialPrograms: ['Holiday Celebrations · Birthday Parties · Outdoor activities · Exercise Program · Musical Program · Arts and Crafts · Games · Movie and Popcorn Nights · Newspaper · Gardening'],
       tours: ['Yes, we provide tours of our facility.'],
       freeConsulting: ['Yes, we offer free consulting services.'],
@@ -91,15 +93,13 @@ export class BusinessQuestionFormComponent implements OnInit {
   onEmployeeFileChange(event: any, index: number): void {
     const file = event.target.files[0];
     if (file) {
-      const filePath = `businesses/${this.businessId}/employees/${file.name}`;
-     // const filePath = `employees/${file.name}`;
-      const task = this.businessService.uploadFile(filePath, file);
+      const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, 'employee');
 
-      this.uploadProgress[`employee_${index}`] = task.percentageChanges();
+      this.uploadProgress[`employee_${index}`] = uploadProgress;
 
-      task.snapshotChanges().pipe(
+      downloadUrl.pipe(
         finalize(() => {
-          this.businessService.getDownloadURL(filePath).subscribe(url => {
+          downloadUrl.subscribe(url => {
             this.employees().at(index).patchValue({ photoURL: url });
           });
         })
@@ -107,24 +107,33 @@ export class BusinessQuestionFormComponent implements OnInit {
     }
   }
 
-  onFileChange(event: any, controlName: string) {
+  onFileChange(event: any, controlName: string): void {
     const file = event.target.files[0];
     if (file) {
-      const filePath = `uploads/${file.name}`;
-      const task = this.businessService.uploadFile(filePath, file);
+      let location: 'gallery' | 'employee' | 'business';
 
-      this.uploadProgress[controlName] = task.percentageChanges();
+      // Determine location based on the controlName
+      if (controlName === 'photoGallery') {
+        location = 'gallery';
+      } else if (controlName === 'logoImage' || controlName === 'ownerImagesBios' || controlName === 'staffImagesBios') {
+        location = 'business';
+      } else {
+        location = 'employee';
+      }
 
-      task.snapshotChanges().pipe(
+      const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, location);
+
+      this.uploadProgress[controlName] = uploadProgress;
+
+      downloadUrl.pipe(
         finalize(() => {
-          this.businessService.getDownloadURL(filePath).subscribe(url => {
-                const currentValue = this.businessForm.get('controlName')?.value;
-                if (Array.isArray(currentValue)) {
-                  this.businessForm.patchValue({ [controlName]: [...currentValue, url] });
-                } else {
-                  this.businessForm.patchValue({ [controlName]: url });
-                }
-
+          downloadUrl.subscribe(url => {
+            const currentValue = this.businessForm.get(controlName)?.value;
+            if (Array.isArray(currentValue)) {
+              this.businessForm.patchValue({ [controlName]: [...currentValue, url] });
+            } else {
+              this.businessForm.patchValue({ [controlName]: url });
+            }
           });
         })
       ).subscribe();
@@ -140,5 +149,8 @@ export class BusinessQuestionFormComponent implements OnInit {
         .then(() => alert('Business details saved successfully!'))
         .catch(err => console.error('Error saving business details', err));
     }
+  }
+  preventDefault(event: Event): void {
+    event.preventDefault();
   }
 }
