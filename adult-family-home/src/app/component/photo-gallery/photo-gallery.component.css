@@ -38,7 +38,9 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 10px;
+  background: #f9f9f9;
   padding: 20px;
+  border-radius: 8px;
 }
 
 .gallery-item img {
@@ -51,4 +53,12 @@
 
 .gallery-item img:hover {
   transform: scale(1.05);
+}
+
+
+.contact-info {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 40px;
 }

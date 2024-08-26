@@ -10,7 +10,7 @@
   --primary-color: #C8E4FF;
   --secondary-color: #FFF9D0;
   --accent-color: #FF6F61;
-  --background-color: #ecf0f1;
+  --background-color:rgba(249, 241, 214, 1)
   --text-color: #2c3e50;
   --button-color:#065A82;
   --nav-background-color: white;
@@ -50,7 +50,7 @@ body {
 
   .garamond{
     font-family: "Cormorant Garamond", serif;
-    font-weight: 300;
+    font-weight: 900;
     font-style: normal;
     font-size: 1.2rem;
   }

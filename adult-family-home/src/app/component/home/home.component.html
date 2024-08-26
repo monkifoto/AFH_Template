@@ -7,13 +7,21 @@
 
 <app-hero-carousel [businessID]="business.id"></app-hero-carousel>
 
+<div class="intro-section">
+<div class="left"><h1>A Home of Exceptional Care</h1>
+  </div>
+<div class="right"><p>#1 Helping Hand AFH was founded in June 2021 with a deep passion for helping the elderly live their best lives.
+   Our journey began with a simple idea:
+  to create a home-like environment where seniors can thrive and feel loved.</p> </div>
+</div>
+
 
 <div class="features-container">
   <div class="features-section">
     <h2>Our Unique Features</h2>
     <div class="feature-list">
       <div *ngFor="let feature of business.uniqueService.split('|')" class="feature-item">
-        <div class="container" [innerHTML]="feature"></div>
+        <div class="" [innerHTML]="feature"></div>
       </div>
     </div>
   </div>
@@ -22,7 +30,7 @@
     <h2>Why Choose Us</h2>
     <div class="feature-list">
       <div *ngFor="let feature of business.whyChoose.split('|')" class="feature-item">
-        <div class="container" [innerHTML]="feature"></div>
+        <div class="" [innerHTML]="feature"></div>
       </div>
     </div>
   </div>
