@@ -5,10 +5,11 @@
       <p>We're here to answer any questions you have</p>
     </div>
   </div>
-
+  <div class="container">
 <div class="gallery">
   <div *ngFor="let image of images$ | async" class="gallery-item">
     <img [src]="image.url" alt="Gallery Image">
   </div>
+</div>
 </div>
 </div>

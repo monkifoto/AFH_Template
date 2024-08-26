@@ -39,9 +39,12 @@
       <img [src]="image" class="d-block w-100" alt="Hero Image">
       <div class="carousel-caption d-none d-md-block hero-overlay">
         <h1>Welcome to <br/> {{ business.businessName }}</h1>
-        <br/>
-        <p>{{ business.tagline }}</p>
+        <div class="business-subtitle garamond"> <br/>
+          <p>{{ business.tagline }}</p>
+        </div>
+        <button class="action-btn"> Schedule an appointment </button>
       </div>
+
     </div>
   </div>
 
