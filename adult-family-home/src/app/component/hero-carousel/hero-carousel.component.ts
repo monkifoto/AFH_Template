@@ -21,8 +21,12 @@ export class HeroCarouselComponent implements OnInit {
       businessName: '#1 Helping Hand AFH',
       tagline: 'We’re Family, Not Just Care.',
       heroImages: [
-        '../../../assets/sharedAssets/istockphoto-613308420-2048x2048.jpg',
         '../../../assets/sharedAssets/istockphoto-804432288-2048x2048.jpg',
+        '../../../assets/sharedAssets/istockphoto-613308420-2048x2048.jpg',
+        '../../../assets/sharedAssets/istockphoto-918529390-2048x2048.jpg',
+        '../../../assets/sharedAssets/istockphoto-1324090651-2048x2048.jpg',
+        '../../../assets/sharedAssets/istockphoto-653191338-2048x2048.jpg',
+        '../../../assets/sharedAssets/istockphoto-1170514008-2048x2048.jpg',
         '../../../assets/sharedAssets/istockphoto-1315315044-2048x2048.jpg'
       ]
     };
