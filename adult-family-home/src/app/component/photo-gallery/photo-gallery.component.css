@@ -1,9 +1,9 @@
 .hero-contact {
-  background-image: url('/assets/splash2.jpg');
+  background-image: url('../../../assets/sharedAssets/istockphoto-1022730404-2048x2048.jpg');
   background-size: cover;
   background-position: center;
   position: relative;
-  height: 300px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
