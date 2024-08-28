@@ -18,7 +18,7 @@ export class BusinessListComponent implements OnInit {
   }
 
   loadBusinesses(): void {
-    this.businessService.getAllBusinesses().subscribe(businesses => {
+    this.businessService.getActiveBusinesses().subscribe(businesses => {
       this.businesses = businesses;
       console.log(businesses);
     });
