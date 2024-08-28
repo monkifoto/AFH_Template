@@ -36,6 +36,11 @@ export class BusinessService {
     return this.afs.collection<Business>(this.basePath).valueChanges({ idField: 'id' });
   }
 
+  getActiveBusinesses(): Observable<Business[]> {
+    return this.afs.collection<Business>(this.basePath, ref => ref.where('isActive', '==', true)).valueChanges({ idField: 'id' });
+  }
+
+
   // Get a single business by id
   getBusiness(id: string): Observable<Business | undefined> {
     return this.afs.doc<Business>(`${this.basePath}/${id}`).valueChanges();
