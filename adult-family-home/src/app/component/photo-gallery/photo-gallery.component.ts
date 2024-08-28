@@ -15,6 +15,7 @@ export class PhotoGalleryComponent implements OnInit {
   businessId!: string;
   images$!: Observable<any[]>;
   business!: Business;
+  selectedImageUrl: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,5 +37,13 @@ export class PhotoGalleryComponent implements OnInit {
     if (this.businessId) {
       this.images$ = this.webContent.getBusinessGalleryImagesById(this.businessId);
     }
+  }
+
+  onImageClick(imageUrl: string) {
+    this.selectedImageUrl = imageUrl;
+  }
+
+  onCloseModal() {
+    this.selectedImageUrl = null;
   }
 }

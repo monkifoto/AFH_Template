@@ -3,13 +3,21 @@
   <div class="hero-contact">
     <div class="hero-overlay">
       <h1>Our Home</h1>
-      <p>We're here to answer any questions you have</p>
+      <div class="hero-subtitle">
+      <p>Feel at Home: A Peek into Our Caring Environment</p>
+    </div>
     </div>
   </div>
   <div class="container">
 <div class="gallery">
-  <div *ngFor="let image of images$ | async" class="gallery-item">
+  <div *ngFor="let image of images$ | async" class="gallery-item" (click)="onImageClick(image.url)">
     <img [src]="image.url" alt="Gallery Image">
   </div>
 </div>
 </div>
+
+<app-image-viewer-modal
+*ngIf="selectedImageUrl"
+[imageUrl]="selectedImageUrl"
+(closeModal)="onCloseModal()">
+</app-image-viewer-modal>

@@ -27,12 +27,17 @@
 }
 
 .hero-overlay h1 {
-  font-size: 4rem;
+  font-size: 5rem;
   letter-spacing: 0.5rem;
   text-transform: uppercase;
   font-weight: 700;
   margin: 0;
 }
+
+.hero-subtitle{
+  font-size: 2rem;
+}
+
 
 .container {
   max-width: 1200px;

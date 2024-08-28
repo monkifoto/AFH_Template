@@ -27,6 +27,7 @@ import { RouterModule } from '@angular/router';
 import { HeroCarouselComponent } from './component/hero-carousel/hero-carousel.component';
 import { PhotoGalleryComponent } from './component/photo-gallery/photo-gallery.component';
 import { PhotoGalleryUploadComponent } from './component/admin/photo-gallery-upload/photo-gallery-upload.component';
+import { ImageViewerModalComponent } from './component/image-viewer-modal/image-viewer-modal.component';
 
 
 
@@ -47,7 +48,8 @@ import { PhotoGalleryUploadComponent } from './component/admin/photo-gallery-upl
     EditBusinessComponent,
     HeroCarouselComponent,
     PhotoGalleryComponent,
-    PhotoGalleryUploadComponent
+    PhotoGalleryUploadComponent,
+    ImageViewerModalComponent
   ],
   imports: [
     BrowserModule,
