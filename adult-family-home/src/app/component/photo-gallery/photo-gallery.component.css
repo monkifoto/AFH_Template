@@ -55,6 +55,12 @@
   transform: scale(1.05);
 }
 
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 
 .contact-info {
   background: #f9f9f9;
