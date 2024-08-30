@@ -4,35 +4,51 @@ import { HomeComponent } from './component/home/home.component';
 import { AboutUsComponent } from './component/about-us/about-us.component';
 import { ServicesComponent } from './component/services/services.component';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
-import { BusinessQuestionFormComponent } from './component/admin/business-question-form/business-question-form.component';
-import { BusinessListComponent } from './component/admin/business-list/business-list.component';
-import { EditBusinessComponent } from './component/admin/edit-business/edit-business.component';
-import { PhotoGalleryUploadComponent } from './component/admin/photo-gallery-upload/photo-gallery-upload.component';
 import { PhotoGalleryComponent } from './component/photo-gallery/photo-gallery.component';
+import { authGuard } from './auth.guard';
+import { LoginComponent } from './admin/login/login.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  //{ path: ':id', component: HomeComponent },
   { path: 'about-us', component: AboutUsComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'contact-us', component: ContactUsComponent },
-  { path: 'gallery', component: PhotoGalleryComponent},
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  // { path: '**', redirectTo: '/home' },
-  { path: 'bqs', component: BusinessQuestionFormComponent },
-  { path: 'bls', component: BusinessListComponent},
-  { path: 'business/new', component: BusinessQuestionFormComponent },
-  { path: 'business/edit/:id', component: EditBusinessComponent },
+  { path: 'gallery', component: PhotoGalleryComponent },
+  { path: 'login', component: LoginComponent },
 
-  { path: 'businessList', component: BusinessListComponent },
-  { path: 'new-business', component: BusinessQuestionFormComponent },
-  { path: 'edit-business/:id', component: EditBusinessComponent },
-  { path: 'gallery-upload', component: PhotoGalleryUploadComponent},
-  { path: ':id', component: HomeComponent }
+  // { path: 'gallery', component: PhotoGalleryComponent},
+  // { path: '', redirectTo: '/home', pathMatch: 'full' },
+  // { path: '**', redirectTo: '/home' },
+  // { path: 'bqs', component: BusinessQuestionFormComponent },
+  // { path: 'bls', component: BusinessListComponent},
+  // { path: 'business/new', component: BusinessQuestionFormComponent },
+  // { path: 'business/edit/:id', component: EditBusinessComponent },
+
+  // { path: 'businessList', component: BusinessListComponent },
+  // { path: 'new-business', component: BusinessQuestionFormComponent },
+  // { path: 'edit-business/:id', component: EditBusinessComponent },
+  // { path: 'gallery-upload', component: PhotoGalleryUploadComponent},
+
+
+    // Admin routes (must come before the dynamic :id route to avoid conflicts)
+    { path: 'login', component: LoginComponent },
+    { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+
+    // Dynamic route for HomeComponent
+    { path: ':id', component: HomeComponent },
+
+    // Default redirect
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+
+    // Wildcard redirect
+   { path: '**', redirectTo: '/home' }
+
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
