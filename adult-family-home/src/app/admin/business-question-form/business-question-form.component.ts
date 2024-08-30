@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./business-question-form.component.css']
 })
 export class BusinessQuestionFormComponent implements OnInit {
+  business: Business | undefined;
   businessId!: string;
   businessForm!: FormGroup;
   uploadProgress: { [key: string]: Observable<number | undefined> } = {};
@@ -145,9 +146,10 @@ export class BusinessQuestionFormComponent implements OnInit {
     if (this.businessForm.valid) {
       const formValue: Business = this.businessForm.value;
       console.log(formValue);
-      this.businessService.createBusiness(formValue)
-        .then(() => alert('Business details saved successfully!'))
-        .catch(err => console.error('Error saving business details', err));
+      this.businessService.createBusiness(formValue).subscribe(bus =>{
+        this.business = bus;
+        console.log("Business Created with ID: ", this.business?.id);
+      })
     }
   }
   preventDefault(event: Event): void {
