@@ -1,0 +1,12 @@
+<form [formGroup]="businessForm" >
+  <div>
+    <label>Business Name:</label>
+    <input formControlName="businessName" required>
+  </div>
+  <div>
+    <label>Tagline:</label>
+    <input formControlName="tagline">
+  </div>
+  <!-- Add more form fields based on your questionnaire -->
+  <button type="submit">Submit</button>
+</form>
