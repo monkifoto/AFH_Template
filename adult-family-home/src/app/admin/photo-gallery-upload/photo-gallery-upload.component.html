@@ -1,0 +1,43 @@
+<!-- <div class="upload-container">
+  <input type="file" multiple (change)="uploadFiles($event)" />
+
+  <div *ngFor="let fileName of uploadedImages | keyvalue">
+    <div *ngIf="uploadProgress[fileName.key] | async as progress">
+      <div class="progress-container">
+        <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+      </div>
+    </div>
+    <div class="thumbnail" *ngIf="uploadedImages[fileName.key]">
+      <img [src]="uploadedImages[fileName.key]" alt="{{fileName.key}}" />
+    </div>
+  </div>
+</div> -->
+
+
+<div class="upload-container">
+  <div class="drag-drop-area"
+       (dragover)="onDragOver($event)"
+       (dragleave)="onDragLeave($event)"
+       (drop)="onDrop($event)">
+    <p *ngIf="!filesToUpload.length">Drag and drop images here, or click to select files</p>
+    <input type="file" multiple (change)="uploadFiles($event)" />
+  </div>
+
+  <div *ngIf="filesToUpload.length > 0">
+    <h3>Files to be uploaded:</h3>
+    <ul>
+      <li *ngFor="let file of filesToUpload">{{ file.name }}</li>
+    </ul>
+  </div>
+
+  <div *ngFor="let fileName of uploadedImages | keyvalue">
+    <div *ngIf="uploadProgress[fileName.key] | async as progress">
+      <div class="progress-container">
+        <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+      </div>
+    </div>
+    <div class="thumbnail" *ngIf="uploadedImages[fileName.key]">
+      <img [src]="uploadedImages[fileName.key]" alt="{{fileName.key}}" />
+    </div>
+  </div>
+</div>
