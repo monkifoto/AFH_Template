@@ -13,7 +13,14 @@
     </thead>
     <tbody>
       <tr *ngFor="let business of businesses">
-        <td><a [routerLink]="['/']" [queryParams]="{ id: business.id }" class="business-id-link">{{ business.id }}</a>not working</td>
+        <td>
+          <a
+            [routerLink]="['/home/']"
+            [queryParams]="{ id: business.id }"
+            class="business-id-link">
+            {{ business.id }}
+          </a>
+        </td>
         <td>{{ business.businessName }}</td>
         <td>
           <button class="edit-button" (click)="editBusiness(business.id)">Edit</button>

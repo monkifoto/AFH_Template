@@ -8,8 +8,6 @@ import { AboutUsComponent } from './component/about-us/about-us.component';
 import { ServicesComponent } from './component/services/services.component';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
 import { NavigationComponent } from './component/navigation/navigation.component';
-import { BusinessFormComponent } from './admin/business-form/business-form.component';
-//import { BusinessListComponent } from './admin/business-list/business-list.component';
 import { BusinessQuestionFormComponent } from './admin/business-question-form/business-question-form.component';
 import { environment } from 'src/environments/environment.prod';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
@@ -40,8 +38,6 @@ import { ImageViewerModalComponent } from './component/image-viewer-modal/image-
     ServicesComponent,
     ContactUsComponent,
     NavigationComponent,
-    BusinessFormComponent,
-    //BusinessListComponent,
     BusinessQuestionFormComponent,
     SplitCommaPipe,
     MeetTheTeamComponent,

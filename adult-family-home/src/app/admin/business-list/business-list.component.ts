@@ -40,6 +40,6 @@ export class BusinessListComponent implements OnInit {
   }
 
   addNewBusiness(): void {
-    this.router.navigate(['/admin/new-business']);
+    this.router.navigate(['/admin/new']);
   }
 }

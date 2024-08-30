@@ -13,10 +13,11 @@ export class BusinessService {
   constructor(private afs: AngularFirestore, private storage: AngularFireStorage) {}
 
   // Create a new business
-  createBusiness(business: Business): Promise<void> {
+  createBusiness(business: Business):  Observable<Business | undefined> {
     console.log('Business Created');
     const id = this.afs.createId();
-    return this.afs.doc(`${this.basePath}/${id}`).set({ ...business, id });
+     this.afs.doc(`${this.basePath}/${id}`).set({ ...business, id });
+    return this.afs.doc<Business>(`${this.basePath}/${id}`).valueChanges();
   }
 
   // Get a list of businesses
