@@ -1,24 +1,39 @@
-
 <div *ngIf="business">
   <div class="hero-contact">
     <div class="hero-overlay">
       <h1>Our Home</h1>
       <div class="hero-subtitle">
-      <p>Feel at Home: A Peek into Our Caring Environment</p>
-    </div>
+        <p>Feel at Home: A Peek into Our Caring Environment</p>
+      </div>
     </div>
   </div>
-  <div class="container">
-    <div class="homeDescription">We understand the importance of providing a home-like setting for our elderly residents. Our adult care home has been specifically designed to provide a comfortable and secure environment for our residents to thrive. The layout of our home is one-of-a-kind with 5 private bedrooms, 3 bathrooms, and an open-concept living space. Our home is also equipped with air conditioning to provide a comfortable atmosphere for our residents. We strive to provide the best care and support to our residents in every aspect of their lives.</div>
-<div class="gallery">
-  <div *ngFor="let image of images$ | async" class="gallery-item" (click)="onImageClick(image.url)">
-    <img [src]="image.url" alt="Gallery Image">
-  </div>
-</div>
-</div>
 
-<app-image-viewer-modal
-*ngIf="selectedImageUrl"
-[imageUrl]="selectedImageUrl"
-(closeModal)="onCloseModal()">
-</app-image-viewer-modal>
+  <div class="container">
+    <section class="home-description">
+      <h2>Welcome to Our Home</h2>
+      <p>
+        We understand the importance of providing a home-like setting for our elderly residents.
+        Our adult care home has been specifically designed to offer a comfortable and secure environment
+        where residents can thrive. The layout of our home is unique, featuring 6 private bedrooms,
+        2 bathrooms, and an open-concept living space. Equipped with air conditioning, our home
+        ensures a comfortable atmosphere year-round. We are dedicated to providing exceptional care
+        and support to our residents in every aspect of their lives.
+      </p>
+    </section>
+
+    <section class="gallery">
+      <h2>Explore Our Gallery</h2>
+      <div class="gallery-grid">
+        <div *ngFor="let image of images$ | async" class="gallery-item" (click)="onImageClick(image.url)">
+          <img [src]="image.url" alt="Gallery Image">
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <app-image-viewer-modal
+    *ngIf="selectedImageUrl"
+    [imageUrl]="selectedImageUrl"
+    (closeModal)="onCloseModal()">
+  </app-image-viewer-modal>
+</div>

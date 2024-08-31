@@ -27,49 +27,83 @@
 }
 
 .hero-overlay h1 {
-  font-size: 5rem;
+  font-size: 4rem;
   letter-spacing: 0.3rem;
   text-transform: uppercase;
   font-weight: 700;
   margin: 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
-.hero-subtitle{
-  font-size: 2rem;
+
+.hero-subtitle {
+  font-size: 1.5rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
-  background: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-.gallery-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-  transition: transform 0.2s;
-}
-
-.gallery-item img:hover {
-  transform: scale(1.05);
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 40px 20px;
 }
 
-
-.contact-info {
-  background: #f9f9f9;
+.home-description {
+  margin-bottom: 40px;
+  background: #ffffff;
   padding: 20px;
   border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.home-description h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.home-description p {
+  line-height: 1.6;
+  color: #555;
+}
+
+.gallery {
   margin-bottom: 40px;
+}
+
+.gallery h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.gallery-item {
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.app-image-viewer-modal {
+  /* Assuming you have styles for this modal, no changes here. */
 }
