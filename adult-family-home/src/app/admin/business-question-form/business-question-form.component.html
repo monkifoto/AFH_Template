@@ -331,3 +331,10 @@
   <button type="submit">Submit</button>
 </form>
 </div>
+
+
+<app-confirmation-dialog
+  *ngIf="showConfirmation"
+  [message]="confirmationMessage"
+  (close)="closeConfirmation()">
+</app-confirmation-dialog>

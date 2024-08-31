@@ -1,4 +1,6 @@
-<div class="meet-the-team">
+
+
+<div *ngIf="employees$" class="meet-the-team">
   <h2>Meet the Team</h2>
   <div class="team-list">
     <div class="team-member" *ngFor="let employee of employees$ | async">
