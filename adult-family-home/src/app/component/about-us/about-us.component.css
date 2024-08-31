@@ -215,7 +215,7 @@ section {
   font-weight: 700;
   color: #333;
   position: relative;
-  z-index: 1;
+  /* z-index: 1; */
   display: inline-block;
   padding: 10px 20px;
   width: 400px;
@@ -243,5 +243,5 @@ section {
   height: 5px;
   background-color: #FF6F61;
   transform: translateX(-50%);
-  z-index: 2;
+  /* z-index: 2; */
 }

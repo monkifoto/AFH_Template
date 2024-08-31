@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class BusinessListComponent implements OnInit {
   businesses: Business[] = [];
+  showActiveOnly: boolean = true;
 
   constructor(private businessService: BusinessService, private router: Router) { }
 
@@ -17,12 +18,22 @@ export class BusinessListComponent implements OnInit {
     this.loadBusinesses();
   }
 
+
+
   loadBusinesses(): void {
-    this.businessService.getActiveBusinesses().subscribe(businesses => {
-      this.businesses = businesses;
-      console.log(businesses);
-    });
+    if (this.showActiveOnly) {
+      this.businessService.getActiveBusinesses().subscribe(businesses => {
+        this.businesses = businesses;
+        console.log(businesses);
+      });
+    } else {
+      this.businessService.getAllBusinesses().subscribe(businesses => {
+        this.businesses = businesses;
+        console.log(businesses);
+      });
+    }
   }
+
 
   editBusiness(id: string): void {
     this.router.navigate(['/admin/edit-business', id]);

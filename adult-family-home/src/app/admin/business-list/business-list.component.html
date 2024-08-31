@@ -1,8 +1,9 @@
 <!-- business-list.component.html -->
 <div class="business-list-container">
-  <h1>Business List</h1>
+  <h2>Business List</h2>
   <button class="add-business-button" (click)="addNewBusiness()">Add New Business</button>
-  <h1>Showing only isActive = true</h1>
+  <label for="toggle-active">Show Active Only</label>
+  <input type="checkbox" id="toggle-active" [(ngModel)]="showActiveOnly" (change)="loadBusinesses()" />
   <table class="business-table">
     <thead>
       <tr>

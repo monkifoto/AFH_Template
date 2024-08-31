@@ -27,6 +27,7 @@ import { HeroCarouselComponent } from './component/hero-carousel/hero-carousel.c
 import { PhotoGalleryComponent } from './component/photo-gallery/photo-gallery.component';
 import { PhotoGalleryUploadComponent } from './admin/photo-gallery-upload/photo-gallery-upload.component';
 import { ImageViewerModalComponent } from './component/image-viewer-modal/image-viewer-modal.component';
+import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
 
 
 
@@ -46,7 +47,8 @@ import { ImageViewerModalComponent } from './component/image-viewer-modal/image-
     HeroCarouselComponent,
     PhotoGalleryComponent,
     PhotoGalleryUploadComponent,
-    ImageViewerModalComponent
+    ImageViewerModalComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,

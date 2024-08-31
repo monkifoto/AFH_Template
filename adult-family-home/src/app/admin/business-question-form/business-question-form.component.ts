@@ -5,7 +5,7 @@ import { UploadService } from 'src/app/services/upload.service'; // Import the U
 import { Business } from 'src/app/model/business-questions.model';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-business-question-form',
@@ -17,12 +17,15 @@ export class BusinessQuestionFormComponent implements OnInit {
   businessId!: string;
   businessForm!: FormGroup;
   uploadProgress: { [key: string]: Observable<number | undefined> } = {};
+  confirmationMessage: string = '';
+  showConfirmation: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private businessService: BusinessService,
     private uploadService: UploadService,  // Inject the UploadService
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -149,10 +152,19 @@ export class BusinessQuestionFormComponent implements OnInit {
       console.log(formValue);
       this.businessService.createBusiness(formValue).subscribe(bus =>{
         this.business = bus;
+        this.confirmationMessage = "Business has been successfully created!";
+        this.showConfirmation = true;
         console.log("Business Created with ID: ", this.business?.id);
       })
     }
   }
+
+  closeConfirmation(): void {
+    this.showConfirmation = false;
+    this.router.navigate(['/admin/businessList']);
+  }
+
+
   preventDefault(event: Event): void {
     event.preventDefault();
   }
