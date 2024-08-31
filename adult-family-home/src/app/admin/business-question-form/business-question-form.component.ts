@@ -68,7 +68,8 @@ export class BusinessQuestionFormComponent implements OnInit {
       contactFormDetails: ['Name, Email, Phone, Message', Validators.required],
       mapDirections: ['Included map and directions to our facility.'],
       photoGallery: ['Gallery of our facility and events.',],
-      employees: this.fb.array([])
+      employees: this.fb.array([]),
+      isActive: true
     });
   }
 
