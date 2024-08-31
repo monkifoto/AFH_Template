@@ -34,9 +34,7 @@ export class PhotoGalleryComponent implements OnInit {
   }
 
   loadImages(): void {
-    if (this.businessId) {
       this.images$ = this.webContent.getBusinessGalleryImagesById(this.businessId);
-    }
   }
 
   onImageClick(imageUrl: string) {

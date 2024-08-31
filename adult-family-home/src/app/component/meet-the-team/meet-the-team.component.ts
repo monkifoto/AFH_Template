@@ -23,9 +23,9 @@ export class MeetTheTeamComponent implements OnInit {
     this.employees$ = this.route.queryParamMap.pipe(
       map(params => params.get('id') || ''), // Default to empty string if id is not provided
       switchMap(businessId => {
-        if (!businessId) {
-          throw new Error('Business ID is required');
-        }
+        // if (!businessId) {
+        //   throw new Error('Business ID is required');
+        // }
         return this.employeeService.getEmployeesByBusinessId(businessId);
       }),
       catchError(error => {
