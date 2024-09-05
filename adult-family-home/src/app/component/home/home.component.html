@@ -6,23 +6,25 @@
 </div> -->
 
 <app-hero-carousel [businessID]="business.id"></app-hero-carousel>
-<app-welcome></app-welcome>
-<div class="intro-section">
+
+<app-welcome [welcomeMsg]="business.welcomeMessage" [keyServicesHighlights]="business.keyServicesHighlights" ></app-welcome>
+
+<!-- <div class="intro-section">
 <div class="left"><h1>{{business.welcomeMessage}}</h1>
   </div>
 <div class="right"><p>
   {{business.keyServicesHighlights}}
  </div>
-</div>
+</div> -->
 
 <app-our-services-home
   [services]="[
-    { icon: 'fas fa-heart', title: 'Mobility Assistance', description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
+    { icon: 'fas fa-heart', title: 'Mobility Assistance', description: 'Wheelchair accessible' },
     { icon: 'fas fa-users', title: 'Companionship Care', description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
-    { icon: 'fas fa-utensils', title: 'Meal Planning', description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
+    { icon: 'fas fa-utensils', title: 'Meal Planning', description: '3 delicious homemade cooked meals with snacks available, dietary accommodations per doctor orders and preferences' },
     { icon: 'fas fa-pills', title: 'Medication Reminders', description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
-    { icon: 'fas fa-bath', title: 'Personal Hygiene', description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
-    { icon: 'fas fa-briefcase-medical', title: 'Medical Care', description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' }
+    { icon: 'fas fa-bath', title: 'Personal Hygiene', description: 'Bathing and personal care, Daily housekeeping and laundry' },
+    { icon: 'fas fa-briefcase-medical', title: 'Medical Care', description: 'Medications management, including diabetes care' }
   ]">
 </app-our-services-home>
 
