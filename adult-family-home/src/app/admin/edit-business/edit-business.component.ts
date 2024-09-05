@@ -5,7 +5,7 @@ import { UploadService } from 'src/app/services/upload.service';  // Import the 
 import { Business } from 'src/app/model/business-questions.model';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-business',
@@ -13,15 +13,19 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./edit-business.component.css']
 })
 export class EditBusinessComponent implements OnInit {
+  business: Business | undefined;
   businessForm!: FormGroup;
   uploadProgress: { [key: string]: Observable<number | undefined> } = {};
   businessId!: string;
+  confirmationMessage: string = '';
+  showConfirmation: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private businessService: BusinessService,
     private uploadService: UploadService,  // Inject the UploadService
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -80,6 +84,11 @@ export class EditBusinessComponent implements OnInit {
     return this.businessForm.get('employees') as FormArray;
   }
 
+  testimonials(): FormArray {
+    return this.businessForm.get('testimonials') as FormArray;
+  }
+
+
   addEmployee(): void {
     const employeeForm = this.fb.group({
       id: [''],
@@ -95,7 +104,39 @@ export class EditBusinessComponent implements OnInit {
     this.employees().removeAt(index);
   }
 
+  addTestimonial(): void {
+    const testimonialForm = this.fb.group({
+      id: [''],
+      name: [''],
+      quote: [''],
+      photoURL: ['']
+    });
+    this.testimonials().push(testimonialForm);
+  }
+
+  removeTestimonial(index: number): void {
+    this.testimonials().removeAt(index);
+  }
+
+
   onEmployeeFileChange(event: any, index: number): void {
+    const file = event.target.files[0];
+    if (file) {
+      const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, 'employee');
+
+      this.uploadProgress[`employee_${index}`] = uploadProgress;
+
+      downloadUrl.pipe(
+        finalize(() => {
+          downloadUrl.subscribe(url => {
+            this.employees().at(index).patchValue({ photoURL: url });
+          });
+        })
+      ).subscribe();
+    }
+  }
+
+  onTestimonialFileChange(event: any, index: number): void {
     const file = event.target.files[0];
     if (file) {
       const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, 'employee');
@@ -179,7 +220,23 @@ export class EditBusinessComponent implements OnInit {
         this.businessService.updateBusiness(this.businessId, formValue)
           .then(() => alert('Business details updated successfully!'))
           .catch(err => console.error('Error updating business details', err));
-      }
+      }else{
+        this.businessService.createBusiness(formValue).subscribe(bus =>{
+          this.business = bus;
+          this.confirmationMessage = "Business has been successfully created!";
+          this.showConfirmation = true;
+          console.log("Business Created with ID: ", this.business?.id);
+      });
     }
   }
+}
+closeConfirmation(): void {
+  this.showConfirmation = false;
+  this.router.navigate(['/admin/businessList']);
+}
+
+
+preventDefault(event: Event): void {
+  event.preventDefault();
+}
 }

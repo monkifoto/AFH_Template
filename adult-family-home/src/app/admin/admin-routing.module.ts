@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from '../auth.guard';
 import { BusinessListComponent } from './business-list/business-list.component';
-import { BusinessQuestionFormComponent } from './business-question-form/business-question-form.component';
 import { AdminComponent } from './admin/admin/admin.component';
 import { EditBusinessComponent } from './edit-business/edit-business.component';
 import { PhotoGalleryUploadComponent } from './photo-gallery-upload/photo-gallery-upload.component';
@@ -15,7 +14,7 @@ const routes: Routes = [
     canActivate: [authGuard],
     children: [
       { path: 'businessList', component: BusinessListComponent },
-      { path: 'new', component: BusinessQuestionFormComponent },
+      { path: 'new', component: EditBusinessComponent },
       { path: 'edit-business/:id', component: EditBusinessComponent },
       { path: 'gallery-upload', component: PhotoGalleryUploadComponent },
       { path: 'edit-business/:id', component: EditBusinessComponent },
