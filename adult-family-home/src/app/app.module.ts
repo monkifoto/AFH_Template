@@ -28,6 +28,10 @@ import { PhotoGalleryComponent } from './component/photo-gallery/photo-gallery.c
 import { PhotoGalleryUploadComponent } from './admin/photo-gallery-upload/photo-gallery-upload.component';
 import { ImageViewerModalComponent } from './component/image-viewer-modal/image-viewer-modal.component';
 import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
+import { TestimonialsComponent } from './component/testimonials/testimonials.component';
+import { InformationComponent } from './component/information/information.component';
+import { OurServicesHomeComponent } from './component/our-services-home/our-services-home.component';
+import { WelcomeComponent } from './component/welcome/welcome.component';
 
 
 
@@ -48,7 +52,11 @@ import { ConfirmationDialogComponent } from './component/confirmation-dialog/con
     PhotoGalleryComponent,
     PhotoGalleryUploadComponent,
     ImageViewerModalComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    TestimonialsComponent,
+    InformationComponent,
+    OurServicesHomeComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

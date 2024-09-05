@@ -6,14 +6,32 @@
 </div> -->
 
 <app-hero-carousel [businessID]="business.id"></app-hero-carousel>
-
+<app-welcome></app-welcome>
 <div class="intro-section">
 <div class="left"><h1>{{business.welcomeMessage}}</h1>
   </div>
-<div class="right"><p>#1 Helping Hand AFH was founded in June 2021 with a deep passion for helping the elderly live their best lives.
-   Our journey began with a simple idea:
-  to create a home-like environment where seniors can thrive and feel loved.</p> </div>
+<div class="right"><p>
+  {{business.keyServicesHighlights}}
+ </div>
 </div>
+
+<app-our-services-home
+  [services]="[
+    { icon: 'fas fa-heart', title: 'Mobility Assistance', description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
+    { icon: 'fas fa-users', title: 'Companionship Care', description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
+    { icon: 'fas fa-utensils', title: 'Meal Planning', description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
+    { icon: 'fas fa-pills', title: 'Medication Reminders', description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
+    { icon: 'fas fa-bath', title: 'Personal Hygiene', description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
+    { icon: 'fas fa-briefcase-medical', title: 'Medical Care', description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' }
+  ]">
+</app-our-services-home>
+
+
+<app-information
+  [phoneNumber]="business.phone"
+  [address]="business.address"
+  [email]="business.email">
+</app-information>
 
 
 <div class="features-container">
@@ -35,3 +53,7 @@
     </div>
   </div>
 </div>
+
+<app-testimonials [testimonialText]='business.testimonials'></app-testimonials>
+
+

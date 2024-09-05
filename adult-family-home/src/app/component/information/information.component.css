@@ -1,0 +1,30 @@
+.information-section {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: #ffffff;
+  min-height: 400px;
+}
+
+.information-container {
+  display: flex;
+  gap: 100px;
+  align-items: center;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-item i {
+  font-size: 24px;
+  color:var(--accent-color);
+}
+
+.info-item p {
+  font-size: 16px;
+  color: #333;
+  margin-top: 8px;
+}
