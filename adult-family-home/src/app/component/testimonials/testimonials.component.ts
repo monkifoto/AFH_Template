@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Testimonial } from 'src/app/model/business-questions.model';
 
 @Component({
   selector: 'app-testimonials',
@@ -6,5 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./testimonials.component.css']
 })
 export class TestimonialsComponent {
-  @Input() testimonialText!: string;
+  @Input() testimonials!: Testimonial[] | undefined;
 }
