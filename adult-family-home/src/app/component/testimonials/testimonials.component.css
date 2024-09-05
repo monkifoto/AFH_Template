@@ -1,28 +1,28 @@
-.about-us {
+.testimonial {
   display: flex;
   justify-content: center;
   padding: 50px;
   background-color: #f7f7f7;
 }
 
-.about-container {
+.testimonial-container {
   display: flex;
   max-width: 1200px;
   gap: 30px;
   align-items: center;
 }
 
-.about-image {
+.testimonial-image {
   position: relative;
   width: 50%;
 }
 
-.about-image img {
+.testimonial-image img {
   width: 100%;
   border-radius: 10px;
 }
 
-.founder-info {
+.testimonial-info {
   position: absolute;
   top: 20px;
   left: 20px;
@@ -34,41 +34,41 @@
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.founder-info img {
+.testimonial-info img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   margin-right: 10px;
 }
 
-.founder-info p {
+.testimonial-info p {
   margin: 0;
   font-size: 16px;
 }
 
-.founder-info span {
+.testimonial-info span {
   display: block;
   font-size: 12px;
   color: #888;
 }
 
-.about-content {
+.testimonial-content {
   width: 50%;
 }
 
-.about-content h3 {
+.testimonial-content h3 {
   color:  var(--accent-color);
   font-size: 18px;
   font-weight: 600;
 }
 
-.about-content h1 {
+.testimonial-content h1 {
   font-size: 42px;
   color: #3a4b5c;
   margin: 10px 0;
 }
 
-.about-content p {
+.testimonial-content p {
   font-size: 16px;
   color: #666;
   line-height: 1.7;
