@@ -56,7 +56,7 @@ export class BusinessQuestionFormComponent implements OnInit {
       lifestyleImages: [''],
       mediaFeatures: ['Featured in Local News, Healthcare Magazine.'],
       ratings: ['Google: 4.8 stars, Yelp: 5 stars'],
-      testimonials: ['John Doe\'s family: "Amazing care!"'],
+      testimonials: this.fb.array([]),
       address: ['1234 Care St, Compassion City, ST 12345', Validators.required],
       phone: ['(123) 456-7890', Validators.required],
       fax: ['(123) 456-7891'],

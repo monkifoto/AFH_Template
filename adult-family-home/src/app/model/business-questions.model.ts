@@ -23,7 +23,7 @@ export interface Business {
   lifestyleImages?: string[];
   mediaFeatures: string;
   ratings: string;
-  testimonials: string;
+  testimonials?: Testimonial[];
   address: string;
   phone: string;
   fax?: string;
@@ -39,7 +39,7 @@ export interface Business {
   mapDirections: string;
   faqs: string;
   blogNews: string;
-  photoGallery: string;
+  photoGalleryText: string;
   mapIframe: string;
   employees?: Employee[];
   isActive: boolean;
@@ -50,5 +50,12 @@ export interface Employee {
   name: string;
   role: string;
   bio: string;
+  photoURL: string;
+}
+
+export interface Testimonial{
+  id: string;
+  name: string;
+  quote: string;
   photoURL: string;
 }
