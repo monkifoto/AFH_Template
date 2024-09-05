@@ -7,7 +7,7 @@ import { HomeComponent } from './component/home/home.component';
 import { AboutUsComponent } from './component/about-us/about-us.component';
 import { ServicesComponent } from './component/services/services.component';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
-import { NavigationComponent } from './component/navigation/navigation.component'
+import { NavigationComponent } from './component/navigation/navigation.component';
 import { environment } from 'src/environments/environment.prod';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';

@@ -1,0 +1,357 @@
+<div class="container">
+  <form [formGroup]="businessForm" (ngSubmit)="onSubmit()">
+
+    <ul class="nav nav-tabs" id="businessTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="basic-info-tab" data-bs-toggle="tab" data-bs-target="#basic-info"
+          type="button" role="tab" aria-controls="basic-info" aria-selected="true">Basic Information</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="story-mission-tab" data-bs-toggle="tab" data-bs-target="#story-mission"
+          type="button" role="tab" aria-controls="story-mission" aria-selected="false">Certifications, Story & Mission</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="services-offerings-tab" data-bs-toggle="tab" data-bs-target="#services-offerings"
+          type="button" role="tab" aria-controls="services-offerings" aria-selected="false">Services &
+          Offerings</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="content-photos-tab" data-bs-toggle="tab" data-bs-target="#content-photos"
+          type="button" role="tab" aria-controls="content-photos" aria-selected="false">Content & Photos</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="media-reviews-tab" data-bs-toggle="tab" data-bs-target="#media-reviews"
+          type="button" role="tab" aria-controls="media-reviews" aria-selected="false">Social Media & Testimonials</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="home-page-tab" data-bs-toggle="tab" data-bs-target="#home-page" type="button"
+          role="tab" aria-controls="home-page" aria-selected="false">Home Page</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="about-us-tab" data-bs-toggle="tab" data-bs-target="#about-us" type="button"
+          role="tab" aria-controls="about-us" aria-selected="false">About Us</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="services-page-tab" data-bs-toggle="tab" data-bs-target="#services-page"
+          type="button" role="tab" aria-controls="services-page" aria-selected="false">Services Page</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="contact-us-page-tab" data-bs-toggle="tab" data-bs-target="#contact-us-page"
+          type="button" role="tab" aria-controls="contact-us-page" aria-selected="false">Contact Us Page</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="employee-profiles-tab" data-bs-toggle="tab" data-bs-target="#employee-profiles"
+          type="button" role="tab" aria-controls="employee-profiles" aria-selected="false">Employee Profiles</button>
+      </li>
+    </ul>
+
+
+    <div class="tab-content" id="businessTabContent">
+      <!-- Basic Information Tab Content -->
+      <div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="basic-info-tab">
+
+        <h2>Business Information</h2>
+        <div class="form-group">
+          <label for="businessName" class="required">Business Name</label>
+          <input id="businessName" formControlName="businessName" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="tagline">Tagline</label>
+          <input id="tagline" formControlName="tagline" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="address" class="required">Address</label>
+          <textarea id="address" formControlName="address" class="form-control" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="phone" class="required">Phone</label>
+          <input id="phone" formControlName="phone" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label for="fax">Fax</label>
+          <input id="fax" formControlName="fax" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="required">Email</label>
+          <input id="email" formControlName="email" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label for="businessHours" class="required">Business Hours</label>
+          <textarea id="businessHours" formControlName="businessHours" class="form-control" required></textarea>
+        </div>
+
+      </div>
+
+      <!-- Business Story and Mission Tab Content -->
+      <div class="tab-pane fade" id="story-mission" role="tabpanel" aria-labelledby="story-mission-tab">
+        <h2>Certifications and Target Audience</h2>
+        <div class="form-group">
+          <label for="certifications" class="required">Certifications</label>
+          <textarea id="certifications" formControlName="certifications" class="form-control" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="targetAudience">Target Audience</label>
+          <textarea id="targetAudience" formControlName="targetAudience" class="form-control"></textarea>
+        </div>
+
+        <h2>Business Story and Mission</h2>
+        <div class="form-group">
+          <label for="uniqueService">Unique Service</label>
+          <input id="uniqueService" formControlName="uniqueService" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="whyChoose">Why Choose Us</label>
+          <input id="whyChoose" formControlName="whyChoose" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="businessStory" class="required">Business Story</label>
+          <textarea id="businessStory" formControlName="businessStory" class="form-control" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="motivation">Motivation</label>
+          <textarea id="motivation" formControlName="motivation" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="mission" class="required">Mission</label>
+          <textarea id="mission" formControlName="mission" class="form-control" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="vision" class="required">Vision</label>
+          <textarea id="vision" formControlName="vision" class="form-control" required></textarea>
+        </div>
+      </div>
+
+      <!-- Services and Offerings Tab Content -->
+      <div class="tab-pane fade" id="services-offerings" role="tabpanel" aria-labelledby="services-offerings-tab">
+        <h2>Services and Offerings</h2>
+        <div class="form-group">
+          <label for="services" class="required">Services</label>
+          <textarea id="services" formControlName="services" class="form-control" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="specialPrograms">Special Programs</label>
+          <textarea id="specialPrograms" formControlName="specialPrograms" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="tours">Tours</label>
+          <textarea id="tours" formControlName="tours" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="freeConsulting">Free Consulting</label>
+          <textarea id="freeConsulting" formControlName="freeConsulting" class="form-control"></textarea>
+        </div>
+      </div>
+
+      <!-- Content and Photos Tab Content -->
+      <div class="tab-pane fade" id="content-photos" role="tabpanel" aria-labelledby="content-photos-tab">
+        <h2>Website Goals</h2>
+        <div class="form-group">
+          <label for="websiteGoals" class="required">Website Goals</label>
+          <textarea id="websiteGoals" formControlName="websiteGoals" class="form-control" required></textarea>
+        </div>
+
+        <h2>Content and Photos</h2>
+        <div class="form-group">
+          <label for="logoImage" class="required">Logo Image</label>
+          <input type="file" id="logoImage" (change)="onFileChange($event, 'logoImage')" class="form-control">
+          <ng-container *ngIf="uploadProgress['logoImage'] | async as progress">
+            <div class="progress">
+              <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="form-group">
+          <label for="ownerImagesBios" class="required">Owner Images and Bios</label>
+          <textarea id="ownerImagesBios" formControlName="ownerImagesBios" class="form-control" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="staffImagesBios" class="required">Staff Images and Bios</label>
+          <textarea id="staffImagesBios" formControlName="staffImagesBios" class="form-control" required></textarea>
+        </div>
+
+
+        <h2>Facility and Lifestyle Images</h2>
+        <div class="form-group">
+          <label for="facilityImages" class="required">Facility Images</label>
+          <input type="file" id="facilityImages" (change)="onFileChange($event, 'facilityImages')" class="form-control">
+          <ng-container *ngIf="uploadProgress['facilityImages'] | async as progress">
+            <div class="progress">
+              <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="form-group">
+          <label for="lifestyleImages" class="required">Lifestyle Images</label>
+          <input type="file" id="lifestyleImages" (change)="onFileChange($event, 'lifestyleImages')"
+            class="form-control">
+          <ng-container *ngIf="uploadProgress['lifestyleImages'] | async as progress">
+            <div class="progress">
+              <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="form-group">
+          <label for="photoGallery">Photo Gallery:</label>
+          <textarea formControlName="photoGallery" class="form-control"></textarea>
+        </div>
+
+
+      </div>
+
+       <!-- Home Page Tab Content -->
+      <div class="tab-pane fade" id="home-page" role="tabpanel" aria-labelledby="home-page-tab">
+        <h2>Home Page</h2>
+
+        <div class="form-group">
+          <label for="welcomeMessage">Welcome Message</label>
+          <textarea id="welcomeMessage" formControlName="welcomeMessage" class="form-control" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="keyServicesHighlights" class="required">Key Services and Highlights</label>
+          <textarea id="keyServicesHighlights" formControlName="keyServicesHighlights" class="form-control"
+            required></textarea>
+        </div>
+      </div>
+      <!-- About Us Page Tab Content -->
+      <div class="tab-pane fade" id="about-us" role="tabpanel" aria-labelledby="about-us-tab">
+        <h2>About Us Page</h2>
+
+        <div class="form-group">
+          <label for="teamValues" class="required">Team and Values</label>
+          <textarea id="teamValues" formControlName="teamValues" class="form-control" required></textarea>
+        </div>
+      </div>
+
+      <!-- Services Page Tab Content -->
+      <div class="tab-pane fade" id="services-page" role="tabpanel" aria-labelledby="services-page-tab">
+        <h2>Services Page</h2>
+        <div class="form-group">
+          <label for="serviceBenefits" class="required">Service Benefits</label>
+          <textarea id="serviceBenefits" formControlName="serviceBenefits" class="form-control" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="pricingStructure" class="required">Pricing Structure</label>
+          <textarea id="pricingStructure" formControlName="pricingStructure" class="form-control" required></textarea>
+        </div>
+      </div>
+
+      <!-- Contact Us Page Tab Content -->
+      <div class="tab-pane fade" id="contact-us-page" role="tabpanel" aria-labelledby="contact-us-page-tab">
+        <h2>Contact Us Page</h2>
+        <div class="form-group">
+          <label for="contactFormDetails" class="required">Contact Form Details</label>
+          <textarea id="contactFormDetails" formControlName="contactFormDetails" class="form-control"
+            required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="mapDirections">Map and Directions</label>
+          <textarea id="mapDirections" formControlName="mapDirections" class="form-control"></textarea>
+        </div>
+      </div>
+
+      <!-- Employee Profiles Tab Content -->
+      <div class="tab-pane fade" id="employee-profiles" role="tabpanel" aria-labelledby="employee-profiles-tab">
+        <h2>Employee Profiles</h2>
+        <div formArrayName="employees">
+          <div *ngFor="let employee of employees().controls; let i = index" [formGroupName]="i">
+            <div class="form-group">
+              <label for="employeeName">Employee Name</label>
+              <input id="employeeName" formControlName="name" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="employeeRole">Role</label>
+              <input id="employeeRole" formControlName="role" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="employeeBio">Bio</label>
+              <textarea id="employeeBio" formControlName="bio" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="employeePhoto">Photo</label>
+              <input type="file" id="employeePhoto" (change)="onEmployeeFileChange($event, i)" class="form-control">
+              <ng-container *ngIf="uploadProgress['employee_' + i] | async as progress">
+                <div class="progress">
+                  <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+                </div>
+              </ng-container>
+            </div>
+            <button type="button" (click)="removeEmployee(i)">Remove Employee</button>
+          </div>
+        </div>
+        <button type="button" (click)="addEmployee()">Add Employee</button>
+      </div>
+
+      <!-- Media and Reviews Tab Content -->
+      <div class="tab-pane fade" id="media-reviews" role="tabpanel" aria-labelledby="media-reviews-tab">
+
+        <h2>Social Media and Testimonials</h2>
+        <div class="form-group">
+          <label for="socialMedia">Social Media</label>
+          <textarea id="socialMedia" formControlName="socialMedia" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="mediaFeatures">Media Features</label>
+          <textarea id="mediaFeatures" formControlName="mediaFeatures" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="ratings">Ratings</label>
+          <textarea id="ratings" formControlName="ratings" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="testimonials">Testimonials</label>
+          <div formArrayName="testimonials">
+            <div *ngFor="let testimonial of testimonials().controls; let i = index" [formGroupName]="i">
+              <div class="form-group">
+                <label for="testimonialName">Employee Name</label>
+                <input id="testimonialName" formControlName="name" class="form-control">
+              </div>
+
+              <div class="form-group">
+                <label for="testimonialQuote">Quote</label>
+                <textarea id="testimonialQuote" formControlName="quote" class="form-control"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="testimonialPhoto">Photo</label>
+                <input type="file" id="testimonialPhoto" (change)="onTestimonialFileChange($event, i)" class="form-control">
+                <ng-container *ngIf="uploadProgress['testimonial' + i] | async as progress">
+                  <div class="progress">
+                    <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+                  </div>
+                </ng-container>
+              </div>
+              <button type="button" (click)="removeTestimonial(i)">Remove Testimonial</button>
+            </div>
+          </div>
+          <button type="button" (click)="addTestimonial()">Add Testimonial</button>
+          <!-- <textarea id="testimonials" formControlName="testimonials" class="form-control"></textarea> -->
+        </div>
+      </div>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+
+<app-confirmation-dialog *ngIf="showConfirmation" [message]="confirmationMessage" (close)="closeConfirmation()">
+</app-confirmation-dialog>
