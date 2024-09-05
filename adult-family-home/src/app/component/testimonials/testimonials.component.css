@@ -57,7 +57,7 @@
 }
 
 .about-content h3 {
-  color: #f2b552;
+  color:  var(--accent-color);
   font-size: 18px;
   font-weight: 600;
 }
@@ -92,7 +92,7 @@
 }
 
 .learn-more {
-  background-color: #f2b552;
+  background-color: var(--accent-color);
   color: white;
   padding: 10px 20px;
   border: none;
@@ -102,5 +102,5 @@
 }
 
 .learn-more:hover {
-  background-color: #e69a41;
+  background-color: var(--accent-color);
 }
