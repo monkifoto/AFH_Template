@@ -19,6 +19,8 @@ export class EditBusinessComponent implements OnInit {
   businessId!: string;
   confirmationMessage: string = '';
   showConfirmation: boolean = false;
+  // Variables for temporary holding the new service data
+  serviceForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -50,7 +52,7 @@ export class EditBusinessComponent implements OnInit {
       vision:[''],
       certifications:[''],
       targetAudience:[''],
-      services:this.fb.array([]),
+      services: this.fb.array([]),
       specialPrograms:[''],
       tours:[''],
       freeConsulting:[''],
@@ -77,6 +79,10 @@ export class EditBusinessComponent implements OnInit {
       mapDirections: [''],
       photoGallery: [''],
       employees: this.fb.array([])
+    });
+    this.serviceForm = this.fb.group({
+      name: ['', Validators.required],
+      description: ['']
     });
   }
 
@@ -123,14 +129,22 @@ export class EditBusinessComponent implements OnInit {
     this.testimonials().removeAt(index);
   }
 
-  addService(): void {
-    const servicesForm = this.fb.group({
-      id: [''],
-      name: [''],
-      description: [''],
-    });
-    this.services().push(servicesForm);
+  addService() {
+    if (this.serviceForm.valid) {
+      this.services().push(this.fb.group(this.serviceForm.value)); // Push the values from the form
+      this.serviceForm.reset(); // Clear the input fields after adding the service
+    }
   }
+  // addService(): void {
+  //   const servicesForm = this.fb.group({
+  //     id: [''],
+  //     name: [''],
+  //     description: [''],
+  //   });
+  //   console.log(servicesForm);
+  //   this.services().push(servicesForm);
+
+  // }
 
   removeService(index: number): void {
     this.services().removeAt(index);

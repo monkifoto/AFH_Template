@@ -142,7 +142,7 @@
             <li *ngFor="let svc of services(); let j = index">{{svc.name}}</li>
           </ul>
         </div> -->
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="services">Services</label>
           <div formArrayName="services">
             <div *ngFor="let service of services().controls; let i = index" [formGroupName]="i">
@@ -157,7 +157,50 @@
             </div>
           </div>
           <button type="button" (click)="addService()">Add Service</button>
+        </div> -->
+
+        <!-- <div class="form-group" fomGroupName="services">
+         Name</label>
+          <input id="serviceName" formControlName="name" class="form-control" placeholder="Enter service name">
+
+          <label for="serviceDescription">Service Description</label>
+          <textarea id="serviceDescription" formControlName="description" class="form-control" placeholder="Enter service description"></textarea>
+
+          <button type="button" (click)="addService()">Add Service</button>
         </div>
+
+        <ul>
+          <li *ngFor="let service of services().controls; let i = index">
+            <button type="button" (click)="removeService(i)">X</button> &nbsp;
+            <strong *ngIf="service.get('name')?.value">{{ service.get('name')?.value }}</strong> {{ service.get('description')?.value }}
+
+
+          </li>
+        </ul> -->
+        <div [formGroup]="serviceForm">
+          <!-- Input for Service Name -->
+          <div class="form-group">
+            <label for="serviceName">Service Name</label>
+            <input formControlName="name" id="serviceName" class="form-control" placeholder="Enter service name">
+          </div>
+
+          <!-- Input for Service Description -->
+          <div class="form-group">
+            <label for="serviceDescription">Service Description</label>
+            <textarea formControlName="description" id="serviceDescription" class="form-control" placeholder="Enter service description"></textarea>
+          </div>
+
+          <!-- Button to Add Service -->
+          <button type="button" (click)="addService()">Add Service</button>
+        </div>
+
+        <!-- Display the list of added services -->
+        <ul>
+          <li *ngFor="let service of services().controls; let i = index">
+            <button type="button" (click)="removeService(i)">X</button> &nbsp;
+            <strong>{{ service.get('name')?.value }}</strong>: {{ service.get('description')?.value }}
+          </li>
+        </ul>
 
         <div class="form-group">
           <label for="specialPrograms">Special Programs</label>
