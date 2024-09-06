@@ -1,18 +1,17 @@
-<section class="testimonial" *ngFor="let testimonial of testimonials">
-  <div class="testimonial-container">
+<div class="testimonial-heading"><h2>Testimonials</h2></div>
+<section class="testimonial" >
+
+  <div class="testimonial-container" *ngFor="let testimonial of testimonials">
     <div class="testimonial-image">
       <img src="{{testimonial.photoURL}}" alt="{{testimonial.name}}">
-
     </div>
     <div >
       <div class="testimonial-content">
-        <h3>Testimonial</h3>
-        <div class="testimonial">
-          <p>"{{testimonial.quote}}"</p>
-          <strong>"{{testimonial.name}}</strong>
-        </div>
 
-        <button class="learn-more">Schedule a visit today.</button>
+        <div class="">
+          <p>" {{testimonial.quote}} "</p>
+          <strong>{{testimonial.name}}</strong>
+        </div>
       </div>
     </div>
   </div>

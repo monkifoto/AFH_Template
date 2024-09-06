@@ -157,7 +157,7 @@ export class EditBusinessComponent implements OnInit {
   onTestimonialFileChange(event: any, index: number): void {
     const file = event.target.files[0];
     if (file) {
-      const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, 'employee');
+      const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, 'testimonail');
 
       this.uploadProgress[`testimonails_${index}`] = uploadProgress;
 
@@ -174,11 +174,13 @@ export class EditBusinessComponent implements OnInit {
   onFileChange(event: any, field: string): void {
     const file = event.target.files[0];
     if (file) {
-      let location: 'gallery' | 'employee' | 'business';
+      let location: 'gallery' | 'employee' | 'business' | 'testimonail';
 
       // Determine location based on the field
       if (field === 'photoGallery') {
         location = 'gallery';
+      } else if (field === 'testimonial') {
+          location = 'gallery';
       } else if (field === 'logoImage' || field === 'facilityImages' || field === 'lifestyleImages') {
         location = 'business';
       } else {
@@ -230,21 +232,21 @@ export class EditBusinessComponent implements OnInit {
       this.employees().push(employeeForm);
     });
     this.testimonials().clear();
-    (business.testimonials ?? []).forEach(employee => {
+    (business.testimonials ?? []).forEach(testimonial => {
       const employeeForm = this.fb.group({
-        id: [employee.id],
-        name: [employee.name],
-        quote: [employee.quote],
-        photoURL: [employee.photoURL]
+        id: [testimonial.id],
+        name: [testimonial.name],
+        quote: [testimonial.quote],
+        photoURL: [testimonial.photoURL]
       });
       this.testimonials().push(employeeForm);
     });
     this.services().clear();
-    (business.services ?? []).forEach(employee => {
+    (business.services ?? []).forEach(svc => {
       const servicesFormForm = this.fb.group({
-        id: [employee.id],
-        name: [employee.name],
-        description: [employee.description],
+        id: [svc.id],
+        name: [svc.name],
+        description: [svc.description],
       });
       this.services().push(servicesFormForm);
     });

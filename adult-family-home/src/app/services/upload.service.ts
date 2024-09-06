@@ -13,10 +13,13 @@ export class UploadService {
     private storage: AngularFireStorage,
     private firestore: AngularFirestore
   ) {}
-  uploadFile(file: File, businessId: string, location: 'gallery' | 'employee' | 'business'): { uploadProgress: Observable<number>, downloadUrl: Observable<string> } {
+  uploadFile(file: File, businessId: string, location: 'gallery' | 'employee' | 'business' | 'testimonail'): { uploadProgress: Observable<number>, downloadUrl: Observable<string> } {
     let filePath: string;
 
     switch (location) {
+      case 'testimonail':
+        filePath = `businesses/${businessId}/testimonail/${file.name}`;
+        break;
       case 'employee':
         filePath = `businesses/${businessId}/employee/${file.name}`;
         break;
