@@ -10,7 +10,7 @@ export interface Business {
   vision: string;
   certifications: string;
   targetAudience: string;
-  services: string;
+  services: ServiceItem[];
   specialPrograms: string;
   tours: string;
   freeConsulting: string;
@@ -58,4 +58,10 @@ export interface Testimonial{
   name: string;
   quote: string;
   photoURL: string;
+}
+
+export interface ServiceItem{
+  id:string;
+  name:string;
+  description: string;
 }
