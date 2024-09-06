@@ -3,6 +3,12 @@
   justify-content: center;
   padding: 50px;
   background-color: #f7f7f7;
+  gap: 50px;
+}
+
+.testimonial-heading{
+  width: 100%;
+  text-align: center;
 }
 
 .testimonial-container {
@@ -14,12 +20,15 @@
 
 .testimonial-image {
   position: relative;
-  width: 50%;
+  width: 200px;
+  height: 200px;
+
 }
 
 .testimonial-image img {
-  width: 100%;
-  border-radius: 10px;
+  width: 200px;
+  height: 200px;
+  border-radius: 25%;
 }
 
 .testimonial-info {
@@ -53,7 +62,7 @@
 }
 
 .testimonial-content {
-  width: 50%;
+  width: 300px;
 }
 
 .testimonial-content h3 {
