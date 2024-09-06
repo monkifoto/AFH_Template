@@ -50,7 +50,7 @@ export class EditBusinessComponent implements OnInit {
       vision:[''],
       certifications:[''],
       targetAudience:[''],
-      services:[''],
+      services:this.fb.array([]),
       specialPrograms:[''],
       tours:[''],
       freeConsulting:[''],
@@ -60,7 +60,7 @@ export class EditBusinessComponent implements OnInit {
       staffImagesBios:[''],
       mediaFeatures:[''],
       ratings:[''],
-      testimonials:[''],
+      testimonials:this.fb.array([]),
       businessName: ['', Validators.required],
       address: ['', Validators.required],
       phone: ['', Validators.required],
@@ -87,6 +87,11 @@ export class EditBusinessComponent implements OnInit {
   testimonials(): FormArray {
     return this.businessForm.get('testimonials') as FormArray;
   }
+
+  services(): FormArray {
+    return this.businessForm.get('services') as FormArray;
+  }
+
 
 
   addEmployee(): void {
@@ -118,6 +123,19 @@ export class EditBusinessComponent implements OnInit {
     this.testimonials().removeAt(index);
   }
 
+  addService(): void {
+    const servicesForm = this.fb.group({
+      id: [''],
+      name: [''],
+      description: [''],
+    });
+    this.services().push(servicesForm);
+  }
+
+  removeService(index: number): void {
+    this.services().removeAt(index);
+  }
+
 
   onEmployeeFileChange(event: any, index: number): void {
     const file = event.target.files[0];
@@ -141,12 +159,12 @@ export class EditBusinessComponent implements OnInit {
     if (file) {
       const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, 'employee');
 
-      this.uploadProgress[`employee_${index}`] = uploadProgress;
+      this.uploadProgress[`testimonails_${index}`] = uploadProgress;
 
       downloadUrl.pipe(
         finalize(() => {
           downloadUrl.subscribe(url => {
-            this.employees().at(index).patchValue({ photoURL: url });
+            this.testimonials().at(index).patchValue({ photoURL: url });
           });
         })
       ).subscribe();
@@ -211,6 +229,26 @@ export class EditBusinessComponent implements OnInit {
       });
       this.employees().push(employeeForm);
     });
+    this.testimonials().clear();
+    (business.testimonials ?? []).forEach(employee => {
+      const employeeForm = this.fb.group({
+        id: [employee.id],
+        name: [employee.name],
+        quote: [employee.quote],
+        photoURL: [employee.photoURL]
+      });
+      this.testimonials().push(employeeForm);
+    });
+    this.services().clear();
+    (business.services ?? []).forEach(employee => {
+      const servicesFormForm = this.fb.group({
+        id: [employee.id],
+        name: [employee.name],
+        description: [employee.description],
+      });
+      this.services().push(servicesFormForm);
+    });
+
   }
 
   onSubmit(): void {

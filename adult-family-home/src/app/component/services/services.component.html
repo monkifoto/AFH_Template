@@ -12,7 +12,7 @@
     <section class="services-list">
       <img src="/assets/care.svg" alt="Service Icon"><h2>Our Comprehensive Services</h2>
       <ul >
-        <li  *ngFor="let service of business.services.split(',')"><h3>{{ service }}</h3></li>
+        <li  *ngFor="let service of business.services"><h3>{{ service.name }}</h3></li>
       </ul>
     </section>
 

@@ -43,11 +43,6 @@
           type="button" role="tab" aria-controls="contact-us-page" aria-selected="false">Contact Us Page</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="additional-content-tab" data-bs-toggle="tab" data-bs-target="#additional-content"
-          type="button" role="tab" aria-controls="additional-content" aria-selected="false">Additional Content & Gallery
-          Photos</button>
-      </li>
-      <li class="nav-item" role="presentation">
         <button class="nav-link" id="employee-profiles-tab" data-bs-toggle="tab" data-bs-target="#employee-profiles"
           type="button" role="tab" aria-controls="employee-profiles" aria-selected="false">Employee Profiles</button>
       </li>
@@ -142,39 +137,28 @@
       <!-- Services and Offerings Tab Content -->
       <div class="tab-pane fade" id="services-offerings" role="tabpanel" aria-labelledby="services-offerings-tab">
         <h2>Services and Offerings</h2>
-
+        <!-- <div class="form-group">
+          <ul>
+            <li *ngFor="let svc of services(); let j = index">{{svc.name}}</li>
+          </ul>
+        </div> -->
         <div class="form-group">
-          <label for="serivces">Services</label>
-          <div formArrayName="serivces">
-            <div *ngFor="let testimonial of services().controls; let i = index" [formGroupName]="i">
+          <label for="services">Services</label>
+          <div formArrayName="services">
+            <div *ngFor="let service of services().controls; let i = index" [formGroupName]="i">
               <div class="form-group">
                 <label for="serviceName">Service Name</label>
                 <input id="serviceName" formControlName="name" class="form-control">
-              </div>
-
-              <div class="form-group">
                 <label for="serviceDescription">Service Description</label>
                 <textarea id="serviceDescription" formControlName="description" class="form-control"></textarea>
               </div>
-              <div class="form-group">
-                <label for="testimonialPhoto">Service</label>
-                <ul>
-                  <li *ngfor="let svc of services">{{svc.name}}</li>
-                </ul>
-              </div>
-              <button type="button" (click)="removeService(i)">Remove Testimonial</button>
+
+              <button type="button" (click)="removeService(i)">Remove Service</button>
             </div>
           </div>
-          <button type="button" (click)="addService()">Add Testimonial</button>
-          <!-- <textarea id="testimonials" formControlName="testimonials" class="form-control"></textarea> -->
+          <button type="button" (click)="addService()">Add Service</button>
         </div>
 
-
-
-        <div class="form-group">
-          <label for="services" class="required">Services</label>
-          <textarea id="services" formControlName="services" class="form-control" required></textarea>
-        </div>
         <div class="form-group">
           <label for="specialPrograms">Special Programs</label>
           <textarea id="specialPrograms" formControlName="specialPrograms" class="form-control"></textarea>
@@ -210,14 +194,14 @@
             </div>
           </ng-container>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="ownerImagesBios" class="required">Owner Images and Bios</label>
           <textarea id="ownerImagesBios" formControlName="ownerImagesBios" class="form-control" required></textarea>
         </div>
         <div class="form-group">
           <label for="staffImagesBios" class="required">Staff Images and Bios</label>
           <textarea id="staffImagesBios" formControlName="staffImagesBios" class="form-control" required></textarea>
-        </div>
+        </div> -->
 
         <!-- Facility and Lifestyle Images -->
         <h2>Facility and Lifestyle Images</h2>
@@ -240,6 +224,21 @@
             </div>
           </ng-container>
         </div>
+        <h2>Additional Content</h2>
+        <div class="form-group">
+          <label for="photoGallery">Photo Gallery:</label>
+          <textarea id="photoGallery" formControlName="photoGallery" class="form-control"></textarea>
+        </div>
+
+
+        <!-- Additional Content -->
+        <h2>Gallery Photos</h2>
+        <div class="form-group">
+          <label for="photoGallery">Photo Gallery:</label>
+          <a [routerLink]="['/admin/gallery-upload']" [queryParams]="{ id: businessId }" class="btn btn-primary">
+            Upload Photos to Gallery
+          </a>
+        </div>
       </div>
 
 
@@ -258,16 +257,12 @@
           <label for="ratings">Ratings</label>
           <textarea id="ratings" formControlName="ratings" class="form-control"></textarea>
         </div>
-        <!-- <div class="form-group">
-          <label for="testimonials">Testimonials</label>
-          <textarea id="testimonials" formControlName="testimonials" class="form-control"></textarea>
-        </div> -->
         <div class="form-group">
           <label for="testimonials">Testimonials</label>
           <div formArrayName="testimonials">
             <div *ngFor="let testimonial of testimonials().controls; let i = index" [formGroupName]="i">
               <div class="form-group">
-                <label for="testimonialName">Employee Name</label>
+                <label for="testimonialName"> Name</label>
                 <input id="testimonialName" formControlName="name" class="form-control">
               </div>
 
@@ -289,7 +284,6 @@
             </div>
           </div>
           <button type="button" (click)="addTestimonial()">Add Testimonial</button>
-          <!-- <textarea id="testimonials" formControlName="testimonials" class="form-control"></textarea> -->
         </div>
       </div>
 
@@ -344,24 +338,6 @@
         </div>
       </div>
 
-      <!-- Additional Content Tab Content -->
-      <div class="tab-pane fade" id="additional-content" role="tabpanel" aria-labelledby="additional-content-tab">
-        <h2>Additional Content</h2>
-        <div class="form-group">
-          <label for="photoGallery">Photo Gallery:</label>
-          <textarea id="photoGallery" formControlName="photoGallery" class="form-control"></textarea>
-        </div>
-
-
-        <!-- Additional Content -->
-        <h2>Gallery Photos</h2>
-        <div class="form-group">
-          <label for="photoGallery">Photo Gallery:</label>
-          <a [routerLink]="['/admin/gallery-upload']" [queryParams]="{ id: businessId }" class="btn btn-primary">
-            Upload Photos to Gallery
-          </a>
-        </div>
-      </div>
       <!-- Employee Profiles Tab Content -->
       <div class="tab-pane fade" id="employee-profiles" role="tabpanel" aria-labelledby="employee-profiles-tab">
         <h2>Employee Profiles</h2>

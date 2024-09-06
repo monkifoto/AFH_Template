@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     vision: '',
     certifications: '',
     targetAudience: '',
-    services: '',
+    services: [],
     specialPrograms: '',
     tours: '',
     freeConsulting: '',
