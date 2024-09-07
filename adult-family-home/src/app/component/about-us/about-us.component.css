@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color:  var(--primary-color);
   text-align: center;
 }
 
@@ -22,7 +22,7 @@
   justify-content: center;
   flex-direction: column;
   background: rgba(0, 0, 0, 0.5);
-  color: white;
+  color:  var(--primary-color);
   font-family: 'Playfair Display', serif;
 }
 
@@ -219,7 +219,7 @@ section {
   display: inline-block;
   padding: 10px 20px;
   width: 400px;
-  background-color: #fff;
+  background-color: var(--background-color);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 

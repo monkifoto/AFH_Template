@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color:  var(--primary-color);
   text-align: center;
 }
 
@@ -22,7 +22,7 @@
   justify-content: center;
   flex-direction: column;
   background: rgba(0, 0, 0, 0.5);
-  color: white;
+  color:  var(--primary-color);
   font-family: 'Playfair Display', serif;
 }
 
@@ -55,7 +55,7 @@
 }
 
 .service-item {
-  background: white;
+  background:  var(--primary-color);
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 8px;

@@ -2,8 +2,8 @@
   width: 100%;
   position: fixed;
   bottom: 0;
-  background-color: #333;
-  color: #fff;
+  background-color: var(--dark-background-color);
+  color: var(--primary-color);
   text-align: center;
   padding: 10px 0;
 }
@@ -25,5 +25,5 @@
 
 a
 {
-  color: #fff;
+  color: var(--primary-color);
 }

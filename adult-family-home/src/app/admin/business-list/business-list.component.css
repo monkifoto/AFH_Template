@@ -3,7 +3,6 @@
   width: 100%;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -17,8 +16,8 @@ h1 {
   display: block;
   margin: 20px auto;
   padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--button-color);
+  color:  var(--primary-color);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -26,7 +25,7 @@ h1 {
 }
 
 .add-business-button:hover {
-  background-color: #0056b3;
+  background-color: var(--button-hover-color);
 }
 
 .business-table {
@@ -41,8 +40,8 @@ h1 {
 }
 
 .business-table thead {
-  background-color: #007bff;
-  color: white;
+  background-color: var(--button-color);
+  color:  var(--primary-color);
 }
 
 .business-table th {
@@ -50,11 +49,11 @@ h1 {
 }
 
 .business-table tr:hover {
-  background-color: #f1f1f1;
+  background-color: var(--background-color);
 }
 
 .business-id-link {
-  color: #007bff;
+  color: var(--text-color);
   text-decoration: none;
 }
 
@@ -72,17 +71,17 @@ h1 {
 }
 
 .edit-button {
-  background-color: #28a745;
-  color: white;
+  background-color: var(--button-color);
+  color:  var(--primary-color);
 }
 
 .edit-button:hover {
-  background-color: #218838;
+  background-color: var(--button-hover-color);
 }
 
 .delete-button {
   background-color: #dc3545;
-  color: white;
+  color:  var(--primary-color);
 }
 
 .delete-button:hover {

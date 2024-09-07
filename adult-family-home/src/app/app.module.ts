@@ -31,6 +31,7 @@ import { TestimonialsComponent } from './component/testimonials/testimonials.com
 import { InformationComponent } from './component/information/information.component';
 import { OurServicesHomeComponent } from './component/our-services-home/our-services-home.component';
 import { WelcomeComponent } from './component/welcome/welcome.component';
+import { ConsultationComponent } from './component/consultation/consultation.component';
 
 
 
@@ -54,7 +55,8 @@ import { WelcomeComponent } from './component/welcome/welcome.component';
     TestimonialsComponent,
     InformationComponent,
     OurServicesHomeComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    ConsultationComponent
   ],
   imports: [
     BrowserModule,
