@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
     welcomeMessage: '',
     keyServicesHighlights: '',
     teamValues: '',
-    serviceBenefits: '',
+    benefits: [],
     pricingStructure: '',
     contactFormDetails: '',
     mapDirections: '',

@@ -19,7 +19,7 @@
     <section class="services-list">
       <img src="/assets/care.svg" alt="Service Icon"><h2>Our Benefits</h2>
       <ul >
-         <li *ngFor="let service of business.serviceBenefits.split(',')"> <h3>{{ service }}</h3></li>
+         <li *ngFor="let benefit of business.benefits"> <h3>{{ benefit.name }}</h3></li>
       </ul>
     </section>
 
