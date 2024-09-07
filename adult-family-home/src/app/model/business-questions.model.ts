@@ -33,7 +33,7 @@ export interface Business {
   welcomeMessage: string;
   keyServicesHighlights: string;
   teamValues: string;
-  serviceBenefits: string;
+  benefits: BenefitItem[];
   pricingStructure: string;
   contactFormDetails: string;
   mapDirections: string;
@@ -61,7 +61,9 @@ export interface Testimonial{
 }
 
 export interface ServiceItem{
-  id:string;
   name:string;
-  description: string;
+}
+
+export interface BenefitItem{
+  name:string;
 }

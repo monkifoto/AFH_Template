@@ -21,6 +21,7 @@ export class EditBusinessComponent implements OnInit {
   showConfirmation: boolean = false;
   // Variables for temporary holding the new service data
   serviceForm!: FormGroup;
+  benefitsForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -53,13 +54,12 @@ export class EditBusinessComponent implements OnInit {
       certifications:[''],
       targetAudience:[''],
       services: this.fb.array([]),
+      benefits: this.fb.array([]),
       specialPrograms:[''],
       tours:[''],
       freeConsulting:[''],
       websiteGoals:[''],
       logoImage:[''],
-      ownerImagesBios:[''],
-      staffImagesBios:[''],
       mediaFeatures:[''],
       ratings:[''],
       testimonials:this.fb.array([]),
@@ -73,7 +73,6 @@ export class EditBusinessComponent implements OnInit {
       welcomeMessage: [''],
       keyServicesHighlights: ['', Validators.required],
       teamValues: ['', Validators.required],
-      serviceBenefits: ['', Validators.required],
       pricingStructure: ['', Validators.required],
       contactFormDetails: ['', Validators.required],
       mapDirections: [''],
@@ -81,8 +80,10 @@ export class EditBusinessComponent implements OnInit {
       employees: this.fb.array([])
     });
     this.serviceForm = this.fb.group({
-      name: ['', Validators.required],
-      description: ['']
+      name: ['', Validators.required]
+    });
+    this.benefitsForm = this.fb.group({
+      name: ['', Validators.required]
     });
   }
 
@@ -98,6 +99,9 @@ export class EditBusinessComponent implements OnInit {
     return this.businessForm.get('services') as FormArray;
   }
 
+  benefits(): FormArray {
+    return this.businessForm.get('benefits') as FormArray;
+  }
 
 
   addEmployee(): void {
@@ -131,25 +135,25 @@ export class EditBusinessComponent implements OnInit {
 
   addService() {
     if (this.serviceForm.valid) {
-      this.services().push(this.fb.group(this.serviceForm.value)); // Push the values from the form
-      this.serviceForm.reset(); // Clear the input fields after adding the service
+      this.services().push(this.fb.group(this.serviceForm.value));
+      this.serviceForm.reset();
     }
   }
-  // addService(): void {
-  //   const servicesForm = this.fb.group({
-  //     id: [''],
-  //     name: [''],
-  //     description: [''],
-  //   });
-  //   console.log(servicesForm);
-  //   this.services().push(servicesForm);
-
-  // }
 
   removeService(index: number): void {
     this.services().removeAt(index);
   }
 
+  addBenefit() {
+    if (this.benefitsForm.valid) {
+      this.benefits().push(this.fb.group(this.benefitsForm.value));
+      this.benefitsForm.reset();
+    }
+  }
+
+  removeBenefit(index: number): void {
+    this.benefits().removeAt(index);
+  }
 
   onEmployeeFileChange(event: any, index: number): void {
     const file = event.target.files[0];
@@ -234,6 +238,7 @@ export class EditBusinessComponent implements OnInit {
 
   populateForm(business: Business): void {
     this.businessForm.patchValue(business);
+
     this.employees().clear();
     (business.employees ?? []).forEach(employee => {
       const employeeForm = this.fb.group({
@@ -245,6 +250,7 @@ export class EditBusinessComponent implements OnInit {
       });
       this.employees().push(employeeForm);
     });
+
     this.testimonials().clear();
     (business.testimonials ?? []).forEach(testimonial => {
       const employeeForm = this.fb.group({
@@ -255,14 +261,21 @@ export class EditBusinessComponent implements OnInit {
       });
       this.testimonials().push(employeeForm);
     });
+
     this.services().clear();
     (business.services ?? []).forEach(svc => {
-      const servicesFormForm = this.fb.group({
-        id: [svc.id],
+      const servicesForm = this.fb.group({
         name: [svc.name],
-        description: [svc.description],
       });
-      this.services().push(servicesFormForm);
+      this.services().push(servicesForm);
+    });
+
+    this.benefits().clear();
+    (business.benefits ?? []).forEach(bnf => {
+      const benefitsFormForm = this.fb.group({
+        name: [bnf.name],
+      });
+      this.benefits().push(benefitsFormForm);
     });
 
   }

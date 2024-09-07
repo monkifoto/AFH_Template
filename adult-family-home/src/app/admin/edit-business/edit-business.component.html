@@ -1,4 +1,3 @@
-
 <div class="container">
   <h1>Business Information</h1>
   <form [formGroup]="businessForm" (ngSubmit)="onSubmit()">
@@ -51,7 +50,7 @@
     <div class="tab-content" id="businessTabContent">
       <!-- Basic Information Tab Content -->
       <div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="basic-info-tab">
-        <!-- Basic Information -->
+
         <h2>Business Information</h2>
         <div class="form-group">
           <label for="businessName" class="required">Business Name</label>
@@ -133,61 +132,14 @@
         </div>
       </div>
 
-
       <!-- Services and Offerings Tab Content -->
       <div class="tab-pane fade" id="services-offerings" role="tabpanel" aria-labelledby="services-offerings-tab">
         <h2>Services and Offerings</h2>
-        <!-- <div class="form-group">
-          <ul>
-            <li *ngFor="let svc of services(); let j = index">{{svc.name}}</li>
-          </ul>
-        </div> -->
-        <!-- <div class="form-group">
-          <label for="services">Services</label>
-          <div formArrayName="services">
-            <div *ngFor="let service of services().controls; let i = index" [formGroupName]="i">
-              <div class="form-group">
-                <label for="serviceName">Service Name</label>
-                <input id="serviceName" formControlName="name" class="form-control">
-                <label for="serviceDescription">Service Description</label>
-                <textarea id="serviceDescription" formControlName="description" class="form-control"></textarea>
-              </div>
-
-              <button type="button" (click)="removeService(i)">Remove Service</button>
-            </div>
-          </div>
-          <button type="button" (click)="addService()">Add Service</button>
-        </div> -->
-
-        <!-- <div class="form-group" fomGroupName="services">
-         Name</label>
-          <input id="serviceName" formControlName="name" class="form-control" placeholder="Enter service name">
-
-          <label for="serviceDescription">Service Description</label>
-          <textarea id="serviceDescription" formControlName="description" class="form-control" placeholder="Enter service description"></textarea>
-
-          <button type="button" (click)="addService()">Add Service</button>
-        </div>
-
-        <ul>
-          <li *ngFor="let service of services().controls; let i = index">
-            <button type="button" (click)="removeService(i)">X</button> &nbsp;
-            <strong *ngIf="service.get('name')?.value">{{ service.get('name')?.value }}</strong> {{ service.get('description')?.value }}
-
-
-          </li>
-        </ul> -->
         <div [formGroup]="serviceForm">
           <!-- Input for Service Name -->
           <div class="form-group">
             <label for="serviceName">Service Name</label>
             <input formControlName="name" id="serviceName" class="form-control" placeholder="Enter service name">
-          </div>
-
-          <!-- Input for Service Description -->
-          <div class="form-group">
-            <label for="serviceDescription">Service Description</label>
-            <textarea formControlName="description" id="serviceDescription" class="form-control" placeholder="Enter service description"></textarea>
           </div>
 
           <!-- Button to Add Service -->
@@ -198,7 +150,26 @@
         <ul>
           <li *ngFor="let service of services().controls; let i = index">
             <button type="button" (click)="removeService(i)">X</button> &nbsp;
-            <strong>{{ service.get('name')?.value }}</strong>: {{ service.get('description')?.value }}
+            <strong>{{ service.get('name')?.value }}</strong>
+          </li>
+        </ul>
+
+        <div [formGroup]="benefitsForm">
+          <!-- Input for Service Name -->
+          <div class="form-group">
+            <label for="benefitName">Benefit Name</label>
+            <input formControlName="name" id="benefitName" class="form-control" placeholder="Enter Benefit name">
+          </div>
+
+          <!-- Button to Add Service -->
+          <button type="button" (click)="addBenefit()">Add Benefit</button>
+        </div>
+
+        <!-- Display the list of added services -->
+        <ul>
+          <li *ngFor="let benefit of benefits().controls; let i = index">
+            <button type="button" (click)="removeBenefit(i)">X</button> &nbsp;
+            <strong>{{ benefit.get('name')?.value }}</strong>
           </li>
         </ul>
 
@@ -215,8 +186,6 @@
           <textarea id="freeConsulting" formControlName="freeConsulting" class="form-control"></textarea>
         </div>
       </div>
-
-
 
       <!-- Content and Photos Tab Content -->
       <div class="tab-pane fade" id="content-photos" role="tabpanel" aria-labelledby="content-photos-tab">
@@ -237,14 +206,6 @@
             </div>
           </ng-container>
         </div>
-        <!-- <div class="form-group">
-          <label for="ownerImagesBios" class="required">Owner Images and Bios</label>
-          <textarea id="ownerImagesBios" formControlName="ownerImagesBios" class="form-control" required></textarea>
-        </div>
-        <div class="form-group">
-          <label for="staffImagesBios" class="required">Staff Images and Bios</label>
-          <textarea id="staffImagesBios" formControlName="staffImagesBios" class="form-control" required></textarea>
-        </div> -->
 
         <!-- Facility and Lifestyle Images -->
         <h2>Facility and Lifestyle Images</h2>
@@ -273,7 +234,6 @@
           <textarea id="photoGallery" formControlName="photoGallery" class="form-control"></textarea>
         </div>
 
-
         <!-- Additional Content -->
         <h2>Gallery Photos</h2>
         <div class="form-group">
@@ -283,7 +243,6 @@
           </a>
         </div>
       </div>
-
 
       <!-- Media and Reviews Tab Content -->
       <div class="tab-pane fade" id="media-reviews" role="tabpanel" aria-labelledby="media-reviews-tab">
@@ -357,10 +316,6 @@
       <!-- Services Page Tab Content -->
       <div class="tab-pane fade" id="services-page" role="tabpanel" aria-labelledby="services-page-tab">
         <h2>Services Page</h2>
-        <div class="form-group">
-          <label for="serviceBenefits" class="required">Service Benefits</label>
-          <textarea id="serviceBenefits" formControlName="serviceBenefits" class="form-control" required></textarea>
-        </div>
         <div class="form-group">
           <label for="pricingStructure" class="required">Pricing Structure</label>
           <textarea id="pricingStructure" formControlName="pricingStructure" class="form-control" required></textarea>
