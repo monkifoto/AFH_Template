@@ -128,7 +128,7 @@
 
 .menu-icon .open-bar1 {
   transform: rotate(-45deg) translate(-5px, 5px);
-  background-color: white;
+  background-color:  var(--primary-color);
 }
 
 .menu-icon .open-bar2 {
@@ -137,7 +137,7 @@
 
 .menu-icon .open-bar3 {
   transform: rotate(45deg) translate(-5px, -5px);
-  background-color: white;
+  background-color:  var(--primary-color);
 }
 
 /* Mobile navigation menu active state */
@@ -201,7 +201,7 @@
   }
 
   .nav-item{
-    color: white;
+    color:  var(--primary-color);
     cursor: pointer;
     text-decoration: none;
     text-transform: uppercase;

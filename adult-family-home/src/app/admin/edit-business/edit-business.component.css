@@ -34,7 +34,7 @@ h1 {
 .employee-card {
   padding: 15px;
   margin-bottom: 15px;
-  background: #fff;
+  background-color: var(--background-color);
   border: 1px solid #ddd;
   border-radius: 4px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -45,8 +45,8 @@ h1 {
 }
 
 .employee-card .remove-button {
-  background-color: #e74c3c;
-  color: white;
+  background-color: var(--accent-color);
+  color:  var(--primary-color);
   border: none;
   padding: 8px 12px;
   border-radius: 4px;
@@ -54,14 +54,14 @@ h1 {
 }
 
 .employee-card .remove-button:hover {
-  background-color: #c0392b;
+  background-color: var(--button-color);
 }
 
 .add-employee-button {
   display: block;
   width: 100%;
-  background-color: #3498db;
-  color: white;
+  background-color: var(--buttong-color);
+  color:  var(--primary-color);
   border: none;
   padding: 10px;
   border-radius: 4px;
@@ -70,14 +70,14 @@ h1 {
 }
 
 .add-employee-button:hover {
-  background-color: #2980b9;
+  background-color: var(--button-hover-color);
 }
 
 .submit-button {
   display: block;
   width: 100%;
-  background-color: #2ecc71;
-  color: white;
+  background-color: var(--button-color);
+  color:  var(--primary-color);
   border: none;
   padding: 10px;
   border-radius: 4px;
@@ -85,35 +85,29 @@ h1 {
 }
 
 .submit-button:hover {
-  background-color: #27ae60;
+  background-color: var(--button-hover-color)
 }
 
 .progress {
   margin-top: 5px;
   height: 10px;
-  background-color: #f3f3f3;
+  background-color: #dddada;
   border-radius: 4px;
   overflow: hidden;
 }
 
 .progress-bar {
   height: 100%;
-  background-color: #3498db;
+  background-color: var(--accent-color);
   text-align: center;
   line-height: 10px;
-  color: white;
+  color:  var(--primary-color);
 }
 
 .employee-photo {
   margin-top: 10px;
   max-width: 100px;
   border-radius: 4px;
-}
-/* business-edit.component.css */
-.container {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
 }
 
 h1 {
@@ -122,7 +116,7 @@ h1 {
 }
 
 h2 {
-  border-bottom: 2px solid #007bff;
+  border-bottom: 2px solid var(--border-color);
   padding-bottom: 10px;
   margin-top: 30px;
 }
@@ -156,8 +150,8 @@ textarea.form-control {
 }
 
 button {
-  background-color: #007bff;
-  color: white;
+  background-color: var(--button-color);
+  color:  var(--primary-color);
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -165,7 +159,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: var(--button-hover-color);
 }
 
 .progress {
@@ -178,7 +172,7 @@ button:hover {
 .progress-bar {
   background-color: #28a745;
   height: 100%;
-  color: white;
+  color:  var(--primary-color);
   text-align: center;
   line-height: 20px;
 }
@@ -195,7 +189,7 @@ button:hover {
 }
 
 .nav-tabs .nav-link {
-  background-color: #f8f9fa; /* Light gray background */
+  background-color: var(--button-color);
   color: #495057; /* Dark text */
   border: 1px solid transparent;
   border-radius: 0.25rem 0.25rem 0 0;
@@ -205,14 +199,15 @@ button:hover {
 
 /* Active Tab */
 .nav-tabs .nav-link.active {
-  background-color: #343a40; /* Dark gray background */
+  background-color: var(--button-hover-color) ;
   color: #ffffff; /* Light text */
   border-color: #dee2e6 #dee2e6 #fff;
 }
 
 /* Hover State for Tabs */
 .nav-tabs .nav-link:hover {
-  background-color: #e9ecef; /* Slightly darker gray on hover */
+  background-color: var(--button-hover-color);
+  color: var(--primary-color);
   border-color: #dee2e6 #dee2e6 #fff;
   color: #343a40; /* Dark text on hover */
 }
@@ -222,7 +217,7 @@ button:hover {
   border: 1px solid #dee2e6;
   border-top: none; /* Align with active tab */
   padding: 15px;
-  background-color: #ffffff; /* White background for content */
+  background-color:  var(--primary-color);
 }
 
 /* Tab Content Heading */
@@ -254,7 +249,7 @@ label.required::after {
 
 /* Submit Button */
 button[type="submit"] {
-  background-color: #007bff; /* Bootstrap primary color */
+  background-color: var(--button-color); /* Bootstrap primary color */
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -263,12 +258,12 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #0056b3; /* Darker shade on hover */
+  background-color: var(--button-hover-color); /* Darker shade on hover */
 }
 
 /* Remove Employee Button */
 button[type="button"] {
-  background-color: #dc3545; /* Bootstrap danger color */
+  background-color: var(--button-color); /* Bootstrap danger color */
   color: #fff;
   border: none;
   padding: 5px 10px;
@@ -277,7 +272,7 @@ button[type="button"] {
 }
 
 button[type="button"]:hover {
-  background-color: #c82333; /* Darker shade on hover */
+  background-color: var(--button-hover-color); /* Darker shade on hover */
 }
 
 /* Progress Bar Styling */

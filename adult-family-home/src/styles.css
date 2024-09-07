@@ -7,22 +7,27 @@
 
 
 :root{
-  --primary-color: #C8E4FF;
-  --secondary-color: #FFF9D0;
-  --accent-color: #FF6F61;
-  --background-color:rgba(249, 241, 214, 1)
-  --text-color: #2c3e50;
-  --button-color:#065A82;
-  --nav-background-color: white;
-  --nav-text-color: black;
-  --nav-active-background: black;
+  --primary-color: #fffaf2;
+  --secondary-color: #F0DBDB;
+  --accent-color: #FF885B;
+  --background-color:#FFE5CF;
+  --dark-background-color: #33372C;
+  --text-color: #33372C;
+  /* --button-color:#065A82; */
+  --nav-background-color: var(--background-color);
+  --nav-text-color: #557C56;
+  --nav-active-background: #33372C;
   --nav-active-text: white;
+
+  --button-color:#FF885B;
+  --button-hover-color: #c9605b;
+  --border-color:var(--text-color);
 }
 a{
   color: var(--button-color);
 }
 .blue{
-  background-color: var(--primary-color);
+  background-color: var(--background-color);
 }
 .yellow{
   background-color: var(--secondary-color);
@@ -72,7 +77,7 @@ body {
 
 button, select {
   background-color: var(--button-color);
-  color: white;
+  color:  var(--primary-color);
   border: none;
   padding: 10px 20px;
   font-size: 16px;

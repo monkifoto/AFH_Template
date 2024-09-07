@@ -13,11 +13,6 @@
           Mission</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="services-offerings-tab" data-bs-toggle="tab" data-bs-target="#services-offerings"
-          type="button" role="tab" aria-controls="services-offerings" aria-selected="false">Services &
-          Offerings</button>
-      </li>
-      <li class="nav-item" role="presentation">
         <button class="nav-link" id="content-photos-tab" data-bs-toggle="tab" data-bs-target="#content-photos"
           type="button" role="tab" aria-controls="content-photos" aria-selected="false">Content & Photos</button>
       </li>
@@ -122,80 +117,11 @@
           <label for="motivation">Motivation</label>
           <textarea id="motivation" formControlName="motivation" class="form-control"></textarea>
         </div>
-        <div class="form-group">
-          <label for="mission" class="required">Mission</label>
-          <textarea id="mission" formControlName="mission" class="form-control" required></textarea>
-        </div>
-        <div class="form-group">
-          <label for="vision" class="required">Vision</label>
-          <textarea id="vision" formControlName="vision" class="form-control" required></textarea>
-        </div>
-      </div>
 
-      <!-- Services and Offerings Tab Content -->
-      <div class="tab-pane fade" id="services-offerings" role="tabpanel" aria-labelledby="services-offerings-tab">
-        <h2>Services and Offerings</h2>
-        <div [formGroup]="serviceForm">
-          <!-- Input for Service Name -->
-          <div class="form-group">
-            <label for="serviceName">Service Name</label>
-            <input formControlName="name" id="serviceName" class="form-control" placeholder="Enter service name">
-          </div>
-
-          <!-- Button to Add Service -->
-          <button type="button" (click)="addService()">Add Service</button>
-        </div>
-
-        <!-- Display the list of added services -->
-        <ul>
-          <li *ngFor="let service of services().controls; let i = index">
-            <button type="button" (click)="removeService(i)">X</button> &nbsp;
-            <strong>{{ service.get('name')?.value }}</strong>
-          </li>
-        </ul>
-
-        <div [formGroup]="benefitsForm">
-          <!-- Input for Service Name -->
-          <div class="form-group">
-            <label for="benefitName">Benefit Name</label>
-            <input formControlName="name" id="benefitName" class="form-control" placeholder="Enter Benefit name">
-          </div>
-
-          <!-- Button to Add Service -->
-          <button type="button" (click)="addBenefit()">Add Benefit</button>
-        </div>
-
-        <!-- Display the list of added services -->
-        <ul>
-          <li *ngFor="let benefit of benefits().controls; let i = index">
-            <button type="button" (click)="removeBenefit(i)">X</button> &nbsp;
-            <strong>{{ benefit.get('name')?.value }}</strong>
-          </li>
-        </ul>
-
-        <div class="form-group">
-          <label for="specialPrograms">Special Programs</label>
-          <textarea id="specialPrograms" formControlName="specialPrograms" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="tours">Tours</label>
-          <textarea id="tours" formControlName="tours" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="freeConsulting">Free Consulting</label>
-          <textarea id="freeConsulting" formControlName="freeConsulting" class="form-control"></textarea>
-        </div>
       </div>
 
       <!-- Content and Photos Tab Content -->
       <div class="tab-pane fade" id="content-photos" role="tabpanel" aria-labelledby="content-photos-tab">
-        <!-- Website Goals -->
-        <h2>Website Goals</h2>
-        <div class="form-group">
-          <label for="websiteGoals" class="required">Website Goals</label>
-          <textarea id="websiteGoals" formControlName="websiteGoals" class="form-control" required></textarea>
-        </div>
-
         <h2>Content and Photos</h2>
         <div class="form-group">
           <label for="logoImage" class="required">Logo Image</label>
@@ -311,11 +237,70 @@
           <label for="teamValues" class="required">Team and Values</label>
           <textarea id="teamValues" formControlName="teamValues" class="form-control" required></textarea>
         </div>
+        <div class="form-group">
+          <label for="mission" class="required">Mission</label>
+          <textarea id="mission" formControlName="mission" class="form-control" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="vision" class="required">Vision</label>
+          <textarea id="vision" formControlName="vision" class="form-control" required></textarea>
+        </div>
       </div>
 
       <!-- Services Page Tab Content -->
       <div class="tab-pane fade" id="services-page" role="tabpanel" aria-labelledby="services-page-tab">
         <h2>Services Page</h2>
+        <h2>Services and Offerings</h2>
+        <div [formGroup]="serviceForm">
+          <!-- Input for Service Name -->
+          <div class="form-group">
+            <label for="serviceName">Service Name</label>
+            <input formControlName="name" id="serviceName" class="form-control" placeholder="Enter service name">
+          </div>
+
+          <!-- Button to Add Service -->
+          <button type="button" (click)="addService()">Add Service</button>
+        </div>
+
+        <!-- Display the list of added services -->
+        <ul>
+          <li *ngFor="let service of services().controls; let i = index">
+            <button type="button" (click)="removeService(i)">X</button> &nbsp;
+            <strong>{{ service.get('name')?.value }}</strong>
+          </li>
+        </ul>
+
+        <div [formGroup]="benefitsForm">
+          <!-- Input for Service Name -->
+          <div class="form-group">
+            <label for="benefitName">Benefit Name</label>
+            <input formControlName="name" id="benefitName" class="form-control" placeholder="Enter Benefit name">
+          </div>
+
+          <!-- Button to Add Service -->
+          <button type="button" (click)="addBenefit()">Add Benefit</button>
+        </div>
+
+        <!-- Display the list of added services -->
+        <ul>
+          <li *ngFor="let benefit of benefits().controls; let i = index">
+            <button type="button" (click)="removeBenefit(i)">X</button> &nbsp;
+            <strong>{{ benefit.get('name')?.value }}</strong>
+          </li>
+        </ul>
+
+        <div class="form-group">
+          <label for="specialPrograms">Special Programs</label>
+          <textarea id="specialPrograms" formControlName="specialPrograms" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="tours">Tours</label>
+          <textarea id="tours" formControlName="tours" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="freeConsulting">Free Consulting</label>
+          <textarea id="freeConsulting" formControlName="freeConsulting" class="form-control"></textarea>
+        </div>
         <div class="form-group">
           <label for="pricingStructure" class="required">Pricing Structure</label>
           <textarea id="pricingStructure" formControlName="pricingStructure" class="form-control" required></textarea>
