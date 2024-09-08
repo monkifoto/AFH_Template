@@ -68,16 +68,6 @@ export class HomeComponent implements OnInit {
         this.business = data;
       });
     });
-
-    // this.webContent.getBusinessData('St95t3fx6YQmakMhdu3W').subscribe(data => {
-    //   if (data) {
-    //     console.log('Homepage data', data);
-    //     this.business = data;
-    //     // this.business.businessName = data.businessName;
-    //     // this.business.tagline = data.tagline;
-    //     // this.business.whyChoose = data.whyChooseUs;
-    //   }
-    // });
   }
 
 }

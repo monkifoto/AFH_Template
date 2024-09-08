@@ -52,13 +52,13 @@ section {
 }
 
 .business-story {
-  background: #f9f9f9;
+  background-color:  var(--primary-color);
   padding: 50px 20px;
   border-radius: 8px;
 }
 
 .business-team {
-  background: #f9f9f9;
+  background-color:  var(--primary-color);
   padding: 20px;
   border-radius: 12px;
 }
@@ -71,7 +71,7 @@ section {
 }
 
 .mission, .vision {
-  background: #f9f9f9;
+  background-color:  var(--primary-color);
   border-radius: 8px;
   margin: 10px;
   padding: 50px 20px;
@@ -114,7 +114,7 @@ section {
 .team-item {
   width: 250px;
   margin: 10px;
-  background: #fff;
+  background-color:  var(--primary-color);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -229,7 +229,7 @@ section {
   left: 0;
   right: 0;
   height: 2px;
-  background-color: #e0e0e0;
+  background-color:  var(--primary-color);
   z-index: 0;
   transform: translateY(-50%);
 }

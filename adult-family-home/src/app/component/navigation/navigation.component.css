@@ -216,7 +216,7 @@
 
   .nav-menu li a {
     color: var(--nav-active-text);
-    font-size: 24px;
+    font-size: 2em;
   }
 
   .number {

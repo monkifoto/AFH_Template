@@ -1,0 +1,19 @@
+<section class="services-section">
+  <div class="section-heading">
+    <span class="section-title-main">Our Unique </span>
+    <span class="section-title-highlight"> Features</span>
+  </div>
+  <p class="section-description">
+    What sets us appart.
+  </p>
+  <div class="features-container">
+    <div class="features-container">
+
+        <div class="feature-list">
+          <div *ngFor="let feature of business.uniqueService.split('|')" class="feature-item">
+            <div class="" [innerHTML]="feature"></div>
+          </div>
+    </div>
+    </div>
+  </div>
+</section>

@@ -10,14 +10,14 @@
 
   <div class="container">
     <section class="home-description">
-      <h2>Welcome to Our Home</h2>
+      <div class="section-heading">Welcome to Our Home</div>
       <p>
         {{business.photoGalleryText}}
       </p>
     </section>
 
     <section class="gallery">
-      <h2>Explore Our Gallery</h2>
+      <div class="section-heading">Explore Our Gallery</div>
       <div class="gallery-grid">
         <div *ngFor="let image of images$ | async" class="gallery-item" (click)="onImageClick(image.url)">
           <img [src]="image.url" alt="Gallery Image">

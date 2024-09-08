@@ -32,6 +32,8 @@ import { InformationComponent } from './component/information/information.compon
 import { OurServicesHomeComponent } from './component/our-services-home/our-services-home.component';
 import { WelcomeComponent } from './component/welcome/welcome.component';
 import { ConsultationComponent } from './component/consultation/consultation.component';
+import { FeaturesComponent } from './component/features/features.component';
+import { WhyUsComponent } from './component/why-us/why-us.component';
 
 
 
@@ -56,7 +58,9 @@ import { ConsultationComponent } from './component/consultation/consultation.com
     InformationComponent,
     OurServicesHomeComponent,
     WelcomeComponent,
-    ConsultationComponent
+    ConsultationComponent,
+    FeaturesComponent,
+    WhyUsComponent
   ],
   imports: [
     BrowserModule,
