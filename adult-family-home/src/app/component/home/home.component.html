@@ -27,25 +27,18 @@
     { icon: 'fas fa-briefcase-medical', title: 'Medical Care', description: 'Medications management, including diabetes care' }
   ]">
 </app-our-services-home>
-<div class="features-container">
-  <div class="features-section">
-    <h2>Our Unique Features</h2>
-    <div class="feature-list">
-      <div *ngFor="let feature of business.uniqueService.split('|')" class="feature-item">
-        <div class="" [innerHTML]="feature"></div>
-      </div>
-    </div>
-  </div>
+
 
   <div class="features-section">
-    <h2>Why Choose Us</h2>
+    <div class="section-heading">Why Choose Us</div>
     <div class="feature-list">
       <div *ngFor="let feature of business.whyChoose.split('|')" class="feature-item">
         <div class="" [innerHTML]="feature"></div>
       </div>
     </div>
   </div>
-</div>
+
+  <app-features></app-features>
 
 <app-testimonials [testimonials]='business.testimonials'></app-testimonials>
 <app-consultation></app-consultation>

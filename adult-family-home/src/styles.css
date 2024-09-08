@@ -10,7 +10,7 @@
   --primary-color: #fffaf2;
   --secondary-color: #F0DBDB;
   --accent-color: #FF885B;
-  --background-color:#FFE5CF;
+  --background-color:#f9efe6;
   --dark-background-color: #33372C;
   --text-color: #33372C;
   /* --button-color:#065A82; */
@@ -35,18 +35,26 @@ a{
 .red{
   background-color: var(--accent-color);
 }
+.primary{
+  color: var(--primary-color) !important;
+}
 
 body {
   margin: 0;
-   font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.5em;
    margin-bottom: 150px;
    color: var(--text-color);
    background-color: var(--background-color);
+
   }
 
   h1{
     font-family: "Montserrat", sans-serif;
   }
+
+
+
   h3{
     font-family: "Cormorant Garamond", serif;
     font-weight: 300;
@@ -73,34 +81,6 @@ body {
     font-weight: 400;
     font-style: normal;
   }
-
-
-button, select {
-  background-color: var(--button-color);
-  color:  var(--primary-color);
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 10px 0;
-  transition: background-color 0.3s ease;
-}
-
-button[disabled] {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-
-button:hover, select:hover {
-  background-color: #0056b3; /* Hover color */
-}
-
-button:focus, select:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
-}
 
 
 .roboto-thin {
@@ -175,9 +155,45 @@ button:focus, select:focus {
   font-style: italic;
 }
 
+.section-heading{
+  /* font-family: "Montserrat", sans-serif;
+  font-size: 2.5em;
+  letter-spacing: 3px;
+  padding-bottom: 10px; */
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  color: #333;
+}
 
 .services_txt {
   line-height: 2.5rem;
   font-size: 1.5rem;
   padding: 20px;
+}
+
+
+
+button, select {
+  background-color: var(--button-color);
+  color:  var(--primary-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 0;
+  transition: background-color 0.3s ease;
+}
+
+button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:hover, select:hover {
+  background-color: var(--button-hover-color); /* Hover color */
+}
+
+button:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }

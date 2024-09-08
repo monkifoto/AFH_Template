@@ -27,7 +27,6 @@
 /* Button Styling */
 button {
   padding: 15px 30px;
-  font-size: 16px;
   color: #fff;
   background-color: var(--button-color);
   border: none;
