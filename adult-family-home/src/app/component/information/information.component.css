@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   padding: 20px;
-  background-color:  var(--background-color);
+  background-color: var(--background-color);
   min-height: 400px;
 }
 
@@ -12,6 +12,7 @@
   align-items: center;
 }
 
+/* Information items are centered and spaced evenly */
 .info-item {
   display: flex;
   flex-direction: column;
@@ -19,10 +20,47 @@
 }
 
 .info-item i {
-  color:var(--accent-color);
+  font-size: 2em;
+  color: var(--accent-color);
+  margin-bottom: 10px;
 }
 
 .info-item p {
   color: #333;
   margin-top: 8px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .information-container {
+    flex-direction: column;
+    gap: 40px; /* Reduce gap between items */
+  }
+
+  .info-item i {
+    font-size: 1.8em; /* Slightly reduce icon size */
+  }
+
+  .info-item p {
+    font-size: 1.2rem; /* Adjust text size */
+  }
+}
+
+@media (max-width: 480px) {
+  .information-section {
+    padding: 10px;
+    min-height: 300px;
+  }
+
+  .information-container {
+    gap: 30px;
+  }
+
+  .info-item i {
+    font-size: 1.6em; /* Further reduce icon size for small screens */
+  }
+
+  .info-item p {
+    font-size: 1rem;
+  }
 }

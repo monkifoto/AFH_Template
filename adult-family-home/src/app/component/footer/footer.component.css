@@ -1,17 +1,20 @@
 .footer {
-  width: 100%;
+  width: 100vw; /* Ensure the footer covers the full viewport width */
   position: fixed;
   bottom: 0;
   background-color: var(--dark-background-color);
   color: var(--primary-color);
   text-align: center;
   padding: 10px 0;
+  overflow: hidden; /* Prevent content from spilling out */
+  box-sizing: border-box; /* Ensure padding doesn't affect the total width */
 }
 
 .footer-content {
-  max-width: 1200px;
+  max-width: 100%; /* Ensure the content doesn't exceed the viewport width */
   margin: 0 auto;
   padding: 0 20px;
+  box-sizing: border-box; /* Ensure padding doesn't cause overflow */
 }
 
 .footer-content p {
@@ -23,7 +26,35 @@
   margin: 0 10px;
 }
 
-a
-{
+a {
   color: var(--primary-color);
+}
+
+/* Mobile responsiveness for the footer */
+@media (max-width: 768px) {
+  .footer {
+    padding: 8px 0; /* Reduce padding for mobile */
+  }
+
+  .footer-content p {
+    font-size: 0.9rem; /* Slightly smaller font on mobile */
+  }
+
+  .footer-content span {
+    margin: 0 5px; /* Reduce margin for smaller screen sizes */
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 6px 0; /* Even smaller padding for smaller screens */
+  }
+
+  .footer-content p {
+    font-size: 0.8rem; /* Further reduce font size */
+  }
+
+  .footer-content span {
+    margin: 0 3px; /* Tighter spacing between elements */
+  }
 }

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class ConsultationComponent {
   constructor(private router: Router) {}
 
-  onBookConsultation(): void {
+  navigateToContact() {
     this.router.navigate(['/contact-us']);
   }
 }

@@ -5,7 +5,7 @@
   align-items: center;
   min-height: 600px;
   background-color: var(--dark-background-color); /* Dark background color */
-  color:  var(--primary-color);
+  color: var(--primary-color);
 }
 
 .consultation-container h1 {
@@ -16,15 +16,60 @@
 .consultation-container p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
-  color:  var(--primary-color);
+  color: var(--primary-color);
 }
 
 .btn-book-consultation {
   padding: 20px;
   background-color: var(--accent-color);
   font-size: 1.4rem;
+  border: none;
+  color: var(--primary-color);
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .btn-book-consultation:hover {
   background-color: var(--accent-color);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .consultation-container {
+    padding: 20px;
+    min-height: 400px;
+  }
+
+  .consultation-container h1 {
+    font-size: 2rem;
+  }
+
+  .consultation-container p {
+    font-size: 1rem;
+  }
+
+  .btn-book-consultation {
+    padding: 15px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .consultation-container {
+    min-height: 350px;
+    padding: 10px;
+  }
+
+  .consultation-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .consultation-container p {
+    font-size: 0.9rem;
+  }
+
+  .btn-book-consultation {
+    padding: 10px;
+    font-size: 1rem;
+  }
 }

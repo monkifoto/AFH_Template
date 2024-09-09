@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-welcome',
@@ -8,4 +9,10 @@ import { Component, Input } from '@angular/core';
 export class WelcomeComponent {
 @Input() welcomeMsg!: string;
 @Input() keyServicesHighlights!: string;
+
+constructor(private router: Router) {}
+
+navigateToContact() {
+  this.router.navigate(['/contact-us']);
+}
 }
