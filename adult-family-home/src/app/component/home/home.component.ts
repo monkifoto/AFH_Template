@@ -13,8 +13,8 @@ export class HomeComponent implements OnInit {
     // Provide default values for the properties if needed
     businessName: '',
     tagline: '',
-    uniqueService: '',
-    whyChoose: '',
+    uniqueService: [],
+    whyChoose: [],
     businessStory: '',
     motivation: '',
     mission: '',

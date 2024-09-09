@@ -22,6 +22,8 @@ export class EditBusinessComponent implements OnInit {
   // Variables for temporary holding the new service data
   serviceForm!: FormGroup;
   benefitsForm!: FormGroup;
+  whyChooseForm!: FormGroup;
+  uniqueServiceForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -45,8 +47,8 @@ export class EditBusinessComponent implements OnInit {
   initializeForm(): void {
     this.businessForm = this.fb.group({
       tagline:[''],
-      uniqueService:[''],
-      whyChoose:[''],
+      uniqueService:this.fb.array([]),
+      whyChoose:this.fb.array([]),
       businessStory:[''],
       motivation:[''],
       mission:[''],
@@ -85,6 +87,14 @@ export class EditBusinessComponent implements OnInit {
     this.benefitsForm = this.fb.group({
       name: ['', Validators.required]
     });
+    this.uniqueServiceForm = this.fb.group({
+      name: ['', Validators.required],
+      description:['']
+    });
+    this.whyChooseForm = this.fb.group({
+      name: ['', Validators.required],
+      description:['']
+    });
   }
 
   employees(): FormArray {
@@ -102,6 +112,15 @@ export class EditBusinessComponent implements OnInit {
   benefits(): FormArray {
     return this.businessForm.get('benefits') as FormArray;
   }
+
+  uniqueService(): FormArray {
+    return this.businessForm.get('uniqueService') as FormArray;
+  }
+
+  whyChoose(): FormArray {
+    return this.businessForm.get('whyChoose') as FormArray;
+  }
+
 
 
   addEmployee(): void {
@@ -153,6 +172,28 @@ export class EditBusinessComponent implements OnInit {
 
   removeBenefit(index: number): void {
     this.benefits().removeAt(index);
+  }
+
+  addUniqueService() {
+    if (this.uniqueServiceForm.valid) {
+      this.uniqueService().push(this.fb.group(this.uniqueServiceForm.value));
+      this.uniqueServiceForm.reset();
+    }
+  }
+
+  removeUniqueService(index: number): void {
+    this.uniqueService().removeAt(index);
+  }
+
+  addWhyChoose() {
+    if (this.whyChooseForm.valid) {
+      this.whyChoose().push(this.fb.group(this.whyChooseForm.value));
+      this.whyChooseForm.reset();
+    }
+  }
+
+  removeWhyChoose(index: number): void {
+    this.whyChoose().removeAt(index);
   }
 
   onEmployeeFileChange(event: any, index: number): void {
@@ -276,6 +317,24 @@ export class EditBusinessComponent implements OnInit {
         name: [bnf.name],
       });
       this.benefits().push(benefitsFormForm);
+    });
+
+    this.uniqueService().clear();
+    (business.uniqueService ?? []).forEach(us => {
+      const uniqueServiceForm = this.fb.group({
+        name: [us.name],
+        description: [us.description]
+      });
+      this.uniqueService().push(uniqueServiceForm);
+    });
+
+    this.whyChoose().clear();
+    (business.whyChoose ?? []).forEach(why => {
+      const whyChooseForm = this.fb.group({
+        name: [why.name],
+        description: [why.description]
+      });
+      this.whyChoose().push(whyChooseForm);
     });
 
   }

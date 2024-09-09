@@ -2,8 +2,8 @@ export interface Business {
   id: string;
   businessName: string;
   tagline?: string;
-  uniqueService: string;
-  whyChoose: string;
+  uniqueService: ListItem[];
+  whyChoose: ListItem[];
   businessStory: string;
   motivation: string;
   mission: string;
@@ -67,3 +67,9 @@ export interface ServiceItem{
 export interface BenefitItem{
   name:string;
 }
+
+export interface ListItem{
+  name:string;
+  description: string;
+}
+
