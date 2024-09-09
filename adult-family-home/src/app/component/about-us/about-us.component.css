@@ -241,7 +241,42 @@ section {
   left: 50%;
   width: 100px;
   height: 5px;
-  background-color: #FF6F61;
+  background-color: var(--accent-color);
   transform: translateX(-50%);
   /* z-index: 2; */
+}
+
+.about-cta {
+  background-color: var(--dark-background-color);
+  padding: 50px;
+  text-align: center;
+  color: var(--primary-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.about-cta h2 {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+.about-cta p {
+  font-size: 1.2rem;
+  color: #ddd;
+  margin-bottom: 30px;
+}
+
+.about-cta .cta-btn {
+  background-color: var(--button-color);
+  color: var(--primary-color);
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.about-cta .cta-btn:hover {
+  background-color: var(--button-hover-color);
 }

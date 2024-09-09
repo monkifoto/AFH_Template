@@ -1,20 +1,20 @@
 <section class="testimonial-comp">
-<div class="testimonial-heading">
-  <div class="section-heading">Testimonials</div>
-</div>
-<div class="testimonial">
-  <div class="testimonial-container" *ngFor="let testimonial of testimonials">
-    <div class="testimonial-image">
-      <img src="{{ testimonial.photoURL }}" alt="{{ testimonial.name }}" />
-    </div>
-    <div>
-      <div class="testimonial-content garamond">
-        <div class="">
-          <p>" {{ testimonial.quote }} "</p>
-          <strong>{{ testimonial.name }}</strong>
+  <div class="testimonial-heading">
+    <div class="section-heading">Testimonials</div>
+  </div>
+  <div class="testimonial">
+    <div class="testimonial-container" *ngFor="let testimonial of testimonials">
+      <div class="testimonial-image">
+        <img src="{{ testimonial.photoURL }}" alt="{{ testimonial.name }}" />
+      </div>
+      <div>
+        <div class="testimonial-content garamond">
+          <div class="">
+            <p>" {{ testimonial.quote }} "</p>
+            <strong>{{ testimonial.name }}</strong>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </section>

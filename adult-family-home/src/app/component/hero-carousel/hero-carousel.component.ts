@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hero-carousel',
@@ -9,10 +10,17 @@ export class HeroCarouselComponent implements OnInit {
   @Input() businessID: string | undefined;
   business: any;
 
+
+  constructor(private router: Router) {}
+
   ngOnInit() {
     this.fetchBusinessData();
   }
 
+
+navigateToContact() {
+  this.router.navigate(['/contact-us']);
+}
   fetchBusinessData() {
     // Fetch the business data based on businessID
     // This is a placeholder for actual data fetching logic.
