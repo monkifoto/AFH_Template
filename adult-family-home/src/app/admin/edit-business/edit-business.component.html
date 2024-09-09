@@ -9,8 +9,11 @@
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="story-mission-tab" data-bs-toggle="tab" data-bs-target="#story-mission"
-          type="button" role="tab" aria-controls="story-mission" aria-selected="false">Certifications, Story &
-          Mission</button>
+          type="button" role="tab" aria-controls="story-mission" aria-selected="false">Our Excellence</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="employee-profiles-tab" data-bs-toggle="tab" data-bs-target="#employee-profiles"
+          type="button" role="tab" aria-controls="employee-profiles" aria-selected="false">Employee Profiles</button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="content-photos-tab" data-bs-toggle="tab" data-bs-target="#content-photos"
@@ -36,10 +39,7 @@
         <button class="nav-link" id="contact-us-page-tab" data-bs-toggle="tab" data-bs-target="#contact-us-page"
           type="button" role="tab" aria-controls="contact-us-page" aria-selected="false">Contact Us Page</button>
       </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="employee-profiles-tab" data-bs-toggle="tab" data-bs-target="#employee-profiles"
-          type="button" role="tab" aria-controls="employee-profiles" aria-selected="false">Employee Profiles</button>
-      </li>
+
     </ul>
     <!-- Tabs Content -->
     <div class="tab-content" id="businessTabContent">
@@ -87,27 +87,64 @@
       <!-- Business Story and Mission Tab Content -->
       <div class="tab-pane fade" id="story-mission" role="tabpanel" aria-labelledby="story-mission-tab">
 
-        <h2>Certifications and Target Audience</h2>
+        <h2>Certifications</h2>
         <div class="form-group">
           <label for="certifications" class="required">Certifications</label>
           <textarea id="certifications" formControlName="certifications" class="form-control" required></textarea>
         </div>
-
+        <h2>Target Audience</h2>
         <div class="form-group">
           <label for="targetAudience">Target Audience</label>
           <textarea id="targetAudience" formControlName="targetAudience" class="form-control"></textarea>
         </div>
 
-        <h2>Business Story and Mission</h2>
+        <h2>Unique Features</h2>
+        <div [formGroup]="uniqueServiceForm">
+          <!-- Input for Service Name -->
+          <div class="form-group">
+            <label for="benefitName">Unique Serivces</label>
+            <input formControlName="name" id="uniqueSericeName" class="form-control" placeholder="Unique Serice Name ">
 
-        <div class="form-group">
-          <label for="uniqueService">Unique Service</label>
-          <input id="uniqueService" formControlName="uniqueService" class="form-control">
+            <input formControlName="description" id="uniqueSericeDescription" class="form-control"
+              placeholder="Unique Service Description ">
+          </div>
+
+          <!-- Button to Add Service -->
+          <button type="button" (click)="addUniqueService()">Add Unique Service</button>
         </div>
-        <div class="form-group">
-          <label for="whyChoose">Why Choose Us</label>
-          <input id="whyChoose" formControlName="whyChoose" class="form-control">
+
+        <ul>
+          <li *ngFor="let us of uniqueService().controls; let i = index">
+            <button type="button" (click)="removeUniqueService(i)">X</button> &nbsp;
+            <strong>{{ us.get('name')?.value }}</strong><br />{{ us.get('description')?.value }}
+
+          </li>
+        </ul>
+        <h2>Why Us Reasons</h2>
+        <div [formGroup]="whyChooseForm">
+          <!-- Input for Service Name -->
+          <div class="form-group">
+            <label for="benefitName">Why Choose Us Reasons</label>
+            <input formControlName="name" id="whyChooseName" class="form-control" placeholder="Enter Reason ">
+
+            <input formControlName="description" id="whyChooseDescription" class="form-control"
+              placeholder="Reason Description ">
+          </div>
+
+          <!-- Button to Add Service -->
+          <button type="button" (click)="addWhyChoose()">Add Reason</button>
         </div>
+
+        <ul>
+          <li *ngFor="let why of whyChoose().controls; let i = index">
+            <button type="button" (click)="removeWhyChoose(i)">X</button> &nbsp;
+            <strong>{{ why.get('name')?.value }}</strong><br />{{ why.get('description')?.value }}
+
+          </li>
+        </ul>
+
+
+        <h2>Business Story and Motivation</h2>
 
         <div class="form-group">
           <label for="businessStory" class="required">Business Story</label>
@@ -172,7 +209,7 @@
 
       <!-- Media and Reviews Tab Content -->
       <div class="tab-pane fade" id="media-reviews" role="tabpanel" aria-labelledby="media-reviews-tab">
-        <h2>Social Media, Reviews and Testimonials</h2>
+        <h2>Social Media, Reviews </h2>
         <div class="form-group">
           <label for="socialMedia">Social Media</label>
           <textarea id="socialMedia" formControlName="socialMedia" class="form-control"></textarea>
@@ -185,6 +222,7 @@
           <label for="ratings">Ratings</label>
           <textarea id="ratings" formControlName="ratings" class="form-control"></textarea>
         </div>
+        <h2>Testimonials</h2>
         <div class="form-group">
           <label for="testimonials">Testimonials</label>
           <div formArrayName="testimonials">

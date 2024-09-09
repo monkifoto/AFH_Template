@@ -1,21 +1,7 @@
-<!-- <div class="hero" *ngIf="business">
-  <div class="hero-overlay">
-    <h1>Welcome to {{business.businessName}}</h1>
-    <p>{{business.tagline}}</p>
-  </div>
-</div> -->
 
 <app-hero-carousel [businessID]="business.id"></app-hero-carousel>
 
 <app-welcome [welcomeMsg]="business.welcomeMessage" [keyServicesHighlights]="business.keyServicesHighlights" ></app-welcome>
-
-<!-- <div class="intro-section">
-<div class="left"><h1>{{business.welcomeMessage}}</h1>
-  </div>
-<div class="right"><p>
-  {{business.keyServicesHighlights}}
- </div>
-</div> -->
 
 <app-our-services-home
   [services]="[
@@ -32,8 +18,9 @@
   <div class="features-section">
     <div class="section-heading">Why Choose Us</div>
     <div class="feature-list">
-      <div *ngFor="let feature of business.whyChoose.split('|')" class="feature-item">
-        <div class="" [innerHTML]="feature"></div>
+      <div *ngFor="let feature of business.whyChoose" class="feature-item">
+        <div class="feature-list-item-title" [innerHTML]="feature.name"></div>
+        <div class="feature-list-item-description" [innerHTML]="feature.description"></div>
       </div>
     </div>
   </div>
@@ -41,6 +28,7 @@
   <app-features></app-features>
 
 <app-testimonials [testimonials]='business.testimonials'></app-testimonials>
+
 <app-consultation></app-consultation>
 <app-information
   [phoneNumber]="business.phone"

@@ -25,6 +25,11 @@
   background-color: var(--primary-color);
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.testimonial-container:hover {
+  transform: translateY(-10px);
 }
 
 /* Adjust for smaller screens */
