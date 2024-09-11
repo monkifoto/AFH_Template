@@ -58,13 +58,13 @@
 
 
         <div class="form-group">
-          <label for="address" class="required">Address</label>
-          <textarea id="address" formControlName="address" class="form-control" required></textarea>
+          <label for="address" >Address</label>
+          <textarea id="address" formControlName="address" class="form-control" ></textarea>
         </div>
 
         <div class="form-group">
-          <label for="phone" class="required">Phone</label>
-          <input id="phone" formControlName="phone" class="form-control" required>
+          <label for="phone" >Phone</label>
+          <input id="phone" formControlName="phone" class="form-control" >
         </div>
 
         <div class="form-group">
@@ -78,8 +78,18 @@
         </div>
 
         <div class="form-group">
-          <label for="businessHours" class="required">Business Hours</label>
-          <textarea id="businessHours" formControlName="businessHours" class="form-control" required></textarea>
+          <label for="businessURL">Web Address</label>
+          <input id="businessURL" formControlName="businessURL" class="form-control" >
+        </div>
+
+
+        <div class="form-group">
+          <label for="businessHours" >Business Hours</label>
+          <textarea id="businessHours" formControlName="businessHours" class="form-control" ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="keyWords" >Key Words</label>
+          <textarea id="keyWords" formControlName="keyWords" class="form-control" ></textarea>
         </div>
 
       </div>
@@ -89,8 +99,8 @@
 
         <h2>Certifications</h2>
         <div class="form-group">
-          <label for="certifications" class="required">Certifications</label>
-          <textarea id="certifications" formControlName="certifications" class="form-control" required></textarea>
+          <label for="certifications">Certifications</label>
+          <textarea id="certifications" formControlName="certifications" class="form-control" ></textarea>
         </div>
         <h2>Target Audience</h2>
         <div class="form-group">
@@ -147,8 +157,8 @@
         <h2>Business Story and Motivation</h2>
 
         <div class="form-group">
-          <label for="businessStory" class="required">Business Story</label>
-          <textarea id="businessStory" formControlName="businessStory" class="form-control" required></textarea>
+          <label for="businessStory">Business Story</label>
+          <textarea id="businessStory" formControlName="businessStory" class="form-control" ></textarea>
         </div>
         <div class="form-group">
           <label for="motivation">Motivation</label>
@@ -161,7 +171,7 @@
       <div class="tab-pane fade" id="content-photos" role="tabpanel" aria-labelledby="content-photos-tab">
         <h2>Content and Photos</h2>
         <div class="form-group">
-          <label for="logoImage" class="required">Logo Image</label>
+          <label for="logoImage" >Logo Image</label>
           <input type="file" id="logoImage" (change)="onFileChange($event, 'logoImage')" class="form-control">
           <ng-container *ngIf="uploadProgress['logoImage'] | async as progress">
             <div class="progress">
@@ -173,7 +183,7 @@
         <!-- Facility and Lifestyle Images -->
         <h2>Facility and Lifestyle Images</h2>
         <div class="form-group">
-          <label for="facilityImages" class="required">Facility Images</label>
+          <label for="facilityImages" >Facility Images</label>
           <input type="file" id="facilityImages" (change)="onFileChange($event, 'facilityImages')" class="form-control">
           <ng-container *ngIf="uploadProgress['facilityImages'] | async as progress">
             <div class="progress">
@@ -182,7 +192,7 @@
           </ng-container>
         </div>
         <div class="form-group">
-          <label for="lifestyleImages" class="required">Lifestyle Images</label>
+          <label for="lifestyleImages" >Lifestyle Images</label>
           <input type="file" id="lifestyleImages" (change)="onFileChange($event, 'lifestyleImages')"
             class="form-control">
           <ng-container *ngIf="uploadProgress['lifestyleImages'] | async as progress">
@@ -258,12 +268,12 @@
         <h2>Home Page</h2>
         <div class="form-group">
           <label for="welcomeMessage">Welcome Message</label>
-          <textarea id="welcomeMessage" formControlName="welcomeMessage" class="form-control" required></textarea>
+          <textarea id="welcomeMessage" formControlName="welcomeMessage" class="form-control" ></textarea>
         </div>
         <div class="form-group">
-          <label for="keyServicesHighlights" class="required">Key Services and Highlights</label>
+          <label for="keyServicesHighlights" >Key Services and Highlights</label>
           <textarea id="keyServicesHighlights" formControlName="keyServicesHighlights" class="form-control"
-            required></textarea>
+            ></textarea>
         </div>
 
       </div>
@@ -272,16 +282,16 @@
       <div class="tab-pane fade" id="about-us" role="tabpanel" aria-labelledby="about-us-tab">
         <h2>About Us Page</h2>
         <div class="form-group">
-          <label for="teamValues" class="required">Team and Values</label>
-          <textarea id="teamValues" formControlName="teamValues" class="form-control" required></textarea>
+          <label for="teamValues" >Team and Values</label>
+          <textarea id="teamValues" formControlName="teamValues" class="form-control" ></textarea>
         </div>
         <div class="form-group">
-          <label for="mission" class="required">Mission</label>
-          <textarea id="mission" formControlName="mission" class="form-control" required></textarea>
+          <label for="mission" >Mission</label>
+          <textarea id="mission" formControlName="mission" class="form-control" ></textarea>
         </div>
         <div class="form-group">
-          <label for="vision" class="required">Vision</label>
-          <textarea id="vision" formControlName="vision" class="form-control" required></textarea>
+          <label for="vision" >Vision</label>
+          <textarea id="vision" formControlName="vision" class="form-control" ></textarea>
         </div>
       </div>
 
@@ -340,8 +350,8 @@
           <textarea id="freeConsulting" formControlName="freeConsulting" class="form-control"></textarea>
         </div>
         <div class="form-group">
-          <label for="pricingStructure" class="required">Pricing Structure</label>
-          <textarea id="pricingStructure" formControlName="pricingStructure" class="form-control" required></textarea>
+          <label for="pricingStructure" >Pricing Structure</label>
+          <textarea id="pricingStructure" formControlName="pricingStructure" class="form-control" ></textarea>
         </div>
       </div>
 
@@ -349,9 +359,9 @@
       <div class="tab-pane fade" id="contact-us-page" role="tabpanel" aria-labelledby="contact-us-page-tab">
         <h2>Contact Us Page</h2>
         <div class="form-group">
-          <label for="contactFormDetails" class="required">Contact Form Details</label>
+          <label for="contactFormDetails" >Contact Form Details</label>
           <textarea id="contactFormDetails" formControlName="contactFormDetails" class="form-control"
-            required></textarea>
+            ></textarea>
         </div>
         <div class="form-group">
           <label for="mapDirections">Map and Directions</label>

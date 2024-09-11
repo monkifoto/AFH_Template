@@ -1,6 +1,8 @@
 export interface Business {
   id: string;
   businessName: string;
+  businessURL: string;
+  keyWords: string;
   tagline?: string;
   uniqueService: ListItem[];
   whyChoose: ListItem[];
