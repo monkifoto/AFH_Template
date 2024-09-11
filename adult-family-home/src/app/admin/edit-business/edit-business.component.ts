@@ -41,12 +41,17 @@ export class EditBusinessComponent implements OnInit {
       if (this.businessId) {
         this.loadBusinessData();
       }
+      else{
+        //load defautls.
+      }
     });
   }
 
   initializeForm(): void {
     this.businessForm = this.fb.group({
       tagline:[''],
+      businessURL: [''],
+      keyWords: [''],
       uniqueService:this.fb.array([]),
       whyChoose:this.fb.array([]),
       businessStory:[''],
@@ -66,33 +71,34 @@ export class EditBusinessComponent implements OnInit {
       ratings:[''],
       testimonials:this.fb.array([]),
       businessName: ['', Validators.required],
-      address: ['', Validators.required],
-      phone: ['', Validators.required],
+      address: [''],
+      phone: [''],
       fax: [''],
       email: ['', Validators.required],
-      businessHours: ['', Validators.required],
+      businessHours: [''],
       socialMedia: [''],
       welcomeMessage: [''],
-      keyServicesHighlights: ['', Validators.required],
-      teamValues: ['', Validators.required],
-      pricingStructure: ['', Validators.required],
-      contactFormDetails: ['', Validators.required],
+      keyServicesHighlights: [''],
+      teamValues: [''],
+      pricingStructure: [''],
+      contactFormDetails: [''],
       mapDirections: [''],
       photoGallery: [''],
+      isActive : true,
       employees: this.fb.array([])
     });
     this.serviceForm = this.fb.group({
-      name: ['', Validators.required]
+      name: ['']
     });
     this.benefitsForm = this.fb.group({
-      name: ['', Validators.required]
+      name: ['']
     });
     this.uniqueServiceForm = this.fb.group({
-      name: ['', Validators.required],
+      name: [''],
       description:['']
     });
     this.whyChooseForm = this.fb.group({
-      name: ['', Validators.required],
+      name: [''],
       description:['']
     });
   }
@@ -260,6 +266,52 @@ export class EditBusinessComponent implements OnInit {
     }
   }
 
+  loadDefaultData():void{
+    this.businessForm = this.fb.group({
+      businessName: ['Careful Living AFH', Validators.required],
+      keyWords: [''],
+      businessURL: [''],
+      tagline: ['Caring with compassion'],
+      uniqueService: this.fb.array([]),
+      whyChoose: this.fb.array([]),
+      businessStory: ['Careful Living AFH was founded in 2005 by a group of healthcare professionals who wanted to provide a loving and caring environment for seniors.'],
+      motivation: ['The motivation behind starting this business was to create a home where seniors can live comfortably and with dignity.'],
+      mission: ['Our mission is to work hard each day to meet and exceed the expectations of our residents and their families. We provide personalized extensive care plans based on the residents needs, preferences and interests while giving their families peace of mind knowing that all their needs are being met.'],
+      vision: ['Elderly Home Care is a perfect alternative for seniors who can no longer live on their own, but want to maintain their independence in a warm, friendly home-like atmosphere with 24-hour tender compassionate care. We are conveniently located 10 minutes away from Evergreen Hospital in Bellevue, bordering Kirkland'],
+      certifications: ['Licensed by the state, Certified Nursing Assistants (CNA) on staff.'],
+      targetAudience: ['Seniors in need of assisted living services, families looking for quality care for their loved ones.',],
+      services:  this.fb.array([]),
+      specialPrograms: ['Holiday Celebrations · Birthday Parties · Outdoor activities · Exercise Program · Musical Program · Arts and Crafts · Games · Movie and Popcorn Nights · Newspaper · Gardening'],
+      tours: ['Yes, we provide tours of our facility.'],
+      freeConsulting: ['Yes, we offer free consulting services.'],
+      websiteGoals: ['To provide information, encourage visits, and offer consultation requests.'],
+      logoImage: [''],
+      ownerImagesBios: ['John Doe, RN, Founder.'],
+      staffImagesBios: ['Jane Smith, CNA, Head Nurse; Bob Johnson, Physical Therapist.'],
+      facilityImages: [''],
+      lifestyleImages: [''],
+      mediaFeatures: ['Featured in Local News, Healthcare Magazine.'],
+      ratings: ['Google: 4.8 stars, Yelp: 5 stars'],
+      testimonials: this.fb.array([]),
+      address: ['1234 Care St, Compassion City, ST 12345'],
+      phone: ['(123) 456-7890'],
+      fax: ['(123) 456-7891'],
+      email: ['info@carefullivingafh.com', Validators.email],
+      businessHours: ['Mon-Fri: 9am-5pm, Sat-Sun: 10am-4pm'],
+      socialMedia: ['Facebook: facebook.com/carefullivingafh'],
+      welcomeMessage: ['Welcome to Careful Living AFH, where we care with compassion.'],
+      keyServicesHighlights: ['24/7 care, nutritious meals, engaging activities.'],
+      teamValues: ['Our team is trained and specialized in providing care for seniors in need of, or who are diagnosed with a wide range of illnesses such as: Dementia, Alzheimer’s, Strokes, Diabetic Management, Cardiac Problems, Multiple Sclerosis, Rehabilitation and Hospice/Palliative Care', Validators.required],
+      serviceBenefits:  this.fb.array([]),
+      pricingStructure: ['Contact us for pricing details.'],
+      contactFormDetails: ['Name, Email, Phone, Message'],
+      mapDirections: ['Included map and directions to our facility.'],
+      photoGallery: ['Gallery of our facility and events.',],
+      employees: this.fb.array([]),
+      isActive: true
+    });
+  }
+
   loadBusinessData(): void {
     this.businessService.getBusiness(this.businessId).subscribe(
       business => {
@@ -340,22 +392,38 @@ export class EditBusinessComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log("submit click");
     if (this.businessForm.valid) {
       const formValue: Business = this.businessForm.value;
+      console.log("form valid");
       if (this.businessId) {
         this.businessService.updateBusiness(this.businessId, formValue)
-          .then(() => alert('Business details updated successfully!'))
+          .then(() => console.error('Business details updated successfully!'))
           .catch(err => console.error('Error updating business details', err));
-      }else{
-        this.businessService.createBusiness(formValue).subscribe(bus =>{
+      } else {
+        console.log('Submit else');
+        this.businessService.createBusiness(formValue).subscribe(bus => {
           this.business = bus;
           this.confirmationMessage = "Business has been successfully created!";
           this.showConfirmation = true;
           console.log("Business Created with ID: ", this.business?.id);
-      });
+
+          // Ensure the business ID is not undefined before calling updateBusiness
+          if (this.business && this.business.id) {
+            this.businessService.updateBusiness(this.business.id, formValue)
+              .then(() => console.error('Business details updated successfully!'))
+              .catch(err => console.error('Error updating business details', err));
+          } else {
+            console.error("Business ID is undefined.");
+          }
+        });
+      }
+    }
+    else{
+      console.log("Business Form  is not valid!")
     }
   }
-}
+
 closeConfirmation(): void {
   this.showConfirmation = false;
   this.router.navigate(['/admin/businessList']);
