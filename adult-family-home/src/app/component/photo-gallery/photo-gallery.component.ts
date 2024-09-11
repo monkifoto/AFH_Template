@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { WebContentService } from 'src/app/services/web-content.service';
 import { Business } from 'src/app/model/business-questions.model';
+import { MetaService } from 'src/app/services/meta-service.service';
 
 @Component({
   selector: 'app-photo-gallery',
@@ -19,18 +20,25 @@ export class PhotoGalleryComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private webContent: WebContentService
-  ) {}
+    private webContent: WebContentService,
+    private metaService: MetaService){}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.businessId = params['id'];
-      this.loadImages();
     });
+
+    this.loadImages();
+
+    this.metaService.getMetaData(this.businessId).subscribe((metaData: { title: string; description: string; keywords: string; }) => {
+      this.metaService.updateMetaTags(metaData);
+    });
+
     this.webContent.getBusinessData(this.businessId).subscribe(data => {
       if(data)
       this.business = data;
     });
+
   }
 
   loadImages(): void {

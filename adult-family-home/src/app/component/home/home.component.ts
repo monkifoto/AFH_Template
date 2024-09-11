@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WebContentService } from 'src/app/services/web-content.service';
 import { Business } from 'src/app/model/business-questions.model';
 import { ActivatedRoute } from '@angular/router';
+import { MetaService } from 'src/app/services/meta-service.service';
 
 @Component({
   selector: 'app-home',
@@ -59,12 +60,18 @@ export class HomeComponent implements OnInit {
   };
 
 
-  constructor(private webContent: WebContentService, private route: ActivatedRoute){}
+  constructor(private webContent: WebContentService, private route: ActivatedRoute,  private metaService: MetaService){}
 
   ngOnInit(): void {
 
     this.route.queryParams.subscribe(params => {
       let businessId = params['id'] ;
+
+      this.metaService.getMetaData(businessId).subscribe((metaData: { title: string; description: string; keywords: string; }) => {
+        console.log("Metadata", metaData);
+        this.metaService.updateMetaTags(metaData);
+      });
+
       this.webContent.getBusinessData(businessId).subscribe(data => {
         if(data)
         this.business = data;
