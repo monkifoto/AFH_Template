@@ -3,6 +3,7 @@ import { WebContentService } from 'src/app/services/web-content.service';
 import { Business } from 'src/app/model/business-questions.model';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { MetaService } from 'src/app/services/meta-service.service';
 
 @Component({
   selector: 'app-contact-us',
@@ -19,11 +20,16 @@ export class ContactUsComponent  implements OnInit{
     message: ''
   };
 
-  constructor(private webContent: WebContentService, private route: ActivatedRoute,private http: HttpClient){}
+  constructor(private webContent: WebContentService, private route: ActivatedRoute,private http: HttpClient,  private metaService: MetaService){}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       let businessId = params['id'];
+
+      this.metaService.getMetaData(businessId).subscribe((metaData: { title: string; description: string; keywords: string; }) => {
+        this.metaService.updateMetaTags(metaData);
+      });
+
       this.webContent.getBusinessData(businessId).subscribe(data => {
         if(data)
         this.business = data;
