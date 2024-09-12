@@ -1,6 +1,7 @@
 export interface Business {
   id: string;
   businessName: string;
+  providerName: string;
   businessURL: string;
   keyWords: string;
   tagline?: string;

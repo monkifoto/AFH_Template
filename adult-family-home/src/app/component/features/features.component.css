@@ -18,7 +18,7 @@ font-size: 2.5em;
 }
 
 .section-title-highlight {
-  color: var(--accent-color);
+  color: var(--button-color);
 }
 
 .section-description {
