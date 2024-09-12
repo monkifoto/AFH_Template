@@ -103,6 +103,22 @@
   background-color: #45a049;
 }
 
+.split-container {
+  display: flex;
+}
+
+.left, .right {
+  flex: 1; /* Equal width columns */
+  padding: 20px;
+}
+
+.left {
+  display: flex;
+  justify-content: center; /* Horizontally center the text */
+  align-items: center; /* Vertically center the text */
+}
+
+
 /* Map Section Styling */
 .map-section {
   margin-bottom: 50px;

@@ -8,9 +8,12 @@
   </p>
   <div class="services-container">
     <div *ngFor="let service of services" class="service-item">
-      <i [ngClass]="service.icon"></i>
-      <h3>{{ service.title }}</h3>
-      <p>{{ service.description }}</p>
+      <i [ngClass]="service.icon" class="service-item-icon"></i>
+      <h3 class="service-item-title">{{ service.title }}</h3>
+      <div class="service-item-description">
+        <p>{{ service.description }}</p>
+      </div>
+
     </div>
   </div>
 </section>

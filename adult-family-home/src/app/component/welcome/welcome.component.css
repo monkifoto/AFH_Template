@@ -48,16 +48,17 @@ p {
 
 .learn-more-btn, .contact-btn {
   padding: 10px 20px;
-  background-color: var(--accent-color);
+  background-color: var(--button-color);
+  color: var(--button-text-color);
   font-size: 1.4rem;
 }
 
 .learn-more-btn {
   background-color: rgb(136, 136, 136);
-  color: black;
+  color: var(--button-text-color);
 }
 
 .contact-btn {
-  background-color: var(--accent-color);
-  color:  var(--primary-color);
+  background-color: var(--button-color);
+  color: var(--button-text-color);
 }

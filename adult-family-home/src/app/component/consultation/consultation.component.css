@@ -40,16 +40,17 @@
 
 .btn-book-consultation {
   padding: 20px;
-  background-color: var(--accent-color);
+  background-color: var(--button-color);
   font-size: 1.4rem;
   border: none;
-  color: var(--primary-color);
+  color: var(--button-text-color);
   border-radius: 5px;
   cursor: pointer;
 }
 
 .btn-book-consultation:hover {
-  background-color: var(--accent-color);
+  background-color: var(--button-hover-color);
+  color: var(--button-text-color);
 }
 
 /* Mobile adjustments */
