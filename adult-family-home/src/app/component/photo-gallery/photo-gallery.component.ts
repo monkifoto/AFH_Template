@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { WebContentService } from 'src/app/services/web-content.service';
 import { Business } from 'src/app/model/business-questions.model';
 import { MetaService } from 'src/app/services/meta-service.service';
@@ -21,7 +21,8 @@ export class PhotoGalleryComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private webContent: WebContentService,
-    private metaService: MetaService){}
+    private metaService: MetaService,
+    private router: Router){}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -52,4 +53,10 @@ export class PhotoGalleryComponent implements OnInit {
   onCloseModal() {
     this.selectedImageUrl = null;
   }
+
+
+  navigateToContact() {
+    this.router.navigate(['/contact-us']);
+  }
+
 }

@@ -19,7 +19,8 @@
     <div class="section-heading">Why Choose Us</div>
     <div class="feature-list">
       <div *ngFor="let feature of business.whyChoose" class="feature-item">
-        <div class="feature-list-item-title" [innerHTML]="feature.name"></div>
+        <h3>
+        <div class="feature-list-item-title" [innerHTML]="feature.name"></div></h3>
         <div class="feature-list-item-description" [innerHTML]="feature.description"></div>
       </div>
     </div>
@@ -30,8 +31,4 @@
 <app-testimonials [testimonials]='business.testimonials'></app-testimonials>
 
 <app-consultation></app-consultation>
-<app-information
-  [phoneNumber]="business.phone"
-  [address]="business.address"
-  [email]="business.email">
-</app-information>
+

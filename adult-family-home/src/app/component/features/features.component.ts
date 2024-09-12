@@ -16,6 +16,8 @@ export class FeaturesComponent implements OnInit{
 
   ngOnInit(): void {
 
+
+
     this.route.queryParams.subscribe(params => {
       let businessId = params['id'] ;
       this.webContent.getBusinessData(businessId).subscribe(data => {

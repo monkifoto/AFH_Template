@@ -10,7 +10,7 @@
     <div class="features-section">
 
       <div class="feature-list">
-        <div *ngFor="let feature of business.uniqueService" class="feature-item">
+        <div *ngFor="let feature of business?.uniqueService" class="feature-item">
           <div class="feature-list-item-title" [innerHTML]="feature.name"></div>
           <div class="feature-list-item-description" [innerHTML]="feature.description"></div>
         </div>
