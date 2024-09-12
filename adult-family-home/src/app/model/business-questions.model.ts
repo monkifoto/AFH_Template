@@ -36,7 +36,6 @@ export interface Business {
   keyServicesHighlights: string;
   teamValues: string;
   benefits: BenefitItem[];
-  pricingStructure: string;
   contactFormDetails: string;
   mapDirections: string;
   faqs: string;

@@ -50,7 +50,17 @@
     <section class="contact-form">
       <div class="section-heading">Send Us a Message</div>
       <!-- Add (ngSubmit) and use Angular's two-way data binding [(ngModel)] -->
-      <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
+    <div class="split-container">
+      <div class="left">
+
+        <div class="content-wrapper">
+        <h2 class="title">How can we help?</h2>
+        <p class="description">Send us a message now for a tour of our facilities, or simply send us your questions
+          using the form. We would love to help.</p>
+        </div>
+      </div>
+      <div class="right">
+        <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" id="name" required [(ngModel)]="formData.name" name="name">
@@ -64,7 +74,9 @@
           <textarea id="message" rows="5" required [(ngModel)]="formData.message" name="message"></textarea>
         </div>
         <button type="submit" [disabled]="!contactForm.form.valid">Submit</button>
-      </form>
+      </form></div>
+    </div>
+
     </section>
 
     <section class="map-section">
