@@ -16,11 +16,12 @@
   <!-- Carousel Items -->
   <div class="carousel-inner">
     <div
-      *ngFor="let image of business.heroImages; let i = index"
+      *ngFor="let image of heroImages; let i = index"
       class="carousel-item"
       [class.active]="i === 0"
     >
-      <img [src]="image" class="d-block w-100" alt="Hero Image">
+
+      <img [src]="image.url" class="d-block w-100" alt="Hero Image">
       <div class="carousel-caption d-none d-md-block hero-overlay">
         <h1>Welcome to <br/> {{ business.businessName }}</h1>
         <div class="business-subtitle garamond"> <br/>

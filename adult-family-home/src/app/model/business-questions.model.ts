@@ -76,3 +76,7 @@ export interface ListItem{
   description: string;
 }
 
+export interface HeroImage {
+  url: string;
+  altText?: string; // Optional field for image alt text
+}
