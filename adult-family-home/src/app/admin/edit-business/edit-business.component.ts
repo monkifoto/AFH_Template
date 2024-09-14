@@ -24,6 +24,7 @@ export class EditBusinessComponent implements OnInit {
   benefitsForm!: FormGroup;
   whyChooseForm!: FormGroup;
   uniqueServiceForm!: FormGroup;
+  uploads: { uploadProgress: number, downloadUrl?: string }[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -239,15 +240,17 @@ export class EditBusinessComponent implements OnInit {
   onFileChange(event: any, field: string): void {
     const file = event.target.files[0];
     if (file) {
-      let location: 'gallery' | 'employee' | 'business' | 'testimonail';
+      let location: 'gallery' | 'employee' | 'business' | 'testimonail' | 'heroImages';
 
       // Determine location based on the field
       if (field === 'photoGallery') {
         location = 'gallery';
       } else if (field === 'testimonial') {
-          location = 'gallery';
+          location = 'business';
       } else if (field === 'logoImage' || field === 'facilityImages' || field === 'lifestyleImages') {
         location = 'business';
+      }  else if (field === 'heroImages' ) {
+        location = 'heroImages';
       } else {
         location = 'employee';
       }

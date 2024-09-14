@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable, catchError, map, of, tap } from 'rxjs';
-import { Business, Employee } from '../model/business-questions.model';
+import { Business, Employee, HeroImage } from '../model/business-questions.model';
 
 
 @Injectable({
@@ -86,11 +86,27 @@ export class WebContentService {
   }
 
   getBusinessGalleryImagesById(businessId: string): Observable<any[]> {
-    console.log("Webcontent getBusinessGalleryImagesByID: " , businessId);
+    console.log("Web content getBusinessGalleryImagesByID: " , businessId);
     if(businessId == undefined || businessId == "" || businessId ===""  ){
       businessId = this.defaultBusinessId;
     }
     return this.firestore.collection('businesses').doc(businessId)
       .collection('gallery').valueChanges();
+  }
+
+  getBusinessUploadedImagesById(businessId: string, uploadLocation: string): Observable<any[]> {
+    console.log("Web content getBusinessGalleryImagesByID: " , businessId);
+    if(businessId == undefined || businessId == "" || businessId ===""  ){
+      businessId = this.defaultBusinessId;
+    }
+    return this.firestore.collection('businesses').doc(businessId)
+    .collection<HeroImage>(uploadLocation).valueChanges(); 
+  }
+
+
+  checkImageExists(imageUrl: string): Promise<boolean> {
+    return this.storage.refFromURL(imageUrl).getDownloadURL().toPromise()
+      .then(() => true)  // Image exists
+      .catch(() => false);  // Image does not exist
   }
 }

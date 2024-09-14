@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import { from, map, Observable, switchMap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WebContentService } from 'src/app/services/web-content.service';
 import { Business } from 'src/app/model/business-questions.model';
@@ -13,7 +13,7 @@ import { MetaService } from 'src/app/services/meta-service.service';
 export class PhotoGalleryComponent implements OnInit {
   @Input()
   businessId!: string;
-  images$!: Observable<any[]>;
+  images!: any[];
   business!: Business;
   selectedImageUrl: string | null = null;
 
@@ -26,24 +26,40 @@ export class PhotoGalleryComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.businessId = params['id'];
-    });
+      this.loadImages();
 
-    this.loadImages();
+      this.metaService.getMetaData(this.businessId).subscribe((metaData: { title: string; description: string; keywords: string; }) => {
+        this.metaService.updateMetaTags(metaData);
+      });
 
-    this.metaService.getMetaData(this.businessId).subscribe((metaData: { title: string; description: string; keywords: string; }) => {
-      this.metaService.updateMetaTags(metaData);
-    });
+      this.webContent.getBusinessData(this.businessId).subscribe(data => {
+        if(data)
+        this.business = data;
+      });
 
-    this.webContent.getBusinessData(this.businessId).subscribe(data => {
-      if(data)
-      this.business = data;
     });
 
   }
 
   loadImages(): void {
-      this.images$ = this.webContent.getBusinessGalleryImagesById(this.businessId);
+    this.webContent.getBusinessGalleryImagesById(this.businessId).pipe(
+      switchMap(images => {
+        // Create an array of observables that check if the image exists
+        const checks = images.map(async image => {
+          const exists = await this.webContent.checkImageExists(image.url);
+          return exists ? image : null;  // Return image only if it exists
+        });
+
+        // Resolve all checks
+        return from(Promise.all(checks));
+      }),
+      map(images => images.filter(image => image !== null))  // Filter out null values
+    ).subscribe(filteredImages => {
+      this.images = filteredImages;
+    });
+
   }
+
 
   onImageClick(imageUrl: string) {
     this.selectedImageUrl = imageUrl;

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Business } from 'src/app/model/business-questions.model';
+import { Business, HeroImage } from 'src/app/model/business-questions.model';
 import { WebContentService } from 'src/app/services/web-content.service';
 
 @Component({
@@ -11,6 +11,7 @@ import { WebContentService } from 'src/app/services/web-content.service';
 export class HeroCarouselComponent implements OnInit {
   businessId!: string;
   business!: Business | undefined;
+  heroImages: HeroImage[] = [];
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -23,9 +24,18 @@ export class HeroCarouselComponent implements OnInit {
       this.webContentService.getBusinessData(this.businessId).subscribe(data => {
         if (data) {
           this.business = data;
+          this.loadHeroImages();
         }
       });
     });
+  }
+
+  loadHeroImages(): void {
+    const uploadLocation = 'heroImages'; // This is the folder in Firestore where the images are stored
+    this.webContentService.getBusinessUploadedImagesById(this.businessId, uploadLocation)
+      .subscribe(images => {
+        this.heroImages = images; // Store the retrieved images
+      });
   }
 
 navigateToContact() {

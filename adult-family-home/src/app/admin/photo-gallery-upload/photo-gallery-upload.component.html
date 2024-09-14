@@ -1,20 +1,18 @@
-<!-- <div class="upload-container">
-  <input type="file" multiple (change)="uploadFiles($event)" />
 
-  <div *ngFor="let fileName of uploadedImages | keyvalue">
-    <div *ngIf="uploadProgress[fileName.key] | async as progress">
-      <div class="progress-container">
-        <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
-      </div>
-    </div>
-    <div class="thumbnail" *ngIf="uploadedImages[fileName.key]">
-      <img [src]="uploadedImages[fileName.key]" alt="{{fileName.key}}" />
-    </div>
-  </div>
-</div> -->
 
 
 <div class="upload-container">
+
+  <div class="upload-location">
+    <label for="uploadLocation">Select Upload Location:</label>
+    <select id="uploadLocation" [(ngModel)]="uploadLocation" (change)="loadImages()">
+      <option value="gallery">Gallery</option>
+      <option value="heroImages">Hero Images</option>
+      <option value="lifestyle">Lifestyle</option>
+    </select>
+  </div>
+
+
   <div class="drag-drop-area"
        (dragover)="onDragOver($event)"
        (dragleave)="onDragLeave($event)"
@@ -41,3 +39,19 @@
     </div>
   </div>
 </div>
+
+<section class="gallery">
+  <div class="section-heading">Explore Our Gallery</div>
+  <div class="gallery-grid">
+    <div *ngFor="let image of images" class="gallery-item" (click)="onImageClick(image.url)">
+      <img [src]="image.url" alt="Gallery Image">
+    </div>
+  </div>
+</section>
+
+
+<app-image-viewer-modal
+*ngIf="selectedImageUrl"
+[imageUrl]="selectedImageUrl"
+(closeModal)="onCloseModal()">
+</app-image-viewer-modal>
