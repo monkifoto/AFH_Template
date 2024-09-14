@@ -45,6 +45,7 @@ export interface Business {
   mapIframe: string;
   employees?: Employee[];
   isActive: boolean;
+  heroImages?: string[];
 }
 
 export interface Employee {

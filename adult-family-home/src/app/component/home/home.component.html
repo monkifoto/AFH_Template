@@ -1,7 +1,7 @@
 
-<app-hero-carousel [businessID]="business.id"></app-hero-carousel>
+<app-hero-carousel></app-hero-carousel>
 
-<app-welcome [welcomeMsg]="business.welcomeMessage" [keyServicesHighlights]="business.keyServicesHighlights" ></app-welcome>
+<app-welcome [welcomeMsg]="business.welcomeMessage" [keyServicesHighlights]="business.keyServicesHighlights" [businessName]="business.businessName" ></app-welcome>
 
 <app-our-services-home
   [services]="[

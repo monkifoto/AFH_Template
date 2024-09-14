@@ -68,7 +68,6 @@ export class HomeComponent implements OnInit {
       let businessId = params['id'] ;
 
       this.metaService.getMetaData(businessId).subscribe((metaData: { title: string; description: string; keywords: string; }) => {
-        console.log("Metadata", metaData);
         this.metaService.updateMetaTags(metaData);
       });
 

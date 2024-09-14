@@ -7,26 +7,26 @@
     </p>
   </div>
 </footer> -->
-<footer class="footer" *ngIf="business$ | async as business">
+<footer class="footer">
   <div class="footer-content">
-    <h2 class="footer-title">{{business.businessName}}</h2>
+    <h2 class="footer-title">{{business?.businessName}}</h2>
     <hr class="footer-divider" />
     <div class="footer-info">
       <div class="footer-column">
         <h3 class="footer-column-title">Location:</h3>
         <address>
-          {{ business.address }}
+          {{ business?.address }}
         </address>
       </div>
       <div class="footer-column">
-        <h3 class="footer-column-title">Provider:{{business.providerName}}</h3>
-        <p>Email: <a href="mailto:{{business.email}}"> {{ business.email }}</a></p>
-        <p>Phone: <a href="tel:+{{business.phone}}">{{business.phone}}</a></p>
+        <h3 class="footer-column-title">Provider:{{business?.providerName}}</h3>
+        <p>Email: <a href="mailto:{{business?.email}}"> {{ business?.email }}</a></p>
+        <p>Phone: <a href="tel:+{{business?.phone}}">{{business?.phone}}</a></p>
       </div>
       <div class="footer-column">
-        <h3 class="footer-column-title">Resident Manager:{{business.providerName}}</h3>
-        <p>Email: <a href="mailto:{{business.email}}"> {{ business.email }}</a></p>
-        <p>Phone: <a href="tel:+{{business.phone}}">{{business.phone}}</a></p>
+        <h3 class="footer-column-title">Resident Manager:{{business?.providerName}}</h3>
+        <p>Email: <a href="mailto:{{business?.email}}"> {{ business?.email }}</a></p>
+        <p>Phone: <a href="tel:+{{business?.phone}}">{{business?.phone}}</a></p>
       </div>
     </div>
   </div>

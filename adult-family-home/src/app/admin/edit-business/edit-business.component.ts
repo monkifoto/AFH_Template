@@ -51,6 +51,7 @@ export class EditBusinessComponent implements OnInit {
     this.businessForm = this.fb.group({
       tagline:[''],
       businessURL: [''],
+      providerName: [''],
       keyWords: [''],
       uniqueService:this.fb.array([]),
       whyChoose:this.fb.array([]),
@@ -270,6 +271,7 @@ export class EditBusinessComponent implements OnInit {
       businessName: ['Careful Living AFH', Validators.required],
       keyWords: [''],
       businessURL: [''],
+      providerName: ['Provider Name'],
       tagline: ['Caring with compassion'],
       uniqueService: this.fb.array([]),
       whyChoose: this.fb.array([]),
