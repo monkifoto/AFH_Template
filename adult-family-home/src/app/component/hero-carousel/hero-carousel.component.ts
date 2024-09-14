@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Business } from 'src/app/model/business-questions.model';
+import { WebContentService } from 'src/app/services/web-content.service';
 
 @Component({
   selector: 'app-hero-carousel',
@@ -7,36 +9,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./hero-carousel.component.css']
 })
 export class HeroCarouselComponent implements OnInit {
-  @Input() businessID: string | undefined;
-  business: any;
+  businessId!: string;
+  business!: Business | undefined;
 
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+    private webContentService: WebContentService) {}
 
-  constructor(private router: Router) {}
+  ngOnInit(): void {
 
-  ngOnInit() {
-    this.fetchBusinessData();
+    this.route.queryParams.subscribe(params => {
+      this.businessId = params['id'];
+      this.webContentService.getBusinessData(this.businessId).subscribe(data => {
+        if (data) {
+          this.business = data;
+        }
+      });
+    });
   }
-
 
 navigateToContact() {
   this.router.navigate(['/contact-us']);
 }
-  fetchBusinessData() {
-    // Fetch the business data based on businessID
-    // This is a placeholder for actual data fetching logic.
-    // Replace it with a service that fetches data from your backend or Firebase.
-    this.business = {
-      businessName: '#1 Helping Hand AFH',
-      tagline: 'We’re Family, Not Just Care.',
-      heroImages: [
-        '../../../assets/sharedAssets/istockphoto-804432288-2048x2048.jpg',
-        '../../../assets/sharedAssets/istockphoto-613308420-2048x2048.jpg',
-        '../../../assets/sharedAssets/istockphoto-918529390-2048x2048.jpg',
-        '../../../assets/sharedAssets/istockphoto-1324090651-2048x2048.jpg',
-        '../../../assets/sharedAssets/istockphoto-653191338-2048x2048.jpg',
-        '../../../assets/sharedAssets/istockphoto-1170514008-2048x2048.jpg',
-        '../../../assets/sharedAssets/istockphoto-1315315044-2048x2048.jpg'
-      ]
-    };
-  }
+
 }

@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class WelcomeComponent {
 @Input() welcomeMsg!: string;
 @Input() keyServicesHighlights!: string;
+@Input() businessName!:string;
 
 constructor(private router: Router) {}
 

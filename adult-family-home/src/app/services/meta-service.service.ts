@@ -24,18 +24,17 @@ export class MetaService {
     }
     return this.firestore.collection('businesses').doc(businessId).valueChanges().pipe(
       map((data: any) => {
-        console.log('Fetched business metadata:', data); // Debug log
         if (!data) {
           return {
-            title: 'Default Title',
-            description: 'Default Description',
+            title: 'No Metadata Title',
+            description: 'No Default Description',
             keywords: 'default, keywords',
           };
         }
 
         return {
-          title: data.metaTitle || 'Default Title',
-          description: data.metaDescription || 'Default Description',
+          title: data.metaTitle || 'Adult Family Home',
+          description: data.metaDescription || 'Best Adult Family home in Washington State',
           keywords: data.metaKeywords || 'default, keywords',
         };
       })
