@@ -100,7 +100,7 @@ export class WebContentService {
       businessId = this.defaultBusinessId;
     }
     return this.firestore.collection('businesses').doc(businessId)
-    .collection<HeroImage>(uploadLocation).valueChanges(); 
+    .collection<HeroImage>(uploadLocation).valueChanges();
   }
 
 

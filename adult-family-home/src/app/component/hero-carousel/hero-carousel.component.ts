@@ -50,7 +50,7 @@ export class HeroCarouselComponent implements OnInit {
         console.log("Number of images: ",this.heroImages.length);
 
         this.heroImages.forEach(element => {
-          console.log(element.altText);
+          console.log("Image url: ",element.url);
 
         });
       });
