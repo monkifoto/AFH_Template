@@ -83,7 +83,7 @@ export class EditBusinessComponent implements OnInit {
       keyServicesHighlights: [''],
       teamValues: [''],
       contactFormDetails: [''],
-      mapDirections: [''],
+      mapIframeUrl: [''],
       photoGallery: [''],
       isActive : true,
       employees: this.fb.array([])
@@ -308,7 +308,7 @@ export class EditBusinessComponent implements OnInit {
       teamValues: ['Our team is trained and specialized in providing care for seniors in need of, or who are diagnosed with a wide range of illnesses such as: Dementia, Alzheimer’s, Strokes, Diabetic Management, Cardiac Problems, Multiple Sclerosis, Rehabilitation and Hospice/Palliative Care', Validators.required],
       serviceBenefits:  this.fb.array([]),
       contactFormDetails: ['Name, Email, Phone, Message'],
-      mapDirections: ['Included map and directions to our facility.'],
+      mapIframeUrl: [''],
       photoGallery: ['Gallery of our facility and events.',],
       employees: this.fb.array([]),
       isActive: true

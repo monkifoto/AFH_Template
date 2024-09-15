@@ -38,11 +38,10 @@ export interface Business {
   teamValues: string;
   benefits: BenefitItem[];
   contactFormDetails: string;
-  mapDirections: string;
+  mapIframeUrl: string;
   faqs: string;
   blogNews: string;
   photoGalleryText: string;
-  mapIframe: string;
   employees?: Employee[];
   isActive: boolean;
   heroImages?: string[];

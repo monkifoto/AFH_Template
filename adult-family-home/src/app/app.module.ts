@@ -34,6 +34,7 @@ import { WelcomeComponent } from './component/welcome/welcome.component';
 import { ConsultationComponent } from './component/consultation/consultation.component';
 import { FeaturesComponent } from './component/features/features.component';
 import { WhyUsComponent } from './component/why-us/why-us.component';
+import { MapIframeComponent } from './component/map-iframe/map-iframe.component';
 
 
 
@@ -60,7 +61,8 @@ import { WhyUsComponent } from './component/why-us/why-us.component';
     WelcomeComponent,
     ConsultationComponent,
     FeaturesComponent,
-    WhyUsComponent
+    WhyUsComponent,
+    MapIframeComponent
   ],
   imports: [
     BrowserModule,
