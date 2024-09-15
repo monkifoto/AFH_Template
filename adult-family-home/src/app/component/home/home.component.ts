@@ -49,13 +49,12 @@ export class HomeComponent implements OnInit {
     teamValues: '',
     benefits: [],
     contactFormDetails: '',
-    mapDirections: '',
+    mapIframeUrl: '',
     photoGalleryText: '',
     employees: [],
     id: '',
     faqs: '',
     blogNews: '',
-    mapIframe: '',
     isActive: false
   };
 
