@@ -10,6 +10,7 @@ import { Business } from '../model/business-questions.model';
 })
 export class BusinessService {
   private basePath = 'businesses';
+  private defaultBusinessId = 'vfCMoPjAu2ROVBbKvk0D';
   constructor(private afs: AngularFirestore, private storage: AngularFireStorage) {}
 
   // Create a new business
@@ -33,6 +34,8 @@ export class BusinessService {
     );
   }
 
+
+
   getAllBusinesses(): Observable<Business[]> {
     return this.afs.collection<Business>(this.basePath).valueChanges({ idField: 'id' });
   }
@@ -44,7 +47,31 @@ export class BusinessService {
 
   // Get a single business by id
   getBusiness(id: string): Observable<Business | undefined> {
-    return this.afs.doc<Business>(`${this.basePath}/${id}`).valueChanges();
+    return this.getBusinessData(id);//this.afs.doc<Business>(`${this.basePath}/${id}`).valueChanges();
+  }
+
+
+  getBusinessData(businessId: string | null | undefined): Observable<Business | undefined> {
+
+    //console.log("Get Business Data businessId", businessId);
+    const resolvedBusinessId = businessId && businessId.trim() ? businessId : this.defaultBusinessId;
+
+
+    //console.log("Get Business Data resolvedBusinessId", resolvedBusinessId);
+
+    return this.afs.collection('businesses').doc<Business>(resolvedBusinessId).snapshotChanges().pipe(
+      map(action => {
+        const data = action.payload.data();
+        const docId = action.payload.id;
+        if (data) {
+          // Remove the existing id property if present
+          const { id: _, ...rest } = data;
+          return { id: docId, ...rest };
+        }
+       // console.log("Get business Data:", data);
+        return undefined;
+      })
+    );
   }
 
   // Update an existing business

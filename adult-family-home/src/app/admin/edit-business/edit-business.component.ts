@@ -6,6 +6,7 @@ import { Business } from 'src/app/model/business-questions.model';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-edit-business',
@@ -22,23 +23,26 @@ export class EditBusinessComponent implements OnInit {
   // Variables for temporary holding the new service data
   serviceForm!: FormGroup;
   benefitsForm!: FormGroup;
-  whyChooseForm!: FormGroup;
-  uniqueServiceForm!: FormGroup;
+
   uploads: { uploadProgress: number, downloadUrl?: string }[] = [];
 
   constructor(
     private fb: FormBuilder,
     private businessService: BusinessService,
-    private uploadService: UploadService,  // Inject the UploadService
+    private uploadService: UploadService,
+    private storage: AngularFireStorage,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {
+    this.initializeForm();
+
+   }
 
   ngOnInit(): void {
-    this.initializeForm();
+
     this.route.paramMap.subscribe(params => {
       this.businessId = params.get('id')!;
-      console.log('Business ID:', this.businessId); // Debugging line
+     // console.log('Business ID:', this.businessId); // Debugging line
       if (this.businessId) {
         this.loadBusinessData();
       }
@@ -50,10 +54,17 @@ export class EditBusinessComponent implements OnInit {
 
   initializeForm(): void {
     this.businessForm = this.fb.group({
+      businessName: ['', Validators.required],
+      address: [''],
+      phone: [''],
+      fax: [''],
+      email: ['', Validators.required],
+      businessHours: [''],
       tagline:[''],
       businessURL: [''],
       providerName: [''],
       keyWords: [''],
+
       uniqueService:this.fb.array([]),
       whyChoose:this.fb.array([]),
       businessStory:[''],
@@ -61,23 +72,20 @@ export class EditBusinessComponent implements OnInit {
       mission:[''],
       vision:[''],
       certifications:[''],
-      targetAudience:[''],
+
+
+
       services: this.fb.array([]),
       benefits: this.fb.array([]),
       specialPrograms:[''],
       tours:[''],
       freeConsulting:[''],
+
       websiteGoals:[''],
-      logoImage:[''],
+      logoImage:[null],
       mediaFeatures:[''],
       ratings:[''],
       testimonials:this.fb.array([]),
-      businessName: ['', Validators.required],
-      address: [''],
-      phone: [''],
-      fax: [''],
-      email: ['', Validators.required],
-      businessHours: [''],
       socialMedia: [''],
       welcomeMessage: [''],
       keyServicesHighlights: [''],
@@ -94,14 +102,7 @@ export class EditBusinessComponent implements OnInit {
     this.benefitsForm = this.fb.group({
       name: ['']
     });
-    this.uniqueServiceForm = this.fb.group({
-      name: [''],
-      description:['']
-    });
-    this.whyChooseForm = this.fb.group({
-      name: [''],
-      description:['']
-    });
+
   }
 
   employees(): FormArray {
@@ -118,14 +119,6 @@ export class EditBusinessComponent implements OnInit {
 
   benefits(): FormArray {
     return this.businessForm.get('benefits') as FormArray;
-  }
-
-  uniqueService(): FormArray {
-    return this.businessForm.get('uniqueService') as FormArray;
-  }
-
-  whyChoose(): FormArray {
-    return this.businessForm.get('whyChoose') as FormArray;
   }
 
 
@@ -181,27 +174,6 @@ export class EditBusinessComponent implements OnInit {
     this.benefits().removeAt(index);
   }
 
-  addUniqueService() {
-    if (this.uniqueServiceForm.valid) {
-      this.uniqueService().push(this.fb.group(this.uniqueServiceForm.value));
-      this.uniqueServiceForm.reset();
-    }
-  }
-
-  removeUniqueService(index: number): void {
-    this.uniqueService().removeAt(index);
-  }
-
-  addWhyChoose() {
-    if (this.whyChooseForm.valid) {
-      this.whyChoose().push(this.fb.group(this.whyChooseForm.value));
-      this.whyChooseForm.reset();
-    }
-  }
-
-  removeWhyChoose(index: number): void {
-    this.whyChoose().removeAt(index);
-  }
 
   onEmployeeFileChange(event: any, index: number): void {
     const file = event.target.files[0];
@@ -283,7 +255,6 @@ export class EditBusinessComponent implements OnInit {
       mission: ['Our mission is to work hard each day to meet and exceed the expectations of our residents and their families. We provide personalized extensive care plans based on the residents needs, preferences and interests while giving their families peace of mind knowing that all their needs are being met.'],
       vision: ['Elderly Home Care is a perfect alternative for seniors who can no longer live on their own, but want to maintain their independence in a warm, friendly home-like atmosphere with 24-hour tender compassionate care. We are conveniently located 10 minutes away from Evergreen Hospital in Bellevue, bordering Kirkland'],
       certifications: ['Licensed by the state, Certified Nursing Assistants (CNA) on staff.'],
-      targetAudience: ['Seniors in need of assisted living services, families looking for quality care for their loved ones.',],
       services:  this.fb.array([]),
       specialPrograms: ['Holiday Celebrations · Birthday Parties · Outdoor activities · Exercise Program · Musical Program · Arts and Crafts · Games · Movie and Popcorn Nights · Newspaper · Gardening'],
       tours: ['Yes, we provide tours of our facility.'],
@@ -319,8 +290,14 @@ export class EditBusinessComponent implements OnInit {
     this.businessService.getBusiness(this.businessId).subscribe(
       business => {
         if (business) {
-          console.log('Business data:', business); // Debugging line
+          //console.log('Business data:', business); // Debugging line
           this.populateForm(business);
+             // Check if the logo image is a Firebase storage path
+        if (business.logoImage && this.isFirebaseStoragePath(business.logoImage)) {
+          this.storage.ref(business.logoImage).getDownloadURL().subscribe(url => {
+            business.logoImage = url;  // Update the URL for display
+          });
+        }
         } else {
           console.error('Business not found');
           // Handle the case where the business is not found, e.g., navigate to an error page
@@ -332,8 +309,20 @@ export class EditBusinessComponent implements OnInit {
     );
   }
 
+   isFirebaseStoragePath(imagePath: string): boolean {
+    return imagePath.startsWith('gs://') || imagePath.includes('firebasestorage.googleapis.com');
+  }
+
   populateForm(business: Business): void {
+    console.log('Logo Image:', business.logoImage);
+    console.log('Lifestyle Images:', business.lifestyleImages);
     this.businessForm.patchValue(business);
+
+      // Ensure logoImage is handled
+  if (!this.businessForm.contains('logoImage')) {
+    this.businessForm.addControl('logoImage', this.fb.control(null));
+  }
+
 
     this.employees().clear();
     (business.employees ?? []).forEach(employee => {
@@ -392,24 +381,57 @@ export class EditBusinessComponent implements OnInit {
       this.whyChoose().push(whyChooseForm);
     });
 
+    // this.loadUniqueServices(business);
+    // this.loadWhyChoose(business);
+
+  }
+
+  // loadUniqueServices(business: any): void {
+  //   this.uniqueService().clear();
+  //   (business.uniqueService ?? []).forEach(us => {
+  //     const uniqueServiceForm = this.fb.group({
+  //       name: [us.name],
+  //       description: [us.description]
+  //     });
+  //     this.uniqueService().push(uniqueServiceForm);
+  //   });
+  // }
+
+  // loadWhyChoose(business: any): void {
+  //   this.whyChoose().clear();
+  //   (business.whyChoose ?? []).forEach(why => {
+  //     const whyChooseForm = this.fb.group({
+  //       name: [why.name],
+  //       description: [why.description]
+  //     });
+  //     this.whyChoose().push(whyChooseForm);
+  //   });
+  // }
+
+  uniqueService(): FormArray {
+    return this.businessForm.get('uniqueService') as FormArray;
+  }
+
+  whyChoose(): FormArray {
+    return this.businessForm.get('whyChoose') as FormArray;
   }
 
   onSubmit(): void {
-    console.log("submit click");
+    //console.log("submit click");
     if (this.businessForm.valid) {
       const formValue: Business = this.businessForm.value;
-      console.log("form valid");
+      console.log("form valid, this is the form", this.businessForm);
       if (this.businessId) {
         this.businessService.updateBusiness(this.businessId, formValue)
           .then(() => console.error('Business details updated successfully!'))
           .catch(err => console.error('Error updating business details', err));
       } else {
-        console.log('Submit else');
+       // console.log('Submit else');
         this.businessService.createBusiness(formValue).subscribe(bus => {
           this.business = bus;
           this.confirmationMessage = "Business has been successfully created!";
           this.showConfirmation = true;
-          console.log("Business Created with ID: ", this.business?.id);
+          //console.log("Business Created with ID: ", this.business?.id);
 
           // Ensure the business ID is not undefined before calling updateBusiness
           if (this.business && this.business.id) {
@@ -423,7 +445,7 @@ export class EditBusinessComponent implements OnInit {
       }
     }
     else{
-      console.log("Business Form  is not valid!")
+      //console.log("Business Form  is not valid!")
     }
   }
 
