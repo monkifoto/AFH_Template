@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.businessId = params['id'];
-      console.log("App component business id: ", this.businessId);
+      //console.log("App component business id: ", this.businessId);
     });
 
     this.webContent.getBusinessData(this.businessId).subscribe(data => {

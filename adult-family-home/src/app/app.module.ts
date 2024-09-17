@@ -9,13 +9,13 @@ import { ServicesComponent } from './component/services/services.component';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
 import { NavigationComponent } from './component/navigation/navigation.component';
 import { environment } from 'src/environments/environment.prod';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { provideStorage, getStorage} from '@angular/fire/storage';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SplitCommaPipe } from './pipe/split-comma.pipe';
 import { MeetTheTeamComponent } from './component/meet-the-team/meet-the-team.component';
@@ -35,8 +35,14 @@ import { ConsultationComponent } from './component/consultation/consultation.com
 import { FeaturesComponent } from './component/features/features.component';
 import { WhyUsComponent } from './component/why-us/why-us.component';
 import { MapIframeComponent } from './component/map-iframe/map-iframe.component';
-
-
+import { BasicInfoComponent } from './admin/basic-info/basic-info.component';
+import { HomePageComponent } from './admin/home-page/home-page.component';
+import { EmployeeComponent } from './admin/employee/employee.component';
+import { PhotosComponent } from './admin/photos/photos.component';
+import { ReviewsComponent } from './admin/reviews/reviews.component';
+import { ServicesPageComponent } from './admin/services-page/services-page.component';
+import { AboutUsPageComponent } from './admin/about-us-page/about-us-page.component';
+import { ContactUsPageComponent } from './admin/contact-us-page/contact-us-page.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +68,15 @@ import { MapIframeComponent } from './component/map-iframe/map-iframe.component'
     ConsultationComponent,
     FeaturesComponent,
     WhyUsComponent,
-    MapIframeComponent
+    MapIframeComponent,
+    BasicInfoComponent,
+    HomePageComponent,
+    EmployeeComponent,
+    PhotosComponent,
+    ReviewsComponent,
+    ServicesPageComponent,
+    AboutUsPageComponent,
+    ContactUsPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,14 +86,14 @@ import { MapIframeComponent } from './component/map-iframe/map-iframe.component'
     AngularFireStorageModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
-    provideFirebaseApp(()=> initializeApp(environment.firebase)),
-    provideFirestore(()=>getFirestore()),
-    provideStorage(()=> getStorage()),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

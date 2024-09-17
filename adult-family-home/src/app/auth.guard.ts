@@ -9,8 +9,8 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   return afAuth.authState.pipe(
     map(user => {
-      console.log('User:', user);
-      console.log('Router State:', state);
+     // console.log('User:', user);
+      //console.log('Router State:', state);
       if (user) {
         return true;
       } else {

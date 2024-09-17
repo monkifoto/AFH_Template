@@ -7,11 +7,13 @@ import { AdminComponent } from './admin/admin/admin.component';
 import { BusinessListComponent } from './business-list/business-list.component';
 
 
+
 @NgModule({
   declarations: [
     LoginComponent,
     AdminComponent,
     BusinessListComponent,
+
   ],
   imports: [
     CommonModule,

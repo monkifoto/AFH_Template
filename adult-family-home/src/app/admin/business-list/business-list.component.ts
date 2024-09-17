@@ -24,12 +24,12 @@ export class BusinessListComponent implements OnInit {
     if (this.showActiveOnly) {
       this.businessService.getActiveBusinesses().subscribe(businesses => {
         this.businesses = businesses;
-        console.log(businesses);
+        //console.log(businesses);
       });
     } else {
       this.businessService.getAllBusinesses().subscribe(businesses => {
         this.businesses = businesses;
-        console.log(businesses);
+       // console.log(businesses);
       });
     }
   }

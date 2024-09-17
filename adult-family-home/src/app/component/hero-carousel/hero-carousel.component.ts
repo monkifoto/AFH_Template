@@ -47,10 +47,10 @@ export class HeroCarouselComponent implements OnInit {
       map(images =>images.filter(image => image !== null))
     ).subscribe(images => {
         this.heroImages = images; // Store the retrieved images
-        console.log("Number of images: ",this.heroImages.length);
+        //console.log("Number of images: ",this.heroImages.length);
 
         this.heroImages.forEach(element => {
-          console.log("Image url: ",element.url);
+         // console.log(element.altText);
 
         });
       });

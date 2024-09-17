@@ -27,7 +27,7 @@ export class MapIframeComponent implements OnInit {
   loadMapIframe(): void {
     this.firestore.collection('businesses').doc(this.businessId).valueChanges().subscribe((business: any) => {
       this.mapIframeUrl = this.sanitizer.bypassSecurityTrustHtml(business?.mapIframeUrl ?? null);
-      console.log(this.mapIframeUrl);
+      //console.log(this.mapIframeUrl);
     });
   }
 }

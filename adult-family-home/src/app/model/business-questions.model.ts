@@ -12,7 +12,6 @@ export interface Business {
   mission: string;
   vision: string;
   certifications: string;
-  targetAudience: string;
   services: ServiceItem[];
   specialPrograms: string;
   tours: string;

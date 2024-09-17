@@ -8,22 +8,6 @@
           type="button" role="tab" aria-controls="basic-info" aria-selected="true">Basic Information</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="story-mission-tab" data-bs-toggle="tab" data-bs-target="#story-mission"
-          type="button" role="tab" aria-controls="story-mission" aria-selected="false">Our Excellence</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="employee-profiles-tab" data-bs-toggle="tab" data-bs-target="#employee-profiles"
-          type="button" role="tab" aria-controls="employee-profiles" aria-selected="false">Employee Profiles</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="content-photos-tab" data-bs-toggle="tab" data-bs-target="#content-photos"
-          type="button" role="tab" aria-controls="content-photos" aria-selected="false">Photos</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="media-reviews-tab" data-bs-toggle="tab" data-bs-target="#media-reviews"
-          type="button" role="tab" aria-controls="media-reviews" aria-selected="false">Media & Reviews</button>
-      </li>
-      <li class="nav-item" role="presentation">
         <button class="nav-link" id="home-page-tab" data-bs-toggle="tab" data-bs-target="#home-page" type="button"
           role="tab" aria-controls="home-page" aria-selected="false">Home Page</button>
       </li>
@@ -36,167 +20,67 @@
           role="tab" aria-controls="about-us" aria-selected="false">About Us</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="contact-us-page-tab" data-bs-toggle="tab" data-bs-target="#contact-us-page"
-          type="button" role="tab" aria-controls="contact-us-page" aria-selected="false">Contact Us Page</button>
+        <button class="nav-link" id="content-photos-tab" data-bs-toggle="tab" data-bs-target="#content-photos"
+          type="button" role="tab" aria-controls="content-photos" aria-selected="false">Photos</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="media-reviews-tab" data-bs-toggle="tab" data-bs-target="#media-reviews"
+          type="button" role="tab" aria-controls="media-reviews" aria-selected="false">Media & Reviews</button>
       </li>
 
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="contact-us-page-tab" data-bs-toggle="tab" data-bs-target="#contact-us-page"
+          type="button" role="tab" aria-controls="contact-us-page" aria-selected="false">Contact Us</button>
+      </li>
+
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="employee-profiles-tab" data-bs-toggle="tab" data-bs-target="#employee-profiles"
+          type="button" role="tab" aria-controls="employee-profiles" aria-selected="false">Employee Profiles</button>
+      </li>
     </ul>
+    
     <!-- Tabs Content -->
     <div class="tab-content" id="businessTabContent">
       <!-- Basic Information Tab Content -->
       <div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="basic-info-tab">
-
-        <h2>Business Information</h2>
-        <div class="form-group">
-          <label for="businessName" class="required">Business Name</label>
-          <input id="businessName" formControlName="businessName" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label for="providerName">Provider Name</label>
-          <input id="providerName" formControlName="providerName" class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="tagline">Tagline</label>
-          <input id="tagline" formControlName="tagline" class="form-control">
-        </div>
-
-
-        <div class="form-group">
-          <label for="address" >Address</label>
-          <textarea id="address" formControlName="address" class="form-control" ></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="phone" >Phone</label>
-          <input id="phone" formControlName="phone" class="form-control" >
-        </div>
-
-        <div class="form-group">
-          <label for="fax">Fax</label>
-          <input id="fax" formControlName="fax" class="form-control">
-        </div>
-
-        <div class="form-group">
-          <label for="email" class="required">Email</label>
-          <input id="email" formControlName="email" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-          <label for="businessURL">Web Address</label>
-          <input id="businessURL" formControlName="businessURL" class="form-control" >
-        </div>
-
-
-        <div class="form-group">
-          <label for="businessHours" >Business Hours</label>
-          <textarea id="businessHours" formControlName="businessHours" class="form-control" ></textarea>
-        </div>
-        <div class="form-group">
-          <label for="keyWords" >Key Words</label>
-          <textarea id="keyWords" formControlName="keyWords" class="form-control" ></textarea>
-        </div>
-
+        <app-basic-info [form]="businessForm"></app-basic-info>
       </div>
-
-      <!-- Business Story and Mission Tab Content -->
-      <div class="tab-pane fade" id="story-mission" role="tabpanel" aria-labelledby="story-mission-tab">
-
-        <h2>Certifications</h2>
-        <div class="form-group">
-          <label for="certifications">Certifications</label>
-          <textarea id="certifications" formControlName="certifications" class="form-control" ></textarea>
-        </div>
-        <h2>Target Audience</h2>
-        <div class="form-group">
-          <label for="targetAudience">Target Audience</label>
-          <textarea id="targetAudience" formControlName="targetAudience" class="form-control"></textarea>
-        </div>
-
-        <h2>Unique Features</h2>
-        <div [formGroup]="uniqueServiceForm">
-          <!-- Input for Service Name -->
-          <div class="form-group">
-            <label for="benefitName">Unique Serivces</label>
-            <input formControlName="name" id="uniqueSericeName" class="form-control" placeholder="Unique Serice Name ">
-
-            <input formControlName="description" id="uniqueSericeDescription" class="form-control"
-              placeholder="Unique Service Description ">
-          </div>
-
-          <!-- Button to Add Service -->
-          <button type="button" (click)="addUniqueService()">Add Unique Service</button>
-        </div>
-
-        <ul>
-          <li *ngFor="let us of uniqueService().controls; let i = index">
-            <button type="button" (click)="removeUniqueService(i)">X</button> &nbsp;
-            <strong>{{ us.get('name')?.value }}</strong><br />{{ us.get('description')?.value }}
-
-          </li>
-        </ul>
-        <h2>Why Us Reasons</h2>
-        <div [formGroup]="whyChooseForm">
-          <!-- Input for Service Name -->
-          <div class="form-group">
-            <label for="benefitName">Why Choose Us Reasons</label>
-            <input formControlName="name" id="whyChooseName" class="form-control" placeholder="Enter Reason ">
-
-            <input formControlName="description" id="whyChooseDescription" class="form-control"
-              placeholder="Reason Description ">
-          </div>
-
-          <!-- Button to Add Service -->
-          <button type="button" (click)="addWhyChoose()">Add Reason</button>
-        </div>
-
-        <ul>
-          <li *ngFor="let why of whyChoose().controls; let i = index">
-            <button type="button" (click)="removeWhyChoose(i)">X</button> &nbsp;
-            <strong>{{ why.get('name')?.value }}</strong><br />{{ why.get('description')?.value }}
-
-          </li>
-        </ul>
-
-
-        <h2>Business Story and Motivation</h2>
-
-        <div class="form-group">
-          <label for="businessStory">Business Story</label>
-          <textarea id="businessStory" formControlName="businessStory" class="form-control" ></textarea>
-        </div>
-        <div class="form-group">
-          <label for="motivation">Motivation</label>
-          <textarea id="motivation" formControlName="motivation" class="form-control"></textarea>
-        </div>
-
-      </div>
-
       <!-- Content and Photos Tab Content -->
       <div class="tab-pane fade" id="content-photos" role="tabpanel" aria-labelledby="content-photos-tab">
         <h2>Content and Photos</h2>
         <div class="form-group">
-          <label for="logoImage" >Logo Image</label>
+          <label for="logoImage">Logo Image</label>
           <input type="file" id="logoImage" (change)="onFileChange($event, 'logoImage')" class="form-control">
           <ng-container *ngIf="uploadProgress['logoImage'] | async as progress">
             <div class="progress">
               <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
             </div>
           </ng-container>
+          <div class="existing-logo" *ngIf="business?.logoImage">
+            <img class="logoImage" [src]="business?.logoImage" alt="Business Logo">
+          </div>
+          <div *ngIf="!business?.logoImage">
+            <p>No logo image available.</p>
+          </div>
         </div>
 
         <!-- Facility and Lifestyle Images -->
         <h2>Facility and Lifestyle Images</h2>
         <div class="form-group">
-          <label for="facilityImages" >Facility Images</label>
+          <label for="facilityImages">Facility Images</label>
           <input type="file" id="facilityImages" (change)="onFileChange($event, 'facilityImages')" class="form-control">
           <ng-container *ngIf="uploadProgress['facilityImages'] | async as progress">
             <div class="progress">
               <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
             </div>
           </ng-container>
+          <div class="existing-facility-images">
+            <img class="facilityImage" *ngIf="business?.facilityImages" [src]="business?.facilityImages"
+              alt="facilityImages">
+          </div>
         </div>
         <div class="form-group">
-          <label for="lifestyleImages" >Lifestyle Images</label>
+          <label for="lifestyleImages">Lifestyle Images</label>
           <input type="file" id="lifestyleImages" (change)="onFileChange($event, 'lifestyleImages')"
             class="form-control">
           <ng-container *ngIf="uploadProgress['lifestyleImages'] | async as progress">
@@ -204,6 +88,10 @@
               <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
             </div>
           </ng-container>
+          <div class="existing-lifestyle-images">
+            <img class="lifestyleImages" *ngIf="business?.lifestyleImages" [src]="business?.lifestyleImages"
+              alt="Lifestyle Image">
+          </div>
         </div>
 
         <h2>Gallery Description</h2>
@@ -270,34 +158,12 @@
 
       <!-- Home Page Tab Content -->
       <div class="tab-pane fade" id="home-page" role="tabpanel" aria-labelledby="home-page-tab">
-        <h2>Home Page</h2>
-        <div class="form-group">
-          <label for="welcomeMessage">Welcome Message</label>
-          <textarea id="welcomeMessage" formControlName="welcomeMessage" class="form-control" ></textarea>
-        </div>
-        <div class="form-group">
-          <label for="keyServicesHighlights" >Key Services and Highlights</label>
-          <textarea id="keyServicesHighlights" formControlName="keyServicesHighlights" class="form-control"
-            ></textarea>
-        </div>
-
+        <app-home-page [form]="businessForm"></app-home-page>
       </div>
 
       <!-- About Us Page Tab Content -->
       <div class="tab-pane fade" id="about-us" role="tabpanel" aria-labelledby="about-us-tab">
-        <h2>About Us Page</h2>
-        <div class="form-group">
-          <label for="businessStory" >Our Story</label>
-          <textarea id="businessStory" formControlName="businessStory" class="form-control" ></textarea>
-        </div>
-        <div class="form-group">
-          <label for="mission" >Our Mission</label>
-          <textarea id="mission" formControlName="mission" class="form-control" ></textarea>
-        </div>
-        <div class="form-group">
-          <label for="vision" >Our Vision</label>
-          <textarea id="vision" formControlName="vision" class="form-control" ></textarea>
-        </div>
+        <app-about-us-page [form]="businessForm"></app-about-us-page>
       </div>
 
       <!-- Services Page Tab Content -->
@@ -360,9 +226,8 @@
       <div class="tab-pane fade" id="contact-us-page" role="tabpanel" aria-labelledby="contact-us-page-tab">
         <h2>Contact Us Page</h2>
         <div class="form-group">
-          <label for="contactFormDetails" >Contact Form Details</label>
-          <textarea id="contactFormDetails" formControlName="contactFormDetails" class="form-control"
-            ></textarea>
+          <label for="contactFormDetails">Contact Form Details</label>
+          <textarea id="contactFormDetails" formControlName="contactFormDetails" class="form-control"></textarea>
         </div>
         <div class="form-group">
           <label for="mapIframeUrl">Google Map</label>
@@ -416,6 +281,6 @@
       </div>
     </div>
     <!-- Submit Button -->
-    <button type="submit">Submit</button>
+    <button type="submit">Save</button>
   </form>
 </div>

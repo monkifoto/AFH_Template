@@ -1,6 +1,6 @@
 /* business-form.component.css */
 .container {
-width: 100%;
+  width: 100%;
   margin: auto;
   padding: 20px;
   background: #f9f9f9;
@@ -31,6 +31,28 @@ h1 {
   box-sizing: border-box;
 }
 
+h2 {
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 10px;
+  margin-top: 30px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+}
+
+.required::after {
+  content: "*";
+  color: red;
+  margin-left: 5px;
+}
+
+textarea.form-control {
+  height: 100px;
+  resize: vertical;
+}
+
 .employee-card {
   padding: 15px;
   margin-bottom: 15px;
@@ -46,7 +68,7 @@ h1 {
 
 .employee-card .remove-button {
   background-color: var(--accent-color);
-  color:  var(--primary-color);
+  color: var(--primary-color);
   border: none;
   padding: 8px 12px;
   border-radius: 4px;
@@ -61,7 +83,7 @@ h1 {
   display: block;
   width: 100%;
   background-color: var(--buttong-color);
-  color:  var(--primary-color);
+  color: var(--primary-color);
   border: none;
   padding: 10px;
   border-radius: 4px;
@@ -77,7 +99,7 @@ h1 {
   display: block;
   width: 100%;
   background-color: var(--button-color);
-  color:  var(--primary-color);
+  color: var(--primary-color);
   border: none;
   padding: 10px;
   border-radius: 4px;
@@ -85,7 +107,7 @@ h1 {
 }
 
 .submit-button:hover {
-  background-color: var(--button-hover-color)
+  background-color: var(--button-hover-color);
 }
 
 .progress {
@@ -101,7 +123,7 @@ h1 {
   background-color: var(--accent-color);
   text-align: center;
   line-height: 10px;
-  color:  var(--primary-color);
+  color: var(--primary-color);
 }
 
 .employee-photo {
@@ -110,48 +132,9 @@ h1 {
   border-radius: 4px;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-h2 {
-  border-bottom: 2px solid var(--border-color);
-  padding-bottom: 10px;
-  margin-top: 30px;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  font-weight: bold;
-}
-
-.required::after {
-  content: '*';
-  color: red;
-  margin-left: 5px;
-}
-
-.form-control {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
-}
-
-textarea.form-control {
-  height: 100px;
-  resize: vertical;
-}
-
 button {
   background-color: var(--button-color);
-  color:  var(--primary-color);
+  color: var(--primary-color);
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -172,11 +155,10 @@ button:hover {
 .progress-bar {
   background-color: #28a745;
   height: 100%;
-  color:  var(--primary-color);
+  color: var(--primary-color);
   text-align: center;
   line-height: 20px;
 }
-
 
 /* General Tab Container */
 .nav-tabs {
@@ -186,6 +168,7 @@ button:hover {
 /* Tab Items */
 .nav-tabs .nav-item {
   margin-bottom: -2px;
+  margin-left: 5px;
 }
 
 .nav-tabs .nav-link {
@@ -193,13 +176,14 @@ button:hover {
   color: #495057; /* Dark text */
   border: 1px solid transparent;
   border-radius: 0.25rem 0.25rem 0 0;
-  padding: 10px 15px;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 /* Active Tab */
 .nav-tabs .nav-link.active {
-  background-color: var(--button-hover-color) ;
+  background-color: var(--button-hover-color);
   color: #ffffff; /* Light text */
   border-color: #dee2e6 #dee2e6 #fff;
 }
@@ -217,7 +201,7 @@ button:hover {
   border: 1px solid #dee2e6;
   border-top: none; /* Align with active tab */
   padding: 15px;
-  background-color:  var(--primary-color);
+  background-color: var(--primary-color);
 }
 
 /* Tab Content Heading */

@@ -16,11 +16,11 @@ export class WebContentService {
 
   getBusinessData(businessId: string | null | undefined): Observable<Business | undefined> {
     // Check if the businessId is null, empty, or undefined, then use the defaultBusinessId
-    console.log("Get Business Data businessId", businessId);
+   // console.log("Get Business Data businessId", businessId);
     const resolvedBusinessId = businessId && businessId.trim() ? businessId : this.defaultBusinessId;
 
 
-    console.log("Get Business Data resolvedBusinessId", resolvedBusinessId);
+    //console.log("Get Business Data resolvedBusinessId", resolvedBusinessId);
 
     return this.firestore.collection('businesses').doc<Business>(resolvedBusinessId).snapshotChanges().pipe(
       map(action => {
@@ -31,7 +31,7 @@ export class WebContentService {
           const { id: _, ...rest } = data;
           return { id: docId, ...rest };
         }
-        console.log("Get business Data:", data);
+       // console.log("Get business Data:", data);
         return undefined;
       })
     );
@@ -67,7 +67,7 @@ export class WebContentService {
         if (doc.exists) {
           const data = doc.data();
           if (data && data.employees) {
-            console.log('Fetched employees:', data.employees);
+            //console.log('Fetched employees:', data.employees);
             return data.employees;
           } else {
             console.warn('No employees found in the document.');
@@ -86,7 +86,7 @@ export class WebContentService {
   }
 
   getBusinessGalleryImagesById(businessId: string): Observable<any[]> {
-    console.log("Web content getBusinessGalleryImagesByID: " , businessId);
+   // console.log("Web content getBusinessGalleryImagesByID: " , businessId);
     if(businessId == undefined || businessId == "" || businessId ===""  ){
       businessId = this.defaultBusinessId;
     }
@@ -95,7 +95,7 @@ export class WebContentService {
   }
 
   getBusinessUploadedImagesById(businessId: string, uploadLocation: string): Observable<any[]> {
-    console.log("Web content getBusinessGalleryImagesByID: " , businessId);
+   // console.log("Web content getBusinessGalleryImagesByID: " , businessId);
     if(businessId == undefined || businessId == "" || businessId ===""  ){
       businessId = this.defaultBusinessId;
     }
