@@ -10,8 +10,8 @@ const corsHandler = cors({origin: true});
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
-    user: 'sorin.bucse@gmail.com',
-    pass: 'owet wzvm ujnl cnce',
+    user: 'helpinghand99.afh@gmail.com',
+    pass: 'ywwu joug obdw ewzr',
   },
 });
 
@@ -21,8 +21,9 @@ export const sendContactEmail = functions.https.onRequest((req, res) => {
     const {name, email, message} = req.body;
 
     const mailOptions = {
-      from: 'sorin.bucse@gmail.com',
+      from: 'helpinghand99.afh@gmail.com',
       to: 'helpinghand99.afh@gmail.com',
+      bcc: 'monkifoto@gmail.com',
       subject: 'Helping Hand Email',
       text: `You have a new message from:
       Name: ${name}
@@ -32,9 +33,14 @@ export const sendContactEmail = functions.https.onRequest((req, res) => {
 
     return transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        return res.status(500).send(error.toString());
+        console.error('Error sending email:', error);
+        return res.status(500).json({success: false,
+          message: 'Error sending email', error});
+      } else {
+        console.log('Email sent: ' + info.response);
+        return res.status(200).json({success: true,
+          message: 'Email sent successfully'});
       }
-      return res.status(200).send('Email sent: ' + info.response);
     });
   });
 });
