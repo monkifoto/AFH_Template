@@ -11,7 +11,10 @@ const transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
     user: 'helpinghand99.afh@gmail.com',
-    pass: 'ywwu joug obdw ewzr',
+    pass: 'ylcg rmnn aoqk ymow',
+    // pass: 'ywwu joug obdw ewzr',
+    // firebase functions:config:set gmail.email="helpinghand99.afh@gmail.com"
+    // gmail.password="ylcg rmnn aoqk ymow"
   },
 });
 
