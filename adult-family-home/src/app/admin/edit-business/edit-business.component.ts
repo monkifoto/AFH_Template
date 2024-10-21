@@ -294,7 +294,7 @@ export class EditBusinessComponent implements OnInit {
           this.populateForm(business);
              // Check if the logo image is a Firebase storage path
         if (business.logoImage && this.isFirebaseStoragePath(business.logoImage)) {
-          this.storage.ref(business.logoImage).getDownloadURL().subscribe(url => {
+          this.storage.refFromURL(business.logoImage).getDownloadURL().subscribe(url => {
             business.logoImage = url;  // Update the URL for display
           });
         }
