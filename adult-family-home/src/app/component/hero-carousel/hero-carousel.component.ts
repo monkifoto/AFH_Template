@@ -57,8 +57,8 @@ export class HeroCarouselComponent implements OnInit {
 
   }
 
-navigateToContact() {
-  this.router.navigate(['/contact-us']);
+navigateToContact(id: string | undefined | null) {
+  this.router.navigate(['/contact-us'], { queryParams: { id } });
 }
 
 }

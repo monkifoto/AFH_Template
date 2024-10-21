@@ -1,0 +1,35 @@
+<div class="theme-admin-container">
+  <h2>Edit Theme Colors</h2>
+
+  <div *ngIf="themeColors$ | async as themeColors">
+    <form (ngSubmit)="onSubmit()">
+      <div class="color-picker">
+        <label for="backgroundColor">Background Color</label>
+        <input type="color" id="backgroundColor" [(ngModel)]="themeColors.backgroundColor" name="backgroundColor">
+      </div>
+
+      <div class="color-picker">
+        <label for="darkBackgroundColor">Dark Background Color</label>
+        <input type="color" id="darkBackgroundColor" [(ngModel)]="themeColors.darkBackgroundColor" name="darkBackgroundColor">
+      </div>
+
+      <div class="color-picker">
+        <label for="primaryColor">Primary Color</label>
+        <input type="color" id="primaryColor" [(ngModel)]="themeColors.primaryColor" name="primaryColor">
+      </div>
+
+      <div class="color-picker">
+        <label for="secondaryColor">Secondary Color</label>
+        <input type="color" id="secondaryColor" [(ngModel)]="themeColors.secondaryColor" name="secondaryColor">
+      </div>
+
+      <div class="color-picker">
+        <label for="textColor">Text Color</label>
+        <input type="color" id="textColor" [(ngModel)]="themeColors.textColor" name="textColor">
+      </div>
+
+      <button type="submit">Save Changes</button>
+      <button type="button" (click)="resetToDefault()">Reset to Default</button>
+    </form>
+  </div>
+</div>

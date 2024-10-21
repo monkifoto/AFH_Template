@@ -13,14 +13,11 @@ export class WebContentService {
   constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) { }
 
   private defaultBusinessId = 'vfCMoPjAu2ROVBbKvk0D';
+  private defaultImage: string = 'assets/sharedAssets/missingTestimonialImage.png';
 
   getBusinessData(businessId: string | null | undefined): Observable<Business | undefined> {
     // Check if the businessId is null, empty, or undefined, then use the defaultBusinessId
-   // console.log("Get Business Data businessId", businessId);
     const resolvedBusinessId = businessId && businessId.trim() ? businessId : this.defaultBusinessId;
-
-
-    //console.log("Get Business Data resolvedBusinessId", resolvedBusinessId);
 
     return this.firestore.collection('businesses').doc<Business>(resolvedBusinessId).snapshotChanges().pipe(
       map(action => {
@@ -28,14 +25,44 @@ export class WebContentService {
         const docId = action.payload.id;
         if (data) {
           // Remove the existing id property if present
-          const { id: _, ...rest } = data;
-          return { id: docId, ...rest };
+          const { id: _, testimonials = [], ...rest } = data;
+
+          // Check each testimonial's photoURL and replace if missing
+          const updatedTestimonials = testimonials.map(testimonial => {
+            return {
+              ...testimonial,
+              photoURL: testimonial.photoURL && testimonial.photoURL.trim() ? testimonial.photoURL : this.defaultImage
+            };
+          });
+
+          return { id: docId, testimonials: updatedTestimonials, ...rest };
         }
-       // console.log("Get business Data:", data);
         return undefined;
       })
     );
   }
+  // getBusinessData(businessId: string | null | undefined): Observable<Business | undefined> {
+  //   // Check if the businessId is null, empty, or undefined, then use the defaultBusinessId
+  //  // console.log("Get Business Data businessId", businessId);
+  //   const resolvedBusinessId = businessId && businessId.trim() ? businessId : this.defaultBusinessId;
+
+
+  //   //console.log("Get Business Data resolvedBusinessId", resolvedBusinessId);
+
+  //   return this.firestore.collection('businesses').doc<Business>(resolvedBusinessId).snapshotChanges().pipe(
+  //     map(action => {
+  //       const data = action.payload.data();
+  //       const docId = action.payload.id;
+  //       if (data) {
+  //         // Remove the existing id property if present
+  //         const { id: _, ...rest } = data;
+  //         return { id: docId, ...rest };
+  //       }
+  //      // console.log("Get business Data:", data);
+  //       return undefined;
+  //     })
+  //   );
+  // }
 
   getDefaultBusinessData(): Observable<Business | undefined> {
     return this.getBusinessData(this.defaultBusinessId);

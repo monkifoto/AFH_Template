@@ -15,8 +15,8 @@ export class AboutUsComponent implements OnInit{
 
   constructor(private webContent: WebContentService, private route: ActivatedRoute,private router: Router, private metaService: MetaService){}
 
-  navigateToContact() {
-    this.router.navigate(['/contact-us']);
+  navigateToContact(id: string | null | undefined) {
+    this.router.navigate(['/contact-us'], { queryParams: { id } });
   }
 
 

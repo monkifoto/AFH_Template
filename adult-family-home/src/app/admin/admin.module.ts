@@ -5,6 +5,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin/admin.component';
 import { BusinessListComponent } from './business-list/business-list.component';
+// import { ColorAdminComponent } from './color-admin/color-admin.component';
 
 
 
@@ -13,6 +14,7 @@ import { BusinessListComponent } from './business-list/business-list.component';
     LoginComponent,
     AdminComponent,
     BusinessListComponent,
+    // ColorAdminComponent,
 
   ],
   imports: [

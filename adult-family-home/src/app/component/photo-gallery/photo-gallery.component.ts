@@ -70,8 +70,8 @@ export class PhotoGalleryComponent implements OnInit {
   }
 
 
-  navigateToContact() {
-    this.router.navigate(['/contact-us']);
+  navigateToContact(id: string|null|undefined) {
+    this.router.navigate(['/contact-us'], { queryParams: { id } });
   }
 
 }

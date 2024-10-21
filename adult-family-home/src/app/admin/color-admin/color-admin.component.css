@@ -1,0 +1,33 @@
+.theme-admin-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.color-picker {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.color-picker label {
+  width: 350px;
+}
+
+input[type="color"] {
+  width: 50px;
+  height: 30px;
+  border: none;
+}
+
+button {
+  margin-right: 10px;
+  padding: 10px 20px;
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--button-hover-color);
+}

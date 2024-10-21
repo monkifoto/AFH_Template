@@ -43,6 +43,7 @@ import { ReviewsComponent } from './admin/reviews/reviews.component';
 import { ServicesPageComponent } from './admin/services-page/services-page.component';
 import { AboutUsPageComponent } from './admin/about-us-page/about-us-page.component';
 import { ContactUsPageComponent } from './admin/contact-us-page/contact-us-page.component';
+import { ColorAdminComponent } from './admin/color-admin/color-admin.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { ContactUsPageComponent } from './admin/contact-us-page/contact-us-page.
     ServicesPageComponent,
     AboutUsPageComponent,
     ContactUsPageComponent,
+    ColorAdminComponent
   ],
   imports: [
     BrowserModule,
