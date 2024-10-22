@@ -15,11 +15,18 @@ export class AppComponent implements OnInit {
   businessId!: string;
   business!: Business;
   colors: any = {
-    primaryColor: '#000000', // default primary color
-    secondaryColor: '#ffffff', // default secondary color
-    backgroundColor: '#f0f0f0', // default background color
-    darkBackgroundColor: '#999999', // default background color
-    textColor: '#333333' // default text color
+    primaryColor: '#fffaf2', // default primary color
+    secondaryColor: '#f8f3f0', // default secondary color
+    accentColor: '#F0C987', // default accent color
+    backgroundColor: '#F5F3E7', // default background color
+    darkBackgroundColor: '#4C6A56', // default dark background color
+    textColor: '#2F2F2F', // default text color
+    navBackgroundColor: '#F5F3E7', // default nav background color
+    navTextColor: '#33372C', // default nav text color
+    navActiveBackground: '#33372C', // default nav active background color
+    navActiveText: '#ffffff', // default nav active text color
+    buttonColor: '#D9A064', // default button color
+    buttonHoverColor: '#c9605b' // default button hover color
   };
 
   constructor(
@@ -66,10 +73,18 @@ export class AppComponent implements OnInit {
           } else {
             // Use hardcoded defaults if all fails
             this.colors = {
-              primaryColor: '#000000',
-              secondaryColor: '#ffffff',
-              backgroundColor: '#f0f0f0',
-              textColor: '#333333',
+              primaryColor: '#fffaf2',
+              secondaryColor: '#f8f3f0',
+              accentColor: '#F0C987',
+              backgroundColor: '#F5F3E7',
+              darkBackgroundColor: '#4C6A56',
+              textColor: '#2F2F2F',
+              navBackgroundColor: '#F5F3E7',
+              navTextColor: '#33372C',
+              navActiveBackground: '#33372C',
+              navActiveText: '#ffffff',
+              buttonColor: '#D9A064',
+              buttonHoverColor: '#c9605b'
             };
           }
           this.applyTheme();
@@ -79,11 +94,18 @@ export class AppComponent implements OnInit {
       console.error('Error fetching theme colors: ', error);
       // Apply default theme on error
       this.colors = {
-        primaryColor: '#000000',
-        secondaryColor: '#ffffff',
-        backgroundColor: '#f0f0f0',
-        darkBackgroundColor: '#999999',
-        textColor: '#333333',
+        primaryColor: '#fffaf2',
+        secondaryColor: '#f8f3f0',
+        accentColor: '#F0C987',
+        backgroundColor: '#F5F3E7',
+        darkBackgroundColor: '#4C6A56',
+        textColor: '#2F2F2F',
+        navBackgroundColor: '#F5F3E7',
+        navTextColor: '#33372C',
+        navActiveBackground: '#33372C',
+        navActiveText: '#ffffff',
+        buttonColor: '#D9A064',
+        buttonHoverColor: '#c9605b'
       };
       this.applyTheme();
     });
@@ -96,25 +118,35 @@ export class AppComponent implements OnInit {
       return;
     }
 
-    document.documentElement.style.setProperty(
-      '--primary-color', this.colors.primaryColor || '#000000'
-    );
-    document.documentElement.style.setProperty(
-      '--secondary-color', this.colors.secondaryColor || '#ffffff'
-    );
-    document.documentElement.style.setProperty(
-      '--background-color', this.colors.backgroundColor || '#f0f0f0'
-    );
-    document.documentElement.style.setProperty(
-      '--dark-background-color', this.colors.darkBackgroundColor || '#999999'
-    );
-    document.documentElement.style.setProperty(
-      '--text-color', this.colors.textColor || '#333333'
-    );
+    document.documentElement.style.setProperty('--primary-color', this.colors.primaryColor);
+    document.documentElement.style.setProperty('--secondary-color', this.colors.secondaryColor);
+    document.documentElement.style.setProperty('--accent-color', this.colors.accentColor);
+    document.documentElement.style.setProperty('--background-color', this.colors.backgroundColor);
+    document.documentElement.style.setProperty('--dark-background-color', this.colors.darkBackgroundColor);
+    document.documentElement.style.setProperty('--text-color', this.colors.textColor);
+    document.documentElement.style.setProperty('--nav-background-color', this.colors.navBackgroundColor);
+    document.documentElement.style.setProperty('--nav-text-color', this.colors.navTextColor);
+    document.documentElement.style.setProperty('--nav-active-background', this.colors.navActiveBackground);
+    document.documentElement.style.setProperty('--nav-active-text', this.colors.navActiveText);
+    document.documentElement.style.setProperty('--button-color', this.colors.buttonColor);
+    document.documentElement.style.setProperty('--button-hover-color', this.colors.buttonHoverColor);
   }
 
   // Validate if theme colors are complete
   hasValidColors(themeColors: any): boolean {
-    return themeColors.primaryColor && themeColors.secondaryColor && themeColors.backgroundColor && themeColors.darkBackgroundColor && themeColors.textColor;
+    return (
+      themeColors.primaryColor &&
+      themeColors.secondaryColor &&
+      themeColors.accentColor &&
+      themeColors.backgroundColor &&
+      themeColors.darkBackgroundColor &&
+      themeColors.textColor &&
+      themeColors.navBackgroundColor &&
+      themeColors.navTextColor &&
+      themeColors.navActiveBackground &&
+      themeColors.navActiveText &&
+      themeColors.buttonColor &&
+      themeColors.buttonHoverColor
+    );
   }
 }
