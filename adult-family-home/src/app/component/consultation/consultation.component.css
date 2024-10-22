@@ -67,7 +67,9 @@
   .consultation-container p {
     font-size: 1rem;
   }
-
+  .section-description{
+    padding: 20px;
+  }
   .btn-book-consultation {
     padding: 15px;
     font-size: 1.2rem;
@@ -87,7 +89,9 @@
   .consultation-container p {
     font-size: 0.9rem;
   }
-
+  .section-description{
+    padding: 20px;
+  }
   .btn-book-consultation {
     padding: 10px;
     font-size: 1rem;

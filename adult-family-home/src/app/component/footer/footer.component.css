@@ -6,7 +6,7 @@
 }
 
 .footer-title {
-  color: var(--accent-color);
+  color: var(--button-color);
   font-size: 28px;
   font-weight: bold;
 }
