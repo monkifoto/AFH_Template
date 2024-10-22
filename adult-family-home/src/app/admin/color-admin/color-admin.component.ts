@@ -77,4 +77,20 @@ export class ColorAdminComponent implements OnInit {
       this.themeForm.patchValue(defaultColors);
     });
   }
+  updateHexInput(event: Event, controlName: string) {
+    const color = (event.target as HTMLInputElement).value;
+    this.themeForm.patchValue({
+      [controlName]: color
+    });
+  }
+
+  updateColorInput(event: Event, controlName: string) {
+    const hex = (event.target as HTMLInputElement).value;
+    if (/^#[0-9A-Fa-f]{6}$/.test(hex)) {
+      this.themeForm.patchValue({
+        [controlName]: hex
+      });
+    }
+  }
+
 }
