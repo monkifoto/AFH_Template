@@ -3,34 +3,42 @@
 
   <div *ngIf="themeForm">
     <form [formGroup]="themeForm" (ngSubmit)="onSubmit()">
-
-      <div class="color-picker">
-        <label for="backgroundColor">Background Color</label>
-        <input type="color" id="backgroundColor" formControlName="backgroundColor">
-        <input type="text" formControlName="backgroundColor" class="hex-input"
-               [ngClass]="{'invalid': themeForm.get('backgroundColor')?.errors?.['invalidHex']}">
-      </div>
-
+     <div class="color-picker">
+       <label for="backgroundColor">Background Color</label>
+       <input type="color" id="backgroundColor" formControlName="backgroundColor"
+            (input)="updateHexInput($event, 'backgroundColor')">
+       <input type="text" formControlName="backgroundColor" class="hex-input"
+            (input)="updateColorInput($event, 'backgroundColor')"
+            [ngClass]="{'invalid': themeForm.get('backgroundColor')?.errors?.['invalidHex']}">
+            <div class="error-message" *ngIf="themeForm.get('backgroundColor')?.errors?.['invalidHex']"></div>
+     </div>
 
       <div class="color-picker">
         <label for="darkBackgroundColor">Dark Background Color</label>
-        <input type="color" id="darkBackgroundColor" formControlName="darkBackgroundColor">
+        <input type="color" id="darkBackgroundColor" formControlName="darkBackgroundColor"
+        (input)="updateHexInput($event, 'backgroundColor')">
         <input type="text" formControlName="darkBackgroundColor" class="hex-input"
+        (input)="updateColorInput($event, 'backgroundColor')"
         [ngClass]="{'invalid': themeForm.get('backgroundColor')?.errors?.['invalidHex']}">
+      <div class="error-message" *ngIf="themeForm.get('darkBackgroundColor')?.errors?.['invalidHex']"></div>
       </div>
 
       <div class="color-picker">
         <label for="primaryColor">Primary Color</label>
-        <input type="color" id="primaryColor" formControlName="primaryColor">
+        <input type="color" id="primaryColor" formControlName="primaryColor"
+        (input)="updateHexInput($event, 'backgroundColor')">
         <input type="text" formControlName="primaryColor" class="hex-input"
+        (input)="updateColorInput($event, 'backgroundColor')"
         [ngClass]="{'invalid': themeForm.get('backgroundColor')?.errors?.['invalidHex']}">
+        <div class="error-message" *ngIf="themeForm.get('primaryColor')?.errors?.['invalidHex']"></div>
       </div>
 
       <div class="color-picker">
         <label for="secondaryColor">Secondary Color</label>
-        <input type="color" id="secondaryColor" formControlName="secondaryColor">
-        <input type="text" formControlName="secondaryColor" class="hex-input"
+        <input type="color" id="secondaryColor" formControlName="secondaryColor" (input)="updateHexInput($event, 'backgroundColor')">
+        <input type="text" formControlName="secondaryColor" class="hex-input" (input)="updateColorInput($event, 'backgroundColor')"
         [ngClass]="{'invalid': themeForm.get('secondaryColor')?.errors?.['invalidHex']}">
+          <div class="error-message" *ngIf="themeForm.get('secondaryColor')?.errors?.['invalidHex']"></div>
       </div>
 
       <div class="color-picker">
