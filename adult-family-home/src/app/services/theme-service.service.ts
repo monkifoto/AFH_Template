@@ -10,7 +10,7 @@ export class ThemeService {
   constructor(private firestore: AngularFirestore) {}
 
   // Default theme colors
-  private defaultTheme = {
+  public defaultTheme = {
     primaryColor: '#fffaf2',
     secondaryColor: '#f8f3f0',
     accentColor: '#F0C987',
