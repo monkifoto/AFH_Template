@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, take } from 'rxjs';
 
+declare var $: any;
 @Component({
   selector: 'app-color-admin',
   templateUrl: './color-admin.component.html',
@@ -13,6 +14,21 @@ export class ColorAdminComponent implements OnInit {
   themeColors$: Observable<any> | undefined;
   themeForm!: FormGroup;
   businessId!: string;
+
+  defaultColors: any = {
+    primaryColor: '#fffaf2', // default primary color
+    secondaryColor: '#f8f3f0', // default secondary color
+    accentColor: '#F0C987', // default accent color
+    backgroundColor: '#F5F3E7', // default background color
+    darkBackgroundColor: '#4C6A56', // default dark background color
+    textColor: '#2F2F2F', // default text color
+    navBackgroundColor: '#F5F3E7', // default nav background color
+    navTextColor: '#33372C', // default nav text color
+    navActiveBackground: '#33372C', // default nav active background color
+    navActiveText: '#ffffff', // default nav active text color
+    buttonColor: '#D9A064', // default button color
+    buttonHoverColor: '#c9605b' // default button hover color
+  };
 
   constructor(
     private themeService: ThemeService,
@@ -61,11 +77,21 @@ export class ColorAdminComponent implements OnInit {
     return null;
   }
 
+  openSaveConfirmation() {
+    $('#saveConfirmationModal').modal('show');
+  }
+
+  confirmSave() {
+    this.onSubmit();  // Call the save functionality
+    $('#saveConfirmationModal').modal('hide');  // Close the modal
+  }
+
   onSubmit() {
     if (this.themeForm.valid) {
       const updatedColors = this.themeForm.value;
       this.themeService.updateColors(this.businessId, updatedColors).then(() => {
         console.log('Colors updated successfully');
+        $('#saveConfirmationModal').modal('hide');
       }).catch(error => {
         console.error('Error updating colors:', error);
       });
@@ -73,10 +99,23 @@ export class ColorAdminComponent implements OnInit {
   }
 
   resetToDefault() {
-    this.themeService.resetToDefaultColors().subscribe(defaultColors => {
+    this.themeService.resetToDefaultColors().pipe(take(1)).subscribe(defaultColors => {
+      if (!defaultColors) {
+        defaultColors = this.themeService.defaultTheme; // Fallback to the hardcoded defaultTheme in case the Firestore document is missing
+      }
+
+      // Reset the form with the default colors
       this.themeForm.patchValue(defaultColors);
+
+      // Save the default colors to Firestore
+      this.themeService.updateColors(this.businessId, defaultColors).then(() => {
+        console.log('Colors reset to default and saved successfully');
+      }).catch(error => {
+        console.error('Error resetting colors to default:', error);
+      });
     });
   }
+
   updateHexInput(event: Event, controlName: string) {
     const color = (event.target as HTMLInputElement).value;
     this.themeForm.patchValue({
