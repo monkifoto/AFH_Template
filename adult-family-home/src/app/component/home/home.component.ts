@@ -54,7 +54,25 @@ export class HomeComponent implements OnInit {
     id: '',
     faqs: '',
     blogNews: '',
-    isActive: false
+    isActive: false,
+    contactUsImageUrl: '',
+  toursImageUrl: '',
+  consultingImageUrl:'',
+
+  theme: {
+    backgroundColor: '',
+    primaryColor: '',
+    secondaryColor: '',
+    textColor: '',
+    accentColor: '',
+    darkBackgroundColor: '',
+    navBackgroundColor: '',
+    navTextColor: '',
+    navActiveBackground: '',
+    navActiveText: '',
+    buttonColor: '',
+    buttonHoverColor: '',
+  }
   };
 
 
