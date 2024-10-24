@@ -232,13 +232,14 @@
 
         <div>
           <h4>Choose from available images:</h4>
-          <div *ngFor="let image of predefinedImages">
+          <div *ngFor="let image of predefinedImages" style="display: inline-block; margin-right: 10px;">
             <input
               type="radio"
+              name="imageSelection"
               formControlName="selectedImageUrl"
               [value]="image.url"
               (change)="onImageSelection(image.url)">
-            <img [src]="image.url" alt="Predefined Image" />
+            <img class="contactUsImagesThumbnails" [src]="image.url" alt="Predefined Image" />
           </div>
         </div>
 
