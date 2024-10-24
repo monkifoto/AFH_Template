@@ -1,1 +1,30 @@
-<p>contact-us-page works!</p>
+<form [formGroup]="form">
+  <h2>Contact Us Page</h2>
+
+  <div>
+    <h4>Choose from available images:</h4>
+    <div *ngFor="let image of predefinedImages" style="display: inline-block; margin-right: 10px;">
+      <input
+        type="radio"
+        formControlName="selectedImageUrl"
+        [value]="image.url"
+        (change)="onImageSelection(image.url)">
+      <img class="contactUsImagesThumbnails" [src]="image.url" alt="Predefined Image" />
+    </div>
+  </div>
+
+  <!-- Upload New Image Section -->
+  <div>
+    <h4>Or upload a new image:</h4>
+    <!-- <input type="file" (change)="onFileSelected($event)"> -->
+  </div>
+
+  <div class="form-group">
+    <label for="contactFormDetails">Contact Form Details</label>
+    <textarea id="contactFormDetails" formControlName="contactFormDetails" class="form-control"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="mapIframeUrl">Google Map</label>
+    <textarea id="mapIframeUrl" formControlName="mapIframeUrl" class="form-control"></textarea>
+  </div>
+</form>

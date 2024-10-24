@@ -12,7 +12,6 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 })
 export class AboutUsPageComponent implements OnInit {
   @Input() form!: FormGroup;
-  // Separate form for adding a unique service and why choose us
   newUniqueServiceForm!: FormGroup;
   newWhyChooseForm!: FormGroup;
 
