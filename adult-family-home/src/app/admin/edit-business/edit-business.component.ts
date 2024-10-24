@@ -389,32 +389,7 @@ export class EditBusinessComponent implements OnInit {
       this.whyChoose().push(whyChooseForm);
     });
 
-    // this.loadUniqueServices(business);
-    // this.loadWhyChoose(business);
-
   }
-
-  // loadUniqueServices(business: any): void {
-  //   this.uniqueService().clear();
-  //   (business.uniqueService ?? []).forEach(us => {
-  //     const uniqueServiceForm = this.fb.group({
-  //       name: [us.name],
-  //       description: [us.description]
-  //     });
-  //     this.uniqueService().push(uniqueServiceForm);
-  //   });
-  // }
-
-  // loadWhyChoose(business: any): void {
-  //   this.whyChoose().clear();
-  //   (business.whyChoose ?? []).forEach(why => {
-  //     const whyChooseForm = this.fb.group({
-  //       name: [why.name],
-  //       description: [why.description]
-  //     });
-  //     this.whyChoose().push(whyChooseForm);
-  //   });
-  // }
 
   uniqueService(): FormArray {
     return this.businessForm.get('uniqueService') as FormArray;
