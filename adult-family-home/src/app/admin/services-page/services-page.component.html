@@ -1,1 +1,54 @@
-<p>services-page works!</p>
+<form [formGroup]="form">
+<h2>Services Page</h2>
+<h2>Services and Offerings</h2>
+<div [formGroup]="newServiceForm">
+  <!-- Input for Service Name -->
+  <div class="form-group">
+    <label for="serviceName">Service Name</label>
+    <input formControlName="name" id="serviceName" class="form-control" placeholder="Enter service name">
+  </div>
+
+  <!-- Button to Add Service -->
+  <button type="button" (click)="addService()">Add Service</button>
+</div>
+
+<!-- Display the list of added services -->
+<ul formArrayName="services">
+  <li *ngFor="let service of services.controls; let i = index">
+    <button type="button" (click)="removeService(i)">X</button> &nbsp;
+    <strong>{{ service.get('name')?.value }}</strong>
+  </li>
+</ul>
+
+<div [formGroup]="newBenefitsForm">
+  <!-- Input for Service Name -->
+  <div class="form-group" >
+    <label for="benefitName">Benefit Name</label>
+    <input formControlName="name" id="benefitName" class="form-control" placeholder="Enter Benefit name">
+  </div>
+
+  <!-- Button to Add Service -->
+  <button type="button" (click)="addBenefit()">Add Benefit</button>
+</div>
+
+<!-- Display the list of added services -->
+<ul formArrayName="benefits">
+  <li *ngFor="let benefit of benefits.controls; let i = index">
+    <button type="button" (click)="removeBenefit(i)">X</button> &nbsp;
+    <strong>{{ benefit.get('name')?.value }}</strong>
+  </li>
+</ul>
+
+<div class="form-group">
+  <label for="specialPrograms">Special Programs</label>
+  <textarea id="specialPrograms" formControlName="specialPrograms" class="form-control"></textarea>
+</div>
+<div class="form-group">
+  <label for="tours">Tours</label>
+  <textarea id="tours" formControlName="tours" class="form-control"></textarea>
+</div>
+<div class="form-group">
+  <label for="freeConsulting">Free Consulting</label>
+  <textarea id="freeConsulting" formControlName="freeConsulting" class="form-control"></textarea>
+</div>
+</form>

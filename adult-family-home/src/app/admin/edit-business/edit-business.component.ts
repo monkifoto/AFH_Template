@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { BusinessService } from 'src/app/services/business.service';
-import { UploadService } from 'src/app/services/upload.service';  // Import the UploadService
+import { UploadService } from 'src/app/services/upload.service';
 import { Business } from 'src/app/model/business-questions.model';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -24,13 +24,6 @@ export class EditBusinessComponent implements OnInit {
   serviceForm!: FormGroup;
   benefitsForm!: FormGroup;
 
-  predefinedImages = [
-    { url: 'assets/sharedAssets/image_fx_(1).jpg' },
-    { url: 'assets/sharedAssets/image_fx_(2).jpg' },
-    { url: 'assets/sharedAssets/image_fx_(3).jpg' },
-    { url: 'assets/sharedAssets/image_fx_(4).jpg' },
-    { url: 'assets/sharedAssets/image_fx_(5).jpg' },
-  ];
 
   uploads: { uploadProgress: number, downloadUrl?: string }[] = [];
 
@@ -81,8 +74,6 @@ export class EditBusinessComponent implements OnInit {
       vision:[''],
       certifications:[''],
 
-
-
       services: this.fb.array([]),
       benefits: this.fb.array([]),
       specialPrograms:[''],
@@ -93,7 +84,9 @@ export class EditBusinessComponent implements OnInit {
       logoImage:[null],
       mediaFeatures:[''],
       ratings:[''],
+
       testimonials:this.fb.array([]),
+
       socialMedia: [''],
       welcomeMessage: [''],
       keyServicesHighlights: [''],
@@ -129,6 +122,13 @@ export class EditBusinessComponent implements OnInit {
     return this.businessForm.get('benefits') as FormArray;
   }
 
+  // get services(): FormArray {
+  //   return this.businessForm.get('services') as FormArray;
+  // }
+
+  // get benefits(): FormArray {
+  //   return this.businessForm.get('benefits') as FormArray;
+  // }
 
 
   addEmployee(): void {
@@ -146,41 +146,7 @@ export class EditBusinessComponent implements OnInit {
     this.employees().removeAt(index);
   }
 
-  addTestimonial(): void {
-    const testimonialForm = this.fb.group({
-      id: [''],
-      name: [''],
-      quote: [''],
-      photoURL: ['']
-    });
-    this.testimonials().push(testimonialForm);
-  }
 
-  removeTestimonial(index: number): void {
-    this.testimonials().removeAt(index);
-  }
-
-  addService() {
-    if (this.serviceForm.valid) {
-      this.services().push(this.fb.group(this.serviceForm.value));
-      this.serviceForm.reset();
-    }
-  }
-
-  removeService(index: number): void {
-    this.services().removeAt(index);
-  }
-
-  addBenefit() {
-    if (this.benefitsForm.valid) {
-      this.benefits().push(this.fb.group(this.benefitsForm.value));
-      this.benefitsForm.reset();
-    }
-  }
-
-  removeBenefit(index: number): void {
-    this.benefits().removeAt(index);
-  }
 
 
   onEmployeeFileChange(event: any, index: number): void {
@@ -200,22 +166,7 @@ export class EditBusinessComponent implements OnInit {
     }
   }
 
-  onTestimonialFileChange(event: any, index: number): void {
-    const file = event.target.files[0];
-    if (file) {
-      const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, 'testimonail');
 
-      this.uploadProgress[`testimonails_${index}`] = uploadProgress;
-
-      downloadUrl.pipe(
-        finalize(() => {
-          downloadUrl.subscribe(url => {
-            this.testimonials().at(index).patchValue({ photoURL: url });
-          });
-        })
-      ).subscribe();
-    }
-  }
 
   onFileChange(event: any, field: string): void {
     const file = event.target.files[0];
@@ -442,9 +393,5 @@ preventDefault(event: Event): void {
   event.preventDefault();
 }
 
-onImageSelection(url: string) {
-  this.businessForm.patchValue({
-    selectedImageUrl: url
-  });
-}
+
 }

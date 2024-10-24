@@ -116,48 +116,7 @@
 
       <!-- Media and Reviews Tab Content -->
       <div class="tab-pane fade" id="media-reviews" role="tabpanel" aria-labelledby="media-reviews-tab">
-        <h2>Social Media, Reviews </h2>
-        <div class="form-group">
-          <label for="socialMedia">Social Media</label>
-          <textarea id="socialMedia" formControlName="socialMedia" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="mediaFeatures">Media Features</label>
-          <textarea id="mediaFeatures" formControlName="mediaFeatures" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="ratings">Ratings</label>
-          <textarea id="ratings" formControlName="ratings" class="form-control"></textarea>
-        </div>
-        <h2>Testimonials</h2>
-        <div class="form-group">
-          <label for="testimonials">Testimonials</label>
-          <div formArrayName="testimonials">
-            <div *ngFor="let testimonial of testimonials().controls; let i = index" [formGroupName]="i">
-              <div class="form-group">
-                <label for="testimonialName"> Name</label>
-                <input id="testimonialName" formControlName="name" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="testimonialQuote">Quote</label>
-                <textarea id="testimonialQuote" formControlName="quote" class="form-control"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="testimonialPhoto">Photo</label>
-                <input type="file" id="testimonialPhoto" (change)="onTestimonialFileChange($event, i)"
-                  class="form-control">
-                <ng-container *ngIf="uploadProgress['testimonial' + i] | async as progress">
-                  <div class="progress">
-                    <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
-                  </div>
-                </ng-container>
-              </div>
-              <button type="button" (click)="removeTestimonial(i)">Remove Testimonial</button>
-            </div>
-          </div>
-          <button type="button" (click)="addTestimonial()">Add Testimonial</button>
-        </div>
+        <app-reviews [form]="businessForm"></app-reviews>
       </div>
 
       <!-- Home Page Tab Content -->
@@ -172,92 +131,12 @@
 
       <!-- Services Page Tab Content -->
       <div class="tab-pane fade" id="services-page" role="tabpanel" aria-labelledby="services-page-tab">
-        <h2>Services Page</h2>
-        <h2>Services and Offerings</h2>
-        <div [formGroup]="serviceForm">
-          <!-- Input for Service Name -->
-          <div class="form-group">
-            <label for="serviceName">Service Name</label>
-            <input formControlName="name" id="serviceName" class="form-control" placeholder="Enter service name">
-          </div>
-
-          <!-- Button to Add Service -->
-          <button type="button" (click)="addService()">Add Service</button>
-        </div>
-
-        <!-- Display the list of added services -->
-        <ul>
-          <li *ngFor="let service of services().controls; let i = index">
-            <button type="button" (click)="removeService(i)">X</button> &nbsp;
-            <strong>{{ service.get('name')?.value }}</strong>
-          </li>
-        </ul>
-
-        <div [formGroup]="benefitsForm">
-          <!-- Input for Service Name -->
-          <div class="form-group">
-            <label for="benefitName">Benefit Name</label>
-            <input formControlName="name" id="benefitName" class="form-control" placeholder="Enter Benefit name">
-          </div>
-
-          <!-- Button to Add Service -->
-          <button type="button" (click)="addBenefit()">Add Benefit</button>
-        </div>
-
-        <!-- Display the list of added services -->
-        <ul>
-          <li *ngFor="let benefit of benefits().controls; let i = index">
-            <button type="button" (click)="removeBenefit(i)">X</button> &nbsp;
-            <strong>{{ benefit.get('name')?.value }}</strong>
-          </li>
-        </ul>
-
-        <div class="form-group">
-          <label for="specialPrograms">Special Programs</label>
-          <textarea id="specialPrograms" formControlName="specialPrograms" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="tours">Tours</label>
-          <textarea id="tours" formControlName="tours" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="freeConsulting">Free Consulting</label>
-          <textarea id="freeConsulting" formControlName="freeConsulting" class="form-control"></textarea>
-        </div>
+       <app-services-page [form]="businessForm"></app-services-page>
       </div>
 
       <!-- Contact Us Page Tab Content -->
       <div class="tab-pane fade" id="contact-us-page" role="tabpanel" aria-labelledby="contact-us-page-tab">
-        <h2>Contact Us Page</h2>
-
-        <div>
-          <h4>Choose from available images:</h4>
-          <div *ngFor="let image of predefinedImages" style="display: inline-block; margin-right: 10px;">
-            <input
-              type="radio"
-              name="imageSelection"
-              formControlName="selectedImageUrl"
-              [value]="image.url"
-              (change)="onImageSelection(image.url)">
-            <img class="contactUsImagesThumbnails" [src]="image.url" alt="Predefined Image" />
-          </div>
-        </div>
-
-        <!-- Upload New Image Section -->
-        <div>
-          <h4>Or upload a new image:</h4>
-          <!-- <input type="file" (change)="onFileSelected($event)"> -->
-        </div>
-
-
-        <div class="form-group">
-          <label for="contactFormDetails">Contact Form Details</label>
-          <textarea id="contactFormDetails" formControlName="contactFormDetails" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="mapIframeUrl">Google Map</label>
-          <textarea id="mapIframeUrl" formControlName="mapIframeUrl" class="form-control"></textarea>
-        </div>
+        <app-contact-us-page [form]="businessForm"></app-contact-us-page>
       </div>
 
       <!-- Employee Profiles Tab Content -->
