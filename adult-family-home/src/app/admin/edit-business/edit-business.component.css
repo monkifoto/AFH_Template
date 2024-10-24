@@ -264,8 +264,3 @@ button[type="button"]:hover {
   background-color: #28a745; /* Green color for progress */
 }
 
-.contactUsImagesThumbnails {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-}
