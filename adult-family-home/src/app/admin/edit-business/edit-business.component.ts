@@ -24,6 +24,14 @@ export class EditBusinessComponent implements OnInit {
   serviceForm!: FormGroup;
   benefitsForm!: FormGroup;
 
+  predefinedImages = [
+    { url: 'assets/sharedAssets/image_fx_(1).jpg' },
+    { url: 'assets/sharedAssets/image_fx_(2).jpg' },
+    { url: 'assets/sharedAssets/image_fx_(3).jpg' },
+    { url: 'assets/sharedAssets/image_fx_(4).jpg' },
+    { url: 'assets/sharedAssets/image_fx_(5).jpg' },
+  ];
+
   uploads: { uploadProgress: number, downloadUrl?: string }[] = [];
 
   constructor(
@@ -457,5 +465,11 @@ closeConfirmation(): void {
 
 preventDefault(event: Event): void {
   event.preventDefault();
+}
+
+onImageSelection(url: string) {
+  this.businessForm.patchValue({
+    selectedImageUrl: url
+  });
 }
 }

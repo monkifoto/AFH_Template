@@ -44,6 +44,26 @@ export interface Business {
   employees?: Employee[];
   isActive: boolean;
   heroImages?: string[];
+
+  contactUsImageUrl: string;
+  toursImageUrl: string;
+  consultingImageUrl: string;
+
+  theme: {
+    backgroundColor: string;
+    primaryColor: string;
+    secondaryColor: string;
+    textColor: string;
+    accentColor: string;
+    darkBackgroundColor: string;
+    navBackgroundColor: string;
+    navTextColor: string;
+    navActiveBackground: string;
+    navActiveText: string;
+    buttonColor: string;
+    buttonHoverColor: string;
+  };
+
 }
 
 export interface Employee {
