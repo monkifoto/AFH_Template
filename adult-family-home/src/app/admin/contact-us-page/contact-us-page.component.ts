@@ -20,7 +20,8 @@ export class ContactUsPageComponent implements OnInit {
     { url: 'assets/sharedAssets/image_fx_(5).jpg' },
   ];
 
-
+  //to do: allow user to select one of the 5 images to show on the contact us page, or to upload a photos under the business dir and save the url to busines.contactUsImageUrl
+  //to do also use the personalize contact us page message currently not used.
 
   constructor(private fb: FormBuilder) {}
 
