@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Business, ServiceItem } from 'src/app/model/business-questions.model';
 
 @Component({
   selector: 'app-services-page',
@@ -8,6 +9,8 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ServicesPageComponent implements OnInit {
   @Input() form!: FormGroup;
+  @Input() business!: Business | undefined;
+  @Input() businessId!: string;
   newServiceForm!: FormGroup;
   newBenefitsForm!: FormGroup;
 
@@ -25,6 +28,28 @@ export class ServicesPageComponent implements OnInit {
       name: ['', Validators.required]
     });
   }
+
+  populateServices(services: ServiceItem[]): void {
+
+    this.services.clear();
+    (services ?? []).forEach((svc) => {
+      const servicesForm = this.fb.group({
+        name: [svc.name],
+      });
+      this.services.push(servicesForm);
+    });
+  }
+
+  populateBenefits(benefits: ServiceItem[]): void {
+    this.benefits.clear();
+    (benefits ?? []).forEach((bnf) => {
+      const benefitsFormForm = this.fb.group({
+        name: [bnf.name],
+      });
+      this.benefits.push(benefitsFormForm);
+    });
+  }
+
 
   get services(): FormArray {
     return this.form.get('services') as FormArray;

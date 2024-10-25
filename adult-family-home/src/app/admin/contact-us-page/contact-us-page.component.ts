@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Business } from 'src/app/model/business-questions.model';
 
 @Component({
   selector: 'app-contact-us-page',
@@ -8,6 +9,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class ContactUsPageComponent implements OnInit {
   @Input() form!: FormGroup;
+  @Input() business!: Business | undefined;
+  @Input() businessId!: string;
 
   predefinedImages = [
     { url: 'assets/sharedAssets/image_fx_(1).jpg' },

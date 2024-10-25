@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { finalize, Observable } from 'rxjs';
+import { Business, Employee } from 'src/app/model/business-questions.model';
 import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
@@ -10,7 +11,9 @@ import { UploadService } from 'src/app/services/upload.service';
 })
 export class EmployeeComponent {
   @Input() form!: FormGroup;
-  businessId!: ""; //to do: need this value for uploading images
+  @Input() business!: Business | undefined;
+  @Input() businessId!: string;
+
   uploadProgress: { [key: string]: Observable<number | undefined> } = {};
 
   constructor(private fb: FormBuilder,
@@ -20,6 +23,20 @@ export class EmployeeComponent {
 
   get employees(): FormArray {
     return this.form.get('employees') as FormArray;
+  }
+
+  populateEmployees(employees: Employee[]): void {
+    this.employees.clear();
+    (employees ?? []).forEach((employee) => {
+      const employeeForm = this.fb.group({
+        id: [employee.id],
+        name: [employee.name],
+        role: [employee.role],
+        bio: [employee.bio],
+        photoURL: [employee.photoURL],
+      });
+      this.employees.push(employeeForm);
+    });
   }
 
   addEmployee(): void {

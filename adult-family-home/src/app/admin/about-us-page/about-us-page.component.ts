@@ -1,9 +1,6 @@
-import {
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Business, ListItem } from 'src/app/model/business-questions.model';
 
 @Component({
   selector: 'app-about-us-page',
@@ -12,6 +9,8 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 })
 export class AboutUsPageComponent implements OnInit {
   @Input() form!: FormGroup;
+  @Input() business!: Business | undefined;
+  @Input() businessId!: string;
   newUniqueServiceForm!: FormGroup;
   newWhyChooseForm!: FormGroup;
 
@@ -30,6 +29,28 @@ export class AboutUsPageComponent implements OnInit {
     this.newWhyChooseForm = this.fb.group({
       name: [''],
       description: [''],
+    });
+  }
+
+  populateUniqueService(uniqueService: ListItem[]): void {
+    this.uniqueServices.clear();
+    (uniqueService ?? []).forEach((us) => {
+      const uniqueServiceForm = this.fb.group({
+        name: [us.name],
+        description: [us.description],
+      });
+      this.uniqueServices.push(uniqueServiceForm);
+    });
+  }
+
+  populateWhyChoose(whyChoose: ListItem[]): void {
+    this.whyChoose.clear();
+    (whyChoose ?? []).forEach((why) => {
+      const whyChooseForm = this.fb.group({
+        name: [why.name],
+        description: [why.description],
+      });
+      this.whyChoose.push(whyChooseForm);
     });
   }
 

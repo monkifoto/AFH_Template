@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Business } from 'src/app/model/business-questions.model';
 
 @Component({
   selector: 'app-home-page',
@@ -9,6 +10,8 @@ import { FormGroup } from '@angular/forms';
 export class HomePageComponent implements OnInit {
 
   @Input() form!: FormGroup;
+  @Input() business!: Business | undefined;
+  @Input() businessId!: string;
   ngOnInit(): void {
 
   }

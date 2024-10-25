@@ -47,47 +47,46 @@
     <div class="tab-content" id="businessTabContent">
       <!-- Basic Information Tab Content -->
       <div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="basic-info-tab">
-        <app-basic-info [form]="businessForm"></app-basic-info>
+        <app-basic-info [form]="businessForm" [business]="business" [businessId]="businessId"></app-basic-info>
       </div>
       <!-- Content and Photos Tab Content -->
       <div class="tab-pane fade" id="content-photos" role="tabpanel" aria-labelledby="content-photos-tab">
-       <app-photos [form]="businessForm" [business]="business"></app-photos>
+        <app-photos [form]="businessForm" [business]="business" [businessId]="businessId"></app-photos>
       </div>
-
       <!-- Media and Reviews Tab Content -->
       <div class="tab-pane fade" id="media-reviews" role="tabpanel" aria-labelledby="media-reviews-tab">
-        <app-reviews [form]="businessForm"></app-reviews>
+        <app-reviews [form]="businessForm" [business]="business" [businessId]="businessId"></app-reviews>
       </div>
 
       <!-- Home Page Tab Content -->
       <div class="tab-pane fade" id="home-page" role="tabpanel" aria-labelledby="home-page-tab">
-        <app-home-page [form]="businessForm"></app-home-page>
+        <app-home-page [form]="businessForm" [business]="business" [businessId]="businessId"></app-home-page>
       </div>
 
       <!-- About Us Page Tab Content -->
       <div class="tab-pane fade" id="about-us" role="tabpanel" aria-labelledby="about-us-tab">
-        <app-about-us-page [form]="businessForm"></app-about-us-page>
+        <app-about-us-page [form]="businessForm" [business]="business" [businessId]="businessId"></app-about-us-page>
       </div>
 
       <!-- Services Page Tab Content -->
       <div class="tab-pane fade" id="services-page" role="tabpanel" aria-labelledby="services-page-tab">
-       <app-services-page [form]="businessForm"></app-services-page>
+       <app-services-page [form]="businessForm" [business]="business" [businessId]="businessId"></app-services-page>
       </div>
 
       <!-- Contact Us Page Tab Content -->
       <div class="tab-pane fade" id="contact-us-page" role="tabpanel" aria-labelledby="contact-us-page-tab">
-        <app-contact-us-page [form]="businessForm"></app-contact-us-page>
+        <app-contact-us-page [form]="businessForm" [business]="business" [businessId]="businessId"></app-contact-us-page>
       </div>
 
       <!-- Employee Profiles Tab Content -->
       <div class="tab-pane fade" id="employee-profiles" role="tabpanel" aria-labelledby="employee-profiles-tab">
-      <app-employee [form]="businessForm"></app-employee>
+      <app-employee [form]="businessForm" [business]="business" [businessId]="businessId"></app-employee>
       </div>
 
 
     <!-- Theme Page Tab Content -->
     <div class="tab-pane fade" id="color-theme" role="tabpanel" aria-labelledby="color-theme-tab">
-      <app-color-admin></app-color-admin>
+      <app-color-admin [form]="businessForm" [business]="business" [businessId]="businessId"></app-color-admin>
     </div>
 
 

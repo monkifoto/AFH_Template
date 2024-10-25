@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ThemeService } from 'src/app/services/theme-service.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, take } from 'rxjs';
+import { Business } from 'src/app/model/business-questions.model';
 
 declare var $: any;
 @Component({
@@ -13,7 +14,9 @@ declare var $: any;
 export class ColorAdminComponent implements OnInit {
   themeColors$: Observable<any> | undefined;
   themeForm!: FormGroup;
-  businessId!: string;
+  @Input() form!: FormGroup;
+  @Input() business!: Business | undefined;
+  @Input() businessId!: string;
 
   defaultColors: any = {
     primaryColor: '#fffaf2', // default primary color
@@ -65,6 +68,24 @@ export class ColorAdminComponent implements OnInit {
           this.themeForm.patchValue(themeColors);
         });
       }
+      else{
+        console.log("Color-admin: - Business does not exist");
+         // Initialize the form with controls
+         this.themeForm = this.fb.group({
+          backgroundColor: this.defaultColors.backgroundColor,
+          darkBackgroundColor:this.defaultColors.darkBackgroundColor,
+          primaryColor: this.defaultColors.primaryColor,
+          secondaryColor: this.defaultColors.secondaryColor,
+          accentColor: this.defaultColors.accentColor,
+          buttonColor: this.defaultColors.buttonColor,
+          buttonHoverColor: this.defaultColors.buttonHoverColor,
+          textColor:this.defaultColors.textColor,
+          navBackgroundColor: this.defaultColors.navBackgroundColor,
+          navTextColor: this.defaultColors.navTextColor,
+          navActiveBackground: this.defaultColors.navActiveBackground,
+          navActiveText: this.defaultColors.navActiveText,
+        });
+      }
     });
   }
 
@@ -90,10 +111,10 @@ export class ColorAdminComponent implements OnInit {
     if (this.themeForm.valid) {
       const updatedColors = this.themeForm.value;
       this.themeService.updateColors(this.businessId, updatedColors).then(() => {
-        console.log('Colors updated successfully');
+        console.log('Color-admin: -Colors updated successfully');
         $('#saveConfirmationModal').modal('hide');
       }).catch(error => {
-        console.error('Error updating colors:', error);
+        console.error('Color-admin: -Error updating colors:', error);
       });
     }
   }
@@ -109,9 +130,9 @@ export class ColorAdminComponent implements OnInit {
 
       // Save the default colors to Firestore
       this.themeService.updateColors(this.businessId, defaultColors).then(() => {
-        console.log('Colors reset to default and saved successfully');
+        console.log('Color-admin: - Colors reset to default and saved successfully');
       }).catch(error => {
-        console.error('Error resetting colors to default:', error);
+        console.error('Color-admin: - Error resetting colors to default:', error);
       });
     });
   }
