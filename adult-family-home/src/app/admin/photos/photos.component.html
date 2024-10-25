@@ -1,1 +1,36 @@
-<p>photos works!</p>
+<form [formGroup]="form">
+<h2>Content and Photos</h2>
+<div class="form-group">
+  <label for="logoImage">Logo Image</label>
+  <input type="file" id="logoImage" (change)="onFileChange($event, 'logoImage')" class="form-control">
+  <ng-container *ngIf="uploadProgress['logoImage'] | async as progress">
+    <div class="progress">
+      <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+    </div>
+  </ng-container>
+  <div class="existing-logo" *ngIf="business?.logoImage">
+    <img class="logoImage" [src]="business?.logoImage" alt="Business Logo">
+  </div>
+  <div *ngIf="!business?.logoImage">
+    <p>No logo image available.</p>
+  </div>
+</div>
+
+<!-- Facility and Lifestyle Images -->
+<h2>Facility and Lifestyle Images</h2>
+
+<h2>Gallery Description</h2>
+<div class="form-group">
+  <label for="photoGallery">Photo Gallery:</label>
+  <textarea id="photoGallery" formControlName="photoGallery" class="form-control"></textarea>
+</div>
+
+<!-- Additional Content -->
+<h2>Gallery Photos</h2>
+<div class="form-group">
+  <label for="photoGallery">Photo Gallery:</label>
+  <a [routerLink]="['/admin/gallery-upload']" [queryParams]="{ id: business?.id }" class="btn btn-primary">
+    Upload Photos to Gallery
+  </a>
+</div>
+</form>

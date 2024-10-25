@@ -48,6 +48,10 @@ export class EditBusinessComponent implements OnInit {
         this.loadBusinessData();
       }
       else{
+        this.loadDefaultData();
+        //to do: When loading default values we are missing alot of controls
+        //to do: reviews / photos and other pages are missing business ID
+        //to do: break down so that each component saves their part and do not depend on the edit-business component
         //load defautls.
       }
     });
@@ -122,83 +126,7 @@ export class EditBusinessComponent implements OnInit {
     return this.businessForm.get('benefits') as FormArray;
   }
 
-  // get services(): FormArray {
-  //   return this.businessForm.get('services') as FormArray;
-  // }
 
-  // get benefits(): FormArray {
-  //   return this.businessForm.get('benefits') as FormArray;
-  // }
-
-
-  addEmployee(): void {
-    const employeeForm = this.fb.group({
-      id: [''],
-      name: [''],
-      role: [''],
-      bio: [''],
-      photoURL: ['']
-    });
-    this.employees().push(employeeForm);
-  }
-
-  removeEmployee(index: number): void {
-    this.employees().removeAt(index);
-  }
-
-
-
-
-  onEmployeeFileChange(event: any, index: number): void {
-    const file = event.target.files[0];
-    if (file) {
-      const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, 'employee');
-
-      this.uploadProgress[`employee_${index}`] = uploadProgress;
-
-      downloadUrl.pipe(
-        finalize(() => {
-          downloadUrl.subscribe(url => {
-            this.employees().at(index).patchValue({ photoURL: url });
-          });
-        })
-      ).subscribe();
-    }
-  }
-
-
-
-  onFileChange(event: any, field: string): void {
-    const file = event.target.files[0];
-    if (file) {
-      let location: 'gallery' | 'employee' | 'business' | 'testimonail' | 'heroImages';
-
-      // Determine location based on the field
-      if (field === 'photoGallery') {
-        location = 'gallery';
-      } else if (field === 'testimonial') {
-          location = 'business';
-      } else if (field === 'logoImage' || field === 'facilityImages' || field === 'lifestyleImages') {
-        location = 'business';
-      }  else if (field === 'heroImages' ) {
-        location = 'heroImages';
-      } else {
-        location = 'employee';
-      }
-
-      const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, location);
-
-      this.uploadProgress[field] = uploadProgress;
-
-      downloadUrl.pipe(
-        finalize(() => {
-          downloadUrl.subscribe(url => {
-            this.businessForm.patchValue({ [field]: url });
-          });
-        })
-      ).subscribe();
-    }
-  }
 
   loadDefaultData():void{
     this.businessForm = this.fb.group({
@@ -222,8 +150,6 @@ export class EditBusinessComponent implements OnInit {
       logoImage: [''],
       ownerImagesBios: ['John Doe, RN, Founder.'],
       staffImagesBios: ['Jane Smith, CNA, Head Nurse; Bob Johnson, Physical Therapist.'],
-      facilityImages: [''],
-      lifestyleImages: [''],
       mediaFeatures: ['Featured in Local News, Healthcare Magazine.'],
       ratings: ['Google: 4.8 stars, Yelp: 5 stars'],
       testimonials: this.fb.array([]),
@@ -259,6 +185,7 @@ export class EditBusinessComponent implements OnInit {
         }
         } else {
           console.error('Business not found');
+
           // Handle the case where the business is not found, e.g., navigate to an error page
         }
       },
@@ -273,8 +200,6 @@ export class EditBusinessComponent implements OnInit {
   }
 
   populateForm(business: Business): void {
-    console.log('Logo Image:', business.logoImage);
-    console.log('Lifestyle Images:', business.lifestyleImages);
     this.businessForm.patchValue(business);
 
       // Ensure logoImage is handled
