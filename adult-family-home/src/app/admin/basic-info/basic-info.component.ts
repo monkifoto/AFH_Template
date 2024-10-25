@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Business } from 'src/app/model/business-questions.model';
 
 @Component({
   selector: 'app-basic-info',
@@ -7,8 +8,9 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./basic-info.component.css']
 })
 export class BasicInfoComponent  implements OnChanges, OnInit{
-  @Input()
-  form!: FormGroup;
+  @Input() form!: FormGroup;
+  @Input() business!: Business | undefined;
+  @Input() businessId!: string;
 
 
   ngOnInit() {

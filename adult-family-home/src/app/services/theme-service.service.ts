@@ -27,7 +27,7 @@ export class ThemeService {
 
   // Fetch theme colors for a business. If not found, create a new document with default theme
 getThemeColors(businessId: string): Observable<any> {
-  console.log('Fetching theme for business ID:', businessId);
+   console.log('Theme Service: - Fetching theme for business ID:', businessId);
 
   const businessDocRef = this.firestore.collection('businesses').doc(businessId);
   const themeDocRef = businessDocRef.collection('theme').doc('themeDoc'); // Single theme doc for the business
@@ -38,8 +38,8 @@ getThemeColors(businessId: string): Observable<any> {
     switchMap(businessSnapshot => {
       if (!businessSnapshot.payload.exists) {
         // If the business document doesn't exist, log an error and stop the process
-        console.error('Business document does not exist');
-        return throwError('Business document does not exist');
+        console.error('Theme Service: - Business document: '+ businessDocRef +' does not exist!');
+        return throwError('Theme Service: - Business document does not exist');
       }
 
       // Check if the theme document exists
@@ -52,7 +52,7 @@ getThemeColors(businessId: string): Observable<any> {
             // If theme document does not exist, create a new one with default theme
             return from(themeDocRef.set(this.defaultTheme)).pipe(
               switchMap(() => {
-                console.log('Created new theme for business with default values.');
+                console.log('Theme Service: - Created new theme for business with default values.');
                 return themeDocRef.valueChanges(); // Return the newly created theme
               })
             );
@@ -74,14 +74,14 @@ updateColors(businessId: string, colors: any): Promise<void> {
     .collection('theme')
     .doc('themeDoc'); // Directly reference the document by ID
 
-  console.log("BusinessId: " + businessId + " theme service updateColors: ", colors);
+  console.log("Theme Service: - BusinessId: " + businessId + " theme service updateColors: ", colors);
 
   return themeDocRef.set(colors, { merge: true }) // Use 'merge: true' to avoid overwriting the entire document
     .then(() => {
-      console.log('Colors updated successfully');
+      console.log('Theme Service: - Colors updated successfully');
     })
     .catch(error => {
-      console.error('Error updating colors:', error);
+      console.error('Theme Service: - Error updating colors:', error);
       throw new Error(error);
     });
 }

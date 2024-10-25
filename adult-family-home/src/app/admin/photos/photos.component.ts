@@ -11,8 +11,8 @@ import { UploadService } from 'src/app/services/upload.service';
 })
 export class PhotosComponent implements OnInit{
   @Input() form!: FormGroup;
-  @Input() business: Business | undefined;
-  businessId!: ""; //to do: need this value for uploading images
+  @Input() business!: Business | undefined;
+  @Input() businessId!: string;
   uploadProgress: { [key: string]: Observable<number | undefined> } = {};
 
   constructor(private fb: FormBuilder,
