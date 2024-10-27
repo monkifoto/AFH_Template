@@ -110,7 +110,9 @@ export class EditBusinessComponent implements OnInit {
       businessStory: [''],
       motivation: [''],
       mission: [''],
+      missionImageUrl:[''],
       vision: [''],
+      visionImageUrl:[''],
       certifications: [''],
 
       services: this.fb.array([]),
@@ -129,8 +131,10 @@ export class EditBusinessComponent implements OnInit {
       keyServicesHighlights: [''],
       teamValues: [''],
       contactFormDetails: [''],
+      contactUsImageUrl: [''],
       mapIframeUrl: [''],
       photoGallery: [''],
+      photoGalleryText: [''],
       isActive: true,
       employees: this.fb.array([]),
     });
@@ -200,6 +204,7 @@ export class EditBusinessComponent implements OnInit {
       keyServicesHighlights: [defaultBusiness.keyServicesHighlights],
       teamValues: [defaultBusiness.teamValues],
       contactFormDetails: [defaultBusiness.contactFormDetails],
+      contactUsImageUrl:[defaultBusiness.contactUsImageUrl],
       mapIframeUrl: [defaultBusiness.mapIframeUrl],
       photoGalleryText: [defaultBusiness.photoGalleryText],
       isActive: [defaultBusiness.isActive],

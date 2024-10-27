@@ -26,3 +26,9 @@ h2 {
   border-radius: 4px;
   box-sizing: border-box;
 }
+
+.contactUsImagesThumbnails {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}

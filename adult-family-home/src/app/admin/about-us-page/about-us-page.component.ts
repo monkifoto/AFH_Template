@@ -17,6 +17,15 @@ export class AboutUsPageComponent implements OnInit {
   showUniqueServiceForm = false;
   showWhyChooseForm = false;
 
+  predefinedImages = [
+    { url: 'assets/sharedAssets/image_fx_(1).jpg' },
+    { url: 'assets/sharedAssets/image_fx_(2).jpg' },
+    { url: 'assets/sharedAssets/image_fx_(3).jpg' },
+    { url: 'assets/sharedAssets/image_fx_(4).jpg' },
+    { url: 'assets/sharedAssets/image_fx_(5).jpg' },
+  ];
+
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
@@ -90,5 +99,23 @@ export class AboutUsPageComponent implements OnInit {
 
   removeWhyChoose(index: number): void {
     this.whyChoose.removeAt(index);
+  }
+
+  onMissionImageSelection(url: string) {
+    this.form.patchValue({
+      missionImageUrl: url
+    });
+    if (this.business) {
+      this.business.missionImageUrl = url;  // Save selected URL in business model
+    }
+  }
+
+  onVisionImageSelection(url: string) {
+    this.form.patchValue({
+      visionImageUrl: url
+    });
+    if (this.business) {
+      this.business.visionImageUrl = url;  // Save selected URL in business model
+    }
   }
 }

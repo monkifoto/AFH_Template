@@ -8,8 +8,12 @@ export interface Business {
   uniqueService: ListItem[];
   whyChoose: ListItem[];
   businessStory: string;
+  isActive: boolean;
+  heroImages?: string[];
   motivation: string;
+  missionImageUrl:string;
   mission: string;
+  visionImageUrl:string;
   vision: string;
   certifications: string;
   services: ServiceItem[];
@@ -36,16 +40,21 @@ export interface Business {
   keyServicesHighlights: string;
   teamValues: string;
   benefits: BenefitItem[];
+
+  //Contact us page
   contactFormDetails: string;
+  contactUsImageUrl: string;
   mapIframeUrl: string;
+
   faqs: string;
   blogNews: string;
   photoGalleryText: string;
-  employees?: Employee[];
-  isActive: boolean;
-  heroImages?: string[];
 
-  contactUsImageUrl: string;
+  //Employyes
+  employees?: Employee[];
+
+
+
   toursImageUrl: string;
   consultingImageUrl: string;
 
@@ -106,7 +115,6 @@ export class BusinessModel {
       id: '',
       faqs: '',
       blogNews: '',
-      contactUsImageUrl: '',
       toursImageUrl: '',
       consultingImageUrl: '',
       businessName: 'Careful Living AFH',
@@ -120,8 +128,10 @@ export class BusinessModel {
         'To offer high-quality, compassionate care for seniors, respecting their independence and dignity.',
       mission:
         'To exceed the expectations of our residents and their families, with personalized care and a homelike atmosphere.',
+        missionImageUrl:'',
       vision:
         'A community where seniors can live independently with compassionate, round-the-clock care and support.',
+        visionImageUrl:'',
       certifications:
         'State Licensed, Certified Nursing Assistants (CNA), First Aid/CPR Certified',
       specialPrograms:
@@ -151,6 +161,7 @@ export class BusinessModel {
         'Dedicated team specialized in elderly care for dementia, Alzheimer’s, stroke recovery, diabetic management, cardiac care, and rehabilitation.',
       contactFormDetails:
         'Please provide name, email, phone number, and message for inquiries.',
+        contactUsImageUrl : '',
       mapIframeUrl: '<iframe src="https://maps.google.com/..."></iframe>',
       photoGalleryText:
         'A collection of images showcasing our facilities, activities, and care staff.',
