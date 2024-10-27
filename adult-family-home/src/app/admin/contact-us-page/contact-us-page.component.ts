@@ -26,18 +26,28 @@ export class ContactUsPageComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    // Initialize the form with necessary controls
-    this.form = this.fb.group({
-      selectedImageUrl: [''],  // Control for image selection
-      contactFormDetails: [''],
-      mapIframeUrl: ['']
-    });
+    // Check if controls exist; if not, add them with default values
+    if (!this.form.contains('contactUsImageUrl')) {
+      this.form.addControl('contactUsImageUrl', this.fb.control(this.form.value.contactUsImageUrl || ''));
+    }
+
+    if (!this.form.contains('contactFormDetails')) {
+      this.form.addControl('contactFormDetails', this.fb.control(this.form.value.contactFormDetails || ''));
+    }
+
+    if (!this.form.contains('mapIframeUrl')) {
+      this.form.addControl('mapIframeUrl', this.fb.control(this.form.value.mapIframeUrl || ''));
+    }
   }
 
   onImageSelection(url: string) {
+    console.log("Admin: Contact Us: onImageSelected: url: ", url)
     this.form.patchValue({
-      selectedImageUrl: url
+      contactUsImageUrl: url
     });
+    if (this.business) {
+      this.business.contactUsImageUrl = url;  // Save selected URL in business model
+    }
   }
 
 }

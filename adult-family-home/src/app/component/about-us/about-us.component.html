@@ -18,14 +18,16 @@
 
     <section class="mission-vision">
       <div class="mission">
-        <img [src]="business.lifestyleImages"/>
+        <img [src]="business.missionImageUrl || 'assets/sharedAssets/image_fx_(1).jpg'"
+        alt="Contact Image" />
         <div class="heading-container">
           <h2 class="styled-heading">Our Mission</h2>
         </div>
         <div class="services_txt garamond" [innerHTML]="business.mission"></div>
       </div>
       <div class="vision">
-        <img [src]="business.facilityImages"/>
+        <img [src]="business.visionImageUrl || 'assets/sharedAssets/image_fx_(3).jpg'"
+        alt="Contact Image" />
         <div class="heading-container">
           <h2 class="styled-heading">Our Vision</h2>
         </div>
