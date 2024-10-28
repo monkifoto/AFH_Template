@@ -59,6 +59,7 @@ export interface Business {
   consultingImageUrl: string;
 
   theme: {
+    themeFileName?: string;
     backgroundColor: string;
     primaryColor: string;
     secondaryColor: string;
@@ -374,6 +375,7 @@ export class BusinessModel {
         },
       ],
       theme: {
+        themeFileName: 'styles.css',
         primaryColor: '#fffaf2',
         secondaryColor: '#f8f3f0',
         accentColor: '#F0C987',

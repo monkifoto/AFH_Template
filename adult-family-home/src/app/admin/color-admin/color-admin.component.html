@@ -3,6 +3,16 @@
 
   <div *ngIf="themeForm">
     <form [formGroup]="themeForm" (ngSubmit)="onSubmit()">
+
+
+      <div class="theme-selection">
+        <label for="themeFileName">Select Theme</label>
+        <select id="themeFileName" formControlName="themeFileName" (change)="onThemeChange($event)">
+          <option *ngFor="let theme of availableThemes" [value]="theme.fileName">{{ theme.name }}</option>
+        </select>
+      </div>
+
+
       <div class="color-picker">
         <label for="backgroundColor">Background Color</label>
         <input type="color" id="backgroundColor" formControlName="backgroundColor"
