@@ -18,6 +18,15 @@ export class ColorAdminComponent implements OnInit {
   @Input() business!: Business | undefined;
   @Input() businessId!: string;
 
+
+  defaultThemeFileName = 'assets/themes/styles3.css';
+  availableThemes = [
+    { name: 'Theme 1', fileName: 'styles.css' },
+    { name: 'Theme 2', fileName: 'styles1.css' },
+    { name: 'Theme 3', fileName: 'styles2.css' }
+    // Add other theme file names here
+  ];
+
   defaultColors: any = {
     primaryColor: '#fffaf2', // default primary color
     secondaryColor: '#f8f3f0', // default secondary color
@@ -49,6 +58,7 @@ export class ColorAdminComponent implements OnInit {
 
         // Initialize the form with controls
         this.themeForm = this.fb.group({
+          themeFileName: [this.defaultThemeFileName],
           backgroundColor: ['', [Validators.required, this.hexValidator]],
           darkBackgroundColor: ['', [Validators.required, this.hexValidator]],
           primaryColor: ['', [Validators.required, this.hexValidator]],
@@ -66,6 +76,9 @@ export class ColorAdminComponent implements OnInit {
         // Populate the form when the themeColors$ observable emits the data
         this.themeColors$.pipe(take(1)).subscribe(themeColors => {
           this.themeForm.patchValue(themeColors);
+          if (themeColors.themeFileName) {
+            this.themeService.applyThemeFile(themeColors.themeFileName);
+          }
         });
       }
       else{
@@ -151,6 +164,11 @@ export class ColorAdminComponent implements OnInit {
         [controlName]: hex
       });
     }
+  }
+
+  onThemeChange(event: any) {
+    const selectedThemeFile = event.target.value;
+    this.themeForm.patchValue({ themeFileName: selectedThemeFile });
   }
 
 }

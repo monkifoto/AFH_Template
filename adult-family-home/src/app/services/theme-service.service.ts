@@ -7,10 +7,16 @@ import { catchError, map, switchMap, take } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ThemeService {
-  constructor(private firestore: AngularFirestore) {}
+  private themeLink: HTMLLinkElement;
+  constructor(private firestore: AngularFirestore) {
+    this.themeLink = document.createElement('link');
+    this.themeLink.rel = 'stylesheet';
+    document.head.appendChild(this.themeLink);
+  }
 
   // Default theme colors
   public defaultTheme = {
+    themeFileName: 'styles.css',
     primaryColor: '#fffaf2',
     secondaryColor: '#f8f3f0',
     accentColor: '#F0C987',
@@ -26,47 +32,51 @@ export class ThemeService {
   };
 
   // Fetch theme colors for a business. If not found, create a new document with default theme
-getThemeColors(businessId: string): Observable<any> {
-   console.log('Theme Service: - Fetching theme for business ID:', businessId);
+  getThemeColors(businessId: string): Observable<any> {
+    console.log('Theme Service: - Fetching theme for business ID:', businessId);
 
-  const businessDocRef = this.firestore.collection('businesses').doc(businessId);
-  const themeDocRef = businessDocRef.collection('theme').doc('themeDoc'); // Single theme doc for the business
+    const businessDocRef = this.firestore.collection('businesses').doc(businessId);
+    const themeDocRef = businessDocRef.collection('theme').doc('themeDoc');
 
-  // Check if the business exists
-  return businessDocRef.snapshotChanges().pipe(
-    take(1), // Take the first value emitted to avoid issues with observable streams
-    switchMap(businessSnapshot => {
-      if (!businessSnapshot.payload.exists) {
-        // If the business document doesn't exist, log an error and stop the process
-        console.error('Theme Service: - Business document: '+ businessDocRef +' does not exist!');
-        return throwError('Theme Service: - Business document does not exist');
-      }
+    return businessDocRef.snapshotChanges().pipe(
+      take(1),
+      switchMap(businessSnapshot => {
+        if (!businessSnapshot.payload.exists) {
+          console.error('Theme Service: - Business document does not exist!');
+          return throwError('Theme Service: - Business document does not exist');
+        }
 
-      // Check if the theme document exists
-      return themeDocRef.get().pipe(
-        switchMap(docSnapshot => {
-          if (docSnapshot.exists) {
-            // If theme document exists, return its data
-            return themeDocRef.valueChanges();
-          } else {
-            // If theme document does not exist, create a new one with default theme
-            return from(themeDocRef.set(this.defaultTheme)).pipe(
-              switchMap(() => {
-                console.log('Theme Service: - Created new theme for business with default values.');
-                return themeDocRef.valueChanges(); // Return the newly created theme
-              })
-            );
-          }
-        })
-      );
-    }),
-    catchError(error => {
-      console.error('Error fetching theme:', error);
-      return of(this.defaultTheme); // Return the default theme on error
-    })
-  );
-}
+        return themeDocRef.get().pipe(
+          switchMap(docSnapshot => {
+            if (docSnapshot.exists) {
+              const themeData = docSnapshot.data();
+              if (themeData?.['themeFileName']) {
+                this.applyThemeFile(themeData['themeFileName']);
+              }
+              return themeDocRef.valueChanges();
+            } else {
+              return from(themeDocRef.set(this.defaultTheme)).pipe(
+                switchMap(() => {
+                  console.log('Theme Service: - Created new theme with default values.');
+                  this.applyThemeFile(this.defaultTheme.themeFileName);
+                  return themeDocRef.valueChanges();
+                })
+              );
+            }
+          })
+        );
+      }),
+      catchError(error => {
+        console.error('Error fetching theme:', error);
+        this.applyThemeFile(this.defaultTheme.themeFileName);
+        return of(this.defaultTheme);
+      })
+    );
+  }
 
+  applyThemeFile(themeFileName: string): void {
+    this.themeLink.href = `assets/themes/${themeFileName}`;
+  }
 
 updateColors(businessId: string, colors: any): Promise<void> {
   const themeDocRef = this.firestore.collection('businesses')
@@ -79,6 +89,9 @@ updateColors(businessId: string, colors: any): Promise<void> {
   return themeDocRef.set(colors, { merge: true }) // Use 'merge: true' to avoid overwriting the entire document
     .then(() => {
       console.log('Theme Service: - Colors updated successfully');
+      if (colors.themeFileName) {
+        this.applyThemeFile(colors.themeFileName);
+      }
     })
     .catch(error => {
       console.error('Theme Service: - Error updating colors:', error);
