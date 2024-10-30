@@ -6,10 +6,12 @@
 
 
       <div class="theme-selection">
-        <label for="themeFileName">Select Theme</label>
-        <select id="themeFileName" formControlName="themeFileName" (change)="onThemeChange($event)">
-          <option *ngFor="let theme of availableThemes" [value]="theme.fileName">{{ theme.name }}</option>
-        </select>
+        <label>Select Theme</label>
+  <select (change)="onThemeFileChange($event)">
+    <option value="styles1.css">Theme 1</option>
+    <option value="styles2.css">Theme 2</option>
+    <option value="styles3.css">Theme 3</option>
+  </select>
       </div>
 
 

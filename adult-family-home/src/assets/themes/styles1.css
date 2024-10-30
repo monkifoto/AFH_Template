@@ -1,0 +1,9 @@
+/*Welcome*/
+.info-container{
+  max-width: 200px;
+  font-size: .75rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+}

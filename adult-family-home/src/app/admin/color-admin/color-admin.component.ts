@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, take } from 'rxjs';
 import { Business } from 'src/app/model/business-questions.model';
+import { BusinessService } from 'src/app/services/business.service';
 
 declare var $: any;
 @Component({
@@ -46,7 +47,8 @@ export class ColorAdminComponent implements OnInit {
     private themeService: ThemeService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private businessService: BusinessService
   ) {}
 
   ngOnInit(): void {
@@ -169,6 +171,17 @@ export class ColorAdminComponent implements OnInit {
   onThemeChange(event: any) {
     const selectedThemeFile = event.target.value;
     this.themeForm.patchValue({ themeFileName: selectedThemeFile });
+  }
+
+  onThemeFileChange(event: Event) {
+    const selectedThemeFile = (event.target as HTMLSelectElement).value;
+
+    // Update the theme file name in Firestore
+    this.businessService.updateThemeFileName(selectedThemeFile).then(() => {
+      console.log(`Theme file updated to: ${selectedThemeFile}`);
+    }).catch(error => {
+      console.error('Error updating theme file:', error);
+    });
   }
 
 }

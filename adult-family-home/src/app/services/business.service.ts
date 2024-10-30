@@ -102,8 +102,34 @@ export class BusinessService {
     return this.storage.ref(filePath).getDownloadURL();
   }
 
+  updateThemeFileName(themeFileName: string, businessId: string = this.defaultBusinessId): Promise<void> {
+    return this.afs.doc(`${this.basePath}/${businessId}`).update({
+      'theme.themeFileName': themeFileName
+    });
+  }
 
+  getThemeFileName(businessId: string = this.defaultBusinessId): Promise<string> {
+    const businessDocRef = this.afs.collection<Business>(this.basePath).doc(businessId);
+    const themeDocRef = businessDocRef.collection('theme').doc('themeDoc');
 
+    console.log(`Fetching theme for business ID: ${businessId}`);
 
+    return themeDocRef.get().toPromise().then(doc => {
+      if (doc && doc.exists) {
+        const themeData = doc.data();
+        console.log(`Theme document found:`, themeData);
 
+        // Accessing the themeFileName directly without folder structure
+        const themeFileName = themeData?.['themeFileName'] || 'styles.css';
+        console.log(`Retrieved themeFileName: ${themeFileName}`);
+        return themeFileName; // Ensure this is just the filename
+      } else {
+        console.warn(`No theme document found for business ID: ${businessId}. Using default theme.`);
+        return 'default-theme.css';
+      }
+    }).catch(error => {
+      console.error(`Error fetching theme file name for business ID: ${businessId}`, error);
+      return 'default-theme.css';
+    });
+  }
 }
