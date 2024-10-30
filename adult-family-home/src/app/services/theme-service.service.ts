@@ -74,9 +74,9 @@ export class ThemeService {
     );
   }
 
-  applyThemeFile(themeFileName: string): void {
-    this.themeLink.href = `assets/themes/${themeFileName}`;
-  }
+ // applyThemeFile(themeFileName: string): void {
+ //   this.themeLink.href = `assets/themes/${themeFileName}`;
+ // }
 
 updateColors(businessId: string, colors: any): Promise<void> {
   const themeDocRef = this.firestore.collection('businesses')
@@ -104,5 +104,29 @@ updateColors(businessId: string, colors: any): Promise<void> {
     return this.firestore.collection('defaultSettings')
       .doc('colors')
       .valueChanges();
+  }
+
+  applyThemeFile(themeFileName: string): Promise<void> {
+    const themePath = `assets/themes/${themeFileName}`; // Ensure this path is correct
+    return this.loadCss(themePath);
+  }
+
+  private loadCss(url: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = url;
+
+      link.onload = () => {
+        console.log(`Loaded theme: ${url}`);
+        resolve();
+      };
+      link.onerror = (error) => {
+        console.error(`Failed to load theme: ${url}`, error);
+        reject(error);
+      };
+
+      document.head.appendChild(link);
+    });
   }
 }

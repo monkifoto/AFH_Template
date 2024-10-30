@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -44,6 +44,11 @@ import { ServicesPageComponent } from './admin/services-page/services-page.compo
 import { AboutUsPageComponent } from './admin/about-us-page/about-us-page.component';
 import { ContactUsPageComponent } from './admin/contact-us-page/contact-us-page.component';
 import { ColorAdminComponent } from './admin/color-admin/color-admin.component';
+import { ThemeInitializerService } from './services/theme-initializer.service';
+
+export function themeInitializerFactory(themeInitializer: ThemeInitializerService) {
+  return () => themeInitializer.loadTheme();
+}
 
 @NgModule({
   declarations: [
@@ -95,7 +100,14 @@ import { ColorAdminComponent } from './admin/color-admin/color-admin.component';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: themeInitializerFactory,
+      deps: [ThemeInitializerService],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
