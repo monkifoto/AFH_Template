@@ -7,21 +7,36 @@ import { BusinessService } from './business.service';
   providedIn: 'root'
 })
 export class ThemeInitializerService {
-  constructor(private http: HttpClient,
+  constructor(
+    private http: HttpClient,
     private themeService: ThemeService,
     private businessService: BusinessService
   ) {}
 
-  loadTheme(): Promise<void> {
+  loadTheme(businessID: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      // Fetch the theme filename directly from Firestore
-      this.businessService.getThemeFileName('vfCMoPjAu2ROVBbKvk0D') // Replace with your business ID or logic
-        .then(themeFileName => {
-          // Apply the theme using ThemeService
-          return this.themeService.applyThemeFile(themeFileName);
-        })
-        .then(() => resolve())
-        .catch(() => resolve()); // Resolve even if it fails to avoid blocking app init
+      // Fetch the business theme
+      this.themeService.getBusinessTheme(businessID).subscribe({
+        next: (themeData) => {
+          const themeFileName = themeData ? themeData.themeFileName : 'default.css';
+          // Apply the theme and resolve the promise after applying it
+          this.themeService.applyThemeFile(themeFileName)
+            .then(() => resolve())
+            .catch(error => {
+              console.error('Error applying theme file:', error);
+              resolve(); // Resolve even if there's an error to allow the app to load
+            });
+        },
+        error: (error) => {
+          console.error('Error loading business theme:', error);
+          this.themeService.applyThemeFile('default.css')
+            .then(() => resolve())
+            .catch(err => {
+              console.error('Error applying default theme file:', err);
+              resolve(); // Resolve even if there's an error
+            });
+        }
+      });
     });
   }
 }

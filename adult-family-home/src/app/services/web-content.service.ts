@@ -41,28 +41,6 @@ export class WebContentService {
       })
     );
   }
-  // getBusinessData(businessId: string | null | undefined): Observable<Business | undefined> {
-  //   // Check if the businessId is null, empty, or undefined, then use the defaultBusinessId
-  //  // console.log("Get Business Data businessId", businessId);
-  //   const resolvedBusinessId = businessId && businessId.trim() ? businessId : this.defaultBusinessId;
-
-
-  //   //console.log("Get Business Data resolvedBusinessId", resolvedBusinessId);
-
-  //   return this.firestore.collection('businesses').doc<Business>(resolvedBusinessId).snapshotChanges().pipe(
-  //     map(action => {
-  //       const data = action.payload.data();
-  //       const docId = action.payload.id;
-  //       if (data) {
-  //         // Remove the existing id property if present
-  //         const { id: _, ...rest } = data;
-  //         return { id: docId, ...rest };
-  //       }
-  //      // console.log("Get business Data:", data);
-  //       return undefined;
-  //     })
-  //   );
-  // }
 
   getDefaultBusinessData(): Observable<Business | undefined> {
     return this.getBusinessData(this.defaultBusinessId);
