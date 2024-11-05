@@ -1,4 +1,8 @@
-/*Welcome*/
+.container{
+  max-width: 800px;
+  padding: 40px 20px;
+}
+
 .info-container{
   max-width: 200px;
   font-size: .75rem;

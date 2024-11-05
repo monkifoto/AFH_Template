@@ -12,7 +12,7 @@ export class WebContentService {
 
   constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) { }
 
-  private defaultBusinessId = 'vfCMoPjAu2ROVBbKvk0D';
+  private defaultBusinessId = 'Z93oAAVwFAwhmdH2lLtB';
   private defaultImage: string = 'assets/sharedAssets/missingTestimonialImage.png';
 
   getBusinessData(businessId: string | null | undefined): Observable<Business | undefined> {

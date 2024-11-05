@@ -31,3 +31,6 @@
     </div>
   </div>
 </footer>
+<div *ngIf="isAuthenticated$ | async" class="footer-theme-file">
+  <p>Theme File: {{ business?.theme?.themeFileName }}</p>
+</div>

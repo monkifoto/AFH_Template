@@ -10,7 +10,7 @@ import { Business } from '../model/business-questions.model';
 })
 export class BusinessService {
   private basePath = 'businesses';
-  private defaultBusinessId = 'vfCMoPjAu2ROVBbKvk0D';
+  private defaultBusinessId = 'Z93oAAVwFAwhmdH2lLtB';
   constructor(private afs: AngularFirestore, private storage: AngularFireStorage) {}
 
   // Create a new business
