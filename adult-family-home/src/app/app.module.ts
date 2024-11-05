@@ -2,6 +2,8 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './component/home/home.component';
 import { AboutUsComponent } from './component/about-us/about-us.component';
@@ -46,8 +48,19 @@ import { ContactUsPageComponent } from './admin/contact-us-page/contact-us-page.
 import { ColorAdminComponent } from './admin/color-admin/color-admin.component';
 import { ThemeInitializerService } from './services/theme-initializer.service';
 
-export function themeInitializerFactory(themeInitializer: ThemeInitializerService) {
-  return () => themeInitializer.loadTheme();
+export function themeInitializerFactory(
+  themeInitializer: ThemeInitializerService,
+  location: Location,
+  router: Router
+): () => Promise<void> {
+  return () => {
+    // Use Location service to get the current URL with query parameters
+    const url = new URL(window.location.href);
+    const businessId = url.searchParams.get('id'); // Retrieve businessId from query string
+    console.log(businessId);
+    // Pass the businessId to the ThemeInitializerService to load the appropriate theme
+    return themeInitializer.loadTheme(businessId || '');
+  };
 }
 
 @NgModule({

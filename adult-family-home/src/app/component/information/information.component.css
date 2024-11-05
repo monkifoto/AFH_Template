@@ -1,4 +1,4 @@
-.information-section {
+/* .information-section {
   display: flex;
   justify-content: center;
   padding: 20px;
@@ -12,7 +12,7 @@
   align-items: center;
 }
 
-/* Information items are centered and spaced evenly */
+
 .info-item {
   display: flex;
   flex-direction: column;
@@ -30,19 +30,18 @@
   margin-top: 8px;
 }
 
-/* Mobile adjustments */
 @media (max-width: 768px) {
   .information-container {
     flex-direction: column;
-    gap: 40px; /* Reduce gap between items */
+    gap: 40px;
   }
 
   .info-item i {
-    font-size: 1.8em; /* Slightly reduce icon size */
+    font-size: 1.8em;
   }
 
   .info-item p {
-    font-size: 1.2rem; /* Adjust text size */
+    font-size: 1.2rem;
   }
 }
 
@@ -57,10 +56,10 @@
   }
 
   .info-item i {
-    font-size: 1.6em; /* Further reduce icon size for small screens */
+    font-size: 1.6em;
   }
 
   .info-item p {
     font-size: 1rem;
   }
-}
+} */

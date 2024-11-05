@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { WebContentService } from '../../services/web-content.service';
 import { Business } from '../../model/business-questions.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { ThemeService } from 'src/app/services/theme-service.service';
 
 @Component({
   selector: 'app-footer',
@@ -15,11 +16,13 @@ export class FooterComponent implements OnInit {
   business!: Business | undefined;
   isAdmin = false;
   isAuthenticated$: Observable<boolean> | undefined;
+  themeFileName?: string;
 
   constructor(
     private route: ActivatedRoute,
     private webContentService: WebContentService,
-    private authService: AuthService
+    private authService: AuthService,
+    private themeService : ThemeService
   ) {
 
   }
@@ -27,13 +30,24 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.businessId = params['id'];
-      console.log("Footer businessId: ", this.businessId);
+      this.businessId = params['id']
+
+
       this.webContentService.getBusinessData(this.businessId).subscribe(data => {
         if (data) {
           this.business = data;
+          console.log("Footer business: ", this.business);
         }
       });
+
+      this.themeService.getBusinessTheme(this.businessId).subscribe( tf =>{
+        if(tf){
+          this.themeFileName = tf.themeFileName;
+        }
+      });
+
+
+
     });
 
     this.isAuthenticated$ = this.authService.isAuthenticated();

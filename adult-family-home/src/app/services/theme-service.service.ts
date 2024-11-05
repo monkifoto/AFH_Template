@@ -31,7 +31,16 @@ export class ThemeService {
     buttonHoverColor: '#c9605b'
   };
 
-  // Fetch theme colors for a business. If not found, create a new document with default theme
+
+  getBusinessTheme(businessId: string): Observable<any> {
+    return this.firestore
+      .collection('businesses')
+      .doc(businessId)
+      .collection('theme')
+      .doc('themeDoc')
+      .valueChanges();
+  }
+
   getThemeColors(businessId: string): Observable<any> {
     console.log('Theme Service: - Fetching theme for business ID:', businessId);
 
@@ -74,32 +83,27 @@ export class ThemeService {
     );
   }
 
- // applyThemeFile(themeFileName: string): void {
- //   this.themeLink.href = `assets/themes/${themeFileName}`;
- // }
+  updateColors(businessId: string, colors: any): Promise<void> {
+    const themeDocRef = this.firestore.collection('businesses')
+      .doc(businessId)
+      .collection('theme')
+      .doc('themeDoc'); // Directly reference the document by ID
 
-updateColors(businessId: string, colors: any): Promise<void> {
-  const themeDocRef = this.firestore.collection('businesses')
-    .doc(businessId)
-    .collection('theme')
-    .doc('themeDoc'); // Directly reference the document by ID
+    console.log("Theme Service: - BusinessId: " + businessId + " theme service updateColors: ", colors);
 
-  console.log("Theme Service: - BusinessId: " + businessId + " theme service updateColors: ", colors);
+    return themeDocRef.set(colors, { merge: true }) // Use 'merge: true' to avoid overwriting the entire document
+      .then(() => {
+        console.log('Theme Service: - Colors updated successfully');
+        if (colors.themeFileName) {
+          this.applyThemeFile(colors.themeFileName);
+        }
+      })
+      .catch(error => {
+        console.error('Theme Service: - Error updating colors:', error);
+        throw new Error(error);
+      });
+  }
 
-  return themeDocRef.set(colors, { merge: true }) // Use 'merge: true' to avoid overwriting the entire document
-    .then(() => {
-      console.log('Theme Service: - Colors updated successfully');
-      if (colors.themeFileName) {
-        this.applyThemeFile(colors.themeFileName);
-      }
-    })
-    .catch(error => {
-      console.error('Theme Service: - Error updating colors:', error);
-      throw new Error(error);
-    });
-}
-
-  // Reset to default colors
   resetToDefaultColors(): Observable<any> {
     return this.firestore.collection('defaultSettings')
       .doc('colors')
@@ -113,6 +117,7 @@ updateColors(businessId: string, colors: any): Promise<void> {
 
   private loadCss(url: string): Promise<void> {
     return new Promise((resolve, reject) => {
+      console.log('Load css from  file:',url);
       const link = document.createElement('link');
       link.rel = 'stylesheet';
       link.href = url;

@@ -32,5 +32,19 @@
   </div>
 </footer>
 <div *ngIf="isAuthenticated$ | async" class="footer-theme-file">
-  <p>Theme File: {{ business?.theme?.themeFileName }}</p>
+  <h1 class="debugger-title">Debugger:</h1>
+  <div class="debugger-info">
+    <div class="debugger-item">
+      <span class="debugger-label">Theme File:</span>
+      <span class="debugger-value">{{ themeFileName}}</span>
+    </div>
+    <div class="debugger-item">
+      <span class="debugger-label">Business ID:</span>
+      <span class="debugger-value">{{ business?.id }}</span>
+    </div>
+    <div class="debugger-item">
+      <span class="debugger-label">Business Name:</span>
+      <span class="debugger-value">{{ business?.businessName }}</span>
+    </div>
+  </div>
 </div>
