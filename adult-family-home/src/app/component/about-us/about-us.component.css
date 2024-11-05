@@ -1,4 +1,4 @@
-.hero-about {
+/* .hero-about {
   background: url('../../../assets/sharedAssets/istockphoto-1207318385-2048x2048.jpg') no-repeat center center/cover;
   background-size: cover;
   background-position: center;
@@ -63,7 +63,6 @@ section {
   border-radius: 12px;
 }
 
-/* Mission and Vision Section Styling */
 .mission-vision {
   display: flex;
   justify-content: space-around;
@@ -142,7 +141,7 @@ section {
   color: #666;
 }
 
-/* Media Queries for Responsiveness */
+
 @media (max-width: 768px) {
   .hero-overlay h1 {
     font-size: 3rem;
@@ -215,7 +214,7 @@ section {
   font-weight: 700;
   color: #333;
   position: relative;
-  /* z-index: 1; */
+
   display: inline-block;
   padding: 10px 20px;
   width: 400px;
@@ -243,7 +242,7 @@ section {
   height: 5px;
   background-color: var(--accent-color);
   transform: translateX(-50%);
-  /* z-index: 2; */
+
 }
 
 .about-cta {
@@ -279,4 +278,4 @@ section {
 
 .about-cta .cta-btn:hover {
   background-color: var(--button-hover-color);
-}
+} */
