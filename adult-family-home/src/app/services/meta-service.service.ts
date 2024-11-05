@@ -7,7 +7,7 @@ import { map, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MetaService {
-  private defaultBusinessId = 'vfCMoPjAu2ROVBbKvk0D';
+  private defaultBusinessId = 'Z93oAAVwFAwhmdH2lLtB';
   constructor(private meta: Meta, private title: Title, private firestore: AngularFirestore,) {}
 
   updateMetaTags(metaData: { title: string; description: string; keywords: string }) {

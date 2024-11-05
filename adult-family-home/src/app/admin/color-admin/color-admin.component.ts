@@ -179,6 +179,8 @@ export class ColorAdminComponent implements OnInit {
     // Update the theme file name in Firestore
     this.businessService.updateThemeFileName(selectedThemeFile).then(() => {
       console.log(`Theme file updated to: ${selectedThemeFile}`);
+      this.themeForm.patchValue({ themeFileName: selectedThemeFile });
+    this.themeService.applyThemeFile(selectedThemeFile);
     }).catch(error => {
       console.error('Error updating theme file:', error);
     });
