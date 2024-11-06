@@ -561,7 +561,7 @@ button[type="submit"]:hover:not(:disabled) {
 }
 
 .our-services-title-highlight {
-  color: var(--accent-color);
+  color: var(--dark-background-color);
   font-size: 2rem; /* Increased font size */
   font-weight: bold;
 }

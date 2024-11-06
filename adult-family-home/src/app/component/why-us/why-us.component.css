@@ -12,11 +12,11 @@ font-size: 2.5em;
   margin-bottom: 15px;
 }
 
-.main {
+.whychoose-section-title.main {
   color: var(--dark-background-color);
 }
 
-.highlight {
+.whychoose-section-title.highlight {
   color: var(--button-color);
 }
 

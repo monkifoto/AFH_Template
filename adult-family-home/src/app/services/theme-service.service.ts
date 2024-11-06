@@ -60,7 +60,7 @@ export class ThemeService {
             if (docSnapshot.exists) {
               const themeData = docSnapshot.data();
               if (themeData?.['themeFileName']) {
-                this.applyThemeFile(themeData['themeFileName']);
+               // this.applyThemeFile(themeData['themeFileName']);
               }
               return themeDocRef.valueChanges();
             } else {

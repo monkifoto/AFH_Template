@@ -894,6 +894,9 @@ ul li strong {
 .testimonial-heading {
   width: 100%;
   text-align: center;
+  color: var(--dark-background-color);
+  font-size: 2.5em;
+  margin-bottom: 15px;
 }
 
 .testimonial-container {

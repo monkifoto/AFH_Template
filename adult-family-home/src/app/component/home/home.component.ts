@@ -3,6 +3,7 @@ import { WebContentService } from 'src/app/services/web-content.service';
 import { Business } from 'src/app/model/business-questions.model';
 import { ActivatedRoute } from '@angular/router';
 import { MetaService } from 'src/app/services/meta-service.service';
+import { BusinessDataService } from 'src/app/services/business-data.service';
 
 @Component({
   selector: 'app-home',
@@ -76,24 +77,30 @@ export class HomeComponent implements OnInit {
     buttonHoverColor: '',
   }
   };
+  business$ = this.businessDataService.businessData$;
 
-
-  constructor(private webContent: WebContentService, private route: ActivatedRoute,  private metaService: MetaService){}
+  constructor(private webContent: WebContentService, private route: ActivatedRoute,  private metaService: MetaService, private businessDataService: BusinessDataService){}
 
   ngOnInit(): void {
 
+    console.log("Home component ngOnInit");
     this.route.queryParams.subscribe(params => {
-      let businessId = params['id'] ;
+      const businessId = params['id'];
 
-      this.metaService.getMetaData(businessId).subscribe((metaData: { title: string; description: string; keywords: string; }) => {
+      // Load metadata
+      this.metaService.getMetaData(businessId).subscribe(metaData => {
         this.metaService.updateMetaTags(metaData);
       });
 
-      this.webContent.getBusinessData(businessId).subscribe(data => {
-        if(data)
-        this.business = data;
+      // Load business data through BusinessDataService
+      this.businessDataService.loadBusinessData(businessId).subscribe(data => {
+        console.log('Home comonent businessDataService data:', data);
+        if (data) {
+          this.business = data;
+        }
       });
     });
+
   }
 
 }
