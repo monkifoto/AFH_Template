@@ -47,6 +47,7 @@ import { AboutUsPageComponent } from './admin/about-us-page/about-us-page.compon
 import { ContactUsPageComponent } from './admin/contact-us-page/contact-us-page.component';
 import { ColorAdminComponent } from './admin/color-admin/color-admin.component';
 import { ThemeInitializerService } from './services/theme-initializer.service';
+import { BusinessDataService } from './services/business-data.service';
 
 export function themeInitializerFactory(
   themeInitializer: ThemeInitializerService,
@@ -60,9 +61,27 @@ export function themeInitializerFactory(
     if(!businessId){
       businessId = 'Z93oAAVwFAwhmdH2lLtB';
     }
-    console.log(businessId);
+    console.log("app.module", businessId);
     // Pass the businessId to the ThemeInitializerService to load the appropriate theme
     return themeInitializer.loadTheme(businessId || '');
+  };
+}
+
+export function initializeBusinessData(
+  businessDataService: BusinessDataService,
+  location: Location,
+  router: Router
+) {
+  const url = new URL(window.location.href);
+  let businessId = url.searchParams.get('id') || 'Z93oAAVwFAwhmdH2lLtB'; // Provide default if null
+  console.log("Initializing business data with businessId:", businessId); // Log here
+
+  return () => {
+    businessDataService.loadBusinessData(businessId).toPromise().then(() => {
+      console.log("Business data loaded successfully");
+    }).catch(error => {
+      console.error("Error loading business data:", error);
+    });
   };
 }
 
@@ -120,7 +139,13 @@ export function themeInitializerFactory(
     {
       provide: APP_INITIALIZER,
       useFactory: themeInitializerFactory,
-      deps: [ThemeInitializerService],
+      deps: [ThemeInitializerService, Location, Router],
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeBusinessData,
+      deps: [BusinessDataService, Location, Router],
       multi: true
     }
   ],

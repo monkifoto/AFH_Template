@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { WebContentService } from 'src/app/services/web-content.service';
+import { BusinessDataService } from 'src/app/services/business-data.service'; // Import BusinessDataService
 import { Business } from 'src/app/model/business-questions.model';
-
 
 @Component({
   selector: 'app-navigation',
@@ -10,25 +9,36 @@ import { Business } from 'src/app/model/business-questions.model';
   styleUrls: ['./navigation.component.css']
 })
 
-export class NavigationComponent implements OnInit{
+export class NavigationComponent implements OnInit {
   businessId: string = '';
-  business: Business | undefined;
+  business: Business | null = null;
   menuActive: boolean = false;
   menuOpen: boolean = false;
 
-  constructor(private route: ActivatedRoute, private router: Router, private content: WebContentService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private businessDataService: BusinessDataService // Inject BusinessDataService here
+  ) {}
+
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.businessId = params['id'] || ''; // Default to empty string if id is undefined
-      this.content.getBusinessData(this.businessId).subscribe(data => {
-        this.business = data;
-      });
+    // Subscribe to the businessId from the service
+    this.businessDataService.getBusinessId().subscribe((businessId) => {
+      if (businessId) {
+        this.businessId = businessId;
+        this.businessDataService.getBusinessData().subscribe((data) => {
+          this.business = data;
+          console.log("Navigation Logo", this.business?.logoImage);
+          console.log("Navigation ID", this.business?.id);
+        });
+      }
     });
   }
 
+
   navigateTo(page: string): void {
     const queryParams = this.businessId ? { id: this.businessId } : {};
-    console.log('This Business id form query string',this.businessId);
+    console.log('This Business id from query string:', this.businessId);
     this.closeMenu();
     this.router.navigate([`/${page}`], { queryParams }).then(success => {
       if (!success) {
@@ -44,5 +54,4 @@ export class NavigationComponent implements OnInit{
   closeMenu(): void {
     this.menuOpen = false;
   }
-
 }

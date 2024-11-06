@@ -3,37 +3,44 @@ import { WebContentService } from 'src/app/services/web-content.service';
 import { Business } from 'src/app/model/business-questions.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MetaService } from 'src/app/services/meta-service.service';
+import { BusinessDataService } from 'src/app/services/business-data.service'; // Import BusinessDataService
 
 @Component({
   selector: 'app-about-us',
   templateUrl: './about-us.component.html',
   styleUrls: ['./about-us.component.css']
 })
-export class AboutUsComponent implements OnInit{
-  businessId!: string;
-  business!: Business;
+export class AboutUsComponent implements OnInit {
+  business: Business | null = null; // Keep business as Business | null
+  businessId: string = '';
 
-  constructor(private webContent: WebContentService, private route: ActivatedRoute,private router: Router, private metaService: MetaService){}
+  constructor(
+    private webContent: WebContentService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private metaService: MetaService,
+    private businessDataService: BusinessDataService // Inject BusinessDataService
+  ) {}
 
   navigateToContact(id: string | null | undefined) {
+    //console.log('navigateToContact id', id);
     this.router.navigate(['/contact-us'], { queryParams: { id } });
   }
 
-
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.businessId = params['id'] ;
+    // Subscribe to business data from the BusinessDataService
+    this.businessDataService.getBusinessData().subscribe(data => {
+      this.business = data; // Update the local business property
     });
 
-    this.metaService.getMetaData(this.businessId).subscribe((metaData: { title: string; description: string; keywords: string; }) => {
+    // Optionally, get business ID from the query string or use the service to set it
+    this.route.queryParams.subscribe(params => {
+      this.businessId = params['id'] || ''; // Set businessId from the query params
+    });
+
+    // Fetch and update the meta tags
+    this.metaService.getMetaData(this.businessId).subscribe(metaData => {
       this.metaService.updateMetaTags(metaData);
     });
-
-    this.webContent.getBusinessData(this.businessId).subscribe(data => {
-      if(data)
-      this.business = data;
-    });
-
   }
-
 }
