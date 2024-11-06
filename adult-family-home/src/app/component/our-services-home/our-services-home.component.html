@@ -1,17 +1,16 @@
-<section class="services-section">
-  <div class="section-heading">
-    <span class="section-title-main">Our</span>
-    <span class="section-title-highlight">Services</span>
+<section class="our-services-section">
+  <div class="our-services-section-heading">
+    <span class="our-services-title main">Our </span>
+    <span class="our-services-title highlight">Services</span>
   </div>
-   <h3 class="section-description">Home Care From Trained Professionals</h3>
-  <div class="services-container">
-    <div *ngFor="let service of services" class="service-item">
-      <i [ngClass]="service.icon" class="service-item-icon"></i>
-      <h3 class="service-item-title">{{ service.title }}</h3>
-      <div class="service-item-description">
+  <h3 class="our-services-description">Home Care From Trained Professionals</h3>
+  <div class="our-services-container">
+    <div *ngFor="let service of services" class="our-services-item">
+      <i [ngClass]="service.icon" class="our-services-item-icon"></i>
+      <h3 class="our-services-item-title">{{ service.title }}</h3>
+      <div class="our-services-item-description">
         <p>{{ service.description }}</p>
       </div>
-
     </div>
   </div>
 </section>
