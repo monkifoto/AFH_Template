@@ -20,11 +20,11 @@ export class ColorAdminComponent implements OnInit {
   @Input() businessId!: string;
 
 
-  defaultThemeFileName = 'assets/themes/styles3.css';
+  defaultThemeFileName = 'assets/themes/default.css';
   availableThemes = [
-    { name: 'Theme 1', fileName: 'styles.css' },
-    { name: 'Theme 2', fileName: 'styles1.css' },
-    { name: 'Theme 3', fileName: 'styles2.css' }
+    { name: 'Helping Hand Style', fileName: 'styles.css' },
+    { name: 'A&E Style', fileName: 'styles1.css' },
+    { name: 'Demo Style', fileName: 'styles2.css' }
     // Add other theme file names here
   ];
 

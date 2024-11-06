@@ -1,4 +1,4 @@
-.services-section {
+.features-section {
   background-color: var(--dark-background-color);
   padding: 50px 0;
   text-align: center;
@@ -7,49 +7,48 @@
   /* height: 1000px; */
 }
 
-.section-title {
+.features-section-title {
 font-size: 2.5em;
   margin-bottom: 15px;
+}
+
+.features-section-title.main {
   color: var(--primary-color);
 }
 
-.section-title-main {
-  color: var(--primary-color);
-}
-
-.section-title-highlight {
+.features-section-title.highlight {
   color: var(--button-color);
 }
 
-.section-description {
+.features-section-description {
   color: var(--primary-color);
   margin-bottom: 40px;
 }
 
-.services-container {
+.features-section-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 }
 
-.service-item {
+.feature-item {
   text-align: center;
   color:  var(--primary-color);
 }
 
-.service-item i {
+.feature-item i {
   font-size: 2em;
   color: var(--accent-color);
   margin-bottom: 10px;
 }
 
-.service-item h3 {
+.feature-item h3 {
   font-size: 1.5em;
   color: var(--accent-color);
   margin-bottom: 10px;
 }
 
-.service-item p {
+.feature-item p {
   color: var(--primary-color);
   font-size: 16px;
 }
@@ -101,11 +100,13 @@ font-size: 2.5em;
 .feature-list-item-title{
   font-weight: bold;
   font-size: 1.5rem;
+  color: var(--dark-background-color);
 }
 
 .feature-list-item-description{
   font-weight: bold;
   font-size: 1rem;
+  color: var(--text-color);
 }
 
 .feature-item:hover {

@@ -1,4 +1,4 @@
-.services-section {
+/* .our-services-section {
   background-color: var(--dark-background-color);
   padding: 50px 0;
   text-align: center;
@@ -6,146 +6,105 @@
   width: 100%;
 }
 
-.section-title-main {
+.our-services-title-main {
   color: var(--primary-color);
 }
 
-.section-title-highlight {
+.our-services-title-highlight {
   color: var(--accent-color);
 }
 
-.section-description {
+.our-services-description {
   color: var(--primary-color);
   margin-bottom: 40px;
 }
-/*
-.services-container {
+
+.our-services-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  text-align: center;
-  justify-content: center;
-
-
+  justify-items: center;
+  align-items: center;
+  width: 100%;
 }
 
-.service-item {
-   max-width: 300px;
-  text-align: center;
-  color: var(--primary-color);
-
-  display: grid;
-
-}
-
-.service-item i {
-  font-size: 2em;
-  color: var(--accent-color);
-  margin-bottom: 10px;
-}
-
-
-.service-item p {
-  color: var(--primary-color);
-  font-size: 16px;
-  max-width: 300px;
-  text-align: center;
-}
- */
-
- .services-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Three equal-width columns */
-  gap: 30px; /* Space between service items */
-  justify-items: center; /* Center items horizontally in each grid cell */
-  align-items: center; /* Center items vertically in each grid cell */
-  width: 100%; /* Full width container */
-}
-
-.service-item {
+.our-services-item {
   display: flex;
-  flex-direction: column; /* Stack the icon, title, and description */
-  align-items: center; /* Center content within each service item */
-  justify-content: center; /* Center the content vertically */
-  text-align: center; /* Ensure text is centered */
-  width: 100%; /* Ensure each service item takes full width of the grid column */
-  max-width: 400px; /* Set a max width for each service item */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
   padding: 20px;
   color: var(--primary-color);
   border-radius: 10px;
 }
 
-.service-item-icon {
-  font-size: 50px; /* Adjust icon size */
-  margin-bottom: 10px; /* Space between icon and title */
+.our-services-item-icon {
+  font-size: 50px;
+  margin-bottom: 10px;
 }
 
-.service-item h3 {
+.our-services-item h3 {
   font-size: 1.5em;
   color: var(--accent-color);
   margin-bottom: 10px;
 }
 
-.service-item i {
+.our-services-item i {
   font-size: 2em;
   color: var(--accent-color);
   margin-bottom: 10px;
 }
 
-
-.service-item p {
+.our-services-item p {
   color: var(--primary-color);
   font-size: 16px;
-  /* max-width: 300px; */
   text-align: center;
 }
 
-.service-item-title {
-
-  margin-bottom: 10px; 
+.our-services-item-title {
+  margin-bottom: 10px;
 }
 
-.service-item-description {
-
-}
+.our-services-item-description {}
 
 
-/* Mobile adjustments */
 @media (max-width: 768px) {
-  .services-container {
+  .our-services-container {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
 
-  .service-item h3 {
+  .our-services-item h3 {
     font-size: 1.2em;
   }
 
-  .service-item p {
+  .our-services-item p {
     font-size: 14px;
   }
 }
 
 @media (max-width: 480px) {
-  .services-container {
+  .our-services-container {
     grid-template-columns: 1fr;
     gap: 20px;
   }
 
-  .service-item {
+  .our-services-item {
     margin-bottom: 20px;
   }
 
-  .service-item h3 {
+  .our-services-item h3 {
     font-size: 1.1em;
   }
 
-  .service-item p {
+  .our-services-item p {
     font-size: 14px;
   }
 
-  .service-item i {
+  .our-services-item i {
     font-size: 1.8em;
   }
-}
-
+} */
