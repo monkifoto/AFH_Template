@@ -481,15 +481,19 @@ font-size: 1.4rem;
   margin-bottom: 20px;
 }
 
+.our-services-title{
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+  font-family: "Cormorant Garamond", serif;
+}
+
+
 .our-services-title.main {
-  font-size: 1.8rem;
-  font-weight: 900;
   color: var(--primary-color);
 }
 
 .our-services-title.highlight {
-  font-size: 1.8rem;
-  font-weight: 900;
   color: var(--accent-color);
 }
 
@@ -576,15 +580,18 @@ font-size: 1.4rem;
   margin-bottom: 20px;
 }
 
+.whychoose-section-title{
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+  font-family: "Cormorant Garamond", serif;
+}
+
 .whychoose-section-title.main {
-  font-size: 1.8rem;
-  font-weight: 900;
   color: var(--text-color);
 }
 
 .whychoose-section-title.highlight {
-  font-size: 1.8rem;
-  font-weight: 900;
    color: var(--accent-color);
 }
 
@@ -671,16 +678,20 @@ font-size: 1.4rem;
   margin-bottom: 30px;
 }
 
+
+.features-section-title{
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+  font-family: "Cormorant Garamond", serif;
+}
+
 .features-section-title.main {
-  font-size: 1.8rem;
-  font-weight: 900;
   color: var(--primary-color);
 }
 
 .features-section-title.highlight {
-  font-size: 1.8rem;
-  font-weight: 900;
-  color: var(--accent-color);
+  color: var(--button-color);
 }
 
 .features-section-description {
@@ -757,10 +768,12 @@ font-size: 1.4rem;
 }
 
 .testimonial-section-heading {
-  font-size: 2.5rem; /* Larger font size for the heading */
-  font-weight: bold; /* Bold text for emphasis */
-  color: var(--primary-color); /* Use your primary color */
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  color: var(--text-color);
+  font-family: "Cormorant Garamond", serif;
 }
+
 
 .testimonial {
   display: flex;
