@@ -1,11 +1,11 @@
-.section-container {
+/* .section-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 50px 0;
   min-height: 600px;
-  background-color: var(--dark-background-color); /* Dark background color */
+  background-color: var(--dark-background-color);
   color: var(--primary-color);
 }
 
@@ -53,7 +53,6 @@
   color: var(--button-text-color);
 }
 
-/* Mobile adjustments */
 @media (max-width: 768px) {
   .consultation-container {
     padding: 20px;
@@ -96,4 +95,4 @@
     padding: 10px;
     font-size: 1rem;
   }
-}
+} */

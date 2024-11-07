@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { from, map, switchMap } from 'rxjs';
 import { Business, HeroImage } from 'src/app/model/business-questions.model';
 import { WebContentService } from 'src/app/services/web-content.service';
-
+import { BusinessDataService } from 'src/app/services/business-data.service';
 @Component({
   selector: 'app-hero-carousel',
   templateUrl: './hero-carousel.component.html',
@@ -11,23 +11,21 @@ import { WebContentService } from 'src/app/services/web-content.service';
 })
 export class HeroCarouselComponent implements OnInit {
   businessId!: string;
-  business!: Business | undefined;
+  business: Business | null= null; ;
   heroImages: HeroImage[] = [];
 
   constructor(private router: Router,
     private route: ActivatedRoute,
-    private webContentService: WebContentService) {}
+    private webContentService: WebContentService,
+    private businessDataService: BusinessDataService) {}
 
   ngOnInit(): void {
 
-    this.route.queryParams.subscribe(params => {
-      this.businessId = params['id'];
-      this.webContentService.getBusinessData(this.businessId).subscribe(data => {
-        if (data) {
-          this.business = data;
-          this.loadHeroImages();
-        }
-      });
+    this.businessDataService.businessData$.subscribe((business) => {
+      this.business = business;
+      if (this.business) {
+        this.loadHeroImages();
+      }
     });
   }
 

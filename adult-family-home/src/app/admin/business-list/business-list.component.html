@@ -1,7 +1,7 @@
 <!-- business-list.component.html -->
 <div class="business-list-container">
   <h2>Business List</h2>
-  <button class="add-business-button" (click)="addNewBusiness()">Add New Business</button>
+  <button ttype="button" class="afhBtn"  (click)="addNewBusiness()">Add New Business</button>
   <label for="toggle-active">Show Active Only</label>
   <input type="checkbox" id="toggle-active" [(ngModel)]="showActiveOnly" (change)="loadBusinesses()" />
   <table class="business-table">
@@ -26,8 +26,8 @@
         <td>{{ business.businessName }}</td>
         <td>{{ business.isActive}}</td>
         <td>
-          <button class="edit-button" (click)="editBusiness(business.id)">Edit</button>
-          <button class="delete-button" (click)="deleteBusiness(business.id)">Delete</button>
+          <button type="button" class="afhBtn"  (click)="editBusiness(business.id)">Edit</button>
+          <button type="button" class="afhBtn"  (click)="deleteBusiness(business.id)">Delete</button>
         </td>
       </tr>
     </tbody>

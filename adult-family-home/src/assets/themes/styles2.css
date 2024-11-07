@@ -127,20 +127,6 @@
   margin-bottom: 20px;
 }
 
-.cta-btn {
-  background-color: #e74c3c;
-  color: #fff;
-  padding: 10px 20px;
-  font-size: 1.1em;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.cta-btn:hover {
-  background-color: #c0392b;
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -162,118 +148,216 @@
 }
 
 /* Contact Info Section */
-.contact-info {
-  margin-top: 2rem;
-}
+/* New CSS for Contact Us Page */
 
-.split-container {
+.hero-contact {
+  background-image: url('/assets/splash2.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  height: 350px;
   display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  text-align: center;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
 }
 
-.left, .right, .left-info, .right-info {
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.7);
+  font-family: 'Playfair Display', serif;
+  text-shadow: 0px 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+.hero-overlay h1 {
+  font-size: 4rem;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 0;
+  padding: 0 15px;
+  text-align: center;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 15px;
+}
+
+/* Contact Information Section */
+.contact-info {
+  background-color: #f1f4f8;
+  padding: 40px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.split-container-info {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.left-info, .right-info {
   flex: 1;
 }
 
+.section-heading {
+  font-size: 2.5rem;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
 .contact-details {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  color: #555;
 }
 
 .contact-item h3 {
-  font-size: 1.2rem;
-  margin-bottom: 0.3rem;
+  font-size: 1.25rem;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 
-.contact-item p {
-  margin: 0;
-}
-
+.contact-item p,
 .contact-item a {
-  color: #0066cc;
+  font-size: 1rem;
+  color: #666;
   text-decoration: none;
+  transition: color 0.2s;
 }
 
 .contact-item a:hover {
-  text-decoration: underline;
+  color: #007BFF;
 }
 
-/* Image Styling */
-.responsive-image img {
-  max-width: 100%;
+.right-image img {
+  width: 100%;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Form Styling */
+/* Contact Form */
+.contact-form {
+  background-color: #ffffff;
+  padding: 30px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+}
+
+.contact-form:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
 .form-group {
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .form-group label {
-  font-weight: bold;
-  margin-bottom: 0.3rem;
-}
-
-.form-group input, .form-group textarea {
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-button[type="submit"] {
-  padding: 0.8rem;
-  background-color: #007bff;
-  color: white;
-  font-size: 1rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button[type="submit"]:disabled {
-  background-color: #ccc;
-}
-
-button[type="submit"]:hover:not(:disabled) {
-  background-color: #0056b3;
-}
-
-/* Modal Styling */
-.modal-content {
-  border-radius: 8px;
-  padding: 1.5rem;
-}
-
-.modal-header, .modal-footer {
-  border: none;
-}
-
-.modal-title {
-  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
   color: #333;
 }
 
-.modal-footer button {
-  padding: 0.6rem 1rem;
-  background-color: #007bff;
-  color: white;
+.form-group input, .form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+.button {
+  background-color: #007BFF;
+  color: #ffffff;
+  padding: 12px 25px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s;
 }
 
-.modal-footer button:hover {
+.button:hover {
   background-color: #0056b3;
 }
 
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .hero-overlay h1 {
+    font-size: 2.5rem;
+  }
 
+  .contact-details {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .split-container-info {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .right-info {
+    margin-left: 0;
+  }
+
+  .contact-item {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .map-section {
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-overlay h1 {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+  }
+
+  .form-group input, .form-group textarea {
+    padding: 10px;
+  }
+
+  .button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+/* ------ END OF CONATCT US PAGE ------*/
 .information-section {
   display: flex;
   justify-content: center;
@@ -710,3 +794,295 @@ button[type="submit"]:hover:not(:disabled) {
   }
 }
 
+
+/*--------------------Home Page Consulation---------------*/
+.section-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+  min-height: 600px;
+  background-color: var(--dark-background-color);
+  color: var(--primary-color);
+}
+
+.section-heading{
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.5em;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+  }
+
+  .section-title-main {
+    color: var(--primary-color);
+  }
+
+  .section-title-highlight {
+    color: var(--button-color);
+  }
+
+.section-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.section-container p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+}
+
+
+
+@media (max-width: 768px) {
+  .consultation-container {
+    padding: 20px;
+    min-height: 400px;
+  }
+
+  .consultation-container h1 {
+    font-size: 2rem;
+  }
+
+  .consultation-container p {
+    font-size: 1rem;
+  }
+  .section-description{
+    padding: 20px;
+  }
+  .btn-book-consultation {
+    padding: 15px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .consultation-container {
+    min-height: 350px;
+    padding: 10px;
+  }
+
+  .consultation-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .consultation-container p {
+    font-size: 0.9rem;
+  }
+  .section-description{
+    padding: 20px;
+  }
+  .btn-book-consultation {
+    padding: 10px;
+    font-size: 1rem;
+  }
+}
+/*-------------------- End of Home Page Consulation---------------*/
+/*-------------------- Home Unique Features Component ------------*/
+.features-section {
+  background-color: var(--dark-background-color);
+  padding: 50px 0;
+  text-align: center;
+  position: relative;
+  width: 100%;
+  /* height: 1000px; */
+}
+
+.features-section-title {
+font-size: 2.5em;
+  margin-bottom: 15px;
+}
+
+.features-section-title.main {
+  color: var(--primary-color);
+}
+
+.features-section-title.highlight {
+  color: var(--button-color);
+}
+
+.features-section-description {
+  color: var(--primary-color);
+  margin-bottom: 40px;
+}
+
+.features-section-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.feature-item {
+  text-align: center;
+  color:  var(--primary-color);
+}
+
+.feature-item i {
+  font-size: 2em;
+  color: var(--accent-color);
+  margin-bottom: 10px;
+}
+
+.feature-item h3 {
+  font-size: 1.5em;
+  color: var(--accent-color);
+  margin-bottom: 10px;
+}
+
+.feature-item p {
+  color: var(--primary-color);
+  font-size: 16px;
+}
+
+.features-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 50px auto;
+  border-radius: 12px;
+}
+
+.features-section {
+  flex: 1 1 100%; /* Ensure each section takes the full width */
+  border-radius: 12px;
+  padding: 50px 20px;
+  /* background-color: var(--background-color); */
+  text-align: center;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.features-section h2 {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.feature-list {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.feature-item {
+  background: var(--primary-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  flex: 1 1 100%; /* Ensures items stack on top of each other */
+  box-sizing: border-box;
+  transition: transform 0.3s;
+  max-width: 100%;
+}
+
+.feature-list-item-title{
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: var(--dark-background-color);
+}
+
+.feature-list-item-description{
+  font-weight: bold;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+.feature-item:hover {
+  transform: translateY(-10px);
+}
+
+.feature-item h3 {
+  font-size: 1.5em;
+  color: var(--text-color);
+  margin: 0;
+}
+
+
+@media (min-width: 1024px) {
+  .feature-item {
+    flex: 1 1 calc(33.333% - 20px); /* Three items per row on desktop */
+    max-width: calc(33.333% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .feature-item {
+    flex: 1 1 calc(50% - 20px); /* Two items per row on tablets */
+    max-width: calc(50% - 20px);
+  }
+
+  .features-section {
+    flex: 1 1 100%;
+    min-width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .feature-item {
+    flex: 1 1 100%; /* One item per row on mobile */
+    max-width: 100%;
+  }
+
+  .features-section {
+    min-width: 100%;
+  }
+}
+
+/*--------------------End Home Unique Features Component ------------*/
+
+
+.cta-btn {
+  background-color: #e74c3c;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cta-btn:hover {
+  background-color: #c0392b;
+}
+
+
+.btn-book-consultation {
+  padding: 20px;
+  background-color: var(--button-color);
+  font-size: 1.4rem;
+  border: none;
+  color: var(--button-text-color);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-book-consultation:hover {
+  background-color: var(--button-hover-color);
+  color: var(--button-text-color);
+}
+
+
+
+/*------ Generic Buttons-----------*/
+.afhBtn {
+  background-color: var(--button-color);
+  color: var(--primary-color);
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.afhBtn:hover {
+  background-color: var(--button-hover-color);
+}
