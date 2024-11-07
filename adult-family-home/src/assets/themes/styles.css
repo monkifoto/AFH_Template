@@ -197,6 +197,184 @@ button:focus, select:focus {
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
+/*------------- CAROUSEL - HERO SECTION-------------*/
+
+
+.carousel-item {
+  display: none;
+  position: relative;
+  width: 100%;
+  transition: transform 0.6s ease-in-out;
+}
+
+.carousel-item.active {
+  display: block;
+}
+
+#heroCarousel {
+  position: relative;
+}
+
+.carousel-item {
+  position: relative;
+  height: 800px;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  top:0px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: rgba(249, 241, 214, 0.1);
+  color:  var(--primary-color);
+  font-family: 'Playfair Display', serif;
+}
+
+.hero-overlay h1 {
+
+padding-top: 200px;
+  font-size: 5rem;
+  letter-spacing: 0.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.business-subtitle{
+  padding: 20px;
+  font-size: 3rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn{
+padding: 20px;
+background-color: var(--button-color);
+font-size: 1.4rem;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 10%;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: solid white;
+  border-width: 0 6px 6px 0;
+}
+
+.carousel-control-prev-icon {
+  transform: rotate(135deg);
+}
+
+.carousel-control-next-icon {
+  transform: rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .hero-overlay h1 {
+    font-size: 2rem;
+  }
+
+  .hero-overlay p {
+    font-size: 1rem;
+  }
+
+  .carousel-item {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-overlay {
+    padding: 10px;
+  }
+
+  .hero-overlay h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-overlay p {
+    font-size: 0.875rem;
+  }
+
+  .carousel-item {
+    height: 200px;
+  }
+}
+.carousel {
+  position: relative;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-size: 100%, 100%;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  display: flex;
+  justify-content: center;
+  padding-left: 0;
+  margin-right: 0;
+  margin-left: 0;
+  list-style: none;
+}
+
+.carousel-indicators [data-bs-target] {
+  box-sizing: content-box;
+  flex: 0 1 auto;
+  width: 50px;
+  height: 5px;
+  margin-right: 3px;
+  margin-left: 3px;
+  text-indent: -999px;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-clip: padding-box;
+  border: 0;
+  border-radius: 0;
+}
+
+.carousel-indicators .active {
+  background-color: #fff;
+}
+
+/*------------- CAROUSEL - HERO SECTION-------------*/
+
 /* ----- Home Page -----*/
 
 .container {
@@ -365,7 +543,7 @@ button:focus, select:focus {
   text-align: center;
 }
 
-.hero-overlay {
+/* .hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -378,8 +556,8 @@ button:focus, select:focus {
   background: rgba(0, 0, 0, 0.5);
   color:  var(--primary-color);
   font-family: 'Playfair Display', serif;
-}
-
+} */
+/*
 .hero-overlay h1 {
   font-size: 5rem;
   letter-spacing: 0.3rem;
@@ -392,7 +570,7 @@ button:focus, select:focus {
 .hero-subtitle{
   font-size: 2rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
+} */
 
 
 .container {
@@ -648,7 +826,7 @@ section {
   color:  var(--primary-color);
   text-align: center;
 }
-
+/*
 .hero-overlay {
   position: absolute;
   top: 0;
@@ -684,7 +862,7 @@ section {
   margin: 0 auto;
   padding: 20px;
 }
-
+ */
 
 
 .contact-info {
@@ -1569,3 +1747,271 @@ font-size: 2.5em;
 .afhBtn:hover {
   background-color: var(--button-hover-color);
 }
+/*------------ Why Choose Us Componet-------------*/
+.whychoose-section {
+  background-color: var(--background-color);
+  padding: 50px 0;
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+
+.whychoose-section-title {
+font-size: 2.5em;
+  margin-bottom: 15px;
+}
+
+.whychoose-section-title.main {
+  color: var(--dark-background-color);
+}
+
+.whychoose-section-title.highlight {
+  color: var(--button-color);
+}
+
+.whychoose-section-description {
+  color: var(--primary-color);
+  margin-bottom: 40px;
+}
+
+.whychoose-section-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.whychoose-item {
+  text-align: center;
+  color:  var(--primary-color);
+}
+
+.whychoose-item i {
+  font-size: 2em;
+  color: var(--accent-color);
+  margin-bottom: 10px;
+}
+
+.whychoose-item h3 {
+  font-size: 1.5em;
+  color: var(--accent-color);
+  margin-bottom: 10px;
+}
+
+.whychoose-item p {
+  color: var(--primary-color);
+  font-size: 16px;
+}
+
+.whychoose-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 50px auto;
+  border-radius: 12px;
+}
+
+.whychoose-section {
+  flex: 1 1 100%;
+  border-radius: 12px;
+  padding: 50px 20px;
+
+  text-align: center;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.whychoose-section h2 {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.whychoose-list {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.whychoose-item {
+  background: var(--primary-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  transition: transform 0.3s;
+  max-width: 100%;
+}
+
+.whychoose-list-item-title{
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: var(--dark-background-color);
+}
+
+.whychoose-list-item-description{
+  font-weight: bold;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+.whychoose-item:hover {
+  transform: translateY(-10px);
+}
+
+.whychoose-item h3 {
+  font-size: 1.5em;
+  color: var(--text-color);
+  margin: 0;
+}
+
+
+@media (min-width: 1024px) {
+  .whychoose-item {
+    flex: 1 1 calc(33.333% - 20px);
+    max-width: calc(33.333% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .whychoose-item {
+    flex: 1 1 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+
+  .whychoose-section {
+    flex: 1 1 100%;
+    min-width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .whychoose-item {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .whychoose-section {
+    min-width: 100%;
+  }
+}
+
+/*------------ END Why Choose Us Componet-------------*/
+
+/* ---------------- Welcome Component -----------------*/
+/* Desktop Styles */
+.welcome-info-container {
+  position: relative;
+  width: 100%;
+  min-height: 600px; /* Set a minimum height */
+  background-color: var(--background-color);
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.welcome-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.welcome-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.brand-name {
+  color: var(--button-color);
+}
+
+.welcome-content h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1.2; /* Add line-height for better readability */
+}
+
+.welcome-content p {
+  margin-top: 20px;
+  font-size: 1.2rem;
+}
+
+.buttons {
+  margin-top: 30px;
+  padding: 20px;
+}
+
+.contact-btn {
+  padding: 10px 20px;
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  font-size: 1.4rem;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .welcome-info-container {
+    min-height:500px;
+    padding: 20px;
+  }
+
+  .welcome-content {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    padding: 20px;
+  }
+
+  .welcome-content h1 {
+    font-size: 2rem; /* Reduce font size for mobile */
+    line-height: 1.3;
+  }
+
+  .welcome-content p {
+    font-size: 1rem; /* Reduce font size for mobile */
+    margin-top: 15px;
+  }
+
+  .buttons {
+    margin-top: 20px;
+  }
+
+  .contact-btn {
+    font-size: 1.2rem; /* Reduce button font size */
+    padding: 8px 16px;
+  }
+}
+
+/* Extra small devices (max-width: 480px) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.6rem; /* Further reduce font size */
+  }
+
+  p {
+    font-size: 0.9rem; /* Further reduce font size */
+  }
+
+  .buttons {
+    margin-top: 15px;
+  }
+
+  .contact-btn {
+    font-size: 1rem; /* Reduce button font size for extra small screens */
+    padding: 6px 14px;
+  }
+}
+
+/* ---------------- END Welcome Component -----------------*/
