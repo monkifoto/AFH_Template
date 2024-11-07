@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MetaService } from 'src/app/services/meta-service.service';
 import { Modal } from 'bootstrap';
+import { BusinessDataService } from 'src/app/services/business-data.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { Modal } from 'bootstrap';
 })
 export class ContactUsComponent  implements OnInit{
 
-  business!: Business;
+  business: Business | null = null;
 
   formData = {
     name: '',
@@ -26,20 +27,20 @@ export class ContactUsComponent  implements OnInit{
   modalMessage: string = '';
   responseModal!: Modal; // Modal instance
 
-  constructor(private webContent: WebContentService, private route: ActivatedRoute,private http: HttpClient,  private metaService: MetaService){}
+  constructor( private businessDataService: BusinessDataService,
+    private webContent: WebContentService,
+    private route: ActivatedRoute,private http: HttpClient,
+      private metaService: MetaService){}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      let businessId = params['id'];
+    this.businessDataService.businessData$.subscribe((business) => {
+      this.business = business;
 
-      this.metaService.getMetaData(businessId).subscribe((metaData: { title: string; description: string; keywords: string; }) => {
-        this.metaService.updateMetaTags(metaData);
-      });
-
-      this.webContent.getBusinessData(businessId).subscribe(data => {
-        if(data)
-        this.business = data;
-      });
+      if (business?.id) {
+        this.metaService.getMetaData(business.id).subscribe((metaData: { title: string; description: string; keywords: string }) => {
+          this.metaService.updateMetaTags(metaData);
+        });
+      }
     });
   }
 

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { WebContentService } from 'src/app/services/web-content.service';
 import { Business } from 'src/app/model/business-questions.model';
 import { MetaService } from 'src/app/services/meta-service.service';
+import { BusinessDataService } from 'src/app/services/business-data.service';
 
 @Component({
   selector: 'app-photo-gallery',
@@ -14,31 +15,28 @@ export class PhotoGalleryComponent implements OnInit {
   @Input()
   businessId!: string;
   images!: any[];
-  business!: Business;
+  business: Business | null = null;
   selectedImageUrl: string | null = null;
 
   constructor(
+    private businessDataService: BusinessDataService,
     private route: ActivatedRoute,
     private webContent: WebContentService,
     private metaService: MetaService,
     private router: Router){}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.businessId = params['id'];
-      this.loadImages();
+    this.businessDataService.businessData$.subscribe((business) => {
+      this.business = business;
 
-      this.metaService.getMetaData(this.businessId).subscribe((metaData: { title: string; description: string; keywords: string; }) => {
-        this.metaService.updateMetaTags(metaData);
-      });
-
-      this.webContent.getBusinessData(this.businessId).subscribe(data => {
-        if(data)
-        this.business = data;
-      });
-
+      if (business?.id) {
+        this.businessId = business.id;
+        this.metaService.getMetaData(business.id).subscribe((metaData: { title: string; description: string; keywords: string }) => {
+          this.metaService.updateMetaTags(metaData);
+          this.loadImages();
+        });
+      }
     });
-
   }
 
   loadImages(): void {
@@ -70,7 +68,8 @@ export class PhotoGalleryComponent implements OnInit {
   }
 
 
-  navigateToContact(id: string|null|undefined) {
+  navigateToContact(id: string | null | undefined) {
+    //console.log('navigateToContact id', id);
     this.router.navigate(['/contact-us'], { queryParams: { id } });
   }
 

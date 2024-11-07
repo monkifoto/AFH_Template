@@ -3,7 +3,7 @@ import { WebContentService } from 'src/app/services/web-content.service';
 import { Business } from 'src/app/model/business-questions.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MetaService } from 'src/app/services/meta-service.service';
-import { BusinessDataService } from 'src/app/services/business-data.service'; // Import BusinessDataService
+import { BusinessDataService } from 'src/app/services/business-data.service';
 
 @Component({
   selector: 'app-about-us',
@@ -11,7 +11,7 @@ import { BusinessDataService } from 'src/app/services/business-data.service'; //
   styleUrls: ['./about-us.component.css']
 })
 export class AboutUsComponent implements OnInit {
-  business: Business | null = null; // Keep business as Business | null
+  business: Business | null = null; 
   businessId: string = '';
 
   constructor(
@@ -19,7 +19,7 @@ export class AboutUsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private metaService: MetaService,
-    private businessDataService: BusinessDataService // Inject BusinessDataService
+    private businessDataService: BusinessDataService
   ) {}
 
   navigateToContact(id: string | null | undefined) {

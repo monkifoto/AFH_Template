@@ -5,7 +5,7 @@
    <div class="carousel-indicators">
     <button
       *ngFor="let image of heroImages; let i = index"
-      type="button"
+      type="button" class="afhBtn"
       data-bs-target="#heroCarousel"
       [attr.data-bs-slide-to]="i"
       [class.active]="i === 0"
@@ -27,7 +27,7 @@
         <div class="business-subtitle garamond"> <br/>
           <p>{{ business.tagline }}</p>
         </div>
-        <button class="action-btn" (click)="navigateToContact(businessId)"> Book Consultation </button>
+        <button type="button" class="afhBtn"  (click)="navigateToContact(businessId)"> Book Consultation </button>
       </div>
 
     </div>

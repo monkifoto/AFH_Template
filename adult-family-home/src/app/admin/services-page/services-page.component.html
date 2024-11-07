@@ -9,13 +9,13 @@
   </div>
 
   <!-- Button to Add Service -->
-  <button type="button" (click)="addService()">Add Service</button>
+  <button type="button" class="afhBtn"  (click)="addService()">Add Service</button>
 </div>
 
 <!-- Display the list of added services -->
 <ul formArrayName="services">
   <li *ngFor="let service of services.controls; let i = index">
-    <button type="button" (click)="removeService(i)">X</button> &nbsp;
+    <button type="button" class="afhBtn"  (click)="removeService(i)">X</button> &nbsp;
     <strong>{{ service.get('name')?.value }}</strong>
   </li>
 </ul>
@@ -28,13 +28,13 @@
   </div>
 
   <!-- Button to Add Service -->
-  <button type="button" (click)="addBenefit()">Add Benefit</button>
+  <button type="button" class="afhBtn"  (click)="addBenefit()">Add Benefit</button>
 </div>
 
 <!-- Display the list of added services -->
 <ul formArrayName="benefits">
   <li *ngFor="let benefit of benefits.controls; let i = index">
-    <button type="button" (click)="removeBenefit(i)">X</button> &nbsp;
+    <button type="button" class="afhBtn"  (click)="removeBenefit(i)">X</button> &nbsp;
     <strong>{{ benefit.get('name')?.value }}</strong>
   </li>
 </ul>
