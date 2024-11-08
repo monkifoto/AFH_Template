@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
-import { Observable } from 'rxjs';
-import { map, finalize } from 'rxjs/operators';
-import { Business } from '../model/business-questions.model';
+import { Observable,of } from 'rxjs';
+import { map,switchMap, finalize } from 'rxjs/operators';
+import { Business, Theme } from '../model/business-questions.model';
 
 @Injectable({
   providedIn: 'root'
@@ -60,27 +60,53 @@ export class BusinessService {
 
 
   getBusinessData(businessId: string | null | undefined): Observable<Business | undefined> {
-
-    //console.log("Get Business Data businessId", businessId);
     const resolvedBusinessId = businessId && businessId.trim() ? businessId : this.defaultBusinessId;
 
-
-    //console.log("Get Business Data resolvedBusinessId", resolvedBusinessId);
-
     return this.afs.collection('businesses').doc<Business>(resolvedBusinessId).snapshotChanges().pipe(
-      map(action => {
+      switchMap(action => {
         const data = action.payload.data();
         const docId = action.payload.id;
-        if (data) {
-          // Remove the existing id property if present
-          const { id: _, ...rest } = data;
-          return { id: docId, ...rest };
+
+        if (!data) {
+          return of(undefined);
         }
-       // console.log("Get business Data:", data);
-        return undefined;
+
+        const { id: _, ...rest } = data;
+        const businessData = { id: docId, ...rest } as Business;
+
+        // Define default theme data
+        const defaultTheme: Theme ={
+          themeFileName: 'styles.css',
+          primaryColor: '#fffaf2',
+          secondaryColor: '#f8f3f0',
+          accentColor: '#F0C987',
+          backgroundColor: '#F5F3E7',
+          darkBackgroundColor: '#4C6A56',
+          textColor: '#2F2F2F',
+          navBackgroundColor: '#F5F3E7',
+          navTextColor: '#33372C',
+          navActiveBackground: '#33372C',
+          navActiveText: '#ffffff',
+          buttonColor: '#D9A064',
+          buttonHoverColor: '#c9605b',
+          themeType:'demo',
+        };
+
+        const themeDocRef = this.afs.collection(`businesses/${docId}/theme`).doc<Theme>('themeDoc');
+        return themeDocRef.snapshotChanges().pipe(
+          map(themeAction => {
+            const themeData = (themeAction.payload.data() || defaultTheme) as Theme;
+
+            // Ensure themeData matches the Theme interface
+            businessData.theme = themeData;
+
+            return businessData;
+          })
+        );
       })
     );
   }
+
 
   // Update an existing business
   updateBusiness(id: string, business: Partial<Business>): Promise<void> {

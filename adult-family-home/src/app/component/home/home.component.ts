@@ -13,6 +13,9 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 export class HomeComponent implements OnInit {
   business: Business = {
     // Provide default values for the properties if needed
+    businessData:[],
+     heroImages:[],
+      logoText:'',
     businessName: '',
     businessURL: '',
     providerName: '',
@@ -75,10 +78,10 @@ export class HomeComponent implements OnInit {
       navActiveText: '',
       buttonColor: '',
       buttonHoverColor: '',
+      themeType:''
     },
   };
   business$ = this.businessDataService.businessData$;
-  layoutType: 'undefined' | 'hh' | 'ae' = 'undefined';
 
   constructor(
     private webContent: WebContentService,
@@ -104,12 +107,6 @@ export class HomeComponent implements OnInit {
           console.log('Home comonent businessDataService data:', data);
           if (data) {
             this.business = data;
-          }
-
-          if (businessId === 'vfCMoPjAu2ROVBbKvk0D') {
-            this.layoutType = 'hh';
-          } else if (businessId === 'UiSDf9elSjwcbQs2HZb1') {
-            this.layoutType = 'ae';
           }
         });
     });

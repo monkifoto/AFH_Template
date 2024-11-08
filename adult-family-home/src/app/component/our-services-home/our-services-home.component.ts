@@ -9,4 +9,5 @@ import { Component, Input } from '@angular/core';
 
 export class OurServicesHomeComponent {
   @Input() services!: { icon: string, title: string, description: string }[];
+  @Input() layoutType: string = 'demo';
 }

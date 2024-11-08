@@ -10,6 +10,7 @@ import { WebContentService } from 'src/app/services/web-content.service';
 })
 export class WhyUsComponent {
  @Input() whyChooseUs!: {  name: string, description: string }[];
+ @Input() layoutType: string = 'demo';
   business!: Business;
 
   constructor(private webContent: WebContentService, private route: ActivatedRoute){}
