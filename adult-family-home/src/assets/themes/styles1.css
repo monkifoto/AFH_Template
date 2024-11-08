@@ -379,67 +379,57 @@ font-size: 1.4rem;
 
 /* --------------Welcome Component ---------------------*/
 
-
-.welcome-info-container {
-  position: relative;
-  width: 100%;
-  height: 100vh; /* Full height for overlay */
-  background: url('your-background-image.jpg') no-repeat center center/cover; /* Example background */
+.welcome-section {
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  gap: 100px;
 }
 
-.welcome-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+.text-content {
+  flex: 1;
+  max-width: 600px;
+  text-align: left;
+}
+
+.image-content {
+  flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
-.welcome-content {
-  color: white;
-  text-align: center;
-}
-
-.welcome-info-card {
-  max-width: 600px;
-  margin: 50px auto; /* Center the card */
-  padding: 20px;
-  border: 1px solid #ccc;
+.image-content img {
+  max-width: 100%;
+  height: auto;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: white; /* Card background */
+  max-height: 600px;
 }
 
-.card-header {
-  margin-bottom: 20px;
+h3 {
+  font-size: 1.5rem;
+  color: #666;
 }
 
-.card-body {
-  margin-bottom: 20px;
+.brand-name {
+  font-style: italic;
+  color: var(--button-color);
 }
 
-.card-footer {
-  text-align: center;
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
 }
 
-.afhBtn {
-  background-color: #007bff; /* Button color */
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
+p {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+  margin: 1rem 0;
 }
 
-.afhBtn:hover {
-  background-color: #0056b3; /* Darker shade on hover */
-}
 
-/*
+
 .welcome-info-container {
   position: relative;
   background-color: var(--background-color);
@@ -450,7 +440,7 @@ font-size: 1.4rem;
   text-align: center;
   min-height: 800px;
 }
-
+/*
 .welcome-overlay {
   padding: 40px 20px;
   color: var(--text-color);
@@ -490,7 +480,7 @@ font-size: 1.4rem;
   margin: 15px 0 30px;
   line-height: 1.5;
 }
-
+*/
 .buttons {
   display: flex;
   justify-content: center;
@@ -523,7 +513,7 @@ font-size: 1.4rem;
   .content p {
     font-size: 0.9rem;
   }
-} */
+}
 
 
 /* --------------End Welcome Component ---------------------*/
