@@ -108,7 +108,7 @@ export class HomeComponent implements OnInit {
 
           if (businessId === 'vfCMoPjAu2ROVBbKvk0D') {
             this.layoutType = 'hh';
-          } else if (businessId === '2') {
+          } else if (businessId === 'UiSDf9elSjwcbQs2HZb1') {
             this.layoutType = 'ae';
           }
         });
