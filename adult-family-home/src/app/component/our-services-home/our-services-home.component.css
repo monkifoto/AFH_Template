@@ -123,90 +123,106 @@
   margin: 0 auto;
 }
 
-/* Card Styles */
-.our-services-card {
-  background-color: var(--primary-color);
-  color: var(--text-color);
-  border-radius: 20px;
-  padding: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
+
+/* Main section styling */
+.modern-services-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 50px;
+  background-color: var(--dark-background-color);
+  gap: 20px;
+}
+
+/* Left side: Services content */
+.services-content {
+  flex: 1;
+  max-width: 50%;
+}
+
+.services-heading {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.services-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between; /* Distributes content evenly */
-  width: 350px;
-  height: 350px; /* Fixed height for uniform card dimensions */
-  box-sizing: border-box;
+  gap: 20px;
 }
 
-.our-services-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
-}
-
-/* Icon Styles */
-.our-services-icon {
-  font-size: 50px;
-  color: var(--accent-color);
-  margin-bottom: 15px;
-}
-
-/* Text Styles */
-.our-services-item-title {
-  font-size: 1.6rem;
-  margin-bottom: 15px;
-  color: var(--accent-color);
-}
-
-.our-services-item-description {
-  font-size: 1rem;
-  color: var(--text-color);
-  line-height: 1.6;
-  text-align: center;
-  flex-grow: 1; /* Allows the description to expand if needed */
+.service-item {
   display: flex;
-  align-items: center; /* Center text vertically */
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 1.2rem;
+  color: var(--background-color);
+  border-bottom: 1px solid var(--primary-color);
+  cursor: pointer;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .our-services-section-heading {
-    font-size: 2rem;
-  }
-  .our-services-card {
-    height: 300px; /* Adjusted height for smaller screens */
-  }
-
-  .our-services-description {
-    font-size: 1.1rem;
-  }
-
-  .our-services-item-title {
-    font-size: 1.4rem;
-  }
-
-  .our-services-item-description {
-    font-size: 0.95rem;
-  }
+.service-description {
+  padding: 15px;
+  font-size: 1rem;
+  color: var(--background-color);
+  background-color: var(--dark-background-color);
+  border-left: 3px solid var(--accent-color);
+  margin: 10px 0;
+  transition: max-height 0.3s ease-in-out;
+}
+.service-title {
+  font-weight: 500;
+  font-style: 3rem;
 }
 
-@media (max-width: 480px) {
-  .our-services-section-heading {
-    font-size: 1.8rem;
-  }
-  .our-services-card {
-    height: 280px; /* Smaller height for mobile view */
-  }
-  .our-services-description {
-    font-size: 1rem;
-  }
-
-  .our-services-item-title {
-    font-size: 1.3rem;
-  }
-
-  .our-services-item-description {
-    font-size: 0.9rem;
-  }
+.service-expand {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
+
+/* Right side: Images */
+.services-images {
+  flex: 1;
+  position: relative;
+  max-width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-large {
+  width: 90%; /* Adjusted to make it smaller */
+  height: 550px; /* Set a fixed height to remove extra space */
+  position: relative;
+  z-index: 1;
+  overflow: hidden; /* Ensures image stays within bounds */
+  padding-bottom: 20%;
+
+}
+
+.image-small {
+  width: 60%; /* Adjusted to make it smaller */
+  height: 350px; /* Set a fixed height to remove extra space */
+  position: absolute;
+  top: 70%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  overflow: hidden; /* Ensures image stays within bounds */
+  padding-left: 10%;
+
+}
+
+/* Ensure images fit within containers without stretching */
+.image-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Keeps the image aspect ratio */
+  border-radius: 15px;
+}
+
+
+

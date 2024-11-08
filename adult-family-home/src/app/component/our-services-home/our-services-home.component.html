@@ -19,24 +19,34 @@
 </ng-container>
 
 <ng-container *ngSwitchCase="'ae'">
-  <section class="our-services-section">
-    <div class="our-services-section-heading">
-      <span class="our-services-title main">Our </span>
-      <span class="our-services-title highlight">Services</span>
+  <section class="modern-services-section">
+    <div class="services-content">
+      <div class="our-services-section-heading">
+        <span class="our-services-title main">Our </span>
+        <span class="our-services-title highlight">Services</span>
+      </div>
+      <div class="services-list">
+        <div *ngFor="let service of services; let i = index"  (click)="toggleService(i)">
+          <div class="service-item">
+          <span class="service-title">{{ service.title }}</span>
+          <span class="service-expand">{{ expandedServiceIndex === i ? '-' : '+' }}</span>
+        </div>
+        <div *ngIf="expandedServiceIndex === i" class="service-description">
+          <p>{{ service.description }}</p>
+        </div>
+      </div>
+      </div>
     </div>
-    <h3 class="our-services-description">Home Care From Trained Professionals</h3>
-    <div class="our-services-grid">
-      <div *ngFor="let service of services" class="our-services-card">
-        <div class="our-services-icon">
-          <i [ngClass]="service.icon" class="our-services-item-icon"></i>
-        </div>
-        <div class="our-services-content">
-          <h3 class="our-services-item-title">{{ service.title }}</h3>
-          <p class="our-services-item-description">{{ service.description }}</p>
-        </div>
+    <div class="services-images">
+      <div class="image-placeholder image-large">
+        <img src="../../../assets/sharedAssets/istockphoto-1551967154-2048x2048.jpg" alt="Welcome Image" />
+      </div>
+      <div class="image-placeholder image-small">
+        <img src="../../../assets/sharedAssets/istockphoto-1097353864-2048x2048.jpg" alt="Welcome Image" />
       </div>
     </div>
   </section>
+
 
 </ng-container>
 </div>
