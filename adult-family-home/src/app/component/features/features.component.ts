@@ -14,5 +14,6 @@ export class FeaturesComponent {
 
   constructor(private webContent: WebContentService, private route: ActivatedRoute){}
   @Input() uniqueService!: {  name: string, description: string }[];
+  @Input() layoutType: string = 'demo';
 
 }

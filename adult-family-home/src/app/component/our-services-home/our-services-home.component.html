@@ -1,3 +1,5 @@
+<div [ngSwitch]="layoutType">
+  <ng-container *ngSwitchCase="'hh'">
 <section class="our-services-section">
   <div class="our-services-section-heading">
     <span class="our-services-title main">Our </span>
@@ -14,3 +16,28 @@
     </div>
   </div>
 </section>
+</ng-container>
+
+<ng-container *ngSwitchCase="'ae'">
+  <section class="our-services-section">
+    <div class="our-services-section-heading">
+      <span class="our-services-title main">Our </span>
+      <span class="our-services-title highlight">Services</span>
+    </div>
+    <h3 class="our-services-description">Home Care From Trained Professionals</h3>
+    <div class="our-services-grid">
+      <div *ngFor="let service of services" class="our-services-card">
+        <div class="our-services-icon">
+          <i [ngClass]="service.icon" class="our-services-item-icon"></i>
+        </div>
+        <div class="our-services-content">
+          <h3 class="our-services-item-title">{{ service.title }}</h3>
+          <p class="our-services-item-description">{{ service.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</ng-container>
+</div>
+

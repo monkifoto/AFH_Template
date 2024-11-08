@@ -34,7 +34,7 @@ export class FooterComponent implements OnInit {
     // Subscribe to the business data from the BusinessDataService
     this.businessDataService.getBusinessData().subscribe(data => {
       this.business = data;
-      console.log("Footer business: ", this.business);
+      //console.log("Footer business: ", this.business);
     });
 
     // Subscribe to get the businessId from the BusinessDataService

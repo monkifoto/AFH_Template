@@ -1,9 +1,9 @@
 
 <app-hero-carousel></app-hero-carousel>
 
-<app-welcome [welcomeMsg]="business.welcomeMessage" [keyServicesHighlights]="business.keyServicesHighlights" [businessName]="business.businessName" [businessId]="business.id" [layoutType]="layoutType" ></app-welcome>
+<app-welcome [welcomeMsg]="business.welcomeMessage" [keyServicesHighlights]="business.keyServicesHighlights" [businessName]="business.businessName" [businessId]="business.id" [layoutType]="business.theme.themeType" ></app-welcome>
 
-<app-our-services-home
+<app-our-services-home [layoutType]="business.theme.themeType"
   [services]="[
     { icon: 'fas fa-heart', title: 'Mobility Assistance', description: 'Hands On, Stand by Assist.' },
     { icon: 'fas fa-users', title: 'Companionship Care', description: '24 hours care and close supervision.' },
@@ -14,11 +14,11 @@
   ]">
 </app-our-services-home>
 
-<app-why-us [whyChooseUs]='business.whyChoose'></app-why-us>
+<app-why-us [whyChooseUs]='business.whyChoose' [layoutType]="business.theme.themeType"></app-why-us>
 
-<app-features [uniqueService]='business.uniqueService'></app-features>
+<app-features [uniqueService]='business.uniqueService' [layoutType]="business.theme.themeType"></app-features>
 
-<app-testimonials [testimonials]='business.testimonials'></app-testimonials>
+<app-testimonials [testimonials]='business.testimonials' [layoutType]="business.theme.themeType"></app-testimonials>
 
-<app-consultation [id]='business.id'></app-consultation>
+<app-consultation [id]='business.id' [layoutType]="business.theme.themeType"></app-consultation>
 

@@ -1,15 +1,17 @@
 export interface Business {
+  businessData: {};
+  [x: string]: {};
   id: string;
   businessName: string;
   providerName: string;
   businessURL: string;
   keyWords: string;
-  tagline?: string;
+  tagline: string;
   uniqueService: ListItem[];
   whyChoose: ListItem[];
   businessStory: string;
   isActive: boolean;
-  heroImages?: string[];
+  heroImages: string[];
   motivation: string;
   missionImageUrl:string;
   mission: string;
@@ -21,18 +23,18 @@ export interface Business {
   tours: string;
   freeConsulting: string;
   websiteGoals: string;
-  logoImage?: string;
-  logoText?: string;
+  logoImage: string;
+  logoText: string;
   ownerImagesBios: string;
   staffImagesBios: string;
-  facilityImages?: string[];
-  lifestyleImages?: string[];
+  facilityImages: string[];
+  lifestyleImages: string[];
   mediaFeatures: string;
   ratings: string;
-  testimonials?: Testimonial[];
+  testimonials: Testimonial[];
   address: string;
   phone: string;
-  fax?: string;
+  fax: string;
   email: string;
   businessHours: string;
   socialMedia: string;
@@ -51,7 +53,7 @@ export interface Business {
   photoGalleryText: string;
 
   //Employyes
-  employees?: Employee[];
+  employees: Employee[];
 
 
 
@@ -72,6 +74,7 @@ export interface Business {
     navActiveText: string;
     buttonColor: string;
     buttonHoverColor: string;
+    themeType: string;
   };
 
 }
@@ -109,10 +112,33 @@ export interface HeroImage {
   altText?: string; // Optional field for image alt text
 }
 
+export interface Theme {
+  themeFileName?: string;
+  backgroundColor: string;
+  primaryColor: string;
+  secondaryColor: string;
+  textColor: string;
+  accentColor: string;
+  darkBackgroundColor: string;
+  navTextColor:string;
+  navBackgroundColor: string;
+  navActiveBackground: string;
+  navActiveText:string;
+  buttonColor: string;
+  buttonHoverColor: string;
+
+  themeType: string;
+}
+
 
 export class BusinessModel {
   static getDefaultBusiness(): Business {
     return {
+      heroImages:[''],
+      businessData:'',
+      logoText:'',
+      facilityImages:[''],
+      lifestyleImages:[''],
       id: '',
       faqs: '',
       blogNews: '',
@@ -388,6 +414,7 @@ export class BusinessModel {
         navActiveText: '#ffffff',
         buttonColor: '#D9A064',
         buttonHoverColor: '#c9605b',
+        themeType:'demo',
       },
     };
   }

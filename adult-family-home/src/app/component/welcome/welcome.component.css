@@ -1,4 +1,4 @@
-/* .welcome-info-container {
+.welcome-info-container {
   position: relative;
   width: 100%;
   min-height: 600px;
@@ -9,6 +9,9 @@
   justify-content: center;
   padding: 20px;
 }
+
+
+/*--------------------hh---------------------*/
 
 .welcome-overlay {
   position: absolute;
@@ -106,4 +109,55 @@
     font-size: 1rem;
     padding: 6px 14px;
   }
-} */
+}
+
+/*------------ ae --------------*/
+
+.welcome-section {
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  gap: 100px;
+}
+
+.text-content {
+  flex: 1;
+  max-width: 600px;
+  text-align: left;
+}
+
+.image-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.image-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  max-height: 600px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: #666;
+}
+
+.brand-name {
+  font-style: italic;
+  color: var(--button-color);
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+p {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+  margin: 1rem 0;
+}

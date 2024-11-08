@@ -12,7 +12,7 @@ export class WelcomeComponent {
   @Input() keyServicesHighlights!: string;
   @Input() businessName!: string;
   @Input() businessId!: string;
-  @Input() layoutType: 'undefined' | 'hh' | 'ae' = 'undefined';
+  @Input() layoutType: string = 'demo';
 
   constructor(private router: Router) {}
 

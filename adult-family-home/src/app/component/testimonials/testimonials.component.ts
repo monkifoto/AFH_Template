@@ -8,4 +8,5 @@ import { Testimonial } from 'src/app/model/business-questions.model';
 })
 export class TestimonialsComponent {
   @Input() testimonials!: Testimonial[] | undefined;
+  @Input() layoutType: string = 'demo';
 }
