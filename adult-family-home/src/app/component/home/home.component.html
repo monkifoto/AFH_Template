@@ -1,5 +1,5 @@
 
-<app-hero-carousel></app-hero-carousel>
+<app-hero-carousel [layoutType]="business.theme.themeType"></app-hero-carousel>
 
 <app-welcome [welcomeMsg]="business.welcomeMessage" [keyServicesHighlights]="business.keyServicesHighlights" [businessName]="business.businessName" [businessId]="business.id" [layoutType]="business.theme.themeType" ></app-welcome>
 
@@ -14,7 +14,7 @@
   ]">
 </app-our-services-home>
 
-<app-why-us [whyChooseUs]='business.whyChoose' [layoutType]="business.theme.themeType"></app-why-us>
+<app-why-us [whyChooseUs]='business.whyChoose' [layoutType]="business.theme.themeType"  [businessName]="business.businessName"></app-why-us>
 
 <app-features [uniqueService]='business.uniqueService' [layoutType]="business.theme.themeType"></app-features>
 

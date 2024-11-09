@@ -2,14 +2,14 @@
 <div [ngSwitch]="layoutType">
   <ng-container *ngSwitchCase="'hh'">
 <section class="testimonial-comp">
-  <div class="testimonial-heading">
-    <div class="testimonial-section-heading">Testimonials</div>
+  <div class="testimonial-section-heading">
+    <span class="testimonial-section-title main">Testimonials</span>
   </div>
   <div class="testimonial">
     <div class="testimonial-container" *ngFor="let testimonial of testimonials">
-      <div class="testimonial-image">
+      <!-- <div class="testimonial-image">
         <img src="{{ testimonial.photoURL }}" alt="{{ testimonial.name }}" />
-      </div>
+      </div> -->
       <div>
         <div class="testimonial-content garamond">
           <div class="">
@@ -25,15 +25,19 @@
 
 
   <ng-container *ngSwitchCase="'ae'">
-    <section class="testimonial-comp">
-      <div class="testimonial-heading">
-        <h2 class="testimonial-section-heading">Testimonials</h2>
+    <section class="ae-testimonial-comp">
+      <div class="ae-testimonial-heading">
+        <h2 class="ae-testimonial-section-heading">Word of mouth</h2>
+        <p class="ae-testimonial-subheading">You should hear what people have to say about us</p>
       </div>
-      <div class="testimonial-grid">
-        <div class="testimonial-card" *ngFor="let testimonial of testimonials">
-          <div class="testimonial-content garamond">
-            <p class="testimonial-quote">"{{ testimonial.quote }}"</p>
-            <p class="testimonial-author"><strong>{{ testimonial.name }}</strong></p>
+
+      <div class="ae-testimonial-container">
+        <div class="ae-testimonial-grid">
+          <div class="ae-testimonial-card" *ngFor="let testimonial of testimonials">
+            <div class="ae-testimonial-content">
+              <p class="ae-testimonial-quote">{{ testimonial.quote }}</p>
+              <p class="ae-testimonial-author">{{ testimonial.name }}</p>
+            </div>
           </div>
         </div>
       </div>
