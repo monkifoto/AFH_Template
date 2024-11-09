@@ -1,4 +1,5 @@
-
+<div [ngSwitch]="layoutType">
+  <ng-container *ngSwitchCase="'hh'">
 <footer class="footer">
   <div class="footer-content">
     <h2 class="footer-title">{{business?.businessName}}</h2>
@@ -23,6 +24,45 @@
     </div>
   </div>
 </footer>
+</ng-container>
+
+<ng-container *ngSwitchCase="'ae'">
+  <footer class="ae-footer">
+    <div class="ae-footer-content">
+      <h2 class="ae-footer-title">{{ business?.businessName }}</h2>
+      <hr class="ae-footer-divider" />
+
+      <div class="footer-info">
+        <!-- Location Column -->
+        <div class="ae-footer-column">
+          <h3 class="ae-footer-column-title">Location:</h3>
+          <address>{{ business?.address }}</address>
+        </div>
+
+        <!-- Provider Column -->
+        <div class="ae-footer-column">
+          <h3 class="ae-footer-column-title">Provider: </h3>{{ business?.providerName }}
+          <p>Email: <a href="mailto:{{ business?.email }}">{{ business?.email }}</a></p>
+          <p>Phone: <a href="tel:+{{ business?.phone }}">{{ business?.phone }}</a></p>
+        </div>
+
+        <!-- Schedule Visit Button -->
+        <div class="ae-footer-column">
+          <button class="afhBtn garamond">Schedule a Visit</button>
+        </div>
+      </div>
+
+      <div class="ae-footer-bottom">
+        <p>© {{ 2024 }} {{ business?.businessName }}. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</ng-container>
+</div>
+
+
+
 <div *ngIf="isAuthenticated$ | async" class="footer-theme-file">
   <h1 class="debugger-title">Debugger:</h1>
   <div class="debugger-info">

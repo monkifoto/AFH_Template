@@ -23,7 +23,9 @@ export class HeroCarouselComponent implements OnInit {
 
     this.businessDataService.businessData$.subscribe((business) => {
       this.business = business;
+      this.businessId = this.business?.id || '';
       if (this.business) {
+        console.log("Hero Section busines id:", this.business.id);
         this.loadHeroImages();
       }
     });
@@ -48,7 +50,7 @@ export class HeroCarouselComponent implements OnInit {
         //console.log("Number of images: ",this.heroImages.length);
 
         this.heroImages.forEach(element => {
-         // console.log(element.altText);
+         console.log(element.url);
 
         });
       });
