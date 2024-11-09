@@ -19,30 +19,30 @@
 </ng-container>
 
 <ng-container *ngSwitchCase="'ae'">
-  <section class="modern-services-section">
-    <div class="our-services-container">
-    <div class="services-content">
-      <div class="our-services-section-heading">
-        <span class="our-services-title main">Our </span>
-        <span class="our-services-title highlight">Services</span>
+  <section class="ae-modern-services-section">
+    <div class="ae-our-services-container">
+    <div class="ae-services-content">
+      <div class="ae-our-services-section-heading">
+        <span class="ae-our-services-title main">Our </span>
+        <span class="ae-our-services-title highlight">Services</span>
       </div>
-      <div class="services-list">
+      <div class="ae-services-list">
         <div *ngFor="let service of services; let i = index"  (click)="toggleService(i)">
-          <div class="service-item">
-          <span class="service-title">{{ service.title }}</span>
-          <span class="service-expand">{{ expandedServiceIndex === i ? '-' : '+' }}</span>
+          <div class="ae-service-item">
+          <span class="ae-service-title">{{ service.title }}</span>
+          <span class="ae-service-expand">{{ expandedServiceIndex === i ? '-' : '+' }}</span>
         </div>
-        <div *ngIf="expandedServiceIndex === i" class="service-description">
+        <div *ngIf="expandedServiceIndex === i" class="ae-service-description">
           <p>{{ service.description }}</p>
         </div>
       </div>
       </div>
     </div>
-    <div class="services-images">
-      <div class="image-placeholder image-large">
+    <div class="ae-services-images">
+      <div class="ae-image-placeholder ae-image-large">
         <img src="../../../assets/sharedAssets/istockphoto-1551967154-2048x2048.jpg" alt="Welcome Image" />
       </div>
-      <div class="image-placeholder image-small">
+      <div class="ae-image-placeholder ae-image-small">
         <img src="../../../assets/sharedAssets/istockphoto-1097353864-2048x2048.jpg" alt="Welcome Image" />
       </div>
     </div>

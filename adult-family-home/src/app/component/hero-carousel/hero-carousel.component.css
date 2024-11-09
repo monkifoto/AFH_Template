@@ -1,4 +1,4 @@
-/*
+
 .carousel-item {
   display: none;
   position: relative;
@@ -37,7 +37,6 @@
   flex-direction: column;
   background: rgba(249, 241, 214, 0.1);
   color:  var(--primary-color);
-  font-family: 'Playfair Display', serif;
 }
 
 .hero-overlay h1 {
@@ -170,4 +169,65 @@ font-size: 1.4rem;
 
 .carousel-indicators .active {
   background-color: #fff;
-} */
+}
+/*--------------------Carousel AE ----------------*/
+.ae-hero-section {
+  position: relative;
+  width: 100%;
+  height: 90vh;
+  overflow: hidden;
+}
+
+.carousel-item {
+  position: relative;
+  height: 90vh;
+}
+
+.ae-carousel-item img {
+  width: 100%;
+  height: 90vh;
+  object-fit: cover;
+}
+
+.ae-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.0));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the left */
+  justify-content: center;
+  color: white;
+  padding-left: 10%; /* Add some padding to align text from the left */
+}
+
+.ae-carousel-caption {
+  text-align: left; /* Align text to the left */
+}
+
+.ae-h1 {
+  font-size: 4rem;
+  line-height: 1.2;
+  margin-bottom: 10px;
+  position: absolute;
+  top:55%;
+  text-align: left;
+}
+
+.ae-business-subtitle p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  position: absolute;
+  top:70%;
+  left: 10%;
+}
+
+.afhBtn{
+  position: absolute;
+  top:75%;
+  left: 10%;
+}
+

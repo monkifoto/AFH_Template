@@ -13,6 +13,7 @@ export class HeroCarouselComponent implements OnInit {
   businessId!: string;
   business: Business | null= null; ;
   heroImages: HeroImage[] = [];
+  @Input() layoutType: string = 'demo';
 
   constructor(private router: Router,
     private route: ActivatedRoute,

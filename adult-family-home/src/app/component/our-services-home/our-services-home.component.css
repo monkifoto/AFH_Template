@@ -31,6 +31,7 @@
   justify-items: center;
   align-items: center;
   width: 100%;
+  margin: 0 auto;
 }
 
 .our-services-item {
@@ -73,8 +74,6 @@
   margin-bottom: 10px;
 }
 
-.our-services-item-description {}
-
 
 @media (max-width: 768px) {
   .our-services-container {
@@ -116,14 +115,15 @@
 /* New CSS for the updated layout */
 
 /* Main section styling */
-.modern-services-section {
+.ae-modern-services-section {
   display: flex;
   justify-content: center;
   justify-items: center;
   background-color: var(--dark-background-color);
+  padding: 10rem 0;
 }
 
-.our-services-container{
+.ae-our-services-container{
 flex: 1;
   max-width: 1400px;
   display: flex;
@@ -135,25 +135,39 @@ flex: 1;
 }
 
 /* Left side: Services content */
-.services-content {
+.ae-services-content {
   flex: 1;
   max-width: 50%;
 }
 
-.services-heading {
+.ae-services-heading {
   font-size: 3rem;
   font-weight: bold;
   color: var(--primary-color);
   margin-bottom: 20px;
 }
 
-.services-list {
+
+.ae-our-services-title {
+  font-size: 2.5em;
+    margin-bottom: 15px;
+  }
+
+.ae-our-services-title.main {
+  color: var(--primary-color);
+}
+
+.ae-our-services-title.highlight {
+  color: var(--accent-color);
+}
+
+.ae-services-list {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.service-item {
+.ae-service-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -164,7 +178,7 @@ flex: 1;
   cursor: pointer;
 }
 
-.service-description {
+.ae-service-description {
   padding: 15px;
   font-size: 1rem;
   color: var(--background-color);
@@ -173,18 +187,18 @@ flex: 1;
   margin: 10px 0;
   transition: max-height 0.3s ease-in-out;
 }
-.service-title {
+.ae-service-title {
   font-weight: 500;
   font-style: 3rem;
 }
 
-.service-expand {
+.ae-service-expand {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
 /* Right side: Images */
-.services-images {
+.ae-services-images {
   flex: 1;
   position: relative;
   max-width: 50%;
@@ -193,7 +207,7 @@ flex: 1;
   justify-content: center;
 }
 
-.image-large {
+.ae-image-large {
   width: 90%; /* Adjusted to make it smaller */
   height: 550px; /* Set a fixed height to remove extra space */
   position: relative;
@@ -203,7 +217,7 @@ flex: 1;
 
 }
 
-.image-small {
+.ae-image-small {
   width: 60%; /* Adjusted to make it smaller */
   height: 350px; /* Set a fixed height to remove extra space */
   position: absolute;
@@ -217,7 +231,7 @@ flex: 1;
 }
 
 /* Ensure images fit within containers without stretching */
-.image-placeholder img {
+.ae-image-placeholder img {
   width: 100%;
   height: 100%;
   object-fit: cover; /* Keeps the image aspect ratio */
