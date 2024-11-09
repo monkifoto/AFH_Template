@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class ConsultationComponent  {
  @Input() id: string | null = null;
  @Input() layoutType: string = 'demo';
+ @Input() businessName!: string;
 
   constructor(private router: Router) {}
 

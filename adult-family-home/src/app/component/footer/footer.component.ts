@@ -6,6 +6,7 @@ import { Business } from '../../model/business-questions.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ThemeService } from 'src/app/services/theme-service.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -18,17 +19,24 @@ export class FooterComponent implements OnInit {
   isAdmin = false;
   isAuthenticated$: Observable<boolean> | undefined;
   themeFileName?: string;
+  layoutType?: string = 'demo';
 
   constructor(
     private route: ActivatedRoute,
     private webContentService: WebContentService,
     private authService: AuthService,
     private themeService : ThemeService,
-    private businessDataService: BusinessDataService
+    private businessDataService: BusinessDataService,
+    private router: Router
   ) {
 
   }
 
+  navigateToIntakeForm() {
+    this.router.navigate(['/resident-form'], {
+      queryParams: { id: this.businessId },
+    });
+  }
 
   ngOnInit(): void {
     // Subscribe to the business data from the BusinessDataService
@@ -41,6 +49,7 @@ export class FooterComponent implements OnInit {
     this.businessDataService.getBusinessId().subscribe(businessId => {
       if (businessId) {
         this.businessId = businessId;
+        this.layoutType = this.business?.theme.themeType;
 
         // Load the theme information based on the businessId
         this.themeService.getBusinessTheme(this.businessId).subscribe(tf => {

@@ -7,6 +7,7 @@ import { ContactUsComponent } from './component/contact-us/contact-us.component'
 import { PhotoGalleryComponent } from './component/photo-gallery/photo-gallery.component';
 import { authGuard } from './auth.guard';
 import { LoginComponent } from './admin/login/login.component';
+import { ResidentIntakeFormComponent } from './component/resident-intake-form/resident-intake-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'gallery', component: PhotoGalleryComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'resident-form', component: ResidentIntakeFormComponent},
 
 
     // Admin routes (must come before the dynamic :id route to avoid conflicts)

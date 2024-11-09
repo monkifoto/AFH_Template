@@ -6,11 +6,16 @@
   width: 100%;
 }
 
-.our-services-title-main {
+.our-services-title {
+  font-size: 2.5em;
+    margin-bottom: 15px;
+  }
+
+.our-services-title.main {
   color: var(--primary-color);
 }
 
-.our-services-title-highlight {
+.our-services-title.highlight {
   color: var(--accent-color);
 }
 
@@ -68,8 +73,8 @@
   margin-bottom: 10px;
 }
 
-.our-services-item-description {
-}
+.our-services-item-description {}
+
 
 @media (max-width: 768px) {
   .our-services-container {
@@ -108,24 +113,19 @@
     font-size: 1.8em;
   }
 }
-
 /* New CSS for the updated layout */
-
-/* Grid Layout */
-.our-services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 100px;
-  justify-items: center;
-  align-items: start;
-  padding: 0 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
 
 /* Main section styling */
 .modern-services-section {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  background-color: var(--dark-background-color);
+}
+
+.our-services-container{
+flex: 1;
+  max-width: 1400px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;

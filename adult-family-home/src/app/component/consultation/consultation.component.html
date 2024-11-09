@@ -1,3 +1,5 @@
+<div [ngSwitch]="layoutType">
+  <ng-container *ngSwitchCase="'hh'">
 <div class="section-container">
   <div class="section-heading">
     <span class="section-title-main">Book a </span>
@@ -7,4 +9,23 @@
     We would love to meet you! Contact us to schedule a tour.
   </p>
   <button type="button" class="afhBtn"  (click)="navigateToContact(id)">Book Consultation</button>
+</div>
+</ng-container>
+
+<ng-container *ngSwitchCase="'ae'">
+  <div class="ae-section-container">
+  <div class="cta-container">
+    <div class="cta-content">
+      <div class="our-services-section-heading">
+        <span class="consultation-title main">Ready to experience </span>
+        <span class="consultation-title highlight">{{ businessName }}?</span>
+      </div>
+      <p>Discover what makes our services unique and tailored to your needs.</p>
+      <div class="cta-buttons">
+        <button class="afhBtn">Schedule a Visit</button>
+      </div>
+    </div>
+  </div>
+</div>
+</ng-container>
 </div>

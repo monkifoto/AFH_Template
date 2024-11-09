@@ -48,6 +48,7 @@ import { ContactUsPageComponent } from './admin/contact-us-page/contact-us-page.
 import { ColorAdminComponent } from './admin/color-admin/color-admin.component';
 import { ThemeInitializerService } from './services/theme-initializer.service';
 import { BusinessDataService } from './services/business-data.service';
+import { ResidentIntakeFormComponent } from './component/resident-intake-form/resident-intake-form.component';
 
 export function themeInitializerFactory(
   themeInitializer: ThemeInitializerService,
@@ -118,7 +119,8 @@ export function initializeBusinessData(
     ServicesPageComponent,
     AboutUsPageComponent,
     ContactUsPageComponent,
-    ColorAdminComponent
+    ColorAdminComponent,
+    ResidentIntakeFormComponent
   ],
   imports: [
     BrowserModule,

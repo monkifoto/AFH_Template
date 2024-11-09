@@ -1,0 +1,207 @@
+<form [formGroup]="intakeForm" (ngSubmit)="onSubmit()">
+  <!-- Personal Information -->
+  <label>
+    Name *
+    <input formControlName="name" placeholder="First and last name" />
+  </label>
+
+  <label>
+    Email *
+    <input formControlName="email" type="email" />
+  </label>
+
+  <label>
+    Phone number *
+    <input formControlName="phoneNumber" />
+  </label>
+
+  <!-- Referral Source -->
+  <label>
+    How did you find out about us? *
+    <select formControlName="referralSource">
+      <option value="google">Google</option>
+      <option value="facebook">Facebook</option>
+      <option value="placementAgency">Placement Agency</option>
+      <option value="friendsFamily">Friends and/or Family</option>
+      <option value="other">Other</option>
+    </select>
+  </label>
+
+  <label>
+    What is your relation to the resident? *
+    <input formControlName="relationToResident" />
+  </label>
+
+  <!-- Resident Information -->
+  <label>
+    Resident's name *
+    <input formControlName="residentName" />
+  </label>
+
+  <label>
+    Age *
+    <input formControlName="age" type="number" />
+  </label>
+
+  <label>
+    Gender *
+    <select formControlName="gender">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="preferNotToSay">Prefer not to say</option>
+      <option value="other">Other</option>
+    </select>
+  </label>
+
+  <!-- Medical History -->
+  <label>
+    Relevant medical and surgical history *
+    <textarea formControlName="medicalHistory"></textarea>
+  </label>
+
+  <label>
+    Height *
+    <input formControlName="height" type="number" />
+  </label>
+
+  <label>
+    Weight *
+    <input formControlName="weight" type="number" />
+  </label>
+
+  <label>
+    Reason for moving to an adult family home *
+    <textarea formControlName="reasonForMoving"></textarea>
+  </label>
+
+  <label>
+    Do you already have an "RN Assessment for AFH"? *
+    <select formControlName="rnAssessment">
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+  </label>
+
+  <!-- Care Levels -->
+  <label>
+    Eating *
+    <select formControlName="eating">
+      <option value="independent">Independent</option>
+      <option value="needingAssistance">Needing Assistance</option>
+      <option value="dependent">Dependent</option>
+    </select>
+  </label>
+
+  <label>
+    Personal Hygiene *
+    <select formControlName="personalHygiene">
+      <option value="independent">Independent</option>
+      <option value="needingAssistance">Needing Assistance</option>
+      <option value="dependent">Dependent</option>
+    </select>
+  </label>
+
+  <label>
+    Bathing *
+    <select formControlName="bathing">
+      <option value="independent">Independent</option>
+      <option value="needingAssistance">Needing Assistance</option>
+      <option value="dependent">Dependent</option>
+    </select>
+  </label>
+
+  <label>
+    Toileting *
+    <select formControlName="toileting">
+      <option value="independent">Independent</option>
+      <option value="needingAssistance">Needing Assistance</option>
+      <option value="dependent">Dependent</option>
+    </select>
+  </label>
+
+  <label>
+    Mobility *
+    <select formControlName="mobility">
+      <option value="independent">Independent</option>
+      <option value="needingAssistance">Needing Assistance</option>
+      <option value="dependent">Dependent</option>
+    </select>
+  </label>
+
+  <label>
+    Transfers *
+    <select formControlName="transfers">
+      <option value="independent">Independent</option>
+      <option value="needingAssistance">Needing Assistance</option>
+      <option value="dependent">Dependent</option>
+    </select>
+  </label>
+
+  <label>
+    Medication Assistance *
+    <select formControlName="medicationAssistance">
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+  </label>
+
+  <!-- Other Medical Information -->
+  <label>
+    Memory Issues *
+    <select formControlName="memoryIssues">
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+  </label>
+
+  <label>
+    Behavior
+    <textarea formControlName="behavior"></textarea>
+  </label>
+
+  <label>
+    Skin Condition
+    <textarea formControlName="skinCondition"></textarea>
+  </label>
+
+  <label>
+    Other information you want us to know
+    <textarea formControlName="additionalInfo"></textarea>
+  </label>
+
+  <!-- Living Situation -->
+  <label>
+    Current living situation *
+    <select formControlName="currentLivingSituation">
+      <option value="ownHome">Own Home</option>
+      <option value="relativesHome">Relative's Home</option>
+      <option value="hospital">Hospital</option>
+      <option value="adultFamilyHome">Adult Family Home</option>
+      <option value="seniorLiving">Senior Living</option>
+      <option value="other">Other</option>
+    </select>
+  </label>
+
+  <!-- Move-In Date -->
+  <label>
+    Target move in date *
+    <input formControlName="targetMoveInDate" type="date" />
+  </label>
+
+  <!-- Disclosure Summary Request -->
+  <label>
+    Would you like a summary of disclosures of our rates and services, including itemized services?
+    <select formControlName="disclosureSummary">
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+  </label>
+
+  <label>
+    Do you have any questions for us?
+    <textarea formControlName="questions"></textarea>
+  </label>
+
+  <!-- Submit Button -->
+  <button type="submit" [disabled]="intakeForm.invalid">Submit</button>
+</form>
