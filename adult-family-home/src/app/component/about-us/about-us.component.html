@@ -1,4 +1,6 @@
 <div *ngIf="business">
+  <div [ngSwitch]="business.theme.themeType">
+    <ng-container *ngSwitchCase="'hh'">
   <div class="hero-about">
     <div class="hero-overlay">
       <h1>About Us</h1>
@@ -46,4 +48,33 @@
       <button class="cta-btn" (click)="navigateToContact(business.id)">Schedule a Visit</button>
     </div>
   </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'ae'">
+      <div class="ae-container">
+        <!-- Main Content Layout -->
+        <div class="ae-content">
+
+          <!-- Left Column: Features -->
+          <div class="ae-features-column">
+
+            <div *ngFor="let feature of business.uniqueService"  class="ae-feature-item">
+              <img src="../../../assets/sharedAssets/icons/bathroom.svg" alt="Non-Toxic" class="ae-icon">
+              <h3>{{feature.name}}</h3>
+              <p>{{feature.description}}</p>
+            </div>
+          </div>
+
+          <!-- Right Column: Overlapping Images and Text -->
+          <div class="ae-image-text-column">
+            <div class="ae-overlapping-images">
+              <img src="../../../assets//sharedAssets/5388429572_df9a403081_k.jpg" alt="Environment Image 1" class="ae-image ae-image-top">
+              <img src="../../../assets//sharedAssets/9676303919_32372bf834_o.jpg" alt="Environment Image 2" class="ae-image ae-image-bottom">
+            </div>
+            <div class="ae-large-text">
+              <h2>Eco-Friendly Products Respecting the Environment</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
 </div>
