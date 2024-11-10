@@ -1,3 +1,4 @@
+
 <div [ngSwitch]="layoutType">
   <ng-container *ngSwitchCase="'hh'">
     <div class="welcome-info-container">
@@ -15,15 +16,15 @@
   </ng-container>
 
   <ng-container *ngSwitchCase="'ae'">
-    <div class="welcome-info-container">
-      <div class="welcome-section">
-        <div class="text-content garamond">
-          <h3>Welcome to <span class="brand-name">{{ businessName }}</span></h3>
+    <div class="ae-welcome-info-container">
+      <div class="ae-welcome-section">
+        <div class="ae-text-content garamond">
+          <h3>Welcome to <span class="ae-brand-name">{{ businessName }}</span></h3>
           <h1>{{ welcomeMsg }}</h1>
           <p>{{ keyServicesHighlights }}</p>
           <button type="button" class="afhBtn" (click)="navigateToContact()">Schedule a Visit</button>
         </div>
-        <div class="image-content">
+        <div class="ae-image-content">
           <img src="../../../assets/sharedAssets/istockphoto-1207318385-2048x2048.jpg" alt="Welcome Image" />
         </div>
       </div>

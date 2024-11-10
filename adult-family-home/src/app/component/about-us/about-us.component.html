@@ -50,11 +50,11 @@
   </div>
     </ng-container>
     <ng-container *ngSwitchCase="'ae'">
-      <div class="ae-container">
-        <!-- Main Content Layout -->
+      <!-- <div class="ae-container">
+
         <div class="ae-content">
 
-          <!-- Left Column: Features -->
+
           <div class="ae-features-column">
 
             <div *ngFor="let feature of business.uniqueService"  class="ae-feature-item">
@@ -64,7 +64,6 @@
             </div>
           </div>
 
-          <!-- Right Column: Overlapping Images and Text -->
           <div class="ae-image-text-column">
             <div class="ae-overlapping-images">
               <img src="../../../assets//sharedAssets/5388429572_df9a403081_k.jpg" alt="Environment Image 1" class="ae-image ae-image-top">
@@ -75,6 +74,32 @@
             </div>
           </div>
         </div>
+      </div> -->
+      <!-- Our Approach Section -->
+<section class="our-approach">
+  <!-- First Row -->
+  <div class="approach-row">
+      <div class="approach-text">
+          <h2>What We Stand For</h2>
+          <p>{{business.mission}}</p>
       </div>
+      <div class="approach-image">
+          <img src="../../../assets//sharedAssets/5388429572_df9a403081_k.jpg"  alt="Therapy session">
+      </div>
+  </div>
+
+  <!-- Second Row -->
+  <div class="approach-row">
+      <div class="approach-image">
+          <img src="../../../assets//sharedAssets/9676303919_32372bf834_o.jpg"  alt="Woman working">
+      </div>
+      <div class="approach-text">
+          <h2>The Future We See</h2>
+          <p>{{business.vision}}</p>
+          <button class="afhBtn">Learn More</button>
+      </div>
+  </div>
+</section>
+
     </ng-container>
 </div>

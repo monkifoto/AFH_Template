@@ -1,7 +1,6 @@
 .welcome-info-container {
   position: relative;
   width: 100%;
-  min-height: 600px;
   background-color: var(--background-color);
   color: var(--text-color);
   display: flex;
@@ -113,28 +112,40 @@
 
 /*------------ ae --------------*/
 
-.welcome-section {
+.ae-welcome-info-container {
+  position: relative;
+  width: 100%;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+
+.ae-welcome-section {
   display: flex;
   align-items: center;
   padding: 2rem;
   gap: 100px;
   max-width: 1400px;
-  margin: 10rem;
+  margin: 0 auto;
 }
 
-.text-content {
+.ae-text-content {
   flex: 1;
   max-width: 600px;
   text-align: left;
 }
 
-.image-content {
+.ae-image-content {
   flex: 1;
   display: flex;
   justify-content: center;
 }
 
-.image-content img {
+.ae-image-content img {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
@@ -146,7 +157,7 @@ h3 {
   color: #666;
 }
 
-.brand-name {
+.ae-brand-name {
   font-style: italic;
   color: var(--button-color);
 }
