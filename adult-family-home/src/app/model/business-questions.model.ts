@@ -103,6 +103,7 @@ export interface BenefitItem{
 }
 
 export interface ListItem{
+  iconURL?:string;
   name:string;
   description: string;
 }

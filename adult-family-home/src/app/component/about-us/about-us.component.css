@@ -280,107 +280,69 @@ section {
   background-color: var(--button-hover-color);
 }
 /*------------------------- AE---------------------------*/
+/* CSS for Our Approach Section */
 
-
-
-.ae-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 40px;
-}
-
-.ae-content {
+.our-approach {
   display: flex;
-  gap: 40px;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Left Column: Features */
-.ae-features-column {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+.approach-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+  margin: 4rem 0;
 }
 
-.ae-feature-item {
-  text-align: center;
+.approach-text, .approach-image {
+  flex: 1 1 40%;
 }
 
-.ae-icon {
-  width: 50px;
-  height: 50px;
-  margin-bottom: 10px;
+.approach-text h2 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: var(--accent-color);
 }
 
-.ae-feature-item h3 {
-  font-size: 1.1rem;
-  color: #333;
-  margin: 10px 0;
+.approach-text p {
+
+  line-height: 1.6;
+  color:var(--text-color);
+  padding: 20px;
 }
 
-.ae-feature-item p {
-  font-size: 0.9rem;
-  color: #666;
-}
-
-/* Right Column: Images and Text */
-.ae-image-text-column {
-  flex: 1;
-  position: relative;
-}
-
-.ae-overlapping-images {
-  position: relative;
-  margin-bottom: 20px;
-}
-
-.ae-image {
+.approach-image img {
   width: 100%;
   height: auto;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
 }
 
-.ae-image-top {
-  position: relative;
-  z-index: 2;
-  margin-bottom: -20%; /* Adjust overlap amount */
+.learn-more-btn {
+  background-color: #d49a89;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
 }
 
-.ae-image-bottom {
-  position: absolute;
-  top: 20%; /* Adjust overlap amount */
-  left: 10%;
-  z-index: 1;
+.learn-more-btn:hover {
+  background-color: #c38773;
 }
 
-.ae-large-text {
-  text-align: center;
-  margin-top: 80px;
-}
-
-.ae-large-text h2 {
-  font-size: 2rem;
-  color: #222;
-  font-weight: normal;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .ae-content {
-    flex-direction: column;
-  }
-
-  .ae-overlapping-images {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .ae-image-bottom {
-    position: relative;
-    top: 0;
-    left: 0;
-    margin-top: -20px;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .approach-row {
+      flex-direction: column;
+      text-align: center;
   }
 }

@@ -1,8 +1,10 @@
 
 <app-hero-carousel [layoutType]="business.theme.themeType"></app-hero-carousel>
 
+<div class="content-wrapper">
 <app-welcome [welcomeMsg]="business.welcomeMessage" [keyServicesHighlights]="business.keyServicesHighlights" [businessName]="business.businessName" [businessId]="business.id" [layoutType]="business.theme.themeType" ></app-welcome>
-
+</div>
+<div class="content-wrapper">
 <app-our-services-home [layoutType]="business.theme.themeType"
   [services]="[
     { icon: 'fas fa-heart', title: 'Mobility Assistance', description: 'Hands On, Stand by Assist.' },
@@ -13,12 +15,16 @@
     { icon: 'fas fa-briefcase-medical', title: 'Medical Care', description: 'All the necessary care for Aging In Place. Able to provide a High Level of Care, including Diabetic Care.' }
   ]">
 </app-our-services-home>
-
+</div>
+<div class="content-wrapper">
 <app-why-us [whyChooseUs]='business.whyChoose' [layoutType]="business.theme.themeType"  [businessName]="business.businessName"></app-why-us>
-
+</div>
+<div class="content-wrapper">
 <app-features [uniqueService]='business.uniqueService' [layoutType]="business.theme.themeType"></app-features>
-
+</div>
+<div class="content-wrapper">
 <app-testimonials [testimonials]='business.testimonials' [layoutType]="business.theme.themeType"></app-testimonials>
-
+</div>
+<div class="content-wrapper">
 <app-consultation [id]='business.id' [layoutType]="business.theme.themeType" [businessName]="business.businessName"></app-consultation>
-
+</div>

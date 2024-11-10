@@ -61,7 +61,8 @@
 
 /* Navbar styling */
 .navbar_ {
-  background-color: var(--nav-background-color);
+  /*background-color: var(--nav-background-color);*/
+  background: transparent;
   width: 100%;
   top: 0;
   left: 0;
