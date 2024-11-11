@@ -14,6 +14,7 @@ export class NavigationComponent implements OnInit {
   business: Business | null = null;
   menuActive: boolean = false;
   menuOpen: boolean = false;
+  layoutType?: string = 'demo';
 
   constructor(
     private route: ActivatedRoute,
@@ -28,12 +29,15 @@ export class NavigationComponent implements OnInit {
         this.businessId = businessId;
         this.businessDataService.getBusinessData().subscribe((data) => {
           this.business = data;
+          this.layoutType = this.business?.theme.themeType;
           console.log("Navigation Logo", this.business?.logoImage);
           console.log("Navigation ID", this.business?.id);
         });
       }
     });
   }
+
+
 
 
   navigateTo(page: string): void {

@@ -9,6 +9,15 @@
   margin: 0 auto;
 }
 
+.ae-navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  height: 100px;
+  margin: 0 auto;
+}
+
 /* Logo styling */
 .logo {
   display: flex;

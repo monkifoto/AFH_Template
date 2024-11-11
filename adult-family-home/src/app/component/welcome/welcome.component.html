@@ -4,9 +4,9 @@
     <div class="welcome-info-container">
       <div class="welcome-overlay">
         <div class="welcome-content garamond">
-          <h3>We Are <span class="brand-name">{{businessName}}</span></h3>
-          <h1>{{welcomeMsg}}</h1>
-          <p>{{keyServicesHighlights}}</p>
+          <h3>We Are <span class="brand-name">{{business.businessName}}</span></h3>
+          <h1>{{business.welcomeMessage}}</h1>
+          <p>{{business.keyServicesHighlights}}</p>
           <div class="buttons">
             <button type="button" class="afhBtn" (click)="navigateToContact()">Contact Us</button>
           </div>
@@ -16,11 +16,14 @@
   </ng-container>
 
   <ng-container *ngSwitchCase="'ae'">
-    <div class="ae-welcome-info-container">
+    <div class="content-wrapper">
+      <app-center-text [title]="'Who We Are'" [content]="business.businessStory"></app-center-text>
+    </div>
+    <img src="../../../assets/sharedAssets/icons//mobilityAssistance.svg">
+    <!-- <div class="ae-welcome-info-container">
       <div class="ae-welcome-section">
         <div class="ae-text-content garamond">
-          <h3>Welcome to <span class="ae-brand-name">{{ businessName }}</span></h3>
-          <h1>{{ welcomeMsg }}</h1>
+          <h2>Welcome to <span class="ae-brand-name">{{ businessName }}</span></h2>
           <p>{{ keyServicesHighlights }}</p>
           <button type="button" class="afhBtn" (click)="navigateToContact()">Schedule a Visit</button>
         </div>
@@ -28,6 +31,6 @@
           <img src="../../../assets/sharedAssets/istockphoto-1207318385-2048x2048.jpg" alt="Welcome Image" />
         </div>
       </div>
-    </div>
+    </div> -->
   </ng-container>
 </div>

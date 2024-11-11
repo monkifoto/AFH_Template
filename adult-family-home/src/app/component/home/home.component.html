@@ -2,7 +2,7 @@
 <app-hero-carousel [layoutType]="business.theme.themeType"></app-hero-carousel>
 
 <div class="content-wrapper">
-<app-welcome [welcomeMsg]="business.welcomeMessage" [keyServicesHighlights]="business.keyServicesHighlights" [businessName]="business.businessName" [businessId]="business.id" [layoutType]="business.theme.themeType" ></app-welcome>
+<app-welcome  [layoutType]="business.theme.themeType"  [business]="business"></app-welcome>
 </div>
 <div class="content-wrapper">
 <app-our-services-home [layoutType]="business.theme.themeType"

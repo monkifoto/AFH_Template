@@ -1,4 +1,4 @@
-import { Business } from './../../model/business-questions.model';
+import { Business } from 'src/app/model/business-questions.model';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,17 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./welcome.component.css'],
 })
 export class WelcomeComponent {
-  @Input() welcomeMsg!: string;
-  @Input() keyServicesHighlights!: string;
-  @Input() businessName!: string;
-  @Input() businessId!: string;
   @Input() layoutType: string = 'demo';
+  @Input() business!: Business;
 
   constructor(private router: Router) {}
 
   navigateToContact() {
     this.router.navigate(['/contact-us'], {
-      queryParams: { id: this.businessId },
+      queryParams: { id: this.business['businessId'] },
     });
   }
 }
