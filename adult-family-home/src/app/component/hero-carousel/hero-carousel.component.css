@@ -209,7 +209,7 @@ font-size: 1.4rem;
 }
 
 .ae-h1 {
-  font-size: 4rem;
+  /* font-size: 4rem; */
   line-height: 1.2;
   margin-bottom: 10px;
   position: absolute;
@@ -218,11 +218,17 @@ font-size: 1.4rem;
 }
 
 .ae-business-subtitle p {
-  font-size: 1.2rem;
+  font-size: 1.7rem;
   margin-bottom: 20px;
   position: absolute;
-  top:70%;
+  top:75%;
   left: 10%;
+  color:var(--primary-color);
+}
+
+.ae-brand-name {
+  font-style: italic;
+  color: var(--button-color);
 }
 
 .afhBtn{

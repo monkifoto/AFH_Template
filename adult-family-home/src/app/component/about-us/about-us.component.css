@@ -231,6 +231,7 @@ section {
   background-color:  var(--primary-color);
   z-index: 0;
   transform: translateY(-50%);
+
 }
 
 .styled-heading:after {
@@ -282,12 +283,14 @@ section {
 /*------------------------- AE---------------------------*/
 /* CSS for Our Approach Section */
 
+
+
 .our-approach {
   display: flex;
   flex-direction: column;
   gap: 3rem;
   padding: 2rem;
-  max-width: 1200px;
+  max-width: calc(var(--cell-max-width) * 24); /* Sets max width based on 24 columns */
   margin: 0 auto;
 }
 
@@ -297,16 +300,39 @@ section {
   align-items: center;
   gap: 2rem;
   margin: 4rem 0;
+  padding: 2rem 0; /* Add padding for breathing room above and below */
 }
+
+.approach-text, .approach-image {
+  flex: 1;
+  max-width: calc(var(--cell-max-width) * 12); /* Each half takes 12 columns */
+}
+
+.approach-text {
+  padding: 3rem; /* Add space between text and image */
+}
+
+.approach-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
 
 .approach-text, .approach-image {
   flex: 1 1 40%;
 }
 
 .approach-text h2 {
-  font-size: 3rem;
+    font-family: "adonis-web", serif;
+font-weight: 400;
+font-style: normal;
+  /* font-size: 3rem; */
   margin-bottom: 2rem;
   color: var(--accent-color);
+  font-size: calc((4 - 1) * 1.2vw + 1rem);
+  /* font-size: 4rem; */
 }
 
 .approach-text p {
@@ -314,6 +340,7 @@ section {
   line-height: 1.6;
   color:var(--text-color);
   padding: 20px;
+  font-size: calc(2 * 1rem);
 }
 
 .approach-image img {

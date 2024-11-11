@@ -49,6 +49,7 @@ import { ColorAdminComponent } from './admin/color-admin/color-admin.component';
 import { ThemeInitializerService } from './services/theme-initializer.service';
 import { BusinessDataService } from './services/business-data.service';
 import { ResidentIntakeFormComponent } from './component/resident-intake-form/resident-intake-form.component';
+import { CenterTextComponent } from './component/center-text/center-text.component';
 
 export function themeInitializerFactory(
   themeInitializer: ThemeInitializerService,
@@ -120,7 +121,8 @@ export function initializeBusinessData(
     AboutUsPageComponent,
     ContactUsPageComponent,
     ColorAdminComponent,
-    ResidentIntakeFormComponent
+    ResidentIntakeFormComponent,
+    CenterTextComponent
   ],
   imports: [
     BrowserModule,
