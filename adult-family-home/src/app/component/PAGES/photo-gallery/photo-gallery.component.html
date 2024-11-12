@@ -1,4 +1,6 @@
 <div *ngIf="business">
+  <div [ngSwitch]="layoutType">
+    <ng-container *ngSwitchCase="'hh'">
   <div class="hero-contact">
     <div class="hero-overlay">
       <h1>Our Home</h1>
@@ -24,7 +26,27 @@
         </div>
       </div>
     </section>
+
+    <div class="cta-section about-cta">
+      <div class="cta-content">
+        <h2>Come Meet Our Family</h2>
+        <p>We’d love to meet you! Schedule a visit and see firsthand how our caring environment feels like home.</p>
+        <button type="button" class="afhBtn"  (click)="navigateToContact(business?.id)">Schedule a Visit</button>
+      </div>
+    </div>
   </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'ae'">
+      <section class="gallery">
+        <div class="section-heading">Explore Our Gallery</div>
+        <div class="gallery-grid gallery-container">
+          <div *ngFor="let image of images" class="gallery-item" (click)="onImageClick(image.url)">
+            <img [src]="image.url" alt="Gallery Image">
+          </div>
+        </div>
+      </section>
+    </ng-container>
 
   <app-image-viewer-modal
     *ngIf="selectedImageUrl"
@@ -33,10 +55,4 @@
   </app-image-viewer-modal>
 </div>
 
-<div class="cta-section about-cta">
-  <div class="cta-content">
-    <h2>Come Meet Our Family</h2>
-    <p>We’d love to meet you! Schedule a visit and see firsthand how our caring environment feels like home.</p>
-    <button type="button" class="afhBtn"  (click)="navigateToContact(business?.id)">Schedule a Visit</button>
-  </div>
-</div>
+

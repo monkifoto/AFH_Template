@@ -1,5 +1,5 @@
 .hero-about {
-  background: url('../../../assets/sharedAssets/istockphoto-1207318385-2048x2048.jpg') no-repeat center center/cover;
+  background: url('../../../../assets/sharedAssets/istockphoto-1207318385-2048x2048.jpg') no-repeat center center/cover;
   background-size: cover;
   background-position: center;
   position: relative;

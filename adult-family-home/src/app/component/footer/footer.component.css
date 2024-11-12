@@ -69,11 +69,12 @@
   background-color: var(--background-color);
   padding: 20px;
   color: var(--text-color);
+  max-width: calc(var(--site-max-width) * 24); /* Sets max width based on 24 columns */
 }
 
 .ae-footer-content {
-  max-width: calc(var(--cell-max-width) * 24); /* Sets max width based on 24 columns */
   margin: 0 auto;
+  max-width: calc(var(--site-max-width) * 24); /* Sets max width based on 24 columns */
 }
 
 .ae-footer-title {
@@ -91,10 +92,11 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  width: 100%;
 }
 
 .ae-footer-column {
-  flex: 1 1 200px;
+  flex: 1 1 400px;
   margin-top: 10px;
 }
 
