@@ -55,6 +55,7 @@ import { LeftTextComponent } from './component/UI/left-text/left-text.component'
 import { ItemListComponent } from './component/UI/item-list/item-list.component';
 import { IconListComponent } from './component/UI/icon-list/icon-list.component';
 import { HeroComponent } from './component/UI/hero/hero.component';
+import { TestimonialImageComponent } from './component/UI/testimonial-image/testimonial-image.component';
 
 export function themeInitializerFactory(
   themeInitializer: ThemeInitializerService,
@@ -132,7 +133,8 @@ export function initializeBusinessData(
     LeftTextComponent,
     ItemListComponent,
     IconListComponent,
-    HeroComponent
+    HeroComponent,
+    TestimonialImageComponent
   ],
   imports: [
     BrowserModule,
