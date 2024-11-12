@@ -18,7 +18,7 @@
 
     <section class="gallery">
       <div class="section-heading">Explore Our Gallery</div>
-      <div class="gallery-grid">
+      <div class="gallery-grid gallery-container">
         <div *ngFor="let image of images" class="gallery-item" (click)="onImageClick(image.url)">
           <img [src]="image.url" alt="Gallery Image">
         </div>

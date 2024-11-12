@@ -1,29 +1,11 @@
 <section class="services-section">
   <h2>Our Services</h2>
   <div class="services-grid">
-      <div class="service-item">
-          <img src="therapy-icon.png" alt="Therapy Icon">
-          <h3>Therapy</h3>
-          <p>It all begins with an idea. Maybe you want to launch a business. Maybe you want to turn a hobby into something more. Or maybe you have a creative project to share with the world. Whatever it is, the way you tell your story online can make all the difference.</p>
-          <p>60 mins | $300</p>
-      </div>
-      <div class="service-item">
-          <img src="psychiatry-icon.png" alt="Psychiatry Icon">
-          <h3>Psychiatry</h3>
-          <p>It all begins with an idea. Maybe you want to launch a business. Maybe you want to turn a hobby into something more. Or maybe you have a creative project to share with the world. Whatever it is, the way you tell your story online can make all the difference.</p>
-          <p>45 mins | $250</p>
-      </div>
-      <div class="service-item">
-          <img src="coaching-icon.png" alt="Coaching Icon">
-          <h3>Coaching</h3>
-          <p>It all begins with an idea. Maybe you want to launch a business. Maybe you want to turn a hobby into something more. Or maybe you have a creative project to share with the world. Whatever it is, the way you tell your story online can make all the difference.</p>
-          <p>50 mins | $200</p>
-      </div>
-      <div class="service-item">
-          <img src="acupuncture-icon.png" alt="Acupuncture Icon">
-          <h3>Acupuncture</h3>
-          <p>It all begins with an idea. Maybe you want to launch a business. Maybe you want to turn a hobby into something more. Or maybe you have a creative project to share with the world. Whatever it is, the way you tell your story online can make all the difference.</p>
-          <p>60 mins | $250</p>
+      <div *ngFor="let service of services" class="service-item">
+        <i [ngClass]="service.icon" class="services-item-icon"></i>
+          <h3>{{service.title}}</h3>
+          <p>{{service.description}}</p>
+          <!-- <p>60 mins | $300</p> -->
       </div>
   </div>
   <button class="afhBtn">Book a consultation</button>

@@ -53,6 +53,8 @@ import { CenterTextComponent } from './component/UI/center-text/center-text.comp
 import { RightTextComponent } from './component/UI/right-text/right-text.component';
 import { LeftTextComponent } from './component/UI/left-text/left-text.component';
 import { ItemListComponent } from './component/UI/item-list/item-list.component';
+import { IconListComponent } from './component/UI/icon-list/icon-list.component';
+import { HeroComponent } from './component/UI/hero/hero.component';
 
 export function themeInitializerFactory(
   themeInitializer: ThemeInitializerService,
@@ -128,7 +130,9 @@ export function initializeBusinessData(
     CenterTextComponent,
     RightTextComponent,
     LeftTextComponent,
-    ItemListComponent
+    ItemListComponent,
+    IconListComponent,
+    HeroComponent
   ],
   imports: [
     BrowserModule,

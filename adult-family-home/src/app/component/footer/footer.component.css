@@ -72,7 +72,7 @@
 }
 
 .ae-footer-content {
-  max-width: 1200px;
+  max-width: calc(var(--cell-max-width) * 24); /* Sets max width based on 24 columns */
   margin: 0 auto;
 }
 
