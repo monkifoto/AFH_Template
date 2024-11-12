@@ -4,6 +4,19 @@
 <div class="content-wrapper">
 <app-welcome  [layoutType]="business.theme.themeType"  [business]="business"></app-welcome>
 </div>
+
+<div class="content-wrapper">
+  <app-right-text [imageURL]="'../../../../assets/sharedAssets/image_fx_ (1).jpg'" [title]="'Our Vision'" [content]="business.vision"></app-right-text>
+  </div>
+  <div class="content-wrapper">
+    <app-left-text [imageURL]="'../../../../assets/sharedAssets/image_fx_ (1).jpg'" [title]="'Our Vision'" [content]="business.vision"></app-left-text>
+    </div>
+
+    <div class="content-wrapper">
+      <app-item-list></app-item-list>
+      </div>
+
+
 <div class="content-wrapper">
 <app-our-services-home [layoutType]="business.theme.themeType"
   [services]="[

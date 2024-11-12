@@ -17,6 +17,8 @@ export class ContactUsComponent  implements OnInit{
 
   business: Business | null = null;
 
+  layoutType: string | undefined = 'demo';
+
   formData = {
     name: '',
     email: '',
@@ -40,6 +42,7 @@ export class ContactUsComponent  implements OnInit{
         this.metaService.getMetaData(business.id).subscribe((metaData: { title: string; description: string; keywords: string }) => {
           this.metaService.updateMetaTags(metaData);
         });
+        this.layoutType = this.business?.theme.themeType;
       }
     });
   }
