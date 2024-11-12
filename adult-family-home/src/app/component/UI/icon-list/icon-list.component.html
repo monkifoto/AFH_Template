@@ -1,0 +1,10 @@
+<div class="services-container">
+  <h2 class="services-title">Our Services</h2>
+  <div class="services-grid">
+    <div class="service-item" *ngFor="let service of services">
+      <i [class]="service.icon" aria-hidden="true"></i>
+      <h3 class="service-title">{{ service.title }}</h3>
+    </div>
+  </div>
+  <button class="afhBtn" routerLink="/services">Learn More</button>
+</div>
