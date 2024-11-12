@@ -17,6 +17,7 @@ export class PhotoGalleryComponent implements OnInit {
   images!: any[];
   business: Business | null = null;
   selectedImageUrl: string | null = null;
+  layoutType: string = 'demo';
 
   constructor(
     private businessDataService: BusinessDataService,
@@ -28,9 +29,10 @@ export class PhotoGalleryComponent implements OnInit {
   ngOnInit(): void {
     this.businessDataService.businessData$.subscribe((business) => {
       this.business = business;
-
+      this.layoutType = business?.theme.themeType || '';
       if (business?.id) {
         this.businessId = business.id;
+
         this.metaService.getMetaData(business.id).subscribe((metaData: { title: string; description: string; keywords: string }) => {
           this.metaService.updateMetaTags(metaData);
           this.loadImages();

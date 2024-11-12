@@ -1,5 +1,6 @@
 .hero-contact {
-  background-image: url("/assets/splash2.jpg");
+  /* background-image: url("../../../../assets/sharedAssets/istockphoto-2032240867-2048x2048") no-repeat center center/cover; */
+  background: url('../../../../assets/sharedAssets/istockphoto-2032240867-2048x2048.jpg') no-repeat center center/cover;
   background-size: cover;
   background-position: center;
   position: relative;
@@ -232,6 +233,7 @@ ul li strong {
   max-width: var(--site-max-width);
   margin: 0 auto;
 }
+
 
 .ae-contact-details,
 .ae-contact-form,

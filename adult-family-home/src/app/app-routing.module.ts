@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './component/home/home.component';
-import { AboutUsComponent } from './component/about-us/about-us.component';
-import { ServicesComponent } from './component/services/services.component';
-import { ContactUsComponent } from './component/contact-us/contact-us.component';
-import { PhotoGalleryComponent } from './component/photo-gallery/photo-gallery.component';
+import { AboutUsComponent } from './component/PAGES/about-us/about-us.component';
+import { ServicesComponent } from './component/PAGES/services/services.component';
+import { ContactUsComponent } from './component/PAGES/contact-us/contact-us.component';
+import { PhotoGalleryComponent } from './component/PAGES/photo-gallery/photo-gallery.component';
 import { authGuard } from './auth.guard';
 import { LoginComponent } from './admin/login/login.component';
-import { ResidentIntakeFormComponent } from './component/resident-intake-form/resident-intake-form.component';
+import { ResidentIntakeFormComponent } from './component/PAGES/resident-intake-form/resident-intake-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },

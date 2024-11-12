@@ -13,7 +13,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { EmployeeComponent } from '../employee/employee.component';
 import { ReviewsComponent } from '../reviews/reviews.component';
 import { ServicesPageComponent } from '../services-page/services-page.component';
-import { AboutUsComponent } from 'src/app/component/about-us/about-us.component';
+import { AboutUsComponent } from 'src/app/component/PAGES/about-us/about-us.component';
 import { AboutUsPageComponent } from '../about-us-page/about-us-page.component';
 
 @Component({
