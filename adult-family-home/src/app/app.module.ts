@@ -49,7 +49,10 @@ import { ColorAdminComponent } from './admin/color-admin/color-admin.component';
 import { ThemeInitializerService } from './services/theme-initializer.service';
 import { BusinessDataService } from './services/business-data.service';
 import { ResidentIntakeFormComponent } from './component/resident-intake-form/resident-intake-form.component';
-import { CenterTextComponent } from './component/center-text/center-text.component';
+import { CenterTextComponent } from './component/UI/center-text/center-text.component';
+import { RightTextComponent } from './component/UI/right-text/right-text.component';
+import { LeftTextComponent } from './component/UI/left-text/left-text.component';
+import { ItemListComponent } from './component/UI/item-list/item-list.component';
 
 export function themeInitializerFactory(
   themeInitializer: ThemeInitializerService,
@@ -122,7 +125,10 @@ export function initializeBusinessData(
     ContactUsPageComponent,
     ColorAdminComponent,
     ResidentIntakeFormComponent,
-    CenterTextComponent
+    CenterTextComponent,
+    RightTextComponent,
+    LeftTextComponent,
+    ItemListComponent
   ],
   imports: [
     BrowserModule,

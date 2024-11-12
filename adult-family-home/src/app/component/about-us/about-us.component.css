@@ -319,7 +319,7 @@ section {
   border-radius: 10px;
 }
 
-
+/*
 .approach-text, .approach-image {
   flex: 1 1 40%;
 }
@@ -328,11 +328,11 @@ section {
     font-family: "adonis-web", serif;
 font-weight: 400;
 font-style: normal;
-  /* font-size: 3rem; */
+
   margin-bottom: 2rem;
   color: var(--accent-color);
   font-size: calc((4 - 1) * 1.2vw + 1rem);
-  /* font-size: 4rem; */
+
 }
 
 .approach-text p {
@@ -341,7 +341,7 @@ font-style: normal;
   color:var(--text-color);
   padding: 20px;
   font-size: calc(2 * 1rem);
-}
+} */
 
 .approach-image img {
   width: 100%;
