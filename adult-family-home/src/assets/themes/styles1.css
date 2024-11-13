@@ -24,10 +24,10 @@
   --border-color:var(--text-color);
   --site-max-width: 1600px;
   --cell-max-width: calc((var(--site-max-width, 1500px) - (11.0px * (24 - 1))) / 24);
-  --large-text-size-value: 1.5;
-  --large-text-size: 1.5rem;
-  --heading-2-size: 4rem;
-  --heading-2-size-value: 4;
+  --large-text-size-value: 1;
+  --large-text-size: 1rem;
+  --heading-2-size: 2rem;
+  --heading-2-size-value: 2;
 }
 
 
@@ -57,16 +57,11 @@ body {
   }
 
   h1{
-    font-family: "Montserrat", sans-serif;
-  }
-
-  h3{
     font-family: "Cormorant Garamond", serif;
-    font-weight: 300;
+    font-weight: 500;
     font-style: normal;
     margin-bottom: 2rem;
-    color: var(--accent-color);
-    font-size: calc(var(--heading-2-size-value) * .5rem);
+    font-size: calc(var(--heading-2-size-value) * 2rem);
   }
 
   h2 {
@@ -75,14 +70,34 @@ body {
     font-style: normal;
     margin-bottom: 2rem;
     color: var(--accent-color);
-    font-size: calc(var(--heading-2-size-value) * 1rem);
+    font-size: calc(var(--heading-2-size-value) * 1.5rem);
   }
 
-   p {
+  h3{
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 300;
+    font-style: normal;
+    margin-bottom: 2rem;
+    color: var(--accent-color);
+    font-size: calc(var(--large-text-size-value) * 1.6rem);
+    line-height: 1.6;
+  }
+
+
+   h4 {
     line-height: 1.6;
     color:var(--text-color);
     padding: 20px;
-    font-size: calc(2 * 1rem);
+    font-size: calc(var(--large-text-size-value) * 1.3rem);
+  }
+
+  p{
+
+      line-height: 1.4;
+      color:var(--text-color);
+      padding: 20px;
+      font-size: calc(var(--large-text-size-value) * 1rem);
+
   }
 
   .garamond{

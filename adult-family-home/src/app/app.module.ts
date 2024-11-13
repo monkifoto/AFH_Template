@@ -57,6 +57,7 @@ import { IconListComponent } from './component/UI/icon-list/icon-list.component'
 import { HeroComponent } from './component/UI/hero/hero.component';
 import { TestimonialImageComponent } from './component/UI/testimonial-image/testimonial-image.component';
 import { CallToActionComponent } from './component/UI/call-to-action/call-to-action.component';
+import { UiTestComponent } from './component/UI/ui-test/ui-test.component';
 
 export function themeInitializerFactory(
   themeInitializer: ThemeInitializerService,
@@ -136,7 +137,8 @@ export function initializeBusinessData(
     IconListComponent,
     HeroComponent,
     TestimonialImageComponent,
-    CallToActionComponent
+    CallToActionComponent,
+    UiTestComponent
   ],
   imports: [
     BrowserModule,
