@@ -1,0 +1,10 @@
+
+  <div class="cta-container" [ngStyle]="{ 'background-color': bgColor, 'color': textColor }">
+    <h2>{{ text }}</h2>
+    <ng-container *ngIf="isButton; else linkTemplate">
+      <button class="cta-button">{{ buttonText }}</button>
+    </ng-container>
+    <ng-template #linkTemplate>
+      <a href="#" class="afhBtn">{{ buttonText }}</a>
+    </ng-template>
+  </div>

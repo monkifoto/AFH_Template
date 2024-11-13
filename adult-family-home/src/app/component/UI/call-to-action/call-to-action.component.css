@@ -1,0 +1,34 @@
+.cta-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  text-align: center;
+  padding-top: 6.6vmax;
+  padding-bottom: 6.6vmax;
+}
+
+.cta-button,
+.cta-link {
+  margin-top: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.cta-button {
+  background-color: #ffffff20; /* semi-transparent white for contrast */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: inherit;
+}
+
+.cta-button:hover {
+  background-color: #ffffff40;
+}
+
+.cta-link {
+  text-decoration: underline;
+}
