@@ -3,6 +3,8 @@
   padding: 2rem;
   background-color: var(--dark-background-color);
   color: var(--primary-color);
+  padding-top: 6.6vmax;
+  padding-bottom: 6.6vmax;
 }
 
 .services-title {
