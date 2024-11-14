@@ -1,28 +1,33 @@
-
-
 .left-text-section {
   display: flex;
   flex-direction: row;
   gap: 3rem;
-  padding: 2rem;
-  max-width: calc(var(--cell-max-width) * 24); /* Sets max width based on 24 columns */
+  padding-left: 5rem;
+  padding-right: 5rem;
+  max-width: calc(var(--cell-max-width) * 24);
   margin: 0 auto;
+  padding-bottom: 6.6vmax;
 }
-
-/* .image-container {
-  flex: 1;
-} */
 
 .text-container, .image-container{
   flex: 1;
-  max-width: calc(var(--cell-max-width) * 11); /* Each half takes 12 columns */
+  max-width: calc(var(--cell-max-width) * 11);
+}
+
+.image-container {
+  width: 100%; /* Container takes full width of its parent */
+  max-width: 300px; /* Define a max width for your square, adjust as needed */
+  aspect-ratio: 1 / 1; /* Ensures the container is a square */
+  overflow: hidden; /* Hides overflow outside the square */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .image-container img {
   width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 10px;
+  height: 100%;
+  object-fit: cover; /* Makes the image cover the container */
 }
 
 .text-container {

@@ -13,6 +13,7 @@
 }
 
 .center-text-description {
-  color: var(--text-color);
+ padding: 0 5rem;
+ padding-bottom: 5rem;
 }
 

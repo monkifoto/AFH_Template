@@ -1,6 +1,6 @@
 <app-hero-carousel [layoutType]="business.theme.themeType"></app-hero-carousel>
 
-<app-ui-test></app-ui-test>
+<!-- <app-ui-test></app-ui-test> -->
 
 <div class="content-wrapper">
   <app-welcome
@@ -9,10 +9,10 @@
   ></app-welcome>
 </div>
 
-<div class="content-wrapper">
+<!-- <div class="content-wrapper"> -->
   <app-right-text
     *ngIf="business.theme.themeType === 'ae'"
-    [imageURL]="'../../../../assets/sharedAssets/image_fx_ (1).jpg'"
+    [imageURL]="'../../../../assets/sharedAssets/istockphoto-1432890664-2048x2048.jpg'"
     [title]="
       'Providing a safe and comfortable home environment for your loved ones'
     "
@@ -20,17 +20,18 @@
       'In our warm, home-like setting, residents enjoy fully private rooms designed for comfort and privacy, fostering a sense of security and belonging. Our dedicated caregivers provide personalized, attentive care tailored to each resident`s unique needs, ensuring they feel valued and supported.'
     "
   ></app-right-text>
-</div>
-<div class="content-wrapper">
+<!-- </div> -->
+<!-- <div class="content-wrapper"> -->
   <app-left-text
     *ngIf="business.theme.themeType === 'ae'"
-    [imageURL]="'../../../../assets/sharedAssets/image_fx_ (1).jpg'"
+    [imageURL]="'../../../../assets/sharedAssets/istockphoto-2032240867-2048x2048.jpg'"
     [title]="'Flexible In-Person and Remote Visitation Options'"
     [content]="
       'Our adult family home welcomes in-person visits in a comfortable and home-like setting. For those unable to visit in person, we offer remote options to help you stay connected with your loved ones, ensuring meaningful interactions from the comfort of your own home.'
     "
   ></app-left-text>
-</div>
+<!-- </div> -->
+
 
 <app-icon-list
   *ngIf="business.theme.themeType === 'ae'"
