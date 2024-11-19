@@ -29,34 +29,43 @@
 <ng-container *ngSwitchCase="'ae'">
   <footer class="ae-footer">
     <div class="ae-footer-content">
-      <h2 class="ae-footer-title">{{ business?.businessName }}</h2>
-      <hr class="ae-footer-divider" />
+      <!-- Business Name and Divider -->
+      <div class="ae-footer-business">
+        <hr class="ae-footer-line" />
+        <span class="ae-footer-business-text">{{ business?.businessName }}</span>
+        <hr class="ae-footer-line" />
+      </div>
 
-      <div class="ae-footer-info">
-        <!-- Location Column -->
+      <!-- Footer Columns -->
+      <div class="ae-footer-columns">
+        <!-- Owner -->
+        <div class="ae-footer-column">
+          <h3 class="ae-footer-column-title">Owner:</h3>
+          <p>{{ business?.providerName }}</p>
+        </div>
+
+        <!-- Location -->
         <div class="ae-footer-column">
           <h3 class="ae-footer-column-title">Location:</h3>
           <address>{{ business?.address }}</address>
         </div>
 
-        <!-- Provider Column -->
+        <!-- Provider -->
         <div class="ae-footer-column">
-          <h3 class="ae-footer-column-title">Provider: </h3>{{ business?.providerName }}
+          <h3 class="ae-footer-column-title">Provider:</h3>
+          <p>{{ business?.providerName }}</p>
           <p>Email: <a href="mailto:{{ business?.email }}">{{ business?.email }}</a></p>
           <p>Phone: <a href="tel:+{{ business?.phone }}">{{ business?.phone }}</a></p>
         </div>
-
-        <!-- Schedule Visit Button -->
-        <div class="ae-footer-column">
-          <button class="afhBtn garamond">Schedule a Visit</button>
-        </div>
       </div>
 
+      <!-- Footer Bottom -->
       <div class="ae-footer-bottom">
         <p>© {{ 2024 }} {{ business?.businessName }}. All rights reserved.</p>
       </div>
     </div>
   </footer>
+
 
 </ng-container>
 
