@@ -13,7 +13,7 @@ export class HeroCarouselComponent implements OnInit {
   businessId!: string;
   business: Business | null= null; ;
   heroImages: HeroImage[] = [];
-  @Input() layoutType: string = 'demo';
+  layoutType: string = 'demo';
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -24,13 +24,14 @@ export class HeroCarouselComponent implements OnInit {
 
     this.businessDataService.businessData$.subscribe((business) => {
       this.business = business;
-      this.businessId = this.business?.id || '';
+      this.businessId = this.business?.id ?? '';
+      this.layoutType = this.business?.theme?.themeType ?? 'demo';
       if (this.business) {
         console.log("Hero Section busines id:", this.business.id);
+        console.log("Hero Section LayoutType: ", this.layoutType);
         this.loadHeroImages();
       }
-    });
-  }
+    });  }
 
   loadHeroImages(): void {
     const uploadLocation = 'heroImages'; // This is the folder in Firestore where the images are stored

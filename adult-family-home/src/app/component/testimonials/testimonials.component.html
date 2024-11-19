@@ -45,4 +45,30 @@
 
     </ng-container>
 
+    <ng-container *ngSwitchDefault>
+      <section class="demo-testimonial-comp">
+        <div class="demo-testimonial-heading">
+          <h2 class="demo-testimonial-section-heading">Word of Mouth</h2>
+          <p class="demo-testimonial-subheading">You should hear what people have to say about us</p>
+        </div>
+      
+        <div class="demo-testimonial-container">
+          <div class="demo-testimonial-grid">
+            <div class="demo-testimonial-card" *ngFor="let testimonial of testimonials">
+              <div class="demo-testimonial-background">
+                <div class="demo-quote-symbol"></div>
+                <p class="demo-testimonial-quote">{{ testimonial.quote }}</p>
+              </div>
+              <div class="demo-testimonial-author-details">
+                <p class="demo-testimonial-author">{{ testimonial.name }}</p>
+                <!-- <p class="demo-testimonial-title">{{ testimonial.title }}</p> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      
+    </ng-container>
+
     </div>
