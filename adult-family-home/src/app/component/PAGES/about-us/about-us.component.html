@@ -45,65 +45,39 @@
     <div class="cta-content">
       <h2>Come Meet Our Family</h2>
       <p>We’d love to meet you! Schedule a visit and see firsthand how our caring environment feels like home.</p>
-      <button class="cta-btn" (click)="navigateToContact(business.id)">Schedule a Visit</button>
+      <button class="cta-btn" (click)="navigateToContact()">Schedule a Visit</button>
     </div>
   </div>
     </ng-container>
     <ng-container *ngSwitchCase="'ae'">
       <app-hero></app-hero>
-      <!-- <div class="ae-container">
 
-        <div class="ae-content">
-
-
-          <div class="ae-features-column">
-
-            <div *ngFor="let feature of business.uniqueService"  class="ae-feature-item">
-              <img src="../../../assets/sharedAssets/icons/bathroom.svg" alt="Non-Toxic" class="ae-icon">
-              <h3>{{feature.name}}</h3>
-              <p>{{feature.description}}</p>
-            </div>
-          </div>
-
-          <div class="ae-image-text-column">
-            <div class="ae-overlapping-images">
-              <img src="../../../assets//sharedAssets/5388429572_df9a403081_k.jpg" alt="Environment Image 1" class="ae-image ae-image-top">
-              <img src="../../../assets//sharedAssets/9676303919_32372bf834_o.jpg" alt="Environment Image 2" class="ae-image ae-image-bottom">
-            </div>
-            <div class="ae-large-text">
-              <h2>Eco-Friendly Products Respecting the Environment</h2>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- Our Approach Section -->
 <section class="our-approach">
-  <!-- First Row -->
-  <div class="approach-row">
-      <div class="approach-text">
-          <h2 class="corben-regular">What We Stand For</h2>
-          <p>{{business.mission}}</p>
-      </div>
-      <div class="approach-image">
-          <img src="../../../assets//sharedAssets/5388429572_df9a403081_k.jpg"  alt="Therapy session">
-      </div>
-  </div>
 
-  <!-- Second Row -->
-  <div class="approach-row">
-      <div class="approach-image">
-          <img src="../../../assets//sharedAssets/9676303919_32372bf834_o.jpg"  alt="Woman working">
-      </div>
-      <div class="approach-text">
-          <h2>The Future We See</h2>
-          <p>{{business.vision}}</p>
-          <button class="afhBtn">Learn More</button>
-      </div>
-  </div>
+
+  <app-right-text
+    *ngIf="business.theme.themeType === 'ae'"
+    [imageURL]="'../../../../../assets//sharedAssets/5388429572_df9a403081_k.jpg'"
+    [title]="'What We Stand For'"
+    [content]="business.mission"
+  ></app-right-text>
+
+  <app-left-text
+    *ngIf="business.theme.themeType === 'ae'"
+    [imageURL]="'../../../../assets//sharedAssets/9676303919_32372bf834_o.jpg'"
+    [title]="'The Future We See'"
+    [content]="business.vision"
+  ></app-left-text>
+
+
 </section>
 
+
+<app-testimonial-image [imageURL]="'../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'"
+          [author]="business.testimonials[0].name" [text]="business.testimonials[0].quote"></app-testimonial-image>
+
 <app-call-to-action [text]="'Have more questions?'" [buttonText]="'Contact Us'" [isButton]="false"
-[bgColor]="business.theme.primaryColor" [textColor]="business.theme.textColor">
+[bgColor]="business.theme.backgroundColor" [textColor]="business.theme.textColor">
 </app-call-to-action>
 
     </ng-container>

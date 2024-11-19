@@ -105,19 +105,18 @@
   align-items: center;
   padding: 50px 0;
   min-height: 600px;
-  background-color: var(-background-color);
+  background-color: var(--dark-background-color);
+  width: 100%;
 }
 .cta-container {
   display: flex;
   background-color: var(--dark-background-color);
   color: #fff;
   padding: 40px;
-  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 1200px;
 }
 
 .consultation-title {
