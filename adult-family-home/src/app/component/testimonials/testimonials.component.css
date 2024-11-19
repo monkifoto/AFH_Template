@@ -221,7 +221,7 @@
 /* Section Container */
 .demo-testimonial-comp {
   padding: 60px 20px;
-  background-color: #f4f4f4; /* Neutral background for the testimonial section */
+  background-color: var(--background-color);
 }
 
 .demo-testimonial-heading {
@@ -249,7 +249,7 @@
 
 .demo-testimonial-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   gap: 20px;
   max-width: 1200px;
   width: 100%;
@@ -258,8 +258,8 @@
 /* Individual Testimonial Card */
 .demo-testimonial-card {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 500px;
+  height: 500px;
   background-color: #fdf3e3; /* Tan background */
   overflow: hidden;
   padding: 20px;
@@ -283,19 +283,22 @@
   background-image: url('../../../assets/sharedAssets/icons/quote.png'); /* Path to your PNG */
   background-size: cover; /* Cover the entire card */
   background-position: center;
-  opacity: 0.1; /* Adjust opacity for subtle overlay effect */
+  opacity: 0.7; /* Adjust opacity for subtle overlay effect */
   z-index: 1; /* Place behind the content */
 }
 
 /* Quote Text */
 .demo-testimonial-quote {
-  position: relative;
+  position: absolute;
   font-size: 1rem;
   font-style: italic;
-  max-width: 80%;
+  max-width: 55%;
   text-align: center;
-  z-index: 2; /* Layer above the background */
+  z-index: 2;
   color: #333;
+  top: 25px;
+  left: 160px;
+  color: var(--primary-color);
 }
 
 /* Author Details */
@@ -306,10 +309,13 @@
 }
 
 .demo-testimonial-author {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   font-weight: bold;
   color: #333;
   margin: 0;
+  position: absolute;
+  top: 50px;
+  left: -160px;
 }
 
 .demo-testimonial-title {
