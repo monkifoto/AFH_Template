@@ -24,7 +24,7 @@
 <!-- <div class="content-wrapper"> -->
   <app-left-text
     *ngIf="business.theme.themeType === 'ae'"
-    [imageURL]="'../../../../assets/sharedAssets/istockphoto-2032240867-2048x2048.jpg'"
+    [imageURL]="'../../../../assets/sharedAssets/istockphoto-1066099806-2048x2048.jpg'"
     [title]="'Flexible In-Person and Remote Visitation Options'"
     [content]="
       'Our adult family home welcomes in-person visits in a comfortable and home-like setting. For those unable to visit in person, we offer remote options to help you stay connected with your loved ones, ensuring meaningful interactions from the comfort of your own home.'
@@ -99,29 +99,29 @@
   >
   </app-our-services-home>
 </div>
-<div  class="content-wrapper">
+
   <app-why-us
     [whyChooseUs]="business.whyChoose"
     [layoutType]="business.theme.themeType"
     [businessName]="business.businessName"
   ></app-why-us>
-</div>
-<div class="content-wrapper">
+
+
   <app-features
     [uniqueService]="business.uniqueService"
     [layoutType]="business.theme.themeType"
   ></app-features>
-</div>
-<div class="content-wrapper">
+
+
   <app-testimonials
     [testimonials]="business.testimonials"
     [layoutType]="business.theme.themeType"
   ></app-testimonials>
-</div>
-<div class="content-wrapper">
+
+
   <app-consultation
     [id]="business.id"
     [layoutType]="business.theme.themeType"
     [businessName]="business.businessName"
   ></app-consultation>
-</div>
+

@@ -16,7 +16,7 @@
 
 .image-container {
   width: 100%; /* Container takes full width of its parent */
-  max-width: 300px; /* Define a max width for your square, adjust as needed */
+  max-width: 500px; /* Define a max width for your square, adjust as needed */
   aspect-ratio: 1 / 1; /* Ensures the container is a square */
   overflow: hidden; /* Hides overflow outside the square */
   display: flex;

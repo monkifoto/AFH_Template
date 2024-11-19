@@ -12,7 +12,7 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 })
 export class AboutUsComponent implements OnInit {
   business: Business | null = null; 
-  businessId: string = '';
+  businessId: string | null = null;
 
   constructor(
     private webContent: WebContentService,
@@ -22,25 +22,22 @@ export class AboutUsComponent implements OnInit {
     private businessDataService: BusinessDataService
   ) {}
 
-  navigateToContact(id: string | null | undefined) {
-    //console.log('navigateToContact id', id);
-    this.router.navigate(['/contact-us'], { queryParams: { id } });
+  navigateToContact() {
+    this.router.navigate(['/contact-us'], { queryParams: { id: this.businessId } });
   }
 
   ngOnInit(): void {
-    // Subscribe to business data from the BusinessDataService
-    this.businessDataService.getBusinessData().subscribe(data => {
-      this.business = data; // Update the local business property
-    });
+    // Subscribe to business data from BusinessDataService
+    this.businessDataService.businessData$.subscribe((business) => {
+      this.business = business;
+      this.businessId = business?.id || null;
 
-    // Optionally, get business ID from the query string or use the service to set it
-    this.route.queryParams.subscribe(params => {
-      this.businessId = params['id'] || ''; // Set businessId from the query params
-    });
-
-    // Fetch and update the meta tags
-    this.metaService.getMetaData(this.businessId).subscribe(metaData => {
-      this.metaService.updateMetaTags(metaData);
+      if (this.businessId) {
+        // Update meta tags based on business data
+        this.metaService.getMetaData(this.businessId).subscribe((metaData: { title: string; description: string; keywords: string }) => {
+          this.metaService.updateMetaTags(metaData);
+        });
+      }
     });
   }
 }

@@ -7,16 +7,12 @@
   padding-bottom: 6.6vmax;
 }
 
-.services-title {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-}
 
 .services-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
+  gap: 4rem;
 }
 
 .service-item {
