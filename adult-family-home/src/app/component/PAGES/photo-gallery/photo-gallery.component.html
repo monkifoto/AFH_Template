@@ -39,7 +39,21 @@
 
     <ng-container *ngSwitchCase="'ae'">
       <app-hero></app-hero>
+      <div>{{business.photoGalleryText}}</div>
+      <section class="gallery">
+        <div class="section-heading">Explore Our Gallery</div>
+        <div class="gallery-grid gallery-container">
+          <div *ngFor="let image of images" class="gallery-item" (click)="onImageClick(image.url)">
+            <img [src]="image.url" alt="Gallery Image">
+          </div>
+        </div>
+      </section>
+    </ng-container>
 
+    <ng-container *ngSwitchDefault>
+      <app-hero></app-hero>
+
+      <div>{{business.photoGalleryText}}</div>
       <section class="gallery">
         <div class="section-heading">Explore Our Gallery</div>
         <div class="gallery-grid gallery-container">
