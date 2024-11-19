@@ -35,13 +35,15 @@
         <div class="ae-testimonial-grid">
           <div class="ae-testimonial-card" *ngFor="let testimonial of testimonials">
             <div class="ae-testimonial-content">
+              <div class="ae-testimonial-quote-icon">❝</div>
               <p class="ae-testimonial-quote">{{ testimonial.quote }}</p>
-              <p class="ae-testimonial-author">{{ testimonial.name }}</p>
+              <h4 class="ae-testimonial-author">{{ testimonial.name }}</h4>
             </div>
           </div>
         </div>
       </div>
     </section>
+
 
     </ng-container>
 
@@ -51,7 +53,7 @@
           <h2 class="demo-testimonial-section-heading">Word of Mouth</h2>
           <p class="demo-testimonial-subheading">You should hear what people have to say about us</p>
         </div>
-      
+
         <div class="demo-testimonial-container">
           <div class="demo-testimonial-grid">
             <div class="demo-testimonial-card" *ngFor="let testimonial of testimonials">
@@ -67,8 +69,8 @@
           </div>
         </div>
       </section>
-      
-      
+
+
     </ng-container>
 
     </div>

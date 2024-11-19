@@ -1,7 +1,7 @@
 
 
 .footer {
-  padding: 40px;
+  /* padding: 40px; */
   text-align: center;
 }
 
@@ -23,7 +23,7 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -64,75 +64,84 @@
 
 
 /*--------- AE --------------*/
-
+/* Footer General Styling */
 .ae-footer {
   background-color: var(--background-color);
-  padding: 20px;
   color: var(--text-color);
-  max-width: calc(var(--site-max-width) * 24); /* Sets max width based on 24 columns */
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
 }
 
 .ae-footer-content {
+  max-width: 1200px;
   margin: 0 auto;
-  max-width: calc(var(--site-max-width) * 24); /* Sets max width based on 24 columns */
+  text-align: center;
 }
 
-.ae-footer-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: var(--text-color);
-}
-
-.ae-footer-divider {
-  border: 1px solid var(--dark-background-color);
-  margin: 10px 0;
-}
-
-.ae-footer-info {
+/* Business Name and Divider */
+.ae-footer-business {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.ae-footer-line {
+  flex: 1;
+  border: none;
+  border-top: 1px dashed var(--dark-background-color);
+  margin: 0 10px;
+}
+
+.ae-footer-business-text {
+  font-size: 1.2rem;
+  color: var(--dark-background-color);
+  font-weight: bold;
+}
+
+/* Footer Columns Layout */
+.ae-footer-columns {
+  display: flex;
+  justify-content: space-between;
   gap: 20px;
-  width: 100%;
+  text-align: left;
+  flex-wrap: wrap; /* Allows wrapping on small screens */
 }
 
 .ae-footer-column {
-  flex: 1 1 400px;
-  margin-top: 10px;
+  flex: 1;
+  min-width: 250px; /* Ensures columns don't shrink too small */
 }
 
+/* Column Titles */
 .ae-footer-column-title {
-  font-weight: bold;
-  margin-bottom: 5px;
-  display: inline;
+  font-size: 1.1rem;
+  color: var(--dark-background-color);
+  margin-bottom: 10px;
 }
 
-
-.ae-footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
-  font-size: 14px;
+.ae-footer-column p,
+.ae-footer-column address {
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
 
-.ae-footer-links a {
-  margin-left: 15px;
-  color:  var(--dark-background-color);
+.ae-footer-column a {
+  color: var(--dark-background-color);
   text-decoration: none;
-  transition: color 0.3s;
 }
 
-.ae-footer-links a:hover {
-  color:  var(--dark-background-color);
+.ae-footer-column a:hover {
+  text-decoration: underline;
 }
 
-@media (max-width: 768px) {
-  .ae-footer-info {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+/* Footer Bottom */
+.ae-footer-bottom {
+  margin-top: 20px;
+  font-size: 0.8rem;
+  color: #aaa;
+  text-align: center;
 }
-
 
 
 
