@@ -69,7 +69,8 @@
   background-color: var(--background-color);
   color: var(--text-color);
   padding: 40px 20px;
-  font-family: Arial, sans-serif;
+  padding-top: 6.6vmax;
+  padding-bottom: 6.6vmax;
 }
 
 .ae-footer-content {
@@ -89,14 +90,14 @@
 .ae-footer-line {
   flex: 1;
   border: none;
-  border-top: 1px dashed var(--dark-background-color);
+  border-top: 2px solid var(--dark-background-color);
   margin: 0 10px;
 }
 
 .ae-footer-business-text {
-  font-size: 1.2rem;
+  /* font-size: 1.2rem; */
   color: var(--dark-background-color);
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 /* Footer Columns Layout */
@@ -106,6 +107,10 @@
   gap: 20px;
   text-align: left;
   flex-wrap: wrap; /* Allows wrapping on small screens */
+}
+
+.ae-footer-column p{
+  padding: 0;
 }
 
 .ae-footer-column {
