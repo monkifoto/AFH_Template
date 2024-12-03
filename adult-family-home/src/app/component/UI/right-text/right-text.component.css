@@ -39,3 +39,31 @@
   justify-content: center;
   padding: 3rem;
 }
+
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  .right-text-section {
+    flex-direction: column; /* Stack elements vertically */
+    padding: 1.5rem 1rem; /* Reduce padding for smaller screens */
+  }
+
+  .text-container, .image-container {
+    max-width: 100%; /* Allow elements to take full width */
+    text-align: center; /* Center text for better mobile presentation */
+  }
+
+  .image-container {
+    margin: 1rem 0; /* Add spacing between image and text */
+  }
+
+  .text-container h2 {
+    font-size: 1.5rem; /* Adjust font size for mobile readability */
+    margin-bottom: 0.5rem;
+  }
+
+  .text-container h4 {
+    font-size: 1rem; /* Adjust font size for mobile */
+    margin-bottom: 1rem;
+  }
+}

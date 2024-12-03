@@ -3,7 +3,7 @@
     <nav class="navbar_">
       <div class="navbar-container">
         <div class="logo">
-          <a href="#" (click)="navigateTo('home')">
+          <a href="#" [routerLink]="['/home']" [queryParams]="{ id: businessId }">
             <img
               class="logoImage"
               *ngIf="business?.logoImage"
@@ -32,7 +32,7 @@
     <nav class="navbar_">
       <div class="ae-navbar-container">
         <div class="logo">
-          <a href="#" (click)="navigateTo('home')">
+          <a href="#" [routerLink]="['/home']" [queryParams]="{ id: businessId }">
             <img
               class="logoImage"
               *ngIf="business?.logoImage"
@@ -54,7 +54,7 @@
           <li class="nav-item" (click)="navigateTo('contact-us')">Contact</li>
         </ul>
         <div class="logo">
-          <a href="#" (click)="navigateTo('home')">
+          <a href="#" [routerLink]="['/contact-us']" [queryParams]="{ id: businessId }">
             <button class="afhBtn" >Schedule a Visit</button>
           </a>
         </div>
@@ -66,7 +66,7 @@
     <nav class="navbar_">
       <div class="ae-navbar-container">
         <div class="logo">
-          <a href="#" (click)="navigateTo('home')">
+          <a href="#" [routerLink]="['/home']" [queryParams]="{ id: businessId }">
             <img
               class="logoImage"
               *ngIf="business?.logoImage"
@@ -88,7 +88,7 @@
           <li class="nav-item" (click)="navigateTo('contact-us')">Contact</li>
         </ul>
         <div class="logo">
-          <a href="#" (click)="navigateTo('home')">
+          <a href="#" [routerLink]="['/contact-us']" [queryParams]="{ id: businessId }">
             <button class="afhBtn" >Schedule a Visit</button>
           </a>
         </div>

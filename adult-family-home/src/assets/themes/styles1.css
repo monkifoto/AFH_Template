@@ -185,3 +185,22 @@ textarea {
   padding-top: 6.6vmax;
   padding-bottom: 6.6vmax;
 }
+
+
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  .cta-button,
+  .afhBtn {
+    font-size: 0.9rem; /* Adjust button text size */
+    padding: 0.5rem 1.25rem; /* Compact padding for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-button,
+  .afhBtn {
+    font-size: 0.85rem; /* Further adjust button text size */
+    padding: 0.5rem 1rem; /* Ensure touch-friendly size */
+  }
+}

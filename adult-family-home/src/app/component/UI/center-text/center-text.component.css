@@ -17,3 +17,19 @@
  padding-bottom: 5rem;
 }
 
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  .center-text-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .center-text-title {
+    font-size: 1.25rem; /* Smaller font size for mobile */
+  }
+
+  .center-text-description {
+    padding: 0 1rem;
+    font-size: 0.9rem; /* Slightly smaller text for compactness */
+  }
+
+}

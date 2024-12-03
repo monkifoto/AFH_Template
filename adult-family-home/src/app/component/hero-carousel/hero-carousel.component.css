@@ -4,6 +4,7 @@
   position: relative;
   width: 100%;
   transition: transform 0.6s ease-in-out;
+  height: 800px;
 }
 
 .carousel-item.active {
@@ -12,11 +13,6 @@
 
 #heroCarousel {
   position: relative;
-}
-
-.carousel-item {
-  position: relative;
-  height: 800px;
 }
 
 .carousel-item img {
@@ -91,37 +87,7 @@ font-size: 1.4rem;
   transform: rotate(-45deg);
 }
 
-@media (max-width: 768px) {
-  .hero-overlay h1 {
-    font-size: 2rem;
-  }
 
-  .hero-overlay p {
-    font-size: 1rem;
-  }
-
-  .carousel-item {
-    height: 300px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-overlay {
-    padding: 10px;
-  }
-
-  .hero-overlay h1 {
-    font-size: 1.5rem;
-  }
-
-  .hero-overlay p {
-    font-size: 0.875rem;
-  }
-
-  .carousel-item {
-    height: 200px;
-  }
-}
 .carousel {
   position: relative;
 }
@@ -170,6 +136,39 @@ font-size: 1.4rem;
 .carousel-indicators .active {
   background-color: #fff;
 }
+
+@media (max-width: 768px) {
+  .hero-overlay h1 {
+    font-size: 2rem;
+  }
+
+  .hero-overlay p {
+    font-size: 1rem;
+  }
+
+  .carousel-item {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-overlay {
+    padding: 10px;
+  }
+
+  .hero-overlay h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-overlay p {
+    font-size: 0.875rem;
+  }
+
+  .carousel-item {
+    height: 200px;
+  }
+}
+
 /*--------------------Carousel AE ----------------*/
 .ae-hero-section {
   position: relative;
@@ -178,16 +177,6 @@ font-size: 1.4rem;
   overflow: hidden;
 }
 
-.carousel-item {
-  position: relative;
-  height: 90vh;
-}
-
-.ae-carousel-item img {
-  width: 100%;
-  height: 90vh;
-  object-fit: cover;
-}
 
 .ae-hero-overlay {
   position: absolute;
@@ -237,4 +226,48 @@ font-size: 1.4rem;
   left: 10%;
 }
 
+@media (max-width: 768px) {
+  .ae-hero-overlay {
+      padding-left: 5%;
+      align-items: center; /* Center align text for better readability */
+  }
 
+  .ae-h1 {
+      font-size: 2rem; /* Reduce font size for smaller screens */
+      top: 60%;
+  }
+
+  .ae-business-subtitle h3 {
+      font-size: 1.2rem;
+      top: 70%;
+  }
+
+  .ae-hero-section {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    overflow: hidden;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .ae-hero-overlay {
+    padding: 10px;
+  }
+
+  .ae-hero-overlay h1 {
+    font-size: 1.5rem;
+  }
+
+  .ae-hero-overlay p {
+    font-size: 0.875rem;
+  }
+
+  .ae-hero-section {
+    position: relative;
+    width: 100%;
+    height: 40vh;
+    overflow: hidden;
+  }
+}
