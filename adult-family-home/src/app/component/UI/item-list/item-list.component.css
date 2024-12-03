@@ -34,3 +34,36 @@
       grid-template-columns: 1fr;
   }
 }
+
+
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr; /* Single column for better readability */
+  }
+
+  .service-item {
+    padding: 1.5rem; /* Reduce padding for compact display */
+  }
+
+  .services-item-icon {
+    font-size: 40px; /* Slightly smaller icons for mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .services-section h2 {
+    font-size: 1.5rem; /* Adjust section title font size for small screens */
+    margin-bottom: 1rem;
+  }
+
+  .service-item h2 {
+    font-size: 1.25rem; /* Reduce font size for service titles */
+  }
+
+  .service-item p {
+    font-size: 1rem; /* Scale down service descriptions */
+  }
+
+}

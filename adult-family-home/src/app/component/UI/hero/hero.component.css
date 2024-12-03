@@ -26,3 +26,33 @@ h1 {
   bottom:10px;
   left:20px;
 }
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  .hero {
+    height: 400px; /* Reduce height for smaller screens */
+  }
+
+  .hero-overlay {
+    padding: 15px;
+    align-items: flex-end;
+  }
+
+  h1 {
+    font-size: 2rem; /* Adjust font size for readability */
+    bottom: 8px;
+    left: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 300px; /* Further reduce height for very small screens */
+  }
+
+  h1 {
+    font-size: 1.5rem; /* Scale down the font size for very small screens */
+    bottom: 5px;
+    left: 10px;
+  }
+}

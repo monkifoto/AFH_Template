@@ -37,6 +37,8 @@
       </button>
     </div>
   </ng-container>
+
+
   <!-- Case for 'ae' -->
   <ng-container *ngSwitchCase="'ae'">
     <section class="ae-hero-section">
@@ -51,7 +53,7 @@
 
         <!-- Carousel Items -->
         <div class="carousel-inner">
-          <div *ngFor="let image of heroImages; let i = index" class="carousel-item ae-carousel-item"
+          <div *ngFor="let image of heroImages; let i = index" class="carousel-item"
             [class.active]="i === 0">
             <img [src]="image.url" class="d-block w-100" alt="Hero Image">
             <div class="carousel-caption d-none d-md-block ae-hero-overlay">
@@ -93,7 +95,7 @@
 
         <!-- Carousel Items -->
         <div class="carousel-inner">
-          <div *ngFor="let image of heroImages; let i = index" class="carousel-item ae-carousel-item"
+          <div *ngFor="let image of heroImages; let i = index" class="carousel-item"
             [class.active]="i === 0">
             <img [src]="image.url" class="d-block w-100" alt="Hero Image">
             <div class="carousel-caption d-none d-md-block ae-hero-overlay">
