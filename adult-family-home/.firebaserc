@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "afhdynamicwebsite"
-  }
+    "default": "afhdynamicwebsite",
+    "ae-afh": "ae-afh"
+  },
+  "targets": {},
+  "etags": {}
 }

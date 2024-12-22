@@ -1,0 +1,187 @@
+/*------------Global Styles -----------*/
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&display=swap');
+
+
+:root{
+  --primary-color: #fffaf2;
+  --secondary-color: #f8f3f0;
+  --accent-color: #F0C987;
+  --background-color:#F5F3E7;
+  --dark-background-color: #4C6A56;
+  --text-color: #2F2F2F;
+  --nav-background-color: var(--background-color);
+  --nav-text-color: #33372C;
+  --nav-active-background: #33372C;
+  --nav-active-text: white;
+  --button-color:#D9A064;
+  --button-hover-color: #c9605b;
+  --link-color: #c9605b;
+  --button-text-color: var(--primary-color);
+  --border-color:var(--text-color);
+  --site-max-width: 1600px;
+  --cell-max-width: calc((var(--site-max-width, 1500px) - (11.0px * (24 - 1))) / 24);
+  --large-text-size-value: 1;
+  --large-text-size: 1rem;
+  --heading-2-size: 2rem;
+  --heading-2-size-value: 2;
+}
+
+
+a{
+  color: var(--button-color);
+}
+.blue{
+  background-color: var(--background-color);
+}
+.yellow{
+  background-color: var(--secondary-color);
+}
+.red{
+  background-color: var(--accent-color);
+}
+.primary{
+  color: var(--primary-color) !important;
+}
+
+body {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.5em;
+   margin-bottom: 150px;
+   color: var(--text-color);
+   background-color: var(--background-color);
+  }
+
+  h1{
+    font-weight: 600;
+    font-style: normal;
+    margin-bottom: 2rem;
+    font-size: calc(var(--heading-2-size-value) * 2rem);
+  }
+
+  h2 {
+
+    font-weight: 500;
+    font-style: normal;
+    margin-bottom: 2rem;
+    font-size: calc(var(--heading-2-size-value) * 1.5rem);
+  }
+
+  h3{
+    font-weight: 400;
+    font-style: normal;
+    margin-bottom: 2rem;
+    font-size: calc(var(--large-text-size-value) * 1.6rem);
+    line-height: 1.6;
+  }
+
+
+   h4 {
+    font-weight: 200;
+    line-height: 1.6;
+    padding: 20px;
+    font-size: calc(var(--large-text-size-value) * 1.4rem);
+  }
+
+  p{
+    font-weight: 100;
+      line-height: 1.4;
+      padding: 20px;
+      font-size: calc(var(--large-text-size-value) * 1.2rem);
+
+  }
+
+  .garamond{
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 1.2rem;
+  }
+
+  .montserrat-hero {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: bold;
+  }
+
+  .catamaran-font {
+    font-family: "Catamaran", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+
+button, select {
+  background-color: var(--button-color);
+  color:  var(--primary-color);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin: 10px 0;
+  transition: background-color 0.3s ease;
+}
+
+button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:hover, select:hover {
+  background-color: var(--button-hover-color); /* Hover color */
+}
+
+button:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 0.9em;
+  color: var(--dark-background-color);
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group span {
+  font-weight: normal;
+}
+
+.name-fields {
+  display: flex;
+  gap: 10px;
+}
+
+.name-fields input {
+  width: 100%;
+}
+
+
+.content-wrapper{
+  padding-top: 6.6vmax;
+  padding-bottom: 6.6vmax;
+}

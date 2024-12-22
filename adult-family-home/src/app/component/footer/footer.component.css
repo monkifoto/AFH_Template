@@ -3,6 +3,8 @@
 .footer {
   /* padding: 40px; */
   text-align: center;
+  padding-top: 6.6vmax;
+  padding-bottom: 6.6vmax;
 }
 
 .footer-title {

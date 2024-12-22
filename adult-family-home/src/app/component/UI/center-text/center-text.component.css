@@ -6,6 +6,8 @@
   /* padding: 4rem 2rem; */
   max-width: calc(var(--cell-max-width) * 24);
   margin: 0 auto;
+  padding-top: 6.6vmax;
+  padding-bottom: 6.6vmax;
 }
 
 .center-text-title {

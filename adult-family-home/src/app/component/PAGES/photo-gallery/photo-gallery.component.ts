@@ -41,6 +41,12 @@ export class PhotoGalleryComponent implements OnInit {
     });
   }
 
+
+
+  closeLightbox() {
+    this.selectedImageUrl = null;
+  }
+
   loadImages(): void {
     this.webContent.getBusinessGalleryImagesById(this.businessId).pipe(
       switchMap(images => {

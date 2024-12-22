@@ -189,6 +189,7 @@
   font-style: italic;
   color: var(--text-color);
   margin: 10px 0;
+  height: 250px;
 }
 
 .ae-testimonial-author {
@@ -196,6 +197,7 @@
   font-weight: bold;
   color: var(--dark-background-color);
   margin-top: 10px;
+  height: 50px;
 }
 
 /*----------------Demo------------------*/

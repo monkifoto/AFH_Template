@@ -39,23 +39,29 @@
 
     <ng-container *ngSwitchCase="'ae'">
       <app-hero></app-hero>
-      <div>{{business.photoGalleryText}}</div>
-      <section class="gallery">
-        <div class="section-heading">Explore Our Gallery</div>
-        <div class="gallery-grid gallery-container">
-          <div *ngFor="let image of images" class="gallery-item" (click)="onImageClick(image.url)">
+
+      <app-center-text [content]="business.photoGalleryText" [title]="'Welcome to our home'" [showBtn]="false"></app-center-text>
+
+      <section class="ae-gallery">
+        <div class="ae-section-heading">Explore Our Gallery</div>
+        <div class="ae-gallery-grid ae-gallery-container">
+          <div *ngFor="let image of images" class="ae-gallery-item" (click)="onImageClick(image.url)">
             <img [src]="image.url" alt="Gallery Image">
           </div>
         </div>
+        <div *ngIf="selectedImageUrl" class="ae-lightbox" (click)="closeLightbox()">
+          <img [src]="selectedImageUrl" alt="Full-size image">
+        </div>
       </section>
+      <app-testimonial-image [imageURL]="'../../../../assets/sharedAssets/istockphoto-1453597643-2048x2048.jpg'"
+      [author]="business.testimonials[4].name" [text]="business.testimonials[4].quote"></app-testimonial-image>
     </ng-container>
 
     <ng-container *ngSwitchDefault>
       <app-hero></app-hero>
-
-      <div>{{business.photoGalleryText}}</div>
+      <app-center-text></app-center-text>
       <section class="gallery">
-        <div class="section-heading">Explore Our Gallery</div>
+        <div class="section-heading"><h2>Explore Our Gallery</h2></div>
         <div class="gallery-grid gallery-container">
           <div *ngFor="let image of images" class="gallery-item" (click)="onImageClick(image.url)">
             <img [src]="image.url" alt="Gallery Image">

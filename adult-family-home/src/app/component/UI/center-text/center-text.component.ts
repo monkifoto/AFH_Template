@@ -8,5 +8,6 @@ import { Component, Input } from '@angular/core';
 export class CenterTextComponent {
   @Input() title!: string;
   @Input() content!: string;
+  @Input() showBtn!: boolean;
 
 }
