@@ -905,7 +905,7 @@ section {
 }
 
 .section-heading {
-  font-size: 36px;
+  /* font-size: 36px; */
   color: #333;
   margin-bottom: 20px;
 }

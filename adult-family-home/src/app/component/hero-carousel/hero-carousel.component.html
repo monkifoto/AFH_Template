@@ -45,7 +45,7 @@
       <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" *ngIf="business">
         <!-- Indicators -->
         <div class="carousel-indicators">
-          <button *ngFor="let image of heroImages; let i = index" type="button" class="ae-afhBtn"
+          <button *ngFor="let image of heroImages; let i = index" type="button" class="afhBtn"
             data-bs-target="#heroCarousel" [attr.data-bs-slide-to]="i" [class.active]="i === 0"
             [attr.aria-current]="i === 0 ? 'true' : null" [attr.aria-label]="'Slide ' + (i + 1)">
           </button>
@@ -62,9 +62,9 @@
               <div class="ae-business-subtitle ">
                 <h3>{{ business.tagline }}</h3>
               </div>
-              <!-- <button type="button" class="afhBtn" (click)="navigateToContact(businessId)">
+              <button type="button" class="ae-afhBtn" (click)="navigateToContact(businessId)">
               Schedule a Visit
-            </button> -->
+            </button>
             </div>
           </div>
         </div>

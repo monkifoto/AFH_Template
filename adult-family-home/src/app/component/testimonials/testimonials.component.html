@@ -7,9 +7,6 @@
   </div>
   <div class="testimonial">
     <div class="testimonial-container" *ngFor="let testimonial of testimonials">
-      <!-- <div class="testimonial-image">
-        <img src="{{ testimonial.photoURL }}" alt="{{ testimonial.name }}" />
-      </div> -->
       <div>
         <div class="testimonial-content garamond">
           <div class="">
@@ -33,7 +30,7 @@
 
       <div class="ae-testimonial-container">
         <div class="ae-testimonial-grid">
-          <div class="ae-testimonial-card" *ngFor="let testimonial of testimonials">
+          <div class="ae-testimonial-card" *ngFor="let testimonial of testimonials | slice:0:4">
             <div class="ae-testimonial-content">
               <div class="ae-testimonial-quote-icon">❝</div>
               <p class="ae-testimonial-quote">{{ testimonial.quote }}</p>

@@ -137,6 +137,11 @@ font-size: 1.4rem;
   background-color: #fff;
 }
 
+/* .afhBtn{
+position: relative;
+left: 50%;
+} */
+
 @media (max-width: 768px) {
   .hero-overlay h1 {
     font-size: 2rem;
@@ -220,7 +225,7 @@ font-size: 1.4rem;
   color: var(--button-color);
 }
 
-.afhBtn{
+.ae-afhBtn{
   position: absolute;
   top:80%;
   left: 10%;
