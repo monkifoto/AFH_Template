@@ -221,14 +221,14 @@ background-color: var(--primary-color);
   position: relative;
 }
 
-.ae-section-heading::after {
-  /* content: '';
+/* .ae-section-heading::after {
+   content: '';
   display: block;
   width: 60px;
   height: 4px;
   background: #f04e30;
-  margin: 8px auto 0; */
-}
+  margin: 8px auto 0;
+} */
 
 .ae-gallery {
   /* background: linear-gradient(to bottom, #f9f9f9, #ececec); */
