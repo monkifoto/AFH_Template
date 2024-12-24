@@ -10,7 +10,7 @@ service cloud.firestore {
       // Make sure to write security rules for your app before that time, or
       // else all client requests to your database will be denied until you
       // update your rules.
-      allow read, write: if request.time < timestamp.date(2024, 7, 25);
+      allow read, write: if request.time < timestamp.date(2025, 7, 25);
     }
   }
   match /databases/{database}/documents {
@@ -18,7 +18,7 @@ service cloud.firestore {
     // This rule should be restrictive and only allow read/write operations based on custom logic.
     // Temporary rule that allows all access till a certain date, should be replaced with specific rules.
     match /{document=**} {
-      allow read, write: if request.time < timestamp.date(2024, 10, 25);
+      allow read, write: if request.time < timestamp.date(2025, 10, 25);
     }
 
     // Specific rules for the `businesses` collection and its sub-collections

@@ -1,4 +1,4 @@
-/* .information-section {
+.information-section {
   display: flex;
   justify-content: center;
   padding: 20px;
@@ -62,4 +62,4 @@
   .info-item p {
     font-size: 1rem;
   }
-} */
+}

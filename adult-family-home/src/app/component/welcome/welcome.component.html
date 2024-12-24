@@ -4,9 +4,9 @@
     <div class="welcome-info-container">
       <div class="welcome-overlay">
         <div class="welcome-content garamond">
-          <h3>We Are <span class="brand-name">{{business.businessName}}</span></h3>
-          <h1>{{business.welcomeMessage}}</h1>
-          <p>{{business.keyServicesHighlights}}</p>
+          <h3>We Are <span class="brand-name">{{business?.businessName}}</span></h3>
+          <h1>{{business?.welcomeMessage}}</h1>
+          <p>{{business?.keyServicesHighlights}}</p>
           <div class="buttons">
             <button type="button" class="afhBtn" (click)="navigateToContact()">Contact Us</button>
           </div>
@@ -16,12 +16,12 @@
   </ng-container>
 
   <ng-container *ngSwitchCase="'ae'">
-      <app-center-text [title]="'Who We Are'" [content]="business.businessStory"></app-center-text>
+      <app-center-text [title]="'Who We Are'" [content]="business?.businessStory || ''"></app-center-text>
   </ng-container>
 
   <ng-container *ngSwitchDefault>
     <div class="content-wrapper">
-      <app-center-text [title]="'Who We Are'" [content]="business.businessStory"></app-center-text>
+      <app-center-text [title]="'Who We Are'" [content]="business?.businessStory || ''"></app-center-text>
     </div>
   </ng-container>
 </div>
