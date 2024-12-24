@@ -16,13 +16,13 @@ export class BusinessDataService {
 
   // Method to load business data on app initialization
   loadBusinessData(businessId: string): Observable<Business | null> {
+    console.log('BusinessDataService - loadBusinessData for ID:', businessId);
     return this.businessService.getBusinessData(businessId).pipe(
-      // Convert undefined to null to match the expected type
-      map(business => business ?? null),
-      tap(business => {
-        // Update business data and businessIdSubject with the provided businessId
-        this.businessDataSubject.next(business);
-        this.businessIdSubject.next(businessId); // Update the businessId
+      map((business) => business ?? null),
+      tap((business) => {
+        console.log('BusinessDataService - Business fetched:', business);
+        this.businessDataSubject.next(business); // Update subject
+        this.businessIdSubject.next(businessId);
       })
     );
   }

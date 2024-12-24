@@ -1,127 +1,71 @@
 <app-hero-carousel></app-hero-carousel>
 
-<!-- <app-ui-test></app-ui-test> -->
-
 <div class="content-wrapper">
   <app-welcome
-    [layoutType]="business.theme.themeType"
-    [business]="business"
+    [layoutType]="business?.theme?.themeType || 'demo'"
+    [businessId]="business?.id || ''"
   ></app-welcome>
 </div>
 
-<!-- <div class="content-wrapper"> -->
-  <app-right-text
-    *ngIf="business.theme.themeType === 'ae'"
-    [imageURL]="'../../../../assets/sharedAssets/istockphoto-1432890664-2048x2048.jpg'"
-    [title]="
-      'Providing a safe and comfortable home environment for your loved ones'
-    "
-    [content]="
-      'In our warm, home-like setting, residents enjoy fully private rooms designed for comfort and privacy, fostering a sense of security and belonging. Our dedicated caregivers provide personalized, attentive care tailored to each resident`s unique needs, ensuring they feel valued and supported.'
-    "
-  ></app-right-text>
-<!-- </div> -->
-<!-- <div class="content-wrapper"> -->
-  <app-left-text
-    *ngIf="business.theme.themeType === 'ae'"
-    [imageURL]="'../../../../assets/sharedAssets/istockphoto-1066099806-2048x2048.jpg'"
-    [title]="'Flexible In-Person and Remote Visitation Options'"
-    [content]="
-      'Our adult family home welcomes in-person visits in a comfortable and home-like setting. For those unable to visit in person, we offer remote options to help you stay connected with your loved ones, ensuring meaningful interactions from the comfort of your own home.'
-    "
-  ></app-left-text>
-<!-- </div> -->
+<app-right-text
+  *ngIf="business?.theme?.themeType === 'ae'"
+  [imageURL]="'../../../../assets/sharedAssets/istockphoto-1432890664-2048x2048.jpg'"
+  [title]="'Providing a safe and comfortable home environment for your loved ones'"
+  [content]="'In our warm, home-like setting, residents enjoy fully private rooms designed for comfort and privacy, fostering a sense of security and belonging. Our dedicated caregivers provide personalized, attentive care tailored to each resident’s unique needs, ensuring they feel valued and supported.'"
+></app-right-text>
 
+<app-left-text
+  *ngIf="business?.theme?.themeType === 'ae'"
+  [imageURL]="'../../../../assets/sharedAssets/istockphoto-1066099806-2048x2048.jpg'"
+  [title]="'Flexible In-Person and Remote Visitation Options'"
+  [content]="'Our adult family home welcomes in-person visits in a comfortable and home-like setting. For those unable to visit in person, we offer remote options to help you stay connected with your loved ones, ensuring meaningful interactions from the comfort of your own home.'"
+></app-left-text>
 
 <app-icon-list
-  *ngIf="business.theme.themeType === 'ae'"
+  *ngIf="business?.theme?.themeType === 'ae'"
   [services]="[
-    {
-      icon: 'fas fa-person-cane',
-      title: 'Mobility Assistance',
-      description: '...'
-    },
-    {
-      icon: 'fas fa-people-group',
-      title: 'Companionship Care',
-      description: '...'
-    },
+    { icon: 'fas fa-person-cane', title: 'Mobility Assistance', description: '...' },
+    { icon: 'fas fa-people-group', title: 'Companionship Care', description: '...' },
     { icon: 'fas fa-bowl-food', title: 'Meal Planning', description: '...' },
-    {
-      icon: 'fas fa-prescription-bottle',
-      title: 'Medication',
-      description: '...'
-    },
+    { icon: 'fas fa-prescription-bottle', title: 'Medication', description: '...' },
     { icon: 'fas fa-shower', title: 'Personal Hygiene', description: '...' },
     { icon: 'fas fa-bed-pulse', title: 'Medical Care', description: '...' }
   ]"
 ></app-icon-list>
 
 <div class="content-wrapper">
-  <app-our-services-home *ngIf="business.theme.themeType === 'hh'"
-    [layoutType]="business.theme.themeType"
+  <app-our-services-home
+    *ngIf="business?.theme?.themeType === 'hh'"
+    [layoutType]="business?.theme?.themeType || 'demo' "
     [services]="[
-      {
-        icon: 'fas fa-heart',
-        title: 'Mobility Assistance',
-        description: 'Hands On, Stand by Assist.'
-      },
-      {
-        icon: 'fas fa-users',
-        title: 'Companionship Care',
-        description: '24 hours care and close supervision.'
-      },
-      {
-        icon: 'fas fa-utensils',
-        title: 'Meal Planning',
-        description:
-          '3 delicious homemade cooked meals with snacks available, dietary accommodations per doctor orders and preferences.'
-      },
-      {
-        icon: 'fas fa-pills',
-        title: 'Medication',
-        description:
-          '24 hours medication administration, management and reminders.'
-      },
-      {
-        icon: 'fas fa-bath',
-        title: 'Personal Hygiene',
-        description:
-          'All inclusive personal care including: bathing, grooming, laundry, incontinence support etc. Also available: hair styling, manicure, pedicure, podiatrist.'
-      },
-      {
-        icon: 'fas fa-briefcase-medical',
-        title: 'Medical Care',
-        description:
-          'All the necessary care for Aging In Place. Able to provide a High Level of Care, including Diabetic Care.'
-      }
+      { icon: 'fas fa-heart', title: 'Mobility Assistance', description: 'Hands On, Stand by Assist.' },
+      { icon: 'fas fa-users', title: 'Companionship Care', description: '24 hours care and close supervision.' },
+      { icon: 'fas fa-utensils', title: 'Meal Planning', description: '3 delicious homemade cooked meals with snacks available, dietary accommodations per doctor orders and preferences.' },
+      { icon: 'fas fa-pills', title: 'Medication', description: '24 hours medication administration, management and reminders.' },
+      { icon: 'fas fa-bath', title: 'Personal Hygiene', description: 'All inclusive personal care including: bathing, grooming, laundry, incontinence support etc. Also available: hair styling, manicure, pedicure, podiatrist.' },
+      { icon: 'fas fa-briefcase-medical', title: 'Medical Care', description: 'All the necessary care for Aging In Place. Able to provide a High Level of Care, including Diabetic Care.' }
     ]"
-  >
-  </app-our-services-home>
+  ></app-our-services-home>
 </div>
 
-  <app-why-us
-    [whyChooseUs]="business.whyChoose"
-    [layoutType]="business.theme.themeType"
-    [businessName]="business.businessName"
-  ></app-why-us>
+<app-why-us
+  [whyChooseUs]="business?.whyChoose || []"
+  [layoutType]="business?.theme?.themeType || 'demo' "
+  [businessName]="business?.businessName || 'Demo' "
+></app-why-us>
 
+<app-features
+  [uniqueService]="business?.uniqueService || []"
+  [layoutType]="business?.theme?.themeType || 'demo' "
+></app-features>
 
-  <app-features
-    [uniqueService]="business.uniqueService"
-    [layoutType]="business.theme.themeType"
-  ></app-features>
+<app-testimonials
+  [testimonials]="business?.testimonials"
+  [layoutType]="business?.theme?.themeType || 'demo' "
+></app-testimonials>
 
-
-  <app-testimonials
-    [testimonials]="business.testimonials"
-    [layoutType]="business.theme.themeType"
-  ></app-testimonials>
-
-
-  <app-consultation
-    [id]="business.id"
-    [layoutType]="business.theme.themeType"
-    [businessName]="business.businessName"
-  ></app-consultation>
-
+<app-consultation
+  [id]="business?.id || ''"
+  [layoutType]="business?.theme?.themeType || 'demo' "
+  [businessName]="business?.businessName || 'Demo' "
+></app-consultation>

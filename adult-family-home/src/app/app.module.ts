@@ -59,21 +59,30 @@ import { TestimonialImageComponent } from './component/UI/testimonial-image/test
 import { CallToActionComponent } from './component/UI/call-to-action/call-to-action.component';
 import { UiTestComponent } from './component/UI/ui-test/ui-test.component';
 
+    // Map hostnames to business IDs
+    const businessIdMap: { [key: string]: string } = {
+      "helpinghandafh.com": "vfCMoPjAu2ROVBbKvk0D",
+      "www.helpinghandafh.com": "vfCMoPjAu2ROVBbKvk0D",
+      "aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1",
+      "www.aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1"
+    };
+
+
 export function themeInitializerFactory(
   themeInitializer: ThemeInitializerService,
   location: Location,
   router: Router
 ): () => Promise<void> {
   return () => {
-    // Use Location service to get the current URL with query parameters
+    // Get the current hostname
+    const hostname = window.location.hostname;
+    // Use URL query parameters as fallback
     const url = new URL(window.location.href);
-    let businessId = url.searchParams.get('id'); // Retrieve businessId from query string
-    if(!businessId){
-      businessId = 'Z93oAAVwFAwhmdH2lLtB';
-    }
-    console.log("app.module", businessId);
-    // Pass the businessId to the ThemeInitializerService to load the appropriate theme
-    return themeInitializer.loadTheme(businessId || '');
+    let businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'Z93oAAVwFAwhmdH2lLtB';
+
+    console.log("themeInitializerFactory app.module businessId: " +  businessId + ' - hostname: ' + hostname);
+    // Pass the businessId to ThemeInitializerService
+    return themeInitializer.loadTheme(businessId);
   };
 }
 
@@ -82,9 +91,12 @@ export function initializeBusinessData(
   location: Location,
   router: Router
 ) {
+  const hostname = window.location.hostname;
   const url = new URL(window.location.href);
-  let businessId = url.searchParams.get('id') || 'Z93oAAVwFAwhmdH2lLtB'; // Provide default if null
-  console.log("Initializing business data with businessId:", businessId); // Log here
+  let businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'Z93oAAVwFAwhmdH2lLtB';
+  // Get business ID based on hostname or fallback to default
+  // const businessId = businessIdMap[hostname] || "Z93oAAVwFAwhmdH2lLtB"; // Default ID
+  console.log("initializeBusinessData app.module businessId:: " +  businessId + ' - hostname: ' + hostname)
 
   return () => {
     businessDataService.loadBusinessData(businessId).toPromise().then(() => {
@@ -92,6 +104,30 @@ export function initializeBusinessData(
     }).catch(error => {
       console.error("Error loading business data:", error);
     });
+  };
+}
+
+export function combinedInitializer(
+  themeInitializer: ThemeInitializerService,
+  businessDataService: BusinessDataService,
+  location: Location,
+  router: Router
+): () => Promise<void> {
+  return async () => {
+    // Initialize theme
+    const hostname = window.location.hostname;
+    const url = new URL(window.location.href);
+    let businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'Z93oAAVwFAwhmdH2lLtB';
+
+    await themeInitializer.loadTheme(businessId);
+
+    // Initialize business data
+    try {
+      await businessDataService.loadBusinessData(businessId).toPromise();
+      console.log("Business data loaded successfully");
+    } catch (error) {
+      console.error("Error loading business data:", error);
+    }
   };
 }
 
@@ -169,6 +205,14 @@ export function initializeBusinessData(
       multi: true
     }
   ],
+  // providers: [
+  //   {
+  //     provide: APP_INITIALIZER,
+  //     useFactory: combinedInitializer,
+  //     deps: [ThemeInitializerService, BusinessDataService, Location, Router],
+  //     multi: true
+  //   }
+  // ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

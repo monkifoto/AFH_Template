@@ -24,12 +24,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Fetch business ID from the URL query params
-    this.route.queryParams.subscribe((params) => {
-      this.businessId = params['id'];
-      // Load the business data and theme after fetching the business ID
       this.loadBusinessData();
-    });
   }
 
   // Fetch business data
