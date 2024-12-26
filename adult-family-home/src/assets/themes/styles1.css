@@ -156,6 +156,10 @@ textarea {
   resize: vertical;
   min-height: 100px;
 }
+textarea{
+  height: 6em;
+}
+
 .form-group {
   margin-bottom: 20px;
 }

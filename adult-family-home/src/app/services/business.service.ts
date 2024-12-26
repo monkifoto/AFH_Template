@@ -151,11 +151,11 @@ export class BusinessService {
         return themeFileName; // Ensure this is just the filename
       } else {
         console.warn(`No theme document found for business ID: ${businessId}. Using default theme.`);
-        return 'default-theme.css';
+        return 'default.css';
       }
     }).catch(error => {
       console.error(`Error fetching theme file name for business ID: ${businessId}`, error);
-      return 'default-theme.css';
+      return 'default.css';
     });
   }
 }

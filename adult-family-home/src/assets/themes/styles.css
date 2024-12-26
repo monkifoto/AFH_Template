@@ -1024,6 +1024,10 @@ ul li strong {
   align-items: center; /* Vertically center the text */
 }
 
+textarea{
+  height: 6em;
+}
+
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
