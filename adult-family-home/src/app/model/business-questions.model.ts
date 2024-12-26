@@ -2,40 +2,64 @@ export interface Business {
   businessData: {};
   [x: string]: {};
   id: string;
+
+  //Business Information
+
   businessName: string;
   providerName: string;
   businessURL: string;
   keyWords: string;
   tagline: string;
-  uniqueService: ListItem[];
-  whyChoose: ListItem[];
-  businessStory: string;
-  isActive: boolean;
-  heroImages: string[];
-  motivation: string;
-  missionImageUrl:string;
-  mission: string;
-  visionImageUrl:string;
-  vision: string;
-  certifications: string;
-  services: ServiceItem[];
-  specialPrograms: string;
-  tours: string;
-  freeConsulting: string;
-  websiteGoals: string;
-  logoImage: string;
-  logoText: string;
-  ownerImagesBios: string;
-  staffImagesBios: string;
-  facilityImages: string[];
-  lifestyleImages: string[];
-  mediaFeatures: string;
-  ratings: string;
-  testimonials: Testimonial[];
   address: string;
   phone: string;
   fax: string;
   email: string;
+
+  uniqueService: ListItem[];
+
+  whyChoose: ListItem[];
+
+  businessStory: string;
+
+  isActive: boolean;
+
+  heroImages: string[];
+
+  motivation: string;
+
+  missionImageUrl:string;
+  missionTitle: string;
+  mission: string;
+
+  visionImageUrl:string;
+  visionTitle: string;
+  vision: string;
+
+  certifications: string;
+
+  services: ServiceItem[];
+
+  specialPrograms: string;
+
+  toursImageUrl: string;
+  tours: string;
+
+  freeConsulting: string;
+  consultingImageUrl: string;
+
+  websiteGoals: string;
+
+  logoImage: string;
+  logoText: string;
+
+
+  facilityImages: string[];
+  lifestyleImages: string[];
+  mediaFeatures: string;
+  ratings: string;
+
+  testimonials: Testimonial[];
+
   businessHours: string;
   socialMedia: string;
   welcomeMessage: string;
@@ -54,11 +78,13 @@ export interface Business {
 
   //Employyes
   employees: Employee[];
+  ownerImagesBios: string;
+  staffImagesBios: string;
 
 
 
-  toursImageUrl: string;
-  consultingImageUrl: string;
+
+
 
   theme: {
     themeFileName?: string;
@@ -154,12 +180,16 @@ export class BusinessModel {
         'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
       motivation:
         'To offer high-quality, compassionate care for seniors, respecting their independence and dignity.',
-      mission:
+
+        mission:
         'To exceed the expectations of our residents and their families, with personalized care and a homelike atmosphere.',
         missionImageUrl:'',
-      vision:
-        'A community where seniors can live independently with compassionate, round-the-clock care and support.',
+        missionTitle: 'Our Mission',
+
+        vision:'A community where seniors can live independently with compassionate, round-the-clock care and support.',
         visionImageUrl:'',
+        visionTitle: 'Our Vision',
+
       certifications:
         'State Licensed, Certified Nursing Assistants (CNA), First Aid/CPR Certified',
       specialPrograms:

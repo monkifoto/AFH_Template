@@ -105,15 +105,22 @@ export class EditBusinessComponent implements OnInit {
       providerName: [''],
       keyWords: [''],
 
+      welcomeMessage: [''],
+      keyServicesHighlights: [''],
+
       uniqueService: this.fb.array([]),
       whyChoose: this.fb.array([]),
       businessStory: [''],
       motivation: [''],
+      missionTitle: [''],
       mission: [''],
       missionImageUrl:[''],
+      visionTitle:[''],
       vision: [''],
       visionImageUrl:[''],
       certifications: [''],
+
+
 
       services: this.fb.array([]),
       benefits: this.fb.array([]),
@@ -127,16 +134,22 @@ export class EditBusinessComponent implements OnInit {
       ratings: [''],
       testimonials: this.fb.array([]),
       socialMedia: [''],
-      welcomeMessage: [''],
-      keyServicesHighlights: [''],
+
       teamValues: [''],
+      //Contact Us Page
       contactFormDetails: [''],
       contactUsImageUrl: [''],
       mapIframeUrl: [''],
+
+      //Gallery Page
       photoGallery: [''],
       photoGalleryText: [''],
+
       isActive: true,
+
+      //Employee Page
       employees: this.fb.array([]),
+
     });
     this.serviceForm = this.fb.group({
       name: [''],

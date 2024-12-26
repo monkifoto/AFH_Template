@@ -57,15 +57,15 @@
 
   <app-right-text
     *ngIf="business.theme.themeType === 'ae'"
-    [imageURL]="'../../../../../assets//sharedAssets/5388429572_df9a403081_k.jpg'"
-    [title]="'What We Stand For'"
+    [imageURL]="business.missionImageUrl"
+    [title]="business.missionTitle"
     [content]="business.mission"
   ></app-right-text>
 
   <app-left-text
     *ngIf="business.theme.themeType === 'ae'"
-    [imageURL]="'../../../../assets//sharedAssets/9676303919_32372bf834_o.jpg'"
-    [title]="'The Future We See'"
+    [imageURL]="business.visionImageUrl"
+    [title]="business.visionTitle"
     [content]="business.vision"
   ></app-left-text>
 
@@ -90,15 +90,15 @@
 
         <app-right-text
 
-          [imageURL]="'../../../../../assets//sharedAssets/5388429572_df9a403081_k.jpg'"
-          [title]="'What We Stand For'"
+          [imageURL]="business.missionImageUrl"
+          [title]="business.missionTitle"
           [content]="business.mission"
         ></app-right-text>
 
         <app-left-text
 
-          [imageURL]="'../../../../assets//sharedAssets/9676303919_32372bf834_o.jpg'"
-          [title]="'The Future We See'"
+          [imageURL]="business.visionImageUrl"
+          [title]="business.visionTitle"
           [content]="business.vision"
         ></app-left-text>
 
