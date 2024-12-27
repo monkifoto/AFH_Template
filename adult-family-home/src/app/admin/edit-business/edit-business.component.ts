@@ -94,6 +94,8 @@ export class EditBusinessComponent implements OnInit {
 
   initializeForm(): void {
     this.businessForm = this.fb.group({
+
+      //Business Info
       businessName: ['', Validators.required],
       address: [''],
       phone: [''],
@@ -105,28 +107,36 @@ export class EditBusinessComponent implements OnInit {
       providerName: [''],
       keyWords: [''],
 
+      //Home Page
       welcomeMessage: [''],
       keyServicesHighlights: [''],
-
       uniqueService: this.fb.array([]),
       whyChoose: this.fb.array([]),
-      businessStory: [''],
+
+
+
+      //About Us
+      certifications: [''],
       motivation: [''],
+      teamValues: [''],
+
+      businessStory: [''],
+
       missionTitle: [''],
       mission: [''],
       missionImageUrl:[''],
       visionTitle:[''],
       vision: [''],
       visionImageUrl:[''],
-      certifications: [''],
 
 
-
+      //Services Page
       services: this.fb.array([]),
       benefits: this.fb.array([]),
       specialPrograms: [''],
       tours: [''],
       freeConsulting: [''],
+
 
       websiteGoals: [''],
       logoImage: [null],
@@ -135,7 +145,8 @@ export class EditBusinessComponent implements OnInit {
       testimonials: this.fb.array([]),
       socialMedia: [''],
 
-      teamValues: [''],
+
+
       //Contact Us Page
       contactFormDetails: [''],
       contactUsImageUrl: [''],

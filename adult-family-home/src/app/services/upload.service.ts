@@ -36,6 +36,9 @@ export class UploadService {
       case 'heroImages':
         filePath = `businesses/${businessId}/heroImages/${file.name}`;
         break;
+      case 'lifeStyle':
+        filePath = `businesses/${businessId}/lifeStyle/${file.name}`;
+        break;
       case 'gallery':
       default:
         filePath = `businesses/${businessId}/gallery/${file.name}`;

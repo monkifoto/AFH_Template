@@ -35,6 +35,7 @@
 
 .team-photo {
   width: 100%;
+  max-width: 300px;
   height: auto;
   border-radius: 50%;
   margin-bottom: 15px;
