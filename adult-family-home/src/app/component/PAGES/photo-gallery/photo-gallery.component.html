@@ -42,15 +42,53 @@
 
       <app-center-text [content]="business.photoGalleryText" [title]="'Welcome to our home'" [showBtn]="false"></app-center-text>
 
-      <section class="ae-gallery">
-        <div class="ae-section-heading">Explore Our Gallery</div>
-        <div class="ae-gallery-grid ae-gallery-container">
-          <div *ngFor="let image of images" class="ae-gallery-item" (click)="onImageClick(image.url)">
-            <img [src]="image.url" alt="Gallery Image">
+      <!-- Hero Images -->
+      <!-- <section class="gallery">
+        <div class="section-heading"><h2>Hero Images</h2></div>
+        <div class="gallery-grid gallery-container">
+          <div *ngFor="let image of heroImages" class="gallery-item" (click)="onImageClick(image.url)">
+            <img [src]="image.url" alt="Hero Image">
           </div>
         </div>
-        <div *ngIf="selectedImageUrl" class="ae-lightbox" (click)="closeLightbox()">
-          <img [src]="selectedImageUrl" alt="Full-size image">
+      </section> -->
+
+      <!-- Business Images -->
+      <!-- <section class="gallery">
+        <div class="section-heading"><h2>Business Images</h2></div>
+        <div class="gallery-grid gallery-container">
+          <div *ngFor="let image of businessImages" class="gallery-item" (click)="onImageClick(image.url)">
+            <img [src]="image.url" alt="Business Image">
+          </div>
+        </div>
+      </section> -->
+
+      <!-- Lifestyle Images -->
+      <section class="gallery">
+        <div class="section-heading"><h2>Lifestyle Images</h2></div>
+        <div class="gallery-grid gallery-container">
+          <div *ngFor="let image of lifeStyleImages" class="gallery-item" (click)="onImageClick(image.url)">
+            <img [src]="image.url" alt="Lifestyle Image">
+          </div>
+        </div>
+      </section>
+
+      <!-- Employee Images -->
+      <!-- <section class="gallery">
+        <div class="section-heading"><h2>Employee Images</h2></div>
+        <div class="gallery-grid gallery-container">
+          <div *ngFor="let image of employeeImages" class="gallery-item" (click)="onImageClick(image.url)">
+            <img [src]="image.url" alt="Employee Image">
+          </div>
+        </div>
+      </section> -->
+
+      <!-- Main Gallery -->
+      <section class="gallery">
+        <div class="section-heading"><h2>Gallery</h2></div>
+        <div class="gallery-grid gallery-container">
+          <div *ngFor="let image of images" class="gallery-item" (click)="onImageClick(image.url)">
+            <img [src]="image.url" alt="Gallery Image">
+          </div>
         </div>
       </section>
       <app-testimonial-image [imageURL]="'../../../../assets/sharedAssets/istockphoto-1453597643-2048x2048.jpg'"

@@ -14,7 +14,13 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 export class PhotoGalleryComponent implements OnInit {
   @Input()
   businessId!: string;
-  images!: any[];
+
+  heroImages: any[] = [];
+  images: any[] = [];
+  businessImages: any[] = [];
+  lifeStyleImages: any[] = [];
+  employeeImages: any[] = [];
+
   business: Business | null = null;
   selectedImageUrl: string | null = null;
   layoutType: string = 'demo';
@@ -48,22 +54,31 @@ export class PhotoGalleryComponent implements OnInit {
   }
 
   loadImages(): void {
-    this.webContent.getBusinessGalleryImagesById(this.businessId).pipe(
-      switchMap(images => {
-        // Create an array of observables that check if the image exists
-        const checks = images.map(async image => {
-          const exists = await this.webContent.checkImageExists(image.url);
-          return exists ? image : null;  // Return image only if it exists
-        });
+    type GalleryTarget = 'heroImages' | 'images' | 'businessImages' | 'lifeStyleImages' | 'employeeImages';
 
-        // Resolve all checks
-        return from(Promise.all(checks));
-      }),
-      map(images => images.filter(image => image !== null))  // Filter out null values
-    ).subscribe(filteredImages => {
-      this.images = filteredImages;
+    const imageCategories: { key: string; target: GalleryTarget }[] = [
+      { key: 'heroImages', target: 'heroImages' },
+      { key: 'gallery', target: 'images' },
+      { key: 'business', target: 'businessImages' },
+      { key: 'lifeStyle', target: 'lifeStyleImages' },
+      { key: 'employee', target: 'employeeImages' },
+    ];
+
+    imageCategories.forEach(({ key, target }) => {
+      this.webContent.getBusinessUploadedImagesById(this.businessId, key).pipe(
+        switchMap((images) => {
+          const checks = images.map(async (image) => {
+            const exists = await this.webContent.checkImageExists(image.url);
+            return exists ? image : null; // Return image only if it exists
+          });
+
+          return from(Promise.all(checks));
+        }),
+        map((images) => images.filter((image) => image !== null))
+      ).subscribe((filteredImages) => {
+        this[target] = filteredImages; // No more errors
+      });
     });
-
   }
 
 

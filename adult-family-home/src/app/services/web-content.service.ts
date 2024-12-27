@@ -99,6 +99,15 @@ export class WebContentService {
       .collection('gallery').valueChanges();
   }
 
+  getBusinessLifeStyleGalleryImagesById(businessId: string): Observable<any[]> {
+    // console.log("Web content getBusinessGalleryImagesByID: " , businessId);
+     if(businessId == undefined || businessId == "" || businessId ===""  ){
+       businessId = this.defaultBusinessId;
+     }
+     return this.firestore.collection('businesses').doc(businessId)
+       .collection('gallery').valueChanges();
+   }
+
   getBusinessUploadedImagesById(businessId: string, uploadLocation: string): Observable<any[]> {
    // console.log("Web content getBusinessGalleryImagesByID: " , businessId);
     if(businessId == undefined || businessId == "" || businessId ===""  ){
