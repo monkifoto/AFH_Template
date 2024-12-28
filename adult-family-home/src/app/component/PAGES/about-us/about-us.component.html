@@ -82,6 +82,39 @@
 
     </ng-container>
 
+    <ng-container *ngSwitchCase="'ehc'">
+      <app-hero></app-hero>
+
+<section class="our-approach">
+  <app-right-text
+    *ngIf="business.theme.themeType === 'ehc'"
+    [imageURL]="business.missionImageUrl"
+    [title]="business.missionTitle"
+    [content]="business.mission"
+  ></app-right-text>
+
+  <app-left-text
+    *ngIf="business.theme.themeType === 'ehc'"
+    [imageURL]="business.visionImageUrl"
+    [title]="business.visionTitle"
+    [content]="business.vision"
+  ></app-left-text>
+
+
+</section>
+
+
+<app-testimonial-image [imageURL]="'../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'"
+          [author]="business.testimonials[0].name" [text]="business.testimonials[0].quote"></app-testimonial-image>
+
+<app-call-to-action [text]="'Have more questions?'" [buttonText]="'Contact Us'" [isButton]="false"
+[bgColor]="business.theme.backgroundColor" [textColor]="business.theme.textColor">
+</app-call-to-action>
+
+<app-meet-the-team></app-meet-the-team>
+
+    </ng-container>
+
     <ng-container *ngSwitchDefault>
       <app-hero></app-hero>
 

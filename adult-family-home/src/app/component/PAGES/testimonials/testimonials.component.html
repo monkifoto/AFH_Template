@@ -1,0 +1,11 @@
+<app-hero></app-hero>
+<div class="testimonials-container" *ngIf="testimonials.length > 0">
+  <div *ngFor="let testimonial of testimonials" class="testimonial-card">
+    <blockquote class="testimonial-quote">
+      <p>"{{ testimonial.quote }}"</p>
+    </blockquote>
+    <div class="testimonial-author">
+      <p>{{ testimonial.name }}</p>
+    </div>
+  </div>
+</div>

@@ -24,7 +24,8 @@ export class ColorAdminComponent implements OnInit {
   availableThemes = [
     { name: 'Helping Hand Style', fileName: 'styles.css' },
     { name: 'A&E Style', fileName: 'styles1.css' },
-    { name: 'Demo Style', fileName: 'styles2.css' }
+    { name: 'EHC Style', fileName: 'styles2.css' },
+    { name: 'Demo Style', fileName: 'demo.css' }
     // Add other theme file names here
   ];
 

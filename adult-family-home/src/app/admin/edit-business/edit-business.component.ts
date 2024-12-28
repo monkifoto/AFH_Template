@@ -106,6 +106,9 @@ export class EditBusinessComponent implements OnInit {
       businessURL: [''],
       providerName: [''],
       keyWords: [''],
+      metaTitle:[''],
+      metaKeywords:[''],
+      metaDescription:[''],
 
       //Home Page
       welcomeMessage: [''],
@@ -200,6 +203,9 @@ export class EditBusinessComponent implements OnInit {
 
     this.businessForm = this.fb.group({
       businessName: [defaultBusiness.businessName],
+      metaTitle:[defaultBusiness.metaTitle],
+      metaKeywords:[defaultBusiness.metaKeywords],
+      metaDescription:[defaultBusiness.metaDescription],
       keyWords: [defaultBusiness.keyWords],
       businessURL: [defaultBusiness.businessURL],
       providerName: [defaultBusiness.providerName],
