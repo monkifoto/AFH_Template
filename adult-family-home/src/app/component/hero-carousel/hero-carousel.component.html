@@ -81,6 +81,48 @@
       </div>
     </section>
   </ng-container>
+
+  <ng-container *ngSwitchCase="'ehc'">
+    <section class="ae-hero-section">
+      <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" *ngIf="business">
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+          <button *ngFor="let image of heroImages; let i = index" type="button" class="afhBtn"
+            data-bs-target="#heroCarousel" [attr.data-bs-slide-to]="i" [class.active]="i === 0"
+            [attr.aria-current]="i === 0 ? 'true' : null" [attr.aria-label]="'Slide ' + (i + 1)">
+          </button>
+        </div>
+
+        <!-- Carousel Items -->
+        <div class="carousel-inner">
+          <div *ngFor="let image of heroImages; let i = index" class="carousel-item"
+            [class.active]="i === 0">
+            <img [src]="image.url" class="d-block w-100" alt="Hero Image">
+            <div class="carousel-caption d-none d-md-block ae-hero-overlay">
+
+              <h1 class="ae-h1">Welcome to <br /> <span class="ae-brand-name">{{ business.businessName }}</span></h1>
+              <div class="ae-business-subtitle ">
+                <h3>{{ business.tagline }}</h3>
+              </div>
+              <button type="button" class="ae-afhBtn" (click)="navigateToContact(businessId)">
+              Schedule a Visit
+            </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </section>
+  </ng-container>
   <!-- Default Case -->
   <ng-container *ngSwitchDefault>
     <section class="ae-hero-section">

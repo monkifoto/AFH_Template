@@ -44,6 +44,35 @@
 
     </ng-container>
 
+    <ng-container *ngSwitchCase="'ehc'">
+      <section class="ehc-testimonial-comp">
+        <div class="ehc-testimonial-heading">
+          <h2 class="ehc-testimonial-section-heading">Testimonials</h2>
+        </div>
+
+        <div class="ehc-testimonial-carousel" *ngIf="testimonials && testimonials.length > 0">
+          <div class="ehc-carousel-container" [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
+            <div class="ehc-testimonial-card" *ngFor="let testimonial of testimonials">
+              <p class="ehc-testimonial-quote">“{{ testimonial.quote }}”</p>
+              <div class="ehc-testimonial-author">
+                <span>{{ testimonial.name }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ehc-carousel-indicators">
+            <button
+              *ngFor="let _ of testimonials; let i = index"
+              class="ehc-indicator"
+              [class.active]="currentIndex === i"
+              (click)="setSlide(i)"
+            ></button>
+          </div>
+        </div>
+      </section>
+    </ng-container>
+
+
     <ng-container *ngSwitchDefault>
       <section class="demo-testimonial-comp">
         <div class="demo-testimonial-heading">

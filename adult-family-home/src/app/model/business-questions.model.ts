@@ -82,7 +82,9 @@ export interface Business {
   staffImagesBios: string;
 
 
-
+  metaTitle:string;
+  metaKeywords:string;
+  metaDescription:string;
 
 
 
@@ -431,6 +433,9 @@ export class BusinessModel {
           bio: '20 years experience as Adult Family Home Markeing director and asparing musician',
         },
       ],
+      metaTitle:'',
+      metaDescription:'',
+      metaKeywords:'',
       theme: {
         themeFileName: 'styles.css',
         primaryColor: '#fffaf2',

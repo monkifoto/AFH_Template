@@ -42,7 +42,26 @@
 
       <app-center-text [content]="business.photoGalleryText" [title]="'Welcome to our home'" [showBtn]="false"></app-center-text>
 
-      <!-- Hero Images -->
+      <!-- Main Gallery -->
+      <section class="gallery">
+        <div class="section-heading"><h2>Gallery</h2></div>
+        <div class="gallery-grid gallery-container">
+          <div *ngFor="let image of images" class="gallery-item" (click)="onImageClick(image.url)">
+            <img [src]="image.url" alt="Gallery Image">
+          </div>
+        </div>
+      </section>
+
+      <section class="gallery">
+        <div class="section-heading"><h2>Lifestyle Images</h2></div>
+        <div class="gallery-grid gallery-container">
+          <div *ngFor="let image of lifeStyleImages" class="gallery-item" (click)="onImageClick(image.url)">
+            <img [src]="image.url" alt="Lifestyle Image">
+          </div>
+        </div>
+      </section>
+
+         <!-- Hero Images -->
       <!-- <section class="gallery">
         <div class="section-heading"><h2>Hero Images</h2></div>
         <div class="gallery-grid gallery-container">
@@ -63,14 +82,7 @@
       </section> -->
 
       <!-- Lifestyle Images -->
-      <section class="gallery">
-        <div class="section-heading"><h2>Lifestyle Images</h2></div>
-        <div class="gallery-grid gallery-container">
-          <div *ngFor="let image of lifeStyleImages" class="gallery-item" (click)="onImageClick(image.url)">
-            <img [src]="image.url" alt="Lifestyle Image">
-          </div>
-        </div>
-      </section>
+
 
       <!-- Employee Images -->
       <!-- <section class="gallery">
@@ -82,6 +94,15 @@
         </div>
       </section> -->
 
+      <app-testimonial-image [imageURL]="'../../../../assets/sharedAssets/istockphoto-1453597643-2048x2048.jpg'"
+      [author]="business.testimonials[4].name" [text]="business.testimonials[4].quote"></app-testimonial-image>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'ehc'">
+      <app-hero></app-hero>
+
+      <app-center-text [content]="business.photoGalleryText" [title]="'Welcome to our home'" [showBtn]="false"></app-center-text>
+
       <!-- Main Gallery -->
       <section class="gallery">
         <div class="section-heading"><h2>Gallery</h2></div>
@@ -91,6 +112,49 @@
           </div>
         </div>
       </section>
+
+      <section class="gallery">
+        <div class="section-heading"><h2>Lifestyle Images</h2></div>
+        <div class="gallery-grid gallery-container">
+          <div *ngFor="let image of lifeStyleImages" class="gallery-item" (click)="onImageClick(image.url)">
+            <img [src]="image.url" alt="Lifestyle Image">
+          </div>
+        </div>
+      </section>
+
+         <!-- Hero Images -->
+      <!-- <section class="gallery">
+        <div class="section-heading"><h2>Hero Images</h2></div>
+        <div class="gallery-grid gallery-container">
+          <div *ngFor="let image of heroImages" class="gallery-item" (click)="onImageClick(image.url)">
+            <img [src]="image.url" alt="Hero Image">
+          </div>
+        </div>
+      </section> -->
+
+      <!-- Business Images -->
+      <!-- <section class="gallery">
+        <div class="section-heading"><h2>Business Images</h2></div>
+        <div class="gallery-grid gallery-container">
+          <div *ngFor="let image of businessImages" class="gallery-item" (click)="onImageClick(image.url)">
+            <img [src]="image.url" alt="Business Image">
+          </div>
+        </div>
+      </section> -->
+
+      <!-- Lifestyle Images -->
+
+
+      <!-- Employee Images -->
+      <!-- <section class="gallery">
+        <div class="section-heading"><h2>Employee Images</h2></div>
+        <div class="gallery-grid gallery-container">
+          <div *ngFor="let image of employeeImages" class="gallery-item" (click)="onImageClick(image.url)">
+            <img [src]="image.url" alt="Employee Image">
+          </div>
+        </div>
+      </section> -->
+
       <app-testimonial-image [imageURL]="'../../../../assets/sharedAssets/istockphoto-1453597643-2048x2048.jpg'"
       [author]="business.testimonials[4].name" [text]="business.testimonials[4].quote"></app-testimonial-image>
     </ng-container>
