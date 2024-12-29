@@ -201,6 +201,25 @@
 }
 
 /*-------------------EHC--------------------*/
+.ehc-testimonial-card {
+  min-width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  opacity: 0.2; /* Default fade for inactive slides */
+  transform: scale(0.95); /* Slightly shrink inactive slides */
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.ehc-testimonial-card.active {
+  opacity: 1; /* Fully visible for the active slide */
+  transform: scale(1); /* Full size for the active slide */
+}
+
+.ehc-testimonial-card.inactive {
+  opacity: 0.2; /* Fade inactive slides */
+}
+
+
 .ehc-testimonial-comp {
   padding: 40px 20px;
   text-align: center;
@@ -242,6 +261,11 @@
   font-style: italic;
   color: #555555;
   margin: 20px 0;
+  display: -webkit-box; /* Enables webkit box layout */
+  -webkit-box-orient: vertical; /* Specifies vertical orientation */
+  overflow: hidden; /* Hides overflow content */
+  text-overflow: ellipsis; /* Adds an ellipsis at the end */
+  -webkit-line-clamp: 3; /* Limits the number of lines to 3 */
 }
 
 .ehc-testimonial-author {
@@ -258,20 +282,23 @@
 }
 
 .ehc-indicator {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   margin: 0 5px;
   background-color: #d3d3d3;
   border: none;
-  border-radius: 50%;
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .ehc-indicator.active {
-  background-color: #008080;
+  background-color: var(--dark-background-color);
 }
 
+.ehc-testimonials-button{
+  padding-top: 3rem;
+}
 
 /*----------------Demo------------------*/
 /* Section Container */

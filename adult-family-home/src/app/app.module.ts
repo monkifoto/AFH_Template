@@ -59,6 +59,7 @@ import { TestimonialImageComponent } from './component/UI/testimonial-image/test
 import { CallToActionComponent } from './component/UI/call-to-action/call-to-action.component';
 import { UiTestComponent } from './component/UI/ui-test/ui-test.component';
 import { TestimonialsListComponent } from './component/PAGES/testimonials/testimonials.component';
+import { ParallaxTextComponent } from './component/UI/parallax-text/parallax-text.component';
 
     // Map hostnames to business IDs
     const businessIdMap: { [key: string]: string } = {
@@ -176,7 +177,8 @@ export function combinedInitializer(
     TestimonialImageComponent,
     CallToActionComponent,
     UiTestComponent,
-    TestimonialsListComponent
+    TestimonialsListComponent,
+    ParallaxTextComponent
   ],
   imports: [
     BrowserModule,

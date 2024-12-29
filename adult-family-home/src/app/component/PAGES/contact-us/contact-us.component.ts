@@ -39,9 +39,7 @@ export class ContactUsComponent  implements OnInit{
       this.business = business;
 
       if (business?.id) {
-        this.metaService.getMetaData(business.id).subscribe((metaData: { title: string; description: string; keywords: string }) => {
-          this.metaService.updateMetaTags(metaData);
-        });
+        this.metaService.loadAndApplyMeta(business?.id);
         this.layoutType = this.business?.theme.themeType;
       }
     });

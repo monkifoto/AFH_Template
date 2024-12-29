@@ -51,6 +51,7 @@ export interface Business {
 
   logoImage: string;
   logoText: string;
+  faviconUrl:string;
 
 
   facilityImages: string[];
@@ -201,6 +202,7 @@ export class BusinessModel {
       websiteGoals:
         'To inform, encourage visits, and offer a means to request consultations.',
       logoImage: '../assets/sharedAssets/Demologo2.png',
+      faviconUrl: '../../assets/sharedAssets/icons/hh_favicon.ico',
       ownerImagesBios: 'Sarah Caregiver, RN, Founder.',
       staffImagesBios:
         'Emily Nurse, CNA, Head Nurse; Jack Therapist, PT, Physical Therapist',

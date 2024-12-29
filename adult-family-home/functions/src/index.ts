@@ -32,7 +32,8 @@ const corsHandler = cors({origin: true});
 
 // Function to create a transporter based on domain
 // const getTransporterForDomain = (domain) => {
-//   const config = domainToTransporterConfig[domain] || domainToTransporterConfig['default'];
+//   const config = domainToTransporterConfig[domain]
+// || domainToTransporterConfig['default'];
 //   return nodemailer.createTransport(config);
 // };
 
