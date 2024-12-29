@@ -17,6 +17,10 @@ export class BusinessDataService {
   // Method to load business data on app initialization
   loadBusinessData(businessId: string): Observable<Business | null> {
     console.log('BusinessDataService - loadBusinessData for ID:', businessId);
+    // Prevent multiple calls if the data is already loaded
+    if (this.businessDataSubject.value) {
+      return this.businessDataSubject.asObservable(); // Return the existing data
+    }
     return this.businessService.getBusinessData(businessId).pipe(
       map((business) => business ?? null),
       tap((business) => {

@@ -65,6 +65,12 @@
   <div class="form-group">
     <label for="faviconUrl" >Favicon Url</label>
     <textarea id="faviconUrl" formControlName="faviconUrl" class="form-control" ></textarea>
+    <div class="existing-logo" *ngIf="business?.faviconUrl">
+      <img class="logoImage" [src]="business?.faviconUrl" alt="Business Favicon">
+    </div>
+    <div *ngIf="!business?.faviconUrl">
+      <p>No favicon available.</p>
+    </div>
   </div>
 </section>
 </form>

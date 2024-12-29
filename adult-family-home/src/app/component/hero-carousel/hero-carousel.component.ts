@@ -1,66 +1,103 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { from, map, switchMap } from 'rxjs';
+import { Subscription, BehaviorSubject, from, map, switchMap } from 'rxjs';
 import { Business, HeroImage } from 'src/app/model/business-questions.model';
 import { WebContentService } from 'src/app/services/web-content.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
+
+declare const bootstrap: any; // Declare bootstrap to use its JS API
+
 @Component({
   selector: 'app-hero-carousel',
   templateUrl: './hero-carousel.component.html',
   styleUrls: ['./hero-carousel.component.css']
 })
-export class HeroCarouselComponent implements OnInit {
+export class HeroCarouselComponent implements OnInit, OnDestroy {
   businessId!: string;
-  business: Business | null= null; ;
+  business: Business | null = null;
   heroImages: HeroImage[] = [];
   layoutType: string = 'demo';
+  private subscriptions = new Subscription();
+  private imagesLoaded$ = new BehaviorSubject<boolean>(false); // To track if images are loaded
+  private carouselInitialized = false;
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private webContentService: WebContentService,
-    private businessDataService: BusinessDataService) {}
+    private businessDataService: BusinessDataService
+  ) {}
 
   ngOnInit(): void {
-
-    this.businessDataService.businessData$.subscribe((business) => {
-      this.business = business;
-      this.businessId = this.business?.id ?? '';
-      this.layoutType = this.business?.theme?.themeType ?? 'demo';
-      if (this.business) {
-        console.log("Hero Section busines id:", this.business.id);
-        console.log("Hero Section LayoutType: ", this.layoutType);
-        this.loadHeroImages();
+    // Subscribe to business data
+    const businessSubscription = this.businessDataService.businessData$.subscribe((business) => {
+      if (business) {
+        this.business = business;
+        this.businessId = this.business?.id ?? '';
+        this.layoutType = this.business?.theme?.themeType ?? 'demo';
+        this.loadHeroImages(); // Trigger image loading
       }
-    });  }
+    });
 
-  loadHeroImages(): void {
-    const uploadLocation = 'heroImages'; // This is the folder in Firestore where the images are stored
-    this.webContentService.getBusinessUploadedImagesById(this.businessId, uploadLocation).pipe(
-      switchMap(images => {
+    this.subscriptions.add(businessSubscription);
 
-        // Create an array of observables that check if the image exists
-        const checks = images.map(async image => {
-          const exists = await this.webContentService.checkImageExists(image.url);
-          return exists ? image : null;  // Return image only if it exists
-        });
+    // Initialize carousel after images are loaded
+    const imageLoadedSubscription = this.imagesLoaded$.subscribe((loaded) => {
+      if (loaded && !this.carouselInitialized) {
+        this.initializeCarousel();
+      }
+    });
 
-        return from(Promise.all(checks));
-      }),
-      map(images =>images.filter(image => image !== null))
-    ).subscribe(images => {
-        this.heroImages = images; // Store the retrieved images
-        //console.log("Number of images: ",this.heroImages.length);
-
-        this.heroImages.forEach(element => {
-         console.log(element.url);
-
-        });
-      });
-
+    this.subscriptions.add(imageLoadedSubscription);
   }
 
-navigateToContact(id: string | undefined | null) {
-  this.router.navigate(['/contact-us'], { queryParams: { id } });
-}
+  loadHeroImages(): void {
+    if (!this.businessId) return; // Avoid fetching without a valid business ID
 
+    const uploadLocation = 'heroImages';
+
+    const imageSubscription = this.webContentService
+      .getBusinessUploadedImagesById(this.businessId, uploadLocation)
+      .pipe(
+        switchMap((images) => {
+          const checks = images.map(async (image) => {
+            const exists = await this.webContentService.checkImageExists(image.url);
+            return exists ? image : null;
+          });
+          return from(Promise.all(checks));
+        }),
+        map((images) => images.filter((image) => image !== null))
+      )
+      .subscribe((images) => {
+        this.heroImages = images as HeroImage[];
+        console.log('Loaded hero images:', this.heroImages);
+
+        if (this.heroImages.length > 0) {
+          this.imagesLoaded$.next(true); // Signal that images are loaded
+        }
+      });
+
+    this.subscriptions.add(imageSubscription);
+  }
+
+  initializeCarousel(): void {
+    const carouselElement = document.querySelector('#heroCarousel');
+    if (carouselElement) {
+      new bootstrap.Carousel(carouselElement, {
+        interval: 10000, // 10 seconds
+        ride: 'carousel',
+      });
+      this.carouselInitialized = true;
+      console.log('Carousel initialized');
+    }
+  }
+
+  navigateToContact(id: string | undefined | null): void {
+    this.router.navigate(['/contact-us'], { queryParams: { id } });
+  }
+
+  ngOnDestroy(): void {
+    // Clean up all subscriptions
+    this.subscriptions.unsubscribe();
+  }
 }
