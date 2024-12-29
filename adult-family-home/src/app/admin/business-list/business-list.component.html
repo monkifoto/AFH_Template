@@ -9,7 +9,9 @@
       <tr>
         <th>ID</th>
         <th>Name</th>
+        <th>Provider</th>
         <th>Active</th>
+        <th>Live</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -20,14 +22,16 @@
             [routerLink]="['/home/']"
             [queryParams]="{ id: business.id }"
             class="business-id-link">
-            {{ business.id }}
+           <strong> {{ business.id }}</strong>
           </a>
         </td>
         <td>{{ business.businessName }}</td>
+        <td><strong>{{ business.providerName}} </strong><br> {{business.phone}}<br>{{business.email}}</td>
         <td>{{ business.isActive}}</td>
+        <td>{{ business.isLive}}</td>
         <td>
           <button type="button" class="afhBtn"  (click)="editBusiness(business.id)">Edit</button>
-          <button type="button" class="afhBtn"  (click)="deleteBusiness(business.id)">Delete</button>
+          <button type="button" class="afhBtn" *ngIf="!business.isActive"  (click)="deleteBusiness(business.id)">Delete</button>
         </td>
       </tr>
     </tbody>

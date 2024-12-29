@@ -1,80 +1,76 @@
 <div [ngSwitch]="layoutType">
   <!-- Case for 'hh' -->
   <ng-container *ngSwitchCase="'hh'">
-    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" *ngIf="business">
+    <div id="heroCarousel" class="carousel slide hh-carousel" data-bs-ride="carousel" *ngIf="business">
 
       <!-- Indicators -->
-      <div class="carousel-indicators">
-        <button *ngFor="let image of heroImages; let i = index" type="button" class="afhBtn"
+      <div class="carousel-indicators hh-indicators">
+        <button *ngFor="let image of heroImages; let i = index" type="button" class="hh-btn"
           data-bs-target="#heroCarousel" [attr.data-bs-slide-to]="i" [class.active]="i === 0"
           [attr.aria-current]="i === 0 ? 'true' : null" [attr.aria-label]="'Slide ' + (i + 1)">
         </button>
       </div>
-      <!-- Carousel Items -->
-      <div class="carousel-inner">
-        <div *ngFor="let image of heroImages; let i = index" class="carousel-item" [class.active]="i === 0">
 
+      <!-- Carousel Items -->
+      <div class="carousel-inner hh-inner">
+        <div *ngFor="let image of heroImages; let i = index" class="carousel-item" [class.active]="i === 0">
           <img [src]="image.url" class="d-block w-100" alt="Hero Image">
-          <div class="carousel-caption d-none d-md-block hero-overlay">
+          <div class="carousel-caption d-none d-md-block hh-overlay">
             <h1>Welcome to <br /> {{ business.businessName }}</h1>
             <div class="business-subtitle garamond"> <br />
               <p>{{ business.tagline }}</p>
             </div>
-            <button type="button" class="afhBtn" (click)="navigateToContact(businessId)"> Book Consultation </button>
+            <button type="button" class="hh-btn" (click)="navigateToContact(businessId)"> Book Consultation </button>
           </div>
-
         </div>
       </div>
 
       <!-- Controls -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <button class="carousel-control-prev hh-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <button class="carousel-control-next hh-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
     </div>
   </ng-container>
 
-
   <!-- Case for 'ae' -->
   <ng-container *ngSwitchCase="'ae'">
     <section class="ae-hero-section">
-      <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" *ngIf="business">
+      <div id="heroCarousel" class="carousel slide ae-carousel" data-bs-ride="carousel" *ngIf="business">
         <!-- Indicators -->
-        <div class="carousel-indicators">
-          <button *ngFor="let image of heroImages; let i = index" type="button" class="afhBtn"
+        <div class="carousel-indicators ae-indicators">
+          <button *ngFor="let image of heroImages; let i = index" type="button" class="ae-btn"
             data-bs-target="#heroCarousel" [attr.data-bs-slide-to]="i" [class.active]="i === 0"
             [attr.aria-current]="i === 0 ? 'true' : null" [attr.aria-label]="'Slide ' + (i + 1)">
           </button>
         </div>
 
         <!-- Carousel Items -->
-        <div class="carousel-inner">
-          <div *ngFor="let image of heroImages; let i = index" class="carousel-item"
-            [class.active]="i === 0">
+        <div class="carousel-inner ae-inner">
+          <div *ngFor="let image of heroImages; let i = index" class="carousel-item" [class.active]="i === 0">
             <img [src]="image.url" class="d-block w-100" alt="Hero Image">
-            <div class="carousel-caption d-none d-md-block ae-hero-overlay">
-
+            <div class="carousel-caption d-none d-md-block ae-overlay">
               <h1 class="ae-h1">Welcome to <br /> <span class="ae-brand-name">{{ business.businessName }}</span></h1>
-              <div class="ae-business-subtitle ">
+              <div class="ae-business-subtitle">
                 <h3>{{ business.tagline }}</h3>
               </div>
-              <button type="button" class="ae-afhBtn" (click)="navigateToContact(businessId)">
-              Schedule a Visit
-            </button>
+              <button type="button" class="ae-btn" (click)="navigateToContact(businessId)">
+                Schedule a Visit
+              </button>
             </div>
           </div>
         </div>
 
         <!-- Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <button class="carousel-control-prev ae-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <button class="carousel-control-next ae-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
@@ -82,83 +78,87 @@
     </section>
   </ng-container>
 
+  <!-- Case for 'ehc' -->
   <ng-container *ngSwitchCase="'ehc'">
-    <section class="ae-hero-section">
-      <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" *ngIf="business">
+    <section class="ehc-hero-section">
+      <div id="heroCarousel" class="carousel slide ehc-carousel" data-bs-ride="carousel" *ngIf="business">
         <!-- Indicators -->
-        <div class="carousel-indicators">
-          <button *ngFor="let image of heroImages; let i = index" type="button" class="afhBtn"
+        <div class="carousel-indicators ehc-indicators">
+          <button *ngFor="let image of heroImages; let i = index" type="button" class="ehc-btn"
             data-bs-target="#heroCarousel" [attr.data-bs-slide-to]="i" [class.active]="i === 0"
             [attr.aria-current]="i === 0 ? 'true' : null" [attr.aria-label]="'Slide ' + (i + 1)">
           </button>
         </div>
 
         <!-- Carousel Items -->
-        <div class="carousel-inner">
-          <div *ngFor="let image of heroImages; let i = index" class="carousel-item"
-            [class.active]="i === 0">
+        <div class="carousel-inner ehc-inner">
+          <div *ngFor="let image of heroImages; let i = index" class="carousel-item" [class.active]="i === 0">
             <img [src]="image.url" class="d-block w-100" alt="Hero Image">
-            <div class="carousel-caption d-none d-md-block ae-hero-overlay">
-
-              <h1 class="ae-h1">Welcome to <br /> <span class="ae-brand-name">{{ business.businessName }}</span></h1>
-              <div class="ae-business-subtitle ">
-                <h3>{{ business.tagline }}</h3>
-              </div>
-              <button type="button" class="ae-afhBtn" (click)="navigateToContact(businessId)">
-              Schedule a Visit
-            </button>
+            <div class="carousel-caption d-none d-md-block ehc-overlay">
+              <ng-container *ngIf="i < 3; else defaultOverlay">
+                <h1 class="ehc-h1">Exclusive Offer<br />Slide {{ i + 1 }}</h1>
+                <p class="ehc-special-text">Enjoy unique benefits on this slide.</p>
+              </ng-container>
+              <ng-template #defaultOverlay>
+                <h1 class="ehc-h1">Welcome to <br /> <span class="ehc-brand-name">{{ business.businessName }}</span></h1>
+                <div class="ehc-business-subtitle">
+                  <h3>{{ business.tagline }}</h3>
+                </div>
+              </ng-template>
+              <button type="button" class="ehc-btn" (click)="navigateToContact(businessId)">
+                Learn More
+              </button>
             </div>
           </div>
         </div>
 
         <!-- Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <button class="carousel-control-prev ehc-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <button class="carousel-control-next ehc-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
       </div>
     </section>
   </ng-container>
+
   <!-- Default Case -->
   <ng-container *ngSwitchDefault>
-    <section class="ae-hero-section">
-      <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" *ngIf="business">
+    <section class="default-hero-section">
+      <div id="heroCarousel" class="carousel slide default-carousel" data-bs-ride="carousel" *ngIf="business">
         <!-- Indicators -->
-        <div class="carousel-indicators">
-          <button *ngFor="let image of heroImages; let i = index" type="button" class="ae-afhBtn"
+        <div class="carousel-indicators default-indicators">
+          <button *ngFor="let image of heroImages; let i = index" type="button" class="default-btn"
             data-bs-target="#heroCarousel" [attr.data-bs-slide-to]="i" [class.active]="i === 0"
             [attr.aria-current]="i === 0 ? 'true' : null" [attr.aria-label]="'Slide ' + (i + 1)">
           </button>
         </div>
 
         <!-- Carousel Items -->
-        <div class="carousel-inner">
-          <div *ngFor="let image of heroImages; let i = index" class="carousel-item"
-            [class.active]="i === 0">
+        <div class="carousel-inner default-inner">
+          <div *ngFor="let image of heroImages; let i = index" class="carousel-item" [class.active]="i === 0">
             <img [src]="image.url" class="d-block w-100" alt="Hero Image">
-            <div class="carousel-caption d-none d-md-block ae-hero-overlay">
-
-              <h1 class="ae-h1">Welcome to <br /> <span class="ae-brand-name">{{ business.businessName }}</span></h1>
-              <div class="ae-business-subtitle ">
+            <div class="carousel-caption d-none d-md-block default-overlay">
+              <h1 class="default-h1">Welcome to <br /> <span class="default-brand-name">{{ business.businessName }}</span></h1>
+              <div class="default-business-subtitle">
                 <h3>{{ business.tagline }}</h3>
               </div>
-              <button type="button" class="afhBtn carouselBtn" (click)="navigateToContact(businessId)">
-              Schedule a Visit
-            </button>
+              <button type="button" class="default-btn" (click)="navigateToContact(businessId)">
+                Get Started
+              </button>
             </div>
           </div>
         </div>
 
         <!-- Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <button class="carousel-control-prev default-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <button class="carousel-control-next default-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>

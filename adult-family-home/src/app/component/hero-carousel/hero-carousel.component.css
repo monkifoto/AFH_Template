@@ -1,4 +1,3 @@
-
 .carousel-item {
   display: none;
   position: relative;
@@ -21,9 +20,10 @@
   object-fit: cover;
 }
 
+/* Common Hero Overlay Styles */
 .hero-overlay {
   position: absolute;
-  top:0px;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
@@ -32,12 +32,11 @@
   justify-content: center;
   flex-direction: column;
   background: rgba(249, 241, 214, 0.1);
-  color:  var(--primary-color);
+  color: var(--primary-color);
 }
 
 .hero-overlay h1 {
-
-padding-top: 200px;
+  padding-top: 200px;
   font-size: 5rem;
   letter-spacing: 0.5rem;
   text-transform: uppercase;
@@ -46,16 +45,16 @@ padding-top: 200px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.business-subtitle{
+.business-subtitle {
   padding: 20px;
   font-size: 3rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.action-btn{
-padding: 20px;
-background-color: var(--button-color);
-font-size: 1.4rem;
+.action-btn {
+  padding: 20px;
+  background-color: var(--button-color);
+  font-size: 1.4rem;
 }
 
 .carousel-control-prev,
@@ -67,7 +66,6 @@ font-size: 1.4rem;
 .carousel-control-next:hover {
   background-color: rgba(0, 0, 0, 0.5);
 }
-
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
@@ -87,7 +85,6 @@ font-size: 1.4rem;
   transform: rotate(-45deg);
 }
 
-
 .carousel {
   position: relative;
 }
@@ -97,11 +94,6 @@ font-size: 1.4rem;
   width: 5%;
   top: 50%;
   transform: translateY(-50%);
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  background-size: 100%, 100%;
 }
 
 .carousel-indicators {
@@ -137,11 +129,6 @@ font-size: 1.4rem;
   background-color: #fff;
 }
 
-/* .afhBtn{
-position: relative;
-left: 50%;
-} */
-
 @media (max-width: 768px) {
   .hero-overlay h1 {
     font-size: 2rem;
@@ -174,7 +161,12 @@ left: 50%;
   }
 }
 
-/*--------------------Carousel AE ----------------*/
+/* HH-Specific Styles */
+.hh-hero-overlay {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* AE-Specific Styles */
 .ae-hero-section {
   position: relative;
   width: 100%;
@@ -182,32 +174,26 @@ left: 50%;
   overflow: hidden;
 }
 
-
 .ae-hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to right, rgba(42, 56, 35, 0.8), rgba(66, 99, 51, 0.0),rgba(66, 99, 51, 0.0));
+  background: linear-gradient(to right, rgba(42, 56, 35, 0.8), rgba(66, 99, 51, 0.0), rgba(66, 99, 51, 0.0));
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Align items to the left */
+  align-items: flex-start;
   justify-content: center;
   color: white;
-  padding-left: 10%; /* Add some padding to align text from the left */
-}
-
-.ae-carousel-caption {
-  text-align: left; /* Align text to the left */
+  padding-left: 10%;
 }
 
 .ae-h1 {
-  /* font-size: 4rem; */
   line-height: 1.2;
   margin-bottom: 10px;
   position: absolute;
-  top:55%;
+  top: 55%;
   text-align: left;
 }
 
@@ -215,9 +201,9 @@ left: 50%;
   font-size: 1.7rem;
   margin-bottom: 20px;
   position: absolute;
-  top:75%;
+  top: 75%;
   left: 10%;
-  color:var(--primary-color);
+  color: var(--primary-color);
 }
 
 .ae-brand-name {
@@ -225,54 +211,47 @@ left: 50%;
   color: var(--button-color);
 }
 
-.ae-afhBtn{
+.ae-afhBtn {
   position: absolute;
-  top:80%;
+  top: 80%;
   left: 10%;
 }
 
 @media (max-width: 768px) {
   .ae-hero-overlay {
-      padding-left: 5%;
-      align-items: center; /* Center align text for better readability */
+    padding-left: 5%;
+    align-items: center;
   }
 
   .ae-h1 {
-      font-size: 2rem; /* Reduce font size for smaller screens */
-      top: 60%;
+    font-size: 2rem;
+    top: 60%;
   }
 
   .ae-business-subtitle h3 {
-      font-size: 1.2rem;
-      top: 70%;
+    font-size: 1.2rem;
+    top: 70%;
   }
 
   .ae-hero-section {
-    position: relative;
-    width: 100%;
     height: 60vh;
-    overflow: hidden;
   }
 }
-
 
 @media (max-width: 480px) {
   .ae-hero-overlay {
     padding: 10px;
   }
 
-  .ae-hero-overlay h1 {
+  .ae-h1 {
     font-size: 1.5rem;
   }
 
-  .ae-hero-overlay p {
-    font-size: 0.875rem;
+  .ae-business-subtitle h3 {
+    font-size: 1rem;
   }
 
   .ae-hero-section {
-    position: relative;
-    width: 100%;
     height: 40vh;
-    overflow: hidden;
   }
 }

@@ -22,6 +22,7 @@ export interface Business {
   businessStory: string;
 
   isActive: boolean;
+  isLive:boolean;
 
   heroImages: string[];
 
@@ -228,6 +229,7 @@ export class BusinessModel {
       photoGalleryText:
         'A collection of images showcasing our facilities, activities, and care staff.',
       isActive: true,
+      isLive:false,
       uniqueService: [
         {
           description:
