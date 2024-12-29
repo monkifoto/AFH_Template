@@ -33,9 +33,7 @@ export class ServicesComponent implements OnInit {
 
       if (this.businessId) {
         // Update meta tags based on business data
-        this.metaService.getMetaData(this.businessId).subscribe((metaData: { title: string; description: string; keywords: string }) => {
-          this.metaService.updateMetaTags(metaData);
-        });
+        this.metaService.loadAndApplyMeta(this.businessId);
       }
     });
   }

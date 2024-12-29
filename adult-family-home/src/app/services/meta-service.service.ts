@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Meta, Title } from '@angular/platform-browser';
-import { map, Observable } from 'rxjs';
+import { BusinessDataService } from './business-data.service';
+import { Business } from '../model/business-questions.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MetaService {
-  private defaultBusinessId = 'Z93oAAVwFAwhmdH2lLtB';
-  constructor(private meta: Meta, private title: Title, private firestore: AngularFirestore,) {}
+  constructor(
+    private meta: Meta,
+    private title: Title,
+    private businessDataService: BusinessDataService
+  ) {}
 
   updateMetaTags(metaData: { title: string; description: string; keywords: string }) {
     this.title.setTitle(metaData.title);
@@ -18,26 +21,37 @@ export class MetaService {
     this.meta.updateTag({ property: 'og:description', content: metaData.description });
   }
 
-  getMetaData(businessId: string): Observable<{ title: string; description: string; keywords: string }> {
-    if(businessId == undefined || businessId == "" || businessId ==="" ){
-      businessId = this.defaultBusinessId;
-    }
-    return this.firestore.collection('businesses').doc(businessId).valueChanges().pipe(
-      map((data: any) => {
-        if (!data) {
-          return {
-            title: 'No Metadata Title',
-            description: 'No Default Description',
-            keywords: 'default, keywords',
-          };
-        }
+  updateFavicon(faviconUrl: string) {
+    const head = document.getElementsByTagName('head')[0];
+    let link: HTMLLinkElement | null = document.querySelector("link[rel*='icon']");
 
-        return {
-          title: data.metaTitle || 'Adult Family Home',
-          description: data.metaDescription || 'Best Adult Family home in Washington State',
-          keywords: data.metaKeywords || 'default, keywords',
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      head.appendChild(link);
+    }
+
+    link.href = faviconUrl;
+  }
+
+  loadAndApplyMeta(businessId: string): void {
+    this.businessDataService.loadBusinessData(businessId).subscribe((business: Business | null) => {
+      if (business) {
+        // Update meta tags
+        const metaData = {
+          title: business.metaTitle || 'Default Title',
+          description: business.metaDescription || 'Default Description',
+          keywords: business.metaKeywords || 'default, keywords',
         };
-      })
-    );
+        this.updateMetaTags(metaData);
+
+        // Update favicon if available
+        if (business.faviconUrl) {
+          this.updateFavicon(business.faviconUrl);
+        }
+      } else {
+        console.warn('MetaService: No business data found for the given ID.');
+      }
+    });
   }
 }

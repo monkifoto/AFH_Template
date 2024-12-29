@@ -11,7 +11,7 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
   styleUrls: ['./about-us.component.css']
 })
 export class AboutUsComponent implements OnInit {
-  business: Business | null = null; 
+  business: Business | null = null;
   businessId: string | null = null;
 
   constructor(
@@ -34,9 +34,7 @@ export class AboutUsComponent implements OnInit {
 
       if (this.businessId) {
         // Update meta tags based on business data
-        this.metaService.getMetaData(this.businessId).subscribe((metaData: { title: string; description: string; keywords: string }) => {
-          this.metaService.updateMetaTags(metaData);
-        });
+        this.metaService.loadAndApplyMeta(this.businessId);
       }
     });
   }

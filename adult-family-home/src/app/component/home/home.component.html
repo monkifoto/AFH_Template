@@ -7,6 +7,8 @@
   ></app-welcome>
 </div>
 
+<app-parallax-text  *ngIf="business?.theme?.themeType === 'ehc'"></app-parallax-text>
+
 <app-right-text
   *ngIf="business?.theme?.themeType === 'ae'"
   [imageURL]="'../../../../assets/sharedAssets/istockphoto-1432890664-2048x2048.jpg'"

@@ -143,6 +143,7 @@ export class EditBusinessComponent implements OnInit {
 
       websiteGoals: [''],
       logoImage: [null],
+      faviconUrl: [''],
       mediaFeatures: [''],
       ratings: [''],
       testimonials: this.fb.array([]),
@@ -220,6 +221,7 @@ export class EditBusinessComponent implements OnInit {
       freeConsulting: [defaultBusiness.freeConsulting],
       websiteGoals: [defaultBusiness.websiteGoals],
       logoImage: [defaultBusiness.logoImage],
+      faviconUrl: [defaultBusiness.faviconUrl],
       ownerImagesBios: [defaultBusiness.ownerImagesBios],
       staffImagesBios: [defaultBusiness.staffImagesBios],
       mediaFeatures: [defaultBusiness.mediaFeatures],

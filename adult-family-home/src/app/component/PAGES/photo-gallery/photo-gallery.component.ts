@@ -38,11 +38,8 @@ export class PhotoGalleryComponent implements OnInit {
       this.layoutType = business?.theme.themeType || '';
       if (business?.id) {
         this.businessId = business.id;
-
-        this.metaService.getMetaData(business.id).subscribe((metaData: { title: string; description: string; keywords: string }) => {
-          this.metaService.updateMetaTags(metaData);
-          this.loadImages();
-        });
+        this.loadImages();
+        this.metaService.loadAndApplyMeta(this.businessId);
       }
     });
   }

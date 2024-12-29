@@ -58,6 +58,8 @@ export class HomeComponent implements OnInit {
         this.businessDataService.getBusinessData().subscribe((data) => {
           this.business = data;
         });
+          // Update meta tags based on business data
+          this.metaService.loadAndApplyMeta(this.businessId);
       }
     });
   }
