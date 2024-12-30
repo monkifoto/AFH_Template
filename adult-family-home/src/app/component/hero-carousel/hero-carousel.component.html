@@ -16,7 +16,7 @@
         <div *ngFor="let image of heroImages; let i = index" class="carousel-item" [class.active]="i === 0">
           <img [src]="image.url" class="d-block w-100" alt="Hero Image">
           <div class="carousel-caption d-none d-md-block hh-overlay">
-            <h1>Welcome to <br /> {{ business.businessName }}</h1>
+            <h1 class="hh-h1">Welcome to <br /> {{ business.businessName }}</h1>
             <div class="business-subtitle garamond"> <br />
               <p>{{ business.tagline }}</p>
             </div>
@@ -53,14 +53,16 @@
         <div class="carousel-inner ae-inner">
           <div *ngFor="let image of heroImages; let i = index" class="carousel-item" [class.active]="i === 0">
             <img [src]="image.url" class="d-block w-100" alt="Hero Image">
-            <div class="carousel-caption d-none d-md-block ae-overlay">
+            <div class="carousel-caption d-none d-md-block ae-hero-overlay ">
+              <div class="ae-carousel-caption-content">
               <h1 class="ae-h1">Welcome to <br /> <span class="ae-brand-name">{{ business.businessName }}</span></h1>
               <div class="ae-business-subtitle">
                 <h3>{{ business.tagline }}</h3>
               </div>
-              <button type="button" class="ae-btn" (click)="navigateToContact(businessId)">
+              <button type="button" class="ae-afhBtn" (click)="navigateToContact(businessId)">
                 Schedule a Visit
               </button>
+            </div>
             </div>
           </div>
         </div>
@@ -95,16 +97,19 @@
           <div *ngFor="let image of heroImages; let i = index" class="carousel-item" [class.active]="i === 0">
             <img [src]="image.url" class="d-block w-100" alt="Hero Image">
             <div class="carousel-caption d-none d-md-block ehc-overlay">
+
               <ng-container *ngIf="i < 3; else defaultOverlay">
                 <h1 class="ehc-h1">Exclusive Offer<br />Slide {{ i + 1 }}</h1>
                 <p class="ehc-special-text">Enjoy unique benefits on this slide.</p>
               </ng-container>
+
               <ng-template #defaultOverlay>
                 <h1 class="ehc-h1">Welcome to <br /> <span class="ehc-brand-name">{{ business.businessName }}</span></h1>
                 <div class="ehc-business-subtitle">
                   <h3>{{ business.tagline }}</h3>
                 </div>
               </ng-template>
+
               <button type="button" class="ehc-btn" (click)="navigateToContact(businessId)">
                 Learn More
               </button>
