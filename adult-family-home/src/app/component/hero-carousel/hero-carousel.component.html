@@ -39,7 +39,7 @@
 
   <!-- Case for 'ae' -->
   <ng-container *ngSwitchCase="'ae'">
-    <section class="ae-hero-section">
+    <section class="ae-hero-section" [class.scrolled]="isScrolled" [ngStyle]="{ opacity: scrollOpacity }">
       <div id="heroCarousel" class="carousel slide ae-carousel" data-bs-ride="carousel" *ngIf="business">
         <!-- Indicators -->
         <div class="carousel-indicators ae-indicators">
@@ -55,8 +55,8 @@
             <img [src]="image.url" class="d-block w-100" alt="Hero Image">
             <div class="carousel-caption d-none d-md-block ae-hero-overlay ">
               <div class="ae-carousel-caption-content">
-              <h1 class="ae-h1">Welcome to <br /> <span class="ae-brand-name">{{ business.businessName }}</span></h1>
-              <div class="ae-business-subtitle">
+              <h1 class="ae-h1" [class.slide-up-fade-in]="animateText" >Welcome to <br /> <span class="ae-brand-name">{{ business.businessName }}</span></h1>
+              <div class="ae-business-subtitle" [class.slide-down-fade-in]="animateText">
                 <h3>{{ business.tagline }}</h3>
               </div>
               <button type="button" class="ae-afhBtn" (click)="navigateToContact(businessId)">
@@ -82,7 +82,7 @@
 
   <!-- Case for 'ehc' -->
   <ng-container *ngSwitchCase="'ehc'">
-    <section class="ehc-hero-section">
+    <section class="ehc-hero-section" [ngStyle]="{ opacity: scrollOpacity }">
       <div id="heroCarousel" class="carousel slide ehc-carousel" data-bs-ride="carousel" *ngIf="business">
         <!-- Indicators -->
         <div class="carousel-indicators ehc-indicators">
@@ -96,23 +96,39 @@
         <div class="carousel-inner ehc-inner">
           <div *ngFor="let image of heroImages; let i = index" class="carousel-item" [class.active]="i === 0">
             <img [src]="image.url" class="d-block w-100" alt="Hero Image">
-            <div class="carousel-caption d-none d-md-block ehc-overlay">
+            <div class="carousel-caption d-none d-md-block ehc-hero-overlay">
+              <div class="ae-carousel-caption-content">
+              <ng-container *ngIf="i == 0; else defaultOverlay">
+                <p [class.slide-up-fade-in]="animateText" class="ehc-special-text">Compassion in our hearts</p>
+                <h1 [class.slide-down-fade-in]="animateText" class="ehc-h1">Excellent care in our hands</h1>
+              </ng-container>
 
-              <ng-container *ngIf="i < 3; else defaultOverlay">
-                <h1 class="ehc-h1">Exclusive Offer<br />Slide {{ i + 1 }}</h1>
-                <p class="ehc-special-text">Enjoy unique benefits on this slide.</p>
+              <ng-container *ngIf="i == 1 ; else defaultOverlay">
+                <p class="ehc-special-text">Personalized care</p>
+                <h1 class="ehc-h1">With passion</h1>
+                <div class="ehc-overlay-buttons">
+                <button class="afhBtn"> Who we are</button>
+                <button class="afhBtn"> Contact Us</button>
+              </div>
+              </ng-container>
+
+              <ng-container *ngIf="i == 2; else defaultOverlay">
+                <p class="ehc-special-text">Family owned</p>
+                <h1 class="ehc-h1">Friendly atmosphere</h1>
+
               </ng-container>
 
               <ng-template #defaultOverlay>
-                <h1 class="ehc-h1">Welcome to <br /> <span class="ehc-brand-name">{{ business.businessName }}</span></h1>
+                <!-- <h1 class="ehc-h1">Welcome to <br /> <span class="ehc-brand-name">{{ business.businessName }}</span></h1>
                 <div class="ehc-business-subtitle">
                   <h3>{{ business.tagline }}</h3>
-                </div>
+                </div> -->
               </ng-template>
 
-              <button type="button" class="ehc-btn" (click)="navigateToContact(businessId)">
+              <!-- <button type="button" class="ehc-btn" (click)="navigateToContact(businessId)">
                 Learn More
-              </button>
+              </button> -->
+              </div>
             </div>
           </div>
         </div>
