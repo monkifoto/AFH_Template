@@ -1,11 +1,9 @@
 <app-hero-carousel></app-hero-carousel>
 
-<div class="content-wrapper">
   <app-welcome
     [layoutType]="business?.theme?.themeType || 'demo'"
     [businessId]="business?.id || ''"
   ></app-welcome>
-</div>
 
 <app-parallax-text  *ngIf="business?.theme?.themeType === 'ehc'"></app-parallax-text>
 
