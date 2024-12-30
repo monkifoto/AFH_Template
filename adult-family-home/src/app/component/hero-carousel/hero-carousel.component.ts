@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, BehaviorSubject, from, map, switchMap } from 'rxjs';
 import { Business, HeroImage } from 'src/app/model/business-questions.model';
@@ -19,7 +19,11 @@ export class HeroCarouselComponent implements OnInit, OnDestroy {
   layoutType: string = 'demo';
   private subscriptions = new Subscription();
   private imagesLoaded$ = new BehaviorSubject<boolean>(false); // To track if images are loaded
+
   private carouselInitialized = false;
+  animateText = false; // Control animation
+  isScrolled: boolean = false;
+  scrollOpacity: number = 1; // Default opacity is fully visible
 
   constructor(
     private router: Router,
@@ -27,6 +31,13 @@ export class HeroCarouselComponent implements OnInit, OnDestroy {
     private webContentService: WebContentService,
     private businessDataService: BusinessDataService
   ) {}
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+    const maxScroll = 1200; // Adjust this value for when the carousel is fully faded
+    this.scrollOpacity = Math.max(1 - scrollPosition / maxScroll, 0); // Ensure opacity doesn't go below 0
+  }
 
   ngOnInit(): void {
     // Subscribe to business data
@@ -45,6 +56,7 @@ export class HeroCarouselComponent implements OnInit, OnDestroy {
     const imageLoadedSubscription = this.imagesLoaded$.subscribe((loaded) => {
       if (loaded && !this.carouselInitialized) {
         this.initializeCarousel();
+        this.animateText = true;
       }
     });
 
@@ -84,7 +96,7 @@ export class HeroCarouselComponent implements OnInit, OnDestroy {
     const carouselElement = document.querySelector('#heroCarousel');
     if (carouselElement) {
       new bootstrap.Carousel(carouselElement, {
-        interval: 10000, // 10 seconds
+        interval: 20000, // 10 seconds
         ride: 'carousel',
       });
       this.carouselInitialized = true;
