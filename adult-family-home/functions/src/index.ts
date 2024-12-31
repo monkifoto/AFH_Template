@@ -40,17 +40,28 @@ const getTransporterForDomain = (domain: string): nodemailer.Transporter => {
 
 export const sendContactEmail = functions.https.onRequest((req, res) => {
   corsHandler(req, res, () => {
-    const {name, email, message} = req.body;
+    const {name, email, message, website} = req.body;
 
-    if (!email || !name || !message) {
+    if (!email || !name || !message || !website) {
       return res.status(400).json({
         success: false,
         message: 'Missing required fields: name, email, or message.',
       });
     }
 
-    // Extract domain from the sender's email
-    const domain = email.split('@')[1] || 'default';
+    // Extract domain from the website URL
+    const domain: string = website || '';
+    // try {
+    //   const url = new URL(website);
+    //   domain = url.hostname.replace('www.', '');
+    // } catch (error) {
+    //   console.error('Invalid website URL:', website);
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: 'Invalid website URL.',
+    //   });
+    // }
+
     const transporter = getTransporterForDomain(domain);
 
     const mailOptions = {
