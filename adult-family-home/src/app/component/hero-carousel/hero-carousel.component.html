@@ -1,6 +1,7 @@
 <div [ngSwitch]="layoutType">
   <!-- Case for 'hh' -->
   <ng-container *ngSwitchCase="'hh'">
+    <section class="hh-hero-section" [class.scrolled]="isScrolled" [ngStyle]="{ opacity: scrollOpacity }">
     <div id="heroCarousel" class="carousel slide hh-carousel" data-bs-ride="carousel" *ngIf="business">
 
       <!-- Indicators -->
@@ -35,6 +36,7 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
+    </section>
   </ng-container>
 
   <!-- Case for 'ae' -->

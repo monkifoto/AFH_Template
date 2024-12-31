@@ -143,8 +143,54 @@ padding-top: 200px;
 }
 
 @media (max-width: 768px) {
-  .hero-overlay h1 {
+
+  .hh-overlay {
+    background: rgba(0, 0, 0, 0.5); /* Darker overlay for readability */
+    padding: 20px;
+    text-align: center;
+    align-items: center;
+    position: absolute;
+    display: block !important;
+  }
+
+  .hh-hero-section {
+    height: 80vh;
+  }
+  .hh-carousel {
+    height: 100%; /* Make the carousel fill the parent container */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hh-carousel .carousel-inner {
+    height: 100%; /* Ensure the inner carousel items take full height */
+  }
+
+  .hh-carousel .carousel-item {
+    height: 100%; /* Make each carousel item fill the carousel */
+  }
+
+  .hh-carousel .carousel-item img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover; /* Ensure images scale correctly */
+  }
+
+  .hh-h1{
+    /* padding-top: 200px; */
     font-size: 2rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .business-subtitle {
+    padding: 10px;
+    font-size: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .hero-overlay p {
@@ -157,12 +203,21 @@ padding-top: 200px;
 }
 
 @media (max-width: 480px) {
+  .hh-overlay {
+    background: rgba(0, 0, 0, 0.5); /* Darker overlay for readability */
+    padding: 20px;
+    text-align: center;
+    align-items: center;
+    position: absolute;
+    display: block !important;
+  }
+
   .hero-overlay {
     padding: 10px;
   }
 
   .hero-overlay h1 {
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
 
   .hero-overlay p {
