@@ -23,7 +23,8 @@ export class ContactUsComponent  implements OnInit{
   formData = {
     name: '',
     email: '',
-    message: ''
+    message: '',
+    website: this.extractBaseDomain(window.location.hostname)
   };
 
   modalTitle: string = '';
@@ -81,6 +82,16 @@ export class ContactUsComponent  implements OnInit{
           this.showModal();
         }
       );
+  }
+
+  // Helper function to extract the base domain
+  private extractBaseDomain(hostname: string): string {
+    const parts = hostname.split('.');
+    // Check if hostname has subdomains (e.g., subdomain.example.com)
+    if (parts.length > 2) {
+      return parts.slice(-2).join('.'); // Keep the last two parts (e.g., example.com)
+    }
+    return hostname; // If no subdomains, return as is
   }
 
   showModal() {
