@@ -1,9 +1,51 @@
 <form [formGroup]="form">
-  <h2>Certifications</h2>
+
+  <h2>About Us Page</h2>
+
   <div class="form-group">
-    <label for="certifications">Certifications</label>
-    <textarea id="certifications" formControlName="certifications" class="form-control"></textarea>
+    <label for="businessStory">Our Story / Who we are (businessStory)</label>
+    <textarea id="businessStory" formControlName="businessStory" class="form-control" rows="10"></textarea>
   </div>
+
+  <div>
+    <h4>Choose from available images:</h4>
+    <div *ngFor="let image of predefinedImages" style="display: inline-block; margin-right: 10px;">
+      <input
+        type="radio"
+        formControlName="missionImageUrl"
+        [value]="image.url"
+        (change)="onMissionImageSelection(image.url)">
+      <img class="contactUsImagesThumbnails" [src]="image.url" alt="Predefined Image" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="mission">Our Mission/What We stand for (mission)</label>
+    <input formControlName="missionTitle" class="form-control" placeholder="Mission Title">
+    <textarea id="mission" formControlName="mission" class="form-control"></textarea>
+  </div>
+
+  <div>
+    <h4>Choose from available images:</h4>
+    <div *ngFor="let image of predefinedImages" style="display: inline-block; margin-right: 10px;">
+      <input
+        type="radio"
+        formControlName="visionImageUrl"
+        [value]="image.url"
+        (change)="onVisionImageSelection(image.url)">
+      <img class="contactUsImagesThumbnails" [src]="image.url" alt="Predefined Image" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="vision">Our Vision / The Future We see (vision)</label>
+    <input formControlName="visionTitle" class="form-control" placeholder="Vision Title">
+    <textarea id="vision" formControlName="vision" class="form-control"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="motivation">Motivation (motivation)</label>
+    <textarea id="motivation" formControlName="motivation" class="form-control"></textarea>
+  </div>
+
   <h2>Unique Features</h2>
   <button type="button" class="afhBtn" (click)="toggleUniqueServiceForm()">Add Unique Service</button>
 
@@ -43,50 +85,10 @@
     </li>
   </ul>
 
-  <h2>About Us Page</h2>
-
+  <h2>Certifications</h2>
   <div class="form-group">
-    <label for="businessStory">Our Story / Who we are</label>
-    <textarea id="businessStory" formControlName="businessStory" class="form-control" rows="10"></textarea>
-  </div>
-
-  <div>
-    <h4>Choose from available images:</h4>
-    <div *ngFor="let image of predefinedImages" style="display: inline-block; margin-right: 10px;">
-      <input
-        type="radio"
-        formControlName="missionImageUrl"
-        [value]="image.url"
-        (change)="onMissionImageSelection(image.url)">
-      <img class="contactUsImagesThumbnails" [src]="image.url" alt="Predefined Image" />
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="mission">Our Mission/What We stand for</label>
-    <input formControlName="missionTitle" class="form-control" placeholder="Mission Title">
-    <textarea id="mission" formControlName="mission" class="form-control"></textarea>
-  </div>
-
-  <div>
-    <h4>Choose from available images:</h4>
-    <div *ngFor="let image of predefinedImages" style="display: inline-block; margin-right: 10px;">
-      <input
-        type="radio"
-        formControlName="visionImageUrl"
-        [value]="image.url"
-        (change)="onVisionImageSelection(image.url)">
-      <img class="contactUsImagesThumbnails" [src]="image.url" alt="Predefined Image" />
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="vision">Our Vision / The Future We see</label>
-    <input formControlName="visionTitle" class="form-control" placeholder="Vision Title">
-    <textarea id="vision" formControlName="vision" class="form-control"></textarea>
-  </div>
-  <div class="form-group">
-    <label for="motivation">Motivation</label>
-    <textarea id="motivation" formControlName="motivation" class="form-control"></textarea>
+    <label for="certifications">Certifications</label>
+    <textarea id="certifications" formControlName="certifications" class="form-control"></textarea>
   </div>
 
 </form>

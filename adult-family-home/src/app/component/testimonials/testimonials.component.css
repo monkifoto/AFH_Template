@@ -200,6 +200,11 @@
   height: 50px;
 }
 
+.ae-testimonials-button{
+  padding-top: 3rem;
+}
+
+
 /*-------------------EHC--------------------*/
 .ehc-testimonial-card {
   min-width: 100%;
