@@ -7,6 +7,7 @@ import { MetaService } from 'src/app/services/meta-service.service';
 import { Modal } from 'bootstrap';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { EmailService } from 'src/app/services/email.service';
 
 
 @Component({
@@ -36,7 +37,8 @@ export class ContactUsComponent  implements OnInit{
     private businessDataService: BusinessDataService,
     private webContent: WebContentService,
     private route: ActivatedRoute,private http: HttpClient,
-      private metaService: MetaService){}
+    private emailService: EmailService,
+    private metaService: MetaService){}
 
       get sanitizedBusinessHours(): SafeHtml {
         return this.business?.businessHours
@@ -68,20 +70,34 @@ export class ContactUsComponent  implements OnInit{
 
   onSubmit() {
     console.log(this.formData);
-    this.http.post('https://us-central1-afhdynamicwebsite.cloudfunctions.net/sendContactEmail', this.formData)
-      .subscribe(
-        response => {
-          this.modalTitle = 'Message Sent';
-          this.modalMessage = 'Thank you for your message! We will get back to you soon.';
-          this.showModal();
-        },
-        error => {
-          console.error('Error sending email', error);
-          this.modalTitle = 'Error';
-          this.modalMessage = 'There was an issue sending your message. Please try again later.';
-          this.showModal();
-        }
-      );
+        // Use the EmailService to send the email
+        this.emailService.sendEmail(this.formData).subscribe(
+          response => {
+            this.modalTitle = 'Message Sent';
+            this.modalMessage = 'Thank you for your message! We will get back to you soon.';
+            this.showModal();
+          },
+          error => {
+            console.error('Error sending email', error);
+            this.modalTitle = 'Error';
+            this.modalMessage = 'There was an issue sending your message. Please try again later.';
+            this.showModal();
+          }
+        );
+    // this.http.post('https://us-central1-afhdynamicwebsite.cloudfunctions.net/sendContactEmail', this.formData)
+    //   .subscribe(
+    //     response => {
+    //       this.modalTitle = 'Message Sent';
+    //       this.modalMessage = 'Thank you for your message! We will get back to you soon.';
+    //       this.showModal();
+    //     },
+    //     error => {
+    //       console.error('Error sending email', error);
+    //       this.modalTitle = 'Error';
+    //       this.modalMessage = 'There was an issue sending your message. Please try again later.';
+    //       this.showModal();
+    //     }
+    //   );
   }
 
   // Helper function to extract the base domain
