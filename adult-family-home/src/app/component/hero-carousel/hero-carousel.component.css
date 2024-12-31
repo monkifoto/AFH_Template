@@ -235,32 +235,22 @@ padding-top: 200px;
 
 @media (max-width: 768px) {
   .ae-hero-overlay {
-    padding-left: 5%;
+    background: rgba(0, 0, 0, 0.5); /* Darker overlay for readability */
+    padding: 20px;
+    text-align: center;
     align-items: center;
+    position: absolute;
+    display: block !important;
   }
 
+  .ae-carousel-caption-content {
+    top: 50%; /* Center vertically */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* border: solid 1px red; */
+  }
   .ae-h1 {
-    font-size: 2rem;
-    top: 60%;
-  }
-
-  .ae-business-subtitle h3 {
-    font-size: 1.2rem;
-    top: 70%;
-  }
-
-  .ae-hero-section {
-    height: 60vh;
-  }
-}
-
-@media (max-width: 480px) {
-  .ae-hero-overlay {
-    padding: 10px;
-  }
-
-  .ae-h1 {
-    font-size: 1.5rem;
+    font-size: 1.8rem; /* Adjust font size */
   }
 
   .ae-business-subtitle h3 {
@@ -268,7 +258,79 @@ padding-top: 200px;
   }
 
   .ae-hero-section {
-    height: 40vh;
+    height: 80vh;
+  }
+  .ae-carousel {
+    height: 100%; /* Make the carousel fill the parent container */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+
+
+  /* .ae-carousel .carousel-inner {
+    height: 100%;
+  } */
+
+  .ae-carousel .carousel-item {
+    height: 100%; /* Make each carousel item fill the carousel */
+  }
+
+  .ae-carousel .carousel-item img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover; /* Ensure images scale correctly */
+  }
+}
+
+@media (max-width: 480px) {
+    .ae-hero-overlay {
+      background: rgba(0, 0, 0, 0.5); /* Darker overlay for readability */
+      padding: 20px;
+      text-align: center;
+      align-items: center;
+      position: absolute;
+      display: block !important;
+    }
+
+  .ae-carousel-caption-content {
+    top: 50%; /* Center vertically */
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+
+  .ae-h1 {
+    font-size: 1.8rem; /* Adjust font size */
+  }
+
+  .ae-business-subtitle h3 {
+    font-size: 1rem;
+  }
+
+  .ae-hero-section {
+    height: 80vh;
+  }
+  .ae-carousel {
+    height: 100%; /* Make the carousel fill the parent container */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .ae-carousel .carousel-inner {
+    height: 100%; /* Ensure the inner carousel items take full height */
+  }
+
+  .ae-carousel .carousel-item {
+    height: 100%; /* Make each carousel item fill the carousel */
+  }
+
+  .ae-carousel .carousel-item img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover; /* Ensure images scale correctly */
   }
 }
 
