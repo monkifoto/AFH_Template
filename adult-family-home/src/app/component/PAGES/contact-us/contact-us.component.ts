@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { MetaService } from 'src/app/services/meta-service.service';
 import { Modal } from 'bootstrap';
 import { BusinessDataService } from 'src/app/services/business-data.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 
 @Component({
@@ -29,10 +30,18 @@ export class ContactUsComponent  implements OnInit{
   modalMessage: string = '';
   responseModal!: Modal; // Modal instance
 
-  constructor( private businessDataService: BusinessDataService,
+  constructor(
+    private sanitizer: DomSanitizer,
+    private businessDataService: BusinessDataService,
     private webContent: WebContentService,
     private route: ActivatedRoute,private http: HttpClient,
       private metaService: MetaService){}
+
+      get sanitizedBusinessHours(): SafeHtml {
+        return this.business?.businessHours
+          ? this.sanitizer.bypassSecurityTrustHtml(this.business.businessHours)
+          : '';
+      }
 
   ngOnInit(): void {
     this.businessDataService.businessData$.subscribe((business) => {
