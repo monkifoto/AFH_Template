@@ -1,4 +1,6 @@
-<app-hero-carousel></app-hero-carousel>
+<app-hero-carousel *ngIf="business?.theme?.themeType != 'clemo'"></app-hero-carousel>
+
+<app-hero-slider  *ngIf="business?.theme?.themeType === 'clemo'"></app-hero-slider>
 
   <app-welcome
     [layoutType]="business?.theme?.themeType || 'demo'"
@@ -57,10 +59,12 @@
   [layoutType]="business?.theme?.themeType || 'demo' "
 ></app-features>
 
-<app-testimonials
+<app-testimonials  *ngIf="business?.theme?.themeType != 'clemo'"
   [testimonials]="business?.testimonials"
   [layoutType]="business?.theme?.themeType || 'demo' "
 ></app-testimonials>
+
+<app-testimonial-carousel  *ngIf="business?.theme?.themeType === 'clemo'"></app-testimonial-carousel>
 
 <app-parallax-stats
 *ngIf="business?.theme?.themeType === 'ehc'"

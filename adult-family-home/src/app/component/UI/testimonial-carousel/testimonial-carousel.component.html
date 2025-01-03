@@ -1,0 +1,17 @@
+<div class="testimonials-container">
+  <h2 class="clemo-head-title clemo-text-center">clients say’s</h2>
+  <div class="testimonial-row">
+    <div class="author">
+      <h3 class="name">{{ currentTestimonial.name }}</h3>
+      <div class="separator5"></div>
+      <p class="role">{{ currentTestimonial.role }}</p>
+    </div>
+    <div class="feedback">
+      <p>{{ currentTestimonial.feedback }}</p>
+    </div>
+  </div>
+  <div class="carousel-navigation">
+    <button (click)="prevSlide()">●</button>
+    <button (click)="nextSlide()">●</button>
+  </div>
+</div>

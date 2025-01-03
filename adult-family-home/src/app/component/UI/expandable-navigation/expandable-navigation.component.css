@@ -1,0 +1,160 @@
+/* Container for the entire navbar */
+.clemo-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  height: 150px; /* Initial height */
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Space between logo and nav links */
+  align-items: center;
+  padding: 0 20px; /* Add some horizontal padding */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Shrinking effect */
+.clemo-header.clemo-shrink {
+  height: 70px; /* Shrunk height */
+  box-shadow: none; /* Remove box-shadow when scrolled */
+}
+
+/* Logo styles */
+.clemo-logo {
+  max-height: 100px; /* Initial size of the logo */
+  transition: max-height 0.3s ease; /* Smooth transition for resizing */
+}
+
+/* Shrink logo when navbar shrinks */
+.clemo-header.clemo-shrink .clemo-logo {
+  max-height: 50px; /* Shrunk size of the logo */
+}
+
+/* Navbar styles */
+.clemo-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px; /* Horizontal padding around the container */
+  display: flex;
+  justify-content: space-between; /* Space out the logo and links */
+  align-items: center; /* Vertically center logo and links */
+  width: 100%;
+}
+
+.clemo-navbar-brand {
+  margin-left: 0; /* Align the logo to the left */
+  display: flex;
+  align-items: center; /* Vertically center the logo */
+}
+
+
+/* Navbar collapse container */
+.clemo-navbar-collapse {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  transition: max-height 0.3s ease; /* Smooth opening/closing animation */
+  align-items: center; /* Vertically align with the logo */
+}
+
+.clemo-navbar-collapse.clemo-show {
+  display: flex; /* Show navbar links when toggled */
+}
+
+
+
+.clemo-navbar-nav {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.clemo-nav-item {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.clemo-nav-link {
+  color: #333;
+  font-size: 1.5rem; /* Larger font size initially */
+  text-transform: uppercase;
+  padding: 15px 0;
+  display: block;
+  transition: font-size 0.3s ease, color 0.3s ease; /* Smooth transition for font size */
+}
+
+.clemo-header.clemo-shrink .clemo-nav-link {
+  font-size: 1rem; /* Smaller font size for shrunk navbar */
+}
+
+.clemo-nav-link:hover {
+  color: #007bff;
+}
+
+/* Responsive toggler */
+.clemo-navbar-toggler {
+  display: none; /* Hide toggler by default */
+}
+
+.clemo-navbar-toggler-icon {
+  width: 25px;
+  height: 2px;
+  background-color: #333;
+  display: block;
+  position: relative;
+}
+
+.clemo-navbar-toggler-icon::before,
+.clemo-navbar-toggler-icon::after {
+  content: '';
+  width: 25px;
+  height: 2px;
+  background-color: #333;
+  position: absolute;
+  left: 0;
+  transition: transform 0.3s ease;
+}
+
+.clemo-navbar-toggler-icon::before {
+  top: -7px;
+}
+
+.clemo-navbar-toggler-icon::after {
+  top: 7px;
+}
+
+/* For mobile screens */
+@media (max-width: 991px) {
+  .clemo-navbar-collapse {
+    display: none; /* Hide links by default */
+    flex-direction: column;
+    background-color: #fff; /* Optional: Add background for mobile menu */
+    position: absolute;
+    top: 70px; /* Position below the navbar */
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .clemo-nav-item {
+    width: 100%;
+    text-align: center;
+  }
+
+  .clemo-nav-link {
+    padding: 10px;
+    font-size: 1.25rem; /* Adjust font size for mobile view */
+  }
+
+  .clemo-navbar-toggler {
+    display: block; /* Show toggler on small screens */
+  }
+
+  .clemo-navbar-collapse.clemo-show {
+    display: flex; /* Show menu when toggled */
+  }
+}
