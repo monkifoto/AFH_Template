@@ -1,0 +1,36 @@
+<div class="clemo-slider-container">
+  <div *ngFor="let slide of slides; let i = index"
+       [class.clemo-active]="i === currentSlide"
+       class="clemo-slides clemo-single-home-slider">
+
+    <!-- Background Image -->
+    <div class="clemo-home-overlay" [ngStyle]="{'background-image': 'url(' + slide.backgroundImage + ')'}"></div>
+
+    <!-- Slide Content -->
+    <div class="clemo-main-home">
+      <h2>{{ slide.title }}</h2>
+      <div class="clemo-separator"></div>
+      <p class="clemo-subtitle" [innerHTML]="slide.subtitle"></p>
+
+      <!-- Dynamic Buttons -->
+      <div class="clemo-home-btn">
+        <ng-container *ngFor="let button of slide.buttons">
+          <a [routerLink]="button.link"
+             [ngClass]="{'clemo-btn': !button.outline, 'clemo-btn-outline': button.outline}">
+            {{ button.text }}
+          </a>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="clemo-slider-navigation">
+    <div
+      *ngFor="let slide of slides; let i = index"
+      [class.clemo-active]="i === currentSlide"
+      class="clemo-nav-item"
+      (click)="navigateToSlide(i)">
+    </div>
+  </div>
+</div>

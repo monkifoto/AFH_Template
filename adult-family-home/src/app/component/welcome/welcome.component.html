@@ -22,6 +22,10 @@
   <ng-container *ngSwitchCase="'ehc'">
     <app-center-text [title]="'Discover Us'" [content]="business?.businessStory || ''"></app-center-text>
 </ng-container>
+<ng-container *ngSwitchCase="'clemo'">
+ <app-three-section></app-three-section>
+</ng-container>
+
 
   <ng-container *ngSwitchDefault>
       <app-center-text [title]="'Who We Are'" [content]="business?.businessStory || ''"></app-center-text>
