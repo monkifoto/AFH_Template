@@ -74,4 +74,8 @@
       }
     }
   }
+  .carousel-navigation button.active {
+    color: black;
+    font-weight: bold;
+  }
 }

@@ -59,6 +59,7 @@ export class ReviewsComponent implements OnInit {
         id: [testimonial.id],
         name: [testimonial.name],
         quote: [testimonial.quote],
+        relationship: [testimonial.relationship],
         photoURL: [testimonial.photoURL]
       });
       this.testimonials.push(testimonialForm);
@@ -73,6 +74,7 @@ export class ReviewsComponent implements OnInit {
     const testimonialForm = this.fb.group({
       id: [''],
       name: [''],
+      relationship:[''],
       quote: [''],
       photoURL: ['']
     });
