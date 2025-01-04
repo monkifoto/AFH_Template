@@ -1,7 +1,12 @@
 <nav class="clemo-header" [ngClass]="{'clemo-shrink': isShrunk}">
   <div class="clemo-container">
-    <a class="clemo-navbar-brand" href="#">
-      <img class="clemo-logo" src="../../../../assets/sharedAssets/Demologo2.png" alt="Logo">
+    <a href="#" class="clemo-navbar-brand" [routerLink]="['/home']" [queryParams]="{ id: businessId }">
+      <img
+      class="clemo-logo"
+        *ngIf="business?.logoImage"
+        [src]="business?.logoImage"
+        alt="Business Logo"
+      />
     </a>
 
     <!-- Hamburger Menu Toggler -->
@@ -15,8 +20,8 @@
         <li class="clemo-nav-item"><a class="clemo-nav-link" href="#">Home</a></li>
         <li class="clemo-nav-item"><a class="clemo-nav-link" href="#">About Us</a></li>
         <li class="clemo-nav-item"><a class="clemo-nav-link" href="#">Services</a></li>
-        <li class="clemo-nav-item"><a class="clemo-nav-link" href="#">Works</a></li>
-        <li class="clemo-nav-item"><a class="clemo-nav-link" href="#">Blog</a></li>
+        <li class="clemo-nav-item"><a class="clemo-nav-link" href="#">Our Home</a></li>
+        <li class="clemo-nav-item"><a class="clemo-nav-link" href="#">Resident Form</a></li>
         <li class="clemo-nav-item"><a class="clemo-nav-link" href="#">Contact</a></li>
       </ul>
     </div>

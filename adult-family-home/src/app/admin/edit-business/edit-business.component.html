@@ -39,7 +39,10 @@
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="color-theme-tab" data-bs-toggle="tab" data-bs-target="#color-theme" type="button" role="tab" aria-controls="color-theme" aria-selected="false">Color Theme</button>
+      </li>
 
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="hero-slider-tab" data-bs-toggle="tab" data-bs-target="#hero-slider-theme" type="button" role="tab" aria-controls="hero-slider-theme" aria-selected="false">Hero Slider</button>
       </li>
     </ul>
 
@@ -89,6 +92,9 @@
       <app-color-admin [form]="businessForm" [business]="business" [businessId]="businessId"></app-color-admin>
     </div>
 
+    <div class="tab-pane fade" id="hero-slider-theme" role="tabpanel" aria-labelledby="hero-slider-tab">
+      <app-admin-hero-slider [business]="business" [businessId]="businessId" ></app-admin-hero-slider>
+    </div>
 
     </div>
     <!-- Submit Button -->

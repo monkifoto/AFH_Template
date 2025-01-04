@@ -12,57 +12,51 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 
 export class HeroSliderComponent implements OnInit {
     business: Business | null = null; // Set to null initially
+    slides: any[] = [];
+    currentSlide = 0;
 
   constructor(private router: Router, private businessDataService: BusinessDataService) {
     this.autoSlide();
   }
 
-  slides = [
-    {
-      title: 'we are ' + this.business?.businessName + '.',
-      subtitle: 'professionals <br /> in the creative industries',
-      backgroundImage: '../../../../assets/sharedAssets/istockphoto-1207318385-2048x2048.jpg',
-      buttons: [
-        { text: 'About Us', link: '/about-us', outline: false },
-        { text: 'Schedule a Visit', link: '/contact-us', outline: true }
-      ]
-    },
-    {
-      title: 'Discover Our Home',
-      subtitle: 'Explore the beauty of our space.',
-      backgroundImage: '../../../../assets/sharedAssets/istockphoto-478915838-2048x2048.jpg',
-      buttons: [
-        { text: 'View Our Home', link: '/gallery', outline: false }
-      ]
-    },
-    {
-      title: 'Welcome New Residents',
-      subtitle: 'We’re here to help you settle in.',
-      backgroundImage: '../../../../assets/sharedAssets/istockphoto-1324090651-2048x2048.jpg',
-      buttons: [
-        { text: 'Resident Intake Form', link: '/resident-intake', outline: false }
-      ]
-    }
-  ];
-
 
   ngOnInit(): void {
-    console.log('hero-slider - ngOnInit');
+    console.log('HeroSliderComponent - ngOnInit');
+    this.fetchHeroSliderData();
+    this.autoSlide();
+  }
 
-    // Check if business data is already available
+  fetchHeroSliderData(): void {
     this.businessDataService.businessData$.subscribe((data) => {
       if (data) {
-        console.log('hero-slider - Using cached business data:', data);
-        this.business = data; // Use cached data
-      } else {
+        console.log('HeroSliderComponent - Retrieved business data:', data);
+        this.business = data;
 
+        if (this.business.heroSlider && Array.isArray(this.business.heroSlider)) {
+          this.slides = this.business.heroSlider.map((slide: any) => ({
+            title: this.replaceKeywords(slide.title),
+            subtitle: this.replaceKeywords(slide.subtitle),
+            backgroundImage: slide.backgroundImage,
+            buttons: slide.buttons || []
+          }));
+        } else {
+          console.warn('HeroSliderComponent - No heroSlider data available in the business data.');
+          this.slides = [];
+        }
+      } else {
+        console.error('HeroSliderComponent - No business data available.');
       }
     });
   }
 
+  replaceKeywords(text: string): string {
+    if (!text || !this.business?.businessName) {
+      return text; // Return the original text if there's no business name or text
+    }
 
-  currentSlide = 0;
-
+    // Replace the special keyword "{{businessName}}" with the business name
+    return text.replace(/{{businessName}}/g, this.business.businessName);
+  }
 
   navigateToSlide(index: number): void {
     this.currentSlide = index;
@@ -71,6 +65,6 @@ export class HeroSliderComponent implements OnInit {
   autoSlide(): void {
     setInterval(() => {
       this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-    }, 5000); // Change slide every 5 seconds
+    }, 15000); // Change slide every 5 seconds
   }
 }

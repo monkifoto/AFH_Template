@@ -1,0 +1,11 @@
+.thumbnail {
+  max-width: 150px;
+  max-height: 100px;
+  margin-top: 10px;
+  display: block;
+}
+.message {
+  color: green;
+  font-weight: bold;
+  margin-top: 20px;
+}
