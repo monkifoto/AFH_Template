@@ -65,6 +65,7 @@ import { ThreeSectionComponent } from './component/UI/three-section/three-sectio
 import { HeroSliderComponent } from './component/UI/hero-slider/hero-slider.component';
 import { ExpandableNavigationComponent } from './component/UI/expandable-navigation/expandable-navigation.component';
 import { TestimonialCarouselComponent } from './component/UI/testimonial-carousel/testimonial-carousel.component';
+import { AdminHeroSliderComponent } from './admin/admin-hero-slider/admin-hero-slider.component';
 
     // Map hostnames to business IDs
     const businessIdMap: { [key: string]: string } = {
@@ -189,6 +190,7 @@ export function combinedInitializer(
     HeroSliderComponent,
     ExpandableNavigationComponent,
     TestimonialCarouselComponent,
+    AdminHeroSliderComponent
   ],
   imports: [
     BrowserModule,

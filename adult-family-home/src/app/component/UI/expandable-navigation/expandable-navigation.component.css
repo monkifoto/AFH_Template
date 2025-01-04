@@ -30,7 +30,7 @@
 
 /* Shrink logo when navbar shrinks */
 .clemo-header.clemo-shrink .clemo-logo {
-  max-height: 50px; /* Shrunk size of the logo */
+  max-height: 40px; /* Shrunk size of the logo */
 }
 
 /* Navbar styles */
@@ -80,7 +80,7 @@
 
 .clemo-nav-link {
   color: #333;
-  font-size: 1.5rem; /* Larger font size initially */
+  font-size: 1.3rem; /* Larger font size initially */
   text-transform: uppercase;
   padding: 15px 0;
   display: block;
