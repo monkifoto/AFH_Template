@@ -1,17 +1,26 @@
-<div class="testimonials-container">
-  <h1 class="clemo-head-title clemo-text-center">clients say’s</h1>
-  <div class="testimonial-row">
-    <div class="author">
+<div
+  class="testimonials-container"
+  (mouseenter)="stopAutoPlay()"
+  (mouseleave)="startAutoPlay()"
+>
+  <h1 class="clemo-head-title clemo-text-center">Clients Say’s</h1>
+  <div class="testimonial-row" *ngIf="currentTestimonial">
+    <div class="author" [@fadeInRight]>
       <h3 class="name">{{ currentTestimonial.name }}</h3>
       <div class="separator5"></div>
-      <p class="role">{{ currentTestimonial.role }}</p>
+      <p class="role">{{ currentTestimonial.relationship }}</p>
     </div>
-    <div class="feedback">
-      <p>{{ currentTestimonial.feedback }}</p>
+    <div class="feedback" [@fadeInLeft]>
+      <p>{{ currentTestimonial.quote }}</p>
     </div>
   </div>
   <div class="carousel-navigation">
-    <button (click)="prevSlide()">●</button>
-    <button (click)="nextSlide()">●</button>
+    <button
+      *ngFor="let testimonial of testimonials; let i = index"
+      [class.active]="i === currentIndex"
+      (click)="goToSlide(i)"
+    >
+      ●
+    </button>
   </div>
 </div>

@@ -259,6 +259,7 @@ export class EditBusinessComponent implements OnInit {
         }))),
       testimonials: this.fb.array((defaultBusiness.testimonials ?? []).map(testimonial => this.fb.group({
         name: [testimonial.name],
+        relationship:[testimonial.relationship],
         quote: [testimonial.quote],
         photoUrl: [testimonial.photoURL],
       }))),

@@ -122,6 +122,7 @@ export interface Testimonial{
   id: string;
   name: string;
   quote: string;
+  relationship:string;
   photoURL: string;
 }
 
@@ -295,6 +296,7 @@ export class BusinessModel {
           name: 'Sarah Thompson',
           quote:
             'Finding this Adult Family Home for my mother was the best decision we ever made.',
+            relationship: 'mother',
           photoURL: '',
         },
         // Other testimonials...

@@ -1,40 +1,79 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { trigger, style, animate, transition } from '@angular/animations';
+import { BusinessDataService } from 'src/app/services/business-data.service';
 
 @Component({
   selector: 'app-testimonial-carousel',
   templateUrl: './testimonial-carousel.component.html',
-  styleUrls: ['./testimonial-carousel.component.css']
+  styleUrls: ['./testimonial-carousel.component.css'],
+  animations: [
+    trigger('fadeInLeft', [
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)', opacity: 0 }),
+        animate('0.5s ease-out', style({ transform: 'translateX(0)', opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('0.5s ease-out', style({ transform: 'translateX(-100%)', opacity: 0 })),
+      ]),
+    ]),
+    trigger('fadeInRight', [
+      transition(':enter', [
+        style({ transform: 'translateX(100%)', opacity: 0 }),
+        animate('0.5s ease-out', style({ transform: 'translateX(0)', opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('0.5s ease-out', style({ transform: 'translateX(100%)', opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
-export class TestimonialCarouselComponent {
-  testimonials = [
-    {
-      name: 'Frank Sims',
-      role: 'Photographer',
-      feedback: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.'
-    },
-    {
-      name: 'Jane Doe',
-      role: 'Designer',
-      feedback: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.'
-    },
-    {
-      name: 'John Smith',
-      role: 'Developer',
-      feedback: 'Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?'
-    }
-  ];
-
+export class TestimonialCarouselComponent implements OnInit, OnDestroy {
+  @Input() businessId!: string;
+  testimonials: any[] = [];
   currentIndex = 0;
+  private autoPlayInterval: any;
 
-  prevSlide() {
-    this.currentIndex = (this.currentIndex - 1 + this.testimonials.length) % this.testimonials.length;
+  constructor(private businessDataService: BusinessDataService) {}
+
+  ngOnInit() {
+    this.loadTestimonials();
+    this.startAutoPlay();
   }
 
-  nextSlide() {
-    this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
+  ngOnDestroy() {
+    this.stopAutoPlay();
+  }
+
+  loadTestimonials() {
+    this.businessDataService.loadBusinessData(this.businessId).subscribe((business) => {
+      if (business && business.testimonials) {
+        this.testimonials = business.testimonials;
+      }
+    });
   }
 
   get currentTestimonial() {
     return this.testimonials[this.currentIndex];
+  }
+
+  goToSlide(index: number) {
+    this.currentIndex = index;
+  }
+
+  startAutoPlay() {
+    this.autoPlayInterval = setInterval(() => {
+      this.nextSlide();
+    }, 15000); // Change slide every 15 seconds
+  }
+
+  stopAutoPlay() {
+    if (this.autoPlayInterval) {
+      clearInterval(this.autoPlayInterval);
+      this.autoPlayInterval = null;
+    }
+  }
+
+  nextSlide() {
+    this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
   }
 }
