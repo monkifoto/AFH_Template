@@ -1,17 +1,17 @@
-<div
-  class="testimonials-container"
-  (mouseenter)="stopAutoPlay()"
-  (mouseleave)="startAutoPlay()"
->
+<div class="testimonials-container">
   <h1 class="clemo-head-title clemo-text-center">Clients Say’s</h1>
-  <div class="testimonial-row" *ngIf="currentTestimonial">
+  <div
+    class="testimonial-row"
+    *ngFor="let testimonial of [currentTestimonial]; trackBy: trackByIndex"
+    [@slideIn]
+  >
     <div class="author" [@fadeInRight]>
-      <h3 class="name">{{ currentTestimonial.name }}</h3>
+      <h3 class="name">{{ testimonial.name }}</h3>
       <div class="separator5"></div>
-      <p class="role">{{ currentTestimonial.relationship }}</p>
+      <p class="role">{{ testimonial.relationship }}</p>
     </div>
     <div class="feedback" [@fadeInLeft]>
-      <p>{{ currentTestimonial.quote }}</p>
+      <p>{{ testimonial.quote }}</p>
     </div>
   </div>
   <div class="carousel-navigation">
@@ -24,3 +24,4 @@
     </button>
   </div>
 </div>
+

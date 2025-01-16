@@ -7,25 +7,29 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
   templateUrl: './testimonial-carousel.component.html',
   styleUrls: ['./testimonial-carousel.component.css'],
   animations: [
-    trigger('fadeInLeft', [
+    trigger('slideIn', [
       transition(':enter', [
-        style({ transform: 'translateX(-100%)', opacity: 0 }),
-        animate('0.5s ease-out', style({ transform: 'translateX(0)', opacity: 1 })),
+        style({ opacity: 0, transform: 'translateX(-100%)' }),
+        animate('0.5s ease-in', style({ opacity: 1, transform: 'translateX(0)' })),
       ]),
       transition(':leave', [
-        animate('0.5s ease-out', style({ transform: 'translateX(-100%)', opacity: 0 })),
+        animate('0.5s ease-out', style({ opacity: 0, transform: 'translateX(-100%)' })),
+      ]),
+    ]),
+    trigger('fadeInLeft', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateX(-100%)' }),
+        animate('0.5s ease-in', style({ opacity: 1, transform: 'translateX(0)' })),
       ]),
     ]),
     trigger('fadeInRight', [
       transition(':enter', [
-        style({ transform: 'translateX(100%)', opacity: 0 }),
-        animate('0.5s ease-out', style({ transform: 'translateX(0)', opacity: 1 })),
-      ]),
-      transition(':leave', [
-        animate('0.5s ease-out', style({ transform: 'translateX(100%)', opacity: 0 })),
+        style({ opacity: 0, transform: 'translateX(100%)' }),
+        animate('0.5s ease-in', style({ opacity: 1, transform: 'translateX(0)' })),
       ]),
     ]),
   ],
+
 })
 export class TestimonialCarouselComponent implements OnInit, OnDestroy {
   @Input() businessId!: string;
@@ -75,5 +79,9 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
 
   nextSlide() {
     this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
+  }
+
+  trackByIndex(index: number, _: any): number {
+    return index;
   }
 }
