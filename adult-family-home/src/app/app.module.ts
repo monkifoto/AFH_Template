@@ -66,6 +66,8 @@ import { HeroSliderComponent } from './component/UI/hero-slider/hero-slider.comp
 import { ExpandableNavigationComponent } from './component/UI/expandable-navigation/expandable-navigation.component';
 import { TestimonialCarouselComponent } from './component/UI/testimonial-carousel/testimonial-carousel.component';
 import { AdminHeroSliderComponent } from './admin/admin-hero-slider/admin-hero-slider.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GoogleMapsComponent } from './component/UI/google-maps/google-maps.component';
 
     // Map hostnames to business IDs
     const businessIdMap: { [key: string]: string } = {
@@ -190,7 +192,8 @@ export function combinedInitializer(
     HeroSliderComponent,
     ExpandableNavigationComponent,
     TestimonialCarouselComponent,
-    AdminHeroSliderComponent
+    AdminHeroSliderComponent,
+    GoogleMapsComponent
   ],
   imports: [
     BrowserModule,
@@ -206,6 +209,7 @@ export function combinedInitializer(
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     {
