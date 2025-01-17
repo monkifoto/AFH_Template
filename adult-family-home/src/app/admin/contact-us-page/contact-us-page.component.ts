@@ -34,10 +34,6 @@ export class ContactUsPageComponent implements OnInit {
     if (!this.form.contains('contactFormDetails')) {
       this.form.addControl('contactFormDetails', this.fb.control(this.form.value.contactFormDetails || ''));
     }
-
-    if (!this.form.contains('mapIframeUrl')) {
-      this.form.addControl('mapIframeUrl', this.fb.control(this.form.value.mapIframeUrl || ''));
-    }
   }
 
   onImageSelection(url: string) {
