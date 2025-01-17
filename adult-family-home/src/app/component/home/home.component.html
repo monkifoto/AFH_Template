@@ -87,5 +87,6 @@
   [businessName]="business?.businessName || 'Demo' "
 ></app-consultation>
 
-<app-google-maps
-></app-google-maps>
+<app-google-maps *ngIf="business?.theme?.themeType != 'clemo'"
+[address]="business?.address ||''"
+[layoutType]="business?.theme?.themeType || 'demo' "></app-google-maps>
