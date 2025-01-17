@@ -1,1 +1,11 @@
-<div id="map" style="width: 100%; height: 600px;"></div>
+
+<div [ngSwitch]="layoutType">
+<ng-container>
+  <ng-container *ngSwitchCase="'clemo'">
+    <div id="map" style="width: 100%; height: 600px;"></div>
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+    <div id="map" style="width: 100%; height: 400px;"></div>
+  </ng-container>
+</ng-container>
+</div>
