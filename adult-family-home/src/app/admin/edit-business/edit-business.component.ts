@@ -154,7 +154,6 @@ export class EditBusinessComponent implements OnInit {
       //Contact Us Page
       contactFormDetails: [''],
       contactUsImageUrl: [''],
-      mapIframeUrl: [''],
 
       //Gallery Page
       photoGallery: [''],
@@ -237,7 +236,6 @@ export class EditBusinessComponent implements OnInit {
       teamValues: [defaultBusiness.teamValues],
       contactFormDetails: [defaultBusiness.contactFormDetails],
       contactUsImageUrl:[defaultBusiness.contactUsImageUrl],
-      mapIframeUrl: [defaultBusiness.mapIframeUrl],
       photoGalleryText: [defaultBusiness.photoGalleryText],
       isActive: [defaultBusiness.isActive],
       theme: [defaultBusiness.theme],

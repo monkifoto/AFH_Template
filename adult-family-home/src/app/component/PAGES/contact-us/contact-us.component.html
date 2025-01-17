@@ -88,10 +88,7 @@
         </section>
         <app-information [phoneNumber]="business.phone" [address]="business.address" [email]="business.email">
         </app-information>
-
-        <app-map-iframe></app-map-iframe>
-
-
+        <app-google-maps [address]="business.address ||''"  [layoutType]="business.theme.themeType || 'demo' "></app-google-maps>
       </div>
   </ng-container>
 
@@ -152,7 +149,7 @@
       </div>
 
       <div class="ae-map-container">
-        <app-map-iframe></app-map-iframe>
+        <app-google-maps [address]="business.address ||''"  [layoutType]="business.theme.themeType || 'demo' "></app-google-maps>
       </div>
     </div>
   </ng-container>
@@ -282,7 +279,7 @@
       </div>
 
       <div class="ae-map-container">
-        <app-map-iframe></app-map-iframe>
+        <app-google-maps [address]="business.address ||''"  [layoutType]="business.theme.themeType || 'demo' "></app-google-maps>
       </div>
     </div>
   </ng-container>

@@ -36,7 +36,6 @@ import { WelcomeComponent } from './component/welcome/welcome.component';
 import { ConsultationComponent } from './component/consultation/consultation.component';
 import { FeaturesComponent } from './component/features/features.component';
 import { WhyUsComponent } from './component/why-us/why-us.component';
-import { MapIframeComponent } from './component/map-iframe/map-iframe.component';
 import { BasicInfoComponent } from './admin/basic-info/basic-info.component';
 import { HomePageComponent } from './admin/home-page/home-page.component';
 import { EmployeeComponent } from './admin/employee/employee.component';
@@ -165,7 +164,6 @@ export function combinedInitializer(
     ConsultationComponent,
     FeaturesComponent,
     WhyUsComponent,
-    MapIframeComponent,
     BasicInfoComponent,
     HomePageComponent,
     EmployeeComponent,

@@ -72,7 +72,6 @@ export interface Business {
   //Contact us page
   contactFormDetails: string;
   contactUsImageUrl: string;
-  mapIframeUrl: string;
 
   faqs: string;
   blogNews: string;
@@ -254,7 +253,6 @@ export class BusinessModel {
       contactFormDetails:
         'Please provide name, email, phone number, and message for inquiries.',
       contactUsImageUrl: '',
-      mapIframeUrl: '<iframe src="https://maps.google.com/..."></iframe>',
       photoGalleryText:
         'A collection of images showcasing our facilities, activities, and care staff.',
       isActive: true,
