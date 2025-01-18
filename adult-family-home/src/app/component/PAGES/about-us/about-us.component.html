@@ -1,150 +1,229 @@
 <div *ngIf="business">
   <div [ngSwitch]="business.theme.themeType">
     <ng-container *ngSwitchCase="'hh'">
-  <div class="hero-about">
-    <div class="hero-overlay">
-      <h1>About Us</h1>
-      <div class="hero-subtitle">
-      <p>Where Compassion Meets Care: Your Loved Ones, Our Family.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <section class="business-story">
-      <div class="heading-container">
-        <h2 class="styled-heading">Our Story</h2>
-      </div>
-      <div class="services_txt garamond" [innerHTML]="business.businessStory"></div>
-    </section>
-
-    <section class="mission-vision">
-      <div class="mission">
-        <img [src]="business.missionImageUrl || 'assets/sharedAssets/image_fx_(1).jpg'"
-        alt="Contact Image" />
-        <div class="heading-container">
-          <h2 class="styled-heading">Our Mission</h2>
+      <div class="hero-about">
+        <div class="hero-overlay">
+          <h1>About Us</h1>
+          <div class="hero-subtitle">
+            <p>Where Compassion Meets Care: Your Loved Ones, Our Family.</p>
+          </div>
         </div>
-        <div class="services_txt garamond" [innerHTML]="business.mission"></div>
       </div>
-      <div class="vision">
-        <img [src]="business.visionImageUrl || 'assets/sharedAssets/image_fx_(3).jpg'"
-        alt="Contact Image" />
-        <div class="heading-container">
-          <h2 class="styled-heading">Our Vision</h2>
-        </div>
-        <div class="services_txt garamond" [innerHTML]="business.vision"></div>
-      </div>
-    </section>
-    <section class="business-team">
-      <app-meet-the-team [businessId]="business.id"></app-meet-the-team>
-    </section>
-  </div>
 
-  <div class="cta-section about-cta">
-    <div class="cta-content">
-      <h2>Come Meet Our Family</h2>
-      <p>We’d love to meet you! Schedule a visit and see firsthand how our caring environment feels like home.</p>
-      <button class="cta-btn" (click)="navigateToContact()">Schedule a Visit</button>
-    </div>
-  </div>
+      <div class="container">
+        <section class="business-story">
+          <div class="heading-container">
+            <h2 class="styled-heading">Our Story</h2>
+          </div>
+          <div
+            class="services_txt garamond"
+            [innerHTML]="business.businessStory"
+          ></div>
+        </section>
+
+        <section class="mission-vision">
+          <div class="mission">
+            <img
+              [src]="
+                business.missionImageUrl ||
+                'assets/sharedAssets/image_fx_(1).jpg'
+              "
+              alt="Contact Image"
+            />
+            <div class="heading-container">
+              <h2 class="styled-heading">Our Mission</h2>
+            </div>
+            <div
+              class="services_txt garamond"
+              [innerHTML]="business.mission"
+            ></div>
+          </div>
+          <div class="vision">
+            <img
+              [src]="
+                business.visionImageUrl ||
+                'assets/sharedAssets/image_fx_(3).jpg'
+              "
+              alt="Contact Image"
+            />
+            <div class="heading-container">
+              <h2 class="styled-heading">Our Vision</h2>
+            </div>
+            <div
+              class="services_txt garamond"
+              [innerHTML]="business.vision"
+            ></div>
+          </div>
+        </section>
+        <section class="business-team">
+          <app-meet-the-team [businessId]="business.id"></app-meet-the-team>
+        </section>
+      </div>
+
+      <div class="cta-section about-cta">
+        <div class="cta-content">
+          <h2>Come Meet Our Family</h2>
+          <p>
+            We’d love to meet you! Schedule a visit and see firsthand how our
+            caring environment feels like home.
+          </p>
+          <button class="cta-btn" (click)="navigateToContact()">
+            Schedule a Visit
+          </button>
+        </div>
+      </div>
     </ng-container>
     <ng-container *ngSwitchCase="'ae'">
       <app-hero></app-hero>
       <div class="content-wrapper">
-<section class="our-approach">
-  <app-right-text
-    *ngIf="business.theme.themeType === 'ae'"
-    [imageURL]="business.missionImageUrl"
-    [title]="business.missionTitle"
-    [content]="business.mission"
-  ></app-right-text>
+        <section class="our-approach">
+          <app-right-text
+            *ngIf="business.theme.themeType === 'ae'"
+            [imageURL]="business.missionImageUrl"
+            [title]="business.missionTitle"
+            [content]="business.mission"
+          ></app-right-text>
 
-  <app-left-text
-    *ngIf="business.theme.themeType === 'ae'"
-    [imageURL]="business.visionImageUrl"
-    [title]="business.visionTitle"
-    [content]="business.vision"
-  ></app-left-text>
+          <app-left-text
+            *ngIf="business.theme.themeType === 'ae'"
+            [imageURL]="business.visionImageUrl"
+            [title]="business.visionTitle"
+            [content]="business.vision"
+          ></app-left-text>
+        </section>
 
+        <app-testimonial-image
+          [imageURL]="
+            '../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'
+          "
+          [author]="business.testimonials[0].name"
+          [text]="business.testimonials[0].quote"
+        ></app-testimonial-image>
 
-</section>
+        <app-call-to-action
+          [text]="'Have more questions?'"
+          [buttonText]="'Contact Us'"
+          [isButton]="false"
+          [bgColor]="business.theme.backgroundColor"
+          [textColor]="business.theme.textColor"
+        >
+        </app-call-to-action>
 
-
-<app-testimonial-image [imageURL]="'../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'"
-          [author]="business.testimonials[0].name" [text]="business.testimonials[0].quote"></app-testimonial-image>
-
-<app-call-to-action [text]="'Have more questions?'" [buttonText]="'Contact Us'" [isButton]="false"
-[bgColor]="business.theme.backgroundColor" [textColor]="business.theme.textColor">
-</app-call-to-action>
-
-<app-meet-the-team></app-meet-the-team>
+        <app-meet-the-team></app-meet-the-team>
       </div>
     </ng-container>
 
     <ng-container *ngSwitchCase="'ehc'">
       <app-hero></app-hero>
 
-<section class="our-approach">
-  <app-right-text
-    *ngIf="business.theme.themeType === 'ehc'"
-    [imageURL]="business.missionImageUrl"
-    [title]="business.missionTitle"
-    [content]="business.mission"
-  ></app-right-text>
-
-  <app-left-text
-    *ngIf="business.theme.themeType === 'ehc'"
-    [imageURL]="business.visionImageUrl"
-    [title]="business.visionTitle"
-    [content]="business.vision"
-  ></app-left-text>
-
-
-</section>
-
-
-<app-testimonial-image [imageURL]="'../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'"
-          [author]="business.testimonials[0].name" [text]="business.testimonials[0].quote"></app-testimonial-image>
-
-<app-call-to-action [text]="'Have more questions?'" [buttonText]="'Contact Us'" [isButton]="false"
-[bgColor]="business.theme.backgroundColor" [textColor]="business.theme.textColor">
-</app-call-to-action>
-
-<app-meet-the-team></app-meet-the-team>
-
-    </ng-container>
-
-    <ng-container *ngSwitchDefault>
-      <app-hero></app-hero>
-
       <section class="our-approach">
-
-
         <app-right-text
-
+          *ngIf="business.theme.themeType === 'ehc'"
           [imageURL]="business.missionImageUrl"
           [title]="business.missionTitle"
           [content]="business.mission"
         ></app-right-text>
 
         <app-left-text
-
+          *ngIf="business.theme.themeType === 'ehc'"
           [imageURL]="business.visionImageUrl"
           [title]="business.visionTitle"
           [content]="business.vision"
         ></app-left-text>
-
-
       </section>
 
+      <app-testimonial-image
+        [imageURL]="
+          '../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'
+        "
+        [author]="business.testimonials[0].name"
+        [text]="business.testimonials[0].quote"
+      ></app-testimonial-image>
 
-      <app-testimonial-image [imageURL]="'../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'"
-                [author]="business.testimonials[5].name" [text]="business.testimonials[5].quote"></app-testimonial-image>
-
-      <app-call-to-action [text]="'Have more questions?'" [buttonText]="'Contact Us'" [isButton]="false"
-      [bgColor]="business.theme.backgroundColor" [textColor]="business.theme.textColor">
+      <app-call-to-action
+        [text]="'Have more questions?'"
+        [buttonText]="'Contact Us'"
+        [isButton]="false"
+        [bgColor]="business.theme.backgroundColor"
+        [textColor]="business.theme.textColor"
+      >
       </app-call-to-action>
+
+      <app-meet-the-team></app-meet-the-team>
     </ng-container>
 
+    <ng-container *ngSwitchCase="'clemo'">
+      <app-hero></app-hero>
+
+      <section class="our-approach">
+        <app-right-text
+          *ngIf="business.theme.themeType === 'clemo'"
+          [imageURL]="business.missionImageUrl"
+          [title]="business.missionTitle"
+          [content]="business.mission"
+        ></app-right-text>
+
+        <app-left-text
+          *ngIf="business.theme.themeType === 'clemo'"
+          [imageURL]="business.visionImageUrl"
+          [title]="business.visionTitle"
+          [content]="business.vision"
+        ></app-left-text>
+      </section>
+
+      <app-testimonial-image
+        [imageURL]="
+          '../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'
+        "
+        [author]="business.testimonials[0].name"
+        [text]="business.testimonials[0].quote"
+      ></app-testimonial-image>
+
+      <app-call-to-action
+        [text]="'Have more questions?'"
+        [buttonText]="'Contact Us'"
+        [isButton]="false"
+        [bgColor]="business.theme.backgroundColor"
+        [textColor]="business.theme.textColor"
+      >
+      </app-call-to-action>
+
+      <app-meet-the-team></app-meet-the-team>
+    </ng-container>
+
+    <ng-container *ngSwitchDefault>
+      <app-hero></app-hero>
+
+      <section class="our-approach">
+        <app-right-text
+          [imageURL]="business.missionImageUrl"
+          [title]="business.missionTitle"
+          [content]="business.mission"
+        ></app-right-text>
+
+        <app-left-text
+          [imageURL]="business.visionImageUrl"
+          [title]="business.visionTitle"
+          [content]="business.vision"
+        ></app-left-text>
+      </section>
+
+      <app-testimonial-image
+        [imageURL]="
+          '../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'
+        "
+        [author]="business.testimonials[5].name"
+        [text]="business.testimonials[5].quote"
+      ></app-testimonial-image>
+
+      <app-call-to-action
+        [text]="'Have more questions?'"
+        [buttonText]="'Contact Us'"
+        [isButton]="false"
+        [bgColor]="business.theme.backgroundColor"
+        [textColor]="business.theme.textColor"
+      >
+      </app-call-to-action>
+    </ng-container>
+  </div>
 </div>

@@ -17,12 +17,12 @@
     <!-- Navbar Links -->
     <div class="clemo-navbar-collapse" [ngClass]="{'clemo-show': menuOpen}">
       <ul class="clemo-navbar-nav">
-        <li class="clemo-nav-item"><a class="clemo-nav-link" href="#">Home</a></li>
-        <li class="clemo-nav-item"><a class="clemo-nav-link" href="#">About Us</a></li>
-        <li class="clemo-nav-item"><a class="clemo-nav-link" href="#">Services</a></li>
-        <li class="clemo-nav-item"><a class="clemo-nav-link" href="#">Our Home</a></li>
-        <li class="clemo-nav-item"><a class="clemo-nav-link" href="#">Resident Form</a></li>
-        <li class="clemo-nav-item"><a class="clemo-nav-link" href="#">Contact</a></li>
+        <li class="clemo-nav-item"><span class="clemo-nav-link"  (click)="navigateTo('home')">Home</span></li>
+        <li class="clemo-nav-item"><span class="clemo-nav-link" (click)="navigateTo('about-us')">About Us</span></li>
+        <li class="clemo-nav-item"><span class="clemo-nav-link" (click)="navigateTo('services')">Services</span></li>
+        <li class="clemo-nav-item"><span class="clemo-nav-link" (click)="navigateTo('gallery')">Our Home</span></li>
+        <li class="clemo-nav-item"><span class="clemo-nav-link" (click)="navigateTo('resident-form')">Resident Form</span></li>
+        <li class="clemo-nav-item"><span class="clemo-nav-link" (click)="navigateTo('contact-us')">Contact</span></li>
       </ul>
     </div>
   </div>
