@@ -14,6 +14,7 @@ export interface Business {
   phone: string;
   fax: string;
   email: string;
+  placeId: string;
 
   uniqueService: ListItem[];
 
@@ -257,6 +258,7 @@ export class BusinessModel {
         'A collection of images showcasing our facilities, activities, and care staff.',
       isActive: true,
       isLive: false,
+      placeId: '',
       uniqueService: [
         {
           description:
