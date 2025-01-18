@@ -1,30 +1,37 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges  } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { GoogleMapsLoaderService } from 'src/app/services/google-maps-loader.service'; // Adjust the path as necessary
 
 declare var google: any; // Declare google object for TypeScript
+
 @Component({
   selector: 'app-google-maps',
   templateUrl: './google-maps.component.html',
-  styleUrls: ['./google-maps.component.css']
+  styleUrls: ['./google-maps.component.css'],
 })
-
 export class GoogleMapsComponent implements OnInit, OnChanges {
-  @Input() address: string = '';
-  @Input() layoutType: string = 'demo';
+  @Input() address: string = ''; // Input for the address to display on the map
+  @Input() layoutType: string = 'demo'; // Example additional input
 
   private map: any;
   private geocoder: any;
 
-  constructor() {}
+  constructor(private googleMapsLoader: GoogleMapsLoaderService) {}
 
   ngOnInit(): void {
-    console.log("Google Map Address:", this.address);
-    this.loadGoogleMapsScript().then(() => {
-      this.initializeMap();
-      if (this.address) {
-        this.showAddressOnMap(this.address);
-      }
-    });
+    console.log('Google Map Address:', this.address);
+
+    // Load the Google Maps script via the service
+    this.googleMapsLoader
+      .loadScript()
+      .then(() => {
+        this.initializeMap();
+        if (this.address) {
+          this.showAddressOnMap(this.address);
+        }
+      })
+      .catch((error) => {
+        console.error('Error loading Google Maps script:', error);
+      });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -33,28 +40,10 @@ export class GoogleMapsComponent implements OnInit, OnChanges {
     }
   }
 
-  private loadGoogleMapsScript(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      if (document.getElementById('google-maps-script')) {
-        resolve();
-        return;
-      }
-
-      const script = document.createElement('script');
-      script.id = 'google-maps-script';
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapsApiKey}`;
-      script.async = true;
-      script.defer = true;
-      script.onload = () => resolve();
-      script.onerror = (error) => reject(error);
-      document.body.appendChild(script);
-    });
-  }
-
   private initializeMap(): void {
     this.map = new google.maps.Map(document.getElementById('map'), {
-      center: { lat: -34.397, lng: 150.644 },
-      zoom: 8,
+      center: { lat: -34.397, lng: 150.644 }, // Default center
+      zoom: 8, // Default zoom
     });
     this.geocoder = new google.maps.Geocoder();
   }
@@ -64,7 +53,7 @@ export class GoogleMapsComponent implements OnInit, OnChanges {
       if (status === 'OK') {
         this.map.setCenter(results[0].geometry.location);
 
-         // Adjust zoom to show a 10-mile area
+        // Adjust zoom to show a 10-mile area
         const bounds = new google.maps.LatLngBounds();
         bounds.extend(results[0].geometry.location);
         this.map.fitBounds(bounds);
