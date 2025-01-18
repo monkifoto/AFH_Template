@@ -67,6 +67,7 @@ import { TestimonialCarouselComponent } from './component/UI/testimonial-carouse
 import { AdminHeroSliderComponent } from './admin/admin-hero-slider/admin-hero-slider.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GoogleMapsComponent } from './component/UI/google-maps/google-maps.component';
+import { GoogleReviewsComponent } from './component/UI/google-reviews/google-reviews.component';
 
     // Map hostnames to business IDs
     const businessIdMap: { [key: string]: string } = {
@@ -191,7 +192,8 @@ export function combinedInitializer(
     ExpandableNavigationComponent,
     TestimonialCarouselComponent,
     AdminHeroSliderComponent,
-    GoogleMapsComponent
+    GoogleMapsComponent,
+    GoogleReviewsComponent
   ],
   imports: [
     BrowserModule,

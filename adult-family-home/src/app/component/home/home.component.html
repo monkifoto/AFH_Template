@@ -90,3 +90,5 @@
 <app-google-maps *ngIf="business?.theme?.themeType == 'clemo'"
 [address]="business?.address ||''"
 [layoutType]="business?.theme?.themeType || 'demo' "></app-google-maps>
+
+<app-google-reviews  *ngIf="business?.theme?.themeType == 'clemo'" [placeId]="'ChIJ5YRRM8cPkFQRUY14zoLyVDQ'"></app-google-reviews>
