@@ -41,10 +41,22 @@
   </div>
 </div>
 
-<section class="gallery">
+<!-- <section class="gallery">
   <div class="section-heading">Explore Our Gallery</div>
   <div class="gallery-grid">
     <div *ngFor="let image of images" class="gallery-item" (click)="onImageClick(image.url)">
+      <img [src]="image.url" alt="Gallery Image">
+    </div>
+  </div>
+</section> -->
+
+<section class="gallery">
+  <div class="section-heading">Explore Our Gallery</div>
+  <div class="gallery-grid">
+    <div *ngFor="let image of images" class="gallery-item">
+      <div class="delete-button" (click)="deleteImage(image)">
+        <i class="fa-solid fa-trash-can"></i>
+      </div>
       <img [src]="image.url" alt="Gallery Image">
     </div>
   </div>
