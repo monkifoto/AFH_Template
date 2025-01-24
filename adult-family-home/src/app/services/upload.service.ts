@@ -76,4 +76,37 @@ export class UploadService {
 
     return { uploadProgress, downloadUrl };
   }
+
+  deleteFile(imageUrl: string, businessId: string, location: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      // Extract the file path from the image URL
+      const filePath = decodeURIComponent(imageUrl.split('/').pop()?.split('?')[0] || '');
+      const storageRef = this.storage.ref(filePath);
+
+      // Step 1: Delete from Firebase Storage
+      storageRef.delete().subscribe({
+        next: () => {
+          // Step 2: Delete from Firestore
+          this.firestore
+            .collection('businesses')
+            .doc(businessId)
+            .collection(location)
+            .ref.where('url', '==', imageUrl)
+            .get()
+            .then((querySnapshot) => {
+              querySnapshot.forEach((doc) => doc.ref.delete());
+              resolve();
+            })
+            .catch((error) => {
+              console.error('Error deleting from Firestore:', error);
+              reject(error);
+            });
+        },
+        error: (error) => {
+          console.error('Error deleting from Storage:', error);
+          reject(error);
+        },
+      });
+    });
+  }
 }

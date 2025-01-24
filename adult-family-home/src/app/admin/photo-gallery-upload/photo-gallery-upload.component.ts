@@ -48,6 +48,21 @@ export class PhotoGalleryUploadComponent implements OnInit {
     }
   }
 
+  deleteImage(image: any): void {
+    if (confirm('Are you sure you want to delete this image?')) {
+      this.uploadService
+        .deleteFile(image.url, this.businessId, this.uploadLocation)
+        .then(() => {
+          // Step 3: Update the local array
+          this.images = this.images.filter((img) => img.url !== image.url);
+        })
+        .catch((error) => {
+          console.error('Error deleting the image:', error);
+        });
+    }
+  }
+
+
   onDragOver(event: DragEvent) {
     event.preventDefault();
     event.stopPropagation();
