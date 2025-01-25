@@ -1,13 +1,13 @@
 .meet-the-team {
   padding: 50px 20px;
-  background-color:  var(--primary-color);
+  background-color:  var(--dark-background-color);
   text-align: center;
 }
 
 .meet-the-team h2 {
   font-size: 2.5em;
   margin-bottom: 30px;
-  color: #333;
+  color: var(--primary-color);
 }
 
 .team-list {
@@ -43,7 +43,7 @@
 
 .team-member h3 {
   font-size: 1.5em;
-  color: #007bff;
+  color: var(--dark-background-color);
   margin: 0;
 }
 

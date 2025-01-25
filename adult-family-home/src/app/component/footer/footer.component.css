@@ -97,9 +97,7 @@
 }
 
 .ae-footer-business-text {
-  /* font-size: 1.2rem; */
   color: var(--dark-background-color);
-  /* font-weight: bold; */
 }
 
 /* Footer Columns Layout */
@@ -122,14 +120,12 @@
 
 /* Column Titles */
 .ae-footer-column-title {
-  font-size: 1.1rem;
   color: var(--dark-background-color);
   margin-bottom: 10px;
 }
 
 .ae-footer-column p,
 .ae-footer-column address {
-  font-size: 0.9rem;
   line-height: 1.6;
 }
 
