@@ -1,7 +1,7 @@
 
 <app-hero-slider  *ngIf="business?.theme?.themeType === 'clemo'"></app-hero-slider>
 <app-three-section *ngIf="business?.theme?.themeType === 'clemo'"></app-three-section>
-<app-testimonial-carousel  *ngIf="business?.theme?.themeType === 'clemo'" [placeId]="business?.placeId || ''"></app-testimonial-carousel>
+
 
 <app-hero-carousel *ngIf="business?.theme?.themeType != 'clemo'"></app-hero-carousel>
 
@@ -73,13 +73,15 @@
 
 
 <app-parallax-stats
-*ngIf="business?.theme?.themeType === 'ehc'"
+*ngIf="business?.theme?.themeType === 'clemo'"
   [backgroundImage]="'https://firebasestorage.googleapis.com/v0/b/afhdynamicwebsite.appspot.com/o/businesses%2FSJgFxBYkopnPR4WibCAf%2Fgallery%2F13.jpg?alt=media&amp;token=cc737375-bdbf-4ba3-95d9-66b63a73b45a'"
   [yearsOfExperience]="20"
   [happyFamilies]="55"
   [servicesOffered]="36"
   [trainedStaff]="4">
 </app-parallax-stats>
+
+<app-testimonial-carousel  *ngIf="business?.theme?.themeType === 'clemo'" [placeId]="business?.placeId || ''"></app-testimonial-carousel>
 
 <app-consultation
 *ngIf="business?.theme?.themeType != 'clemo'"

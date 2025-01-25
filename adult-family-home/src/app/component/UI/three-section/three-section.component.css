@@ -20,6 +20,7 @@
   flex-wrap: wrap; /* Ensure items wrap on smaller screens */
   align-items: center; /* Center items vertically */
   justify-content: space-between; /* Add spacing between items */
+  margin: 0 auto;
 }
 
 .clemo-single-service-area {
@@ -36,10 +37,10 @@
 
 .clemo-single-service-left {
   flex: 1;
-  max-width: 600px;
+  /* max-width: 600px; */
   display: flex;
   justify-content: center;
-  padding: 40px; /* Add padding around the image */
+  padding: 80px; /* Add padding around the image */
 }
 
 .clemo-single-service-left img {
