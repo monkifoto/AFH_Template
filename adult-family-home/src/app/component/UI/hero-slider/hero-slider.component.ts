@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Business } from 'src/app/model/business-questions.model';
 import { BusinessDataService } from 'src/app/services/business-data.service';
@@ -8,17 +8,15 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
   templateUrl: './hero-slider.component.html',
   styleUrls: ['./hero-slider.component.css']
 })
-
-
 export class HeroSliderComponent implements OnInit {
-    business: Business | null = null; // Set to null initially
-    slides: any[] = [];
-    currentSlide = 0;
+  business: Business | null = null;
+  slides: any[] = [];
+  currentSlide = 0;
+  sliderOpacity = 1; // Initial opacity for the slider
 
   constructor(private router: Router, private businessDataService: BusinessDataService) {
     this.autoSlide();
   }
-
 
   ngOnInit(): void {
     console.log('HeroSliderComponent - ngOnInit');
@@ -51,10 +49,8 @@ export class HeroSliderComponent implements OnInit {
 
   replaceKeywords(text: string): string {
     if (!text || !this.business?.businessName) {
-      return text; // Return the original text if there's no business name or text
+      return text;
     }
-
-    // Replace the special keyword "{{businessName}}" with the business name
     return text.replace(/{{businessName}}/g, this.business.businessName);
   }
 
@@ -65,6 +61,16 @@ export class HeroSliderComponent implements OnInit {
   autoSlide(): void {
     setInterval(() => {
       this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-    }, 15000); // Change slide every 5 seconds
+    }, 15000);
+  }
+
+  // Scroll event listener to adjust opacity
+  @HostListener('window:scroll', ['$event'])
+  onScroll(): void {
+    const scrollY = window.scrollY; // Get the current scroll position
+    const viewportHeight = window.innerHeight; // Get the viewport height
+
+    // Calculate the new opacity based on scroll position
+    this.sliderOpacity = Math.max(1 - scrollY / viewportHeight, 0);
   }
 }

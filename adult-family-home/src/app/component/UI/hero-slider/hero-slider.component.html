@@ -1,10 +1,16 @@
-<div class="clemo-slider-container">
+<div
+  class="clemo-slider-container"
+  id="carousel"
+  [ngStyle]="{ '--slider-opacity': sliderOpacity }"
+>
   <div *ngFor="let slide of slides; let i = index"
        [class.clemo-active]="i === currentSlide"
        class="clemo-slides clemo-single-home-slider">
 
     <!-- Background Image -->
-    <div class="clemo-home-overlay" [ngStyle]="{'background-image': 'url(' + slide.backgroundImage + ')'}"></div>
+    <div class="clemo-home-overlay"
+     [ngStyle]="{'background': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(' + slide.backgroundImage + ')'}">
+</div>
 
     <!-- Slide Content -->
     <div class="clemo-main-home">
@@ -20,6 +26,12 @@
             {{ button.text }}
           </a>
         </ng-container>
+      </div>
+      <div class="mouse-scroll">
+        <div class="mouse">
+          <div class="scroll"></div>
+        </div>
+        <p>Scroll down</p>
       </div>
     </div>
   </div>

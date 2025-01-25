@@ -2,7 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px;
+  /* padding: 40px; */
+  padding-bottom: 6.6vmax;
+  padding-top: 6.6vmax;
 
   .title {
     font-size: 2.5rem;
@@ -78,4 +80,26 @@
     color: black;
     font-weight: bold;
   }
+}
+
+
+.read-more {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  padding: 0;
+  margin-left: 5px;
+}
+
+.read-more:hover {
+  color: #007bff;
+}
+
+.google-stars {
+  color: gold;
+  font-size: 1.2rem;
+  margin-top: 5px;
 }

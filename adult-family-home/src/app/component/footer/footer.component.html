@@ -70,6 +70,50 @@
 </ng-container>
 
 
+<ng-container *ngSwitchCase="'clemo'">
+  <footer class="ae-footer">
+    <div class="ae-footer-content">
+      <!-- Business Name and Divider -->
+      <div class="ae-footer-business">
+        <hr class="ae-footer-line" />
+        <h2 class="ae-footer-business-text">{{ business?.businessName }}</h2>
+        <hr class="ae-footer-line" />
+      </div>
+
+      <!-- Footer Columns -->
+      <div class="ae-footer-columns">
+        <!-- Owner -->
+        <div class="ae-footer-column">
+          <h3 class="ae-footer-column-title">Owner:</h3>
+          <p>{{ business?.providerName }}</p>
+        </div>
+
+        <!-- Location -->
+        <div class="ae-footer-column">
+          <h3 class="ae-footer-column-title">Location:</h3>
+          <p>{{ business?.address }}</p>
+        </div>
+
+        <!-- Provider -->
+        <div class="ae-footer-column">
+          <h3 class="ae-footer-column-title">Provider:</h3>
+          <p>{{ business?.providerName }}</p>
+          <p>Email: <a href="mailto:{{ business?.email }}">{{ business?.email }}</a></p>
+          <p>Phone: <a href="tel:+{{ business?.phone }}">{{ business?.phone }}</a></p>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="ae-footer-bottom">
+        <p>© {{ 2024 }} {{ business?.businessName }}. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+
+</ng-container>
+
+
 <ng-container *ngSwitchDefault>
   <footer class="footer">
     <div class="footer-content">
