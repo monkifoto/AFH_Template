@@ -1,12 +1,10 @@
 <section class="services-section">
-  <h2>Our Services</h2>
+  <app-section-tile [title]="'Our Services'"></app-section-tile>
   <div class="services-grid">
       <div *ngFor="let service of services" class="service-item">
         <i [ngClass]="service.icon" class="services-item-icon"></i>
           <h2>{{service.title}}</h2>
           <p>{{service.description}}</p>
-          <!-- <p>60 mins | $300</p> -->
       </div>
   </div>
-  <button class="afhBtn">Book a consultation</button>
 </section>

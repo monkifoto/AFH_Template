@@ -119,31 +119,17 @@
   text-align: center;
 }
 
-.consultation-title {
-  font-size: 2.5em;
-    margin-bottom: 15px;
-  }
-
-.consultation-title.main {
-  color: var(--primary-color);
-}
-
-.consultation-title.highlight {
-  color: var(--accent-color);
-}
-
-
 .cta-content {
   max-width: 600px;
 }
 
 .cta-content h2 {
-  font-size: 24px;
+  font-size: 26px;
   margin-bottom: 10px;
 }
 
 .cta-content p {
-  font-size: 16px;
+  font-size: 20px;
   margin-bottom: 20px;
   color:var(--primary-color);
 }
@@ -161,4 +147,20 @@
   cursor: pointer;
   transition: all 0.3s ease;
 }
+
+
+
+.consultation-title {
+  font-size: 2.5em;
+    margin-bottom: 15px;
+  }
+
+.consultation-title.main {
+  color: var(--primary-color);
+}
+
+.consultation-title.highlight {
+  color: var(--accent-color);
+}
+
 

@@ -69,6 +69,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GoogleMapsComponent } from './component/UI/google-maps/google-maps.component';
 import { GoogleReviewsComponent } from './component/UI/google-reviews/google-reviews.component';
 import { InstagramFeedComponent } from './component/UI/instagram-feed/instagram-feed.component';
+import { SectionTileComponent } from './component/UI/section-tile/section-tile.component';
 
     // Map hostnames to business IDs
     const businessIdMap: { [key: string]: string } = {
@@ -195,7 +196,8 @@ export function combinedInitializer(
     AdminHeroSliderComponent,
     GoogleMapsComponent,
     GoogleReviewsComponent,
-    InstagramFeedComponent
+    InstagramFeedComponent,
+    SectionTileComponent
   ],
   imports: [
     BrowserModule,
