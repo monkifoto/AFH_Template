@@ -1,9 +1,24 @@
 /* Slider Container */
+/* .clemo-slider-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+} */
+
+
 .clemo-slider-container {
   position: relative;
   width: 100%;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
   overflow: hidden;
+  opacity: var(--slider-opacity, 1); /* Use dynamic opacity */
+  transition: opacity 0.3s ease; /* Smooth transition */
+  pointer-events: auto; /* Prevent blocking scroll interaction */
+}
+
+.clemo-slider-container.hidden {
+  pointer-events: none; /* Disable interaction when fully faded */
 }
 
 /* Slides */
@@ -31,6 +46,18 @@
 }
 
 /* Background Overlay */
+/* .clemo-home-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.9;
+  z-index: 1;
+} */
+
 .clemo-home-overlay {
   position: absolute;
   top: 0;
@@ -39,9 +66,9 @@
   height: 100%;
   background-size: cover;
   background-position: center;
-  opacity: 0.3; /* Barely visible background image */
   z-index: 1;
 }
+
 
 /* Slide Content */
 .clemo-main-home {
@@ -58,19 +85,19 @@
   font-size: 3rem;
   font-weight: bold;
   margin: 0;
-  color: #000;
+  color: #fff;
 }
 
 .clemo-separator {
   width: 50px;
   height: 2px;
-  background-color: #000;
+  background-color: #fff;
   margin: 20px auto;
 }
 
 .clemo-subtitle {
   font-size: 1.5rem;
-  color: #333;
+  color: #fff;
   margin: 20px 0;
   line-height: 1.5;
 }
@@ -86,15 +113,15 @@
   font-size: 1rem;
   font-weight: bold;
   text-transform: uppercase;
-  color: #fff;
-  background-color: #000;
+  color: #000;
+  background-color: #fff;
   border-radius: 25px;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
   margin-right: 50px;
   &:hover {
-    background-color: #333;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
   }
 }
 
@@ -105,16 +132,16 @@
   font-size: 1rem;
   font-weight: bold;
   text-transform: uppercase;
-  color: #000;
+  color: #fff;
   background-color: transparent;
-  border: 2px solid #000;
+  border: 2px solid #fff;
   border-radius: 25px;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    background-color: #000;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
   }
 }
 
@@ -134,7 +161,7 @@
 .clemo-nav-item {
   width: 15px;
   height: 15px;
-  background-color: #000;
+  background-color: #fff;
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
   cursor: pointer;
   transition: all 0.3s ease;
@@ -157,5 +184,61 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+
+/* Container for the scroll animation */
+.mouse-scroll {
+  position: absolute;
+  bottom: -220px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 100;
+  font-family: Arial, sans-serif;
+}
+
+.mouse {
+  width: 30px;
+  height: 50px;
+  border: 2px solid #fff;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 10px auto;
+  position: relative;
+}
+
+.scroll {
+  width: 6px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 3px;
+  animation: scroll 1.5s infinite;
+}
+
+/* Text below the scroll indicator */
+.mouse-scroll p {
+  color: #fff;
+  font-size: 14px;
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Scroll animation */
+@keyframes scroll {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
   }
 }
