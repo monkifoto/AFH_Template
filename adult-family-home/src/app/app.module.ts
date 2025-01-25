@@ -70,6 +70,8 @@ import { GoogleMapsComponent } from './component/UI/google-maps/google-maps.comp
 import { GoogleReviewsComponent } from './component/UI/google-reviews/google-reviews.component';
 import { InstagramFeedComponent } from './component/UI/instagram-feed/instagram-feed.component';
 import { SectionTileComponent } from './component/UI/section-tile/section-tile.component';
+import { VideoComponent } from './component/UI/video/video.component';
+import { Tour3DComponent } from './component/UI/tour-3-d/tour-3-d.component';
 
     // Map hostnames to business IDs
     const businessIdMap: { [key: string]: string } = {
@@ -197,7 +199,9 @@ export function combinedInitializer(
     GoogleMapsComponent,
     GoogleReviewsComponent,
     InstagramFeedComponent,
-    SectionTileComponent
+    SectionTileComponent,
+    VideoComponent,
+    Tour3DComponent
   ],
   imports: [
     BrowserModule,

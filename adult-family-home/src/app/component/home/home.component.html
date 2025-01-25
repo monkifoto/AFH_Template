@@ -70,7 +70,9 @@
   [layoutType]="business?.theme?.themeType || 'demo' "
 ></app-testimonials>
 
+<app-video *ngIf="business?.theme?.themeType === 'clemo'" [videoSource]="'https://youtu.be/rVBHH5DwYFA?si=Cr3AncNVTaxqHsfX'"></app-video>
 
+<app-tour-3-d *ngIf="business?.theme?.themeType === 'clemo'"></app-tour-3-d>
 
 <app-parallax-stats
 *ngIf="business?.theme?.themeType === 'clemo'"
