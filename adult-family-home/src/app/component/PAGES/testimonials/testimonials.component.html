@@ -1,13 +1,13 @@
 <app-hero></app-hero>
 <div class="content-wrapper">
-<div class="testimonials-container" *ngIf="testimonials.length > 0">
-  <div *ngFor="let testimonial of testimonials" class="testimonial-card">
-    <blockquote class="testimonial-quote">
-      <h4>"{{ testimonial.quote }}"</h4>
-    </blockquote>
-    <div class="testimonial-author">
-      <p>{{ testimonial.name }}</p>
+  <div class="testimonials-container" *ngIf="testimonials.length > 0">
+    <div *ngFor="let testimonial of testimonials" class="testimonial-card">
+      <blockquote class="testimonial-quote">
+        <h4>"{{ testimonial.quote }}"</h4>
+      </blockquote>
+      <div class="testimonial-author">
+        <p>{{ testimonial.name }}</p>
+      </div>
     </div>
   </div>
-</div>
 </div>

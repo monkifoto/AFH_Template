@@ -264,3 +264,10 @@
   }
 }
 
+@media (max-width: 768px) {
+  .ae-gallery {
+    /* background: linear-gradient(to bottom, #f9f9f9, #ececec); */
+    padding: 40px 20px;
+  }
+}
+
