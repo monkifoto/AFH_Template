@@ -1,5 +1,5 @@
-<section class="right-text-section">
-  
+<section class="right-text-section" *ngIf="themeType!='clemo'">
+
   <div class="image-container">
       <img src="{{imageURL}}" alt="{{title}}">
   </div>
@@ -10,3 +10,29 @@
   </div>
 
 </section>
+
+
+
+<section class="content-container" *ngIf="themeType=='clemo'">
+  <div class="content-area">
+  <div class="row">
+
+  <div class="left-image-container">
+      <img src="{{imageURL}}" alt="{{title}}">
+  </div>
+
+  <div class="text-container">
+      <h3>
+        {{ titleParts.part1 }}</h3>
+        <h2><span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span></h2>
+
+        <div class="separator2"></div>
+      <p>{{content}}</p>
+      <a href="#" class="btn">learn more</a>
+  </div>
+</div>
+</div>
+
+</section>
+
+

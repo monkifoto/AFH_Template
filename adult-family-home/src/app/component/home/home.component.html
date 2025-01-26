@@ -15,6 +15,7 @@
 
 <app-right-text
   *ngIf="business?.theme?.themeType === 'ae'"
+  [themeType]="business?.theme?.themeType || ''"
   [imageURL]="'../../../../assets/sharedAssets/istockphoto-1432890664-2048x2048.jpg'"
   [title]="'Providing a safe and comfortable home environment for your loved ones'"
   [content]="'In our warm, home-like setting, residents enjoy fully private rooms designed for comfort and privacy, fostering a sense of security and belonging. Our dedicated caregivers provide personalized, attentive care tailored to each resident’s unique needs, ensuring they feel valued and supported.'"
@@ -22,6 +23,7 @@
 
 <app-left-text
   *ngIf="business?.theme?.themeType === 'ae'"
+  [themeType]="business?.theme?.themeType || ''"
   [imageURL]="'../../../../assets/sharedAssets/istockphoto-1066099806-2048x2048.jpg'"
   [title]="'Flexible In-Person and Remote Visitation Options'"
   [content]="'Our adult family home welcomes in-person visits in a comfortable and home-like setting. For those unable to visit in person, we offer remote options to help you stay connected with your loved ones, ensuring meaningful interactions from the comfort of your own home.'"
@@ -72,7 +74,7 @@
 
 <app-video *ngIf="business?.theme?.themeType === 'clemo'" [videoSource]="'https://youtu.be/rVBHH5DwYFA?si=Cr3AncNVTaxqHsfX'"></app-video>
 
-<app-tour-3-d *ngIf="business?.theme?.themeType === 'clemo'"></app-tour-3-d>
+
 
 <app-parallax-stats
 *ngIf="business?.theme?.themeType === 'clemo'"

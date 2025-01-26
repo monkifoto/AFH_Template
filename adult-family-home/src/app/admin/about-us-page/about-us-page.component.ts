@@ -139,6 +139,24 @@ export class AboutUsPageComponent implements OnInit {
     }
   }
 
+  onBusinessImageSelection(url: string) {
+    this.form.patchValue({
+      businessStoryImageUrl: url
+    });
+    if (this.business) {
+      this.business.businessStoryImageUrl = url;  // Save selected URL in business model
+    }
+  }
+
+  onMotivationImageSelection(url: string) {
+    this.form.patchValue({
+      motivationImageUrl: url
+    });
+    if (this.business) {
+      this.business.motivationImageUrl = url;  // Save selected URL in business model
+    }
+  }
+
   onVisionImageSelection(url: string) {
     this.form.patchValue({
       visionImageUrl: url

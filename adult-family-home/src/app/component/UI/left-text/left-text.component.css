@@ -64,3 +64,54 @@
     margin-bottom: 1rem;
   }
 }
+
+
+
+.row {
+  display: flex;
+  flex-wrap: wrap; /* Ensure items wrap on smaller screens */
+  align-items: center; /* Center items vertically */
+  justify-content: space-between; /* Add spacing between items */
+  margin: 0 auto;
+}
+
+.content-area {
+  display: flex;
+  align-items: center;
+  margin-bottom: 80px;
+  flex-wrap: wrap; /* Ensures proper stacking on smaller screens */
+  gap: 40px; /* Add larger gap between text and image */
+}
+
+.content-area  p {
+  line-height: 1.9;
+}
+
+
+.content-container {
+  max-width: 1400px; /* Limit the maximum width */
+  margin: 0 auto; /* Center the container horizontally */
+  padding: 0 20px; /* Add some padding for smaller screens */
+  padding-top: 6.6vmax;
+}
+
+.left-image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center the image vertically */
+  padding: 80px; /* Add padding around the image */
+}
+
+.left-image-container img {
+  width: 100%; /* Let the image scale with its container */
+  max-width: 600px; /* Set a maximum width for the square */
+  aspect-ratio: 1 / 1; /* Ensure the image stays square */
+  object-fit: cover; /* Ensure the image fills the square without distortion */
+
+}
+
+.btn{
+  border: solid 1px black;
+  color: #000;
+}

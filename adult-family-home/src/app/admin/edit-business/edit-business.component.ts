@@ -120,9 +120,15 @@ export class EditBusinessComponent implements OnInit {
 
       //About Us
       certifications: [''],
-      motivation: [''],
+
       teamValues: [''],
 
+      motivationTitle: [''],
+      motivationImageUrl: [''],
+      motivation: [''],
+
+      businessStoryTitle:[''],
+      businessStoryImageUrl:[''],
       businessStory: [''],
 
       missionTitle: [''],
