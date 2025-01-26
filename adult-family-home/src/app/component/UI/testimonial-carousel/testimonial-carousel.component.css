@@ -103,3 +103,43 @@
   font-size: 1.2rem;
   margin-top: 5px;
 }
+
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  .testimonials-container {
+    padding: 3rem 1rem; /* Adjust overall padding for smaller screens */
+  }
+
+  .testimonial-row {
+    gap: 15px; /* Reduce gap for compact stacking */
+    flex-direction: column;
+
+    .author {
+      .name {
+        font-size: 1.3rem; /* Further reduce font size */
+      }
+
+      .separator5 {
+        width: 60%; /* Slightly wider line for emphasis */
+      }
+
+      .google-stars {
+        font-size: 0.9rem; /* Adjust for smaller screens */
+      }
+    }
+
+    .feedback p {
+      font-size: 0.9rem; /* Slightly smaller font size for feedback text */
+    }
+  }
+
+  .carousel-navigation {
+    flex-wrap: wrap; /* Enable wrapping */
+    gap: 2px; /* Reduce gap between dots */
+    button {
+      font-size: 1rem; /* Smaller button size */
+      margin: 0 1px; /* Further reduce margin */
+    }
+  }
+}
