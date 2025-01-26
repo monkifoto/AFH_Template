@@ -8,7 +8,7 @@
   background-color: #fff;
   transition: all 0.3s ease;
   height: 150px; /* Initial height */
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   justify-content: space-between; /* Space between logo and nav links */
   align-items: center;
@@ -129,12 +129,17 @@
 
 /* For mobile screens */
 @media (max-width: 991px) {
+
+  .clemo-navbar-nav{
+    display: block;
+    height: 80vh;
+  }
   .clemo-navbar-collapse {
     display: none; /* Hide links by default */
     flex-direction: column;
-    background-color: #fff; /* Optional: Add background for mobile menu */
+    background-color: var(--background-color); /* Optional: Add background for mobile menu */
     position: absolute;
-    top: 70px; /* Position below the navbar */
+    top: 170px; /* Position below the navbar */
     left: 0;
     width: 100%;
     z-index: 1000;
@@ -143,6 +148,7 @@
   .clemo-nav-item {
     width: 100%;
     text-align: center;
+    padding: 30px;
   }
 
   .clemo-nav-link {
@@ -152,9 +158,19 @@
 
   .clemo-navbar-toggler {
     display: block; /* Show toggler on small screens */
+    padding: 30px;
+    /* border-radius: 15px; */
+    background-color: transparent;
+    border:0px;
   }
 
   .clemo-navbar-collapse.clemo-show {
     display: flex; /* Show menu when toggled */
   }
+
+  .clemo-navbar-collapse {
+    top: 170px; /* Ensure menu doesn't cover toggler */
+  }
 }
+
+

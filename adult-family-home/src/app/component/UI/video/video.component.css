@@ -2,13 +2,31 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100vh; /* Full viewport height */
   background-color: var(--background-color);
+  padding: 20px; /* Add padding to avoid content touching edges */
+  box-sizing: border-box; /* Ensure padding is included in the dimensions */
 }
 
-video {
-  max-width: 100%;
-  max-height: 100%;
+video,
+iframe {
+  max-width: 100%; /* Ensure it scales within the container */
+  max-height: 100%; /* Prevent overflow */
   border: 1px solid #ccc;
   border-radius: 8px;
+  aspect-ratio: 16 / 9; /* Maintain a 16:9 aspect ratio */
+}
+
+/* For smaller screens */
+@media (max-width: 768px) {
+  .video-container {
+    height: auto; /* Allow the container to adjust based on content */
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  video,
+  iframe {
+    width: 100%; /* Use full width of the container */
+    max-height: 60vh; /* Limit height to ensure it doesn’t take over the screen */
+  }
 }
