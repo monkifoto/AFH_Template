@@ -8,27 +8,31 @@
   align-items: center;
   position: relative;
   color: white;
+  padding: 20px; /* Add padding to prevent text from touching edges */
+  box-sizing: border-box; /* Include padding in dimensions */
 }
 
 .stats-overlay {
   display: flex;
-  gap: 150px;
+  gap: 150px; /* Large gap for desktop */
   text-align: center;
   background: rgba(0, 0, 0, 0.5);
   padding: 20px;
   border-radius: 10px;
   width: 100%;
-  height: 100%;
+  max-width: 1200px; /* Limit overlay width for better layout on wide screens */
+  height: auto; /* Let height adapt to content */
   justify-content: center;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
 }
 
 .stat {
   display: flex;
   flex-direction: column;
+  margin: 10px; /* Add spacing between items */
 
   .number {
     font-size: 5.5rem;
-
   }
 
   .label {
@@ -36,5 +40,29 @@
     margin-top: 5px;
     font-weight: bold;
     text-transform: uppercase;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .parallax-container {
+    height: auto; /* Allow height to adapt to content */
+    padding: 10px; /* Reduce padding for smaller screens */
+    background-attachment: scroll; /* Fix background for better performance on mobile */
+  }
+
+  .stats-overlay {
+    gap: 20px; /* Reduce gap between stats */
+    padding: 15px; /* Adjust padding for mobile */
+    flex-direction: column; /* Stack stats vertically */
+    align-items: center; /* Center align the content */
+  }
+
+  .stat .number {
+    font-size: 3rem; /* Reduce font size for numbers */
+  }
+
+  .stat .label {
+    font-size: 0.9rem; /* Reduce label font size */
   }
 }
