@@ -1,3 +1,4 @@
+
 export interface Business {
   businessData: {};
   [x: string]: {};
@@ -15,18 +16,21 @@ export interface Business {
   fax: string;
   email: string;
   placeId: string;
-
-  uniqueService: ListItem[];
-
-  whyChoose: ListItem[];
-
-  businessStory: string;
-
   isActive: boolean;
   isLive:boolean;
 
   heroImages: string[];
 
+  uniqueService: ListItem[];
+
+  whyChoose: ListItem[];
+
+  businessStoryImageUrl:string;
+  businessStoryTitle:string;
+  businessStory: string;
+
+  motivationImageUrl:string;
+  motivationTitle:string;
   motivation: string;
 
   missionImageUrl:string;
@@ -212,18 +216,26 @@ export class BusinessModel {
       businessURL: 'https://www.carefullivingafh.com',
       providerName: 'Sarah Caregiver',
       tagline: 'Caring with compassion for every senior',
+
+      businessStoryImageUrl:'',
+      businessStoryTitle: 'Business Story',
       businessStory:
         'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
-      motivation:
+motivationImageUrl:'',
+motivationTitle:'Motivation Title',
+        motivation:
         'To offer high-quality, compassionate care for seniors, respecting their independence and dignity.',
-      mission:
+
+        mission:
         'To exceed the expectations of our residents and their families, with personalized care and a homelike atmosphere.',
       missionImageUrl: '',
       missionTitle: 'Our Mission',
+
       vision:
         'A community where seniors can live independently with compassionate, round-the-clock care and support.',
       visionImageUrl: '',
       visionTitle: 'Our Vision',
+
       certifications:
         'State Licensed, Certified Nursing Assistants (CNA), First Aid/CPR Certified',
       specialPrograms:

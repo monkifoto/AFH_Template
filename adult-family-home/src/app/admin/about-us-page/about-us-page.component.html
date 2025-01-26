@@ -1,94 +1,218 @@
 <form [formGroup]="form">
-
   <h2>About Us Page</h2>
-
   <div class="form-group">
-    <label for="businessStory">Our Story / Who we are (businessStory)</label>
-    <textarea id="businessStory" formControlName="businessStory" class="form-control" rows="10"></textarea>
-  </div>
-
-  <div>
-    <h4>Choose from available images:</h4>
-    <div *ngFor="let image of predefinedImages" style="display: inline-block; margin-right: 10px;">
-      <input
-        type="radio"
-        formControlName="missionImageUrl"
-        [value]="image.url"
-        (change)="onMissionImageSelection(image.url)">
-      <img class="contactUsImagesThumbnails" [src]="image.url" alt="Predefined Image" />
+    <div>
+      <h4 for="businessStory">Our Story / Who we are (businessStory)</h4>
+      <strong>Choose from available images:</strong><br />
+      <div
+        *ngFor="let image of predefinedImages"
+        style="display: inline-block; margin-right: 10px"
+      >
+        <input
+          type="radio"
+          formControlName="businessStoryImageUrl"
+          [value]="image.url"
+          (change)="onBusinessImageSelection(image.url)"
+        />
+        <img
+          class="contactUsImagesThumbnails"
+          [src]="image.url"
+          alt="Predefined Image"
+        />
+      </div>
     </div>
-  </div>
 
+    <br />
+    <input
+      formControlName="businessStoryTitle"
+      class="form-control"
+      placeholder="Business Story Title"
+    />
+    <br />
+    <textarea
+      id="businessStory"
+      formControlName="businessStory"
+      class="form-control"
+      rows="10"
+    ></textarea>
+  </div>
   <div class="form-group">
-    <label for="mission">Our Mission/What We stand for (mission)</label>
-    <input formControlName="missionTitle" class="form-control" placeholder="Mission Title">
-    <textarea id="mission" formControlName="mission" class="form-control"></textarea>
-  </div>
+    <h4 for="mission">Our Mission/What We stand for (mission)</h4>
+    <div>
+      <strong>Choose from available images:</strong><br />
+      <div
+        *ngFor="let image of predefinedImages"
+        style="display: inline-block; margin-right: 10px"
+      >
+        <input
+          type="radio"
+          formControlName="missionImageUrl"
+          [value]="image.url"
+          (change)="onMissionImageSelection(image.url)"
+        />
+        <img
+          class="contactUsImagesThumbnails"
+          [src]="image.url"
+          alt="Predefined Image"
+        />
+      </div>
+    </div>
+    <br />
 
+    <input
+      formControlName="missionTitle"
+      class="form-control"
+      placeholder="Mission Title"
+    />
+    <br />
+    <textarea
+      id="mission"
+      formControlName="mission"
+      class="form-control"
+    ></textarea>
+  </div>
+  <div class="form-group">
+    <h4 for="vision">Our Vision / The Future We see (vision)</h4>
   <div>
-    <h4>Choose from available images:</h4>
-    <div *ngFor="let image of predefinedImages" style="display: inline-block; margin-right: 10px;">
+    <strong>Choose from available images:</strong><br>
+    <div
+      *ngFor="let image of predefinedImages"
+      style="display: inline-block; margin-right: 10px"
+    >
       <input
         type="radio"
         formControlName="visionImageUrl"
         [value]="image.url"
-        (change)="onVisionImageSelection(image.url)">
-      <img class="contactUsImagesThumbnails" [src]="image.url" alt="Predefined Image" />
+        (change)="onVisionImageSelection(image.url)"
+      />
+      <img
+        class="contactUsImagesThumbnails"
+        [src]="image.url"
+        alt="Predefined Image"
+      />
     </div>
   </div>
-  <div class="form-group">
-    <label for="vision">Our Vision / The Future We see (vision)</label>
-    <input formControlName="visionTitle" class="form-control" placeholder="Vision Title">
-    <textarea id="vision" formControlName="vision" class="form-control"></textarea>
+<br>
+    <input
+      formControlName="visionTitle"
+      class="form-control"
+      placeholder="Vision Title"
+    /><br>
+    <textarea
+      id="vision"
+      formControlName="vision"
+      class="form-control"
+    ></textarea>
   </div>
   <div class="form-group">
-    <label for="motivation">Motivation (motivation)</label>
-    <textarea id="motivation" formControlName="motivation" class="form-control"></textarea>
+    <h4 for="motivation">Motivation (motivation)</h4>
+  <div>
+    <strong>Choose from available images:</strong><br>
+    <div
+      *ngFor="let image of predefinedImages"
+      style="display: inline-block; margin-right: 10px"
+    >
+      <input
+        type="radio"
+        formControlName="motivationImageUrl"
+        [value]="image.url"
+        (change)="onMotivationImageSelection(image.url)"
+      />
+      <img
+        class="contactUsImagesThumbnails"
+        [src]="image.url"
+        alt="Predefined Image"
+      />
+    </div>
+  </div>
+  <br>
+    <input
+      formControlName="motivationTitle"
+      class="form-control"
+      placeholder="Motivation Title"
+    /><br>
+    <textarea
+      id="motivation"
+      formControlName="motivation"
+      class="form-control"
+    ></textarea>
   </div>
 
   <h2>Unique Features</h2>
-  <button type="button" class="afhBtn" (click)="toggleUniqueServiceForm()">Add Unique Service</button>
+  <button type="button" class="afhBtn" (click)="toggleUniqueServiceForm()">
+    Add Unique Service
+  </button>
 
   <div *ngIf="showUniqueServiceForm">
     <div [formGroup]="newUniqueServiceForm">
-      <input formControlName="name" class="form-control" placeholder="Unique Service Name">
-      <input formControlName="description" class="form-control" placeholder="Unique Service Description">
+      <input
+        formControlName="name"
+        class="form-control"
+        placeholder="Unique Service Name"
+      />
+      <input
+        formControlName="description"
+        class="form-control"
+        placeholder="Unique Service Description"
+      />
     </div>
-    <button type="button" class="afhBtn" (click)="addUniqueService()">Save Unique Service</button>
+    <button type="button" class="afhBtn" (click)="addUniqueService()">
+      Save Unique Service
+    </button>
   </div>
 
   <ul>
     <li *ngFor="let us of uniqueServices.controls; let i = index">
-      <button type="button" class="afhBtn"  (click)="removeUniqueService(i)">X</button>
-      <strong>{{ us.get('name')?.value }}</strong><br />
-      {{ us.get('description')?.value }}
+      <button type="button" class="afhBtn" (click)="removeUniqueService(i)">
+        X
+      </button>
+      <strong>{{ us.get("name")?.value }}</strong
+      ><br />
+      {{ us.get("description")?.value }}
     </li>
   </ul>
 
   <h2>Why Us Reasons</h2>
-  <button type="button" class="afhBtn" (click)="toggleWhyChooseForm()">Add Why Choose Us Reason</button>
+  <button type="button" class="afhBtn" (click)="toggleWhyChooseForm()">
+    Add Why Choose Us Reason
+  </button>
 
   <div *ngIf="showWhyChooseForm">
     <div [formGroup]="newWhyChooseForm">
-      <input formControlName="name" class="form-control" placeholder="Reason Name">
-      <input formControlName="description" class="form-control" placeholder="Reason Description">
+      <input
+        formControlName="name"
+        class="form-control"
+        placeholder="Reason Name"
+      />
+      <input
+        formControlName="description"
+        class="form-control"
+        placeholder="Reason Description"
+      />
     </div>
-    <button type="button" class="afhBtn" (click)="addWhyChoose()">Save Reason</button>
+    <button type="button" class="afhBtn" (click)="addWhyChoose()">
+      Save Reason
+    </button>
   </div>
-
 
   <ul>
     <li *ngFor="let why of whyChoose.controls; let i = index">
-      <button type="button" class="afhBtn" (click)="removeWhyChoose(i)">X</button>
-      <strong>{{ why.get('name')?.value }}</strong><br />
-      {{ why.get('description')?.value }}
+      <button type="button" class="afhBtn" (click)="removeWhyChoose(i)">
+        X
+      </button>
+      <strong>{{ why.get("name")?.value }}</strong
+      ><br />
+      {{ why.get("description")?.value }}
     </li>
   </ul>
 
   <h2>Certifications</h2>
   <div class="form-group">
     <label for="certifications">Certifications</label>
-    <textarea id="certifications" formControlName="certifications" class="form-control"></textarea>
+    <textarea
+      id="certifications"
+      formControlName="certifications"
+      class="form-control"
+    ></textarea>
   </div>
-
 </form>

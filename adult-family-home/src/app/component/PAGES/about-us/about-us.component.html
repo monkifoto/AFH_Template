@@ -79,6 +79,7 @@
         <section class="our-approach">
           <app-right-text
             *ngIf="business.theme.themeType === 'ae'"
+            [themeType]="business.theme.themeType || ''"
             [imageURL]="business.missionImageUrl"
             [title]="business.missionTitle"
             [content]="business.mission"
@@ -86,6 +87,7 @@
 
           <app-left-text
             *ngIf="business.theme.themeType === 'ae'"
+            [themeType]="business.theme.themeType || ''"
             [imageURL]="business.visionImageUrl"
             [title]="business.visionTitle"
             [content]="business.vision"
@@ -119,6 +121,7 @@
       <section class="our-approach">
         <app-right-text
           *ngIf="business.theme.themeType === 'ehc'"
+          [themeType]="business.theme.themeType || ''"
           [imageURL]="business.missionImageUrl"
           [title]="business.missionTitle"
           [content]="business.mission"
@@ -126,6 +129,7 @@
 
         <app-left-text
           *ngIf="business.theme.themeType === 'ehc'"
+          [themeType]="business.theme.themeType || ''"
           [imageURL]="business.visionImageUrl"
           [title]="business.visionTitle"
           [content]="business.vision"
@@ -157,6 +161,7 @@
 
       <section class="our-approach">
         <app-right-text
+        [themeType]="business.theme.themeType || ''"
           *ngIf="business.theme.themeType === 'clemo'"
           [imageURL]="business.missionImageUrl"
           [title]="business.missionTitle"
@@ -165,18 +170,36 @@
 
         <app-left-text
           *ngIf="business.theme.themeType === 'clemo'"
+          [themeType]="business.theme.themeType || ''"
           [imageURL]="business.visionImageUrl"
           [title]="business.visionTitle"
           [content]="business.vision"
         ></app-left-text>
+
+        <app-right-text
+        [themeType]="business.theme.themeType || ''"
+          *ngIf="business.theme.themeType === 'clemo'"
+          [imageURL]="business.businessStoryImageUrl"
+          [title]="business.businessStoryTitle"
+          [content]="business.businessStory"
+        ></app-right-text>
+
+        <app-left-text
+        *ngIf="business.theme.themeType === 'clemo'"
+        [themeType]="business.theme.themeType || ''"
+        [imageURL]="business.motivationImageUrl"
+        [title]="business.motivationTitle"
+        [content]="business.motivation"
+      ></app-left-text>
+
       </section>
 
       <app-testimonial-image
         [imageURL]="
           '../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'
         "
-        [author]="business.testimonials[0].name"
-        [text]="business.testimonials[0].quote"
+        [author]="business.testimonials[2].name"
+        [text]="business.testimonials[2].quote"
       ></app-testimonial-image>
 
       <app-call-to-action
@@ -196,12 +219,14 @@
 
       <section class="our-approach">
         <app-right-text
+        [themeType]="business.theme.themeType || ''"
           [imageURL]="business.missionImageUrl"
           [title]="business.missionTitle"
           [content]="business.mission"
         ></app-right-text>
 
         <app-left-text
+        [themeType]="business.theme.themeType || ''"
           [imageURL]="business.visionImageUrl"
           [title]="business.visionTitle"
           [content]="business.vision"
