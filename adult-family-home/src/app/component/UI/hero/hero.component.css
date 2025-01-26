@@ -25,6 +25,7 @@ h1 {
   position: absolute;
   bottom:10px;
   left:20px;
+  color: var(--primary-color);
 }
 
 /* Mobile-specific adjustments */

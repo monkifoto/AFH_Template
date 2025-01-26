@@ -1,6 +1,13 @@
 
 <app-hero-slider  *ngIf="business?.theme?.themeType === 'clemo'"></app-hero-slider>
-<app-three-section *ngIf="business?.theme?.themeType === 'clemo'"></app-three-section>
+<!-- <app-three-section *ngIf="business?.theme?.themeType === 'clemo'"></app-three-section> -->
+<app-right-text
+[themeType]="business?.theme?.themeType || ''"
+  *ngIf="business?.theme?.themeType === 'clemo'"
+  [imageURL]="business?.businessStoryImageUrl || ''"
+  [title]="business?.businessStoryTitle || ''"
+  [content]="business?.businessStory || ''"
+></app-right-text>
 
 
 <app-hero-carousel *ngIf="business?.theme?.themeType != 'clemo'"></app-hero-carousel>
