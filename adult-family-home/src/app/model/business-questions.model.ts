@@ -43,7 +43,7 @@ export interface Business {
 
   certifications: string;
 
-  services: ServiceItem[];
+  services: ListItem[];
 
   specialPrograms: string;
 
@@ -72,7 +72,7 @@ export interface Business {
   welcomeMessage: string;
   keyServicesHighlights: string;
   teamValues: string;
-  benefits: BenefitItem[];
+  benefits: ListItem[];
 
   //Contact us page
   contactFormDetails: string;
@@ -130,16 +130,8 @@ export interface Testimonial{
   photoURL: string;
 }
 
-export interface ServiceItem{
-  name:string;
-}
-
-export interface BenefitItem{
-  name:string;
-}
-
 export interface ListItem{
-  iconURL?:string;
+  icon?:string;
   name:string;
   description: string;
 }
@@ -293,13 +285,13 @@ motivationTitle:'Motivation Title',
         // Other reasons...
       ],
       services: [
-        { name: '24/7 Personalized Care' },
-        { name: 'Medication Management' },
+        { name: '24/7 Personalized Care', icon: '', description: '' },
+        { name: 'Medication Management', icon: '', description: '' },
         // Other services...
       ],
       benefits: [
-        { name: 'Personalized Care' },
-        { name: '24/7 Support' },
+        { name: 'Personalized Care', icon: '', description: '' },
+        { name: '24/7 Support', icon: '', description: '' },
         // Other benefits...
       ],
       testimonials: [

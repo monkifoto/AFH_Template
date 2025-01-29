@@ -4,8 +4,23 @@
 <div [formGroup]="newServiceForm">
   <!-- Input for Service Name -->
   <div class="form-group">
+    Examples:
+    <ul>
+      <li>24/7 Personalized Care</li>
+      <li>Medication Management</li>
+      <li>Assistance with Daily Living (ADLs)</li>
+      <li>Nutritious Meal Preparation</li>
+      <li>Memory Care</li>
+      <li>Hospice and End-of-Life Care</li>
+      <li>Physical Therapy and Wellness Programs</li>
+      <li>Housekeeping and Laundry Services</li>
+      <li>Social and Recreational Activities</li>
+      <li>Transportation to Appointments</li>
+    </ul>
     <label for="serviceName">Service Name</label>
+    <input formControlName="icon" id="serivceIcon" class="form-control" placeholder="Font Awesome Icon">
     <input formControlName="name" id="serviceName" class="form-control" placeholder="Enter service name">
+    <input formControlName="description" id="serviceDescription" class="form-control" placeholder="Enter service Description">
   </div>
 
   <!-- Button to Add Service -->
@@ -14,17 +29,39 @@
 
 <!-- Display the list of added services -->
 <ul formArrayName="services">
-  <li *ngFor="let service of services.controls; let i = index">
-    <button type="button" class="afhBtn"  (click)="removeService(i)">X</button> &nbsp;
-    <strong>{{ service.get('name')?.value }}</strong>
+  <li *ngFor="let service of services.controls; let i = index" class="list-item">
+    <div class="list-item-header">
+      <div class="list-item-icon">
+        <i [ngClass]="service.get('icon')?.value" class="services-item-icon"></i>
+        <strong>{{ service.get('name')?.value }}</strong>
+      </div>
+        <div class="list-item-buttons">
+        <button type="button" class="afhBtn"  (click)="removeService(i)">X</button> &nbsp;
+      </div>
+    </div>
+    <p>{{ service.get('description')?.value }}</p>
   </li>
 </ul>
 
 <div [formGroup]="newBenefitsForm">
+  <ul>
+    <li>Private Rooms with Attached Bathrooms</li>
+    <li>Experienced and Compassionate Caregivers</li>
+    <li>Aging in Place Design</li>
+    <li>Home-Like Environment</li>
+    <li>Personalized Care Plans</li>
+    <li>Memory Care Expertise</li>
+    <li>Nutritious, Home-Cooked Meals</li>
+    <li>Beautiful, Spacious Home Layout </li>
+    <li>Focus on Independence</li>
+    <li>Family-Oriented Approach</li>
+  </ul>
   <!-- Input for Service Name -->
   <div class="form-group" >
     <label for="benefitName">Benefit Name</label>
+    <input formControlName="icon" id="benefitIcon" class="form-control" placeholder="Font Awesome Icon">
     <input formControlName="name" id="benefitName" class="form-control" placeholder="Enter Benefit name">
+    <input formControlName="description" id="benefitDescription" class="form-control" placeholder="Enter service Description">
   </div>
 
   <!-- Button to Add Service -->
@@ -33,9 +70,17 @@
 
 <!-- Display the list of added services -->
 <ul formArrayName="benefits">
-  <li *ngFor="let benefit of benefits.controls; let i = index">
+  <li *ngFor="let benefit of benefits.controls; let i = index" class="list-item">
+    <div class="list-item-header">
+      <div class="list-item-icon">
+        <i [ngClass]="benefit.get('icon')?.value" class="services-item-icon"></i>
+        <strong>{{ benefit.get('name')?.value }}</strong>
+      </div>
+      <div class="list-item-buttons">
     <button type="button" class="afhBtn"  (click)="removeBenefit(i)">X</button> &nbsp;
-    <strong>{{ benefit.get('name')?.value }}</strong>
+  </div>
+</div>
+    <br>  <strong>{{ benefit.get('description')?.value }}</strong>
   </li>
 </ul>
 
