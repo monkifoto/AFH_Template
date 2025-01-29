@@ -1,5 +1,6 @@
 .parallax-container {
-  height: 300px;
+  width: 100vw; /* Ensure it spans the full viewport width */
+  /* height: 300px; */
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -8,61 +9,54 @@
   align-items: center;
   position: relative;
   color: white;
-  padding: 20px; /* Add padding to prevent text from touching edges */
-  box-sizing: border-box; /* Include padding in dimensions */
+  box-sizing: border-box;
 }
 
 .stats-overlay {
   display: flex;
-  gap: 150px; /* Large gap for desktop */
+  gap: 150px;
   text-align: center;
   background: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  border-radius: 10px;
-  width: 100%;
-  max-width: 1200px; /* Limit overlay width for better layout on wide screens */
-  height: auto; /* Let height adapt to content */
+  padding: 150px;
+  width: 100vw; /* Make the overlay stretch across the full width */
+  height: 100%;
+  height: auto;
   justify-content: center;
-  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  flex-wrap: wrap;
 }
 
 .stat {
   display: flex;
   flex-direction: column;
-  margin: 10px; /* Add spacing between items */
+  align-items: center;
+  margin: 10px;
+}
 
-  .number {
-    font-size: 5.5rem;
-  }
-
-  .label {
-    font-size: 1rem;
-    margin-top: 5px;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
+.stat .number {
+  font-size: 5.5rem;
 }
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
   .parallax-container {
-    height: auto; /* Allow height to adapt to content */
-    padding: 10px; /* Reduce padding for smaller screens */
-    background-attachment: scroll; /* Fix background for better performance on mobile */
+    height: auto;
+    /* padding: 10px; */
+    background-attachment: scroll;
   }
 
   .stats-overlay {
-    gap: 20px; /* Reduce gap between stats */
-    padding: 15px; /* Adjust padding for mobile */
-    flex-direction: column; /* Stack stats vertically */
-    align-items: center; /* Center align the content */
+    gap: 20px;
+    padding: 15px;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Ensure it still spans the width */
   }
 
   .stat .number {
-    font-size: 3rem; /* Reduce font size for numbers */
+    font-size: 3rem;
   }
 
   .stat .label {
-    font-size: 0.9rem; /* Reduce label font size */
+    font-size: 0.9rem;
   }
 }

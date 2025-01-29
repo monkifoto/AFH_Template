@@ -71,47 +71,47 @@
 
 
 <ng-container *ngSwitchCase="'clemo'">
-  <footer class="ae-footer">
-    <div class="ae-footer-content">
-      <!-- Business Name and Divider -->
-      <div class="ae-footer-business">
-        <hr class="ae-footer-line" />
-        <h2 class="ae-footer-business-text">{{ business?.businessName }}</h2>
-        <hr class="ae-footer-line" />
+  <footer class="clemo-footer">
+    <div class="clemo-footer-content">
+      <!-- Logo and Contact Info -->
+      <div class="clemo-footer-logo">
+        <img src="{{ business?.logoImage}}" alt="">
+        <!-- <h2 class="clemo-footer-logo-text">{{ business?.logoImage}}</h2> -->
+        <h4>{{ business?.businessName }}</h4>
+        <p class="clemo-footer-phone">{{ business?.phone }}</p>
+        <p class="clemo-footer-address">{{ business?.address }}</p>
       </div>
 
-      <!-- Footer Columns -->
-      <div class="ae-footer-columns">
-        <!-- Owner -->
-        <div class="ae-footer-column">
-          <h3 class="ae-footer-column-title">Owner:</h3>
-          <p>{{ business?.providerName }}</p>
-        </div>
-
-        <!-- Location -->
-        <div class="ae-footer-column">
-          <h3 class="ae-footer-column-title">Location:</h3>
-          <p>{{ business?.address }}</p>
-        </div>
-
-        <!-- Provider -->
-        <div class="ae-footer-column">
-          <h3 class="ae-footer-column-title">Provider:</h3>
-          <p>{{ business?.providerName }}</p>
-          <p>Email: <a href="mailto:{{ business?.email }}">{{ business?.email }}</a></p>
-          <p>Phone: <a href="tel:+{{ business?.phone }}">{{ business?.phone }}</a></p>
-        </div>
+      <!-- Social Media Links -->
+      <div class="clemo-footer-social">
+        <a href="#" class="clemo-social-icon"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#" class="clemo-social-icon"><i class="fa-brands fa-google"></i></a>
       </div>
 
-      <!-- Footer Bottom -->
-      <div class="ae-footer-bottom">
-        <p>© {{ 2024 }} {{ business?.businessName }}. All rights reserved.</p>
+      <!-- Footer Navigation -->
+      <nav class="clemo-footer-nav">
+        <!-- <a href="#" class="clemo-footer-link">HOME</a>
+        <a href="#" class="clemo-footer-link">FEATURES</a>
+        <a href="#" class="clemo-footer-link">PAGE LAYOUTS</a>
+        <a href="#" class="clemo-footer-link">PAGES</a>
+        <a href="#" class="clemo-footer-link">STORE</a> -->
+
+        <span class="clemo-footer-link"  (click)="navigateTo('home')">HOME</span>
+        <span class="clemo-footer-link" (click)="navigateTo('about-us')">ABOUT US</span>
+        <span class="clemo-footer-link" (click)="navigateTo('services')">SERVICES</span>
+        <span class="clemo-footer-link" (click)="navigateTo('gallery')">OUR HOME</span>
+        <span class="clemo-footer-link" (click)="navigateTo('resident-form')">RESIDENT FORM</span>
+        <span class="clemo-footer-link" (click)="navigateTo('contact-us')">CONTACT</span>
+      </nav>
+
+      <!-- Copyright Notice -->
+      <div class="clemo-footer-bottom">
+        <p>© Copyright. All rights reserved.</p>
       </div>
     </div>
   </footer>
-
-
 </ng-container>
+
 
 
 <ng-container *ngSwitchDefault>

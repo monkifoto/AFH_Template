@@ -109,6 +109,7 @@ export class EditBusinessComponent implements OnInit {
       metaTitle:[''],
       metaKeywords:[''],
       metaDescription:[''],
+      placeID:[],
 
       //Home Page
       welcomeMessage: [''],
@@ -217,16 +218,22 @@ export class EditBusinessComponent implements OnInit {
       providerName: [defaultBusiness.providerName],
       tagline: [defaultBusiness.tagline],
       businessStory: [defaultBusiness.businessStory],
+
       motivation: [defaultBusiness.motivation],
+
       mission: [defaultBusiness.mission],
+
       vision: [defaultBusiness.vision],
+
       certifications: [defaultBusiness.certifications],
       specialPrograms: [defaultBusiness.specialPrograms],
       tours: [defaultBusiness.tours],
       freeConsulting: [defaultBusiness.freeConsulting],
       websiteGoals: [defaultBusiness.websiteGoals],
+
       logoImage: [defaultBusiness.logoImage],
       faviconUrl: [defaultBusiness.faviconUrl],
+
       ownerImagesBios: [defaultBusiness.ownerImagesBios],
       staffImagesBios: [defaultBusiness.staffImagesBios],
       mediaFeatures: [defaultBusiness.mediaFeatures],
@@ -245,6 +252,7 @@ export class EditBusinessComponent implements OnInit {
       photoGalleryText: [defaultBusiness.photoGalleryText],
       isActive: [defaultBusiness.isActive],
       theme: [defaultBusiness.theme],
+      placeId:[defaultBusiness.placeId],
 
       // Initialize FormArrays
       uniqueService: this.fb.array((defaultBusiness.uniqueService ?? []).map(service => this.fb.group({

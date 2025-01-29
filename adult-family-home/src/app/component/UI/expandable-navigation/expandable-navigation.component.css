@@ -85,6 +85,7 @@
   padding: 15px 0;
   display: block;
   transition: font-size 0.3s ease, color 0.3s ease; /* Smooth transition for font size */
+  cursor: pointer;
 }
 
 .clemo-header.clemo-shrink .clemo-nav-link {
@@ -92,7 +93,7 @@
 }
 
 .clemo-nav-link:hover {
-  color: #007bff;
+  color: var(--dark-background-color);
 }
 
 /* Responsive toggler */
