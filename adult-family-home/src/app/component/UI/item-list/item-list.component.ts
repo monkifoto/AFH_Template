@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ListItem } from 'src/app/model/business-questions.model';
 
 @Component({
   selector: 'app-item-list',
@@ -6,6 +7,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./item-list.component.css']
 })
 export class ItemListComponent {
-  @Input() services!: { icon: string, title: string, description: string }[];
+  @Input() services!: ListItem[];
   @Input() layoutType: string = 'demo';
 }

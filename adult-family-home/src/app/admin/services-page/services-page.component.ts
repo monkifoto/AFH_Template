@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Business, ServiceItem } from 'src/app/model/business-questions.model';
+import { Business, ListItem } from 'src/app/model/business-questions.model';
 
 @Component({
   selector: 'app-services-page',
@@ -20,31 +20,40 @@ export class ServicesPageComponent implements OnInit {
   ngOnInit(): void {
     // Initialize serviceForm with necessary fields
     this.newServiceForm = this.fb.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      icon: [''],
+      description:[]
+
     });
 
     // Initialize benefitsForm with necessary fields
     this.newBenefitsForm = this.fb.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      icon: [''],
+      description:[]
     });
   }
 
-  populateServices(services: ServiceItem[]): void {
+  populateServices(services: ListItem[]): void {
 
     this.services.clear();
     (services ?? []).forEach((svc) => {
       const servicesForm = this.fb.group({
         name: [svc.name],
+        icon: [svc.icon],
+        description:[svc.description]
       });
       this.services.push(servicesForm);
     });
   }
 
-  populateBenefits(benefits: ServiceItem[]): void {
+  populateBenefits(benefits: ListItem[]): void {
     this.benefits.clear();
     (benefits ?? []).forEach((bnf) => {
       const benefitsFormForm = this.fb.group({
         name: [bnf.name],
+        icon: [bnf.icon],
+        description:[bnf.description]
       });
       this.benefits.push(benefitsFormForm);
     });
