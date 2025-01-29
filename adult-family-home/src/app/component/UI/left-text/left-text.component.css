@@ -115,3 +115,49 @@
   border: solid 1px black;
   color: #000;
 }
+
+
+
+/* Adjustments for mobile */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column; /* Stack items vertically */
+    gap: 20px; /* Reduce gap between items */
+  }
+
+  .left-image-container {
+    padding: 20px; /* Reduce padding for smaller screens */
+  }
+
+  .content-area {
+    flex-direction: column; /* Stack image and text */
+    gap: 20px;
+  }
+
+  .text-container h3 {
+    font-size: 1.4rem; /* Adjust heading size */
+  }
+
+  .text-container h2 {
+    font-size: 1.8rem; /* Adjust heading size */
+  }
+
+  .btn {
+    font-size: 1rem; /* Adjust button font size */
+    padding: 0.8rem 1.2rem; /* Adjust button padding */
+  }
+}
+
+.btn {
+  border: solid 1px black;
+  color: #000;
+  padding: 0.8rem 1.5rem; /* Ensure button has adequate padding */
+  text-transform: uppercase;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+/* .btn:hover {
+  background-color: #000;
+  color: #fff;
+} */

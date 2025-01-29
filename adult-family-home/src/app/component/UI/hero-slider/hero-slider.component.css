@@ -59,13 +59,16 @@
 } */
 
 .clemo-home-overlay {
+  outline: 2px solid blue;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
+  background-size: cover; /* Ensures the image covers the container */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  opacity: 0.9; /* Adjust opacity if needed */
   z-index: 1;
 }
 
