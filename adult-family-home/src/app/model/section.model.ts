@@ -1,7 +1,8 @@
 export  interface Section {
+  sectionName:string;
   sectionTitle: string;
   sectionContent: string;
-  sectionImage?: string;
+  sectionImageUrl?: string;
   sectionType: string;
-  style:string;
+  sectionStyle:string;
 }

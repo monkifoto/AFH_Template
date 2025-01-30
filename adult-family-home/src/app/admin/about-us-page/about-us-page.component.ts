@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Business, ListItem } from 'src/app/model/business-questions.model';
+import { Section } from 'src/app/model/section.model';
+
 
 @Component({
   selector: 'app-about-us-page',
@@ -13,6 +15,10 @@ export class AboutUsPageComponent implements OnInit {
   @Input() businessId!: string;
   newUniqueServiceForm!: FormGroup;
   newWhyChooseForm!: FormGroup;
+  newSectionForm!:FormGroup;
+
+  sectionForm!: FormGroup;
+  showSectionForm = false;
 
   showUniqueServiceForm = false;
   showWhyChooseForm = false;
@@ -54,11 +60,27 @@ export class AboutUsPageComponent implements OnInit {
     { url: 'assets/sharedAssets/9676303919_32372bf834_o.jpg' },
   ];
 
+  // newSection = this.fb.group({
+  //   name: [''],
+  //   type: [''],
+  //   title: [''],
+  //   imageUrl: [''],
+  //   content: ['']
+  // });
 
+  sectionTypes = ['Story', 'Vision', 'Motivation', 'Mission', 'Other'];
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     // Initialize the forms here
+    this.newSectionForm = this.fb.group({
+      name: [''],
+      type: [''],
+      title: [''],
+      imageUrl: [''],
+      content: [''],
+    });
+
     this.newUniqueServiceForm = this.fb.group({
       name: [''],
       description: [''],
@@ -68,6 +90,29 @@ export class AboutUsPageComponent implements OnInit {
       name: [''],
       description: [''],
     });
+  }
+
+  toggleSectionForm(): void {
+    this.showSectionForm = !this.showSectionForm;
+  }
+
+  onImageSelection(url: string) {
+    this.sectionForm.patchValue({ imageUrl: url });
+  }
+
+  pupulateSection(sections: Section[]): void {
+    this.sections.clear();
+    (sections??[]).forEach((s)=>{
+      const sectionForm = this.fb.group({
+        sectionName: [s.sectionName],
+        sectionType: [s.sectionType],
+        sectionTitle: [s.sectionTitle],
+        sectionContent: [s.sectionContent],
+        sectionImageUrl: [s.sectionImageUrl],
+        sectionStyle: [s.sectionStyle]
+      });
+      this.sections.push(sectionForm);
+    })
   }
 
   populateUniqueService(uniqueService: ListItem[]): void {
@@ -92,6 +137,11 @@ export class AboutUsPageComponent implements OnInit {
     });
   }
 
+  get sections(): FormArray {
+    return this.form.get('sections') as FormArray;
+  }
+
+
   get uniqueServices(): FormArray {
     return this.form.get('uniqueService') as FormArray;
   }
@@ -106,6 +156,23 @@ export class AboutUsPageComponent implements OnInit {
 
   toggleWhyChooseForm(): void {
     this.showWhyChooseForm = !this.showWhyChooseForm;
+  }
+
+  addSection(): void {
+    const newSection = this.fb.group({
+      sectionName: [''],
+      sectionType: [''],
+      sectionTitle: [''],
+      sectionImageUrl: [''],
+      sectionContent: [''],
+      sectionStyle: ['']
+    });
+
+    this.sections.push(newSection); 
+  }
+
+  removeSection(index: number): void {
+    this.sections.removeAt(index);
   }
 
   addUniqueService(): void {
