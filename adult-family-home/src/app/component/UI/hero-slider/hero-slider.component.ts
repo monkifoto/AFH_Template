@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Business } from 'src/app/model/business-questions.model';
 import { BusinessDataService } from 'src/app/services/business-data.service';
@@ -11,6 +11,9 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 export class HeroSliderComponent implements OnInit {
   business: Business | null = null;
   slides: any[] = [];
+  @Input() navigation: 'side' | 'bottom' = 'side';  // Default: side navigation
+  @Input() sideButtons: boolean = true;  // Default: show side buttons
+  @Input() sliderHeight: string = '100vh'; // Default height is 100vh
   currentSlide = 0;
   sliderOpacity = 1; // Initial opacity for the slider
 
@@ -62,6 +65,14 @@ export class HeroSliderComponent implements OnInit {
     setInterval(() => {
       this.currentSlide = (this.currentSlide + 1) % this.slides.length;
     }, 15000);
+  }
+
+  prevSlide() {
+    this.currentSlide = (this.currentSlide === 0) ? this.slides.length - 1 : this.currentSlide - 1;
+  }
+
+  nextSlide() {
+    this.currentSlide = (this.currentSlide === this.slides.length - 1) ? 0 : this.currentSlide + 1;
   }
 
   // Scroll event listener to adjust opacity

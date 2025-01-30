@@ -84,6 +84,13 @@
   color: #000;
   animation: fade-in-opacity 1s ease-in-out; /* Fade in without changing position */
 }
+
+.clemo-main-home h1 {
+  font-size: 5rem;
+  font-weight: bold;
+  margin: 0;
+  color: #fff;
+}
 .clemo-main-home h2 {
   font-size: 3rem;
   font-weight: bold;
@@ -161,23 +168,44 @@
   z-index: 10;
 }
 
+/* Bottom Navigation Style */
+.clemo-slider-navigation.bottom-nav {
+  right: auto;
+  bottom: 20px;
+  top: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: row;
+}
+
+/* Default Diamond Indicator */
 .clemo-nav-item {
-  width: 15px;
-  height: 15px;
-  background-color: #fff;
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  width: 20px;
+  height: 20px;
+  background-color: #fff;/*diamonds*/
+  /* clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); */
+  border-radius: 50%; /* Makes it a circle */
   cursor: pointer;
   transition: all 0.3s ease;
   border: 2px solid transparent;
+}
 
-  &:hover {
-    background-color: #555;
-  }
+.clemo-nav-item:hover {
+  background-color: #555;
+}
 
-  &.clemo-active {
-    background-color: transparent; /* Transparent background for active diamond */
-    border-color: #fff;           /* White border for active diamond */
-  }
+.clemo-nav-item.clemo-active {
+  background-color: transparent;
+  border-color: #fff;
+}
+
+/* Bottom Navigation Line Indicator */
+.clemo-nav-item.line-style {
+  width: 30px;
+  height: 4px;
+  background-color: #fff;
+  clip-path: none;
+  border-radius: 2px;
 }
 
 /* Animations */

@@ -1,0 +1,19 @@
+.testimonial-item
+{
+  border: solid 1px var(--dark-background-color);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 10px;
+}
+
+.testimonial-header{
+  display: flex;
+  justify-content: space-between; /* Pushes items to the far ends */
+  align-items: center; /* Aligns items vertically */
+  width: 100%;
+}
+
+.testimonial-header-item{
+  width: 50%;
+  padding: 10px;
+}

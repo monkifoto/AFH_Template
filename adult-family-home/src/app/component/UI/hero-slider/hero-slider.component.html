@@ -1,28 +1,44 @@
 <div
   class="clemo-slider-container"
   id="carousel"
-  [ngStyle]="{ '--slider-opacity': sliderOpacity }"
+  [ngStyle]="{ '--slider-opacity': sliderOpacity, 'height': sliderHeight }"
 >
-  <div *ngFor="let slide of slides; let i = index"
-       [class.clemo-active]="i === currentSlide"
-       class="clemo-slides clemo-single-home-slider">
-
+  <div
+    *ngFor="let slide of slides; let i = index"
+    [class.clemo-active]="i === currentSlide"
+    class="clemo-slides clemo-single-home-slider"
+  >
     <!-- Background Image -->
-    <div class="clemo-home-overlay"
-     [ngStyle]="{'background': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(' + slide.backgroundImage + ')', 'background-size': 'cover','background-position': 'center','background-repeat': 'no-repeat'}">
-  </div>
+    <div
+      class="clemo-home-overlay"
+      [ngStyle]="{
+        background:
+          'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(' +
+          slide.backgroundImage +
+          ')',
+        'background-size': 'cover',
+        'background-position': 'center',
+        'background-repeat': 'no-repeat'
+      }"
+    ></div>
 
     <!-- Slide Content -->
-    <div class="clemo-main-home">
-      <h2>{{ slide.title }}</h2>
+    <div class="clemo-main-home" *ngIf="slide.title?.trim()">
+      <h1>{{ slide.title }}</h1>
       <div class="clemo-separator"></div>
-      <p class="clemo-subtitle" [innerHTML]="slide.subtitle"></p>
+      <h2 class="clemo-subtitle" [innerHTML]="slide.subtitle"></h2>
 
       <!-- Dynamic Buttons -->
       <div class="clemo-home-btn">
         <ng-container *ngFor="let button of slide.buttons">
-          <a [routerLink]="button.link"
-             [ngClass]="{'clemo-btn': !button.outline, 'clemo-btn-outline': button.outline}">
+          <a
+            [routerLink]="button.link"
+            [ngClass]="{
+              'clemo-btn': !button.outline,
+              'clemo-btn-outline': button.outline
+            }"
+            routerLinkActive="active"
+          >
             {{ button.text }}
           </a>
         </ng-container>
@@ -37,12 +53,41 @@
   </div>
 
   <!-- Navigation -->
-  <div class="clemo-slider-navigation">
-    <div
-      *ngFor="let slide of slides; let i = index"
-      [class.clemo-active]="i === currentSlide"
-      class="clemo-nav-item"
-      (click)="navigateToSlide(i)">
-    </div>
+  <div
+  class="clemo-slider-navigation"
+  [ngClass]="{ 'bottom-nav': navigation === 'bottom' }">
+
+  <div
+    *ngFor="let slide of slides; let i = index"
+    [class.clemo-active]="i === currentSlide"
+    class="clemo-nav-item"
+    [ngClass]="{ 'line-style': navigation === 'bottom' }"
+    (click)="navigateToSlide(i)">
   </div>
+</div>
+
+<!-- Side Buttons (Conditional) -->
+<button
+  *ngIf="sideButtons"
+  class="carousel-control-prev hh-prev"
+  type="button"
+  (click)="prevSlide()"
+  data-bs-target="#heroCarousel"
+  data-bs-slide="prev">
+  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  <span class="visually-hidden">Previous</span>
+</button>
+
+<button
+  *ngIf="sideButtons"
+  class="carousel-control-next hh-next"
+  type="button"
+  (click)="nextSlide()"
+  data-bs-target="#heroCarousel"
+  data-bs-slide="next">
+  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  <span class="visually-hidden">Next</span>
+</button>
+
+
 </div>
