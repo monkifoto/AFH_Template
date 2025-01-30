@@ -1,3 +1,4 @@
+import { Section } from "./section.model";
 
 export interface Business {
   businessData: {};
@@ -24,6 +25,8 @@ export interface Business {
   uniqueService: ListItem[];
 
   whyChoose: ListItem[];
+
+  sections: Section[];
 
   businessStoryImageUrl:string;
   businessStoryTitle:string;
@@ -162,6 +165,13 @@ export interface Theme {
 export class BusinessModel {
   static getDefaultBusiness(): Business {
     return {
+      sections:[{
+        sectionName: '',
+        sectionTitle: "",
+        sectionContent: "",
+        sectionType: "",
+        sectionStyle: ""
+      }],
       heroImages: [''],
       heroSlider: [
         {

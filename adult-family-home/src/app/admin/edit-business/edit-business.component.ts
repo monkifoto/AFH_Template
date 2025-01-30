@@ -117,7 +117,13 @@ export class EditBusinessComponent implements OnInit {
       uniqueService: this.fb.array([]),
       whyChoose: this.fb.array([]),
 
-
+    sections:this.fb.array([]),
+     sectionName:[''],
+     sectionTitle: [''],
+     sectionContent: [''],
+     sectionImageUrl: [''],
+     sectionType: [''],
+     sectionStyle:[''],
 
       //About Us
       certifications: [''],
@@ -316,6 +322,7 @@ private populateFormArray(formArray: FormArray, items: any[]) {
     if (this.aboutUsComponent) {
       this.aboutUsComponent.populateUniqueService(business.uniqueService ?? []);
       this.aboutUsComponent.populateWhyChoose(business.whyChoose ?? []);
+      this.aboutUsComponent.pupulateSection(business.sections)
     }
 
     if (this.reviewComponent) {

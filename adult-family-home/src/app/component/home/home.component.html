@@ -24,6 +24,9 @@
 
 <!-- <app-hero-slider  *ngIf="business?.theme?.themeType === 'ae'"></app-hero-slider> -->
 <!-- <app-three-section *ngIf="business?.theme?.themeType === 'clemo'"></app-three-section> -->
+
+
+
 <app-right-text
 [themeType]="business?.theme?.themeType || ''"
   *ngIf="business?.theme?.themeType === 'clemo'"
@@ -35,7 +38,6 @@
 
 
 
-
   <app-welcome
     [layoutType]="business?.theme?.themeType || 'demo'"
     [businessId]="business?.id || ''"
@@ -43,7 +45,26 @@
 
 <app-parallax-text  *ngIf="business?.theme?.themeType === 'ehc'"></app-parallax-text>
 
+<!----Testing   -->
 <app-right-text
+  *ngIf="business?.theme?.themeType === 'ae'"
+  [themeType]="business?.theme?.themeType || ''"
+  [imageURL]="business?.sections?.[0]?.sectionImageUrl || ''"
+  [title]="business?.sections?.[0]?.sectionTitle ||''"
+  [content]="business?.sections?.[0]?.sectionContent || ''"
+></app-right-text>
+
+<app-left-text
+  *ngIf="business?.theme?.themeType === 'ae'"
+  [themeType]="business?.theme?.themeType || ''"
+  [imageURL]="business?.sections?.[1]?.sectionImageUrl || ''"
+  [title]="business?.sections?.[1]?.sectionTitle ||''"
+  [content]="business?.sections?.[1]?.sectionContent || ''"
+></app-left-text>
+<!----Testing   -->
+
+
+<!-- <app-right-text
   *ngIf="business?.theme?.themeType === 'ae'"
   [themeType]="business?.theme?.themeType || ''"
   [imageURL]="'../../../../assets/sharedAssets/istockphoto-1432890664-2048x2048.jpg'"
@@ -57,7 +78,7 @@
   [imageURL]="'../../../../assets/sharedAssets/istockphoto-1066099806-2048x2048.jpg'"
   [title]="'Flexible In-Person and Remote Visitation Options'"
   [content]="'Our adult family home welcomes in-person visits in a comfortable and home-like setting. For those unable to visit in person, we offer remote options to help you stay connected with your loved ones, ensuring meaningful interactions from the comfort of your own home.'"
-></app-left-text>
+></app-left-text> -->
 
 <app-icon-list
   *ngIf="business?.theme?.themeType === 'ae'"
