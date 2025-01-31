@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-right-text',
@@ -7,9 +8,19 @@ import { Component, Input } from '@angular/core';
 })
 export class RightTextComponent {
   @Input() title!: string;
-  @Input() content!: string;
+  // @Input() content!: string;
   @Input() imageURL!: string;
   @Input() themeType!: string;
+  @Input()
+  set content(value: string) {
+    this._content = value;
+    this.sanitizedContent = this.sanitizer.bypassSecurityTrustHtml(value);
+  }
+
+    private _content!: string;
+    sanitizedContent!: SafeHtml;
+
+    constructor(private sanitizer: DomSanitizer) {}
 
   get titleParts(): { part1: string; part2: string | null } {
     if (this.title.includes('|')) {
@@ -18,4 +29,9 @@ export class RightTextComponent {
     }
     return { part1: this.title, part2: null };
   }
+
+  get content(): string {
+    return this._content;
+  }
+
 }

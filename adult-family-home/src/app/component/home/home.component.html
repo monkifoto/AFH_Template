@@ -107,12 +107,12 @@
 </app-hero-slider>
 
 <app-right-text
+*ngIf="business?.sections | sectionFilter:'HomeRightText' as section"
 [themeType]="business?.theme?.themeType || ''"
-  [imageURL]="business?.businessStoryImageUrl || ''"
-  [title]="business?.businessStoryTitle || ''"
-  [content]="business?.businessStory || ''"
+[imageURL]="section?.sectionImageUrl || ''"
+[title]="section?.sectionTitle || ''"
+[content]="section?.sectionContent || ''"
 ></app-right-text>
-
 
 <app-video
 [videoSource]="'https://youtu.be/rVBHH5DwYFA?si=Cr3AncNVTaxqHsfX'">

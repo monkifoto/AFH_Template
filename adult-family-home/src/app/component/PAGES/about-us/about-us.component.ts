@@ -31,6 +31,7 @@ export class AboutUsComponent implements OnInit {
     this.businessDataService.businessData$.subscribe((business) => {
       this.business = business;
       this.businessId = business?.id || null;
+      console.log("About Us Business.Sections", business?.sections);
 
       if (this.businessId) {
         // Update meta tags based on business data

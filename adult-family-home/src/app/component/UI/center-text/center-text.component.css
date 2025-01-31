@@ -3,7 +3,17 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  /* padding: 4rem 2rem; */
+  max-width: calc(var(--cell-max-width) * 24);
+  margin: 0 auto;
+  padding-top: 6.6vmax;
+  padding-bottom: 6.6vmax;
+}
+.center-text-section-clemo{
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
   max-width: calc(var(--cell-max-width) * 24);
   margin: 0 auto;
   padding-top: 6.6vmax;
@@ -17,6 +27,17 @@
 .center-text-description {
  padding: 0 5rem;
  padding-bottom: 5rem;
+}
+
+.text-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.clemo-center-title{
+  padding-bottom: 3rem;
 }
 
 /* Mobile-specific adjustments */

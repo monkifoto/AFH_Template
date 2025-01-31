@@ -27,7 +27,9 @@
         <h2><span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span></h2>
 
         <div class="separator2"></div>
-      <p>{{content}}</p>
+      <p [innerHTML]="sanitizedContent" >{{content}}</p>
+      <!-- <h4 class="center-text-description" [innerHTML]="sanitizedContent"></h4> -->
+
       <a href="#" class="btn">learn more</a>
   </div>
 </div>

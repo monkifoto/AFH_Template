@@ -77,21 +77,23 @@
       <app-hero></app-hero>
       <div class="content-wrapper">
         <section class="our-approach">
-          <app-right-text
-            *ngIf="business.theme.themeType === 'ae'"
-            [themeType]="business.theme.themeType || ''"
-            [imageURL]="business.missionImageUrl"
-            [title]="business.missionTitle"
-            [content]="business.mission"
-          ></app-right-text>
 
-          <app-left-text
-            *ngIf="business.theme.themeType === 'ae'"
-            [themeType]="business.theme.themeType || ''"
-            [imageURL]="business.visionImageUrl"
-            [title]="business.visionTitle"
-            [content]="business.vision"
-          ></app-left-text>
+          <app-right-text
+          *ngIf="business.sections | sectionFilter:'AboutUsTextRight' as section"
+          [themeType]="business.theme.themeType || ''"
+          [imageURL]="section.sectionImageUrl || ''"
+          [title]="section.sectionTitle || ''"
+          [content]="section.sectionContent || ''"
+        ></app-right-text>
+
+        <app-left-text
+          *ngIf="business.sections | sectionFilter:'AboutUsTextLeft' as section"
+          [themeType]="business.theme.themeType || ''"
+          [imageURL]="section.sectionImageUrl || ''"
+          [title]="section?.sectionTitle || ''"
+          [content]="section.sectionContent || ''"
+        ></app-left-text>
+
         </section>
 
         <app-testimonial-image
@@ -161,27 +163,27 @@
 
       <section class="our-approach">
         <app-right-text
+        *ngIf="business.sections | sectionFilter:'AboutUsTextRight' as section"
         [themeType]="business.theme.themeType || ''"
-          *ngIf="business.theme.themeType === 'clemo'"
-          [imageURL]="business.missionImageUrl"
-          [title]="business.missionTitle"
-          [content]="business.mission"
+        [imageURL]="section.sectionImageUrl || ''"
+        [title]="section.sectionTitle || ''"
+        [content]="section.sectionContent || ''"
         ></app-right-text>
 
         <app-left-text
-          *ngIf="business.theme.themeType === 'clemo'"
-          [themeType]="business.theme.themeType || ''"
-          [imageURL]="business.visionImageUrl"
-          [title]="business.visionTitle"
-          [content]="business.vision"
+        *ngIf="business.sections | sectionFilter:'AboutUsTextLeft' as section"
+        [themeType]="business.theme.themeType || ''"
+        [imageURL]="section.sectionImageUrl || ''"
+        [title]="section.sectionTitle || ''"
+        [content]="section.sectionContent || ''"
         ></app-left-text>
 
         <app-right-text
-        *ngIf="business.theme.themeType === 'clemo'"
+        *ngIf="business.sections | sectionFilter:'AboutUsTextRight2' as section"
         [themeType]="business.theme.themeType || ''"
-        [imageURL]="business.motivationImageUrl"
-        [title]="business.motivationTitle"
-        [content]="business.motivation"
+        [imageURL]="section.sectionImageUrl || ''"
+        [title]="section.sectionTitle || ''"
+        [content]="section.sectionContent || ''"
       ></app-right-text>
 
       </section>
