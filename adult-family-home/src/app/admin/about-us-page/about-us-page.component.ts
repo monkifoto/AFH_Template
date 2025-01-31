@@ -16,6 +16,7 @@ export class AboutUsPageComponent implements OnInit {
   newUniqueServiceForm!: FormGroup;
   newWhyChooseForm!: FormGroup;
   newSectionForm!:FormGroup;
+  collapsedSections: boolean[] = [];
 
   sectionForm!: FormGroup;
   showSectionForm = false;
@@ -72,6 +73,7 @@ export class AboutUsPageComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.collapsedSections = this.sections.controls.map(() => false);
     // Initialize the forms here
     this.newSectionForm = this.fb.group({
       name: [''],
@@ -90,6 +92,10 @@ export class AboutUsPageComponent implements OnInit {
       name: [''],
       description: [''],
     });
+  }
+
+  toggleSection(index: number) {
+    this.collapsedSections[index] = !this.collapsedSections[index];
   }
 
   toggleSectionForm(): void {
@@ -168,7 +174,7 @@ export class AboutUsPageComponent implements OnInit {
       sectionStyle: ['']
     });
 
-    this.sections.push(newSection); 
+    this.sections.push(newSection);
   }
 
   removeSection(index: number): void {

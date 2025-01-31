@@ -5,43 +5,50 @@
 
   <button (click)="addSection()" class="afhBtn">Add Section</button>
 
-  <div formArrayName="sections">
-    <div *ngFor="let section of sections.controls; let i = index" [formGroupName]="i">
-      <h3>Section {{ i + 1 }}</h3>
+  <div formArrayName="sections" >
+    <div *ngFor="let section of sections.controls; let i = index" [formGroupName]="i" class="sectionForm-container">
+      <div class="sectionForm-header">
 
-      <div class="form-group">
+        <div class="sectionForm-header-item">
+      <h3>Section {{ i + 1 }}</h3>
+    </div>
+<div class="sectionForm-header-item">
+      <button (click)="toggleSection(i)" class="toggle-btn">
+        {{ collapsedSections[i] ? 'Expand' : 'Collapse' }}
+      </button>
+    </div>
+      </div>
+<div class="sectionForm-header">
+      <div class="form-group" class="sectionForm-header-item">
         <label for="sectionName">Section Name</label>
         <input formControlName="sectionName" id="sectionName" class="form-control" placeholder="Enter section name" />
       </div>
 
-      <div class="form-group">
+      <div class="form-group" class="sectionForm-header-item">
         <label for="sectionType">Section Type</label>
         <select formControlName="sectionType" id="sectionType" class="form-control">
           <option value="Story">Story</option>
           <option value="Vision">Vision</option>
           <option value="Motivation">Motivation</option>
           <option value="Mission">Mission</option>
+          <option value="Welcomw">Welcome</option>
           <option value="Other">Other</option>
         </select>
       </div>
-
-      <div class="form-group">
+    </div>
+    <div [ngClass]="{'collapsed': collapsedSections[i]}">
         <label for="sectionTitle">Title</label>
         <input formControlName="sectionTitle" id="sectionTitle" class="form-control" placeholder="Enter section title" />
-      </div>
-
-      <div class="form-group">
-        <label>Choose an Image</label>
+        <label for="sectionContent">Content</label>
+        <textarea formControlName="sectionContent" id="sectionContent" class="form-control" rows="5"></textarea>
+        <br/>
+        <label>Choose an Image</label> <br/>
         <div *ngFor="let image of predefinedImages" class="image-selection">
           <input type="radio" formControlName="sectionImageUrl" [value]="image.url" />
           <img [src]="image.url" class="contactUsImagesThumbnails" alt="Predefined Image" />
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="sectionContent">Content</label>
-        <textarea formControlName="sectionContent" id="sectionContent" class="form-control" rows="5"></textarea>
-      </div>
 
       <button (click)="removeSection(i)" class="afhBtn">Remove Section</button>
     </div>
