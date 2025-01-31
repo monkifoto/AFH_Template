@@ -72,6 +72,7 @@ import { InstagramFeedComponent } from './component/UI/instagram-feed/instagram-
 import { SectionTileComponent } from './component/UI/section-tile/section-tile.component';
 import { VideoComponent } from './component/UI/video/video.component';
 import { Tour3DComponent } from './component/UI/tour-3-d/tour-3-d.component';
+import { SectionFilterPipe } from './pipe/section-filter.pipe';
 
     // Map hostnames to business IDs
     const businessIdMap: { [key: string]: string } = {
@@ -201,7 +202,8 @@ export function combinedInitializer(
     InstagramFeedComponent,
     SectionTileComponent,
     VideoComponent,
-    Tour3DComponent
+    Tour3DComponent,
+    SectionFilterPipe
   ],
   imports: [
     BrowserModule,

@@ -1,100 +1,18 @@
-<app-hero-slider
-  *ngIf="business?.theme?.themeType === 'clemo' "
-  [navigation]="'side'"
-  [sideButtons]="false"
-  sliderHeight="100vh">
-</app-hero-slider>
+<!------------------------ HH SECTION ---------------------->
 
-<app-hero-slider
-  *ngIf=" business?.theme?.themeType === 'ae'"
-  [navigation]="'side'"
-  [sideButtons]="false"
-  sliderHeight="80vh">
-</app-hero-slider>
-
-
-<app-hero-slider
-  *ngIf="business?.theme?.themeType === 'hh'"
+<section *ngIf="business?.theme?.themeType === 'hh'">
+  <app-hero-slider
   [navigation]="'bottom'"
   [sideButtons]="true"
   sliderHeight="70vh">
 </app-hero-slider>
 
-<!-- <app-hero-carousel *ngIf="business?.theme?.themeType != 'clemo' || 'ae'"></app-hero-carousel> -->
+<app-welcome
+  [layoutType]="business?.theme?.themeType || 'demo'"
+  [businessId]="business?.id || ''"
+></app-welcome>
 
-<!-- <app-hero-slider  *ngIf="business?.theme?.themeType === 'ae'"></app-hero-slider> -->
-<!-- <app-three-section *ngIf="business?.theme?.themeType === 'clemo'"></app-three-section> -->
-
-
-
-<app-right-text
-[themeType]="business?.theme?.themeType || ''"
-  *ngIf="business?.theme?.themeType === 'clemo'"
-  [imageURL]="business?.businessStoryImageUrl || ''"
-  [title]="business?.businessStoryTitle || ''"
-  [content]="business?.businessStory || ''"
-></app-right-text>
-
-
-
-
-  <app-welcome
-    [layoutType]="business?.theme?.themeType || 'demo'"
-    [businessId]="business?.id || ''"
-  ></app-welcome>
-
-<app-parallax-text  *ngIf="business?.theme?.themeType === 'ehc'"></app-parallax-text>
-
-<!----Testing   -->
-<app-right-text
-  *ngIf="business?.theme?.themeType === 'ae'"
-  [themeType]="business?.theme?.themeType || ''"
-  [imageURL]="business?.sections?.[0]?.sectionImageUrl || ''"
-  [title]="business?.sections?.[0]?.sectionTitle ||''"
-  [content]="business?.sections?.[0]?.sectionContent || ''"
-></app-right-text>
-
-<app-left-text
-  *ngIf="business?.theme?.themeType === 'ae'"
-  [themeType]="business?.theme?.themeType || ''"
-  [imageURL]="business?.sections?.[1]?.sectionImageUrl || ''"
-  [title]="business?.sections?.[1]?.sectionTitle ||''"
-  [content]="business?.sections?.[1]?.sectionContent || ''"
-></app-left-text>
-<!----Testing   -->
-
-
-<!-- <app-right-text
-  *ngIf="business?.theme?.themeType === 'ae'"
-  [themeType]="business?.theme?.themeType || ''"
-  [imageURL]="'../../../../assets/sharedAssets/istockphoto-1432890664-2048x2048.jpg'"
-  [title]="'Providing a safe and comfortable home environment for your loved ones'"
-  [content]="'In our warm, home-like setting, residents enjoy fully private rooms designed for comfort and privacy, fostering a sense of security and belonging. Our dedicated caregivers provide personalized, attentive care tailored to each resident’s unique needs, ensuring they feel valued and supported.'"
-></app-right-text>
-
-<app-left-text
-  *ngIf="business?.theme?.themeType === 'ae'"
-  [themeType]="business?.theme?.themeType || ''"
-  [imageURL]="'../../../../assets/sharedAssets/istockphoto-1066099806-2048x2048.jpg'"
-  [title]="'Flexible In-Person and Remote Visitation Options'"
-  [content]="'Our adult family home welcomes in-person visits in a comfortable and home-like setting. For those unable to visit in person, we offer remote options to help you stay connected with your loved ones, ensuring meaningful interactions from the comfort of your own home.'"
-></app-left-text> -->
-
-<app-icon-list
-  *ngIf="business?.theme?.themeType === 'ae'"
-  [services]="[
-  { icon: 'fas fa-dove', title: 'Hospice Care', description: '...' },
-    { icon: 'fas fa-person-cane', title: 'Mobility Assistance', description: '...' },
-    { icon: 'fas fa-people-group', title: 'Companionship Care', description: '...' },
-    { icon: 'fas fa-bowl-food', title: 'Meal Planning', description: '...' },
-    { icon: 'fas fa-prescription-bottle', title: 'Medication', description: '...' },
-    { icon: 'fas fa-shower', title: 'Personal Hygiene', description: '...' },
-    { icon: 'fas fa-bed-pulse', title: 'Medical Care', description: '...' }
-  ]"
-></app-icon-list>
-
-  <app-our-services-home
-    *ngIf="business?.theme?.themeType === 'hh'"
+<app-our-services-home
     [layoutType]="business?.theme?.themeType || 'demo' "
     [services]="[
       { icon: 'fas fa-heart', title: 'Mobility Assistance', description: 'Hands On, Stand by Assist.' },
@@ -106,29 +24,103 @@
     ]"
   ></app-our-services-home>
 
-<app-why-us
-*ngIf="business?.theme?.themeType != 'clemo'"
+  <app-why-us
   [whyChooseUs]="business?.whyChoose || []"
   [layoutType]="business?.theme?.themeType || 'demo' "
   [businessName]="business?.businessName || 'Demo' "
 ></app-why-us>
 
-<app-features *ngIf="business?.theme?.themeType != 'clemo'"
+<app-features
   [uniqueService]="business?.uniqueService || []"
   [layoutType]="business?.theme?.themeType || 'demo' "
 ></app-features>
 
-<app-testimonials  *ngIf="business?.theme?.themeType != 'clemo'"
+<app-testimonials
   [testimonials]="business?.testimonials"
   [layoutType]="business?.theme?.themeType || 'demo' "
 ></app-testimonials>
 
-<app-video *ngIf="business?.theme?.themeType === 'clemo'" [videoSource]="'https://youtu.be/rVBHH5DwYFA?si=Cr3AncNVTaxqHsfX'"></app-video>
+</section>
+
+<!------------------------ AE SECTION ---------------------->
+
+<section *ngIf="business?.theme?.themeType === 'ae'">
+
+  <app-hero-slider
+  [navigation]="'side'"
+  [sideButtons]="false"
+  sliderHeight="80vh">
+</app-hero-slider>
+
+  <app-center-text
+  *ngIf="business?.sections | sectionFilter:'HomeWelcomeText' as section"
+  [themeType]="business?.theme?.themeType || ''"
+  [imageURL]="section?.sectionImageUrl || ''"
+  [title]="section?.sectionTitle || ''"
+  [content]="section?.sectionContent || ''"
+  [showBtn]="false"
+></app-center-text>
+
+  <app-right-text
+  *ngIf="business?.sections | sectionFilter:'HomeRightText' as section"
+  [themeType]="business?.theme?.themeType || ''"
+  [imageURL]="section?.sectionImageUrl || ''"
+  [title]="section?.sectionTitle || ''"
+  [content]="section?.sectionContent || ''"
+></app-right-text>
+
+<app-left-text
+  *ngIf="business?.sections | sectionFilter:'HomeLeftText' as section"
+  [themeType]="business?.theme?.themeType || ''"
+  [imageURL]="section?.sectionImageUrl || ''"
+  [title]="section?.sectionTitle || ''"
+  [content]="section?.sectionContent || ''"
+></app-left-text>
+
+<app-icon-list
+  [services]="[
+  { icon: 'fas fa-dove', title: 'Hospice Care', description: '...' },
+    { icon: 'fas fa-person-cane', title: 'Mobility Assistance', description: '...' },
+    { icon: 'fas fa-people-group', title: 'Companionship Care', description: '...' },
+    { icon: 'fas fa-bowl-food', title: 'Meal Planning', description: '...' },
+    { icon: 'fas fa-prescription-bottle', title: 'Medication', description: '...' },
+    { icon: 'fas fa-shower', title: 'Personal Hygiene', description: '...' },
+    { icon: 'fas fa-bed-pulse', title: 'Medical Care', description: '...' }
+  ]"
+></app-icon-list>
+
+<app-testimonials
+  [testimonials]="business?.testimonials"
+  [layoutType]="business?.theme?.themeType || 'demo' "
+></app-testimonials>
+
+</section>
+
+<!------------------------ CLEMO SECTION ---------------------->
+
+<section *ngIf="business?.theme?.themeType === 'clemo'">
+
+  <app-hero-slider
+  [navigation]="'side'"
+  [sideButtons]="false"
+  sliderHeight="100vh">
+</app-hero-slider>
+
+<app-right-text
+[themeType]="business?.theme?.themeType || ''"
+  [imageURL]="business?.businessStoryImageUrl || ''"
+  [title]="business?.businessStoryTitle || ''"
+  [content]="business?.businessStory || ''"
+></app-right-text>
+
+
+<app-video
+[videoSource]="'https://youtu.be/rVBHH5DwYFA?si=Cr3AncNVTaxqHsfX'">
+</app-video>
 
 
 
 <app-parallax-stats
-*ngIf="business?.theme?.themeType === 'clemo'"
   [backgroundImage]="'https://firebasestorage.googleapis.com/v0/b/afhdynamicwebsite.appspot.com/o/businesses%2FSJgFxBYkopnPR4WibCAf%2Fgallery%2F13.jpg?alt=media&amp;token=cc737375-bdbf-4ba3-95d9-66b63a73b45a'"
   [yearsOfExperience]="20"
   [happyFamilies]="55"
@@ -136,7 +128,21 @@
   [trainedStaff]="4">
 </app-parallax-stats>
 
-<app-testimonial-carousel  *ngIf="business?.theme?.themeType === 'clemo'" [placeId]="business?.placeId || ''"></app-testimonial-carousel>
+<app-testimonial-carousel
+[placeId]="business?.placeId || ''">
+</app-testimonial-carousel>
+
+<app-parallax-text>
+
+</app-parallax-text>
+
+<app-google-maps *ngIf="business?.theme?.themeType == 'clemo'"
+[address]="business?.address ||''"
+[layoutType]="business?.theme?.themeType || 'demo' "></app-google-maps>
+
+</section>
+
+<!------------------------ SHARED SECTION ---------------------->
 
 <app-consultation
 *ngIf="business?.theme?.themeType != 'clemo'"
@@ -144,10 +150,6 @@
   [layoutType]="business?.theme?.themeType || 'demo' "
   [businessName]="business?.businessName || 'Demo' "
 ></app-consultation>
-
-<app-google-maps *ngIf="business?.theme?.themeType == 'clemo'"
-[address]="business?.address ||''"
-[layoutType]="business?.theme?.themeType || 'demo' "></app-google-maps>
 
 <!-- <app-google-reviews  *ngIf="business?.theme?.themeType == 'clemo'" [placeId]="business?.placeId || ''"></app-google-reviews> -->
 
