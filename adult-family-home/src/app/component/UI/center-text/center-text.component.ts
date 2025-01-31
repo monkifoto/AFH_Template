@@ -7,8 +7,10 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   styleUrls: ['./center-text.component.css']
 })
 export class CenterTextComponent {
+  @Input() themeType!: string;
   @Input() title!: string;
-  @Input() showBtn!: boolean;
+  @Input() imageURL!: string;
+  @Input() showBtn: boolean = false;
 
   private _content!: string;
   sanitizedContent!: SafeHtml;

@@ -35,4 +35,8 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
+  getSectionByName(sectionName: string) {
+    return this.business?.sections?.find(section => section.sectionName === sectionName) || null;
+  }
 }
