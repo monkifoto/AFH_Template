@@ -7,10 +7,21 @@
   sliderHeight="70vh">
 </app-hero-slider>
 
-<app-welcome
-  [layoutType]="business?.theme?.themeType || 'demo'"
-  [businessId]="business?.id || ''"
-></app-welcome>
+<app-center-text
+  *ngIf="business?.sections | sectionFilter:'HomeWelcomeText' as section"
+  [themeType]="business?.theme?.themeType || ''"
+  [imageURL]="section?.sectionImageUrl || ''"
+  [title]="section?.sectionTitle || ''"
+  [subTitle]="section?.sectionSubTitle || ''"
+  [content]="section?.sectionContent || ''"
+  [showBtn]="true"
+  [_businessName]="business?.businessName || ''"
+></app-center-text>
+
+<app-item-list
+[layoutType]="'hh'"
+[services]="business?.services || []"
+></app-item-list>
 
 <app-our-services-home
     [layoutType]="business?.theme?.themeType || 'demo' "

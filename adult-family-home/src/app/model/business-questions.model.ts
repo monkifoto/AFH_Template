@@ -1,4 +1,4 @@
-import { Section } from "./section.model";
+import { Section } from './section.model';
 
 export interface Business {
   businessData: {};
@@ -18,7 +18,7 @@ export interface Business {
   email: string;
   placeId: string;
   isActive: boolean;
-  isLive:boolean;
+  isLive: boolean;
 
   heroImages: string[];
 
@@ -28,21 +28,26 @@ export interface Business {
 
   sections: Section[];
 
-  businessStoryImageUrl:string;
-  businessStoryTitle:string;
+     // to be removed
+  businessStoryImageUrl: string;
+  businessStoryTitle: string;
   businessStory: string;
 
-  motivationImageUrl:string;
-  motivationTitle:string;
+  motivationImageUrl: string;
+  motivationTitle: string;
   motivation: string;
 
-  missionImageUrl:string;
+  missionImageUrl: string;
   missionTitle: string;
   mission: string;
 
-  visionImageUrl:string;
+  visionImageUrl: string;
   visionTitle: string;
   vision: string;
+  teamValues: string;
+  welcomeMessage: string;
+  keyServicesHighlights: string;
+   // to be removed
 
   certifications: string;
 
@@ -60,22 +65,23 @@ export interface Business {
 
   logoImage: string;
   logoText: string;
-  faviconUrl:string;
-
+  faviconUrl: string;
 
   facilityImages: string[];
   lifestyleImages: string[];
+  testimonials: Testimonial[];
+  benefits: ListItem[];
+
   mediaFeatures: string;
   ratings: string;
 
-  testimonials: Testimonial[];
+
 
   businessHours: string;
   socialMedia: string;
-  welcomeMessage: string;
-  keyServicesHighlights: string;
-  teamValues: string;
-  benefits: ListItem[];
+
+
+
 
   //Contact us page
   contactFormDetails: string;
@@ -90,18 +96,14 @@ export interface Business {
   ownerImagesBios: string;
   staffImagesBios: string;
 
-
-  metaTitle:string;
-  metaKeywords:string;
-  metaDescription:string;
-
-
+  metaTitle: string;
+  metaKeywords: string;
+  metaDescription: string;
 
   theme: Theme;
 
   // Hero Slider
   heroSlider: HeroSlide[];
-
 }
 
 export interface HeroSlide {
@@ -125,17 +127,17 @@ export interface Employee {
   photoURL: string;
 }
 
-export interface Testimonial{
+export interface Testimonial {
   id: string;
   name: string;
   quote: string;
-  relationship:string;
+  relationship: string;
   photoURL: string;
 }
 
-export interface ListItem{
-  icon?:string;
-  name:string;
+export interface ListItem {
+  icon?: string;
+  name: string;
   description: string;
 }
 
@@ -152,10 +154,10 @@ export interface Theme {
   textColor: string;
   accentColor: string;
   darkBackgroundColor: string;
-  navTextColor:string;
+  navTextColor: string;
   navBackgroundColor: string;
   navActiveBackground: string;
-  navActiveText:string;
+  navActiveText: string;
   buttonColor: string;
   buttonHoverColor: string;
 
@@ -165,13 +167,17 @@ export interface Theme {
 export class BusinessModel {
   static getDefaultBusiness(): Business {
     return {
-      sections:[{
-        sectionName: '',
-        sectionTitle: "",
-        sectionContent: "",
-        sectionType: "",
-        sectionStyle: ""
-      }],
+      sections: [
+        {
+          sectionName: 'HomeCenterText',
+          sectionTitle: 'Welcome To AFH',
+          sectionSubTitle: 'Caring with compassion for every senior.',
+          sectionContent:
+            'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
+          sectionType: 'Other',
+          sectionStyle: 'hh',
+        },
+      ],
       heroImages: [''],
       heroSlider: [
         {
@@ -219,16 +225,17 @@ export class BusinessModel {
       providerName: 'Sarah Caregiver',
       tagline: 'Caring with compassion for every senior',
 
-      businessStoryImageUrl:'',
+        // to be removed
+      businessStoryImageUrl: '',
       businessStoryTitle: 'Business Story',
       businessStory:
         'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
-motivationImageUrl:'',
-motivationTitle:'Motivation Title',
-        motivation:
+      motivationImageUrl: '',
+      motivationTitle: 'Motivation Title',
+      motivation:
         'To offer high-quality, compassionate care for seniors, respecting their independence and dignity.',
 
-        mission:
+      mission:
         'To exceed the expectations of our residents and their families, with personalized care and a homelike atmosphere.',
       missionImageUrl: '',
       missionTitle: 'Our Mission',
@@ -237,6 +244,15 @@ motivationTitle:'Motivation Title',
         'A community where seniors can live independently with compassionate, round-the-clock care and support.',
       visionImageUrl: '',
       visionTitle: 'Our Vision',
+
+      welcomeMessage:
+      'Welcome to Careful Living AFH - where our residents are family.',
+
+      keyServicesHighlights:
+        '24/7 care, balanced meals, therapeutic activities.',
+      teamValues:
+        'Dedicated team specialized in elderly care for dementia, Alzheimer’s, stroke recovery, diabetic management, cardiac care, and rehabilitation.',
+        // to be removed
 
       certifications:
         'State Licensed, Certified Nursing Assistants (CNA), First Aid/CPR Certified',
@@ -248,23 +264,23 @@ motivationTitle:'Motivation Title',
         'To inform, encourage visits, and offer a means to request consultations.',
       logoImage: '../assets/sharedAssets/Demologo2.png',
       faviconUrl: '../../assets/sharedAssets/icons/hh_favicon.ico',
+      // to be removed
       ownerImagesBios: 'Sarah Caregiver, RN, Founder.',
       staffImagesBios:
         'Emily Nurse, CNA, Head Nurse; Jack Therapist, PT, Physical Therapist',
+        // to be removed
+
       mediaFeatures: 'Featured in Healthcare Journal, Senior Care Monthly.',
       ratings: 'Google: 4.8 stars, Yelp: 5 stars',
       address: '4567 Compassionate Ln, Kindness City, ST 56789',
       phone: '(987) 654-3210',
       fax: '(987) 654-3211',
       email: 'contact@carefullivingafh.com',
+
       businessHours: 'Mon-Fri: 8am-6pm, Sat-Sun: 9am-5pm',
       socialMedia:
         'Facebook: facebook.com/carefullivingafh; Instagram: instagram.com/carefullivingafh',
-      welcomeMessage:
-        'Welcome to Careful Living AFH - where our residents are family.',
-      keyServicesHighlights: '24/7 care, balanced meals, therapeutic activities.',
-      teamValues:
-        'Dedicated team specialized in elderly care for dementia, Alzheimer’s, stroke recovery, diabetic management, cardiac care, and rehabilitation.',
+
       contactFormDetails:
         'Please provide name, email, phone number, and message for inquiries.',
       contactUsImageUrl: '',
@@ -310,7 +326,7 @@ motivationTitle:'Motivation Title',
           name: 'Sarah Thompson',
           quote:
             'Finding this Adult Family Home for my mother was the best decision we ever made.',
-            relationship: 'mother',
+          relationship: 'mother',
           photoURL: '',
         },
         // Other testimonials...
@@ -347,4 +363,3 @@ motivationTitle:'Motivation Title',
     };
   }
 }
-

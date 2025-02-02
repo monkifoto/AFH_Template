@@ -1,17 +1,30 @@
+
+
+  <div class="welcome-info-container" [ngClass]="themeType" *ngIf="themeType=='hh'">
+    <div class="welcome-overlay">
+      <div class="welcome-content garamond">
+        <h3> <span class="brand-name">{{ subTitle | replaceKeyword: { businessName: _businessName } }}</span></h3>
+        <h1>{{title}}</h1>
+        <p [innerHTML]="sanitizedContent"></p>
+        <div class="buttons">
+          <button *ngIf="showBtn" type="button" class="afhBtn" (click)="navigateToContact()">Contact Us</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 <div class="center-text-section"
 [ngClass]="themeType"
-*ngIf="themeType!='clemo'">
+*ngIf="themeType!='clemo' && themeType!='hh'">
   <img *ngIf="imageURL && showImage"  [src]="imageURL" alt="Section Image" class="center-text-image" />
+  <h3 class="center-text-title">{{ subTitle | replaceKeyword: { businessName: _businessName } }}</h3>
   <h2 class="center-text-title">{{ title }}</h2>
   <h4 class="center-text-description" [innerHTML]="sanitizedContent"></h4>
   <button *ngIf="showBtn" class="afhBtn">Schedule A Visit</button>
 </div>
 
-
-
-<div class="center-text-section-clemo"
-[ngClass]="themeType"
-*ngIf="themeType=='clemo'">
+<div class="center-text-section-clemo" [ngClass]="themeType" *ngIf="themeType=='clemo'">
   <img *ngIf="imageURL && showImage"  [src]="imageURL" alt="Section Image" class="center-text-image" />
   <div class="text-container">
   <h3>

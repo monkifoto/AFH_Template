@@ -31,7 +31,7 @@
           <option value="Vision">Vision</option>
           <option value="Motivation">Motivation</option>
           <option value="Mission">Mission</option>
-          <option value="Welcomw">Welcome</option>
+          <option value="Welcome">Welcome</option>
           <option value="Other">Other</option>
         </select>
       </div>
@@ -39,6 +39,8 @@
     <div [ngClass]="{'collapsed': collapsedSections[i]}">
         <label for="sectionTitle">Title</label>
         <input formControlName="sectionTitle" id="sectionTitle" class="form-control" placeholder="Enter section title" />
+        <label for="sectionSubTitle">Subtitle</label>
+        <input formControlName="sectionSubTitle" id="sectionSubTitle" class="form-control" placeholder="Enter section Subtitle" />
         <label for="sectionContent">Content</label>
         <textarea formControlName="sectionContent" id="sectionContent" class="form-control" rows="5"></textarea>
         <br/>
