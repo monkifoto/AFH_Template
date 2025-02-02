@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Business, ListItem } from 'src/app/model/business-questions.model';
 
@@ -17,9 +17,15 @@ export class ServicesPageComponent implements OnInit {
   collapsedServices: boolean[] = [];
   collapsedBenefits: boolean[] = [];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {
+    if (!this.form.controls['services']) {
+      this.form.addControl('services', this.fb.array([]));
+    }
+    if (!this.form.controls['benefits']) {
+      this.form.addControl('benefits', this.fb.array([]));
+    }
     // Initialize serviceForm with necessary fields
     this.newServiceForm = this.fb.group({
       name: ['', Validators.required],
@@ -34,6 +40,7 @@ export class ServicesPageComponent implements OnInit {
       icon: [''],
       description:[]
     });
+    this.initializeCollapsedStates();
   }
 
   populateServices(services: ListItem[]): void {
@@ -79,30 +86,49 @@ export class ServicesPageComponent implements OnInit {
   }
 
   toggleService(index: number): void {
-    this.collapsedServices[index] = !this.collapsedServices[index];
+    if (index >= 0 && index < this.collapsedServices.length) {
+      this.collapsedServices[index] = !this.collapsedServices[index];
+    }
   }
 
-  toggleBenefit(index: number) {
-    this.collapsedBenefits[index] = !this.collapsedBenefits[index];
+  toggleBenefit(index: number): void {
+    if (index >= 0 && index < this.collapsedBenefits.length) {
+      this.collapsedBenefits[index] = !this.collapsedBenefits[index];
+    }
   }
 
   addService() {
-    if (this.newServiceForm.valid) {
-      this.services.push(this.fb.group(this.newServiceForm.value));
-      this.newServiceForm.reset();
-    }
+    const serviceGroup = this.fb.group({
+      name: [''],
+      icon: [''],
+      description: ['']
+    });
+
+    this.services.insert(0, serviceGroup);  // Insert at index 0
+
+    this.collapsedServices.unshift(false);  // Add collapsed state to the top
+    this.cdRef.detectChanges();
   }
+
+
 
   removeService(index: number): void {
     this.services.removeAt(index);
   }
 
   addBenefit() {
-    if (this.newBenefitsForm.valid) {
-      this.benefits.push(this.fb.group(this.newBenefitsForm.value));
-      this.newBenefitsForm.reset();
-    }
+    const benefitGroup = this.fb.group({
+      name: [''],  // No validation at this stage
+      icon: [''],
+      description: ['']
+    });
+
+    this.benefits.insert(0, benefitGroup);  // Insert at index 0
+    this.collapsedBenefits.unshift(true);  // Add collapsed state to the top
+    this.cdRef.detectChanges();
   }
+
+
 
   removeBenefit(index: number): void {
     this.benefits.removeAt(index);

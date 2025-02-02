@@ -112,7 +112,7 @@ showAutoSaveMessage: boolean = false;
       metaTitle:[''],
       metaKeywords:[''],
       metaDescription:[''],
-      placeID:[],
+      placeId:[''],
 
       //Home Page
       welcomeMessage: [''],

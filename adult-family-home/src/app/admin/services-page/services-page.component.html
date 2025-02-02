@@ -2,7 +2,7 @@
 <h2>Services Page</h2>
 
 
-<button (click)="addService()" class="afhBtn">Add Service</button>
+<button (click)="addService()" class="afhBtn">+ Add Service</button>
 
 <div formArrayName="services">
   <div *ngFor="let service of services.controls; let i = index" [formGroupName]="i" class="service-container">
@@ -39,7 +39,7 @@
 </div>
 
 
-<button (click)="addBenefit()" class="afhBtn">Add Benefit</button>
+<button (click)="addBenefit()" class="afhBtn">+ Add Benefit</button>
 
 <div formArrayName="benefits">
   <div *ngFor="let service of benefits.controls; let i = index" [formGroupName]="i" class="benefit-container">
