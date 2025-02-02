@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { BusinessService } from 'src/app/services/business.service';
 import { UploadService } from 'src/app/services/upload.service';
@@ -21,7 +21,7 @@ import { AboutUsPageComponent } from '../about-us-page/about-us-page.component';
   templateUrl: './edit-business.component.html',
   styleUrls: ['./edit-business.component.css'],
 })
-export class EditBusinessComponent implements OnInit {
+export class EditBusinessComponent implements OnInit , AfterViewInit{
   @ViewChild(EmployeeComponent) employeeComponent!: EmployeeComponent;
   @ViewChild(ReviewsComponent) reviewComponent!: ReviewsComponent;
   @ViewChild(ServicesPageComponent) serviceComponent!: ServicesPageComponent;
@@ -333,6 +333,25 @@ private populateFormArray(formArray: FormArray, items: any[]) {
     // Ensure logoImage is handled
     if (!this.businessForm.contains('logoImage')) {
       this.businessForm.addControl('logoImage', this.fb.control(null));
+    }
+  }
+
+  ngAfterViewInit(): void {
+    // Attach event listener after view initialization
+    const tabs = document.querySelectorAll('[data-bs-toggle="tab"]');
+    tabs.forEach(tab => {
+      tab.addEventListener('shown.bs.tab', (event: any) => {
+        this.autoSave();
+      });
+    });
+  }
+
+  autoSave(): void {
+    if (this.businessForm.valid) {
+      const formValue = this.businessForm.value;
+      this.businessService.updateBusiness(this.businessId, formValue)
+        .then(() => console.log('Auto-saved successfully'))
+        .catch(err => console.error('Error auto-saving', err));
     }
   }
 
