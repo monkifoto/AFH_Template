@@ -15,11 +15,10 @@
           <div class="heading-container">
             <h2 class="styled-heading">Our Services</h2>
           </div>
-          <ul>
-            <li *ngFor="let service of business.services">
-              <h3>{{ service.name }}</h3>
-            </li>
-          </ul>
+          <app-item-list
+          [layoutType]="business.theme.themeType"
+          [services]="business.services"
+        ></app-item-list>
         </section>
 
         <section class="services-list">

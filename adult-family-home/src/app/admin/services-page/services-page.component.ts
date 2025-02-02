@@ -47,6 +47,7 @@ export class ServicesPageComponent implements OnInit {
       });
       this.services.push(servicesForm);
     });
+    this.initializeCollapsedStates();
   }
 
   populateBenefits(benefits: ListItem[]): void {
@@ -71,11 +72,13 @@ export class ServicesPageComponent implements OnInit {
   }
 
   initializeCollapsedStates() {
-    this.collapsedServices = this.services.controls.map(() => false);
-    this.collapsedBenefits = this.benefits.controls.map(() => false);
+    this.collapsedServices = new Array(this.services.length).fill(true);
+    this.collapsedBenefits = new Array(this.benefits.length).fill(true);
+    // this.collapsedServices = this.services.controls.map(() => true);
+    // this.collapsedBenefits = this.benefits.controls.map(() => true);
   }
 
-  toggleService(index: number) {
+  toggleService(index: number): void {
     this.collapsedServices[index] = !this.collapsedServices[index];
   }
 

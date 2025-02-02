@@ -1,4 +1,15 @@
-<section class="services-section">
+<section class="services-list-section" *ngIf="layoutType=='hh'">
+  <div class="services-list">
+<ul>
+  <li *ngFor="let service of services" class="service-list-item">
+    <h2>{{service.name}}</h2>
+  </li>
+</ul>
+  </div>
+</section>
+
+
+<section class="services-section" *ngIf="layoutType!='hh'">
   <app-section-tilte [title]="'Our Services'"></app-section-tilte>
   <div class="services-grid">
       <div *ngFor="let service of services" class="service-item">
