@@ -72,3 +72,15 @@ h2 {
   cursor: pointer;
   margin-bottom: 10px;
 }
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #007bff;
+}
+
+.delete-btn {
+  color: red;
+}
