@@ -5,32 +5,36 @@
 <button (click)="addService()" class="afhBtn">Add Service</button>
 
 <div formArrayName="services">
-  <div *ngFor="let service of services.controls; let i = index" [formGroupName]="i" class="sectionForm-container">
-    <div class="sectionForm-header">
-      <div class="sectionForm-header-item">
-        <h3>Service {{ i + 1 }}</h3>
-      </div>
-      <div class="sectionForm-header-item">
-        <label for="serviceName">Service Name</label>
-        <input formControlName="name" id="serviceName" class="form-control" placeholder="Enter service name" />
-      </div>
-      <div class="sectionForm-header-item">
+  <div *ngFor="let service of services.controls; let i = index" [formGroupName]="i" class="service-container">
 
-        <label for="serviceIcon">Font Awesome Icon</label>
-        <input formControlName="icon" id="serviceIcon" class="form-control" placeholder="Enter Icon Class" />
-      </div>
-      <div class="sectionForm-header-item">
-        <button (click)="toggleService(i)" class="toggle-btn">
-          {{ collapsedServices[i] ? 'Expand' : 'Collapse' }}
+    <!-- Single Row Display (Collapsed) -->
+    <div class="service-header">
+      <i [class]="service.get('icon')?.value || 'fa fa-star'"></i>
+      <span class="service-name">{{ 'Service ' + (i + 1) }}: {{ service.get('name')?.value }}</span>
+
+      <!-- Button Group: Expand/Collapse & Remove -->
+      <div class="button-group">
+        <button (click)="toggleService(i)" class="icon-btn">
+          <i [class]="collapsedServices[i] ? 'fa-solid fa-angles-down' : 'fa-solid fa-angles-up'"></i>
+        </button>
+        <button (click)="removeService(i)" class="icon-btn delete-btn">
+          <i class="fa-solid fa-trash-can"></i>
         </button>
       </div>
     </div>
-    <div [ngClass]="{'collapsed': collapsedServices[i]}">
+
+    <!-- Expanded View -->
+    <div *ngIf="!collapsedServices[i]" class="service-details">
+      <label for="serviceName">Service Name</label>
+      <input formControlName="name" id="serviceName" class="form-control" placeholder="Enter service name" />
+
+      <label for="serviceIcon">Font Awesome Icon</label>
+      <input formControlName="icon" id="serviceIcon" class="form-control" placeholder="Enter Icon Class" />
+
       <label for="serviceDescription">Description</label>
       <textarea formControlName="description" id="serviceDescription" class="form-control" rows="3"></textarea>
     </div>
 
-    <button (click)="removeService(i)" class="afhBtn">Remove Service</button>
   </div>
 </div>
 
@@ -43,11 +47,17 @@
     <!-- Single Row Display (Collapsed) -->
     <div class="benefit-header">
       <i [class]="service.get('icon')?.value || 'fa fa-star'"></i>
-      <span class="benefit-name">{{'Benefit ' + (i + 1)}}: {{ service.get('name')?.value  }}</span>
+      <span class="benefit-name">{{ 'Benefit ' + (i + 1) }}: {{ service.get('name')?.value }}</span>
 
-      <button (click)="toggleService(i)" class="toggle-btn">
-        {{ collapsedServices[i] ? 'Expand' : 'Collapse' }}
-      </button>
+      <!-- Button Group: Expand/Collapse & Remove -->
+      <div class="button-group">
+        <button (click)="toggleService(i)" class="icon-btn">
+          <i [class]="collapsedServices[i] ? 'fa-solid fa-angles-down' : 'fa-solid fa-angles-up'"></i>
+        </button>
+        <button (click)="removeBenefit(i)" class="icon-btn delete-btn">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+      </div>
     </div>
 
     <!-- Expanded View -->
@@ -62,9 +72,6 @@
       <textarea formControlName="description" id="benefitDescription" class="form-control" rows="3"></textarea>
     </div>
 
-
-
-    <button (click)="removeBenefit(i)" class="afhBtn">Remove Benefit</button>
   </div>
 </div>
 
