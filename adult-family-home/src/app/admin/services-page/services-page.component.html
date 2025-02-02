@@ -1,81 +1,6 @@
 <form [formGroup]="form">
 <h2>Services Page</h2>
-<!-- <h2>Services and Offerings</h2>
-<div [formGroup]="newServiceForm">
-  <div class="form-group">
-    Examples:
-    <ul>
-      <li><div class="service-item_info">
-        <div><i class="fa-solid fa-people-group"></i></div>
-        <div>fa-solid fa-people-group</div>
-        <div>Companionship Care</div>
-      </div>
-    </li>
-    <li><div class="service-item_info">
-      <div><i class="fa-solid fa-prescription-bottle-medical"></i></div>
-      <div>fa-solid fa-prescription-bottle-medical</div>
-      <div>Medication Management</div>
-    </div>
-  </li>
-  <li><div class="service-item_info">
-    <div><i class="fa-solid fa-bowl-rice"></i></div>
-    <div>fa-solid fa-bowl-rice</div>
-    <div>Nutritious Meal Preparation</div>
-  </div>
-</li>
-<li><div class="service-item_info">
-  <div><i class="fa-solid fa-jug-detergent"></i></div>
-  <div>fa-solid fa-jug-detergent</div>
-  <div>Housekeeping and Laundry Services</div>
-</div>
-</li>
-<li><div class="service-item_info">
-  <div><i class="fa-solid fa-dove"></i></div>
-  <div>fa-solid fa-dove</div>
-  <div>Hospice and End-of-Life Care</div>
-</div>
-</li>
-<li><div class="service-item_info">
-  <div><i class="fa-solid fa-van-shuttle"></i></div>
-  <div>fa-solid fa-van-shuttle</div>
-  <div>Transportation to Appointments</div>
-</div>
-</li>
-<li><div class="service-item_info">
-  <div><i class="fa-solid fa-person-cane"></i></div>
-  <div>fa-solid fa-person-cane</div>
-  <div>Assistance with Daily Living (ADLs)</div>
-</div>
-</li>
 
-
-      <li>Memory Care</li>
-      <li>Physical Therapy and Wellness Programs</li>
-      <li>Social and Recreational Activities</li>
-
-    </ul>
-    <label for="serviceName">Service Name</label>
-    <input formControlName="icon" id="serivceIcon" class="form-control" placeholder="Font Awesome Icon">
-    <input formControlName="name" id="serviceName" class="form-control" placeholder="Enter service name">
-    <input formControlName="description" id="serviceDescription" class="form-control" placeholder="Enter service Description">
-  </div>
-  <button type="button" class="afhBtn"  (click)="addService()">Add Service</button>
-</div>
-
-<ul formArrayName="services">
-  <li *ngFor="let service of services.controls; let i = index" class="list-item">
-    <div class="list-item-header">
-      <div class="list-item-icon">
-        <i [ngClass]="service.get('icon')?.value" class="services-item-icon"></i>
-        <strong>{{ service.get('name')?.value }}</strong>
-      </div>
-        <div class="list-item-buttons">
-        <button type="button" class="afhBtn"  (click)="removeService(i)">X</button> &nbsp;
-      </div>
-    </div>
-    <p>{{ service.get('description')?.value }}</p>
-  </li>
-</ul> -->
 
 <button (click)="addService()" class="afhBtn">Add Service</button>
 
@@ -86,24 +11,20 @@
         <h3>Service {{ i + 1 }}</h3>
       </div>
       <div class="sectionForm-header-item">
+        <label for="serviceName">Service Name</label>
+        <input formControlName="name" id="serviceName" class="form-control" placeholder="Enter service name" />
+      </div>
+      <div class="sectionForm-header-item">
+
+        <label for="serviceIcon">Font Awesome Icon</label>
+        <input formControlName="icon" id="serviceIcon" class="form-control" placeholder="Enter Icon Class" />
+      </div>
+      <div class="sectionForm-header-item">
         <button (click)="toggleService(i)" class="toggle-btn">
           {{ collapsedServices[i] ? 'Expand' : 'Collapse' }}
         </button>
       </div>
     </div>
-
-    <div class="sectionForm-header">
-      <div class="form-group sectionForm-header-item">
-        <label for="serviceName">Service Name</label>
-        <input formControlName="name" id="serviceName" class="form-control" placeholder="Enter service name" />
-      </div>
-
-      <div class="form-group sectionForm-header-item">
-        <label for="serviceIcon">Font Awesome Icon</label>
-        <input formControlName="icon" id="serviceIcon" class="form-control" placeholder="Enter Icon Class" />
-      </div>
-    </div>
-
     <div [ngClass]="{'collapsed': collapsedServices[i]}">
       <label for="serviceDescription">Description</label>
       <textarea formControlName="description" id="serviceDescription" class="form-control" rows="3"></textarea>
@@ -113,47 +34,41 @@
   </div>
 </div>
 
-<div [formGroup]="newBenefitsForm">
-  <ul>
-    <li>Private Rooms with Attached Bathrooms</li>
-    <li>Experienced and Compassionate Caregivers</li>
-    <li>Aging in Place Design</li>
-    <li>Home-Like Environment</li>
-    <li>Personalized Care Plans</li>
-    <li>Memory Care Expertise</li>
-    <li>Nutritious, Home-Cooked Meals</li>
-    <li>Beautiful, Spacious Home Layout </li>
-    <li>Focus on Independence</li>
-    <li>Family-Oriented Approach</li>
-  </ul>
-  <!-- Input for Service Name -->
-  <div class="form-group" >
-    <label for="benefitName">Benefit Name</label>
-    <input formControlName="icon" id="benefitIcon" class="form-control" placeholder="Font Awesome Icon">
-    <input formControlName="name" id="benefitName" class="form-control" placeholder="Enter Benefit name">
-    <input formControlName="description" id="benefitDescription" class="form-control" placeholder="Enter service Description">
-  </div>
 
-  <!-- Button to Add Service -->
-  <button type="button" class="afhBtn"  (click)="addBenefit()">Add Benefit</button>
-</div>
+<button (click)="addBenefit()" class="afhBtn">Add Benefit</button>
 
-<!-- Display the list of added services -->
-<!-- <ul formArrayName="benefits">
-  <li *ngFor="let benefit of benefits.controls; let i = index" class="list-item">
-    <div class="list-item-header">
-      <div class="list-item-icon">
-        <i [ngClass]="benefit.get('icon')?.value" class="services-item-icon"></i>
-        <strong>{{ benefit.get('name')?.value }}</strong>
-      </div>
-      <div class="list-item-buttons">
-    <button type="button" class="afhBtn"  (click)="removeBenefit(i)">X</button> &nbsp;
+<div formArrayName="benefits">
+  <div *ngFor="let service of benefits.controls; let i = index" [formGroupName]="i" class="benefit-container">
+
+    <!-- Single Row Display (Collapsed) -->
+    <div class="benefit-header">
+      <i [class]="service.get('icon')?.value || 'fa fa-star'"></i>
+      <span class="benefit-name">{{'Benefit ' + (i + 1)}}: {{ service.get('name')?.value  }}</span>
+
+      <button (click)="toggleService(i)" class="toggle-btn">
+        {{ collapsedServices[i] ? 'Expand' : 'Collapse' }}
+      </button>
+    </div>
+
+    <!-- Expanded View -->
+    <div *ngIf="!collapsedServices[i]" class="benefit-details">
+      <label for="benefitName">Benefit Name</label>
+      <input formControlName="name" id="benefitName" class="form-control" placeholder="Enter benefit name" />
+
+      <label for="benefitIcon">Font Awesome Icon</label>
+      <input formControlName="icon" id="benefitIcon" class="form-control" placeholder="Enter Icon Class" />
+
+      <label for="benefitDescription">Description</label>
+      <textarea formControlName="description" id="benefitDescription" class="form-control" rows="3"></textarea>
+    </div>
+
+
+
+    <button (click)="removeBenefit(i)" class="afhBtn">Remove Benefit</button>
   </div>
 </div>
-    <br>  <strong>{{ benefit.get('description')?.value }}</strong>
-  </li>
-</ul>
--->
+
+
 
 <div class="form-group">
   <label for="specialPrograms">Special Programs</label>

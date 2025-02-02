@@ -12,5 +12,6 @@ export class ItemListComponent implements OnInit {
 
   ngOnInit(): void{
     console.log("List Items: ", this.services);
+    console.log("List Items layoutType", this.layoutType);
   }
 }
