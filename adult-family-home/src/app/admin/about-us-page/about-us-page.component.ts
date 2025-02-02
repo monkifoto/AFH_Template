@@ -69,7 +69,7 @@ export class AboutUsPageComponent implements OnInit {
   //   content: ['']
   // });
 
-  sectionTypes = ['Story', 'Vision', 'Motivation', 'Mission', 'Other'];
+  sectionTypes = ['Story', 'Vision', 'Motivation', 'Mission', 'Welcome','Other'];
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
@@ -79,6 +79,7 @@ export class AboutUsPageComponent implements OnInit {
       name: [''],
       type: [''],
       title: [''],
+      subtitle:[''],
       imageUrl: [''],
       content: [''],
     });
@@ -113,6 +114,7 @@ export class AboutUsPageComponent implements OnInit {
         sectionName: [s.sectionName],
         sectionType: [s.sectionType],
         sectionTitle: [s.sectionTitle],
+        sectionSubTitle: [s.sectionSubTitle],
         sectionContent: [s.sectionContent],
         sectionImageUrl: [s.sectionImageUrl],
         sectionStyle: [s.sectionStyle]
@@ -169,6 +171,7 @@ export class AboutUsPageComponent implements OnInit {
       sectionName: [''],
       sectionType: [''],
       sectionTitle: [''],
+      sectionSubTitle: [''],
       sectionImageUrl: [''],
       sectionContent: [''],
       sectionStyle: ['']

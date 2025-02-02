@@ -16,6 +16,7 @@
   --border-color:var(--text-color);
   --heading-2-size : 4rem;
   --site-max-width:1200px;
+  --cell-max-width: calc((var(--site-max-width, 1500px) - (11.0px * (24 - 1))) / 24);
 
 }
 

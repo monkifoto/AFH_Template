@@ -120,6 +120,7 @@ export class EditBusinessComponent implements OnInit {
     sections:this.fb.array([]),
      sectionName:[''],
      sectionTitle: [''],
+     sectionSubTitle: [''],
      sectionContent: [''],
      sectionImageUrl: [''],
      sectionType: [''],

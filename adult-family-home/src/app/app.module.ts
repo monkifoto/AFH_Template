@@ -32,7 +32,7 @@ import { ConfirmationDialogComponent } from './component/confirmation-dialog/con
 import { TestimonialsComponent } from './component/testimonials/testimonials.component';
 import { InformationComponent } from './component/information/information.component';
 import { OurServicesHomeComponent } from './component/our-services-home/our-services-home.component';
-import { WelcomeComponent } from './component/welcome/welcome.component';
+
 import { ConsultationComponent } from './component/consultation/consultation.component';
 import { FeaturesComponent } from './component/features/features.component';
 import { WhyUsComponent } from './component/why-us/why-us.component';
@@ -69,10 +69,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GoogleMapsComponent } from './component/UI/google-maps/google-maps.component';
 import { GoogleReviewsComponent } from './component/UI/google-reviews/google-reviews.component';
 import { InstagramFeedComponent } from './component/UI/instagram-feed/instagram-feed.component';
-import { SectionTileComponent } from './component/UI/section-tile/section-tile.component';
+import { SectionTitleComponent } from './component/UI/section-title/section-title.component';
 import { VideoComponent } from './component/UI/video/video.component';
 import { Tour3DComponent } from './component/UI/tour-3-d/tour-3-d.component';
 import { SectionFilterPipe } from './pipe/section-filter.pipe';
+import { ReplaceKeywordPipe } from './pipe/replace-keyword.pipe';
 
     // Map hostnames to business IDs
     const businessIdMap: { [key: string]: string } = {
@@ -166,7 +167,6 @@ export function combinedInitializer(
     TestimonialsComponent,
     InformationComponent,
     OurServicesHomeComponent,
-    WelcomeComponent,
     ConsultationComponent,
     FeaturesComponent,
     WhyUsComponent,
@@ -200,10 +200,11 @@ export function combinedInitializer(
     GoogleMapsComponent,
     GoogleReviewsComponent,
     InstagramFeedComponent,
-    SectionTileComponent,
+    SectionTitleComponent,
     VideoComponent,
     Tour3DComponent,
-    SectionFilterPipe
+    SectionFilterPipe,
+    ReplaceKeywordPipe
   ],
   imports: [
     BrowserModule,

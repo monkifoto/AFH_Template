@@ -14,6 +14,8 @@ export class ServicesPageComponent implements OnInit {
   newServiceForm!: FormGroup;
   newBenefitsForm!: FormGroup;
 
+  collapsedServices: boolean[] = [];
+  collapsedBenefits: boolean[] = [];
 
   constructor(private fb: FormBuilder) {}
 
@@ -68,6 +70,18 @@ export class ServicesPageComponent implements OnInit {
     return this.form.get('benefits') as FormArray;
   }
 
+  initializeCollapsedStates() {
+    this.collapsedServices = this.services.controls.map(() => false);
+    this.collapsedBenefits = this.benefits.controls.map(() => false);
+  }
+
+  toggleService(index: number) {
+    this.collapsedServices[index] = !this.collapsedServices[index];
+  }
+
+  toggleBenefit(index: number) {
+    this.collapsedBenefits[index] = !this.collapsedBenefits[index];
+  }
 
   addService() {
     if (this.newServiceForm.valid) {

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-center-text',
@@ -9,14 +10,16 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class CenterTextComponent {
   @Input() themeType!: string;
   @Input() title!: string;
+  @Input() subTitle!: string;
   @Input() imageURL!: string;
   @Input() showBtn: boolean = false;
   @Input() showImage: boolean =false;
+  @Input() _businessName: string = '';
 
   private _content!: string;
   sanitizedContent!: SafeHtml;
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer, private router: Router) {}
 
   @Input()
   set content(value: string) {
@@ -34,5 +37,9 @@ export class CenterTextComponent {
 
   get content(): string {
     return this._content;
+  }
+
+  navigateToContact() {
+    this.router.navigate(['/contact-us']);
   }
 }
