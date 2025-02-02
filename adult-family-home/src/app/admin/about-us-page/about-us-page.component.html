@@ -3,7 +3,7 @@
 
   <h2>Manage About Us Sections</h2>
 
-  <button (click)="addSection()" class="afhBtn">Add Section</button>
+  <button (click)="addSection()" class="afhBtn">+ Add Section</button>
 
   <div formArrayName="sections" >
     <div *ngFor="let section of sections.controls; let i = index" [formGroupName]="i" class="sectionForm-container">
@@ -13,9 +13,9 @@
       <h3>Section {{ i + 1 }}</h3>
     </div>
 <div class="sectionForm-header-item">
-      <button (click)="toggleSection(i)" class="toggle-btn">
-        {{ collapsedSections[i] ? 'Expand' : 'Collapse' }}
-      </button>
+  <button (click)="toggleSection(i)" class="icon-btn">
+    <i class="fa-solid" [ngClass]="collapsedSections[i] ? 'fa-angles-down' : 'fa-angles-up'"></i>
+  </button>
     </div>
       </div>
 <div class="sectionForm-header">
@@ -52,7 +52,7 @@
       </div>
 
 
-      <button (click)="removeSection(i)" class="afhBtn">Remove Section</button>
+      <button (click)="removeSection(i)" class="icon-btn delete-btn"> <i class="fa-solid fa-trash-can"></i></button>
     </div>
   </div>
 
@@ -198,7 +198,7 @@
 
   <h2>Unique Features</h2>
   <button type="button" class="afhBtn" (click)="toggleUniqueServiceForm()">
-    Add Unique Service
+   + Add Unique Service
   </button>
 
   <div *ngIf="showUniqueServiceForm">
@@ -221,8 +221,8 @@
 
   <ul>
     <li *ngFor="let us of uniqueServices.controls; let i = index">
-      <button type="button" class="afhBtn" (click)="removeUniqueService(i)">
-        X
+      <button type="button" class="icon-btn delete-btn" (click)="removeUniqueService(i)">
+        <i class="fa-solid fa-trash-can"></i>
       </button>
       <strong>{{ us.get("name")?.value }}</strong
       ><br />
@@ -232,7 +232,7 @@
 
   <h2>Why Us Reasons</h2>
   <button type="button" class="afhBtn" (click)="toggleWhyChooseForm()">
-    Add Why Choose Us Reason
+   + Add Why Choose Us Reason
   </button>
 
   <div *ngIf="showWhyChooseForm">
@@ -255,8 +255,8 @@
 
   <ul>
     <li *ngFor="let why of whyChoose.controls; let i = index">
-      <button type="button" class="afhBtn" (click)="removeWhyChoose(i)">
-        X
+      <button type="button" class="icon-btn delete-btn" (click)="removeWhyChoose(i)">
+        <i class="fa-solid fa-trash-can"></i>
       </button>
       <strong>{{ why.get("name")?.value }}</strong
       ><br />

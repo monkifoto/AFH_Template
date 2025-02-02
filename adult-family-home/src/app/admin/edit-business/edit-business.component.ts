@@ -36,6 +36,9 @@ export class EditBusinessComponent implements OnInit , AfterViewInit{
   // Variables for temporary holding the new service data
   serviceForm!: FormGroup;
   benefitsForm!: FormGroup;
+  autoSaveMessage: string = ''; // Holds the save status message
+showAutoSaveMessage: boolean = false;
+
 
   uploads: { uploadProgress: number; downloadUrl?: string }[] = [];
 
@@ -350,7 +353,15 @@ private populateFormArray(formArray: FormArray, items: any[]) {
     if (this.businessForm.valid) {
       const formValue = this.businessForm.value;
       this.businessService.updateBusiness(this.businessId, formValue)
-        .then(() => console.log('Auto-saved successfully'))
+        .then(() => {
+          this.autoSaveMessage = 'Changes saved!';
+          this.showAutoSaveMessage = true;
+
+          // Hide the message after 2 seconds
+          setTimeout(() => {
+            this.showAutoSaveMessage = false;
+          }, 2000);
+        })
         .catch(err => console.error('Error auto-saving', err));
     }
   }

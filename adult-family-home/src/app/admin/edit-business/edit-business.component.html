@@ -1,31 +1,34 @@
 <div class="container">
   <h1>Business Information</h1>
   <form [formGroup]="businessForm" (ngSubmit)="onSubmit()">
+    <div *ngIf="showAutoSaveMessage" class="auto-save-message">
+      ✅ {{ autoSaveMessage }}
+    </div>
 
     <ul class="nav nav-tabs" id="businessTab" role="tablist">
       <li class="nav-item" role="presentation">
         <button class="nav-link active" id="basic-info-tab" data-bs-toggle="tab" data-bs-target="#basic-info"
-          type="button" role="tab" aria-controls="basic-info" aria-selected="true">Basic Information</button>
+          type="button" role="tab" aria-controls="basic-info" aria-selected="true">Basic Information <span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span></button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="home-page-tab" data-bs-toggle="tab" data-bs-target="#home-page"
-          type="button" role="tab" aria-controls="home-page" aria-selected="false">Home Page</button>
+          type="button" role="tab" aria-controls="home-page" aria-selected="false">Home Page<span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span></button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="services-page-tab" data-bs-toggle="tab" data-bs-target="#services-page"
-          type="button" role="tab" aria-controls="services-page" aria-selected="false">Services Page</button>
+          type="button" role="tab" aria-controls="services-page" aria-selected="false">Services Page<span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span></button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="about-us-tab" data-bs-toggle="tab" data-bs-target="#about-us"
-          type="button" role="tab" aria-controls="about-us" aria-selected="false">About Us</button>
+          type="button" role="tab" aria-controls="about-us" aria-selected="false">About Us<span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span></button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="content-photos-tab" data-bs-toggle="tab" data-bs-target="#content-photos"
-          type="button" role="tab" aria-controls="content-photos" aria-selected="false">Photos</button>
+          type="button" role="tab" aria-controls="content-photos" aria-selected="false">Photos<span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span></button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="media-reviews-tab" data-bs-toggle="tab" data-bs-target="#media-reviews"
-          type="button" role="tab" aria-controls="media-reviews" aria-selected="false">Media & Reviews</button>
+          type="button" role="tab" aria-controls="media-reviews" aria-selected="false">Media & Reviews<span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span></button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="contact-us-page-tab" data-bs-toggle="tab" data-bs-target="#contact-us-page"
@@ -33,15 +36,15 @@
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="employee-profiles-tab" data-bs-toggle="tab" data-bs-target="#employee-profiles"
-          type="button" role="tab" aria-controls="employee-profiles" aria-selected="false">Employee Profiles</button>
+          type="button" role="tab" aria-controls="employee-profiles" aria-selected="false">Employee Profiles<span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span></button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="color-theme-tab" data-bs-toggle="tab" data-bs-target="#color-theme"
-          type="button" role="tab" aria-controls="color-theme" aria-selected="false">Color Theme</button>
+          type="button" role="tab" aria-controls="color-theme" aria-selected="false">Color Theme<span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span></button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="hero-slider-tab" data-bs-toggle="tab" data-bs-target="#hero-slider-theme"
-          type="button" role="tab" aria-controls="hero-slider-theme" aria-selected="false">Hero Slider</button>
+          type="button" role="tab" aria-controls="hero-slider-theme" aria-selected="false">Hero Slider<span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span></button>
       </li>
     </ul>
 

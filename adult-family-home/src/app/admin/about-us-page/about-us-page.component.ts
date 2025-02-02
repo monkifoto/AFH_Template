@@ -73,7 +73,8 @@ export class AboutUsPageComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.collapsedSections = this.sections.controls.map(() => false);
+    this.collapsedSections = new Array(this.sections.length).fill(true);
+
     // Initialize the forms here
     this.newSectionForm = this.fb.group({
       name: [''],
@@ -92,6 +93,10 @@ export class AboutUsPageComponent implements OnInit {
     this.newWhyChooseForm = this.fb.group({
       name: [''],
       description: [''],
+    });
+
+    this.form.get('sections')?.valueChanges.subscribe(() => {
+      this.collapsedSections = new Array(this.sections.length).fill(true);
     });
   }
 
@@ -178,10 +183,12 @@ export class AboutUsPageComponent implements OnInit {
     });
 
     this.sections.push(newSection);
+    this.collapsedSections.push(true);
   }
 
   removeSection(index: number): void {
     this.sections.removeAt(index);
+    this.collapsedSections.splice(index, 1);
   }
 
   addUniqueService(): void {
