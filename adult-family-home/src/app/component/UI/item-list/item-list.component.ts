@@ -9,6 +9,7 @@ import { ListItem } from 'src/app/model/business-questions.model';
 export class ItemListComponent implements OnInit {
   @Input() services!: ListItem[];
   @Input() layoutType: string = 'demo';
+  @Input() minimal: boolean = false;
 
   ngOnInit(): void{
     console.log("List Items: ", this.services);
