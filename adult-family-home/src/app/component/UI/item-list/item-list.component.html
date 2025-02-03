@@ -1,8 +1,35 @@
 <section class="services-list-section" *ngIf="layoutType=='hh'">
-  <div class="services-list">
+  <!-- <div  class="minimal-container">
+<div *ngFor="let service of services" >
+  <div>
+  <div class="minimal-icon"><i [ngClass]="service.icon" class="services-item-icon"></i></div>
+  <div class="minimal-title"><h2>{{service.name}}</h2></div>
+</div>
+</div> -->
+<div *ngIf="minimal">
+<section class="our-services-section">
+  <div class="our-services-section-heading">
+    <span class="our-services-title main">Our </span>
+    <span class="our-services-title highlight">Services</span>
+  </div>
+<h3 class="our-services-description">Home Care From Trained Professionals</h3>
+<div class="our-services-container">
+  <div *ngFor="let service of services" class="our-services-item">
+    <i [ngClass]="service.icon" class="our-services-item-icon"></i>
+    <h3 class="our-services-item-title">{{ service.name }}</h3>
+
+  </div>
+</div>
+
+</section>
+  </div>
+  <div *ngIf="!minimal" class="services-list">
 <ul>
   <li *ngFor="let service of services" class="service-list-item">
     <h2>{{service.name}}</h2>
+     <div class="our-services-item-description">
+      <p>{{ service.description }}</p>
+    </div>
   </li>
 </ul>
   </div>
