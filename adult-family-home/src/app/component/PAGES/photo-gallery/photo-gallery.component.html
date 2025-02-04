@@ -11,14 +11,11 @@
   </div>
 
   <div class="container">
-    <section class="home-description">
-      <div class="section-heading">Welcome to Our Home</div>
-      <app-center-text   *ngIf="business?.sections | sectionFilter:'GalleryCenterText' as section"
-      [themeType]="business.theme.themeType || ''"
-      [imageURL]="section.sectionImageUrl || ''"
-      [title]="section.sectionTitle || ''"
-      [content]="section.sectionContent || ''"
-      [showBtn]="false"></app-center-text>
+    <section class="home-description" *ngIf="business?.sections | sectionFilter:'GalleryCenterText' as section">
+      <div class="section-heading" [innerHTML]="section.sectionTitle"></div>
+      <div >
+        <p [innerHTML]="section.sectionContent"></p>
+      </div>
     </section>
 
     <section class="gallery">
