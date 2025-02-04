@@ -87,6 +87,11 @@
   margin-right: 40px;
 }
 
+.tours img, .consulting img {
+  width: 100%;
+}
+
+
 .tours:last-child, .consulting:last-child {
   margin-right: 0;
 }

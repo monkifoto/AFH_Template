@@ -68,6 +68,8 @@
 
 .gallery {
   margin-bottom: 40px;
+  max-width: var(--site-max-width);
+  margin: 0 auto;
 }
 
 .gallery h2 {

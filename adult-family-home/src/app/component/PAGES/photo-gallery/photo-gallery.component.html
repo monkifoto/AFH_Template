@@ -13,9 +13,12 @@
   <div class="container">
     <section class="home-description">
       <div class="section-heading">Welcome to Our Home</div>
-      <p>
-        {{business.photoGalleryText}}
-      </p>
+      <app-center-text   *ngIf="business?.sections | sectionFilter:'GalleryCenterText' as section"
+      [themeType]="business.theme.themeType || ''"
+      [imageURL]="section.sectionImageUrl || ''"
+      [title]="section.sectionTitle || ''"
+      [content]="section.sectionContent || ''"
+      [showBtn]="false"></app-center-text>
     </section>
 
     <section class="gallery">
@@ -40,7 +43,12 @@
     <ng-container *ngSwitchCase="'ae'">
       <app-hero></app-hero>
 
-      <app-center-text [content]="business.photoGalleryText" [title]="'Welcome to our home'" [showBtn]="false"></app-center-text>
+      <app-center-text   *ngIf="business?.sections | sectionFilter:'GalleryCenterText' as section"
+      [themeType]="business.theme.themeType || ''"
+      [imageURL]="section.sectionImageUrl || ''"
+      [title]="section.sectionTitle || ''"
+      [content]="section.sectionContent || ''"
+      [showBtn]="false"></app-center-text>
 
       <!-- Main Gallery -->
       <section class="gallery ae-gallery">
@@ -101,7 +109,12 @@
     <ng-container *ngSwitchCase="'ehc'">
       <app-hero></app-hero>
 
-      <app-center-text [content]="business.photoGalleryText" [title]="'Welcome to our home'" [showBtn]="false"></app-center-text>
+      <app-center-text  *ngIf="business?.sections | sectionFilter:'GalleryCenterText' as section"
+      [themeType]="business.theme.themeType || ''"
+      [imageURL]="section.sectionImageUrl || ''"
+      [title]="section.sectionTitle || ''"
+      [content]="section.sectionContent || ''"
+      [showBtn]="false"></app-center-text>
 
       <!-- Main Gallery -->
       <section class="gallery">
@@ -173,7 +186,9 @@
 
       <!-- Main Gallery -->
       <section class="gallery ae-gallery">
-        <div class="section-heading"><app-section-tilte [title]="'Gallery'"></app-section-tilte></div>
+        <div class="section-heading">
+          <app-section-tilte [title]="'Gallery'"></app-section-tilte>
+        </div>
         <div class="gallery-grid gallery-container ae-gallery-container ">
           <div *ngFor="let image of images" class="gallery-item" (click)="onImageClick(image.url)">
             <img [src]="image.url" alt="Gallery Image">
@@ -182,7 +197,9 @@
       </section>
 
       <section class="gallery ae-gallery">
-        <div class="section-heading"><app-section-tilte [title]="'Lifestyle Images'"></app-section-tilte></div>
+        <div class="section-heading">
+          <app-section-tilte [title]="'Lifestyle Images'"></app-section-tilte>
+        </div>
         <div class="gallery-grid gallery-container ae-gallery-container ">
           <div *ngFor="let image of lifeStyleImages" class="gallery-item" (click)="onImageClick(image.url)">
             <img [src]="image.url" alt="Lifestyle Image">
@@ -230,7 +247,14 @@
 
     <ng-container *ngSwitchDefault>
       <app-hero></app-hero>
-      <app-center-text></app-center-text>
+      <app-center-text
+      *ngIf="business?.sections | sectionFilter:'GalleryCenterText' as section"
+      [themeType]="business.theme.themeType || ''"
+      [imageURL]="section.sectionImageUrl || ''"
+      [title]="section.sectionTitle || ''"
+      [content]="section.sectionContent || ''"
+      [showBtn]="false"
+      ></app-center-text>
       <section class="gallery">
         <div class="section-heading"><h2>Explore Our Gallery</h2></div>
         <div class="gallery-grid gallery-container">
