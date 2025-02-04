@@ -24,7 +24,7 @@ import { MeetTheTeamComponent } from './component/meet-the-team/meet-the-team.co
 import { FooterComponent } from './component/footer/footer.component';
 import { EditBusinessComponent } from './admin/edit-business/edit-business.component';
 import { RouterModule } from '@angular/router';
-import { HeroCarouselComponent } from './component/hero-carousel/hero-carousel.component';
+// import { HeroCarouselComponent } from './component/hero-carousel/hero-carousel.component';
 import { PhotoGalleryComponent } from './component/PAGES/photo-gallery/photo-gallery.component';
 import { PhotoGalleryUploadComponent } from './admin/photo-gallery-upload/photo-gallery-upload.component';
 import { ImageViewerModalComponent } from './component/image-viewer-modal/image-viewer-modal.component';
@@ -60,7 +60,7 @@ import { UiTestComponent } from './component/UI/ui-test/ui-test.component';
 import { TestimonialsListComponent } from './component/PAGES/testimonials/testimonials.component';
 import { ParallaxTextComponent } from './component/UI/parallax-text/parallax-text.component';
 import { ParallaxStatsComponent } from './component/UI/parallax-stats/parallax-stats.component';
-import { ThreeSectionComponent } from './component/UI/three-section/three-section.component';
+// import { ThreeSectionComponent } from './component/UI/three-section/three-section.component';
 import { HeroSliderComponent } from './component/UI/hero-slider/hero-slider.component';
 import { ExpandableNavigationComponent } from './component/UI/expandable-navigation/expandable-navigation.component';
 import { TestimonialCarouselComponent } from './component/UI/testimonial-carousel/testimonial-carousel.component';
@@ -159,7 +159,7 @@ export function combinedInitializer(
     MeetTheTeamComponent,
     FooterComponent,
     EditBusinessComponent,
-    HeroCarouselComponent,
+    // HeroCarouselComponent,
     PhotoGalleryComponent,
     PhotoGalleryUploadComponent,
     ImageViewerModalComponent,
@@ -192,7 +192,7 @@ export function combinedInitializer(
     TestimonialsListComponent,
     ParallaxTextComponent,
     ParallaxStatsComponent,
-    ThreeSectionComponent,
+    // ThreeSectionComponent,
     HeroSliderComponent,
     ExpandableNavigationComponent,
     TestimonialCarouselComponent,
