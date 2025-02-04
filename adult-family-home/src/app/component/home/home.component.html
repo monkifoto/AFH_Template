@@ -24,18 +24,6 @@
 [minimal]="true"
 ></app-item-list>
 
-<!-- <app-our-services-home
-    [layoutType]="business?.theme?.themeType || 'demo' "
-    [services]="[
-      { icon: 'fas fa-heart', title: 'Mobility Assistance', description: 'Hands On, Stand by Assist.' },
-      { icon: 'fas fa-users', title: 'Companionship Care', description: '24 hours care and close supervision.' },
-      { icon: 'fas fa-utensils', title: 'Meal Planning', description: '3 delicious homemade cooked meals with snacks available, dietary accommodations per doctor orders and preferences.' },
-      { icon: 'fas fa-pills', title: 'Medication', description: '24 hours medication administration, management and reminders.' },
-      { icon: 'fas fa-bath', title: 'Personal Hygiene', description: 'All inclusive personal care including: bathing, grooming, laundry, incontinence support etc. Also available: hair styling, manicure, pedicure, podiatrist.' },
-      { icon: 'fas fa-briefcase-medical', title: 'Medical Care', description: 'All the necessary care for Aging In Place. Able to provide a High Level of Care, including Diabetic Care.' }
-    ]"
-  ></app-our-services-home> -->
-
   <app-why-us
   [whyChooseUs]="business?.whyChoose || []"
   [layoutType]="business?.theme?.themeType || 'demo' "
@@ -65,7 +53,7 @@
 </app-hero-slider>
 
   <app-center-text
-  *ngIf="business?.sections | sectionFilter:'HomeWelcomeText' as section"
+  *ngIf="business?.sections | sectionFilter:'HomeCenterText' as section"
   [themeType]="business?.theme?.themeType || ''"
   [imageURL]="section?.sectionImageUrl || ''"
   [title]="section?.sectionTitle || ''"
