@@ -228,22 +228,16 @@ showAutoSaveMessage: boolean = false;
       providerName: [defaultBusiness.providerName],
       tagline: [defaultBusiness.tagline],
       businessStory: [defaultBusiness.businessStory],
-
       motivation: [defaultBusiness.motivation],
-
       mission: [defaultBusiness.mission],
-
       vision: [defaultBusiness.vision],
-
       certifications: [defaultBusiness.certifications],
       specialPrograms: [defaultBusiness.specialPrograms],
       tours: [defaultBusiness.tours],
       freeConsulting: [defaultBusiness.freeConsulting],
       websiteGoals: [defaultBusiness.websiteGoals],
-
       logoImage: [defaultBusiness.logoImage],
       faviconUrl: [defaultBusiness.faviconUrl],
-
       ownerImagesBios: [defaultBusiness.ownerImagesBios],
       staffImagesBios: [defaultBusiness.staffImagesBios],
       mediaFeatures: [defaultBusiness.mediaFeatures],
@@ -259,7 +253,6 @@ showAutoSaveMessage: boolean = false;
       teamValues: [defaultBusiness.teamValues],
       contactFormDetails: [defaultBusiness.contactFormDetails],
       contactUsImageUrl:[defaultBusiness.contactUsImageUrl],
-      photoGalleryText: [defaultBusiness.photoGalleryText],
       isActive: [defaultBusiness.isActive],
       theme: [defaultBusiness.theme],
       placeId:[defaultBusiness.placeId],

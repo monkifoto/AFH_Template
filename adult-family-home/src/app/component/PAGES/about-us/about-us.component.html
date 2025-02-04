@@ -9,52 +9,65 @@
           </div>
         </div>
       </div>
-
       <div class="container">
-        <section class="business-story">
+        <section class="business-story"  *ngIf="business.sections | sectionFilter:'AboutUsCenterText' as section">
           <div class="heading-container">
-            <h2 class="styled-heading">Our Story</h2>
+            <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
           </div>
           <div
             class="services_txt garamond"
-            [innerHTML]="business.businessStory"
+            [innerHTML]="section.sectionContent || ''"
           ></div>
         </section>
 
         <section class="mission-vision">
-          <div class="mission">
+          <div class="mission"  *ngIf="business.sections | sectionFilter:'AboutUsLeftText' as section">
             <img
               [src]="
-                business.missionImageUrl ||
+                section.sectionImageUrl ||
                 'assets/sharedAssets/image_fx_(1).jpg'
               "
               alt="Contact Image"
             />
             <div class="heading-container">
-              <h2 class="styled-heading">Our Mission</h2>
+              <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
             </div>
             <div
               class="services_txt garamond"
-              [innerHTML]="business.mission"
+              [innerHTML]="section.sectionContent || ''"
             ></div>
           </div>
-          <div class="vision">
+
+
+          <div class="vision"  *ngIf="business.sections | sectionFilter:'AboutUsRightText' as section">
             <img
               [src]="
-                business.visionImageUrl ||
+              section.sectionImageUrl ||
                 'assets/sharedAssets/image_fx_(3).jpg'
               "
               alt="Contact Image"
             />
             <div class="heading-container">
-              <h2 class="styled-heading">Our Vision</h2>
+              <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
             </div>
             <div
-              class="services_txt garamond"
-              [innerHTML]="business.vision"
-            ></div>
+            class="services_txt garamond"
+            [innerHTML]="section.sectionContent || ''"
+          ></div>
           </div>
         </section>
+
+
+        <section class="business-story"  *ngIf="business.sections | sectionFilter:'AboutUsCenterText2' as section">
+          <div class="heading-container">
+            <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
+          </div>
+          <div
+            class="services_txt garamond"
+            [innerHTML]="section.sectionContent || ''"
+          ></div>
+        </section>
+
         <section class="business-team">
           <app-meet-the-team [businessId]="business.id"></app-meet-the-team>
         </section>

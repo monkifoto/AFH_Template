@@ -64,11 +64,7 @@ export interface Business {
   websiteGoals: string;
 
   logoImage: string;
-  logoText: string;
   faviconUrl: string;
-
-  facilityImages: string[];
-  lifestyleImages: string[];
   testimonials: Testimonial[];
   benefits: ListItem[];
 
@@ -88,8 +84,6 @@ export interface Business {
   contactUsImageUrl: string;
 
   faqs: string;
-  blogNews: string;
-  photoGalleryText: string;
 
   //Employyes
   employees: Employee[];
@@ -174,6 +168,52 @@ export class BusinessModel {
           sectionSubTitle: 'Caring with compassion for every senior.',
           sectionContent:
             'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
+          sectionImageUrl: 'assets/sharedAssets/istockphoto-502998071-2048x2048.jpg',
+          sectionType: 'Other',
+          sectionStyle: 'hh',
+        },
+        {
+          sectionName: 'HomeRightText',
+          sectionTitle: 'Our Story',
+          sectionSubTitle: 'Caring with compassion for every senior.',
+          sectionContent:
+            'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
+          sectionType: 'Story',
+          sectionStyle: 'hh',
+        },
+        {
+          sectionName: 'HomeLeftText',
+          sectionTitle: 'Our Vision',
+          sectionSubTitle: 'Caring with compassion for every senior.',
+          sectionContent:
+            'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
+          sectionType: 'Vision',
+          sectionStyle: 'hh',
+        },
+        {
+          sectionName: 'HomeRightText',
+          sectionTitle: 'Our Mission',
+          sectionSubTitle: 'Caring with compassion for every senior.',
+          sectionContent:
+            'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
+          sectionType: 'Mission',
+          sectionStyle: 'hh',
+        },
+        {
+          sectionName: 'HomeLeftText',
+          sectionTitle: 'Our Motivation',
+          sectionSubTitle: 'Caring with compassion for every senior.',
+          sectionContent:
+            'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
+          sectionType: 'Motivation',
+          sectionStyle: 'hh',
+        },
+        {
+          sectionName: 'GalleryCenterText',
+          sectionTitle: 'OurHome',
+          sectionSubTitle: 'Welcome to our gallery',
+          sectionContent:
+            'Gallery Text',
           sectionType: 'Other',
           sectionStyle: 'hh',
         },
@@ -183,7 +223,7 @@ export class BusinessModel {
         {
           title: 'Welcome to Careful Living AFH',
           subtitle: 'Caring with compassion for every senior.',
-          backgroundImage: '../assets/heroImages/hero1.jpg',
+          backgroundImage: '../../assets/sharedAssets/istockphoto-1022730404-2048x2048.jpg',
           buttons: [
             {
               text: 'Learn More',
@@ -198,9 +238,22 @@ export class BusinessModel {
           ],
         },
         {
+          title: 'Welcome to Careful Living AFH',
+          subtitle: 'Caring with compassion for every senior.',
+          backgroundImage: '../../assets/sharedAssets/istockphoto-1022730404-2048x2048.jpg',
+          buttons: [
+            {
+              text: 'Schedule A Visti',
+              link: '/contact-us',
+              outline: false,
+            },
+
+          ],
+        },
+        {
           title: 'Exceptional Senior Care',
           subtitle: 'Personalized, compassionate, and dedicated.',
-          backgroundImage: '../assets/heroImages/hero2.jpg',
+          backgroundImage: '../../assets/sharedAssets/istockphoto-1319783351-2048x2048.jpg',
           buttons: [
             {
               text: 'Our Services',
@@ -211,16 +264,12 @@ export class BusinessModel {
         },
       ],
       businessData: '',
-      logoText: '',
-      facilityImages: [''],
-      lifestyleImages: [''],
       id: '',
       faqs: '',
-      blogNews: '',
       toursImageUrl: '',
       consultingImageUrl: '',
       businessName: 'Careful Living AFH',
-      keyWords: 'senior care, compassionate care, assisted living',
+      keyWords: 'Adult Family Home Bellevue, Senior Care Bellevue WA, Elderly Care Services Bellevue, Assisted Living Bellevue Washington, Memory Care Bellevue, Dementia Care Bellevue WA, Respite Care Bellevue, Long-Term Care Bellevue, Home Care for Seniors Bellevue,Skilled Nursing Bellevue WA,Personalized Senior Care Bellevue, Senior Living Bellevue Washington, Compassionate Elderly Care Bellevue, Family Home Care Bellevue WA, Professional Senior Care Services Bellevue, Senior Assisted Living Bellevue, Senior Home Assistance Bellevue WA, Senior Housing Bellevue Washington, Helping Hand AFH Bellevue, Senior Caregivers Bellevue WA',
       businessURL: 'https://www.carefullivingafh.com',
       providerName: 'Sarah Caregiver',
       tagline: 'Caring with compassion for every senior',
@@ -284,8 +333,7 @@ export class BusinessModel {
       contactFormDetails:
         'Please provide name, email, phone number, and message for inquiries.',
       contactUsImageUrl: '',
-      photoGalleryText:
-        'A collection of images showcasing our facilities, activities, and care staff.',
+
       isActive: true,
       isLive: false,
       placeId: '',
@@ -311,13 +359,19 @@ export class BusinessModel {
         // Other reasons...
       ],
       services: [
-        { name: '24/7 Personalized Care', icon: '', description: '' },
-        { name: 'Medication Management', icon: '', description: '' },
+        { name: 'Medication & Health Management', icon: 'fa-solid fa-prescription-bottle', description: 'Proper medication administration, doctor visits, lab work, and therapy to maintain well-being.' },
+        { name: '24/7 Assistance & Health Monitoring', icon: 'fa-solid fa-bed-pulse', description: 'Around-the-clock care, including vital signs monitoring and professional nursing support.' },
+        { name: 'Daily Living & Personal Care', icon: 'fa-solid fa-shower', description: 'Assistance with bathing, dressing, grooming, mobility, and incontinence support.' },
+        { name: 'Nutritious Meals & Special Diets', icon: 'fa-solid fa-utensils', description: 'Thoughtfully planned meals tailored to dietary and medical needs.' },
+        { name: 'Engaging Activities & Entertainment', icon: 'fa-solid fa-compact-disc', description: 'Personalized activities, social programs, and entertainment for enrichment and connection.' },
+        { name: 'Comfortable & Accessible Living', icon: 'fa-solid fa-wheelchair', description: 'Housekeeping, wheelchair accessibility, and a clean, safe environment.' },
         // Other services...
       ],
       benefits: [
-        { name: 'Personalized Care', icon: '', description: '' },
-        { name: '24/7 Support', icon: '', description: '' },
+        { name: 'Private & Accessible Rooms', icon: 'fa-solid fa-lock', description: 'Private rooms with optional shared bathrooms, equipped with a calling system, phone, cable TV, and high-speed wireless internet.' },
+        { name: 'Safe & Secure Environment', icon: 'fa-brands fa-accessible-icon', description: 'Handicap-accessible design, smoke alarms, a security system, emergency call buttons, and an electric generator for backup power.' },
+        { name: 'Spacious & Inviting Common Areas', icon: 'fa-solid fa-expand', description: 'Open floor plan with high ceilings, hardwood floors, and a covered deck for relaxation.' },
+        { name: 'Engaging Activities & Social Events', icon: 'fa-solid fa-compact-disc', description: 'Music and audiobook therapy, card and board games, knitting, word searches, puzzles, crafts, movie nights, and birthday celebrations.' },
         // Other benefits...
       ],
       testimonials: [
@@ -358,7 +412,7 @@ export class BusinessModel {
         navActiveText: '#ffffff',
         buttonColor: '#D9A064',
         buttonHoverColor: '#c9605b',
-        themeType: 'demo',
+        themeType: 'hh',
       },
     };
   }

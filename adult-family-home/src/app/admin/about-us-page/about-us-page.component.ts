@@ -96,7 +96,8 @@ export class AboutUsPageComponent implements OnInit {
     });
 
     this.form.get('sections')?.valueChanges.subscribe(() => {
-      this.collapsedSections = new Array(this.sections.length).fill(true);
+      // this.collapsedSections = new Array(this.sections.length).fill(true);
+      this.collapsedSections = this.sections.controls.map((_, index) => this.collapsedSections[index] ?? true);
     });
   }
 
