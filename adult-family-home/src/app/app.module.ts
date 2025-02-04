@@ -81,7 +81,9 @@ import { LatestProductsComponent } from './component/UI/latest-products/latest-p
       "helpinghandafh.com": "vfCMoPjAu2ROVBbKvk0D",
       "www.helpinghandafh.com": "vfCMoPjAu2ROVBbKvk0D",
       "aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1",
-      "www.aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1"
+      "www.aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1",
+       "sbmediahub.com": "MGou3rzTVIbP77OLmZa7",
+      "www.sbmediahub.com": "MGou3rzTVIbP77OLmZa7"
     };
 
 
@@ -95,7 +97,7 @@ export function themeInitializerFactory(
     const hostname = window.location.hostname;
     // Use URL query parameters as fallback
     const url = new URL(window.location.href);
-    let businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'Z93oAAVwFAwhmdH2lLtB';
+    let businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
 
     console.log("themeInitializerFactory app.module businessId: " +  businessId + ' - hostname: ' + hostname);
     // Pass the businessId to ThemeInitializerService
@@ -110,7 +112,7 @@ export function initializeBusinessData(
 ) {
   const hostname = window.location.hostname;
   const url = new URL(window.location.href);
-  let businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'Z93oAAVwFAwhmdH2lLtB';
+  let businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
   // Get business ID based on hostname or fallback to default
   // const businessId = businessIdMap[hostname] || "Z93oAAVwFAwhmdH2lLtB"; // Default ID
   console.log("initializeBusinessData app.module businessId:: " +  businessId + ' - hostname: ' + hostname)
@@ -134,7 +136,7 @@ export function combinedInitializer(
     // Initialize theme
     const hostname = window.location.hostname;
     const url = new URL(window.location.href);
-    let businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'Z93oAAVwFAwhmdH2lLtB';
+    let businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
 
     await themeInitializer.loadTheme(businessId);
 
