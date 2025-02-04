@@ -273,3 +273,75 @@
     transform: translateY(10px);
   }
 }
+
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .clemo-main-home h1 {
+    font-size: 3.5rem; /* Reduce size on tablets */
+  }
+
+  .clemo-main-home h2 {
+    font-size: 2.5rem;
+  }
+
+  .clemo-subtitle {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .clemo-main-home h1 {
+    font-size: 2.5rem; /* Adjust size for smaller tablets */
+  }
+
+  .clemo-main-home h2 {
+    font-size: 2rem;
+  }
+
+  .clemo-subtitle {
+    font-size: 1rem;
+  }
+
+  .clemo-home-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Stack buttons vertically */
+  }
+
+  .clemo-btn,
+  .clemo-btn-outline {
+    font-size: 0.9rem;
+    padding: 8px 15px; /* Reduce padding for smaller screens */
+    margin-right: 0; /* Remove large right margin */
+  }
+
+  .mouse-scroll {
+    bottom: -150px; /* Adjust scroll indicator position */
+  }
+}
+
+@media (max-width: 480px) {
+  .clemo-main-home h1 {
+    font-size: 2rem; /* Further reduce for mobile */
+  }
+
+  .clemo-main-home h2 {
+    font-size: 1.5rem;
+  }
+
+  .clemo-subtitle {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .clemo-btn,
+  .clemo-btn-outline {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+
+  .mouse-scroll {
+    bottom: -120px;
+  }
+}

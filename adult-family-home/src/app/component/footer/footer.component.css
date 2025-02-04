@@ -59,11 +59,6 @@
   text-decoration: underline;
 }
 
-@media (max-width: 768px) {
-  .footer-info {
-    flex-direction: column;
-  }
-}
 
 
 /*--------- AE --------------*/
@@ -267,4 +262,64 @@
 .debugger-value {
   color:  var(--dark-background-color);
   word-break: break-word;
+}
+
+
+/* Ensure footer elements don't exceed screen width */
+.footer, .ae-footer, .clemo-footer {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Wrap flex elements properly */
+.footer-info,
+.ae-footer-columns,
+.clemo-footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+/* Ensure columns stack properly on smaller screens */
+.footer-column,
+.ae-footer-column,
+.clemo-footer-logo,
+.clemo-footer-nav {
+  flex: 1 1 100%;
+  min-width: unset;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* Prevent oversized images */
+.clemo-footer-logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Adjust spacing for better mobile layout */
+@media (max-width: 768px) {
+  .footer-info, .ae-footer-columns {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-column,
+  .ae-footer-column {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .clemo-footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
 }
