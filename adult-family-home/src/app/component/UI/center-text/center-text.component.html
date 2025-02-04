@@ -16,7 +16,7 @@
 
 <div class="center-text-section"
 [ngClass]="themeType"
-*ngIf="themeType!='clemo' && themeType!='hh'">
+*ngIf="themeType!='clemo' && themeType!='hh' && themeType!='sb'">
   <img *ngIf="imageURL && showImage"  [src]="imageURL" alt="Section Image" class="center-text-image" />
   <h3 class="center-text-title">{{ subTitle | replaceKeyword: { businessName: _businessName } }}</h3>
   <h2 class="center-text-title">{{ title }}</h2>
@@ -25,6 +25,19 @@
 </div>
 
 <div class="center-text-section-clemo" [ngClass]="themeType" *ngIf="themeType=='clemo'">
+  <img *ngIf="imageURL && showImage"  [src]="imageURL" alt="Section Image" class="center-text-image" />
+  <div class="text-container">
+  <h3>
+    {{ titleParts.part1 }}</h3>
+    <h2><span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span></h2>
+
+    <div class="separator2"></div>
+  <p class="center-text-description" [innerHTML]="sanitizedContent"></p>
+</div>
+  <button *ngIf="showBtn" class="afhBtn">Schedule A Visit</button>
+</div>
+
+<div class="center-text-section-clemo" [ngClass]="themeType" *ngIf="themeType=='sb'">
   <img *ngIf="imageURL && showImage"  [src]="imageURL" alt="Section Image" class="center-text-image" />
   <div class="text-container">
   <h3>

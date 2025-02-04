@@ -174,7 +174,7 @@ showAutoSaveMessage: boolean = false;
 
       //Gallery Page
       photoGallery: [''],
-      photoGalleryText: [''],
+      // photoGalleryText: [''],
 
       isActive: true,
 
