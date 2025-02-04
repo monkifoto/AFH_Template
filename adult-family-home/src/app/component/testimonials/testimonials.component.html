@@ -50,44 +50,36 @@
   </div>
     </ng-container>
 
-    <ng-container *ngSwitchCase="'ehc'">
-      <div class="content-wrapper">
-      <section class="ehc-testimonial-comp">
-        <div class="ehc-testimonial-heading">
-          <h2 class="ehc-testimonial-section-heading">Testimonials</h2>
-        </div>
 
-        <div class="ehc-testimonial-carousel" *ngIf="testimonials && testimonials.length > 0">
-
-        <div class="ehc-carousel-container" [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
-  <div
-    class="ehc-testimonial-card"
-    *ngFor="let testimonial of testimonials; let i = index"
-    [class.active]="currentIndex === i"
-    [class.inactive]="currentIndex !== i">
-    <p class="ehc-testimonial-quote">“{{ testimonial.quote }}”</p>
-    <div class="ehc-testimonial-author">
-      <span>{{ testimonial.name }}</span>
-    </div>
-  </div>
-</div>
-          <div class="ehc-carousel-indicators">
-            <button
-              *ngFor="let _ of testimonials; let i = index"
-              class="ehc-indicator"
-              [class.active]="currentIndex === i"
-              (click)="setSlide(i)"
-            ></button>
-          </div>
-          <div class="ehc-testimonials-button">
-            <button class="view-all-testimonials" routerLink="/testimonials">
-              View All Testimonials
-            </button>
-          </div>
-        </div>
-      </section>
+  <ng-container *ngSwitchCase="'clemo'">
+    <div class="content-wrapper">
+    <section class="ae-testimonial-comp">
+      <div class="ae-testimonial-heading">
+        <h2 class="ae-testimonial-section-heading">Word of mouth</h2>
+        <p class="ae-testimonial-subheading">You should hear what people have to say about us</p>
       </div>
+
+      <div class="ae-testimonial-container">
+        <div class="ae-testimonial-grid">
+          <div class="ae-testimonial-card" *ngFor="let testimonial of testimonials | slice:0:4">
+            <div class="ae-testimonial-content">
+              <div class="ae-testimonial-quote-icon">❝</div>
+              <p class="ae-testimonial-quote">{{ testimonial.quote }}</p>
+              <h4 class="ae-testimonial-author">{{ testimonial.name }}</h4>
+            </div>
+          </div>
+        </div>
+        <div class="ae-testimonials-button">
+          <button class="view-all-testimonials" routerLink="/testimonials">
+            View All Testimonials
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </div>
     </ng-container>
+
 
 
     <ng-container *ngSwitchDefault>

@@ -214,39 +214,39 @@ export class AboutUsPageComponent implements OnInit {
     this.whyChoose.removeAt(index);
   }
 
-  onMissionImageSelection(url: string) {
-    this.form.patchValue({
-      missionImageUrl: url
-    });
-    if (this.business) {
-      this.business.missionImageUrl = url;  // Save selected URL in business model
-    }
-  }
+  // onMissionImageSelection(url: string) {
+  //   this.form.patchValue({
+  //     missionImageUrl: url
+  //   });
+  //   if (this.business) {
+  //     this.business.missionImageUrl = url;  // Save selected URL in business model
+  //   }
+  // }
 
-  onBusinessImageSelection(url: string) {
-    this.form.patchValue({
-      businessStoryImageUrl: url
-    });
-    if (this.business) {
-      this.business.businessStoryImageUrl = url;  // Save selected URL in business model
-    }
-  }
+  // onBusinessImageSelection(url: string) {
+  //   this.form.patchValue({
+  //     businessStoryImageUrl: url
+  //   });
+  //   if (this.business) {
+  //     this.business.businessStoryImageUrl = url;  // Save selected URL in business model
+  //   }
+  // }
 
-  onMotivationImageSelection(url: string) {
-    this.form.patchValue({
-      motivationImageUrl: url
-    });
-    if (this.business) {
-      this.business.motivationImageUrl = url;  // Save selected URL in business model
-    }
-  }
+  // onMotivationImageSelection(url: string) {
+  //   this.form.patchValue({
+  //     motivationImageUrl: url
+  //   });
+  //   if (this.business) {
+  //     this.business.motivationImageUrl = url;  // Save selected URL in business model
+  //   }
+  // }
 
-  onVisionImageSelection(url: string) {
-    this.form.patchValue({
-      visionImageUrl: url
-    });
-    if (this.business) {
-      this.business.visionImageUrl = url;  // Save selected URL in business model
-    }
-  }
+  // onVisionImageSelection(url: string) {
+  //   this.form.patchValue({
+  //     visionImageUrl: url
+  //   });
+  //   if (this.business) {
+  //     this.business.visionImageUrl = url;  // Save selected URL in business model
+  //   }
+  // }
 }

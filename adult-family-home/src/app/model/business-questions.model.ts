@@ -29,24 +29,26 @@ export interface Business {
   sections: Section[];
 
      // to be removed
-  businessStoryImageUrl: string;
-  businessStoryTitle: string;
-  businessStory: string;
+  // businessStoryImageUrl: string;
+  // businessStoryTitle: string;
+  // businessStory: string;
 
-  motivationImageUrl: string;
-  motivationTitle: string;
-  motivation: string;
+  // motivationImageUrl: string;
+  // motivationTitle: string;
+  // motivation: string;
 
-  missionImageUrl: string;
-  missionTitle: string;
-  mission: string;
+  // missionImageUrl: string;
+  // missionTitle: string;
+  // mission: string;
 
-  visionImageUrl: string;
-  visionTitle: string;
-  vision: string;
-  teamValues: string;
-  welcomeMessage: string;
-  keyServicesHighlights: string;
+  // visionImageUrl: string;
+  // visionTitle: string;
+  // vision: string;
+  // teamValues: string;
+
+  // welcomeMessage: string;
+
+  // keyServicesHighlights: string;
    // to be removed
 
   certifications: string;
@@ -275,32 +277,32 @@ export class BusinessModel {
       tagline: 'Caring with compassion for every senior',
 
         // to be removed
-      businessStoryImageUrl: '',
-      businessStoryTitle: 'Business Story',
-      businessStory:
-        'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
-      motivationImageUrl: '',
-      motivationTitle: 'Motivation Title',
-      motivation:
-        'To offer high-quality, compassionate care for seniors, respecting their independence and dignity.',
+      // businessStoryImageUrl: '',
+      // businessStoryTitle: 'Business Story',
+      // businessStory:
+      //   'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
+      // motivationImageUrl: '',
+      // motivationTitle: 'Motivation Title',
+      // motivation:
+      //   'To offer high-quality, compassionate care for seniors, respecting their independence and dignity.',
 
-      mission:
-        'To exceed the expectations of our residents and their families, with personalized care and a homelike atmosphere.',
-      missionImageUrl: '',
-      missionTitle: 'Our Mission',
+      // mission:
+      //   'To exceed the expectations of our residents and their families, with personalized care and a homelike atmosphere.',
+      // missionImageUrl: '',
+      // missionTitle: 'Our Mission',
 
-      vision:
-        'A community where seniors can live independently with compassionate, round-the-clock care and support.',
-      visionImageUrl: '',
-      visionTitle: 'Our Vision',
+      // vision:
+      //   'A community where seniors can live independently with compassionate, round-the-clock care and support.',
+      // visionImageUrl: '',
+      // visionTitle: 'Our Vision',
 
-      welcomeMessage:
-      'Welcome to Careful Living AFH - where our residents are family.',
+      // welcomeMessage:
+      // 'Welcome to Careful Living AFH - where our residents are family.',
 
-      keyServicesHighlights:
-        '24/7 care, balanced meals, therapeutic activities.',
-      teamValues:
-        'Dedicated team specialized in elderly care for dementia, Alzheimer’s, stroke recovery, diabetic management, cardiac care, and rehabilitation.',
+      // keyServicesHighlights:
+      //   '24/7 care, balanced meals, therapeutic activities.',
+      // teamValues:
+      //   'Dedicated team specialized in elderly care for dementia, Alzheimer’s, stroke recovery, diabetic management, cardiac care, and rehabilitation.',
         // to be removed
 
       certifications:
