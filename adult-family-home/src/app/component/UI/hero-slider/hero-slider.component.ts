@@ -14,6 +14,10 @@ export class HeroSliderComponent implements OnInit {
   @Input() navigation: 'side' | 'bottom' = 'side';  // Default: side navigation
   @Input() sideButtons: boolean = true;  // Default: show side buttons
   @Input() sliderHeight: string = '100vh'; // Default height is 100vh
+  @Input() buttonBorderRadius: string = '25px'; // Default border radius
+  @Input() subtitleSize: string = '1.5rem'; // Default subtitle size
+  @Input() subtitleWeight: string = '1.5rem'; // Default subtitle size
+
   currentSlide = 0;
   sliderOpacity = 1; // Initial opacity for the slider
 

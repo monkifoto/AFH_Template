@@ -1,7 +1,11 @@
 <div
   class="clemo-slider-container"
   id="carousel"
-  [ngStyle]="{ '--slider-opacity': sliderOpacity, 'height': sliderHeight }"
+  [ngStyle]="{ '--slider-opacity': sliderOpacity,
+   'height': sliderHeight,
+    '--button-border-radius': buttonBorderRadius,
+    '--subtitle-size': subtitleSize ,
+    '--subtitle-weiight': subtitleWeight}"
 >
   <div
     *ngFor="let slide of slides; let i = index"
@@ -26,7 +30,7 @@
     <div class="clemo-main-home" *ngIf="slide.title?.trim()">
       <h1>{{ slide.title }}</h1>
       <div class="clemo-separator"></div>
-      <h2 class="clemo-subtitle" [innerHTML]="slide.subtitle"></h2>
+      <h2 class="clemo-subtitle" [ngStyle]="{ 'font-size': subtitleSize , 'font-weight': subtitleWeight}" [innerHTML]="slide.subtitle"></h2>
 
       <!-- Dynamic Buttons -->
       <div class="clemo-home-btn">
@@ -37,6 +41,7 @@
               'clemo-btn': !button.outline,
               'clemo-btn-outline': button.outline
             }"
+            [ngStyle]="{ 'border-radius': buttonBorderRadius }"
             routerLinkActive="active"
           >
             {{ button.text }}
