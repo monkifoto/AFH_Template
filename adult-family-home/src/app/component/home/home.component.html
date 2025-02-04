@@ -142,6 +142,38 @@
 
 </section>
 
+
+<!------------------------ SB SECTION ---------------------->
+
+<section *ngIf="business?.theme?.themeType === 'sb'">
+  <app-hero-slider
+  [navigation]="'side'"
+  [sideButtons]="false"
+  sliderHeight="100vh">
+</app-hero-slider>
+
+<app-center-text
+  *ngIf="business?.sections | sectionFilter:'HomeCenterText' as section"
+  [themeType]="business?.theme?.themeType || ''"
+  [imageURL]="section?.sectionImageUrl || ''"
+  [title]="section?.sectionTitle || ''"
+  [subTitle]="section?.sectionSubTitle || ''"
+  [content]="section?.sectionContent || ''"
+  [showBtn]="false"
+  [_businessName]="business?.businessName || ''"
+></app-center-text>
+
+<app-latest-products></app-latest-products>
+
+<app-item-list
+[layoutType]="'sb'"
+[services]="business?.services || []"
+[minimal]="true"
+></app-item-list>
+
+</section>
+
+
 <!------------------------ SHARED SECTION ---------------------->
 
 <app-consultation

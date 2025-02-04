@@ -181,10 +181,60 @@
       <app-meet-the-team></app-meet-the-team>
     </ng-container>
 
+    <ng-container *ngSwitchCase="'sb'">
+      <app-hero></app-hero>
+
+      <section class="our-approach">
+        <app-right-text
+        *ngIf="business.sections | sectionFilter:'AboutUsRightText' as section"
+        [themeType]="business.theme.themeType || ''"
+        [imageURL]="section.sectionImageUrl || ''"
+        [title]="section.sectionTitle || ''"
+        [content]="section.sectionContent || ''"
+        ></app-right-text>
+
+        <app-left-text
+        *ngIf="business.sections | sectionFilter:'AboutUsLeftText' as section"
+        [themeType]="business.theme.themeType || ''"
+        [imageURL]="section.sectionImageUrl || ''"
+        [title]="section.sectionTitle || ''"
+        [content]="section.sectionContent || ''"
+        ></app-left-text>
+
+        <app-right-text
+        *ngIf="business.sections | sectionFilter:'AboutUsRightText2' as section"
+        [themeType]="business.theme.themeType || ''"
+        [imageURL]="section.sectionImageUrl || ''"
+        [title]="section.sectionTitle || ''"
+        [content]="section.sectionContent || ''"
+      ></app-right-text>
+
+      </section>
+
+      <app-testimonial-image
+        [imageURL]="
+          '../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'
+        "
+        [author]="business.testimonials[2].name"
+        [text]="business.testimonials[2].quote"
+      ></app-testimonial-image>
+
+      <app-call-to-action
+        [text]="'Have more questions?'"
+        [buttonText]="'Contact Us'"
+        [isButton]="false"
+        [bgColor]="business.theme.backgroundColor"
+        [textColor]="business.theme.textColor"
+      >
+      </app-call-to-action>
+
+      <app-meet-the-team></app-meet-the-team>
+    </ng-container>
+
     <ng-container *ngSwitchDefault>
       <app-hero></app-hero>
 
- 
+
 
       <app-testimonial-image
         [imageURL]="

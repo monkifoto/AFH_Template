@@ -26,6 +26,7 @@ export class ColorAdminComponent implements OnInit {
     { name: 'A&E Style', fileName: 'styles1.css' },
     { name: 'EHC Style', fileName: 'styles2.css' },
     { name: 'Clemo Style', fileName: 'clemo.css' },
+    { name: 'SB Style', fileName: 'sb.css' },
     { name: 'Demo Style', fileName: 'demo.css' }
     // Add other theme file names here
   ];
