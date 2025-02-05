@@ -28,4 +28,20 @@
   </div>
 </div>
 </ng-container>
+<ng-container *ngSwitchCase="'sb'">
+  <div class="ae-section-container">
+  <div class="cta-container">
+    <div class="cta-content">
+      <div class="our-services-section-heading">
+        <span class="consultation-title main">Ready to experience </span>
+        <span class="consultation-title highlight">{{ businessName }}?</span>
+      </div>
+      <p>Discover what makes our services unique and tailored to your needs.</p>
+      <div class="cta-buttons">
+        <button class="btn" (click)="navigateToContact(id)">Schedule a Visit</button>
+      </div>
+    </div>
+  </div>
+</div>
+</ng-container>
 </div>
