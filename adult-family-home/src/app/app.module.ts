@@ -75,6 +75,7 @@ import { Tour3DComponent } from './component/UI/tour-3-d/tour-3-d.component';
 import { SectionFilterPipe } from './pipe/section-filter.pipe';
 import { ReplaceKeywordPipe } from './pipe/replace-keyword.pipe';
 import { LatestProductsComponent } from './component/UI/latest-products/latest-products.component';
+import { FaqComponent } from './component/faq/faq.component';
 
     // Map hostnames to business IDs
     const businessIdMap: { [key: string]: string } = {
@@ -208,7 +209,8 @@ export function combinedInitializer(
     Tour3DComponent,
     SectionFilterPipe,
     ReplaceKeywordPipe,
-    LatestProductsComponent
+    LatestProductsComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,

@@ -40,11 +40,15 @@ export class PhotoGalleryUploadComponent implements OnInit {
   uploadFiles(event: any) {
     const files: File[] = event.target.files;
     for (let file of files) {
-      const title = prompt('Enter image title:');
-      const description = prompt('Enter image description:');
-      const link = prompt('Enter image link:');
-      const order = prompt('Enter image order:');
+      // const title = prompt('Enter image title:');
+      // const description = prompt('Enter image description:');
+      // const link = prompt('Enter image link:');
+      // const order = prompt('Enter image order:');
       // const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, this.uploadLocation);
+      const title :string = '';
+      const description :string = '';
+      const link :string = '';
+      const order :string = '';
       const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, this.uploadLocation, title || '', description || '', link || '', order ||'');
       this.uploadProgress[file.name] = uploadProgress;
       downloadUrl.subscribe((url: string) => {
@@ -131,7 +135,7 @@ export class PhotoGalleryUploadComponent implements OnInit {
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          doc.ref.update({ title: image.title, description: image.description });
+          doc.ref.update({ title: image.title, description: image.description, link: image.link, order:image.order });
         });
       })
       .catch((error) => console.error('Error updating image details:', error));

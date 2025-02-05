@@ -192,17 +192,22 @@
       <!-- Main Gallery -->
       <section class="gallery ae-gallery">
         <div class="section-heading">
-          <app-section-tilte [title]="'Gallery'"></app-section-tilte>
+          <app-section-tilte [title]="'Small Business Websites Gallery'"></app-section-tilte>
         </div>
+
         <div class="gallery-grid gallery-container ae-gallery-container ">
-          <div *ngFor="let image of images" class="gallery-item" (click)="onImageClick(image.url)">
-            <img [src]="image.url" alt="Gallery Image">
+          <div *ngFor="let image of images; let i = index" class="gallery-item" (click)="onImageClick(image.url)">
+            <img [src]="image.url" alt="Gallery Image" alt="{{image.title}}">
+            <div *ngIf="image.title" class="image-info">
+              <p><a *ngIf="image.link" href="{{image.link}}" target="_blank">{{ image.title }}</a></p>
+            </div>
           </div>
+
         </div>
       </section>
-
+<!--
       <app-testimonial-image [imageURL]="'../../../../assets/sharedAssets/istockphoto-1453597643-2048x2048.jpg'"
-      [author]="business.testimonials[4].name" [text]="business.testimonials[4].quote"></app-testimonial-image>
+      [author]="business.testimonials[4].name" [text]="business.testimonials[4].quote"></app-testimonial-image> -->
     </ng-container>
 
 
