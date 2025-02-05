@@ -40,7 +40,12 @@ export class PhotoGalleryUploadComponent implements OnInit {
   uploadFiles(event: any) {
     const files: File[] = event.target.files;
     for (let file of files) {
-      const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, this.uploadLocation);
+      const title = prompt('Enter image title:');
+      const description = prompt('Enter image description:');
+      const link = prompt('Enter image link:');
+      const order = prompt('Enter image order:');
+      // const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, this.uploadLocation);
+      const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, this.uploadLocation, title || '', description || '', link || '', order ||'');
       this.uploadProgress[file.name] = uploadProgress;
       downloadUrl.subscribe((url: string) => {
         this.uploadedImages[file.name] = url;
@@ -98,7 +103,13 @@ export class PhotoGalleryUploadComponent implements OnInit {
       }),
       map(images => images.filter(image => image !== null))  // Filter out null values
     ).subscribe(filteredImages => {
-      this.images = filteredImages;
+      this.images = filteredImages.map(img => ({
+        ...img,
+        title: img.title || '',
+        description: img.description || '',
+        link: img.link || '',
+        order: img.order || ''
+      }));
     });
 
   }
@@ -109,6 +120,21 @@ export class PhotoGalleryUploadComponent implements OnInit {
 
   onCloseModal() {
     this.selectedImageUrl = null;
+  }
+
+  saveImageDetails(image: any) {
+    this.firestore
+      .collection('businesses')
+      .doc(this.businessId)
+      .collection(this.uploadLocation)
+      .ref.where('url', '==', image.url)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.update({ title: image.title, description: image.description });
+        });
+      })
+      .catch((error) => console.error('Error updating image details:', error));
   }
 
 

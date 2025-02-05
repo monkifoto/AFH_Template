@@ -41,14 +41,6 @@
   </div>
 </div>
 
-<!-- <section class="gallery">
-  <div class="section-heading">Explore Our Gallery</div>
-  <div class="gallery-grid">
-    <div *ngFor="let image of images" class="gallery-item" (click)="onImageClick(image.url)">
-      <img [src]="image.url" alt="Gallery Image">
-    </div>
-  </div>
-</section> -->
 
 <section class="gallery">
   <div class="section-heading">Explore Our Gallery</div>
@@ -58,6 +50,12 @@
         <i class="fa-solid fa-trash-can"></i>
       </div>
       <img [src]="image.url" alt="Gallery Image">
+      <input [(ngModel)]="image.title" placeholder="Enter Title">
+      <textarea [(ngModel)]="image.description" placeholder="Enter Description"></textarea>
+      <input [(ngModel)]="image.link" placeholder="Enter Link:">
+      <input [(ngModel)]="image.order" placeholder="Enter Order:">
+
+      <button (click)="saveImageDetails(image)">Save</button>
     </div>
   </div>
 </section>

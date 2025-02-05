@@ -59,7 +59,7 @@
 } */
 
 .clemo-home-overlay {
-  outline: 2px solid blue;
+  /* outline: 2px solid blue; */
   position: absolute;
   top: 0;
   left: 0;
@@ -106,7 +106,9 @@
 }
 
 .clemo-subtitle {
-  font-size: 1.5rem;
+  font-size: var(--subtitle-size, 1.5rem);
+  font-weight: var(--subtitle-weight, 400);
+  /* font-size: 1.5rem; */
   color: #fff;
   margin: 20px 0;
   line-height: 1.5;
@@ -300,7 +302,7 @@
   }
 
   .clemo-subtitle {
-    font-size: 1rem;
+    font-size: 1rem !important;
   }
 
   .clemo-home-btn {
@@ -331,7 +333,7 @@
   }
 
   .clemo-subtitle {
-    font-size: 0.9rem;
+    font-size: 0.9rem !important;
     line-height: 1.4;
   }
 

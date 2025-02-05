@@ -20,6 +20,10 @@ export class UploadService {
     file: File,
     businessId: string,
     location: string,
+    title: string = '',
+    description: string = '',
+    link: string='',
+    order:string=''
   ): { uploadProgress: Observable<number>; downloadUrl: Observable<string> } {
     let filePath: string;
 
@@ -65,7 +69,7 @@ export class UploadService {
                 .collection('businesses')
                 .doc(businessId)
                 .collection(location)
-                .add({ url });
+                .add({ url, title, description, link, order })
               observer.next(url);
               observer.complete();
             });
