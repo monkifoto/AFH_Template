@@ -1,4 +1,4 @@
-<section class="right-text-section" *ngIf="themeType!='clemo'">
+<section class="right-text-section" *ngIf="themeType!='clemo' && themeType!='sb'">
 
   <div class="image-container">
       <img src="{{imageURL}}" alt="{{title}}">
@@ -13,7 +13,7 @@
 
 
 
-<section class="content-container" *ngIf="themeType=='clemo'">
+<section class="content-container" *ngIf="themeType=='clemo' || themeType=='sb'">
   <div class="content-area">
   <div class="row">
 
@@ -36,5 +36,7 @@
 </div>
 
 </section>
+
+
 
 

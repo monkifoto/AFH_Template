@@ -136,6 +136,11 @@
 
 </app-parallax-text>
 
+<app-latest-products
+[layoutType]="'clemo'"
+></app-latest-products>
+
+
 <app-google-maps *ngIf="business?.theme?.themeType == 'clemo'"
 [address]="business?.address ||''"
 [layoutType]="business?.theme?.themeType || 'demo' "></app-google-maps>
@@ -166,7 +171,9 @@
   [_businessName]="business?.businessName || ''"
 ></app-center-text>
 
-<app-latest-products></app-latest-products>
+<app-latest-products
+[layoutType]="'sb'"
+></app-latest-products>
 
 <app-item-list
 [layoutType]="'sb'"

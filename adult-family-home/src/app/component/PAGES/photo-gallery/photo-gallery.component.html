@@ -177,6 +177,35 @@
       [author]="business.testimonials[4].name" [text]="business.testimonials[4].quote"></app-testimonial-image>
     </ng-container>
 
+    <ng-container *ngSwitchCase="'sb'">
+      <app-hero [layoutType]="'sb'"></app-hero>
+
+      <app-center-text
+  *ngIf="business?.sections | sectionFilter:'GalleryCenterText' as section"
+  [themeType]="business.theme.themeType || ''"
+  [imageURL]="section.sectionImageUrl || ''"
+  [title]="section.sectionTitle || ''"
+  [content]="section.sectionContent || ''"
+  [showBtn]="false"
+></app-center-text>
+
+      <!-- Main Gallery -->
+      <section class="gallery ae-gallery">
+        <div class="section-heading">
+          <app-section-tilte [title]="'Gallery'"></app-section-tilte>
+        </div>
+        <div class="gallery-grid gallery-container ae-gallery-container ">
+          <div *ngFor="let image of images" class="gallery-item" (click)="onImageClick(image.url)">
+            <img [src]="image.url" alt="Gallery Image">
+          </div>
+        </div>
+      </section>
+
+      <app-testimonial-image [imageURL]="'../../../../assets/sharedAssets/istockphoto-1453597643-2048x2048.jpg'"
+      [author]="business.testimonials[4].name" [text]="business.testimonials[4].quote"></app-testimonial-image>
+    </ng-container>
+
+
     <ng-container *ngSwitchDefault>
       <app-hero></app-hero>
       <app-center-text

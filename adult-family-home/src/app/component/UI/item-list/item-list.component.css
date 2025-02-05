@@ -241,7 +241,9 @@
   font-weight: 600;
   color: #343a40;
   margin-bottom: 10px;
+  line-height: 1.5rem;
 }
+
 
 .sb-service-description {
   font-size: 14px;
