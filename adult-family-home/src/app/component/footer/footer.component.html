@@ -90,11 +90,6 @@
 
       <!-- Footer Navigation -->
       <nav class="clemo-footer-nav">
-        <!-- <a href="#" class="clemo-footer-link">HOME</a>
-        <a href="#" class="clemo-footer-link">FEATURES</a>
-        <a href="#" class="clemo-footer-link">PAGE LAYOUTS</a>
-        <a href="#" class="clemo-footer-link">PAGES</a>
-        <a href="#" class="clemo-footer-link">STORE</a> -->
 
         <span class="clemo-footer-link"  (click)="navigateTo('home')">HOME</span>
         <span class="clemo-footer-link" (click)="navigateTo('about-us')">ABOUT US</span>
@@ -111,6 +106,43 @@
     </div>
   </footer>
 </ng-container>
+
+<ng-container *ngSwitchCase="'sb'">
+  <footer class="clemo-footer">
+    <div class="clemo-footer-content">
+      <!-- Logo and Contact Info -->
+      <div class="clemo-footer-logo">
+        <img src="{{ business?.logoImage}}" alt="">
+        <!-- <h2 class="clemo-footer-logo-text">{{ business?.logoImage}}</h2> -->
+        <!-- <h4>{{ business?.businessName }}</h4> -->
+        <p class="clemo-footer-phone">{{ business?.phone }}</p>
+        <p class="clemo-footer-address">{{ business?.address }}</p>
+      </div>
+
+      <!-- Social Media Links -->
+      <div class="clemo-footer-social">
+        <a href="#" class="clemo-social-icon"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#" class="clemo-social-icon"><i class="fa-brands fa-google"></i></a>
+      </div>
+
+      <!-- Footer Navigation -->
+      <nav class="clemo-footer-nav">
+        <span class="clemo-footer-link"  (click)="navigateTo('home')">HOME</span>
+        <span class="clemo-footer-link" (click)="navigateTo('about-us')">ABOUT US</span>
+        <span class="clemo-footer-link" (click)="navigateTo('services')">SERVICES</span>
+        <span class="clemo-footer-link" (click)="navigateTo('gallery')">OUR HOME</span>
+        <span class="clemo-footer-link" (click)="navigateTo('resident-form')">RESIDENT FORM</span>
+        <span class="clemo-footer-link" (click)="navigateTo('contact-us')">CONTACT</span>
+      </nav>
+
+      <!-- Copyright Notice -->
+      <div class="clemo-footer-bottom">
+        <p>© Copyright. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</ng-container>
+
 
 
 
