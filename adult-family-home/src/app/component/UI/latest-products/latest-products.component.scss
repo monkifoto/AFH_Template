@@ -14,7 +14,9 @@
     color: #777;
     max-width: 600px;
     margin: 0 auto 20px;
+    padding: 20px;
     font-size: 16px;
+    // border: solid 1px black;
   }
 
   .product-grid {
@@ -28,6 +30,37 @@
       text-align: left;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       border-radius: 10px;
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        // border: solid 1px black;
+      }
+      .logo {
+        width: 250px;
+        max-height: 80px;
+
+        img{
+          object-fit:fill;
+        }
+
+      }
+      .index {
+        font-size: 24px;
+        color: rgba(0, 0, 0, 0.1);
+        font-weight: bold;
+      }
+
+      .company-name {
+        text-align: center;
+        font-size: 20px;
+        margin: 15px 0;
+      }
+      .company-description {
+        font-size: 14px;
+        color: #444;
+      }
 
       img {
         width: 100%;
@@ -67,7 +100,7 @@
   }
 }
 
-
+/*
 .container {
   text-align: center;
   padding: 20px;
@@ -126,4 +159,4 @@
 }
 .learn-more:hover {
   text-decoration: underline;
-}
+} */

@@ -10,4 +10,5 @@
 
 .center-text-title {
   color: var(--text-color);
+  padding-bottom: 3rem;
 }
