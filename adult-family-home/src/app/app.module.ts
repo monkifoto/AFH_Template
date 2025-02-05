@@ -32,12 +32,10 @@ import { ConfirmationDialogComponent } from './component/confirmation-dialog/con
 import { TestimonialsComponent } from './component/testimonials/testimonials.component';
 import { InformationComponent } from './component/information/information.component';
 import { OurServicesHomeComponent } from './component/our-services-home/our-services-home.component';
-
 import { ConsultationComponent } from './component/consultation/consultation.component';
 import { FeaturesComponent } from './component/features/features.component';
 import { WhyUsComponent } from './component/why-us/why-us.component';
 import { BasicInfoComponent } from './admin/basic-info/basic-info.component';
-import { HomePageComponent } from './admin/home-page/home-page.component';
 import { EmployeeComponent } from './admin/employee/employee.component';
 import { PhotosComponent } from './admin/photos/photos.component';
 import { ReviewsComponent } from './admin/reviews/reviews.component';
@@ -60,7 +58,6 @@ import { UiTestComponent } from './component/UI/ui-test/ui-test.component';
 import { TestimonialsListComponent } from './component/PAGES/testimonials/testimonials.component';
 import { ParallaxTextComponent } from './component/UI/parallax-text/parallax-text.component';
 import { ParallaxStatsComponent } from './component/UI/parallax-stats/parallax-stats.component';
-// import { ThreeSectionComponent } from './component/UI/three-section/three-section.component';
 import { HeroSliderComponent } from './component/UI/hero-slider/hero-slider.component';
 import { ExpandableNavigationComponent } from './component/UI/expandable-navigation/expandable-navigation.component';
 import { TestimonialCarouselComponent } from './component/UI/testimonial-carousel/testimonial-carousel.component';
@@ -163,7 +160,6 @@ export function combinedInitializer(
     MeetTheTeamComponent,
     FooterComponent,
     EditBusinessComponent,
-    // HeroCarouselComponent,
     PhotoGalleryComponent,
     PhotoGalleryUploadComponent,
     ImageViewerModalComponent,
@@ -175,7 +171,6 @@ export function combinedInitializer(
     FeaturesComponent,
     WhyUsComponent,
     BasicInfoComponent,
-    HomePageComponent,
     EmployeeComponent,
     PhotosComponent,
     ReviewsComponent,
@@ -196,7 +191,6 @@ export function combinedInitializer(
     TestimonialsListComponent,
     ParallaxTextComponent,
     ParallaxStatsComponent,
-    // ThreeSectionComponent,
     HeroSliderComponent,
     ExpandableNavigationComponent,
     TestimonialCarouselComponent,

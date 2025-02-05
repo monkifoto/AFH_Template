@@ -11,10 +11,6 @@
           type="button" role="tab" aria-controls="basic-info" aria-selected="true">Basic Information <span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span></button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="home-page-tab" data-bs-toggle="tab" data-bs-target="#home-page"
-          type="button" role="tab" aria-controls="home-page" aria-selected="false">Home Page<span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span></button>
-      </li>
-      <li class="nav-item" role="presentation">
         <button class="nav-link" id="services-page-tab" data-bs-toggle="tab" data-bs-target="#services-page"
           type="button" role="tab" aria-controls="services-page" aria-selected="false">Services Page<span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span></button>
       </li>
@@ -52,9 +48,6 @@
     <div class="tab-content" id="businessTabContent">
       <div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="basic-info-tab">
         <app-basic-info [form]="businessForm" [business]="business" [businessId]="businessId"></app-basic-info>
-      </div>
-      <div class="tab-pane fade" id="home-page" role="tabpanel" aria-labelledby="home-page-tab">
-        <app-home-page [form]="businessForm" [business]="business" [businessId]="businessId"></app-home-page>
       </div>
       <div class="tab-pane fade" id="services-page" role="tabpanel" aria-labelledby="services-page-tab">
         <app-services-page [form]="businessForm" [business]="business" [businessId]="businessId"></app-services-page>

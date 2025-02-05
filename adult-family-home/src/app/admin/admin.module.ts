@@ -5,9 +5,6 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin/admin.component';
 import { BusinessListComponent } from './business-list/business-list.component';
-// import { AdminHeroSliderComponent } from './admin-hero-slider/admin-hero-slider.component';
-// import { ColorAdminComponent } from './color-admin/color-admin.component';
-
 
 
 @NgModule({
@@ -15,9 +12,6 @@ import { BusinessListComponent } from './business-list/business-list.component';
     LoginComponent,
     AdminComponent,
     BusinessListComponent,
-    // AdminHeroSliderComponent,
-    // ColorAdminComponent,
-
   ],
   imports: [
     CommonModule,
