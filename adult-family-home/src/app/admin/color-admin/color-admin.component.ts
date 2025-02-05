@@ -90,6 +90,7 @@ export class ColorAdminComponent implements OnInit {
         console.log("Color-admin: - Business does not exist");
          // Initialize the form with controls
          this.themeForm = this.fb.group({
+          themeFileName: [this.defaultThemeFileName],
           backgroundColor: this.defaultColors.backgroundColor,
           darkBackgroundColor:this.defaultColors.darkBackgroundColor,
           primaryColor: this.defaultColors.primaryColor,

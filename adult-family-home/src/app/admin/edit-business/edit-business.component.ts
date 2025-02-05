@@ -115,39 +115,13 @@ showAutoSaveMessage: boolean = false;
       placeId:[''],
 
       //Home Page
-      welcomeMessage: [''],
       keyServicesHighlights: [''],
       uniqueService: this.fb.array([]),
       whyChoose: this.fb.array([]),
 
     sections:this.fb.array([]),
-     sectionName:[''],
-     sectionTitle: [''],
-     sectionSubTitle: [''],
-     sectionContent: [''],
-     sectionImageUrl: [''],
-     sectionType: [''],
-     sectionStyle:[''],
-
       //About Us
       certifications: [''],
-
-      teamValues: [''],
-
-      motivationTitle: [''],
-      motivationImageUrl: [''],
-      motivation: [''],
-
-      businessStoryTitle:[''],
-      businessStoryImageUrl:[''],
-      businessStory: [''],
-
-      missionTitle: [''],
-      mission: [''],
-      missionImageUrl:[''],
-      visionTitle:[''],
-      vision: [''],
-      visionImageUrl:[''],
 
 
       //Services Page
@@ -165,7 +139,6 @@ showAutoSaveMessage: boolean = false;
       ratings: [''],
       testimonials: this.fb.array([]),
       socialMedia: [''],
-
 
 
       //Contact Us Page
@@ -227,30 +200,24 @@ showAutoSaveMessage: boolean = false;
       businessURL: [defaultBusiness.businessURL],
       providerName: [defaultBusiness.providerName],
       tagline: [defaultBusiness.tagline],
-      // businessStory: [defaultBusiness.businessStory],
-      // motivation: [defaultBusiness.motivation],
-      // mission: [defaultBusiness.mission],
-      // vision: [defaultBusiness.vision],
       certifications: [defaultBusiness.certifications],
-      specialPrograms: [defaultBusiness.specialPrograms],
-      tours: [defaultBusiness.tours],
-      freeConsulting: [defaultBusiness.freeConsulting],
-      websiteGoals: [defaultBusiness.websiteGoals],
+      // specialPrograms: [defaultBusiness.specialPrograms],
+      // tours: [defaultBusiness.tours],
+      // freeConsulting: [defaultBusiness.freeConsulting],
+      // websiteGoals: [defaultBusiness.websiteGoals],
       logoImage: [defaultBusiness.logoImage],
       faviconUrl: [defaultBusiness.faviconUrl],
-      ownerImagesBios: [defaultBusiness.ownerImagesBios],
-      staffImagesBios: [defaultBusiness.staffImagesBios],
-      mediaFeatures: [defaultBusiness.mediaFeatures],
-      ratings: [defaultBusiness.ratings],
+      // ownerImagesBios: [defaultBusiness.ownerImagesBios],
+      // staffImagesBios: [defaultBusiness.staffImagesBios],
+      // mediaFeatures: [defaultBusiness.mediaFeatures],
+      // ratings: [defaultBusiness.ratings],
       address: [defaultBusiness.address],
       phone: [defaultBusiness.phone],
       fax: [defaultBusiness.fax],
       email: [defaultBusiness.email],
       businessHours: [defaultBusiness.businessHours],
       socialMedia: [defaultBusiness.socialMedia],
-      // welcomeMessage: [defaultBusiness.welcomeMessage],
-      // keyServicesHighlights: [defaultBusiness.keyServicesHighlights],
-      // teamValues: [defaultBusiness.teamValues],
+
       contactFormDetails: [defaultBusiness.contactFormDetails],
       contactUsImageUrl:[defaultBusiness.contactUsImageUrl],
       isActive: [defaultBusiness.isActive],
@@ -262,28 +229,42 @@ showAutoSaveMessage: boolean = false;
         name: [service.name],
         description: [service.description]
         }))),
+
       whyChoose: this.fb.array(defaultBusiness.whyChoose.map(choice => this.fb.group({
         name: [choice.name],
         description: [choice.description]
         }))),
+
       services: this.fb.array(defaultBusiness.services.map(service => this.fb.group({
         name: [service.name]
         }))),
+
       benefits: this.fb.array(defaultBusiness.benefits.map(benefit => this.fb.group({
         name: [benefit.name]
         }))),
+
       testimonials: this.fb.array((defaultBusiness.testimonials ?? []).map(testimonial => this.fb.group({
         name: [testimonial.name],
         relationship:[testimonial.relationship],
         quote: [testimonial.quote],
         photoUrl: [testimonial.photoURL],
       }))),
+
       employees: this.fb.array((defaultBusiness.employees ?? []).map(employee => this.fb.group({
         name: [employee.name],
         role: [employee.role],
         bio: [employee.bio],
         photoURL: [employee.photoURL],
       }))),
+      sections: this.fb.array((defaultBusiness.sections ?? []).map(section => this.fb.group({
+        sectionName: [section.sectionName || ''],
+        sectionTitle: [section.sectionTitle || ''],
+        sectionSubTitle: [section.sectionSubTitle || ''],
+        sectionContent: [section.sectionContent || ''],
+        sectionImageUrl: [section.sectionImageUrl || ''],
+        sectionType: [section.sectionType || ''],
+        sectionStyle: [section.sectionStyle || '']
+      })))
     });
   }
 

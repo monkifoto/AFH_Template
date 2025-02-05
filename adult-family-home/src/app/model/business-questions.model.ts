@@ -6,100 +6,56 @@ export interface Business {
   id: string;
 
   //Business Information
-
   businessName: string;
   providerName: string;
-  businessURL: string;
-  keyWords: string;
   tagline: string;
   address: string;
   phone: string;
   fax: string;
   email: string;
+  businessURL: string;
+  logoImage: string;
+  faviconUrl: string;
+  keyWords: string;
   placeId: string;
   isActive: boolean;
   isLive: boolean;
-
-  heroImages: string[];
-
-  uniqueService: ListItem[];
-
-  whyChoose: ListItem[];
-
-  sections: Section[];
-
-     // to be removed
-  // businessStoryImageUrl: string;
-  // businessStoryTitle: string;
-  // businessStory: string;
-
-  // motivationImageUrl: string;
-  // motivationTitle: string;
-  // motivation: string;
-
-  // missionImageUrl: string;
-  // missionTitle: string;
-  // mission: string;
-
-  // visionImageUrl: string;
-  // visionTitle: string;
-  // vision: string;
-  // teamValues: string;
-
-  // welcomeMessage: string;
-
-  // keyServicesHighlights: string;
-   // to be removed
-
-  certifications: string;
-
-  services: ListItem[];
-
-  specialPrograms: string;
-
-  toursImageUrl: string;
-  tours: string;
-
-  freeConsulting: string;
-  consultingImageUrl: string;
-
-  websiteGoals: string;
-
-  logoImage: string;
-  faviconUrl: string;
-  testimonials: Testimonial[];
-  benefits: ListItem[];
-
-  mediaFeatures: string;
-  ratings: string;
-
-
-
   businessHours: string;
   socialMedia: string;
 
+  // Hero Slider
+  heroSlider: HeroSlide[];
+  heroImages: string[];
+  sections: Section[];
+  services: ListItem[];
+  testimonials: Testimonial[];
+  benefits: ListItem[];
+  uniqueService: ListItem[];
+  whyChoose: ListItem[];
+  employees: Employee[];
 
-
+//to be removed
+   certifications: string;
+  // specialPrograms: string;
+  // toursImageUrl: string;
+  // tours: string;
+  // freeConsulting: string;
+  // consultingImageUrl: string;
+  // websiteGoals: string;
+  // mediaFeatures: string;
+  // ratings: string;
+  // ownerImagesBios: string;
+  // staffImagesBios: string;
+//to be removed
 
   //Contact us page
   contactFormDetails: string;
   contactUsImageUrl: string;
-
   faqs: string;
-
-  //Employyes
-  employees: Employee[];
-  ownerImagesBios: string;
-  staffImagesBios: string;
-
   metaTitle: string;
   metaKeywords: string;
   metaDescription: string;
-
   theme: Theme;
-
-  // Hero Slider
-  heroSlider: HeroSlide[];
 }
 
 export interface HeroSlide {
@@ -268,58 +224,33 @@ export class BusinessModel {
       businessData: '',
       id: '',
       faqs: '',
-      toursImageUrl: '',
-      consultingImageUrl: '',
+      //to be removed
+    //   toursImageUrl: '',
+    //   consultingImageUrl: '',
+    //   ownerImagesBios: 'Sarah Caregiver, RN, Founder.',
+    //   staffImagesBios:
+    //      'Emily Nurse, CNA, Head Nurse; Jack Therapist, PT, Physical Therapist',
+
+    //   specialPrograms:
+    //   'Holiday celebrations, birthday parties, outdoor activities, exercise programs, arts & crafts, movie nights.',
+    // tours: 'Yes, facility tours are available by appointment.',
+    // freeConsulting: 'Yes, initial consulting services are offered for free.',
+    // websiteGoals:
+    //   'To inform, encourage visits, and offer a means to request consultations.',
+
+  // to be removed
       businessName: 'Careful Living AFH',
       keyWords: 'Adult Family Home Bellevue, Senior Care Bellevue WA, Elderly Care Services Bellevue, Assisted Living Bellevue Washington, Memory Care Bellevue, Dementia Care Bellevue WA, Respite Care Bellevue, Long-Term Care Bellevue, Home Care for Seniors Bellevue,Skilled Nursing Bellevue WA,Personalized Senior Care Bellevue, Senior Living Bellevue Washington, Compassionate Elderly Care Bellevue, Family Home Care Bellevue WA, Professional Senior Care Services Bellevue, Senior Assisted Living Bellevue, Senior Home Assistance Bellevue WA, Senior Housing Bellevue Washington, Helping Hand AFH Bellevue, Senior Caregivers Bellevue WA',
       businessURL: 'https://www.carefullivingafh.com',
       providerName: 'Sarah Caregiver',
       tagline: 'Caring with compassion for every senior',
 
-        // to be removed
-      // businessStoryImageUrl: '',
-      // businessStoryTitle: 'Business Story',
-      // businessStory:
-      //   'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
-      // motivationImageUrl: '',
-      // motivationTitle: 'Motivation Title',
-      // motivation:
-      //   'To offer high-quality, compassionate care for seniors, respecting their independence and dignity.',
-
-      // mission:
-      //   'To exceed the expectations of our residents and their families, with personalized care and a homelike atmosphere.',
-      // missionImageUrl: '',
-      // missionTitle: 'Our Mission',
-
-      // vision:
-      //   'A community where seniors can live independently with compassionate, round-the-clock care and support.',
-      // visionImageUrl: '',
-      // visionTitle: 'Our Vision',
-
-      // welcomeMessage:
-      // 'Welcome to Careful Living AFH - where our residents are family.',
-
-      // keyServicesHighlights:
-      //   '24/7 care, balanced meals, therapeutic activities.',
-      // teamValues:
-      //   'Dedicated team specialized in elderly care for dementia, Alzheimer’s, stroke recovery, diabetic management, cardiac care, and rehabilitation.',
-        // to be removed
-
       certifications:
         'State Licensed, Certified Nursing Assistants (CNA), First Aid/CPR Certified',
-      specialPrograms:
-        'Holiday celebrations, birthday parties, outdoor activities, exercise programs, arts & crafts, movie nights.',
-      tours: 'Yes, facility tours are available by appointment.',
-      freeConsulting: 'Yes, initial consulting services are offered for free.',
-      websiteGoals:
-        'To inform, encourage visits, and offer a means to request consultations.',
+
       logoImage: '../assets/sharedAssets/Demologo2.png',
       faviconUrl: '../../assets/sharedAssets/icons/hh_favicon.ico',
-      // to be removed
-      ownerImagesBios: 'Sarah Caregiver, RN, Founder.',
-      staffImagesBios:
-        'Emily Nurse, CNA, Head Nurse; Jack Therapist, PT, Physical Therapist',
-        // to be removed
+
 
       mediaFeatures: 'Featured in Healthcare Journal, Senior Care Monthly.',
       ratings: 'Google: 4.8 stars, Yelp: 5 stars',
