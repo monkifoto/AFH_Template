@@ -286,8 +286,8 @@
 }
 
 .footer-info,
-.ae-footer-columns,
-.clemo-footer-content {
+.ae-footer-columns
+ {
   display: flex;
   flex-wrap: nowrap; /* Ensures columns stay in a row */
   justify-content: space-between; /* Space out the columns */
@@ -297,6 +297,10 @@
   margin: 0 auto;
   box-sizing: border-box;
   padding: 0 20px; /* Add some padding */
+}
+
+.clemo-footer-content{
+  display: grid;
 }
 
 .footer-column,
