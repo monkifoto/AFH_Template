@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./hero.component.css']
 })
 export class HeroComponent implements  OnInit {
+  @Input() layoutType: string = 'demo';
   backgroundImage: string = '';
   message: string = '';
 
@@ -20,6 +21,15 @@ export class HeroComponent implements  OnInit {
     }
   };
 
+  private imagesAndMessagesSB: { [key in 'services' | 'gallery' | 'about-us' | 'contact-us' | 'testimonials' | 'resident-form']: { image: string; message: string } } = {
+    'services': { image: 'https://firebasestorage.googleapis.com/v0/b/afhdynamicwebsite.appspot.com/o/businesses%2FMGou3rzTVIbP77OLmZa7%2FlifeStyle%2Fistockphoto-1389603578-1024x1024.jpg?alt=media&token=8c0c4e15-ac69-4f4a-8bc0-ae206f25f3d3', message: 'Discover our Services' },
+    'gallery': { image: 'https://firebasestorage.googleapis.com/v0/b/afhdynamicwebsite.appspot.com/o/businesses%2FMGou3rzTVIbP77OLmZa7%2FlifeStyle%2Fistockphoto-1253430957-1024x1024.jpg?alt=media&token=e3c87354-9e0c-4d66-8a10-5277fdc5d94a', message: 'Explore our Gallery' },
+    'about-us': { image: 'https://firebasestorage.googleapis.com/v0/b/afhdynamicwebsite.appspot.com/o/businesses%2FMGou3rzTVIbP77OLmZa7%2FlifeStyle%2Fistockphoto-1334906074-1024x1024.jpg?alt=media&token=3c5bf267-a30a-4f93-8262-89382527949a', message: 'Learn About Us' },
+    'contact-us': { image: 'https://firebasestorage.googleapis.com/v0/b/afhdynamicwebsite.appspot.com/o/businesses%2FMGou3rzTVIbP77OLmZa7%2FlifeStyle%2Fistockphoto-1367776831-1024x1024.jpg?alt=media&token=1272b1b2-ad7f-425a-b17e-10ba49234dab', message: 'Get in Touch' },
+    'testimonials': { image: 'https://firebasestorage.googleapis.com/v0/b/afhdynamicwebsite.appspot.com/o/businesses%2FMGou3rzTVIbP77OLmZa7%2FlifeStyle%2Fistockphoto-1456339578-1024x1024.jpg?alt=media&token=2e380b78-c7ba-46c4-bd9b-fd8d3cc6e818', message: 'What they say about us' },
+    'resident-form': { image: 'https://firebasestorage.googleapis.com/v0/b/afhdynamicwebsite.appspot.com/o/businesses%2FMGou3rzTVIbP77OLmZa7%2FlifeStyle%2Fistockphoto-1336136316-1024x1024.jpg?alt=media&token=2e625f22-8511-447b-bfb1-18919c2c276b', message: 'Les us make you feel at home'
+    }
+  };
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
@@ -28,12 +38,14 @@ export class HeroComponent implements  OnInit {
       const page = currentUrl.replace('/', '') as 'services' | 'gallery' | 'about-us' | 'contact-us' | 'testimonials' | 'resident-form';
       console.log('UI - Hero, page: ', page);
 
+      // Select image set based on layoutType
+      const selectedImages = this.layoutType === 'sb' ? this.imagesAndMessagesSB : this.imagesAndMessages;
 
-      if (page && this.imagesAndMessages[page]) {
-        this.backgroundImage = `url(${this.imagesAndMessages[page].image})`;
-        this.message = this.imagesAndMessages[page].message;
+      if (page && selectedImages[page]) {
+        this.backgroundImage = `url(${selectedImages[page].image})`;
+        this.message = selectedImages[page].message;
       } else {
-        // Fallback in case the page is not found in imagesAndMessages
+        // Fallback in case the page is not found
         this.backgroundImage = 'url(../../../../assets/sharedAssets/istockphoto-1066099806-2048x2048.jpg)';
         this.message = 'Welcome';
       }

@@ -1,4 +1,4 @@
-<div class="latest-products">
+<div class="latest-products" *ngIf="layoutType=='sb'">
   <h2>Latest Products</h2>
   <p class="description">
     Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor incididunt ut
@@ -6,12 +6,28 @@
   </p>
 
   <div class="product-grid">
-    <div class="product-card" *ngFor="let product of products">
+    <div class="product-card" *ngFor="let product of displayItems">
       <img [src]="product.image" [alt]="product.title" />
       <h3>{{ product.title }}</h3>
       <span class="category">{{ product.category }}</span>
       <p>{{ product.description }}</p>
       <a href="#" class="read-more">READ MORE</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="container" *ngIf="layoutType!='sb'">
+  <p class="description">Using carefully vetted providers and vendors.</p>
+  <div class="card-container">
+    <div class="card" *ngFor="let item of displayItems; let i = index">
+      <div class="card-header">
+        <img [src]="item.companyLogo || item.image" alt="{{ item.title }} Logo" class="logo" />
+        <span class="index">{{ (i + 1) | number:'2.0' }}</span>
+      </div>
+      <h3 class="company-name">{{ item.title }}</h3>
+      <p class="company-description">{{ item.description }}</p>
+      <a [routerLink]="item.url" class="learn-more">Learn More</a>
     </div>
   </div>
 </div>
