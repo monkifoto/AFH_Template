@@ -325,3 +325,18 @@
     width: 100%; /* Full width when stacked */
   }
 }
+
+.copy {
+  max-width: var(--site-max-width);
+  display: flex;
+  justify-content: space-between; /* Corrected property */
+  align-items: center; /* Ensures vertical alignment */
+  /* border: solid 1px black; */
+  padding: 10px; /* Adds some spacing */
+  margin: 0 auto;
+}
+
+.design, .rights {
+  display: flex;
+  align-items: center;
+}

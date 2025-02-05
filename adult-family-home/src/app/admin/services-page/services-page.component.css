@@ -146,3 +146,18 @@
 .delete-btn {
   color: red;
 }
+
+
+
+button[type="button"] {
+  background-color: var(--button-color); /* Bootstrap danger color */
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 0.25rem;
+  margin-top: 10px;
+}
+
+button[type="button"]:hover {
+  background-color: var(--button-hover-color); /* Darker shade on hover */
+}
