@@ -49,7 +49,7 @@
       <div class="delete-button" (click)="deleteImage(image)">
         <i class="fa-solid fa-trash-can"></i>
       </div>
-      <img [src]="image.url" alt="Gallery Image">
+      <img [src]="image.url" class="gallery-image" alt="Gallery Image">
       <input [(ngModel)]="image.title" placeholder="Enter Title">
       <textarea [(ngModel)]="image.description" placeholder="Enter Description"></textarea>
       <input [(ngModel)]="image.link" placeholder="Enter Link:">

@@ -88,11 +88,21 @@
   border-radius: 10px;
 }
 
-.gallery-item {
+/* .gallery-item {
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
+} */
+
+.gallery-item, .ae-gallery-item {
+  overflow: visible !important; /* Ensure text is not cut off */
+  display: flex;
+  flex-direction: column; /* Stack image & text */
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-bottom: 10px; /* Add space for text */
 }
 
 .gallery-item img {
@@ -100,15 +110,18 @@
   height: auto;
   object-fit: cover;
   display: block;
+  position: relative;
+  z-index: 1; /* Ensure image doesn't overlap text */
+}
+
+.image-info {
+  position: relative;
+  z-index: 2; /* Ensure text is above the image */
 }
 
 .gallery-item:hover {
   transform: scale(1.03);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.app-image-viewer-modal {
-
 }
 
 
@@ -156,33 +169,34 @@
 
 .ae-gallery {
   /* background: linear-gradient(to bottom, #f9f9f9, #ececec); */
+  border-radius: 8px;
   padding: 40px 120px;
 }
 
-.gallery-item {
+/* .gallery-item {
   overflow: hidden;
-  border-radius: 8px; /* Optional: adds rounded corners */
-}
+  border-radius: 8px;
+} */
 
 .gallery-item img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   display: block;
+  position: relative;
+  z-index: 1; /* Ensure image doesn't overlap text */
 }
 
+.image-info {
+  position: relative;
+  z-index: 2; /* Ensure text is above the image */
+}
 
 .ae-gallery-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 40px;
   padding: 20px;
-}
-
-.ae-gallery-item {
-  overflow: hidden;
-  border-radius: 8px;
-  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .ae-gallery-item:hover {
@@ -228,16 +242,14 @@
   position: relative;
 }
 
-/* .ae-section-heading::after {
-   content: '';
-  display: block;
-  width: 60px;
-  height: 4px;
-  background: #f04e30;
-  margin: 8px auto 0;
-} */
 
-
+.image-info {
+  color: black;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+}
 
 .ae-gallery-item {
   opacity: 0;

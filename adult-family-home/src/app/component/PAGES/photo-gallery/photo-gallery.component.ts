@@ -50,6 +50,40 @@ export class PhotoGalleryComponent implements OnInit {
     this.selectedImageUrl = null;
   }
 
+  // loadImages(): void {
+  //   type GalleryTarget = 'heroImages' | 'images' | 'businessImages' | 'lifeStyleImages' | 'employeeImages';
+
+  //   const imageCategories: { key: string; target: GalleryTarget }[] = [
+  //     { key: 'heroImages', target: 'heroImages' },
+  //     { key: 'gallery', target: 'images' },
+  //     { key: 'business', target: 'businessImages' },
+  //     { key: 'lifeStyle', target: 'lifeStyleImages' },
+  //     { key: 'employee', target: 'employeeImages' },
+  //   ];
+
+  //   imageCategories.forEach(({ key, target }) => {
+  //     this.webContent.getBusinessUploadedImagesById(this.businessId, key).pipe(
+  //       switchMap((images) => {
+  //         const checks = images.map(async (image) => {
+  //           const exists = await this.webContent.checkImageExists(image.url);
+  //           return exists ? image : null; // Return image only if it exists
+  //         });
+
+  //         return from(Promise.all(checks));
+  //       }),
+  //       map((images) => images.filter((image) => image !== null))
+  //     ).subscribe((filteredImages) => {
+  //       this[target] = filteredImages.map(img => ({
+  //         ...img,
+  //         title: img.title || '',
+  //         description: img.description || '',
+  //         order: img.order || '',
+  //         link: img.link || ''
+
+  //       }));
+  //     });
+  //   });
+  // }
   loadImages(): void {
     type GalleryTarget = 'heroImages' | 'images' | 'businessImages' | 'lifeStyleImages' | 'employeeImages';
 
@@ -64,20 +98,42 @@ export class PhotoGalleryComponent implements OnInit {
     imageCategories.forEach(({ key, target }) => {
       this.webContent.getBusinessUploadedImagesById(this.businessId, key).pipe(
         switchMap((images) => {
+          console.log(`Raw Firestore images for ${key}:`, images); // Debugging Step 1
+
+          // Convert async calls to a Promise array
           const checks = images.map(async (image) => {
             const exists = await this.webContent.checkImageExists(image.url);
-            return exists ? image : null; // Return image only if it exists
+            return exists ? image : null;
           });
 
           return from(Promise.all(checks));
         }),
-        map((images) => images.filter((image) => image !== null))
-      ).subscribe((filteredImages) => {
-        this[target] = filteredImages; // No more errors
+        map((images) => images.filter((image) => image !== null)),
+        map((filteredImages) => {
+          console.log(`Filtered images for ${target}:`, filteredImages); // Debugging Step 2
+
+          return filteredImages
+            .map(img => ({
+              url: img.url,
+              title: img.title || 'No Title',
+              description: img.description || 'No Description',
+              link: img.link || 'No Link',
+              order: !isNaN(Number(img.order)) ? Number(img.order) : 999 // Ensure valid number
+            }))
+            .sort((a, b) => a.order - b.order);
+        })
+      ).subscribe((sortedImages) => {
+        console.log(`Sorted images for ${target}:`, sortedImages); // Debugging Step 3
+
+        // Ensure target exists
+        if (!this[target]) {
+          this[target] = [];
+        }
+
+        this[target] = sortedImages;
       });
     });
   }
-
 
   onImageClick(imageUrl: string) {
     this.selectedImageUrl = imageUrl;
