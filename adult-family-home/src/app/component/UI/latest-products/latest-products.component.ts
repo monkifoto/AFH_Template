@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'app-latest-products',
   templateUrl: './latest-products.component.html',
-  styleUrls: ['./latest-products.component.css']
+  styleUrls: ['./latest-products.component.scss']
 })
 export class LatestProductsComponent implements OnInit {
   @Input() layoutType: string = '';
@@ -36,28 +36,28 @@ export class LatestProductsComponent implements OnInit {
 
    ];
   @Input() products: { title: string; description: string; category: string; companyLogo?: string; link?: string, image:string; url:string; }[] = [ {
-    title: 'Single Page Website',
+    title: 'LaunchPad Website',
     companyLogo: '',
     category: '$799',
-    description: 'Simple, clean, and effective online presence',
+    description: 'Get your adult family home online quickly with a simple yet professional single-page website. Perfect for a clean, mobile-friendly presence that showcases your services, location, and contact details. This package is great for those who want an affordable, no-fuss solution to establish credibility online.',
     image: 'https://firebasestorage.googleapis.com/v0/b/afhdynamicwebsite.appspot.com/o/businesses%2FMGou3rzTVIbP77OLmZa7%2FheroImages%2FA7400076.jpg?alt=media&token=1132bd32-3d2c-4f52-be31-3759c20b5285',
-     url: 'https://www.readymedspharmacy.com/'
+     url: ''
   },
   {
-    title: 'Essentials Website',
+    title: 'Foundation Website',
     companyLogo: '',
     category: '$1500',
-    description: 'Comprehensive design with key pages for your home',
+    description: 'A well-rounded five-page website designed to highlight all the key aspects of your adult family home. This package includes essential pages such as Home, About, Services, Gallery, and Contact, ensuring visitors get a complete picture of your offerings. SEO-optimized, mobile-responsive, and designed to attract potential residents and their families.',
     image: 'https://firebasestorage.googleapis.com/v0/b/afhdynamicwebsite.appspot.com/o/businesses%2FMGou3rzTVIbP77OLmZa7%2FheroImages%2FDJI_0061.jpg?alt=media&token=24aa3da1-a50d-47ec-89ae-588eb13e42a9',
-     url: 'https://www.readymedspharmacy.com/'
+     url: ''
   },
   {
-    title: 'Custom Lux Website',
+    title: 'Prestige Website',
     companyLogo: '',
     category: 'Pricing varies',
-    description: 'Unique design, professional photos/videos, logo & business card design',
+    description: 'A high-end, fully customized website tailored to your brand. This package includes professional photography and videography, custom design, logo creation, business card design, and advanced features such as integrated Google Maps, resident intake forms, and review sections. Perfect for those who want to stand out with a premium online presence.',
     image: 'https://firebasestorage.googleapis.com/v0/b/afhdynamicwebsite.appspot.com/o/businesses%2FMGou3rzTVIbP77OLmZa7%2FheroImages%2FDJI_0713%20DTE-Edit.jpg?alt=media&token=31151dd0-c6fb-4cc1-acf8-eb50d617d318',
-     url: 'https://www.readymedspharmacy.com/'
+     url: ''
   }];
 
   displayItems: any[] = [];
