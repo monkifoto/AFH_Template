@@ -318,3 +318,21 @@ ul li strong {
 }
 
 
+.btnSBSend{
+  display: inline-block;
+    min-width: 180px;
+    padding: .4em;
+    height: 45px;
+    text-align: center;
+    color: #fff;
+    letter-spacing: 1px;
+    margin: 0;
+    font-size: 1.125rem;
+    /* border-radius: 50px; */
+    margin-top: 20px;
+    background-color: var(--dark-background-color);
+    transition: .5s;
+    border:1px solid var(--primary-color);
+}
+
+

@@ -16,6 +16,10 @@ const domainToTransporterConfig: Record<string,
     user: 'narteae@gmail.com',
     pass: 'fggv tyqw cnkt feex',
   },
+  'sbmediahub.com': {
+    user: 'sorin.bucse@gmail.com',
+    pass: 'ybdv kmuc ciox nifm ',
+  },
 };
 
 // Default credentials
