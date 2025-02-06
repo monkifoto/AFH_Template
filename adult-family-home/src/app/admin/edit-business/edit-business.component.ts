@@ -15,13 +15,14 @@ import { ReviewsComponent } from '../reviews/reviews.component';
 import { ServicesPageComponent } from '../services-page/services-page.component';
 import { AboutUsComponent } from 'src/app/component/PAGES/about-us/about-us.component';
 import { AboutUsPageComponent } from '../about-us-page/about-us-page.component';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-business',
   templateUrl: './edit-business.component.html',
   styleUrls: ['./edit-business.component.css'],
 })
-export class EditBusinessComponent implements OnInit , AfterViewInit{
+export class EditBusinessComponent implements OnInit, AfterViewInit {
   @ViewChild(EmployeeComponent) employeeComponent!: EmployeeComponent;
   @ViewChild(ReviewsComponent) reviewComponent!: ReviewsComponent;
   @ViewChild(ServicesPageComponent) serviceComponent!: ServicesPageComponent;
@@ -37,8 +38,8 @@ export class EditBusinessComponent implements OnInit , AfterViewInit{
   serviceForm!: FormGroup;
   benefitsForm!: FormGroup;
   autoSaveMessage: string = ''; // Holds the save status message
-showAutoSaveMessage: boolean = false;
-
+  showAutoSaveMessage: boolean = false;
+  private isSubmitting: boolean = false;
 
   uploads: { uploadProgress: number; downloadUrl?: string }[] = [];
 
@@ -54,7 +55,7 @@ showAutoSaveMessage: boolean = false;
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
+    this.route.paramMap.pipe(take(1)).subscribe((params) => { // ✅ Take only the first subscription
       this.businessId = params.get('id')!;
 
       if (this.businessId) {
@@ -62,7 +63,6 @@ showAutoSaveMessage: boolean = false;
         this.loadBusinessData();
       } else {
         console.log('Loading default data');
-
         this.loadDefaultData();
       }
     });
@@ -97,7 +97,6 @@ showAutoSaveMessage: boolean = false;
 
   initializeForm(): void {
     this.businessForm = this.fb.group({
-
       //Business Info
       businessName: ['', Validators.required],
       address: [''],
@@ -109,20 +108,19 @@ showAutoSaveMessage: boolean = false;
       businessURL: [''],
       providerName: [''],
       keyWords: [''],
-      metaTitle:[''],
-      metaKeywords:[''],
-      metaDescription:[''],
-      placeId:[''],
+      metaTitle: [''],
+      metaKeywords: [''],
+      metaDescription: [''],
+      placeId: [''],
 
       //Home Page
       keyServicesHighlights: [''],
       uniqueService: this.fb.array([]),
       whyChoose: this.fb.array([]),
 
-    sections:this.fb.array([]),
+      sections: this.fb.array([]),
       //About Us
       certifications: [''],
-
 
       //Services Page
       services: this.fb.array([]),
@@ -131,7 +129,6 @@ showAutoSaveMessage: boolean = false;
       tours: [''],
       freeConsulting: [''],
 
-
       websiteGoals: [''],
       logoImage: [null],
       faviconUrl: [''],
@@ -139,7 +136,6 @@ showAutoSaveMessage: boolean = false;
       ratings: [''],
       testimonials: this.fb.array([]),
       socialMedia: [''],
-
 
       //Contact Us Page
       contactFormDetails: [''],
@@ -153,7 +149,6 @@ showAutoSaveMessage: boolean = false;
 
       //Employee Page
       employees: this.fb.array([]),
-
     });
     this.serviceForm = this.fb.group({
       name: [''],
@@ -193,9 +188,9 @@ showAutoSaveMessage: boolean = false;
 
     this.businessForm = this.fb.group({
       businessName: [defaultBusiness.businessName],
-      metaTitle:[defaultBusiness.metaTitle],
-      metaKeywords:[defaultBusiness.metaKeywords],
-      metaDescription:[defaultBusiness.metaDescription],
+      metaTitle: [defaultBusiness.metaTitle],
+      metaKeywords: [defaultBusiness.metaKeywords],
+      metaDescription: [defaultBusiness.metaDescription],
       keyWords: [defaultBusiness.keyWords],
       businessURL: [defaultBusiness.businessURL],
       providerName: [defaultBusiness.providerName],
@@ -219,60 +214,88 @@ showAutoSaveMessage: boolean = false;
       socialMedia: [defaultBusiness.socialMedia],
 
       contactFormDetails: [defaultBusiness.contactFormDetails],
-      contactUsImageUrl:[defaultBusiness.contactUsImageUrl],
+      contactUsImageUrl: [defaultBusiness.contactUsImageUrl],
       isActive: [defaultBusiness.isActive],
       theme: [defaultBusiness.theme],
-      placeId:[defaultBusiness.placeId],
+      placeId: [defaultBusiness.placeId],
 
       // Initialize FormArrays
-      uniqueService: this.fb.array((defaultBusiness.uniqueService ?? []).map(service => this.fb.group({
-        name: [service.name],
-        description: [service.description]
-        }))),
+      uniqueService: this.fb.array(
+        (defaultBusiness.uniqueService ?? []).map((service) =>
+          this.fb.group({
+            name: [service.name],
+            description: [service.description],
+          })
+        )
+      ),
 
-      whyChoose: this.fb.array(defaultBusiness.whyChoose.map(choice => this.fb.group({
-        name: [choice.name],
-        description: [choice.description]
-        }))),
+      whyChoose: this.fb.array(
+        defaultBusiness.whyChoose.map((choice) =>
+          this.fb.group({
+            name: [choice.name],
+            description: [choice.description],
+          })
+        )
+      ),
 
-      services: this.fb.array(defaultBusiness.services.map(service => this.fb.group({
-        name: [service.name]
-        }))),
+      services: this.fb.array(
+        defaultBusiness.services.map((service) =>
+          this.fb.group({
+            name: [service.name],
+          })
+        )
+      ),
 
-      benefits: this.fb.array(defaultBusiness.benefits.map(benefit => this.fb.group({
-        name: [benefit.name]
-        }))),
+      benefits: this.fb.array(
+        defaultBusiness.benefits.map((benefit) =>
+          this.fb.group({
+            name: [benefit.name],
+          })
+        )
+      ),
 
-      testimonials: this.fb.array((defaultBusiness.testimonials ?? []).map(testimonial => this.fb.group({
-        name: [testimonial.name],
-        relationship:[testimonial.relationship],
-        quote: [testimonial.quote],
-        photoUrl: [testimonial.photoURL],
-      }))),
+      testimonials: this.fb.array(
+        (defaultBusiness.testimonials ?? []).map((testimonial) =>
+          this.fb.group({
+            name: [testimonial.name],
+            relationship: [testimonial.relationship],
+            quote: [testimonial.quote],
+            photoUrl: [testimonial.photoURL],
+          })
+        )
+      ),
 
-      employees: this.fb.array((defaultBusiness.employees ?? []).map(employee => this.fb.group({
-        name: [employee.name],
-        role: [employee.role],
-        bio: [employee.bio],
-        photoURL: [employee.photoURL],
-      }))),
-      sections: this.fb.array((defaultBusiness.sections ?? []).map(section => this.fb.group({
-        sectionName: [section.sectionName || ''],
-        sectionTitle: [section.sectionTitle || ''],
-        sectionSubTitle: [section.sectionSubTitle || ''],
-        sectionContent: [section.sectionContent || ''],
-        sectionImageUrl: [section.sectionImageUrl || ''],
-        sectionType: [section.sectionType || ''],
-        sectionStyle: [section.sectionStyle || '']
-      })))
+      employees: this.fb.array(
+        (defaultBusiness.employees ?? []).map((employee) =>
+          this.fb.group({
+            name: [employee.name],
+            role: [employee.role],
+            bio: [employee.bio],
+            photoURL: [employee.photoURL],
+          })
+        )
+      ),
+      sections: this.fb.array(
+        (defaultBusiness.sections ?? []).map((section) =>
+          this.fb.group({
+            sectionName: [section.sectionName || ''],
+            sectionTitle: [section.sectionTitle || ''],
+            sectionSubTitle: [section.sectionSubTitle || ''],
+            sectionContent: [section.sectionContent || ''],
+            sectionImageUrl: [section.sectionImageUrl || ''],
+            sectionType: [section.sectionType || ''],
+            sectionStyle: [section.sectionStyle || ''],
+          })
+        )
+      ),
     });
   }
 
   // Helper function to populate form arrays
-private populateFormArray(formArray: FormArray, items: any[]) {
-  formArray.clear();  // Clear any existing controls
-  items.forEach(item => formArray.push(this.fb.control(item)));  // Add each item as a form control
-}
+  private populateFormArray(formArray: FormArray, items: any[]) {
+    formArray.clear(); // Clear any existing controls
+    items.forEach((item) => formArray.push(this.fb.control(item))); // Add each item as a form control
+  }
 
   isFirebaseStoragePath(imagePath: string): boolean {
     return (
@@ -300,7 +323,7 @@ private populateFormArray(formArray: FormArray, items: any[]) {
     if (this.aboutUsComponent) {
       this.aboutUsComponent.populateUniqueService(business.uniqueService ?? []);
       this.aboutUsComponent.populateWhyChoose(business.whyChoose ?? []);
-      this.aboutUsComponent.pupulateSection(business.sections)
+      this.aboutUsComponent.pupulateSection(business.sections);
     }
 
     if (this.reviewComponent) {
@@ -316,7 +339,7 @@ private populateFormArray(formArray: FormArray, items: any[]) {
   ngAfterViewInit(): void {
     // Attach event listener after view initialization
     const tabs = document.querySelectorAll('[data-bs-toggle="tab"]');
-    tabs.forEach(tab => {
+    tabs.forEach((tab) => {
       tab.addEventListener('shown.bs.tab', (event: any) => {
         this.autoSave();
       });
@@ -326,7 +349,8 @@ private populateFormArray(formArray: FormArray, items: any[]) {
   autoSave(): void {
     if (this.businessForm.valid) {
       const formValue = this.businessForm.value;
-      this.businessService.updateBusiness(this.businessId, formValue)
+      this.businessService
+        .updateBusiness(this.businessId, formValue)
         .then(() => {
           this.autoSaveMessage = 'Changes saved!';
           this.showAutoSaveMessage = true;
@@ -336,49 +360,134 @@ private populateFormArray(formArray: FormArray, items: any[]) {
             this.showAutoSaveMessage = false;
           }, 2000);
         })
-        .catch(err => console.error('Error auto-saving', err));
+        .catch((err) => console.error('Error auto-saving', err));
     }
   }
 
+  // onSubmit(): void {
+  //   //console.log("submit click");
+  //   if (this.businessForm.valid) {
+  //     const formValue: Business = this.businessForm.value;
+  //     console.log('form valid, this is the form', this.businessForm);
+  //     if (this.businessId) {
+  //       this.businessService
+  //         .updateBusiness(this.businessId, formValue)
+  //         .then(() =>
+  //           console.error(
+  //             'Business details updated successfully! New Business!'
+  //           )
+  //         )
+  //         .catch((err) =>
+  //           console.error('Error updating business details', err)
+  //         );
+  //     } else {
+  //       // console.log('Submit else');
+  //       this.businessService.createBusiness(formValue).subscribe((bus) => {
+  //         this.business = bus;
+  //         this.confirmationMessage = 'Business has been successfully created!';
+  //         this.showConfirmation = true;
+  //         //console.log("Business Created with ID: ", this.business?.id);
+
+  //         // Ensure the business ID is not undefined before calling updateBusiness
+  //         if (this.business && this.business.id) {
+  //           this.businessService
+  //             .updateBusiness(this.business.id, formValue)
+  //             .then(() =>
+  //               console.error(
+  //                 'Business details updated successfully! For Existing Business'
+  //               )
+  //             )
+  //             .catch((err) =>
+  //               console.error('Error updating business details', err)
+  //             );
+  //         } else {
+  //           console.error('Business ID is undefined.');
+  //         }
+  //       });
+  //     }
+  //   } else {
+  //     //console.log("Business Form  is not valid!")
+  //   }
+  // }
+
+  // onSubmit(): void {
+
+  //   if (this.isSubmitting) return; // Prevent multiple calls
+  // this.isSubmitting = true;
+
+  //   if (this.businessForm.valid) {
+  //     const formValue: Business = this.businessForm.value;
+
+  //     if (this.businessId) {
+  //       // Update existing business
+  //       this.businessService
+  //         .updateBusiness(this.businessId, formValue)
+  //         .then(() => console.log('Business details updated successfully!'))
+  //         .catch((err) => console.error('Error updating business details', err));
+  //     } else {
+  //       // Create new business
+  //       this.businessService.createBusiness(formValue).subscribe((bus) => {
+  //         if (bus && bus.id) {
+  //           this.business = bus;
+  //           this.businessId = bus.id; // ✅ Save the generated ID
+  //           console.log('Business created with ID:', this.businessId);
+  //         }
+  //         this.confirmationMessage = 'Business has been successfully created!';
+  //         this.showConfirmation = true;
+  //       });
+  //     }
+  //   } else {
+  //     console.log("Business Form is not valid!");
+  //   }
+  // }
+
+
+
+
   onSubmit(): void {
-    //console.log("submit click");
+    if (this.isSubmitting) return; // Prevent multiple submissions
+    this.isSubmitting = true;
+
+    console.log("onSubmit() called"); // Debugging
+
     if (this.businessForm.valid) {
       const formValue: Business = this.businessForm.value;
-      console.log('form valid, this is the form', this.businessForm);
+
       if (this.businessId) {
         this.businessService
           .updateBusiness(this.businessId, formValue)
-          .then(() => console.error('Business details updated successfully!'))
-          .catch((err) =>
-            console.error('Error updating business details', err)
-          );
+          .then(() => {
+            console.log("Business details updated successfully!");
+            this.isSubmitting = false;
+          })
+          .catch((err) => {
+            console.error("Error updating business details", err);
+            this.isSubmitting = false;
+          });
       } else {
-        // console.log('Submit else');
-        this.businessService.createBusiness(formValue).subscribe((bus) => {
-          this.business = bus;
-          this.confirmationMessage = 'Business has been successfully created!';
-          this.showConfirmation = true;
-          //console.log("Business Created with ID: ", this.business?.id);
-
-          // Ensure the business ID is not undefined before calling updateBusiness
-          if (this.business && this.business.id) {
-            this.businessService
-              .updateBusiness(this.business.id, formValue)
-              .then(() =>
-                console.error('Business details updated successfully!')
-              )
-              .catch((err) =>
-                console.error('Error updating business details', err)
-              );
-          } else {
-            console.error('Business ID is undefined.');
-          }
-        });
+        this.businessService.createBusiness(formValue)
+          .pipe(take(1)) // ✅ Ensure only one execution
+          .subscribe((bus) => {
+            if (bus && bus.id) {
+              this.business = bus;
+              this.businessId = bus.id; // ✅ Save the new business ID
+              console.log("Business created with ID:", this.businessId);
+            }
+            this.confirmationMessage = "Business has been successfully created!";
+            this.showConfirmation = true;
+            this.isSubmitting = false;
+          }, (err) => {
+            console.error("Error creating business:", err);
+            this.isSubmitting = false;
+          });
       }
     } else {
-      //console.log("Business Form  is not valid!")
+      console.log("Business Form is not valid!");
+      this.isSubmitting = false;
     }
   }
+
+
 
   closeConfirmation(): void {
     this.showConfirmation = false;

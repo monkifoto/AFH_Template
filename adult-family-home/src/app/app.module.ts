@@ -73,6 +73,10 @@ import { SectionFilterPipe } from './pipe/section-filter.pipe';
 import { ReplaceKeywordPipe } from './pipe/replace-keyword.pipe';
 import { LatestProductsComponent } from './component/UI/latest-products/latest-products.component';
 import { FaqComponent } from './component/faq/faq.component';
+import { SpGalleryComponentComponent } from './component/UI/sp-gallery-component/sp-gallery-component.component';
+import { SpContactUsComponentComponent } from './component/UI/sp-contact-us-component/sp-contact-us-component.component';
+import { SpHeroComponentComponent } from './component/UI/sp-hero-component/sp-hero-component.component';
+
 
     // Map hostnames to business IDs
     const businessIdMap: { [key: string]: string } = {
@@ -204,7 +208,10 @@ export function combinedInitializer(
     SectionFilterPipe,
     ReplaceKeywordPipe,
     LatestProductsComponent,
-    FaqComponent
+    FaqComponent,
+    SpGalleryComponentComponent,
+    SpContactUsComponentComponent,
+    SpHeroComponentComponent,
   ],
   imports: [
     BrowserModule,

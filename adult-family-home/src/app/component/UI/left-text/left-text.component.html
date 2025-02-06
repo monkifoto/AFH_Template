@@ -1,4 +1,4 @@
-<section class="left-text-section" *ngIf="themeType!='clemo' && themeType !='sb'">
+<section class="left-text-section" *ngIf="themeType!='clemo' && themeType !='sb'&& themeType!='sp'">
 
   <div class="text-container">
       <h2>{{title}}</h2>
@@ -12,7 +12,7 @@
 </section>
 
 
-<section class="content-container" *ngIf="themeType=='clemo' || themeType=='sb'">
+<section class="content-container" *ngIf="themeType=='clemo' || themeType=='sb' || themeType=='sp'">
   <div class="content-area">
   <div class="row">
 
