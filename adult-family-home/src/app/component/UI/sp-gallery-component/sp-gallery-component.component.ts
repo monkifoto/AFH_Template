@@ -1,36 +1,32 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { from, map, Observable, switchMap } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
 import { WebContentService } from 'src/app/services/web-content.service';
 import { Business } from 'src/app/model/business-questions.model';
 import { MetaService } from 'src/app/services/meta-service.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 
+
 @Component({
-  selector: 'app-photo-gallery',
-  templateUrl: './photo-gallery.component.html',
-  styleUrls: ['./photo-gallery.component.css']
+  selector: 'app-sp-gallery-component',
+  templateUrl: './sp-gallery-component.component.html',
+  styleUrls: ['./sp-gallery-component.component.css']
 })
-export class PhotoGalleryComponent implements OnInit {
+export class SpGalleryComponentComponent {
   @Input()
   businessId!: string;
-
-  heroImages: any[] = [];
   images: any[] = [];
   businessImages: any[] = [];
   lifeStyleImages: any[] = [];
   employeeImages: any[] = [];
-
+  heroImages: any[] = [];
   business: Business | null = null;
   selectedImageUrl: string | null = null;
   layoutType: string = 'demo';
 
-  constructor(
+constructor(
     private businessDataService: BusinessDataService,
-    private route: ActivatedRoute,
     private webContent: WebContentService,
-    private metaService: MetaService,
-    private router: Router){}
+    private metaService: MetaService){}
 
   ngOnInit(): void {
     this.businessDataService.businessData$.subscribe((business) => {
@@ -44,11 +40,6 @@ export class PhotoGalleryComponent implements OnInit {
     });
   }
 
-
-
-  closeLightbox() {
-    this.selectedImageUrl = null;
-  }
 
   loadImages(): void {
     type GalleryTarget = 'heroImages' | 'images' | 'businessImages' | 'lifeStyleImages' | 'employeeImages';
@@ -101,18 +92,16 @@ export class PhotoGalleryComponent implements OnInit {
     });
   }
 
+  closeLightbox() {
+    this.selectedImageUrl = null;
+  }
+
   onImageClick(imageUrl: string) {
     this.selectedImageUrl = imageUrl;
   }
 
   onCloseModal() {
     this.selectedImageUrl = null;
-  }
-
-
-  navigateToContact(id: string | null | undefined) {
-    //console.log('navigateToContact id', id);
-    this.router.navigate(['/contact-us'], { queryParams: { id } });
   }
 
 }

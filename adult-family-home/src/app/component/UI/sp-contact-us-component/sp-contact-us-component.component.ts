@@ -9,14 +9,12 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { EmailService } from 'src/app/services/email.service';
 
-
 @Component({
-  selector: 'app-contact-us',
-  templateUrl: './contact-us.component.html',
-  styleUrls: ['./contact-us.component.css']
+  selector: 'app-sp-contact-us-component',
+  templateUrl: './sp-contact-us-component.component.html',
+  styleUrls: ['./sp-contact-us-component.component.css'],
 })
-export class ContactUsComponent  implements OnInit{
-
+export class SpContactUsComponentComponent implements OnInit {
   business: Business | null = null;
 
   layoutType: string | undefined = 'demo';
@@ -25,7 +23,7 @@ export class ContactUsComponent  implements OnInit{
     name: '',
     email: '',
     message: '',
-    website: this.extractBaseDomain(window.location.hostname)
+    website: this.extractBaseDomain(window.location.hostname),
   };
 
   modalTitle: string = '';
@@ -36,15 +34,17 @@ export class ContactUsComponent  implements OnInit{
     private sanitizer: DomSanitizer,
     private businessDataService: BusinessDataService,
     private webContent: WebContentService,
-    private route: ActivatedRoute,private http: HttpClient,
+    private route: ActivatedRoute,
+    private http: HttpClient,
     private emailService: EmailService,
-    private metaService: MetaService){}
+    private metaService: MetaService
+  ) {}
 
-      get sanitizedBusinessHours(): SafeHtml {
-        return this.business?.businessHours
-          ? this.sanitizer.bypassSecurityTrustHtml(this.business.businessHours)
-          : '';
-      }
+  get sanitizedBusinessHours(): SafeHtml {
+    return this.business?.businessHours
+      ? this.sanitizer.bypassSecurityTrustHtml(this.business.businessHours)
+      : '';
+  }
 
   ngOnInit(): void {
     this.businessDataService.businessData$.subscribe((business) => {
@@ -55,17 +55,6 @@ export class ContactUsComponent  implements OnInit{
         this.layoutType = this.business?.theme.themeType;
       }
     });
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      const modalElement = document.getElementById('responseModal');
-      if (modalElement) {
-        this.responseModal = new Modal(modalElement); // Bootstrap modal instance
-      } else {
-        console.error('Modal element not found.');
-      }
-    }, 0); // This delays execution to the next event loop cycle, ensuring the DOM is fully loaded
   }
 
   onSubmit() {
@@ -86,7 +75,6 @@ export class ContactUsComponent  implements OnInit{
         );
   }
 
-  // Helper function to extract the base domain
   private extractBaseDomain(hostname: string): string {
     const parts = hostname.split('.');
     // Check if hostname has subdomains (e.g., subdomain.example.com)
@@ -98,7 +86,7 @@ export class ContactUsComponent  implements OnInit{
 
   showModal() {
     if (this.responseModal) {
-      this.responseModal.show();  // Use the Bootstrap modal instance to show the modal
+      this.responseModal.show(); // Use the Bootstrap modal instance to show the modal
     }
   }
 }

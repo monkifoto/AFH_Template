@@ -51,6 +51,14 @@ export class NavigationComponent implements OnInit {
     });
   }
 
+  scrollToSection(sectionId: string) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    this.menuOpen = false; // Close menu after clicking (optional)
+  }
+
   toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
   }
