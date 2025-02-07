@@ -11,57 +11,8 @@
   text-align: center;
 }
 
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background: rgba(0, 0, 0, 0.5);
-  color:  var(--primary-color);
-  font-family: 'Playfair Display', serif;
-}
-
-.hero-overlay h1 {
-  font-size: 5rem;
-  letter-spacing: 0.3rem;
-  text-transform: uppercase;
-  font-weight: 700;
-  margin: 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.hero-subtitle{
-  font-size: 2rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-section {
-  margin-bottom: 40px;
-}
-
-.business-story {
-  background-color:  var(--primary-color);
-  padding: 50px 20px;
-  border-radius: 8px;
-}
-
-.business-team {
-  background-color:  var(--primary-color);
-  padding: 20px;
-  border-radius: 12px;
-}
 
 .mission-vision {
   display: flex;
@@ -83,17 +34,6 @@ section {
   width: 100%;
 }
 
-.business-story h2 {
-  font-size: 2.5rem;
-  margin-bottom: 30px;
-  color: #333;
-}
-
-.mission h2, .vision h2 {
-  font-size: 2.5rem;
-  margin-bottom: 30px;
-  color: #333;
-}
 
 .mission p, .vision p {
   font-size: 1rem;
@@ -158,9 +98,6 @@ section {
     margin: 20px 0;
   }
 
-  .business-story h2, .mission h2, .vision h2 {
-    font-size: 2rem;
-  }
 }
 
 @media (max-width: 480px) {
@@ -175,10 +112,6 @@ section {
 
   .mission, .vision {
     padding: 20px 10px;
-  }
-
-  .business-story h2, .mission h2, .vision h2 {
-    font-size: 1.8rem;
   }
 
   .team-item {
@@ -200,51 +133,6 @@ section {
   }
 }
 
-.heading-container {
-  text-align: center;
-  margin: 20px 0;
-  padding: 10px;
-  position: relative;
-  overflow: hidden;
-}
-
-.styled-heading {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #333;
-  position: relative;
-
-  display: inline-block;
-  padding: 10px 20px;
-  width: 400px;
-  background-color: var(--background-color);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.styled-heading:before {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background-color:  var(--primary-color);
-  z-index: 0;
-  transform: translateY(-50%);
-
-}
-
-.styled-heading:after {
-  content: "";
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  width: 100px;
-  height: 5px;
-  background-color: var(--accent-color);
-  transform: translateX(-50%);
-
-}
 
 .about-cta {
   background-color: var(--dark-background-color);

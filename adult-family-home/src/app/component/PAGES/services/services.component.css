@@ -11,41 +11,7 @@
   text-align: center;
 }
 
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background: rgba(0, 0, 0, 0.5);
-  color:  var(--primary-color);
-  font-family: 'Playfair Display', serif;
-}
 
-.hero-overlay h1 {
-  font-size: 5rem;
-  letter-spacing: 0.5rem;
-  text-transform: uppercase;
-  font-weight: 700;
-  margin: 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.hero-subtitle{
-  font-size: 2rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
 
 .services-list {
   background-color:  var(--primary-color);
@@ -68,12 +34,6 @@
   margin-top: 0;
 }
 
-.special-programs, .tours-consulting {
-  background-color:  var(--primary-color);
-  padding: 30px;
-  border-radius: 8px;
-  margin-bottom: 40px;
-}
 
 .tours-consulting {
   display: flex;
@@ -118,49 +78,6 @@
   max-width: 100%;
 }
 
-.heading-container {
-  text-align: center;
-  margin: 20px 0;
-  padding: 10px;
-  position: relative;
-  overflow: hidden;
-}
-
-.styled-heading {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #333;
-  position: relative;
-  /* z-index: 1; */
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: var(--background-color);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.styled-heading:before {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background-color: #e0e0e0;
-  z-index: 0;
-  transform: translateY(-50%);
-}
-
-.styled-heading:after {
-  content: "";
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  width: 100px;
-  height: 5px;
-  background-color: var(--accent-color);
-  transform: translateX(-50%);
-  /* z-index: 2; */
-}
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
@@ -191,11 +108,6 @@
     padding-top: 1rem;
     padding-bottom: 0.5rem;
   }
-
-  .styled-heading {
-    font-size: 1.5rem;
-    padding: 8px 16px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -211,15 +123,7 @@
     padding: 10px;
   }
 
-  .service_heading {
-    padding-top: 0.5rem;
-    padding-bottom: 0.25rem;
-  }
 
-  .styled-heading {
-    font-size: 1.25rem;
-    padding: 6px 12px;
-  }
 
   .service-item {
     padding: 15px;
