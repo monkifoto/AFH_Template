@@ -28,6 +28,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
   @ViewChild(ServicesPageComponent) serviceComponent!: ServicesPageComponent;
   @ViewChild(AboutUsPageComponent) aboutUsComponent!: AboutUsPageComponent;
 
+
   business!: Business;
   businessForm!: FormGroup;
   uploadProgress: { [key: string]: Observable<number | undefined> } = {};
@@ -67,6 +68,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
 
   loadBusinessData(): void {
     this.businessService.getBusiness(this.businessId).subscribe(
@@ -196,16 +198,9 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
       providerName: [defaultBusiness.providerName],
       tagline: [defaultBusiness.tagline],
       certifications: [defaultBusiness.certifications],
-      // specialPrograms: [defaultBusiness.specialPrograms],
-      // tours: [defaultBusiness.tours],
-      // freeConsulting: [defaultBusiness.freeConsulting],
-      // websiteGoals: [defaultBusiness.websiteGoals],
       logoImage: [defaultBusiness.logoImage],
       faviconUrl: [defaultBusiness.faviconUrl],
-      // ownerImagesBios: [defaultBusiness.ownerImagesBios],
-      // staffImagesBios: [defaultBusiness.staffImagesBios],
-      // mediaFeatures: [defaultBusiness.mediaFeatures],
-      // ratings: [defaultBusiness.ratings],
+
       address: [defaultBusiness.address],
       phone: [defaultBusiness.phone],
       fax: [defaultBusiness.fax],
@@ -321,9 +316,9 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     }
 
     if (this.aboutUsComponent) {
-      this.aboutUsComponent.populateUniqueService(business.uniqueService ?? []);
-      this.aboutUsComponent.populateWhyChoose(business.whyChoose ?? []);
-      this.aboutUsComponent.pupulateSection(business.sections);
+      // this.aboutUsComponent.populateUniqueService(business.uniqueService ?? []);
+      // this.aboutUsComponent.populateWhyChoose(business.whyChoose ?? []);
+      //this.aboutUsComponent.pupulateSection(business.sections);
     }
 
     if (this.reviewComponent) {
@@ -364,85 +359,20 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // onSubmit(): void {
-  //   //console.log("submit click");
-  //   if (this.businessForm.valid) {
-  //     const formValue: Business = this.businessForm.value;
-  //     console.log('form valid, this is the form', this.businessForm);
-  //     if (this.businessId) {
-  //       this.businessService
-  //         .updateBusiness(this.businessId, formValue)
-  //         .then(() =>
-  //           console.error(
-  //             'Business details updated successfully! New Business!'
-  //           )
-  //         )
-  //         .catch((err) =>
-  //           console.error('Error updating business details', err)
-  //         );
-  //     } else {
-  //       // console.log('Submit else');
-  //       this.businessService.createBusiness(formValue).subscribe((bus) => {
-  //         this.business = bus;
-  //         this.confirmationMessage = 'Business has been successfully created!';
-  //         this.showConfirmation = true;
-  //         //console.log("Business Created with ID: ", this.business?.id);
+  private getExistingSectionCounter(page: string, location: string): number {
+    const sections = this.businessForm.get('sections') as FormArray;
+    let counter = 1; // Default counter if no section exists
 
-  //         // Ensure the business ID is not undefined before calling updateBusiness
-  //         if (this.business && this.business.id) {
-  //           this.businessService
-  //             .updateBusiness(this.business.id, formValue)
-  //             .then(() =>
-  //               console.error(
-  //                 'Business details updated successfully! For Existing Business'
-  //               )
-  //             )
-  //             .catch((err) =>
-  //               console.error('Error updating business details', err)
-  //             );
-  //         } else {
-  //           console.error('Business ID is undefined.');
-  //         }
-  //       });
-  //     }
-  //   } else {
-  //     //console.log("Business Form  is not valid!")
-  //   }
-  // }
+    // Loop through existing sections to check if one with the same Page and Location exists
+    sections.controls.forEach((section, index) => {
+      const sectionPage = section.get('sectionName')?.value.split('Section')[0]; // Extract Page + Location part of sectionName
+      if (sectionPage === `${page}${location}`) {
+        counter++; // Increment the counter if a matching section is found
+      }
+    });
 
-  // onSubmit(): void {
-
-  //   if (this.isSubmitting) return; // Prevent multiple calls
-  // this.isSubmitting = true;
-
-  //   if (this.businessForm.valid) {
-  //     const formValue: Business = this.businessForm.value;
-
-  //     if (this.businessId) {
-  //       // Update existing business
-  //       this.businessService
-  //         .updateBusiness(this.businessId, formValue)
-  //         .then(() => console.log('Business details updated successfully!'))
-  //         .catch((err) => console.error('Error updating business details', err));
-  //     } else {
-  //       // Create new business
-  //       this.businessService.createBusiness(formValue).subscribe((bus) => {
-  //         if (bus && bus.id) {
-  //           this.business = bus;
-  //           this.businessId = bus.id; // ✅ Save the generated ID
-  //           console.log('Business created with ID:', this.businessId);
-  //         }
-  //         this.confirmationMessage = 'Business has been successfully created!';
-  //         this.showConfirmation = true;
-  //       });
-  //     }
-  //   } else {
-  //     console.log("Business Form is not valid!");
-  //   }
-  // }
-
-
-
+    return counter;
+  }
 
   onSubmit(): void {
     if (this.isSubmitting) return; // Prevent multiple submissions
@@ -451,6 +381,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     console.log("onSubmit() called"); // Debugging
 
     if (this.businessForm.valid) {
+
       const formValue: Business = this.businessForm.value;
 
       if (this.businessId) {

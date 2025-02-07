@@ -84,8 +84,11 @@ import { SpHeroComponentComponent } from './component/UI/sp-hero-component/sp-he
       "www.helpinghandafh.com": "vfCMoPjAu2ROVBbKvk0D",
       "aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1",
       "www.aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1",
-       "sbmediahub.com": "MGou3rzTVIbP77OLmZa7",
-      "www.sbmediahub.com": "MGou3rzTVIbP77OLmZa7"
+      "sbmediahub.com": "MGou3rzTVIbP77OLmZa7",
+      "www.sbmediahub.com": "MGou3rzTVIbP77OLmZa7",
+      "countrycrestafh.com": "yrNc50SvfPqwTSkvvygA",
+      "www.countrycrestafh.com": "yrNc50SvfPqwTSkvvygA"
+
     };
 
 
