@@ -194,6 +194,16 @@
 <!------------Single Page   -->
 
 <section *ngIf="business?.theme?.themeType === 'sp'" class="single_page_container">
+<section id="hero">
+  <app-sp-hero-component
+  [navigation]="'side'"
+  [sideButtons]="false"
+  [buttonBorderRadius]="'0px'"
+  [subtitleSize]="'50px'"
+  [subtitleWeight]="'100'"
+  sliderHeight="40vh">
+  ></app-sp-hero-component>
+</section>
 <section id="home" class="single_page_section">
 
   <app-center-text
