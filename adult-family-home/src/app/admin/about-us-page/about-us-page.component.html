@@ -1,201 +1,94 @@
 <form [formGroup]="form">
-  <h2>About Us Page</h2>
-
-  <h2>Manage About Us Sections</h2>
-
+  <h2>Sections</h2>
   <button (click)="addSection()" class="afhBtn">+ Add Section</button>
+  <div formArrayName="sections">
+    <div
+      *ngFor="let section of sections.controls; let i = index"
+      [formGroupName]="i"
+      class="sectionForm-container"
+    >
+      <h3>Section {{ i + 1 }}  <label class="sectionName">{{ section.get("sectionName")?.value }}</label> </h3>
 
-  <div formArrayName="sections" >
-    <div *ngFor="let section of sections.controls; let i = index" [formGroupName]="i" class="sectionForm-container">
-      <div class="sectionForm-header">
 
-        <div class="sectionForm-header-item">
-      <h3>Section {{ i + 1 }}</h3>
-    </div>
-<div class="sectionForm-header-item">
-  <button (click)="toggleSection(i)" class="icon-btn">
-    <i class="fa-solid" [ngClass]="collapsedSections[i] ? 'fa-angles-down' : 'fa-angles-up'"></i>
-  </button>
-    </div>
-      </div>
-<div class="sectionForm-header">
-      <div class="form-group" class="sectionForm-header-item">
-        <label for="sectionName">Section Name</label>
-        <input formControlName="sectionName" id="sectionName" class="form-control" placeholder="Enter section name" />
-      </div>
 
-      <div class="form-group" class="sectionForm-header-item">
-        <label for="sectionType">Section Type</label>
-        <select formControlName="sectionType" id="sectionType" class="form-control">
-          <option value="Story">Story</option>
-          <option value="Vision">Vision</option>
-          <option value="Motivation">Motivation</option>
-          <option value="Mission">Mission</option>
-          <option value="Welcome">Welcome</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-    </div>
-    <div [ngClass]="{'collapsed': collapsedSections[i]}">
-        <label for="sectionTitle">Title</label>
-        <input formControlName="sectionTitle" id="sectionTitle" class="form-control" placeholder="Enter section title" />
-        <label for="sectionSubTitle">Subtitle</label>
-        <input formControlName="sectionSubTitle" id="sectionSubTitle" class="form-control" placeholder="Enter section Subtitle" />
-        <label for="sectionContent">Content</label>
-        <textarea formControlName="sectionContent" id="sectionContent" class="form-control" rows="5"></textarea>
-        <br/>
-        <label>Choose an Image</label> <br/>
-        <div *ngFor="let image of predefinedImages" class="image-selection">
-          <input type="radio" formControlName="sectionImageUrl" [value]="image.url" />
-          <img [src]="image.url" class="contactUsImagesThumbnails" alt="Predefined Image" />
+
+      <button (click)="toggleSection(i)" class="icon-btn">
+        <i
+          class="fa-solid"
+          [ngClass]="collapsedSections[i] ? 'fa-angles-down' : 'fa-angles-up'"
+        ></i>
+      </button>
+
+      <div [ngClass]="{ collapsed: collapsedSections[i] }">
+        <!-- Row 1: Page, Location, Section Type on the same row -->
+        <div class="row">
+          <div class="col">
+            <label>Page</label>
+            <select formControlName="page" class="form-control">
+              <option *ngFor="let p of pages" [value]="p">{{ p }}</option>
+            </select>
+          </div>
+
+          <div class="col">
+            <label>Location</label>
+            <select formControlName="location" class="form-control">
+              <option *ngFor="let loc of locations" [value]="loc">
+                {{ loc }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col">
+            <label>Section Type</label>
+            <select formControlName="sectionType" class="form-control">
+              <option *ngFor="let type of sectionTypes" [value]="type">
+                {{ type }}
+              </option>
+            </select>
+          </div>
         </div>
-      </div>
 
+        <!-- Row 2: Title and Subtitle on the same row -->
+        <div class="row">
+          <div class="col">
+            <label>Title</label>
+            <input formControlName="sectionTitle" class="form-control" />
+          </div>
 
-      <button (click)="removeSection(i)" class="icon-btn delete-btn"> <i class="fa-solid fa-trash-can"></i></button>
-    </div>
-  </div>
+          <div class="col">
+            <label>Subtitle</label>
+            <input formControlName="sectionSubTitle" class="form-control" />
+          </div>
+        </div>
 
+        <!-- Content and Image Selection -->
+        <label>Content</label>
+        <textarea
+          formControlName="sectionContent"
+          class="form-control"
+        ></textarea>
 
+        <label>Choose an Image</label>
+        <div class="image-selection-container">
+          <div *ngFor="let image of predefinedImages" class="image-selection">
+            <input
+              type="radio"
+              formControlName="sectionImageUrl"
+              [value]="image.url"
+            />
+            <img [src]="image.url" class="contactUsImagesThumbnails" />
+          </div>
+        </div>
 
-  <!-- <div class="form-group">
-    <div>
-      <h4 for="businessStory">Our Story / Who we are (businessStory)</h4>
-      <strong>Choose from available images:</strong><br />
-      <div
-        *ngFor="let image of predefinedImages"
-        style="display: inline-block; margin-right: 10px"
-      >
-        <input
-          type="radio"
-          formControlName="businessStoryImageUrl"
-          [value]="image.url"
-          (change)="onBusinessImageSelection(image.url)"
-        />
-        <img
-          class="contactUsImagesThumbnails"
-          [src]="image.url"
-          alt="Predefined Image"
-        />
-      </div>
-    </div>
-
-    <br />
-    <input
-      formControlName="businessStoryTitle"
-      class="form-control"
-      placeholder="Business Story Title"
-    />
-    <br />
-    <textarea
-      id="businessStory"
-      formControlName="businessStory"
-      class="form-control"
-      rows="10"
-    ></textarea>
-  </div>
-  <div class="form-group">
-    <h4 for="mission">Our Mission/What We stand for (mission)</h4>
-    <div>
-      <strong>Choose from available images:</strong><br />
-      <div
-        *ngFor="let image of predefinedImages"
-        style="display: inline-block; margin-right: 10px"
-      >
-        <input
-          type="radio"
-          formControlName="missionImageUrl"
-          [value]="image.url"
-          (change)="onMissionImageSelection(image.url)"
-        />
-        <img
-          class="contactUsImagesThumbnails"
-          [src]="image.url"
-          alt="Predefined Image"
-        />
+        <button (click)="updateSection(i)" class="afhBtn">Update</button>
+        <button (click)="removeSection(i)" class="afhBtn delete-btn">
+          Delete
+        </button>
       </div>
     </div>
-    <br />
+  </div>
 
-    <input
-      formControlName="missionTitle"
-      class="form-control"
-      placeholder="Mission Title"
-    />
-    <br />
-    <textarea
-      id="mission"
-      formControlName="mission"
-      class="form-control"
-    ></textarea>
-  </div>
-  <div class="form-group">
-    <h4 for="vision">Our Vision / The Future We see (vision)</h4>
-  <div>
-    <strong>Choose from available images:</strong><br>
-    <div
-      *ngFor="let image of predefinedImages"
-      style="display: inline-block; margin-right: 10px"
-    >
-      <input
-        type="radio"
-        formControlName="visionImageUrl"
-        [value]="image.url"
-        (change)="onVisionImageSelection(image.url)"
-      />
-      <img
-        class="contactUsImagesThumbnails"
-        [src]="image.url"
-        alt="Predefined Image"
-      />
-    </div>
-  </div>
-<br>
-    <input
-      formControlName="visionTitle"
-      class="form-control"
-      placeholder="Vision Title"
-    /><br>
-    <textarea
-      id="vision"
-      formControlName="vision"
-      class="form-control"
-    ></textarea>
-  </div>
-  <div class="form-group">
-    <h4 for="motivation">Motivation (motivation)</h4>
-  <div>
-    <strong>Choose from available images:</strong><br>
-    <div
-      *ngFor="let image of predefinedImages"
-      style="display: inline-block; margin-right: 10px"
-    >
-      <input
-        type="radio"
-        formControlName="motivationImageUrl"
-        [value]="image.url"
-        (change)="onMotivationImageSelection(image.url)"
-      />
-      <img
-        class="contactUsImagesThumbnails"
-        [src]="image.url"
-        alt="Predefined Image"
-      />
-    </div>
-  </div>
-  <br>
-    <input
-      formControlName="motivationTitle"
-      class="form-control"
-      placeholder="Motivation Title"
-    /><br>
-    <textarea
-      id="motivation"
-      formControlName="motivation"
-      class="form-control"
-    ></textarea>
-  </div> -->
-
+<!--
   <h2>Unique Features</h2>
   <button type="button" class="afhBtn" (click)="toggleUniqueServiceForm()">
    + Add Unique Service
@@ -272,5 +165,5 @@
       formControlName="certifications"
       class="form-control"
     ></textarea>
-  </div>
+  </div> -->
 </form>

@@ -158,4 +158,32 @@ export class BusinessService {
       return 'default.css';
     });
   }
+
+  // Add section to Firestore
+  createSection(businessId: string, section: any): Promise<any> {
+    return this.afs.collection(`${this.basePath}/${businessId}/sections`).add(section);
+  }
+
+  getSections(businessId: string): Observable<any[]> {
+    return this.afs.collection(`${this.basePath}/${businessId}/sections`)
+      .snapshotChanges() // Get real-time changes
+      .pipe(
+        map(actions => actions.map(a => {
+          const data = a.payload.doc.data() as any;
+          const sectionId = a.payload.doc.id; // The document ID is the sectionId
+          console.log("🔥 Fetched section from Firestore:", { sectionId, ...data }); // Log the section with sectionId
+          return { sectionId, ...data }; // Ensure the sectionId is merged correctly
+        }))
+      );
+  }
+
+
+  updateSection(businessId: string, sectionId: string, section: any): Promise<void> {
+    return this.afs.doc(`${this.basePath}/${businessId}/sections/${sectionId}`).update(section);
+  }
+
+  deleteSection(businessId: string, sectionId: string): Promise<void> {
+    return this.afs.doc(`${this.basePath}/${businessId}/sections/${sectionId}`).delete();
+  }
+
 }

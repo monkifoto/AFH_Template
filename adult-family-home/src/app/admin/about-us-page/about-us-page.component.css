@@ -1,10 +1,12 @@
+/* General styling */
 h1 {
   text-align: center;
   margin-bottom: 20px;
 }
+
 h2 {
-  border-bottom: 2px solid #343a40; /* Dark gray underline for section headings */
-  color: #343a40; /* Match with active tab color */
+  border-bottom: 2px solid #343a40;
+  color: #343a40;
   margin-bottom: 20px;
   padding-bottom: 10px;
 }
@@ -27,38 +29,43 @@ h2 {
   box-sizing: border-box;
 }
 
-.contactUsImagesThumbnails {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
+/* For section name */
+.sectionName {
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
 
-.image-selection{
-  display: inline-block;
-  margin-right: 10px;
+/* Row layout using flexbox */
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
-.sectionForm-container
-{
+.col {
+  flex: 1;
+}
+
+.sectionForm-container {
   border: solid 1px var(--dark-background-color);
   border-radius: 15px;
   padding: 10px;
   margin: 5px;
 }
 
-.sectionForm-header{
+.sectionForm-header {
   display: flex;
-  justify-content: space-between; /* Pushes items to the far ends */
-  align-items: center; /* Aligns items vertically */
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
 }
 
-
-.sectionForm-header-item{
+.sectionForm-header-item {
   width: 50%;
   padding: 10px;
 }
-
 
 .collapsed {
   display: none;
@@ -83,4 +90,24 @@ h2 {
 
 .delete-btn {
   color: red;
+}
+
+.contactUsImagesThumbnails {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+/* For image selection */
+.image-selection {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+/* Container for the images to allow wrapping */
+.image-selection-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
