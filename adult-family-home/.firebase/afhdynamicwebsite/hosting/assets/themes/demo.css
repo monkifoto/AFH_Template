@@ -762,7 +762,7 @@ section {
   /* z-index: 1; */
   display: inline-block;
   padding: 10px 20px;
-  width: 400px;
+  max-width: 400px;
   background-color: var(--background-color);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
