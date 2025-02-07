@@ -131,7 +131,7 @@ export class BusinessModel {
           sectionStyle: 'hh',
         },
         {
-          sectionName: 'HomeRightText',
+          sectionName: 'AboutUsightText',
           sectionTitle: 'Our Story',
           sectionSubTitle: 'Caring with compassion for every senior.',
           sectionContent:
@@ -140,7 +140,7 @@ export class BusinessModel {
           sectionStyle: 'hh',
         },
         {
-          sectionName: 'HomeLeftText',
+          sectionName: 'AboutUsLeftText',
           sectionTitle: 'Our Vision',
           sectionSubTitle: 'Caring with compassion for every senior.',
           sectionContent:
@@ -149,7 +149,7 @@ export class BusinessModel {
           sectionStyle: 'hh',
         },
         {
-          sectionName: 'HomeRightText',
+          sectionName: 'ServicesRightText',
           sectionTitle: 'Our Mission',
           sectionSubTitle: 'Caring with compassion for every senior.',
           sectionContent:
@@ -158,7 +158,7 @@ export class BusinessModel {
           sectionStyle: 'hh',
         },
         {
-          sectionName: 'HomeLeftText',
+          sectionName: 'ServicesLeftText',
           sectionTitle: 'Our Motivation',
           sectionSubTitle: 'Caring with compassion for every senior.',
           sectionContent:
