@@ -1,4 +1,6 @@
 export  interface Section {
+  page:string;
+  location:string;
   sectionId?: string;
   sectionName:string;
   sectionTitle: string;

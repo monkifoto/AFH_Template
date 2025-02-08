@@ -176,66 +176,97 @@
 
 
     <ng-container *ngSwitchDefault>
-      <app-hero></app-hero>
-      <div class="content-wrapper">
-        <app-item-list
+      <div class="hero-services">
+        <div class="hero-overlay">
+          <h1>Our Services</h1>
+          <div class="hero-subtitle">
+            <p>Providing exceptional care tailored to your needs</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <section class="services-list">
+          <div class="heading-container">
+            <h2 class="styled-heading">Our Services</h2>
+          </div>
+          <app-item-list
           [layoutType]="business.theme.themeType"
-          [services]="[
-            {
-              icon: 'fas fa-person-cane',
-              name: 'Mobility Assistance',
-              description:
-                'Gentle, reliable support to help residents move safely and confidently, enhancing independence and comfort in their daily lives'
-            },
-            {
-              icon: 'fas fa-people-group',
-              name: 'Companionship Care',
-              description:
-                'We provide 24-hour care and close supervision, ensuring residents receive attentive, around-the-clock support for their safety and well-being.'
-            },
-            {
-              icon: 'fas fa-bowl-food',
-              name: 'Meal Planning',
-              description:
-                '3 delicious homemade cooked meals with snacks available, dietary accommodations per doctor orders and preferences.'
-            },
-            {
-              icon: 'fas fa-prescription-bottle',
-              name: 'Medication',
-              description:
-                '24-hour medication administration, management, and reminders to ensure residents receive their medications safely and on time.'
-            },
-            {
-              icon: 'fas fa-shower',
-              name: 'Personal Hygiene',
-              description:
-                'All inclusive personal care including: bathing, grooming, laundry, incontinence support etc. Also available: hair styling, manicure, pedicure, podiatrist.'
-            },
-            {
-              icon: 'fas fa-bed-pulse',
-              name: 'Medical Care',
-              description:
-                'All the necessary care for Aging In Place. Able to provide a High Level of Care, including Diabetic Care.'
-            }
-          ]"
+          [services]="business.services"
+          [minimal]="false"
         ></app-item-list>
+        </section>
 
-        <app-testimonial-image
-          [imageURL]="
-            '../../../../assets/sharedAssets/istockphoto-1453597643-2048x2048.jpg'
-          "
-          [author]="business.testimonials[6].name"
-          [text]="business.testimonials[6].quote"
-        ></app-testimonial-image>
+        <section class="services-list">
+          <div class="heading-container">
+            <h2 class="styled-heading">Our Benefits</h2>
+          </div>
+          <app-item-list
+          [layoutType]="business.theme.themeType"
+          [services]="business.benefits"
+          [minimal]="false"
+        ></app-item-list>
+        </section>
 
-        <app-call-to-action
-          [text]="'Have more questions?'"
-          [buttonText]="'Contact Us'"
-          [isButton]="true"
-          [bgColor]="business.theme.backgroundColor"
-          [textColor]="business.theme.textColor"
-        >
-        </app-call-to-action>
+        <section class="special-programs"  *ngIf="business.sections | sectionFilter:'ServicesCenterTop' as section">
+          <div class="heading-container">
+            <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
+          </div>
+          <h3
+            class="services_txt garamond"
+            [innerHTML]="section.sectionContent || ''"
+          ></h3>
+        </section>
+
+        <section class="tours-consulting">
+
+          <div class="tours"  *ngIf="business.sections | sectionFilter:'ServicesLeft' as section">
+            <img
+              [src]="
+                section.sectionImageUrl ||
+                'assets/sharedAssets/image_fx_(1).jpg'
+              "
+              alt="Contact Image"
+            />
+            <div class="heading-container">
+              <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
+            </div>
+            <div
+              class="services_txt garamond"
+              [innerHTML]="section.sectionContent || ''"
+            ></div>
+          </div>
+
+          <div class="consulting"  *ngIf="business.sections | sectionFilter:'ServicesRight' as section">
+            <img
+              [src]="
+                section.sectionImageUrl ||
+                'assets/sharedAssets/image_fx_(1).jpg'
+              "
+              alt="Contact Image"
+            />
+            <div class="heading-container">
+              <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
+            </div>
+            <div
+              class="services_txt garamond"
+              [innerHTML]="section.sectionContent || ''"
+            ></div>
+          </div>
+
+        </section>
+      </div>
+      <div class="cta-section services-cta">
+        <div class="cta-content">
+          <h2>Ready to Experience Exceptional Care?</h2>
+          <p>
+            Schedule a free consultation today and let’s discuss how we can meet
+            your needs with our personalized services.
+          </p>
+          <button type="button" class="afhBtn" (click)="navigateToContact()">
+            Book a Consultation
+          </button>
+        </div>
       </div>
     </ng-container>
   </div>

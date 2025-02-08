@@ -80,54 +80,6 @@ img {
   max-width: 100%;
 }
 
-/*
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    margin: 0;
-    color:#000000;
-    font-family: 'Montserrat', sans-serif;
-}
-
-h1{
-  font-weight: 900;
-  margin-bottom: 2rem;
-  font-size: calc(var(--heading-2-size-value) * 3.75rem);
-}
-
-h2 {
-  font-weight: 700;
-  margin-bottom: 2rem;
-  font-size: calc(var(--heading-2-size-value) * 3rem);
-  line-height: 3rem;
-}
-
-h3{
-  font-weight: 400;
-  margin-bottom: 2rem;
-  font-size: calc(var(--large-text-size-value) * 1.875rem);
-  line-height: 2.5rem;
-}
-
-
- h4 {
-  font-weight: 200;
-  line-height: 1.6;
-  padding: 20px;
-  font-size: calc(var(--large-text-size-value) * 1.4rem);
-}
-
-p{
-  font-weight: 100;
-    line-height: 1.4;
-    padding: 20px;
-    font-size: calc(var(--large-text-size-value) * 1.2rem);
-
-} */
-
 h1,
 h2,
 h3,
@@ -222,12 +174,7 @@ p{
   margin: 10px 0 10px auto;
   background: #000;
 }
-/*section:nth-of-type(odd) {
-    background-color: #F9F9F9;
-}
-/*
-Button
-*/
+
 .btn-primary.active.focus,
 .btn-primary.active:focus,
 .btn-primary.active:hover,
@@ -377,3 +324,8 @@ input::-ms-input-placeholder {
 .clemo-head-title p{
   font-size:1rem;
 }
+
+
+
+
+

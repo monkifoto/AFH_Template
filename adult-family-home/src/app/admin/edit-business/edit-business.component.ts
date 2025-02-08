@@ -77,6 +77,16 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
           //console.log('Business data:', business); // Debugging line
           this.business = business;
           this.populateForm(business);
+
+           // Ensure each section has an ID
+        if (business.sections) {
+          business.sections.forEach((s, index) => {
+            console.log(`🔥 Load Business Data in Edit Business Section ${index}:`, s);
+            if (!s.sectionId) {
+              console.warn(`⚠️ Section at index ${index} is missing an ID!`);
+            }
+          });
+        }
           // Check if the logo image is a Firebase storage path
           if (
             business.logoImage &&
@@ -316,9 +326,9 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     }
 
     if (this.aboutUsComponent) {
-      // this.aboutUsComponent.populateUniqueService(business.uniqueService ?? []);
-      // this.aboutUsComponent.populateWhyChoose(business.whyChoose ?? []);
-      //this.aboutUsComponent.pupulateSection(business.sections);
+      this.aboutUsComponent.populateUniqueService(business.uniqueService ?? []);
+      this.aboutUsComponent.populateWhyChoose(business.whyChoose ?? []);
+      // this.aboutUsComponent.pupulateSection(business.sections);
     }
 
     if (this.reviewComponent) {
@@ -359,20 +369,6 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private getExistingSectionCounter(page: string, location: string): number {
-    const sections = this.businessForm.get('sections') as FormArray;
-    let counter = 1; // Default counter if no section exists
-
-    // Loop through existing sections to check if one with the same Page and Location exists
-    sections.controls.forEach((section, index) => {
-      const sectionPage = section.get('sectionName')?.value.split('Section')[0]; // Extract Page + Location part of sectionName
-      if (sectionPage === `${page}${location}`) {
-        counter++; // Increment the counter if a matching section is found
-      }
-    });
-
-    return counter;
-  }
 
   onSubmit(): void {
     if (this.isSubmitting) return; // Prevent multiple submissions
@@ -381,6 +377,11 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     console.log("onSubmit() called"); // Debugging
 
     if (this.businessForm.valid) {
+
+        console.log("Form Value Before Saving:", this.businessForm.value); // 🔍 Debugging
+        console.log("Unique Services:", this.businessForm.get('uniqueService')?.value); // 🔍 Debugging
+        console.log("Why Choose:", this.businessForm.get('whyChoose')?.value); // 🔍 Debugging
+
 
       const formValue: Business = this.businessForm.value;
 

@@ -17,12 +17,15 @@ export class AboutUsPageComponent implements OnInit {
 
   @Output() sectionNameGenerated = new EventEmitter<string>();
 
-  // newUniqueServiceForm!: FormGroup;
-  // newWhyChooseForm!: FormGroup;
+  newUniqueServiceForm!: FormGroup;
+  newWhyChooseForm!: FormGroup;
+
   newSectionForm!: FormGroup;
+
   collapsedSections: boolean[] = [];
 
   sectionForm!: FormGroup;
+
   showSectionForm = false;
 
   showUniqueServiceForm = false;
@@ -90,10 +93,39 @@ export class AboutUsPageComponent implements OnInit {
     private businessService: BusinessService
   ) {}
 
+  // ngOnInit(): void {
+  //   if (!this.form) {
+  //     console.error("❌ Form not initialized in AboutUsPageComponent!");
+  //     return;
+  //   }
+
+  //   console.log('✅ Received Form:', this.form.value); // Debugging
+
+  //   if (!this.form.get('sections')) {
+  //     this.form.addControl('sections', this.fb.array([])); // Ensure sections exist
+  //   }
+
+  //   this.collapsedSections = new Array(this.sections.length).fill(true);
+  // }
+
   ngOnInit(): void {
-    this.form = this.fb.group({
-      sections: this.fb.array([]),
-    });
+    // this.form = this.fb.group({
+    //   sections: this.fb.array([]),
+    //   uniqueService: this.fb.array([]), // Ensure this is initialized
+    //    whyChoose: this.fb.array([]), // Ensure this is initialized
+    //    certifications: [''],
+    // });
+
+    if (!this.form) {
+      console.error("❌ Form not initialized in AboutUsPageComponent!");
+      return;
+    }
+
+    console.log('✅ Received Form:', this.form.value); // Debugging
+
+    if (!this.form.get('sections')) {
+      this.form.addControl('sections', this.fb.array([])); // Ensure sections exist
+    }
     this.loadSections();
     this.collapsedSections = new Array(this.sections.length).fill(true);
 
@@ -109,15 +141,15 @@ export class AboutUsPageComponent implements OnInit {
       content: [''],
     });
 
-    // this.newUniqueServiceForm = this.fb.group({
-    //   name: [''],
-    //   description: [''],
-    // });
+    this.newUniqueServiceForm = this.fb.group({
+      name: [''],
+      description: [''],
+    });
 
-    // this.newWhyChooseForm = this.fb.group({
-    //   name: [''],
-    //   description: [''],
-    // });
+    this.newWhyChooseForm = this.fb.group({
+      name: [''],
+      description: [''],
+    });
 
 
   }
@@ -134,21 +166,51 @@ export class AboutUsPageComponent implements OnInit {
     this.sectionForm.patchValue({ imageUrl: url });
   }
 
-  pupulateSection(sections: Section[]): void {
-    this.sections.clear();
-    (sections ?? []).forEach((s) => {
-      const sectionForm = this.fb.group({
-        id: [s.sectionId || ''], // Store the Firestore document ID
-        sectionName: [s.sectionName],
-        sectionType: [s.sectionType],
-        sectionTitle: [s.sectionTitle],
-        sectionSubTitle: [s.sectionSubTitle],
-        sectionContent: [s.sectionContent],
-        sectionImageUrl: [s.sectionImageUrl],
-        sectionStyle: [s.sectionStyle],
-      });
-      this.sections.push(sectionForm);
-    });
+  // pupulateSection(sections: Section[]): void {
+  //   this.sections.clear();
+  //   (sections ?? []).forEach((s) => {
+  //     const sectionForm = this.fb.group({
+  //       id: [s.sectionId || ''], // Store the Firestore document ID
+  //       sectionName: [s.sectionName],
+  //       sectionType: [s.sectionType],
+  //       sectionTitle: [s.sectionTitle],
+  //       sectionSubTitle: [s.sectionSubTitle],
+  //       sectionContent: [s.sectionContent],
+  //       sectionImageUrl: [s.sectionImageUrl],
+  //       sectionStyle: [s.sectionStyle],
+  //     });
+  //     this.sections.push(sectionForm);
+  //   });
+  // }
+  // pupulateSection(sections: Section[]): void {
+  //   // this.sections.clear();
+
+  //   (sections ?? []).forEach((s) => {
+  //     const sectionForm = this.fb.group({
+  //       sectionId: [s.sectionId || ''],
+  //       id: [s.sectionId || ''],
+  //       page: [s.page || ''], // ✅ Ensure `page` is always initialized
+  //       location: [s.location || ''],
+  //       sectionName: [s.sectionName || ''],
+  //       sectionType: [s.sectionType || ''],
+  //       sectionTitle: [s.sectionTitle || ''],
+  //       sectionSubTitle: [s.sectionSubTitle || ''],
+  //       sectionContent: [s.sectionContent || ''],
+  //       sectionImageUrl: [s.sectionImageUrl || ''],
+  //       sectionStyle: [s.sectionStyle || ''],
+  //     });
+  //     this.sections.push(sectionForm);
+  //   });
+
+  //   console.log('✅ Sections Populated:', this.sections.value);
+  // }
+
+  get uniqueServices(): FormArray {
+    return this.form.get('uniqueService') as FormArray;
+  }
+
+  get whyChoose(): FormArray {
+    return this.form.get('whyChoose') as FormArray;
   }
 
   get sections(): FormArray {
@@ -156,9 +218,36 @@ export class AboutUsPageComponent implements OnInit {
   }
 
   sectionCounters: { [key: string]: number } = {}; // Track counters globally
+  // addSection(): void {
+  //   const newSection = this.fb.group({
+  //     id: [''], // Empty initially, will be updated after Firestore save
+  //     page: [''],
+  //     location: [''],
+  //     sectionName: [''],
+  //     sectionType: [''],
+  //     sectionTitle: [''],
+  //     sectionSubTitle: [''],
+  //     sectionImageUrl: [''],
+  //     sectionContent: [''],
+  //     sectionStyle: [''],
+  //   });
+
+  //   this.sections.push(newSection);
+  //   this.collapsedSections.push(true);
+
+  //   this.businessService
+  //     .createSection(this.businessId, newSection.value)
+  //     .then((docRef) => {
+  //       console.log('Firestore ID generated:', docRef.id); // Log Firestore generated ID
+  //       newSection.patchValue({ id: docRef.id }); // Update form with Firestore ID (sectionId)
+  //       console.log('Updated section form:', newSection.value); // Check updated form
+  //     })
+  //     .catch((error) => console.error('Error adding section:', error));
+  // }
+
   addSection(): void {
     const newSection = this.fb.group({
-      id: [''], // Empty initially, will be updated after Firestore save
+      sectionId: [''], // Firestore will generate this
       page: [''],
       location: [''],
       sectionName: [''],
@@ -170,23 +259,35 @@ export class AboutUsPageComponent implements OnInit {
       sectionStyle: [''],
     });
 
-    this.sections.push(newSection);
-    this.collapsedSections.push(true);
 
-    this.businessService
-      .createSection(this.businessId, newSection.value)
+
+    this.businessService.createSection(this.businessId, newSection.value)
       .then((docRef) => {
-        console.log('Firestore ID generated:', docRef.id); // Log Firestore generated ID
-        newSection.patchValue({ id: docRef.id }); // Update form with Firestore ID (sectionId)
-        console.log('Updated section form:', newSection.value); // Check updated form
+        console.log('🔥 Firestore ID generated:', docRef.id);
+        newSection.patchValue({ sectionId: docRef.id }); // ✅ Update section in FormArray
+
+        // ✅ Also update the parent `businessForm.sections`
+        const parentSections = this.form.get('sections') as FormArray;
+        const index = this.sections.length - 1;
+        parentSections.at(index).patchValue({ sectionId: docRef.id });
+
+        console.log('✅ Section added with ID:', newSection.value);
+        this.sections.push(newSection); // ✅ Add section to FormArray immediately
       })
-      .catch((error) => console.error('Error adding section:', error));
+      .catch((error) => console.error('❌ Error adding section:', error));
   }
 
+
   updateSection(index: number): void {
+    console.log(this.sections);
     const sectionFormGroup = this.sections.at(index) as FormGroup;
     const updatedSection = sectionFormGroup.value;
-    const sectionId = sectionFormGroup.get('id')?.value?.trim(); // Fetch sectionId (Firestore document ID)
+
+    const sectionId = sectionFormGroup.get('id')?.value?.trim();
+    const legacySectionId = sectionFormGroup.get('sectionId')?.value?.trim(); // Old field name
+
+    console.log('🔍 Attempting to update section:', updatedSection);
+    console.log('🔥 Section ID:', sectionId, '🔥 Legacy ID:', legacySectionId); // Debugging
 
     console.log('🔍 Attempting to update section:', updatedSection); // Log section data before updating
 
@@ -244,29 +345,69 @@ export class AboutUsPageComponent implements OnInit {
     }
   }
 
-  private loadSections(): void {
-    this.businessService.getSections(this.businessId).subscribe((sections) => {
-      this.sections.clear(); // Clear existing sections
-      sections.forEach((s) => {
-        console.log('✅ Loading section into form:', s); // Check the section data with sectionId
-        const sectionForm = this.fb.group({
-          id: [s.sectionId || ''], // Use sectionId from Firestore document ID
-          page: [s.page],
-          location: [s.location],
-          sectionName: [s.sectionName],
-          sectionType: [s.sectionType],
-          sectionTitle: [s.sectionTitle],
-          sectionSubTitle: [s.sectionSubTitle],
-          sectionImageUrl: [s.sectionImageUrl],
-          sectionContent: [s.sectionContent],
-          sectionStyle: [s.sectionStyle],
-        });
-        this.sections.push(sectionForm); // Add section form to the form array
-      });
+  // private loadSections(): void {
+  //   this.businessService.getSections(this.businessId).subscribe((sections) => {
+  //     // console.log('🔥 Firestore Data:', sections); // 🔍 Log the raw data before adding to form
 
+  //     this.sections.clear(); // Clear existing sections
+
+  //     sections.forEach((s, index) => {
+  //       // console.log(`✅ Section ${index} from Firestore:`, s);
+
+  //       if (!s.sectionId && !s.id) {
+  //         console.warn(`⚠️ Section at index ${index} is missing an ID!`);
+  //       }
+
+  //       const sectionForm = this.fb.group({
+  //         // sectionId: [ s.id || ''],
+  //         id: [ s.id || ''], // Use Firestore ID
+  //         page: [s.page || ''],
+  //         location: [s.location || ''],
+  //         sectionName: [s.sectionName || ''],
+  //         sectionType: [s.sectionType || ''],
+  //         sectionTitle: [s.sectionTitle || ''],
+  //         sectionSubTitle: [s.sectionSubTitle || ''],
+  //         sectionImageUrl: [s.sectionImageUrl || ''],
+  //         sectionContent: [s.sectionContent || ''],
+  //         sectionStyle: [s.sectionStyle || ''],
+  //       });
+
+  //       this.sections.push(sectionForm); // Add section to FormArray
+  //     });
+
+  //     // console.log('🔥 Sections after loading:', this.sections.value); // 🔍 Log the final form data
+  //     this.collapsedSections = new Array(sections.length).fill(true);
+  //   });
+  // }
+
+  private loadSections(): void {
+    if (this.sections.length > 0) {
+      console.log("🔄 Sections already loaded, skipping Firestore fetch.");
+      return;
+    }
+
+    this.businessService.getSections(this.businessId).subscribe((sections) => {
+      this.sections.clear();
+      sections.forEach((s) => {
+        const sectionForm = this.fb.group({
+          id: [s.id || ''],
+          page: [s.page || ''],
+          location: [s.location || ''],
+          sectionName: [s.sectionName || ''],
+          sectionType: [s.sectionType || ''],
+          sectionTitle: [s.sectionTitle || ''],
+          sectionSubTitle: [s.sectionSubTitle || ''],
+          sectionImageUrl: [s.sectionImageUrl || ''],
+          sectionContent: [s.sectionContent || ''],
+          sectionStyle: [s.sectionStyle || ''],
+        });
+        this.sections.push(sectionForm);
+      });
       this.collapsedSections = new Array(sections.length).fill(true);
     });
   }
+
+
 
   updateSectionName(index: number): void {
     const section = this.sections.at(index);
@@ -327,63 +468,56 @@ export class AboutUsPageComponent implements OnInit {
     return sectionName;
   }
 /*-----------------Unique Features --------------------*/
-  // populateUniqueService(uniqueService: ListItem[]): void {
-  //   this.uniqueServices.clear();
-  //   (uniqueService ?? []).forEach((us) => {
-  //     const uniqueServiceForm = this.fb.group({
-  //       name: [us.name],
-  //       description: [us.description],
-  //     });
-  //     this.uniqueServices.push(uniqueServiceForm);
-  //   });
-  // }
+  populateUniqueService(uniqueService: ListItem[]): void {
+    this.uniqueServices.clear();
+    (uniqueService ?? []).forEach((us) => {
+      const uniqueServiceForm = this.fb.group({
+        name: [us.name],
+        description: [us.description],
+      });
+      this.uniqueServices.push(uniqueServiceForm);
+    });
+  }
 
-  // populateWhyChoose(whyChoose: ListItem[]): void {
-  //   this.whyChoose.clear();
-  //   (whyChoose ?? []).forEach((why) => {
-  //     const whyChooseForm = this.fb.group({
-  //       name: [why.name],
-  //       description: [why.description],
-  //     });
-  //     this.whyChoose.push(whyChooseForm);
-  //   });
-  // }
+  populateWhyChoose(whyChoose: ListItem[]): void {
+    this.whyChoose.clear();
+    (whyChoose ?? []).forEach((why) => {
+      const whyChooseForm = this.fb.group({
+        name: [why.name],
+        description: [why.description],
+      });
+      this.whyChoose.push(whyChooseForm);
+    });
+  }
 
-  // addUniqueService(): void {
-  //   const newService = this.fb.group(this.newUniqueServiceForm.value);
-  //   this.uniqueServices.push(newService);
-  //   this.newUniqueServiceForm.reset();
-  //   this.showUniqueServiceForm = false;
-  // }
+  addUniqueService(): void {
+    const newService = this.fb.group(this.newUniqueServiceForm.value);
+    this.uniqueServices.push(newService);
+    this.newUniqueServiceForm.reset();
+    this.showUniqueServiceForm = false;
+  }
 
-  // addWhyChoose(): void {
-  //   const newReason = this.fb.group(this.newWhyChooseForm.value);
-  //   this.whyChoose.push(newReason);
-  //   this.newWhyChooseForm.reset();
-  //   this.showWhyChooseForm = false;
-  // }
+  addWhyChoose(): void {
+    const newReason = this.fb.group(this.newWhyChooseForm.value);
+    this.whyChoose.push(newReason);
+    this.newWhyChooseForm.reset();
+    this.showWhyChooseForm = false;
+  }
 
-  // removeUniqueService(index: number): void {
-  //   this.uniqueServices.removeAt(index);
-  // }
+  removeUniqueService(index: number): void {
+    this.uniqueServices.removeAt(index);
+  }
 
-  // removeWhyChoose(index: number): void {
-  //   this.whyChoose.removeAt(index);
-  // }
+  removeWhyChoose(index: number): void {
+    this.whyChoose.removeAt(index);
+  }
 
-  // get uniqueServices(): FormArray {
-  //   return this.form.get('uniqueService') as FormArray;
-  // }
 
-  // get whyChoose(): FormArray {
-  //   return this.form.get('whyChoose') as FormArray;
-  // }
+  toggleUniqueServiceForm(): void {
+    this.showUniqueServiceForm = !this.showUniqueServiceForm;
+  }
 
-  // toggleUniqueServiceForm(): void {
-  //   this.showUniqueServiceForm = !this.showUniqueServiceForm;
-  // }
-
-  // toggleWhyChooseForm(): void {
-  //   this.showWhyChooseForm = !this.showWhyChooseForm;
-  // }
+  toggleWhyChooseForm(): void {
+    this.showWhyChooseForm = !this.showWhyChooseForm;
+  }
 }

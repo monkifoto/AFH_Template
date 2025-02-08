@@ -84,7 +84,7 @@ export class BusinessService {
               return { id: sectionId, ...sectionData };
             });
 
-            console.log("🔥 Loaded Sections from Firestore:", sections);
+            //console.log("🔥 Loaded Sections from Firestore:", sections);
             businessData.sections = sections; // Attach sections to businessData
             return businessData;
           }),
@@ -111,7 +111,7 @@ export class BusinessService {
               map(themeAction => {
                 const themeData = themeAction.payload.data() || defaultTheme;
                 updatedBusiness.theme = themeData;
-                console.log("🎨 Loaded Theme from Firestore:", themeData);
+                //console.log("🎨 Loaded Theme from Firestore:", themeData);
                 return updatedBusiness;
               })
             );
@@ -186,7 +186,7 @@ export class BusinessService {
         map(actions => actions.map(a => {
           const data = a.payload.doc.data() as any;
           const sectionId = a.payload.doc.id; // The document ID is the sectionId
-          console.log("🔥 Fetched section from Firestore:", { sectionId, ...data }); // Log the section with sectionId
+          // console.log("🔥 Fetched section from Firestore:", { sectionId, ...data }); // Log the section with sectionId
           return { sectionId, ...data }; // Ensure the sectionId is merged correctly
         }))
       );
