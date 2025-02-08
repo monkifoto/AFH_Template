@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="container">
-        <section class="business-story"  *ngIf="business.sections | sectionFilter:'AboutUsCenterText' as section">
+        <section class="business-story"  *ngIf="business.sections | sectionFilter:'AboutUsCenterTop' as section">
           <div class="heading-container">
             <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
           </div>
@@ -21,7 +21,7 @@
         </section>
 
         <section class="mission-vision">
-          <div class="mission"  *ngIf="business.sections | sectionFilter:'AboutUsLeftText' as section">
+          <div class="mission"  *ngIf="business.sections | sectionFilter:'AboutUsLeft' as section">
             <img
               [src]="
                 section.sectionImageUrl ||
@@ -39,7 +39,7 @@
           </div>
 
 
-          <div class="vision"  *ngIf="business.sections | sectionFilter:'AboutUsRightText' as section">
+          <div class="vision"  *ngIf="business.sections | sectionFilter:'AboutUsRight' as section">
             <img
               [src]="
               section.sectionImageUrl ||
@@ -58,7 +58,7 @@
         </section>
 
 
-        <section class="business-story"  *ngIf="business.sections | sectionFilter:'AboutUsCenterText2' as section">
+        <section class="business-story"  *ngIf="business.sections | sectionFilter:'AboutUsCenterBottom' as section">
           <div class="heading-container">
             <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
           </div>
@@ -92,7 +92,7 @@
         <section class="our-approach">
 
           <app-right-text
-          *ngIf="business.sections | sectionFilter:'AboutUsRightText' as section"
+          *ngIf="business.sections | sectionFilter:'AboutUsRight' as section"
           [themeType]="business.theme.themeType || ''"
           [imageURL]="section.sectionImageUrl || ''"
           [title]="section.sectionTitle || ''"
@@ -100,7 +100,7 @@
         ></app-right-text>
 
         <app-left-text
-          *ngIf="business.sections | sectionFilter:'AboutUsLeftText' as section"
+          *ngIf="business.sections | sectionFilter:'AboutUsLeft' as section"
           [themeType]="business.theme.themeType || ''"
           [imageURL]="section.sectionImageUrl || ''"
           [title]="section?.sectionTitle || ''"
@@ -136,7 +136,7 @@
 
       <section class="our-approach">
         <app-right-text
-        *ngIf="business.sections | sectionFilter:'AboutUsRightText' as section"
+        *ngIf="business.sections | sectionFilter:'AboutUsRight' as section"
         [themeType]="business.theme.themeType || ''"
         [imageURL]="section.sectionImageUrl || ''"
         [title]="section.sectionTitle || ''"
@@ -144,7 +144,7 @@
         ></app-right-text>
 
         <app-left-text
-        *ngIf="business.sections | sectionFilter:'AboutUsLeftText' as section"
+        *ngIf="business.sections | sectionFilter:'AboutUsLeft' as section"
         [themeType]="business.theme.themeType || ''"
         [imageURL]="section.sectionImageUrl || ''"
         [title]="section.sectionTitle || ''"
@@ -152,7 +152,7 @@
         ></app-left-text>
 
         <app-right-text
-        *ngIf="business.sections | sectionFilter:'AboutUsRightText2' as section"
+        *ngIf="business.sections | sectionFilter:'AboutUsCenterBottom' as section"
         [themeType]="business.theme.themeType || ''"
         [imageURL]="section.sectionImageUrl || ''"
         [title]="section.sectionTitle || ''"
@@ -191,7 +191,7 @@
 
       <section class="our-approach">
         <app-right-text
-        *ngIf="business.sections | sectionFilter:'AboutUsRightText' as section"
+        *ngIf="business.sections | sectionFilter:'AboutUsRight' as section"
         [themeType]="business.theme.themeType || ''"
         [imageURL]="section.sectionImageUrl || ''"
         [title]="section.sectionTitle || ''"
@@ -199,7 +199,7 @@
         ></app-right-text>
 
         <app-left-text
-        *ngIf="business.sections | sectionFilter:'AboutUsLeftText' as section"
+        *ngIf="business.sections | sectionFilter:'AboutUsLeft' as section"
         [themeType]="business.theme.themeType || ''"
         [imageURL]="section.sectionImageUrl || ''"
         [title]="section.sectionTitle || ''"
@@ -207,7 +207,7 @@
         ></app-left-text>
 
         <app-right-text
-        *ngIf="business.sections | sectionFilter:'AboutUsRightText2' as section"
+        *ngIf="business.sections | sectionFilter:'AboutUsCenterBottom' as section"
         [themeType]="business.theme.themeType || ''"
         [imageURL]="section.sectionImageUrl || ''"
         [title]="section.sectionTitle || ''"

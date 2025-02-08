@@ -201,8 +201,8 @@ export class AboutUsPageComponent implements OnInit {
 
     // Generate the sectionName dynamically if both page and location are selected
     if (page && location) {
-      const counter = this.getNextCounter(page, location);
-      const sectionName = `${page}${location}${counter}`;
+     // const counter = this.getNextCounter(page, location);
+      const sectionName = `${page}${location}`;
 
       // Update sectionName in the form
       sectionFormGroup.patchValue({ sectionName });

@@ -4,6 +4,7 @@ import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/
 import { Observable,of } from 'rxjs';
 import { map,switchMap, finalize } from 'rxjs/operators';
 import { Business, Theme } from '../model/business-questions.model';
+import { Section } from '../model/section.model';
 
 @Injectable({
   providedIn: 'root'
@@ -74,38 +75,52 @@ export class BusinessService {
         const { id: _, ...rest } = data;
         const businessData = { id: docId, ...rest } as Business;
 
-        // Define default theme data
-        const defaultTheme: Theme ={
-          themeFileName: 'styles.css',
-          primaryColor: '#fffaf2',
-          secondaryColor: '#f8f3f0',
-          accentColor: '#F0C987',
-          backgroundColor: '#F5F3E7',
-          darkBackgroundColor: '#4C6A56',
-          textColor: '#2F2F2F',
-          navBackgroundColor: '#F5F3E7',
-          navTextColor: '#33372C',
-          navActiveBackground: '#33372C',
-          navActiveText: '#ffffff',
-          buttonColor: '#D9A064',
-          buttonHoverColor: '#c9605b',
-          themeType:'demo',
-        };
+        // Fetch Sections & Theme in parallel
+        return this.afs.collection(`businesses/${docId}/sections`).snapshotChanges().pipe(
+          map(sectionActions => {
+            const sections = sectionActions.map(a => {
+              const sectionData = a.payload.doc.data() as Section;
+              const sectionId = a.payload.doc.id;
+              return { id: sectionId, ...sectionData };
+            });
 
-        const themeDocRef = this.afs.collection(`businesses/${docId}/theme`).doc<Theme>('themeDoc');
-        return themeDocRef.snapshotChanges().pipe(
-          map(themeAction => {
-            const themeData = (themeAction.payload.data() || defaultTheme) as Theme;
-
-            // Ensure themeData matches the Theme interface
-            businessData.theme = themeData;
-
+            console.log("🔥 Loaded Sections from Firestore:", sections);
+            businessData.sections = sections; // Attach sections to businessData
             return businessData;
+          }),
+          switchMap(updatedBusiness => {
+            // Fetch Theme
+            const defaultTheme: Theme = {
+              themeFileName: 'styles.css',
+              primaryColor: '#fffaf2',
+              secondaryColor: '#f8f3f0',
+              accentColor: '#F0C987',
+              backgroundColor: '#F5F3E7',
+              darkBackgroundColor: '#4C6A56',
+              textColor: '#2F2F2F',
+              navBackgroundColor: '#F5F3E7',
+              navTextColor: '#33372C',
+              navActiveBackground: '#33372C',
+              navActiveText: '#ffffff',
+              buttonColor: '#D9A064',
+              buttonHoverColor: '#c9605b',
+              themeType: 'demo',
+            };
+
+            return this.afs.collection(`businesses/${docId}/theme`).doc<Theme>('themeDoc').snapshotChanges().pipe(
+              map(themeAction => {
+                const themeData = themeAction.payload.data() || defaultTheme;
+                updatedBusiness.theme = themeData;
+                console.log("🎨 Loaded Theme from Firestore:", themeData);
+                return updatedBusiness;
+              })
+            );
           })
         );
       })
     );
   }
+
 
 
   // Update an existing business
