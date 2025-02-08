@@ -42,6 +42,48 @@
 
 </section>
 
+<section *ngIf="business?.theme?.themeType === 'demo'">
+  <app-hero-slider
+  [navigation]="'bottom'"
+  [sideButtons]="true"
+  sliderHeight="70vh">
+</app-hero-slider>
+
+<app-center-text
+  *ngIf="business?.sections | sectionFilter:'HomeCenterTop' as section"
+  [themeType]="business?.theme?.themeType || ''"
+  [imageURL]="section?.sectionImageUrl || ''"
+  [title]="section?.sectionTitle || ''"
+  [subTitle]="section?.sectionSubTitle || ''"
+  [content]="section?.sectionContent || '' | replaceKeyword:{ businessName: business?.businessName||''}"
+  [showBtn]="true"
+  [_businessName]="business?.businessName || ''"
+></app-center-text>
+
+<app-item-list
+[layoutType]="'hh'"
+[services]="business?.services || []"
+[minimal]="true"
+></app-item-list>
+
+  <app-why-us
+  [whyChooseUs]="business?.whyChoose || []"
+  [layoutType]="business?.theme?.themeType || 'demo' "
+  [businessName]="business?.businessName || 'Demo' "
+></app-why-us>
+
+<app-features
+  [uniqueService]="business?.uniqueService || []"
+  [layoutType]="business?.theme?.themeType || 'demo' "
+></app-features>
+
+<app-testimonials
+  [testimonials]="business?.testimonials"
+  [layoutType]="business?.theme?.themeType || 'demo' "
+></app-testimonials>
+
+</section>
+
 <!------------------------ AE SECTION ---------------------->
 
 <section *ngIf="business?.theme?.themeType === 'ae'">
