@@ -21,10 +21,11 @@ export class CenterTextComponent {
 
   constructor(private sanitizer: DomSanitizer, private router: Router) {}
 
+
   @Input()
   set content(value: string) {
     this._content = value;
-    this.sanitizedContent = this.sanitizer.bypassSecurityTrustHtml(value);
+    this.sanitizedContent = this.sanitizer.bypassSecurityTrustHtml(this._content);
   }
 
   get titleParts(): { part1: string; part2: string | null } {
@@ -42,4 +43,5 @@ export class CenterTextComponent {
   navigateToContact() {
     this.router.navigate(['/contact-us']);
   }
+
 }

@@ -1,6 +1,6 @@
 <!------------------------ HH SECTION ---------------------->
 
-<section *ngIf="business?.theme?.themeType === 'hh'">
+<section *ngIf="business?.theme?.themeType === 'hh' || 'demo'">
   <app-hero-slider
   [navigation]="'bottom'"
   [sideButtons]="true"
@@ -13,7 +13,7 @@
   [imageURL]="section?.sectionImageUrl || ''"
   [title]="section?.sectionTitle || ''"
   [subTitle]="section?.sectionSubTitle || ''"
-  [content]="section?.sectionContent || ''"
+  [content]="section?.sectionContent || '' | replaceKeyword:{ businessName: business?.businessName||''}"
   [showBtn]="true"
   [_businessName]="business?.businessName || ''"
 ></app-center-text>
@@ -57,7 +57,7 @@
   [themeType]="business?.theme?.themeType || ''"
   [imageURL]="section?.sectionImageUrl || ''"
   [title]="section?.sectionTitle || ''"
-  [content]="section?.sectionContent || ''"
+  [content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
   [showBtn]="false"
 ></app-center-text>
 
@@ -66,7 +66,7 @@
   [themeType]="business?.theme?.themeType || ''"
   [imageURL]="section?.sectionImageUrl || ''"
   [title]="section?.sectionTitle || ''"
-  [content]="section?.sectionContent || ''"
+  [content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
 ></app-right-text>
 
 <app-left-text
@@ -74,7 +74,7 @@
   [themeType]="business?.theme?.themeType || ''"
   [imageURL]="section?.sectionImageUrl || ''"
   [title]="section?.sectionTitle || ''"
-  [content]="section?.sectionContent || ''"
+  [content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
 ></app-left-text>
 
 <app-icon-list
@@ -111,7 +111,7 @@
 [themeType]="business?.theme?.themeType || ''"
 [imageURL]="section?.sectionImageUrl || ''"
 [title]="section?.sectionTitle || ''"
-[content]="section?.sectionContent || ''"
+[content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
 ></app-right-text>
 
 <app-video
@@ -162,7 +162,7 @@
   [imageURL]="section?.sectionImageUrl || ''"
   [title]="section?.sectionTitle || ''"
   [subTitle]="section?.sectionSubTitle || ''"
-  [content]="section?.sectionContent || ''"
+  [content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
   [showBtn]="false"
   [_businessName]="business?.businessName || ''"
 ></app-center-text>
@@ -212,7 +212,7 @@
   [imageURL]="section?.sectionImageUrl || ''"
   [title]="section?.sectionTitle || ''"
   [subTitle]="section?.sectionSubTitle || ''"
-  [content]="section?.sectionContent || ''"
+  [content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
   [showBtn]="false"
   [_businessName]="business?.businessName || ''">
 </app-center-text>
@@ -239,7 +239,7 @@
   [themeType]="business?.theme?.themeType || ''"
   [imageURL]="section?.sectionImageUrl || ''"
   [title]="section?.sectionTitle || ''"
-  [content]="section?.sectionContent || ''"
+  [content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
 ></app-right-text>
 
 <app-left-text
@@ -247,7 +247,7 @@
   [themeType]="business?.theme?.themeType || ''"
   [imageURL]="section?.sectionImageUrl || ''"
   [title]="section?.sectionTitle || ''"
-  [content]="section?.sectionContent || ''"
+  [content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
 ></app-left-text>
 
 <app-right-text
@@ -255,7 +255,7 @@
 [themeType]="business?.theme?.themeType || ''"
 [imageURL]="section?.sectionImageUrl || ''"
 [title]="section?.sectionTitle || ''"
-[content]="section?.sectionContent || ''"
+[content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
 ></app-right-text>
 
 <app-left-text
@@ -263,7 +263,7 @@
 [themeType]="business?.theme?.themeType || ''"
 [imageURL]="section?.sectionImageUrl || ''"
 [title]="section?.sectionTitle || ''"
-[content]="section?.sectionContent || ''"
+[content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
 ></app-left-text>
 
 </section>

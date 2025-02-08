@@ -121,6 +121,8 @@ export class BusinessModel {
     return {
       sections: [
         {
+          page:'',
+          location:'',
           sectionName: 'HomeCenterTop',
           sectionTitle: 'Welcome To AFH',
           sectionSubTitle: 'Caring with compassion for every senior.',
@@ -131,6 +133,8 @@ export class BusinessModel {
           sectionStyle: 'hh',
         },
         {
+          page:'',
+          location:'',
           sectionName: 'AboutUsRight',
           sectionTitle: 'Our Story',
           sectionSubTitle: 'Caring with compassion for every senior.',
@@ -140,6 +144,8 @@ export class BusinessModel {
           sectionStyle: 'hh',
         },
         {
+          page:'',
+          location:'',
           sectionName: 'AboutUsLeft',
           sectionTitle: 'Our Vision',
           sectionSubTitle: 'Caring with compassion for every senior.',
@@ -149,6 +155,8 @@ export class BusinessModel {
           sectionStyle: 'hh',
         },
         {
+          page:'',
+          location:'',
           sectionName: 'ServicesRight',
           sectionTitle: 'Our Mission',
           sectionSubTitle: 'Caring with compassion for every senior.',
@@ -158,6 +166,8 @@ export class BusinessModel {
           sectionStyle: 'hh',
         },
         {
+          page:'',
+          location:'',
           sectionName: 'ServicesLeft',
           sectionTitle: 'Our Motivation',
           sectionSubTitle: 'Caring with compassion for every senior.',
@@ -167,6 +177,8 @@ export class BusinessModel {
           sectionStyle: 'hh',
         },
         {
+          page:'',
+          location:'',
           sectionName: 'GalleryCenterTop',
           sectionTitle: 'OurHome',
           sectionSubTitle: 'Welcome to our gallery',
