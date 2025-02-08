@@ -11,8 +11,8 @@
       <img [src]="product.image" [alt]="product.title" />
       <h3>{{ product.title }}</h3>
       <span class="category">{{ product.category }}</span>
-      <p>{{ product.description }}</p>
-      <a href="#" class="read-more">READ MORE</a>
+      <p [innerHTML]="getSanitizedDescription(product.description)"></p>
+      <!-- <a href="#" class="read-more">READ MORE</a> -->
     </div>
   </div>
 </div>
@@ -30,8 +30,15 @@
         <span class="index">{{ (i + 1) | number:'2.0' }}</span>
       </div>
       <h3 class="company-name">{{ item.title }}</h3>
-      <p >{{ item.description }}</p>
+      <p [innerHTML]="getSanitizedDescription(item.description)"></p>
       <a href="{{item.url}}" class="read-more" target="_blank">Visit</a>
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
