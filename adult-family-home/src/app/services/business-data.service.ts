@@ -17,19 +17,31 @@ export class BusinessDataService {
   // Method to load business data on app initialization
   loadBusinessData(businessId: string): Observable<Business | null> {
     console.log('BusinessDataService - loadBusinessData for ID:', businessId);
-    // Prevent multiple calls if the data is already loaded
+
     if (this.businessDataSubject.value) {
-      return this.businessDataSubject.asObservable(); // Return the existing data
+      return this.businessDataSubject.asObservable();
     }
+
     return this.businessService.getBusinessData(businessId).pipe(
-      map((business) => business ?? null),
+      map((business) => {
+        if (!business) return null;
+
+        // Ensure sections are included
+        if (!business.sections) {
+          business.sections = [];
+          console.warn("⚠️ No sections found in Firestore. Initializing empty array.");
+        }
+
+        return business;
+      }),
       tap((business) => {
-        console.log('BusinessDataService - Business fetched:', business);
-        this.businessDataSubject.next(business); // Update subject
+        console.log('✅ BusinessDataService - Business fetched:', business);
+        this.businessDataSubject.next(business); // Update state with business and sections
         this.businessIdSubject.next(businessId);
       })
     );
   }
+
   // Accessor method for components to get the latest business data
   // get businessData(): Business | null {
   //   return this.businessDataSubject.value;

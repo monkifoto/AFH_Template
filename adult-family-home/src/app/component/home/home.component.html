@@ -8,7 +8,7 @@
 </app-hero-slider>
 
 <app-center-text
-  *ngIf="business?.sections | sectionFilter:'HomeWelcomeText' as section"
+  *ngIf="business?.sections | sectionFilter:'HomeCenterTop' as section"
   [themeType]="business?.theme?.themeType || ''"
   [imageURL]="section?.sectionImageUrl || ''"
   [title]="section?.sectionTitle || ''"
@@ -53,7 +53,7 @@
 </app-hero-slider>
 
   <app-center-text
-  *ngIf="business?.sections | sectionFilter:'HomeCenterText' as section"
+  *ngIf="business?.sections | sectionFilter:'HomeCenterTop' as section"
   [themeType]="business?.theme?.themeType || ''"
   [imageURL]="section?.sectionImageUrl || ''"
   [title]="section?.sectionTitle || ''"
@@ -62,7 +62,7 @@
 ></app-center-text>
 
   <app-right-text
-  *ngIf="business?.sections | sectionFilter:'HomeRightText' as section"
+  *ngIf="business?.sections | sectionFilter:'HomeRight' as section"
   [themeType]="business?.theme?.themeType || ''"
   [imageURL]="section?.sectionImageUrl || ''"
   [title]="section?.sectionTitle || ''"
@@ -70,7 +70,7 @@
 ></app-right-text>
 
 <app-left-text
-  *ngIf="business?.sections | sectionFilter:'HomeLeftText' as section"
+  *ngIf="business?.sections | sectionFilter:'HomeLeft' as section"
   [themeType]="business?.theme?.themeType || ''"
   [imageURL]="section?.sectionImageUrl || ''"
   [title]="section?.sectionTitle || ''"
@@ -107,7 +107,7 @@
 </app-hero-slider>
 
 <app-right-text
-*ngIf="business?.sections | sectionFilter:'HomeRightText' as section"
+*ngIf="business?.sections | sectionFilter:'HomeRight' as section"
 [themeType]="business?.theme?.themeType || ''"
 [imageURL]="section?.sectionImageUrl || ''"
 [title]="section?.sectionTitle || ''"
@@ -157,7 +157,7 @@
 </app-hero-slider>
 
 <app-center-text
-  *ngIf="business?.sections | sectionFilter:'HomeCenterText' as section"
+  *ngIf="business?.sections | sectionFilter:'HomeCenterTop' as section"
   [themeType]="business?.theme?.themeType || ''"
   [imageURL]="section?.sectionImageUrl || ''"
   [title]="section?.sectionTitle || ''"
@@ -207,7 +207,7 @@
 <section id="home" class="single_page_section">
 
   <app-center-text
-    *ngIf="business?.sections | sectionFilter:'HomeCenterText' as section"
+    *ngIf="business?.sections | sectionFilter:'HomeCenterTop' as section"
   [themeType]="business?.theme?.themeType || ''"
   [imageURL]="section?.sectionImageUrl || ''"
   [title]="section?.sectionTitle || ''"
@@ -235,7 +235,7 @@
   <app-section-tilte [title]="'About Us'"></app-section-tilte>
 
   <app-right-text
-  *ngIf="business?.sections | sectionFilter:'HomeRightText' as section"
+  *ngIf="business?.sections | sectionFilter:'HomeRight' as section"
   [themeType]="business?.theme?.themeType || ''"
   [imageURL]="section?.sectionImageUrl || ''"
   [title]="section?.sectionTitle || ''"
@@ -243,7 +243,7 @@
 ></app-right-text>
 
 <app-left-text
-  *ngIf="business?.sections | sectionFilter:'HomeLeftText' as section"
+  *ngIf="business?.sections | sectionFilter:'HomeLeft' as section"
   [themeType]="business?.theme?.themeType || ''"
   [imageURL]="section?.sectionImageUrl || ''"
   [title]="section?.sectionTitle || ''"
@@ -251,7 +251,7 @@
 ></app-left-text>
 
 <app-right-text
-*ngIf="business?.sections | sectionFilter:'HomeRightText2' as section"
+*ngIf="business?.sections | sectionFilter:'AboutUsRight' as section"
 [themeType]="business?.theme?.themeType || ''"
 [imageURL]="section?.sectionImageUrl || ''"
 [title]="section?.sectionTitle || ''"
@@ -259,7 +259,7 @@
 ></app-right-text>
 
 <app-left-text
-*ngIf="business?.sections | sectionFilter:'HomeLeftText2' as section"
+*ngIf="business?.sections | sectionFilter:'AboutUsLeft' as section"
 [themeType]="business?.theme?.themeType || ''"
 [imageURL]="section?.sectionImageUrl || ''"
 [title]="section?.sectionTitle || ''"

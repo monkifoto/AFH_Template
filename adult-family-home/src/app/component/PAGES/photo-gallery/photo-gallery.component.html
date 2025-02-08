@@ -11,7 +11,7 @@
   </div>
 
   <div class="container">
-    <section class="home-description" *ngIf="business?.sections | sectionFilter:'GalleryCenterText' as section">
+    <section class="home-description" *ngIf="business?.sections | sectionFilter:'GalleryCenterTop' as section">
       <div class="section-heading" [innerHTML]="section.sectionTitle"></div>
       <div >
         <p [innerHTML]="section.sectionContent"></p>
@@ -40,7 +40,7 @@
     <ng-container *ngSwitchCase="'ae'">
       <app-hero></app-hero>
 
-      <app-center-text   *ngIf="business?.sections | sectionFilter:'GalleryCenterText' as section"
+      <app-center-text   *ngIf="business?.sections | sectionFilter:'GalleryCenterTop' as section"
       [themeType]="business.theme.themeType || ''"
       [imageURL]="section.sectionImageUrl || ''"
       [title]="section.sectionTitle || ''"
@@ -108,7 +108,7 @@
       <app-hero></app-hero>
 
       <app-center-text
-  *ngIf="business?.sections | sectionFilter:'GalleryCenterText' as section"
+  *ngIf="business?.sections | sectionFilter:'GalleryCenterTop' as section"
   [themeType]="business.theme.themeType || ''"
   [imageURL]="section.sectionImageUrl || ''"
   [title]="section.sectionTitle || ''"
@@ -181,7 +181,7 @@
       <app-hero [layoutType]="'sb'"></app-hero>
 
       <app-center-text
-  *ngIf="business?.sections | sectionFilter:'GalleryCenterText' as section"
+  *ngIf="business?.sections | sectionFilter:'GalleryCenterTop' as section"
   [themeType]="business.theme.themeType || ''"
   [imageURL]="section.sectionImageUrl || ''"
   [title]="section.sectionTitle || ''"
@@ -214,7 +214,7 @@
     <ng-container *ngSwitchDefault>
       <app-hero></app-hero>
       <app-center-text
-      *ngIf="business?.sections | sectionFilter:'GalleryCenterText' as section"
+      *ngIf="business?.sections | sectionFilter:'GalleryCenterTop' as section"
       [themeType]="business.theme.themeType || ''"
       [imageURL]="section.sectionImageUrl || ''"
       [title]="section.sectionTitle || ''"
