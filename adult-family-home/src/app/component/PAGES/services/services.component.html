@@ -39,7 +39,7 @@
           </div>
           <h3
             class="services_txt garamond"
-            [innerHTML]="section.sectionContent || ''"
+            [innerHTML]="section.sectionContent || ''  | replaceKeyword:{ businessName: business.businessName||''}"
           ></h3>
         </section>
 
@@ -58,7 +58,7 @@
             </div>
             <div
               class="services_txt garamond"
-              [innerHTML]="section.sectionContent || ''"
+              [innerHTML]="section.sectionContent || ''  | replaceKeyword:{ businessName: business.businessName||''}"
             ></div>
           </div>
 
@@ -75,7 +75,7 @@
             </div>
             <div
               class="services_txt garamond"
-              [innerHTML]="section.sectionContent || ''"
+              [innerHTML]="section.sectionContent || ''  | replaceKeyword:{ businessName: business.businessName||''}"
             ></div>
           </div>
 
@@ -214,7 +214,7 @@
           </div>
           <h3
             class="services_txt garamond"
-            [innerHTML]="section.sectionContent || ''"
+            [innerHTML]="section.sectionContent || ''  | replaceKeyword:{ businessName: business.businessName||''}"
           ></h3>
         </section>
 
@@ -233,7 +233,7 @@
             </div>
             <div
               class="services_txt garamond"
-              [innerHTML]="section.sectionContent || ''"
+              [innerHTML]="section.sectionContent || ''  | replaceKeyword:{ businessName: business.businessName||''}"
             ></div>
           </div>
 
