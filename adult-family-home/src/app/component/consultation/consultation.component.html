@@ -1,6 +1,16 @@
 <div [ngSwitch]="layoutType">
   <ng-container *ngSwitchCase="'hh'">
-<div class="section-container">
+    <div class="section-container">
+      <div class="section-heading">
+        <span class="section-title-main">Ready to </span>
+        <span class="section-title-highlight">Take the Next Step?</span>
+      </div>
+      <p class="section-description">
+        We’d love to welcome you into our home. Fill out our resident intake form, and let’s start planning the care and comfort your loved one deserves.
+      </p>
+      <button type="button" class="afhBtn" (click)="navigateTo('resident-form')">Get Started</button>
+    </div>
+<!-- <div class="section-container">
   <div class="section-heading">
     <span class="section-title-main">Book a </span>
     <span class="section-title-highlight"> Consultation</span>
@@ -9,7 +19,7 @@
     We would love to meet you! Contact us to schedule a tour.
   </p>
   <button type="button" class="afhBtn"  (click)="navigateToContact(id)">Book Consultation</button>
-</div>
+</div> -->
 </ng-container>
 
 <ng-container *ngSwitchCase="'ae'">

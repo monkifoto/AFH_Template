@@ -58,7 +58,7 @@
         <input type="color" id="accentColor" formControlName="accentColor"
           (input)="updateHexInput($event, 'accentColor')">
         <input type="text" formControlName="accentColor" class="hex-input"
-          (input)="updateColorInput($event, 'secondaryColor')"
+          (input)="updateColorInput($event, 'accentColor')"
           [ngClass]="{'invalid': themeForm.get('accentColor')?.errors?.['invalidHex']}">
       </div>
 

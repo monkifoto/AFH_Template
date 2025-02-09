@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WebContentService } from 'src/app/services/web-content.service';
 import { Business } from 'src/app/model/business-questions.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MetaService } from 'src/app/services/meta-service.service';
 import { Modal } from 'bootstrap';
@@ -38,7 +38,9 @@ export class ContactUsComponent  implements OnInit{
     private webContent: WebContentService,
     private route: ActivatedRoute,private http: HttpClient,
     private emailService: EmailService,
+    private router: Router,
     private metaService: MetaService){}
+
 
       get sanitizedBusinessHours(): SafeHtml {
         return this.business?.businessHours
@@ -100,5 +102,9 @@ export class ContactUsComponent  implements OnInit{
     if (this.responseModal) {
       this.responseModal.show();  // Use the Bootstrap modal instance to show the modal
     }
+  }
+
+  navigateTo(page:string) {
+    this.router.navigate(['/'+page], { queryParams: { id: this.business?.id } });
   }
 }

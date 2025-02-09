@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MetaService } from 'src/app/services/meta-service.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 import { Business } from 'src/app/model/business-questions.model';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ import { Business } from 'src/app/model/business-questions.model';
 })
 export class HomeComponent implements OnInit {
   businessId: string = '';
-  business: Business | null = null; // Set to null initially
+  business: Business | null = null;
   business$ = this.businessDataService.businessData$;
 
   constructor(
@@ -23,16 +24,18 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     console.log('HomeComponent - ngOnInit');
 
-     // Subscribe to the businessId from the service
-     this.businessDataService.getBusinessId().subscribe((businessId) => {
-      if (businessId) {
-        this.businessId = businessId;
-        this.businessDataService.getBusinessData().subscribe((data) => {
-          this.business = data;
-        });
-          // Update meta tags based on business data
-          this.metaService.loadAndApplyMeta(this.businessId);
-      }
+    // Subscribe to businessId and load business data in a single stream
+    this.businessDataService.getBusinessId().pipe(
+      switchMap((businessId) => {
+        if (businessId) {
+          this.businessId = businessId;
+          this.metaService.loadAndApplyMeta(businessId);
+          return this.businessDataService.loadBusinessData(businessId); // This will fetch the business data
+        }
+        return []; // Return an empty array if no businessId is available
+      })
+    ).subscribe((business) => {
+      this.business = business;
     });
   }
 
