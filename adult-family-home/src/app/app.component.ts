@@ -32,6 +32,8 @@ export class AppComponent implements OnInit {
     this.webContent.getBusinessData(this.businessId).subscribe((data) => {
       if (data) {
         this.business = data;
+        this.metaService.loadAndApplyMeta(this.businessId);
+    
       }
     });
   }
