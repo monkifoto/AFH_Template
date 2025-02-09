@@ -102,16 +102,19 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  padding-bottom: 10px; /* Add space for text */
+  /* padding-bottom: 10px;  */
+  width: 300px;  /* Fixed width */
+  height: 200px; /* Fixed height */
 }
 
 .gallery-item img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
+  width: 300px;  /* Fixed width */
+  height: 200px; /* Fixed height */
+  object-fit: cover; /* Ensures image fills the container without distortion */
+  object-position: top; /* Centers the image */
+  overflow: hidden; /* Hides any part that exceeds container */
   display: block;
-  position: relative;
-  z-index: 1; /* Ensure image doesn't overlap text */
+  border-radius: 8px; /* Optional: for rounded corners */
 }
 
 .image-info {

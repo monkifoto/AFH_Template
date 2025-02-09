@@ -16,4 +16,8 @@ export class ConsultationComponent  {
   navigateToContact(id: string | undefined | null) {
     this.router.navigate(['/contact-us'], { queryParams: { id } });
   }
+
+  navigateTo(page:string) {
+    this.router.navigate(['/'+page], { queryParams: { id: this.id } });
+  }
 }

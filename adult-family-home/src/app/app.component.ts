@@ -24,7 +24,11 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.businessId = params.get('id') || 'MGou3rzTVIbP77OLmZa7'; // Fallback if undefined
       this.loadBusinessData();
+    });
+      // this.loadBusinessData();
   }
 
   // Fetch business data
@@ -32,12 +36,8 @@ export class AppComponent implements OnInit {
     this.webContent.getBusinessData(this.businessId).subscribe((data) => {
       if (data) {
         this.business = data;
-        this.metaService.loadAndApplyMeta(this.businessId);
-    
       }
     });
   }
-
-
 
 }

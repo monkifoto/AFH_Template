@@ -224,7 +224,7 @@
 /* Container for the scroll animation */
 .mouse-scroll {
   position: absolute;
-  bottom: -220px;
+  bottom: calc(-50% + 40px);
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
