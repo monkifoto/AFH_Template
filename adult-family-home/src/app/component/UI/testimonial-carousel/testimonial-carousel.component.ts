@@ -155,4 +155,7 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
   navigateToTestimonials() {
     this.router.navigate(['/testimonials']); // Update with your testimonials page route
   }
+  get googleReviewLink(): string {
+    return `https://search.google.com/local/writereview?placeid=${this.placeId}`;
+  }
 }

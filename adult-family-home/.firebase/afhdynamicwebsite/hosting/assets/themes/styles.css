@@ -1199,3 +1199,17 @@ section {
     font-size: 0.8rem;
   }
 }
+
+
+.clemo-head-title{
+  margin-bottom:60px;
+}
+.clemo-head-title h2{
+  font-size:3.125rem;
+  color:#223d61;
+}
+.clemo-head-title p{
+  font-size:1rem;
+}
+
+.clemo-text-center{}
