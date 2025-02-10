@@ -72,6 +72,9 @@
         ●
       </button>
     </div>
+    <a *ngIf="placeId" [href]="googleReviewLink" target="_blank" rel="noopener noreferrer" class="afhBtn leave-review">
+      Leave a Google Review
+    </a>
   </ng-container>
 
   <!-- Fallback Message if No Testimonials Exist -->
