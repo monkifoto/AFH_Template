@@ -103,8 +103,12 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
   }
 
 
+  // get currentTestimonial() {
+  //   return this.testimonials[this.currentIndex];
+  // }
+
   get currentTestimonial() {
-    return this.testimonials[this.currentIndex];
+    return this.testimonials.length > 0 ? this.testimonials[this.currentIndex] : null;
   }
 
   goToSlide(index: number) {
@@ -124,8 +128,14 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
     }
   }
 
+  // nextSlide() {
+  //   this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
+  // }
+
   nextSlide() {
-    this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
+    if (this.testimonials.length > 0) {
+      this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
+    }
   }
 
   trackByIndex(index: number, _: any): number {

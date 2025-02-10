@@ -36,7 +36,7 @@
 </section>
 
 
-<section class="services-section" *ngIf="layoutType!='hh' && layoutType != 'sb'">
+<section class="services-section" *ngIf="layoutType!='hh' && layoutType != 'sb' && layoutType != 'sp'">
   <app-section-tilte [title]="'Our Services'"></app-section-tilte>
   <div class="services-grid">
       <div *ngFor="let service of services" class="service-item">
@@ -47,13 +47,19 @@
   </div>
 </section>
 
-<section class="sb-services-section" *ngIf="layoutType=='sb'">
+<section class="sb-services-section" *ngIf="layoutType=='sb' || layoutType =='sp'">
   <app-section-tilte [title]="'Our Services'"></app-section-tilte>
   <div class="sb-services-grid">
       <div *ngFor="let service of services" class="sb-service-item">
+        <div class="sb-service-icon-wrapper">
         <i [ngClass]="service.icon" class="sb-services-item-icon"></i>
+        </div>
+        <div class="sb-service-content">
           <h2 class="sb-service-title">{{service.name}}</h2>
           <p class="sb-service-description">{{service.description}}</p>
+        </div>
       </div>
   </div>
+
+
 </section>

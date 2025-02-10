@@ -578,7 +578,7 @@ textarea{
 
 .text-container, .image-container{
   flex: 1;
-  max-width: calc(var(--cell-max-width) * 11);
+  /* max-width: calc(var(--cell-max-width) * 11); */
 }
 
 .image-container {
@@ -743,3 +743,108 @@ textarea{
 }
 
 
+
+.sb-services-section {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #f8f9fa;
+}
+
+.sb-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.sb-service-item {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.sb-service-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.sb-service-icon-wrapper {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f1f1;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.sb-services-item-icon {
+  font-size: 32px;
+  color: #6c757d;
+}
+
+.sb-service-content {
+  text-align: left;
+}
+
+.sb-service-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #343a40;
+  margin-bottom: 5px;
+}
+
+.sb-service-description {
+  font-size: 14px;
+  color: #6c757d;
+  line-height: 1.6;
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  .sb-services-section {
+    padding: 30px 15px;
+  }
+
+  .sb-services-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .sb-service-item {
+    flex-direction: row;
+    padding: 15px;
+  }
+
+  .sb-service-icon-wrapper {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+
+  .sb-services-item-icon {
+    font-size: 28px;
+  }
+
+  .sb-service-title {
+    font-size: 16px;
+  }
+
+  .sb-service-description {
+    font-size: 13px;
+  }
+}
+
+
+.app-item-list{
+  padding-top: 6.6vmax;
+  padding-bottom: 6.6vmax;
+  border: solid 1px red ;
+}
