@@ -73,12 +73,13 @@
           <img [src]="section.value.sectionImageUrl" alt="Preview" width="100" height="100" />
         </div>
 
-        <!-- Show Upload Progress -->
-        <div *ngIf="section.value.uploadProgress !== null">
+        <!-- Show Upload Progress not working-->
+        <!-- <div *ngIf="section.value.uploadProgress !== null">
           <progress [value]="section.value.uploadProgress" max="100"></progress>
           <span>{{ section.value.uploadProgress }}%</span>
-        </div>
+        </div> -->
       </div>
+
 
 
         <label>Choose an Image</label>

@@ -35,10 +35,14 @@
   [layoutType]="business?.theme?.themeType || 'demo' "
 ></app-features>
 
-<app-testimonials
+<app-testimonials *ngIf="!business?.placeId"
   [testimonials]="business?.testimonials"
   [layoutType]="business?.theme?.themeType || 'demo' "
 ></app-testimonials>
+
+<app-testimonial-carousel *ngIf="business?.placeId"
+[placeId]="business?.placeId || ''">
+</app-testimonial-carousel>
 
 </section>
 
@@ -243,7 +247,7 @@
   [buttonBorderRadius]="'0px'"
   [subtitleSize]="'50px'"
   [subtitleWeight]="'100'"
-  sliderHeight="40vh">
+  sliderHeight="50vh">
   ></app-sp-hero-component>
 </section>
 <section id="home" class="single_page_section">
@@ -261,20 +265,16 @@
 
 </section>
 <section id="services" class="single_page_section">
-  <app-icon-list
-  [services]="[
-  { icon: 'fas fa-dove', title: 'Hospice Care', description: '...' },
-    { icon: 'fas fa-person-cane', title: 'Mobility Assistance', description: '...' },
-    { icon: 'fas fa-people-group', title: 'Companionship Care', description: '...' },
-    { icon: 'fas fa-bowl-food', title: 'Meal Planning', description: '...' },
-    { icon: 'fas fa-prescription-bottle', title: 'Medication', description: '...' },
-    { icon: 'fas fa-shower', title: 'Personal Hygiene', description: '...' },
-    { icon: 'fas fa-bed-pulse', title: 'Medical Care', description: '...' }
-  ]"
-></app-icon-list>
+
+  <app-item-list class="app-item-list"
+  [layoutType]="business?.theme?.themeType || ''"
+  [services]="business?.services || []"
+></app-item-list>
+
+
 </section>
 <section id="about-us" class="single_page_section">
-  <app-section-tilte [title]="'About Us'"></app-section-tilte>
+  <!-- <app-section-tilte [title]="'About Us'"></app-section-tilte> -->
 
   <app-right-text
   *ngIf="business?.sections | sectionFilter:'HomeRight' as section"
