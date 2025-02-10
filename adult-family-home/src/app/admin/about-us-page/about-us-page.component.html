@@ -64,6 +64,23 @@
           class="form-control"
         ></textarea>
 
+      <div class="imageUpload">
+        <label>Upload an Image</label>
+        <input type="file" (change)="onFileSelected($event, i)" />
+
+        <!-- Display Thumbnail Preview -->
+        <div *ngIf="section.value.sectionImageUrl">
+          <img [src]="section.value.sectionImageUrl" alt="Preview" width="100" height="100" />
+        </div>
+
+        <!-- Show Upload Progress -->
+        <div *ngIf="section.value.uploadProgress !== null">
+          <progress [value]="section.value.uploadProgress" max="100"></progress>
+          <span>{{ section.value.uploadProgress }}%</span>
+        </div>
+      </div>
+
+
         <label>Choose an Image</label>
         <div class="image-selection-container">
           <div *ngFor="let image of predefinedImages" class="image-selection">

@@ -4,6 +4,7 @@ import { Business, ListItem } from 'src/app/model/business-questions.model';
 import { Section } from 'src/app/model/section.model';
 import { ChangeDetectorRef, EventEmitter, Output } from '@angular/core';
 import { BusinessService } from 'src/app/services/business.service';
+import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
   selector: 'app-about-us-page',
@@ -90,7 +91,8 @@ export class AboutUsPageComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private businessService: BusinessService
+    private businessService: BusinessService,
+    private uploadService: UploadService
   ) {}
 
   // ngOnInit(): void {
@@ -218,32 +220,7 @@ export class AboutUsPageComponent implements OnInit {
   }
 
   sectionCounters: { [key: string]: number } = {}; // Track counters globally
-  // addSection(): void {
-  //   const newSection = this.fb.group({
-  //     id: [''], // Empty initially, will be updated after Firestore save
-  //     page: [''],
-  //     location: [''],
-  //     sectionName: [''],
-  //     sectionType: [''],
-  //     sectionTitle: [''],
-  //     sectionSubTitle: [''],
-  //     sectionImageUrl: [''],
-  //     sectionContent: [''],
-  //     sectionStyle: [''],
-  //   });
 
-  //   this.sections.push(newSection);
-  //   this.collapsedSections.push(true);
-
-  //   this.businessService
-  //     .createSection(this.businessId, newSection.value)
-  //     .then((docRef) => {
-  //       console.log('Firestore ID generated:', docRef.id); // Log Firestore generated ID
-  //       newSection.patchValue({ id: docRef.id }); // Update form with Firestore ID (sectionId)
-  //       console.log('Updated section form:', newSection.value); // Check updated form
-  //     })
-  //     .catch((error) => console.error('Error adding section:', error));
-  // }
 
   addSection(): void {
     const newSection = this.fb.group({
@@ -407,6 +384,41 @@ export class AboutUsPageComponent implements OnInit {
     });
   }
 
+  onFileSelected(event: Event, index: number) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      const businessId = this.businessId; // Ensure businessId is available
+      const location = 'sections'; // Store images under 'sections'
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        // Update FormGroup with a temporary image preview
+        this.sections.at(index).patchValue({ sectionImageUrl: reader.result as string, isExpanded: true });
+      };
+      reader.readAsDataURL(file);
+
+      // Upload file
+      const uploadData = this.uploadService.uploadFile(file, businessId, location);
+
+      // Show upload progress
+      uploadData.uploadProgress.subscribe((progress) => {
+        this.sections.at(index).patchValue({ uploadProgress: progress, isExpanded: true });
+      });
+
+      // Save final image URL and keep section open
+      uploadData.downloadUrl.subscribe((url) => {
+        this.sections.at(index).patchValue({
+          sectionImageUrl: url,
+          uploadProgress: null,
+          // isExpanded: true // Ensure section remains open
+        });
+        this.updateSection(index);
+
+        // Explicitly trigger form update to persist the changes
+        this.form.markAsDirty();
+      });
+    }
+  }
 
 
   updateSectionName(index: number): void {
