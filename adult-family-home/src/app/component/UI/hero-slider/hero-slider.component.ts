@@ -44,6 +44,8 @@ export class HeroSliderComponent implements OnInit {
             backgroundImage: slide.backgroundImage,
             buttons: slide.buttons || []
           }));
+          console.log("slide count:", this.slides.length);
+
         } else {
           console.warn('HeroSliderComponent - No heroSlider data available in the business data.');
           this.slides = [];

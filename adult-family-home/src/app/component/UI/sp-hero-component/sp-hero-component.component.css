@@ -47,11 +47,15 @@ h1 {
   font-size: 5rem;
   font-weight: bold;
   margin: 0;
+  color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 h2.subtitle {
   margin: 20px 0;
   line-height: 1.5;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .separator {

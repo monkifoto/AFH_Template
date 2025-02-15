@@ -1,96 +1,94 @@
 import * as functions from 'firebase-functions';
 import * as nodemailer from 'nodemailer';
 import * as cors from 'cors';
-import * as express from 'express';
 
-const app = express();
-app.use(cors({origin: true}));
+// Configure CORS middleware to allow requests from any origin
+const corsHandler = cors({origin: true});
 
 // Domain-to-credentials mapping
-const domainToTransporterConfig: Record<string, {user: string; pass: string}> = {
-  'helpinghandafh.com': {user: 'helpinghand99.afh@gmail.com', pass: 'ylcg rmnn aoqk ymow'},
-  'aefamilyhome.com': {user: 'narteae@gmail.com', pass: 'fggv tyqw cnkt feex'},
-  'sbmediahub.com': {user: 'sorin.bucse@gmail.com', pass: 'ybdv kmuc ciox nifm'},
-};
-
-const defaultTransporterConfig = {
-  user: 'helpinghand99.afh@gmail.com',
-  pass: 'ylcg rmnn aoqk ymow',
-};
-
-const getTransporterForDomain = (domain: string): nodemailer.Transporter => {
-  const config = domainToTransporterConfig[domain] || defaultTransporterConfig;
-  return nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {user: config.user, pass: config.pass},
-  });
-};
-
-app.post('/send-email', (req, res) => {
-  const {name, email, message, website} = req.body;
-  if (!email || !name || !message || !website) {
-    return res.status(400).json({success: false, message: 'Missing required fields.'});
-  }
-  return res.status(400).json({success: false, message: 'Something went wrong'});
-  const domain: string = website || '';
-  const transporter = getTransporterForDomain(domain);
-  const mailOptions = {
-    from: domainToTransporterConfig[domain]?.user || defaultTransporterConfig.user,
-    to: domainToTransporterConfig[domain]?.user || defaultTransporterConfig.user,
-    bcc: 'monkifoto@gmail.com',
-    subject: `Contact Email from ${domain}`,
-    text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-  };
-
-  transporter.sendMail(mailOptions, (error) => {
-    if (error) {
-      console.error('Error sending email:', error);
-      return res.status(500).json({success: false, message: 'Error sending email', error});
-    }
-    return res.status(200).json({success: true, message: 'Email sent successfully'});
-  });
-});
-
-// Dynamic Metadata Handling
-const businessMetadata: Record<string, { title: string; description: string }> = {
+const domainToTransporterConfig: Record<string,
+{user: string; pass: string}> = {
   'helpinghandafh.com': {
-    title: 'Helping Hand AFH - Quality Care',
-    description: 'Providing exceptional adult family home care services.',
+    user: 'helpinghand99.afh@gmail.com',
+    pass: 'ylcg rmnn aoqk ymow',
   },
   'aefamilyhome.com': {
-    title: 'AE Family Home - Trusted Care',
-    description: 'Caring for your loved ones with dedication.',
+    user: 'narteae@gmail.com',
+    pass: 'fggv tyqw cnkt feex',
   },
   'sbmediahub.com': {
-    title: 'SB Media Hub - Digital Solutions',
-    description: 'Helping small businesses grow with digital marketing.',
+    user: 'sorin.bucse@gmail.com',
+    pass: 'ybdv kmuc ciox nifm',
   },
-  'default': {
-    title: 'Welcome to Our Platform',
-    description: 'Find the best services for your needs.',
-  },
+  'countrycrestafh.com': {
+    user: 'countrycrestafh@gmail.com',
+    pass: 'xemf vinl sfub dbez'},
 };
 
-app.get('*', (req, res) => {
-  const hostname = req.hostname;
-  const metadata = businessMetadata[hostname] || businessMetadata.default;
-  const html = `
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>${metadata.title}</title>
-      <meta name="description" content="${metadata.description}">
-      <meta property="og:title" content="${metadata.title}">
-      <meta property="og:description" content="${metadata.description}">
-  </head>
-  <body>
-      <h1>${metadata.title}</h1>
-  </body>
-  </html>`;
-  res.status(200).send(html);
-});
+// Default credentials
+const defaultTransporterConfig = {
+  user: 'sorin.bucse@gmail.com',
+  pass: 'ybdv kmuc ciox nifm',
+};
 
-// Export Firebase functions
-exports.app = functions.https.onRequest(app);
+// Function to get the appropriate transporter for a domain
+const getTransporterForDomain = (domain: string): nodemailer.Transporter => {
+  const config = domainToTransporterConfig[domain] ||
+   defaultTransporterConfig;
+
+  return nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: config.user,
+      pass: config.pass,
+    },
+  });
+};
+
+export const sendContactEmail = functions.https.onRequest((req, res) => {
+  corsHandler(req, res, () => {
+    const {name, email, message, website} = req.body;
+
+    if (!email || !name || !message || !website) {
+      return res.status(400).json({
+        success: false,
+        message: 'Missing required fields: name, email, or message.',
+      });
+    }
+
+    // Extract domain from the website URL
+    const domain: string = website || '';
+
+    const transporter = getTransporterForDomain(domain);
+
+    const mailOptions = {
+      from: domainToTransporterConfig[domain]?.user ||
+       defaultTransporterConfig.user,
+      to: domainToTransporterConfig[domain]?.user ||
+       defaultTransporterConfig.user,
+      bcc: 'monkifoto@gmail.com',
+      subject: `Contact Email from ${domain}`,
+      text: `You have a new message from:
+      Name: ${name}
+      Email: ${email}
+      Message: ${message}`,
+    };
+
+    return transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error('Error sending email:', error);
+        return res.status(500).json({
+          success: false,
+          message: 'Error sending email',
+          error,
+        });
+      } else {
+        console.log('Email sent: ' + info.response);
+        return res.status(200).json({
+          success: true,
+          message: 'Email sent successfully',
+        });
+      }
+    });
+  });
+});

@@ -10,22 +10,22 @@ const domainToTransporterConfig: Record<string,
 {user: string; pass: string}> = {
   'helpinghandafh.com': {
     user: 'helpinghand99.afh@gmail.com',
-    pass: 'ylcg rmnn aoqk ymow',
+    pass: '',
   },
   'aefamilyhome.com': {
     user: 'narteae@gmail.com',
-    pass: 'fggv tyqw cnkt feex',
+    pass: '',
   },
   'sbmediahub.com': {
     user: 'sorin.bucse@gmail.com',
-    pass: 'ybdv kmuc ciox nifm ',
+    pass: '',
   },
 };
 
 // Default credentials
 const defaultTransporterConfig = {
   user: 'helpinghand99.afh@gmail.com',
-  pass: 'ylcg rmnn aoqk ymow',
+  pass: '',
 };
 
 // Function to get the appropriate transporter for a domain
@@ -53,18 +53,8 @@ export const sendContactEmail = functions.https.onRequest((req, res) => {
       });
     }
 
-    // Extract domain from the website URL
     const domain: string = website || '';
-    // try {
-    //   const url = new URL(website);
-    //   domain = url.hostname.replace('www.', '');
-    // } catch (error) {
-    //   console.error('Invalid website URL:', website);
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: 'Invalid website URL.',
-    //   });
-    // }
+
 
     const transporter = getTransporterForDomain(domain);
 
