@@ -21,6 +21,7 @@
   </div>
 
   <!-- Navigation -->
+  <div *ngIf="slides.length > 1">
   <div class="navigation" [ngClass]="{ 'bottom-nav': navigation === 'bottom' }">
     <div *ngFor="let slide of slides; let i = index"
          [class.active]="i === currentSlide"
@@ -36,4 +37,5 @@
   <button *ngIf="sideButtons" class="control next" (click)="nextSlide()">
     &rarr;
   </button>
+  </div>
 </div>

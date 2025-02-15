@@ -85,6 +85,7 @@ import { SpHeroComponentComponent } from './component/UI/sp-hero-component/sp-he
       "aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1",
       "www.aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1",
       "sbmediahub.com": "MGou3rzTVIbP77OLmZa7",
+      "sp.sbmediahub.com": "KyQfU7hjez0uXRfAjqcu",
       "www.sbmediahub.com": "MGou3rzTVIbP77OLmZa7",
       "countrycrestafh.com": "yrNc50SvfPqwTSkvvygA",
       "www.countrycrestafh.com": "yrNc50SvfPqwTSkvvygA"

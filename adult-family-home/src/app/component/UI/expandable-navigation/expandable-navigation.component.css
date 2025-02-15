@@ -10,16 +10,16 @@
   height: 150px; /* Initial height */
   /* width: 100%; */
   display: flex;
-  justify-content: space-between; /* Space between logo and nav links */
+  justify-content: space-between;
   align-items: center;
-  padding: 0 20px; /* Add some horizontal padding */
+  padding: 0 20px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Shrinking effect */
 .clemo-header.clemo-shrink {
-  height: 70px; /* Shrunk height */
-  box-shadow: none; /* Remove box-shadow when scrolled */
+  height: 70px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Logo styles */

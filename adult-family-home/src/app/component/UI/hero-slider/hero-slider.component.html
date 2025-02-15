@@ -1,11 +1,13 @@
 <div
   class="clemo-slider-container"
   id="carousel"
-  [ngStyle]="{ '--slider-opacity': sliderOpacity,
-   'height': sliderHeight,
+  [ngStyle]="{
+    '--slider-opacity': sliderOpacity,
+    height: sliderHeight,
     '--button-border-radius': buttonBorderRadius,
-    '--subtitle-size': subtitleSize ,
-    '--subtitle-weight': subtitleWeight}"
+    '--subtitle-size': subtitleSize,
+    '--subtitle-weight': subtitleWeight
+  }"
 >
   <div
     *ngFor="let slide of slides; let i = index"
@@ -30,7 +32,11 @@
     <div class="clemo-main-home" *ngIf="slide.title?.trim()">
       <h1>{{ slide.title }}</h1>
       <div class="clemo-separator"></div>
-      <h2 class="clemo-subtitle" [ngStyle]="{ 'font-size': subtitleSize , 'font-weight': subtitleWeight}" [innerHTML]="slide.subtitle"></h2>
+      <h2
+        class="clemo-subtitle"
+        [ngStyle]="{ 'font-size': subtitleSize, 'font-weight': subtitleWeight }"
+        [innerHTML]="slide.subtitle"
+      ></h2>
 
       <!-- Dynamic Buttons -->
       <div class="clemo-home-btn">
@@ -58,41 +64,43 @@
   </div>
 
   <!-- Navigation -->
-  <div
-  class="clemo-slider-navigation"
-  [ngClass]="{ 'bottom-nav': navigation === 'bottom' }">
+  <div *ngIf="slides.length > 1">
+    <div
+      class="clemo-slider-navigation"
+      [ngClass]="{ 'bottom-nav': navigation === 'bottom' }"
+    >
+      <div
+        *ngFor="let slide of slides; let i = index"
+        [class.clemo-active]="i === currentSlide"
+        class="clemo-nav-item"
+        [ngClass]="{ 'line-style': navigation === 'bottom' }"
+        (click)="navigateToSlide(i)"
+      ></div>
+    </div>
 
-  <div
-    *ngFor="let slide of slides; let i = index"
-    [class.clemo-active]="i === currentSlide"
-    class="clemo-nav-item"
-    [ngClass]="{ 'line-style': navigation === 'bottom' }"
-    (click)="navigateToSlide(i)">
+    <!-- Side Buttons (Conditional) -->
+    <button
+      *ngIf="sideButtons"
+      class="carousel-control-prev hh-prev"
+      type="button"
+      (click)="prevSlide()"
+      data-bs-target="#heroCarousel"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+
+    <button
+      *ngIf="sideButtons"
+      class="carousel-control-next hh-next"
+      type="button"
+      (click)="nextSlide()"
+      data-bs-target="#heroCarousel"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
-</div>
-
-<!-- Side Buttons (Conditional) -->
-<button
-  *ngIf="sideButtons"
-  class="carousel-control-prev hh-prev"
-  type="button"
-  (click)="prevSlide()"
-  data-bs-target="#heroCarousel"
-  data-bs-slide="prev">
-  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-  <span class="visually-hidden">Previous</span>
-</button>
-
-<button
-  *ngIf="sideButtons"
-  class="carousel-control-next hh-next"
-  type="button"
-  (click)="nextSlide()"
-  data-bs-target="#heroCarousel"
-  data-bs-slide="next">
-  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-  <span class="visually-hidden">Next</span>
-</button>
-
-
 </div>
