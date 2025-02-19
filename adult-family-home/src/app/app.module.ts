@@ -76,6 +76,7 @@ import { FaqComponent } from './component/faq/faq.component';
 import { SpGalleryComponentComponent } from './component/UI/sp-gallery-component/sp-gallery-component.component';
 import { SpContactUsComponentComponent } from './component/UI/sp-contact-us-component/sp-contact-us-component.component';
 import { SpHeroComponentComponent } from './component/UI/sp-hero-component/sp-hero-component.component';
+import { DynamicThemeLoaderComponent } from './component/dynamic-theme-loader/dynamic-theme-loader.component';
 
 
     // Map hostnames to business IDs
@@ -216,6 +217,7 @@ export function combinedInitializer(
     SpGalleryComponentComponent,
     SpContactUsComponentComponent,
     SpHeroComponentComponent,
+    DynamicThemeLoaderComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators, AbstractControl } from '@angular/forms';
-import { Business } from 'src/app/model/business-questions.model';
+import { Business, SliderConfig } from 'src/app/model/business-questions.model';
 import { BusinessService } from 'src/app/services/business.service';
 import { UploadService } from 'src/app/services/upload.service';
 
@@ -11,10 +11,14 @@ import { UploadService } from 'src/app/services/upload.service';
 })
 export class AdminHeroSliderComponent implements OnInit {
   sliderForm: FormGroup;
-  // businessId: string = 'default-business-id'; // Replace with your logic to fetch business ID
   uploadProgress: number[] = [];
   isSaving = false;
   message: string | null = null;
+
+  sliderHeights: string[] = [
+    '10vh', '20vh', '30vh', '40vh', '50vh', '60vh', '70vh', '80vh', '90vh', '100vh'
+  ];
+
   @Input() business!: Business | undefined;
   @Input() businessId!: string;
 
@@ -25,6 +29,14 @@ export class AdminHeroSliderComponent implements OnInit {
   ) {
     this.sliderForm = this.fb.group({
       slides: this.fb.array([]),
+      sliderConfig: this.fb.group({
+        navigation: ['side'],
+        sideButtons: [true],
+        sliderHeight: ['100vh'],
+        buttonBorderRadius: ['25px'],
+        subtitleSize: ['1.5rem'],
+        subtitleWeight: ['600']
+      })
     });
   }
 
@@ -36,13 +48,45 @@ export class AdminHeroSliderComponent implements OnInit {
     return this.sliderForm.get('slides') as FormArray;
   }
 
+  get sliderConfig(): FormGroup {
+    return this.sliderForm.get('sliderConfig') as FormGroup;
+  }
+
   loadSliderData(): void {
     this.businessService.getBusiness(this.businessId).subscribe((business) => {
-      this.slides.clear(); // Clear existing slides to prevent duplicates
-      if (business?.heroSlider) {
+      if (!business) {
+        console.warn('AdminHeroSliderComponent - No business data found.');
+        return;
+      }
+
+      // Clear slides and add the data from the backend
+      this.slides.clear();
+      if (business.heroSlider) {
         business.heroSlider.forEach((slide: any) => this.addSlide(slide));
       }
+
+      // Load and apply slider configuration from the database
+      if (business.sliderConfig) {
+        this.applySliderConfig(business.sliderConfig);
+      } else {
+        console.warn('AdminHeroSliderComponent - No sliderConfig found in database.');
+      }
     });
+  }
+
+  applySliderConfig(config: SliderConfig): void {
+    // Apply slider configuration to the form
+    this.sliderForm.patchValue({
+      sliderConfig: {
+        navigation: config.navigation ?? 'side',
+        sideButtons: config.sideButtons ?? true,
+        sliderHeight: config.sliderHeight ?? '100vh',
+        buttonBorderRadius: config.buttonBorderRadius ?? '25px',
+        subtitleSize: config.subtitleSize ?? '1.5rem',
+        subtitleWeight: config.subtitleWeight ?? '600'
+      }
+    });
+    console.log('AdminHeroSliderComponent - Loaded slider config:', config);
   }
 
   addSlide(slide: any = { title: '', subtitle: '', backgroundImage: '', buttons: [] }): void {
@@ -109,25 +153,6 @@ export class AdminHeroSliderComponent implements OnInit {
     }
   }
 
-  // uploadImage(file: File, slideIndex: number): void {
-  //   const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(
-  //     file,
-  //     this.businessId,
-  //     'heroImages'
-  //   );
-
-  //   this.uploadProgress[slideIndex] = 0;
-
-  //   uploadProgress.subscribe((progress) => {
-  //     this.uploadProgress[slideIndex] = progress;
-  //   });
-
-  //   downloadUrl.subscribe((url) => {
-  //     this.slides.at(slideIndex).get('backgroundImage')?.setValue(url);
-  //     this.uploadProgress[slideIndex] = 100; // Set to 100% on completion
-  //   });
-  // }
-
   getButtons(slide: AbstractControl): FormArray {
     return slide.get('buttons') as FormArray;
   }
@@ -135,13 +160,16 @@ export class AdminHeroSliderComponent implements OnInit {
   saveSliderData(): void {
     if (this.sliderForm.valid) {
       this.isSaving = true;
-      const updatedData = { heroSlider: this.sliderForm.value.slides };
+      const updatedData = {
+        heroSlider: this.sliderForm.value.slides,
+        sliderConfig: this.sliderForm.value.sliderConfig // Ensure sliderConfig is included in the data
+      };
 
       this.businessService.updateBusiness(this.businessId, updatedData).then(
         () => {
           this.isSaving = false;
           this.message = 'Slider data saved successfully!';
-          setTimeout(() => (this.message = null), 3000); // Clear message after 3 seconds
+          setTimeout(() => (this.message = null), 3000);
         },
         (error) => {
           this.isSaving = false;

@@ -2,7 +2,7 @@ import { Section } from './section.model';
 
 export interface Business {
   businessData: {};
-  [x: string]: {};
+  // [x: string]: {};
   id: string;
 
   //Business Information
@@ -25,6 +25,7 @@ export interface Business {
 
   // Hero Slider
   heroSlider: HeroSlide[];
+  sliderConfig?: SliderConfig;
   heroImages: string[];
   sections: Section[];
   services: ListItem[];
@@ -64,6 +65,15 @@ export interface HeroSlide {
   backgroundImage: string; // URL for the slide's background image
   buttons: HeroButton[]; // Array of buttons for the slide
 }
+export interface SliderConfig {
+  navigation: 'side' | 'bottom';
+  sideButtons: boolean;
+  sliderHeight: string;
+  buttonBorderRadius: string;
+  subtitleSize: string;
+  subtitleWeight: string;
+}
+
 
 export interface HeroButton {
   text: string; // Button text
@@ -264,8 +274,8 @@ export class BusinessModel {
       faviconUrl: '../../assets/sharedAssets/icons/hh_favicon.ico',
 
 
-      mediaFeatures: 'Featured in Healthcare Journal, Senior Care Monthly.',
-      ratings: 'Google: 4.8 stars, Yelp: 5 stars',
+      // mediaFeatures: 'Featured in Healthcare Journal, Senior Care Monthly.',
+      // ratings: 'Google: 4.8 stars, Yelp: 5 stars',
       address: '4567 Compassionate Ln, Kindness City, ST 56789',
       phone: '(987) 654-3210',
       fax: '(987) 654-3211',
