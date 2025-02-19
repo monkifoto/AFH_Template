@@ -31,6 +31,31 @@ const defaultTransporterConfig = {
   pass: 'ybdv kmuc ciox nifm',
 };
 
+// Dynamic Metadata Handling (SEO Meta Tags)
+const businessMetadata: Record<string, {title: string; description: string}> = {
+  'helpinghandafh.com': {
+    title: 'Helping Hand AFH - Quality Care',
+    description: 'Providing exceptional adult family home care services.',
+  },
+  'countrycrestafh.com': {
+    title: 'Country Crest AFH - Quality Care',
+    description: 'Providing exceptional adult family home care services.',
+  },
+  'aefamilyhome.com': {
+    title: 'AE Family Home - Trusted Care',
+    description: 'Caring for your loved ones with dedication.',
+  },
+  'sbmediahub.com': {
+    title: 'SB Media Hub - Digital Solutions',
+    description: 'Helping small businesses grow with digital marketing.',
+  },
+  'default': {
+    title: 'Welcome to Our Platform',
+    description: 'Find the best services for your needs.',
+  },
+};
+
+
 // Function to get the appropriate transporter for a domain
 const getTransporterForDomain = (domain: string): nodemailer.Transporter => {
   const config = domainToTransporterConfig[domain] ||
@@ -90,5 +115,36 @@ export const sendContactEmail = functions.https.onRequest((req, res) => {
         });
       }
     });
+  });
+});
+
+export const handleSeoMetadata = functions.https.onRequest((req, res) => {
+  corsHandler(req, res, () => {
+    const hostname = req.hostname;
+    const metadata = businessMetadata[hostname] || businessMetadata.default;
+
+    const html = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>${metadata.title}</title>
+        <meta name="description" content="${metadata.description}">
+        <meta property="og:title" content="${metadata.title}">
+        <meta property="og:description" content="${metadata.description}">
+        <meta property="og:image" content="https://example.com/your-image.jpg">
+        <meta property="og:url" content="https://${hostname}">
+        <meta name="twitter:title" content="${metadata.title}">
+        <meta name="twitter:description" content="${metadata.description}">
+        <meta name="twitter:image" content="https://example.com/your-image.jpg">
+    </head>
+    <body>
+        <h1>${metadata.title}</h1>
+        <p>${metadata.description}</p>
+    </body>
+    </html>`;
+
+    res.status(200).send(html);
   });
 });

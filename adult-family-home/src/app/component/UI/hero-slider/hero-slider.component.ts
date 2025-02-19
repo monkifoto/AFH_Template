@@ -1,6 +1,6 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Business } from 'src/app/model/business-questions.model';
+import { Business, SliderConfig } from 'src/app/model/business-questions.model';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 
 @Component({
@@ -37,6 +37,7 @@ export class HeroSliderComponent implements OnInit {
         console.log('HeroSliderComponent - Retrieved business data:', data);
         this.business = data;
 
+        // Load slides
         if (this.business.heroSlider && Array.isArray(this.business.heroSlider)) {
           this.slides = this.business.heroSlider.map((slide: any) => ({
             title: this.replaceKeywords(slide.title),
@@ -45,10 +46,16 @@ export class HeroSliderComponent implements OnInit {
             buttons: slide.buttons || []
           }));
           console.log("slide count:", this.slides.length);
-
         } else {
-          console.warn('HeroSliderComponent - No heroSlider data available in the business data.');
+          console.warn('HeroSliderComponent - No heroSlider data available.');
           this.slides = [];
+        }
+
+        // Load slider configuration if available
+        if (this.business.sliderConfig) {
+          this.applySliderConfig(this.business.sliderConfig);
+        } else {
+          console.warn('HeroSliderComponent - No sliderConfig found, using default values.');
         }
       } else {
         console.error('HeroSliderComponent - No business data available.');
@@ -56,6 +63,16 @@ export class HeroSliderComponent implements OnInit {
     });
   }
 
+  applySliderConfig(config: SliderConfig): void {
+    this.navigation = config.navigation ?? 'side';
+    this.sideButtons = config.sideButtons ?? true;
+    this.sliderHeight = config.sliderHeight ?? '100vh';
+    this.buttonBorderRadius = config.buttonBorderRadius ?? '25px';
+    this.subtitleSize = config.subtitleSize ?? '1.5rem';
+    this.subtitleWeight = config.subtitleWeight ?? '600';
+
+    console.log('HeroSliderComponent - Applied slider config:', config);
+  }
   replaceKeywords(text: string): string {
     if (!text || !this.business?.businessName) {
       return text;

@@ -4,28 +4,45 @@ import * as cors from 'cors';
 import * as express from 'express';
 
 const app = express();
-// app.use(cors({origin: true}));
-app.use(cors({
+
+// 🔹 Correct CORS setup
+const corsHandler = cors({
   origin: ['https://sbmediahub.com', 'https://helpinghandafh.com',
     'https://aefamilyhome.com', 'https://countrycrestafh.com'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: ['Content-Type', 'Authorization'],
-}));
-
-
+  credentials: true,
+});
+app.use(corsHandler);
+app.use(express.json());
 // Domain-to-credentials mapping
-const domainToTransporterConfig: Record<string, {user: string; pass: string}> = {
-  'helpinghandafh.com': {user: 'helpinghand99.afh@gmail.com', pass: 'ylcg rmnn aoqk ymow'},
-  'aefamilyhome.com': {user: 'narteae@gmail.com', pass: 'fggv tyqw cnkt feex'},
-  'sbmediahub.com': {user: 'sorin.bucse@gmail.com', pass: 'ybdv kmuc ciox nifm'},
-  'countrycrestafh.com': {user: 'countrycrestafh@gmail.com', pass: 'xemf vinl sfub dbez'},
-};
+const domainToTransporterConfig: Record<string, {
+  user: string; pass: string }> = {
+    'helpinghandafh.com': {
+      user: 'helpinghand99.afh@gmail.com',
+      pass: 'ylcg rmnn aoqk ymow',
+    },
+    'aefamilyhome.com': {
+      user: 'narteae@gmail.com',
+      pass: 'fggv tyqw cnkt feex',
+    },
+    'sbmediahub.com': {
+      user: 'sorin.bucse@gmail.com',
+      pass: 'ybdv kmuc ciox nifm',
+    },
+    'countrycrestafh.com': {
+      user: 'countrycrestafh@gmail.com',
+      pass: 'xemf vinl sfub dbez',
+    },
+  };
 
+// Default credentials (Fallback)
 const defaultTransporterConfig = {
   user: 'sorin.bucse@gmail.com',
   pass: 'biwq ueph cymy evmg',
 };
 
+// Function to create a transporter for a domain
 const getTransporterForDomain = (domain: string): nodemailer.Transporter => {
   const config = domainToTransporterConfig[domain] || defaultTransporterConfig;
   return nodemailer.createTransport({
@@ -34,33 +51,38 @@ const getTransporterForDomain = (domain: string): nodemailer.Transporter => {
   });
 };
 
+// Email sending endpoint
 app.post('/send-email', (req, res) => {
-  const {name, email, message, website} = req.body;
-  if (!email || !name || !message || !website) {
-    return res.status(400).json({success: false, message: 'Missing required fields.'});
-  }
-  return res.status(400).json({success: false, message: 'Something went wrong'});
-  const domain: string = website || '';
-  const transporter = getTransporterForDomain(domain);
-  const mailOptions = {
-    from: domainToTransporterConfig[domain]?.user || defaultTransporterConfig.user,
-    to: domainToTransporterConfig[domain]?.user || defaultTransporterConfig.user,
-    bcc: 'monkifoto@gmail.com',
-    subject: `Contact Email from ${domain}`,
-    text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-  };
+  corsHandler(req, res, async () => {
+    const {name, email, message, website} = req.body;
 
-  transporter.sendMail(mailOptions, (error) => {
-    if (error) {
+    if (!email || !name || !message || !website) {
+      return res.status(400).json({success: false, message: 'Missing required fields.'});
+    }
+
+    const domain: string = website || '';
+    const transporter = getTransporterForDomain(domain);
+
+    const mailOptions = {
+      from: domainToTransporterConfig[domain]?.user || defaultTransporterConfig.user,
+      to: domainToTransporterConfig[domain]?.user || defaultTransporterConfig.user,
+      bcc: 'monkifoto@gmail.com',
+      subject: `Contact Email from ${domain}`,
+      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+    };
+
+    try {
+      await transporter.sendMail(mailOptions);
+      return res.status(200).json({success: true, message: 'Email sent successfully'});
+    } catch (error) {
       console.error('Error sending email:', error);
       return res.status(500).json({success: false, message: 'Error sending email', error});
     }
-    return res.status(200).json({success: true, message: 'Email sent successfully'});
   });
 });
 
-// Dynamic Metadata Handling
-const businessMetadata: Record<string, { title: string; description: string }> = {
+// Dynamic Metadata Handling (SEO Meta Tags)
+const businessMetadata: Record<string, {title: string; description: string}> = {
   'helpinghandafh.com': {
     title: 'Helping Hand AFH - Quality Care',
     description: 'Providing exceptional adult family home care services.',
@@ -83,9 +105,11 @@ const businessMetadata: Record<string, { title: string; description: string }> =
   },
 };
 
+// Handle metadata for SEO
 app.get('*', (req, res) => {
   const hostname = req.hostname;
   const metadata = businessMetadata[hostname] || businessMetadata.default;
+
   const html = `
   <!DOCTYPE html>
   <html lang="en">
@@ -101,15 +125,15 @@ app.get('*', (req, res) => {
       <h1>${metadata.title}</h1>
   </body>
   </html>`;
+
   res.status(200).send(html);
 });
 
-app.options('*', (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
-  res.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.set('Access-Control-Allow-Headers', 'Content-Type');
+// Handle CORS preflight requests
+app.options('*', corsHandler, (req, res) => {
   res.status(204).send('');
 });
 
-// Export Firebase functions
+
+// Deploy to Firebase Functions
 exports.app = functions.https.onRequest(app);

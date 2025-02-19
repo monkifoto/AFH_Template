@@ -1,5 +1,6 @@
 <div class="admin-hero-slider">
   <h2>Manage Hero Slider</h2>
+
   <form [formGroup]="sliderForm" (ngSubmit)="saveSliderData()">
     <div formArrayName="slides">
       <div *ngFor="let slide of slides.controls; let i = index" [formGroupName]="i" class="slide">
@@ -23,8 +24,6 @@
             <input type="file" (change)="uploadImage($event, i)" />
             <progress *ngIf="uploadProgress[i] !== undefined" [value]="uploadProgress[i]" max="100"></progress>
           </div>
-
-
         </div>
 
         <!-- Collapsible Button Section -->
@@ -43,11 +42,42 @@
 
         <button type="button" (click)="removeSlide(i)">Remove Slide</button>
       </div>
-
     </div>
+
     <button type="button" (click)="addSlide()">Add Slide</button>
+
+
+    <!-- Slider Configuration -->
+    <div class="config-settings" formGroupName="sliderConfig">
+      <h3>Slider Configuration</h3>
+
+      <label>Navigation</label>
+      <select formControlName="navigation">
+        <option value="side">Side</option>
+        <option value="bottom">Bottom</option>
+      </select>
+
+      <label>Show Side Buttons</label>
+      <input type="checkbox" formControlName="sideButtons" />
+
+      <label>Slider Height</label>
+      <select formControlName="sliderHeight">
+        <option *ngFor="let height of sliderHeights" [value]="height">{{ height }}</option>
+      </select>
+
+      <label>Button Border Radius</label>
+      <input type="text" formControlName="buttonBorderRadius" />
+
+      <label>Subtitle Size</label>
+      <input type="text" formControlName="subtitleSize" />
+
+      <label>Subtitle Weight</label>
+      <input type="text" formControlName="subtitleWeight" />
+    </div>
+
     <button type="submit" [disabled]="isSaving">Save Slider Data</button>
   </form>
+
   <!-- Confirmation Message -->
   <div *ngIf="message" class="message">{{ message }}</div>
 </div>
