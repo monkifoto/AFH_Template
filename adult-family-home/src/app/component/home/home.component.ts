@@ -4,6 +4,8 @@ import { MetaService } from 'src/app/services/meta-service.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 import { BusinessSectionsService } from 'src/app/services/business-sections.service';
 import { CenterTextComponent } from '../UI/center-text/center-text.component';
+import { RightTextComponent } from '../UI/right-text/right-text.component';
+import { LeftTextComponent } from '../UI/left-text/left-text.component';
 import { HeroSliderComponent } from '../UI/hero-slider/hero-slider.component';
 import { ItemListComponent } from '../UI/item-list/item-list.component';
 import { FeaturesComponent } from '../features/features.component';
@@ -28,9 +30,12 @@ export class HomeComponent implements OnInit {
   componentsMap: Record<string, Type<any>> = {
     'center-text': CenterTextComponent,
     'hero-slider': HeroSliderComponent,
+    'right-text': RightTextComponent,
+    'left-text': LeftTextComponent,
     'item-list': ItemListComponent,
     'features': FeaturesComponent,
     'testimonials': TestimonialsComponent,
+    'testimonials-carousel': TestimonialCarouselComponent,
     'why-us': WhyUsComponent
   };
 
@@ -78,20 +83,21 @@ export class HomeComponent implements OnInit {
   getFilteredSections(themeType: string, sections: any[]): any[] {
     console.log(`Filtering sections for themeType: ${themeType}`, sections);
 
-    // Map sectionType values to the expected component names
     const sectionTypeToComponentMap: Record<string, string> = {
       "Welcome": "center-text",
+      "Left": "left-text",
+      "Right": "right-text",
       "Gallery": "gallery",
       "Story": "center-text",
       "Mission": "center-text",
       "Vision": "center-text",
-      "Other": "features" // Default for unknown types
+      "Other": "features"
     };
 
     const themeSectionsMap: Record<string, string[]> = {
       hh: ["center-text", "item-list"],
       demo: ["center-text", "item-list"],
-      ae: ["center-text", "testimonials"],
+      ae: ["center-text", "right-text", "left-text", "testimonials"],
       clemo: ["features", "testimonials"],
       sb: ["center-text", "item-list"],
       prestige: []
@@ -99,17 +105,24 @@ export class HomeComponent implements OnInit {
 
     const allowedComponents = themeSectionsMap[themeType] || [];
 
-    // Convert sectionType to component before filtering
-    const filteredSections = sections.map(section => {
-      const mappedComponent = sectionTypeToComponentMap[section.sectionType] || "features"; // Default fallback
-      return { ...section, component: mappedComponent };
-    }).filter(section => allowedComponents.includes(section.component));
+    // Ensure sections are mapped correctly before filtering
+    const mappedSections = sections.map(section => {
+      const component = sectionTypeToComponentMap[section.location] || sectionTypeToComponentMap[section.sectionType] || null;
+      return component ? { ...section, component } : null;
+    }).filter(section => section !== null) as any[];
+
+    // Order sections based on themeSectionsMap
+    const filteredSections = allowedComponents
+      .map(componentType => mappedSections.find(section => section.component === componentType))
+      .filter(section => section !== undefined);
 
     console.log("Allowed Components for Theme:", allowedComponents);
-    console.log("Final Filtered Sections:", filteredSections);
+    console.log("Final Filtered Sections (Ordered):", filteredSections);
 
-    return filteredSections.sort((a, b) => a.order - b.order);
+    return filteredSections;
   }
+
+
 
 
   loadComponents() {
@@ -140,6 +153,7 @@ export class HomeComponent implements OnInit {
       const componentRef = this.container.createComponent(factory, undefined, this.injector);
 
       if (componentRef.instance && typeof componentRef.instance === 'object') {
+        console.log("Assigning Content to LeftTextComponent:", section.sectionContent);
         // Assign section properties dynamically
         Object.assign(componentRef.instance, {
           title: this.applyReplaceKeyword(section.sectionTitle || ''),
@@ -151,6 +165,7 @@ export class HomeComponent implements OnInit {
           _businessName: this.business?.businessName || '',
           showImage: !!section.sectionImageUrl, // Show image if URL exists
         });
+        console.log("Left-Text Instance Data:", componentRef.instance); // Debugging log
       }
     });
 

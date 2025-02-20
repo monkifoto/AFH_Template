@@ -2,7 +2,7 @@
 
   <div class="text-container">
       <h2>{{title}}</h2>
-      <h4>{{content}}</h4>
+      <h4 [innerHTML]="sanitizedContent"></h4>
   </div>
 
   <div class="image-container">
@@ -22,8 +22,8 @@
         <h2><span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span></h2>
 
         <div class="separator2"></div>
-      <p>{{content}}</p>
-      <!-- <a href="#" class="btn">learn more</a> -->
+        <p [innerHTML]="sanitizedContent"></p>
+
   </div>
 
   <div class="left-image-container">
@@ -35,3 +35,4 @@
 </div>
 
 </section>
+
