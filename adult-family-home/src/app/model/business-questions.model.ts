@@ -141,6 +141,7 @@ export class BusinessModel {
           sectionImageUrl: 'assets/sharedAssets/istockphoto-502998071-2048x2048.jpg',
           sectionType: 'Other',
           sectionStyle: 'hh',
+          order:0,
         },
         {
           page:'',
@@ -152,6 +153,7 @@ export class BusinessModel {
             'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
           sectionType: 'Story',
           sectionStyle: 'hh',
+          order:0,
         },
         {
           page:'',
@@ -163,6 +165,7 @@ export class BusinessModel {
             'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
           sectionType: 'Vision',
           sectionStyle: 'hh',
+          order:0,
         },
         {
           page:'',
@@ -174,6 +177,7 @@ export class BusinessModel {
             'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
           sectionType: 'Mission',
           sectionStyle: 'hh',
+          order:0,
         },
         {
           page:'',
@@ -185,6 +189,7 @@ export class BusinessModel {
             'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
           sectionType: 'Motivation',
           sectionStyle: 'hh',
+          order:0,
         },
         {
           page:'',
@@ -196,6 +201,7 @@ export class BusinessModel {
             'Gallery Text',
           sectionType: 'Other',
           sectionStyle: 'hh',
+          order:0,
         },
       ],
       heroImages: [''],
