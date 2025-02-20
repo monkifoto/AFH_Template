@@ -1,11 +1,9 @@
+<!-- <app-theme-loader [businessId]="business?.id || ''"></app-theme-loader> -->
+
 <!------------------------ HH SECTION ---------------------->
 
 <section *ngIf="business?.theme?.themeType === 'hh'">
-  <app-hero-slider
-  [navigation]="'bottom'"
-  [sideButtons]="true"
-  sliderHeight="70vh">
-</app-hero-slider>
+  <app-hero-slider></app-hero-slider>
 
 <app-center-text
   *ngIf="business?.sections | sectionFilter:'HomeCenterTop' as section"
@@ -92,11 +90,7 @@
 
 <section *ngIf="business?.theme?.themeType === 'ae'">
 
-  <app-hero-slider
-  [navigation]="'side'"
-  [sideButtons]="false"
-  sliderHeight="80vh">
-</app-hero-slider>
+  <app-hero-slider></app-hero-slider>
 
   <app-center-text
   *ngIf="business?.sections | sectionFilter:'HomeCenterTop' as section"
@@ -146,11 +140,7 @@
 
 <section *ngIf="business?.theme?.themeType === 'clemo'">
 
-  <app-hero-slider
-  [navigation]="'side'"
-  [sideButtons]="false"
-  sliderHeight="100vh">
-</app-hero-slider>
+  <app-hero-slider></app-hero-slider>
 
 <app-right-text
 *ngIf="business?.sections | sectionFilter:'HomeRight' as section"
@@ -193,14 +183,7 @@
 <!------------------------ SB SECTION ---------------------->
 
 <section *ngIf="business?.theme?.themeType === 'sb'">
-  <app-hero-slider
-  [navigation]="'side'"
-  [sideButtons]="false"
-  [buttonBorderRadius]="'0px'"
-  [subtitleSize]="'50px'"
-  [subtitleWeight]="'100'"
-  sliderHeight="100vh">
-</app-hero-slider>
+  <app-hero-slider></app-hero-slider>
 
 <app-center-text
   *ngIf="business?.sections | sectionFilter:'HomeCenterTop' as section"
@@ -223,6 +206,14 @@
 [minimal]="true"
 ></app-item-list>
 </section>
+
+<!--------------------PRESTIGE SECTION ----------------------->
+<section *ngIf="business?.theme?.themeType === 'prestige'">
+
+  <app-hero-slider></app-hero-slider>
+
+</section>
+
 <!------------------------ SHARED SECTION ---------------------->
 
 <app-consultation

@@ -9,4 +9,5 @@ export  interface Section {
   sectionImageUrl?: string;
   sectionType: string;
   sectionStyle:string;
+  order:number;
 }

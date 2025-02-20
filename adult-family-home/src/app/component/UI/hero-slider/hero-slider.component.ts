@@ -34,7 +34,7 @@ export class HeroSliderComponent implements OnInit {
   fetchHeroSliderData(): void {
     this.businessDataService.businessData$.subscribe((data) => {
       if (data) {
-        console.log('HeroSliderComponent - Retrieved business data:', data);
+        //console.log('HeroSliderComponent - Retrieved business data:', data);
         this.business = data;
 
         // Load slides
