@@ -40,7 +40,7 @@ import { EmployeeComponent } from './admin/employee/employee.component';
 import { PhotosComponent } from './admin/photos/photos.component';
 import { ReviewsComponent } from './admin/reviews/reviews.component';
 import { ServicesPageComponent } from './admin/services-page/services-page.component';
-import { AboutUsPageComponent } from './admin/about-us-page/about-us-page.component';
+import { SectionManagerComponent } from './admin/section-manager/section-manager.component';
 import { ContactUsPageComponent } from './admin/contact-us-page/contact-us-page.component';
 import { ColorAdminComponent } from './admin/color-admin/color-admin.component';
 import { ThemeInitializerService } from './services/theme-initializer.service';
@@ -77,6 +77,7 @@ import { SpGalleryComponentComponent } from './component/UI/sp-gallery-component
 import { SpContactUsComponentComponent } from './component/UI/sp-contact-us-component/sp-contact-us-component.component';
 import { SpHeroComponentComponent } from './component/UI/sp-hero-component/sp-hero-component.component';
 import { DynamicThemeLoaderComponent } from './component/dynamic-theme-loader/dynamic-theme-loader.component';
+import { SafeUrlPipe } from './pipe/safe-url.pipe';
 
 
     // Map hostnames to business IDs
@@ -184,7 +185,7 @@ export function combinedInitializer(
     PhotosComponent,
     ReviewsComponent,
     ServicesPageComponent,
-    AboutUsPageComponent,
+    SectionManagerComponent,
     ContactUsPageComponent,
     ColorAdminComponent,
     ResidentIntakeFormComponent,
@@ -218,6 +219,7 @@ export function combinedInitializer(
     SpContactUsComponentComponent,
     SpHeroComponentComponent,
     DynamicThemeLoaderComponent,
+    SafeUrlPipe,
   ],
   imports: [
     BrowserModule,

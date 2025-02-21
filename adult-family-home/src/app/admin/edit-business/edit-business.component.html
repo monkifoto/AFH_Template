@@ -16,7 +16,7 @@
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="about-us-tab" data-bs-toggle="tab" data-bs-target="#about-us"
-          type="button" role="tab" aria-controls="about-us" aria-selected="false">SECTIONS<span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span></button>
+          type="button" role="tab" aria-controls="about-us" aria-selected="false">SECTION MANAGER<span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span></button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="content-photos-tab" data-bs-toggle="tab" data-bs-target="#content-photos"
@@ -53,7 +53,7 @@
         <app-services-page [form]="businessForm" [business]="business" [businessId]="businessId"></app-services-page>
       </div>
       <div class="tab-pane fade" id="about-us" role="tabpanel" aria-labelledby="about-us-tab">
-        <app-about-us-page [form]="businessForm" [business]="business" [businessId]="businessId"></app-about-us-page>
+        <app-section-manager [form]="businessForm" [businessId]="businessId"></app-section-manager>
       </div>
       <div class="tab-pane fade" id="content-photos" role="tabpanel" aria-labelledby="content-photos-tab">
         <app-photos [form]="businessForm" [business]="business" [businessId]="businessId"></app-photos>

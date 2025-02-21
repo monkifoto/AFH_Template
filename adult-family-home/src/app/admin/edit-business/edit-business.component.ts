@@ -14,7 +14,7 @@ import { EmployeeComponent } from '../employee/employee.component';
 import { ReviewsComponent } from '../reviews/reviews.component';
 import { ServicesPageComponent } from '../services-page/services-page.component';
 import { AboutUsComponent } from 'src/app/component/PAGES/about-us/about-us.component';
-import { AboutUsPageComponent } from '../about-us-page/about-us-page.component';
+import { SectionManagerComponent } from '../section-manager/section-manager.component';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -26,7 +26,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
   @ViewChild(EmployeeComponent) employeeComponent!: EmployeeComponent;
   @ViewChild(ReviewsComponent) reviewComponent!: ReviewsComponent;
   @ViewChild(ServicesPageComponent) serviceComponent!: ServicesPageComponent;
-  @ViewChild(AboutUsPageComponent) aboutUsComponent!: AboutUsPageComponent;
+  @ViewChild(SectionManagerComponent) sectionManager!: SectionManagerComponent;
 
 
   business!: Business;
@@ -82,7 +82,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
         if (business.sections) {
           business.sections.forEach((s, index) => {
             console.log(`🔥 Load Business Data in Edit Business Section ${index}:`, s);
-            if (!s.sectionId) {
+            if (!s.id) {
               console.warn(`⚠️ Section at index ${index} is missing an ID!`);
             }
           });
@@ -280,19 +280,19 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
           })
         )
       ),
-      sections: this.fb.array(
-        (defaultBusiness.sections ?? []).map((section) =>
-          this.fb.group({
-            sectionName: [section.sectionName || ''],
-            sectionTitle: [section.sectionTitle || ''],
-            sectionSubTitle: [section.sectionSubTitle || ''],
-            sectionContent: [section.sectionContent || ''],
-            sectionImageUrl: [section.sectionImageUrl || ''],
-            sectionType: [section.sectionType || ''],
-            sectionStyle: [section.sectionStyle || ''],
-          })
-        )
-      ),
+      // sections: this.fb.array(
+      //   (defaultBusiness.sections ?? []).map((section) =>
+      //     this.fb.group({
+      //       sectionName: [section.sectionName || ''],
+      //       sectionTitle: [section.sectionTitle || ''],
+      //       sectionSubTitle: [section.sectionSubTitle || ''],
+      //       sectionContent: [section.sectionContent || ''],
+      //       sectionImageUrl: [section.sectionImageUrl || ''],
+      //       sectionType: [section.sectionType || ''],
+      //       sectionStyle: [section.sectionStyle || ''],
+      //     })
+      //   )
+      // ),
     });
   }
 
@@ -325,11 +325,6 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
       this.serviceComponent.populateBenefits(business.benefits ?? []);
     }
 
-    if (this.aboutUsComponent) {
-      this.aboutUsComponent.populateUniqueService(business.uniqueService ?? []);
-      this.aboutUsComponent.populateWhyChoose(business.whyChoose ?? []);
-      // this.aboutUsComponent.pupulateSection(business.sections);
-    }
 
     if (this.reviewComponent) {
       this.reviewComponent.populateTestimonials(business.testimonials ?? []);
