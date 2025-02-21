@@ -1,273 +1,41 @@
 <div *ngIf="business">
-  <div [ngSwitch]="business.theme.themeType">
-    <ng-container *ngSwitchCase="'hh'">
-      <div class="hero-services">
-        <div class="hero-overlay">
-          <h1>Our Services</h1>
-          <div class="hero-subtitle">
-            <p>Providing exceptional care tailored to your needs</p>
-          </div>
-        </div>
+  <div class="hero-services">
+    <div class="hero-overlay">
+      <h1>Our Services</h1>
+      <div class="hero-subtitle">
+        <p>Providing exceptional care tailored to your needs</p>
       </div>
-
-      <div class="container">
-        <section class="services-list">
-          <div class="heading-container">
-            <h2 class="styled-heading">Our Services</h2>
-          </div>
-          <app-item-list
-          [layoutType]="business.theme.themeType"
-          [services]="business.services"
-          [minimal]="false"
-        ></app-item-list>
-        </section>
-
-        <section class="services-list">
-          <div class="heading-container">
-            <h2 class="styled-heading">Our Benefits</h2>
-          </div>
-          <app-item-list
-          [layoutType]="business.theme.themeType"
-          [services]="business.benefits"
-          [minimal]="false"
-        ></app-item-list>
-        </section>
-
-        <section class="special-programs"  *ngIf="business.sections | sectionFilter:'ServicesCenterTop' as section">
-          <div class="heading-container">
-            <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
-          </div>
-          <h3
-            class="services_txt garamond"
-            [innerHTML]="section.sectionContent || ''  | replaceKeyword:{ businessName: business.businessName||''}"
-          ></h3>
-        </section>
-
-        <section class="tours-consulting">
-
-          <div class="tours"  *ngIf="business.sections | sectionFilter:'ServicesLeft' as section">
-            <img
-              [src]="
-                section.sectionImageUrl ||
-                'assets/sharedAssets/image_fx_(1).jpg'
-              "
-              alt="Contact Image"
-            />
-            <div class="heading-container">
-              <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
-            </div>
-            <div
-              class="services_txt garamond"
-              [innerHTML]="section.sectionContent || ''  | replaceKeyword:{ businessName: business.businessName||''}"
-            ></div>
-          </div>
-
-          <div class="consulting"  *ngIf="business.sections | sectionFilter:'ServicesRight' as section">
-            <img
-              [src]="
-                section.sectionImageUrl ||
-                'assets/sharedAssets/image_fx_(1).jpg'
-              "
-              alt="Contact Image"
-            />
-            <div class="heading-container">
-              <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
-            </div>
-            <div
-              class="services_txt garamond"
-              [innerHTML]="section.sectionContent || ''  | replaceKeyword:{ businessName: business.businessName||''}"
-            ></div>
-          </div>
-
-        </section>
-      </div>
-      <div class="cta-section services-cta">
-        <div class="cta-content">
-          <h2>Ready to Experience Exceptional Care?</h2>
-          <p>
-            Schedule a free consultation today and let’s discuss how we can meet
-            your needs with our personalized services.
-          </p>
-          <button type="button" class="afhBtn" (click)="navigateToContact()">
-            Book a Consultation
-          </button>
-        </div>
-      </div>
-    </ng-container>
-    <ng-container *ngSwitchCase="'ae'">
-      <app-hero></app-hero>
-      <div class="content-wrapper">
-        <app-item-list
-          [layoutType]="business.theme.themeType"
-          [services]="business.services"
-        ></app-item-list>
-
-        <app-testimonial-image
-          [imageURL]="
-            '../../../../assets/sharedAssets/istockphoto-1453597643-2048x2048.jpg'
-          "
-          [author]="business.testimonials[1].name"
-          [text]="business.testimonials[1].quote"
-        ></app-testimonial-image>
-
-        <app-call-to-action
-          [text]="'Have more questions?'"
-          [buttonText]="'Contact Us'"
-          [isButton]="true"
-          [bgColor]="business.theme.backgroundColor"
-          [textColor]="business.theme.textColor"
-        >
-        </app-call-to-action>
-      </div>
-    </ng-container>
-    <ng-container *ngSwitchCase="'clemo' ">
-      <app-hero></app-hero>
-      <div class="content-wrapper">
-        <app-item-list
-          [layoutType]="business.theme.themeType"
-          [services]="business.services"
-        ></app-item-list>
-
-        <app-testimonial-image
-          [imageURL]="
-            '../../../../assets/sharedAssets/istockphoto-1453597643-2048x2048.jpg'
-          "
-          [author]="business.testimonials[4].name"
-          [text]="business.testimonials[4].quote"
-        ></app-testimonial-image>
-
-        <app-call-to-action
-          [text]="'Have more questions?'"
-          [buttonText]="'Contact Us'"
-          [isButton]="true"
-          [bgColor]="business.theme.backgroundColor"
-          [textColor]="business.theme.textColor"
-        >
-        </app-call-to-action>
-      </div>
-    </ng-container>
-
-    <ng-container *ngSwitchCase="'sb' ">
-      <app-hero [layoutType]="'sb'"></app-hero>
-      <div class="content-wrapper">
-        <app-item-list
-          [layoutType]="business.theme.themeType"
-          [services]="business.services"
-        ></app-item-list>
-
-        <!-- <app-testimonial-image
-          [imageURL]="
-            '../../../../assets/sharedAssets/istockphoto-1453597643-2048x2048.jpg'
-          "
-          [author]="business.testimonials[4].name"
-          [text]="business.testimonials[4].quote"
-        ></app-testimonial-image> -->
-
-        <app-call-to-action
-          [text]="'Have more questions?'"
-          [buttonText]="'Contact Us'"
-          [isButton]="true"
-          [bgColor]="business.theme.backgroundColor"
-          [textColor]="business.theme.textColor"
-        >
-        </app-call-to-action>
-      </div>
-    </ng-container>
-
-
-    <ng-container *ngSwitchDefault>
-      <div class="hero-services">
-        <div class="hero-overlay">
-          <h1>Our Services</h1>
-          <div class="hero-subtitle">
-            <p>Providing exceptional care tailored to your needs</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="container">
-        <section class="services-list">
-          <div class="heading-container">
-            <h2 class="styled-heading">Our Services</h2>
-          </div>
-          <app-item-list
-          [layoutType]="business.theme.themeType"
-          [services]="business.services"
-          [minimal]="false"
-        ></app-item-list>
-        </section>
-
-        <section class="services-list">
-          <div class="heading-container">
-            <h2 class="styled-heading">Our Benefits</h2>
-          </div>
-          <app-item-list
-          [layoutType]="business.theme.themeType"
-          [services]="business.benefits"
-          [minimal]="false"
-        ></app-item-list>
-        </section>
-
-        <section class="special-programs"  *ngIf="business.sections | sectionFilter:'ServicesCenterTop' as section">
-          <div class="heading-container">
-            <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
-          </div>
-          <h3
-            class="services_txt garamond"
-            [innerHTML]="section.sectionContent || ''  | replaceKeyword:{ businessName: business.businessName||''}"
-          ></h3>
-        </section>
-
-        <section class="tours-consulting">
-
-          <div class="tours"  *ngIf="business.sections | sectionFilter:'ServicesLeft' as section">
-            <img
-              [src]="
-                section.sectionImageUrl ||
-                'assets/sharedAssets/image_fx_(1).jpg'
-              "
-              alt="Contact Image"
-            />
-            <div class="heading-container">
-              <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
-            </div>
-            <div
-              class="services_txt garamond"
-              [innerHTML]="section.sectionContent || ''  | replaceKeyword:{ businessName: business.businessName||''}"
-            ></div>
-          </div>
-
-          <div class="consulting"  *ngIf="business.sections | sectionFilter:'ServicesRight' as section">
-            <img
-              [src]="
-                section.sectionImageUrl ||
-                'assets/sharedAssets/image_fx_(1).jpg'
-              "
-              alt="Contact Image"
-            />
-            <div class="heading-container">
-              <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
-            </div>
-            <div
-              class="services_txt garamond"
-              [innerHTML]="section.sectionContent || ''"
-            ></div>
-          </div>
-
-        </section>
-      </div>
-      <div class="cta-section services-cta">
-        <div class="cta-content">
-          <h2>Ready to Experience Exceptional Care?</h2>
-          <p>
-            Schedule a free consultation today and let’s discuss how we can meet
-            your needs with our personalized services.
-          </p>
-          <button type="button" class="afhBtn" (click)="navigateToContact()">
-            Book a Consultation
-          </button>
-        </div>
-      </div>
-    </ng-container>
+    </div>
   </div>
+
+  <div class="container">
+    <app-item-list
+      *ngIf="business.sections | sectionFilter:'Services' : 'CenterTop' as section"
+      [layoutType]="business.theme.themeType"
+      [services]="section.items || []"
+      [minimal]="false"
+    ></app-item-list>
+
+    <app-left-text
+      *ngIf="business.sections | sectionFilter:'Services' : 'Left' as section"
+      [title]="section.sectionTitle || ''"
+      [content]="section.sectionContent || ''"
+      [imageURL]="section.sectionImageUrl || ''"
+    ></app-left-text>
+
+    <app-right-text
+      *ngIf="business.sections | sectionFilter:'Services' : 'Right' as section"
+      [title]="section.sectionTitle || ''"
+      [content]="section.sectionContent || ''"
+      [imageURL]="section.sectionImageUrl || ''"
+    ></app-right-text>
+  </div>
+
+  <app-call-to-action
+    [text]="'Book a Consultation'"
+    [buttonText]="'Get Started'"
+    [isButton]="true"
+    [bgColor]="business.theme.backgroundColor"
+    [textColor]="business.theme.textColor"
+  ></app-call-to-action>
 </div>

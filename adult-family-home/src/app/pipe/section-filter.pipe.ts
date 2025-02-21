@@ -1,12 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Section } from 'src/app/model/section.model';
+import { Section } from '../model/section.model';
 
 @Pipe({
   name: 'sectionFilter'
 })
 export class SectionFilterPipe implements PipeTransform {
-  transform(sections: Section[] | undefined, sectionName: string): Section | null {
-    if (!sections || !sectionName) return null;
-    return sections.find(section => section.sectionName === sectionName) || null;
+  transform(sections: Section[], page: string, location: string): Section | null {
+    if (!sections || !page || !location) return null;
+
+    return sections.find(section => section.page === page && section.location === location) || null;
   }
 }

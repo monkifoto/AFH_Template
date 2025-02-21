@@ -61,7 +61,7 @@ export class BusinessService {
 
 
   getBusinessData(businessId: string | null | undefined): Observable<Business | undefined> {
-    const resolvedBusinessId = businessId && businessId.trim() ? businessId : this.defaultBusinessId;
+    const resolvedBusinessId = businessId && businessId.trim() ? businessId : 'defaultBusinessId';
 
     return this.afs.collection('businesses').doc<Business>(resolvedBusinessId).snapshotChanges().pipe(
       switchMap(action => {
@@ -72,24 +72,19 @@ export class BusinessService {
           return of(undefined);
         }
 
-        const { id: _, ...rest } = data;
-        const businessData = { id: docId, ...rest } as Business;
+        const businessData: Business = { ...data, id: docId };
 
-        // Fetch Sections & Theme in parallel
-        return this.afs.collection(`businesses/${docId}/sections`).snapshotChanges().pipe(
+        return this.afs.collection('sections', ref => ref.where('businessId', '==', docId)).snapshotChanges().pipe(
           map(sectionActions => {
             const sections = sectionActions.map(a => {
               const sectionData = a.payload.doc.data() as Section;
-              const sectionId = a.payload.doc.id;
-              return { id: sectionId, ...sectionData };
+              return { ...sectionData, id: a.payload.doc.id };
             });
 
-            //console.log("🔥 Loaded Sections from Firestore:", sections);
-            businessData.sections = sections; // Attach sections to businessData
-            return businessData;
+            console.log("🔥 Loaded Sections from Firestore Collection:", sections);
+            return { ...businessData, sections };
           }),
           switchMap(updatedBusiness => {
-            // Fetch Theme
             const defaultTheme: Theme = {
               themeFileName: 'styles.css',
               primaryColor: '#fffaf2',
@@ -111,7 +106,6 @@ export class BusinessService {
               map(themeAction => {
                 const themeData = themeAction.payload.data() || defaultTheme;
                 updatedBusiness.theme = themeData;
-                //console.log("🎨 Loaded Theme from Firestore:", themeData);
                 return updatedBusiness;
               })
             );

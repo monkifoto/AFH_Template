@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AboutUsPageComponent } from './about-us-page.component';
+import { AboutUsPageComponent } from './section-manager.component';
 
 describe('AboutUsPageComponent', () => {
   let component: AboutUsPageComponent;

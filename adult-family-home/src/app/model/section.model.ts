@@ -1,13 +1,20 @@
 export  interface Section {
-  page:string;
-  location:string;
-  sectionId?: string;
-  sectionName:string;
-  sectionTitle: string;
-  sectionSubTitle:string;
-  sectionContent: string;
-  sectionImageUrl?: string;
+  id?: string;
   sectionType: string;
+  sectionName: string;
   sectionStyle:string;
-  order:number;
+  page: string;
+  location: string;
+  sectionTitle: string;
+  sectionSubTitle?: string;
+  sectionContent?: string;
+  component: string;
+  titleFontSize?: number;
+  subtitleFontSize?: number;
+  titleFontStyle?: string;
+  subtitleFontStyle?: string;
+  showLearnMore?: boolean;
+  sectionImageUrl?: string;
+  items?: any[];
+  order: number;
 }

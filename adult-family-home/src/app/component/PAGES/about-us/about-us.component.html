@@ -9,314 +9,38 @@
           </div>
         </div>
       </div>
+
       <div class="container">
-        <section class="business-story"  *ngIf="business.sections | sectionFilter:'AboutUsCenterTop' as section">
-          <div class="heading-container">
-            <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
-          </div>
-          <div
-            class="services_txt garamond"
-            [innerHTML]="section.sectionContent || '' | replaceKeyword:{ businessName: business.businessName}"
-          ></div>
-        </section>
-
-        <section class="mission-vision">
-          <div class="mission"  *ngIf="business.sections | sectionFilter:'AboutUsLeft' as section">
-            <img
-              [src]="
-                section.sectionImageUrl ||
-                'assets/sharedAssets/image_fx_(1).jpg'
-              "
-              alt="Contact Image"
-            />
-            <div class="heading-container">
-              <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
-            </div>
-            <div
-              class="services_txt garamond"
-              [innerHTML]="section.sectionContent || '' | replaceKeyword:{ businessName: business.businessName}"
-            ></div>
-          </div>
-
-
-          <div class="vision"  *ngIf="business.sections | sectionFilter:'AboutUsRight' as section">
-            <img
-              [src]="
-              section.sectionImageUrl ||
-                'assets/sharedAssets/image_fx_(3).jpg'
-              "
-              alt="Contact Image"
-            />
-            <div class="heading-container">
-              <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
-            </div>
-            <div
-            class="services_txt garamond"
-            [innerHTML]="section.sectionContent || '' | replaceKeyword:{ businessName: business.businessName}"
-          ></div>
-          </div>
-        </section>
-
-
-        <section class="business-story"  *ngIf="business.sections | sectionFilter:'AboutUsCenterBottom' as section">
-          <div class="heading-container">
-            <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
-          </div>
-          <div
-            class="services_txt garamond"
-            [innerHTML]="section.sectionContent || '' | replaceKeyword:{ businessName: business.businessName}"
-          ></div>
-        </section>
-
-        <section class="business-team">
-          <app-meet-the-team [businessId]="business.id"></app-meet-the-team>
-        </section>
-      </div>
-
-      <div class="cta-section about-cta">
-        <div class="cta-content">
-          <h2>Come Meet Our Family</h2>
-          <p>
-            We’d love to meet you! Schedule a visit and see firsthand how our
-            caring environment feels like home.
-          </p>
-          <button class="cta-btn" (click)="navigateToContact()">
-            Schedule a Visit
-          </button>
-        </div>
-      </div>
-    </ng-container>
-    <ng-container *ngSwitchCase="'ae'">
-      <app-hero></app-hero>
-      <div class="content-wrapper">
-        <section class="our-approach">
-
-          <app-right-text
-          *ngIf="business.sections | sectionFilter:'AboutUsRight' as section"
-          [themeType]="business.theme.themeType || ''"
-          [imageURL]="section.sectionImageUrl || ''"
+        <app-center-text
+          *ngIf="business.sections | sectionFilter:'AboutUs' : 'CenterTop' as section"
           [title]="section.sectionTitle || ''"
-          [content]="section.sectionContent || '' | replaceKeyword:{ businessName: business.businessName}"
-        ></app-right-text>
-
-        <app-left-text
-          *ngIf="business.sections | sectionFilter:'AboutUsLeft' as section"
-          [themeType]="business.theme.themeType || ''"
+          [subTitle]="section.sectionSubTitle || ''"
+          [content]="section.sectionContent || '' | replaceKeyword:{ businessName: business.businessName }"
           [imageURL]="section.sectionImageUrl || ''"
-          [title]="section?.sectionTitle || ''"
-          [content]="section.sectionContent || '' | replaceKeyword:{ businessName: business.businessName}"
-        ></app-left-text>
-
-        </section>
-
-        <app-testimonial-image
-          [imageURL]="
-            '../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'
-          "
-          [author]="business.testimonials[0].name"
-          [text]="business.testimonials[0].quote"
-        ></app-testimonial-image>
-
-        <app-call-to-action
-          [text]="'Have more questions?'"
-          [buttonText]="'Contact Us'"
-          [isButton]="false"
-          [bgColor]="business.theme.backgroundColor"
-          [textColor]="business.theme.textColor"
-        >
-        </app-call-to-action>
-
-        <app-meet-the-team></app-meet-the-team>
-      </div>
-    </ng-container>
-    <ng-container *ngSwitchCase="'clemo'">
-      <app-hero></app-hero>
-
-      <section class="our-approach">
-        <app-right-text
-        *ngIf="business.sections | sectionFilter:'AboutUsRight' as section"
-        [themeType]="business.theme.themeType || ''"
-        [imageURL]="section.sectionImageUrl || ''"
-        [title]="section.sectionTitle || ''"
-        [content]="section.sectionContent || '' | replaceKeyword:{ businessName: business.businessName}"
-        ></app-right-text>
+        ></app-center-text>
 
         <app-left-text
-        *ngIf="business.sections | sectionFilter:'AboutUsLeft' as section"
-        [themeType]="business.theme.themeType || ''"
-        [imageURL]="section.sectionImageUrl || ''"
-        [title]="section.sectionTitle || ''"
-        [content]="section.sectionContent || '' | replaceKeyword:{ businessName: business.businessName}"
+          *ngIf="business.sections | sectionFilter:'AboutUs' : 'Left' as section"
+          [title]="section.sectionTitle || ''"
+          [content]="section.sectionContent || '' | replaceKeyword:{ businessName: business.businessName }"
+          [imageURL]="section.sectionImageUrl || ''"
         ></app-left-text>
 
         <app-right-text
-        *ngIf="business.sections | sectionFilter:'AboutUsCenterBottom' as section"
-        [themeType]="business.theme.themeType || ''"
-        [imageURL]="section.sectionImageUrl || ''"
-        [title]="section.sectionTitle || ''"
-        [content]="section.sectionContent || '' | replaceKeyword:{ businessName: business.businessName}"
-      ></app-right-text>
-
-      </section>
-      <section>
-        <app-latest-products
-[layoutType]="'clemo'"
-></app-latest-products>
-      </section>
-
-      <app-testimonial-image
-        [imageURL]="
-          '../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'
-        "
-        [author]="business.testimonials[2].name"
-        [text]="business.testimonials[2].quote"
-      ></app-testimonial-image>
-
-      <app-call-to-action
-        [text]="'Have more questions?'"
-        [buttonText]="'Contact Us'"
-        [isButton]="false"
-        [bgColor]="business.theme.backgroundColor"
-        [textColor]="business.theme.textColor"
-      >
-      </app-call-to-action>
-
-      <app-meet-the-team></app-meet-the-team>
-    </ng-container>
-    <ng-container *ngSwitchCase="'sb'">
-      <app-hero [layoutType]="'sb'"></app-hero>
-
-      <section class="our-approach">
-        <app-right-text
-        *ngIf="business.sections | sectionFilter:'AboutUsRight' as section"
-        [themeType]="business.theme.themeType || ''"
-        [imageURL]="section.sectionImageUrl || ''"
-        [title]="section.sectionTitle || ''"
-        [content]="section.sectionContent || '' | replaceKeyword:{ businessName: business.businessName}"
+          *ngIf="business.sections | sectionFilter:'AboutUs' : 'Right' as section"
+          [title]="section.sectionTitle || ''"
+          [content]="section.sectionContent || '' | replaceKeyword:{ businessName: business.businessName }"
+          [imageURL]="section.sectionImageUrl || ''"
         ></app-right-text>
-
-        <app-left-text
-        *ngIf="business.sections | sectionFilter:'AboutUsLeft' as section"
-        [themeType]="business.theme.themeType || ''"
-        [imageURL]="section.sectionImageUrl || ''"
-        [title]="section.sectionTitle || ''"
-        [content]="section.sectionContent || '' | replaceKeyword:{ businessName: business.businessName}"
-        ></app-left-text>
-
-        <app-right-text
-        *ngIf="business.sections | sectionFilter:'AboutUsCenterBottom' as section"
-        [themeType]="business.theme.themeType || ''"
-        [imageURL]="section.sectionImageUrl || ''"
-        [title]="section.sectionTitle || ''"
-        [content]="section.sectionContent || '' | replaceKeyword:{ businessName: business.businessName}"
-      ></app-right-text>
-
-      </section>
-
-      <!-- <app-testimonial-image
-        [imageURL]="
-          '../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'
-        "
-        [author]="business.testimonials[2].name"
-        [text]="business.testimonials[2].quote"
-      ></app-testimonial-image> -->
+      </div>
 
       <app-call-to-action
-        [text]="'Have more questions?'"
-        [buttonText]="'Contact Us'"
-        [isButton]="false"
+        [text]="'Come Meet Our Family'"
+        [buttonText]="'Schedule a Visit'"
+        [isButton]="true"
         [bgColor]="business.theme.backgroundColor"
         [textColor]="business.theme.textColor"
-      >
-      </app-call-to-action>
-
-      <app-meet-the-team></app-meet-the-team>
-    </ng-container>
-    <ng-container *ngSwitchDefault>
-      <div class="hero-about">
-        <div class="hero-overlay">
-          <h1>About Us</h1>
-          <div class="hero-subtitle">
-            <p>Where Compassion Meets Care: Your Loved Ones, Our Family.</p>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <section class="business-story"  *ngIf="business.sections | sectionFilter:'AboutUsCenterTop' as section">
-          <div class="heading-container">
-            <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
-          </div>
-          <div
-            class="services_txt garamond"
-            [innerHTML]="section.sectionContent || '' | replaceKeyword:{ businessName: business.businessName}"
-          ></div>
-        </section>
-
-        <section class="mission-vision">
-          <div class="mission"  *ngIf="business.sections | sectionFilter:'AboutUsLeft' as section">
-            <img
-              [src]="
-                section.sectionImageUrl ||
-                'assets/sharedAssets/image_fx_(1).jpg'
-              "
-              alt="Contact Image"
-            />
-            <div class="heading-container">
-              <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
-            </div>
-            <div
-              class="services_txt garamond"
-              [innerHTML]="section.sectionContent || '' | replaceKeyword:{ businessName: business.businessName}"
-            ></div>
-          </div>
-
-
-          <div class="vision"  *ngIf="business.sections | sectionFilter:'AboutUsRight' as section">
-            <img
-              [src]="
-              section.sectionImageUrl ||
-                'assets/sharedAssets/image_fx_(3).jpg'
-              "
-              alt="Contact Image"
-            />
-            <div class="heading-container">
-              <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
-            </div>
-            <div
-            class="services_txt garamond"
-            [innerHTML]="section.sectionContent || '' | replaceKeyword:{ businessName: business.businessName}"
-          ></div>
-          </div>
-        </section>
-
-
-        <section class="business-story"  *ngIf="business.sections | sectionFilter:'AboutUsCenterBottom' as section">
-          <div class="heading-container">
-            <h2 class="styled-heading" [innerHTML]="section.sectionTitle || ''"></h2>
-          </div>
-          <div
-            class="services_txt garamond"
-            [innerHTML]="section.sectionContent || '' | replaceKeyword:{ businessName: business.businessName}"
-          ></div>
-        </section>
-
-        <section class="business-team">
-          <app-meet-the-team [businessId]="business.id"></app-meet-the-team>
-        </section>
-      </div>
-
-      <div class="cta-section about-cta">
-        <div class="cta-content">
-          <h2>Come Meet Our Family</h2>
-          <p>
-            We’d love to meet you! Schedule a visit and see firsthand how our
-            caring environment feels like home.
-          </p>
-          <button class="cta-btn" (click)="navigateToContact()">
-            Schedule a Visit
-          </button>
-        </div>
-      </div>
+      ></app-call-to-action>
     </ng-container>
   </div>
 </div>
