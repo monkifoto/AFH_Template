@@ -65,20 +65,31 @@ export class HomeComponent implements OnInit {
       console.log("Business Data Retrieved:", business); // Debugging output
       if (business) {
         this.business = business;
-        this.loadSections(business.theme?.themeType || 'default');
+        this.loadSections();
       }
     });
   }
 
 
-  loadSections(themeType: string) {
-    this.sectionService.getBusinessSections(this.businessId, 'Home').subscribe((sections) => {
-      console.log("Sections Retrieved:", sections); // Debugging output
-      this.sections = this.getFilteredSections(themeType, sections);
-      console.log("Filtered Sections:", this.sections); // Debugging output
+  loadSections() {
+    this.sectionService.getBusinessSections(this.businessId, 'home').subscribe((sections) => {
+      console.log("📌 Sections Retrieved:", sections);
+
+      if (!sections || sections.length === 0) {
+        console.warn("❗ No sections retrieved from the database");
+        return;
+      }
+
+      // No mapping needed, directly assign sections
+      // this.sections = sections;
+      this.sections = sections.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+      console.log("✅ Final Sections to Load:", this.sections);
+
       this.loadComponents();
     });
   }
+
 
   getFilteredSections(themeType: string, sections: any[]): any[] {
     console.log(`Filtering sections for themeType: ${themeType}`, sections);
@@ -128,24 +139,25 @@ export class HomeComponent implements OnInit {
   loadComponents() {
     this.container.clear();
 
-    // Always Load HeroSliderComponent First
-    console.log("Adding HeroSliderComponent");
+    console.log("✅ Starting to Load Components");
+
+    // Load HeroSliderComponent First
+    console.log("✅ Adding HeroSliderComponent");
     const heroSliderFactory = this.resolver.resolveComponentFactory(HeroSliderComponent);
-    const heroSliderRef = this.container.createComponent(heroSliderFactory, undefined, this.injector);
+    this.container.createComponent(heroSliderFactory, undefined, this.injector);
 
     if (!this.sections.length) {
-      console.warn("No sections to load.");
+      console.warn("❗ No sections available to load.");
       return;
     }
 
+    this.sections.forEach((section, index) => {
+      console.log(`🔄 Loading Component for Section ${index + 1}:`, section.component);
 
-
-    this.sections.forEach((section) => {
-      console.log("Loading Component:", section.component);
       const componentType = this.componentsMap[section.component as keyof typeof this.componentsMap] as Type<any>;
 
       if (!componentType) {
-        console.error("Component Not Found:", section.component);
+        console.error(`❌ Component Not Found:`, section.component);
         return;
       }
 
@@ -153,19 +165,17 @@ export class HomeComponent implements OnInit {
       const componentRef = this.container.createComponent(factory, undefined, this.injector);
 
       if (componentRef.instance && typeof componentRef.instance === 'object') {
-        console.log("Assigning Content to LeftTextComponent:", section.sectionContent);
-        // Assign section properties dynamically
         Object.assign(componentRef.instance, {
           title: this.applyReplaceKeyword(section.sectionTitle || ''),
           subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
           content: this.applyReplaceKeyword(section.sectionContent || ''),
-          imageURL: section.sectionImageUrl,
-          themeType: this.business?.theme?.themeType || '',
-          showBtn: true, // Adjust based on need
+          imageURL: section.sectionImageUrl || '',
+          showBtn: section.showLearnMore || false,
           _businessName: this.business?.businessName || '',
-          showImage: !!section.sectionImageUrl, // Show image if URL exists
+          showImage: !!section.sectionImageUrl
         });
-        console.log("Left-Text Instance Data:", componentRef.instance); // Debugging log
+
+        console.log(`✅ Component Data for ${section.component}:`, componentRef.instance);
       }
     });
 
