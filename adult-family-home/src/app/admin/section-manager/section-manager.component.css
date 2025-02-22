@@ -29,85 +29,57 @@ h2 {
   box-sizing: border-box;
 }
 
-/* For section name */
-.sectionName {
-  font-weight: bold;
-  margin-top: 10px;
-  margin-bottom: 15px;
+/* ✅ Section Form Styling */
+.sectionForm-container {
+  border: solid 1px var(--dark-background-color);
+  border-radius: 15px;
+  padding: 15px;
+  margin: 10px;
+  background-color: #f8f9fa;
 }
 
-/* Row layout using flexbox */
+/* ✅ Row layout using flexbox */
 .row {
   display: flex;
   justify-content: space-between;
   gap: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .col {
   flex: 1;
 }
 
-.sectionForm-container {
-  border: solid 1px var(--dark-background-color);
-  border-radius: 15px;
-  padding: 10px;
-  margin: 5px;
-}
-
-.sectionForm-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.sectionForm-header-item {
-  width: 50%;
-  padding: 10px;
-}
-
-.collapsed {
-  display: none;
-}
-
-.toggle-btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-
-.icon-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  color: #007bff;
-}
-
-.delete-btn {
-  color: red;
-}
-
-.contactUsImagesThumbnails {
+/* ✅ Image Preview with 100px Size */
+.uploaded-image-preview {
   width: 100px;
   height: 100px;
   object-fit: cover;
+  display: block;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
-/* For image selection */
-.image-selection {
-  display: inline-block;
-  margin-right: 10px;
-  margin-bottom: 10px;
+/* ✅ Buttons */
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 10px;
 }
 
-/* Container for the images to allow wrapping */
-.image-selection-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+button:hover {
+  background-color: #0056b3;
+}
+
+.delete-btn {
+  background-color: red;
+}
+
+.delete-btn:hover {
+  background-color: darkred;
 }

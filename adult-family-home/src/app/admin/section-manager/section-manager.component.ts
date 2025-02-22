@@ -37,7 +37,10 @@ export class SectionManagerComponent implements OnInit {
       if (!this.businessId) return;
       this.businessSectionsService.getAllBusinessSections(this.businessId).subscribe(sections => {
         this.sections.clear();
-        sections.forEach(section => {
+        sections.forEach((section, index) => {
+          console.log(`🔍 Section ${index + 1}:`, section); // Logs each section received
+          console.log(`🖼️ Image URL for Section ${index + 1}:`, section.sectionImageUrl); // Specifically logs the image URL
+
           this.sections.push(this.fb.group({
             id: [section.id],
             component: [section.component || 'center-text'],
@@ -119,7 +122,12 @@ export class SectionManagerComponent implements OnInit {
     }
 
     getItems(section: AbstractControl | null): FormArray | null {
-      return section instanceof FormGroup ? section.get('items') as FormArray : null;
+      if (section instanceof FormGroup) {
+        const items = section.get('items') as FormArray;
+        console.log("📌 Items for section:", items.value);
+        return items;
+      }
+      return null;
     }
 
     async uploadImage(event: Event, index: number): Promise<void> {
