@@ -1,9 +1,9 @@
-
+/*
 
 .services-section {
   text-align: center;
   padding: 2rem;
-  max-width: calc(var(--cell-max-width) * 24); /* Sets max width based on 24 columns */
+  max-width: calc(var(--cell-max-width) * 24);
   margin: auto;
 }
 
@@ -24,7 +24,7 @@
 
 
 .service-item {
-  /* background-color: #fff; */
+
   border-radius: 8px;
   padding: 2.5rem;
   text-align: center;
@@ -36,7 +36,6 @@
 }
 
 
-/* Responsive layout for smaller screens */
 @media (max-width: 600px) {
   .services-grid {
       grid-template-columns: 1fr;
@@ -45,33 +44,33 @@
 
 
 
-/* Adjustments for smaller screens */
+
 @media (max-width: 768px) {
   .services-grid {
-    grid-template-columns: 1fr; /* Single column for better readability */
+    grid-template-columns: 1fr;
   }
 
   .service-item {
-    padding: 1.5rem; /* Reduce padding for compact display */
+    padding: 1.5rem;
   }
 
   .services-item-icon {
-    font-size: 40px; /* Slightly smaller icons for mobile */
+    font-size: 40px;
   }
 }
 
 @media (max-width: 480px) {
   .services-section h2 {
-    font-size: 1.5rem; /* Adjust section title font size for small screens */
+    font-size: 1.5rem;
     margin-bottom: 1rem;
   }
 
   .service-item h2 {
-    font-size: 1.25rem; /* Reduce font size for service titles */
+    font-size: 1.25rem;
   }
 
   .service-item p {
-    font-size: 1rem; /* Scale down service descriptions */
+    font-size: 1rem;
   }
 
 }
@@ -198,4 +197,109 @@
     font-size: 1.8em;
   }
 }
+ */
+/* ✅ Parallax Background */
+.parallax-container {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #000;
+  position: relative;
+  padding: 20px;
+}
 
+.parallax-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5); /* Light overlay */
+  z-index: 1;
+}
+
+/* ✅ Regular Image Background (No Parallax) */
+.regular-image-container {
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #000;
+  position: relative;
+  padding: 20px;
+}
+
+/* ✅ Solid Background if No Image */
+.solid-bg-container {
+  background-color: var(--dark-background-color);
+  padding: 50px 0;
+  text-align: center;
+  width: 100%;
+}
+
+/* ✅ Service Items */
+.services-grid, .minimal-services-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10rem;
+  padding: 3rem 0;
+}
+
+.service-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.service-item i {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.service-title {
+  font-size: 1.25rem;
+}
+
+/* ✅ Hide Descriptions in Minimal Mode */
+.minimal-services-grid .service-description {
+  display: none;
+}
+
+/* ✅ Responsive Styles */
+@media (max-width: 768px) {
+  .services-grid {
+    gap: 1.5rem;
+  }
+
+  .service-item {
+    font-size: 1.25rem;
+  }
+
+  .service-item i {
+    font-size: 2.5rem;
+  }
+
+  .service-title {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .services-title {
+    font-size: 1.5rem;
+  }
+}

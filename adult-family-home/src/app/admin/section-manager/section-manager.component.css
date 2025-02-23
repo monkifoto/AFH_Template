@@ -62,7 +62,7 @@ h2 {
 }
 
 /* ✅ Buttons */
-button {
+/* button {
   background-color: #007bff;
   color: white;
   border: none;
@@ -82,4 +82,4 @@ button:hover {
 
 .delete-btn:hover {
   background-color: darkred;
-}
+} */

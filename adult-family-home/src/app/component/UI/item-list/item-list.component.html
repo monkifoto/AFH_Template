@@ -1,11 +1,4 @@
-<section class="services-list-section" *ngIf="layoutType=='hh'">
-  <!-- <div  class="minimal-container">
-<div *ngFor="let service of services" >
-  <div>
-  <div class="minimal-icon"><i [ngClass]="service.icon" class="services-item-icon"></i></div>
-  <div class="minimal-title"><h2>{{service.name}}</h2></div>
-</div>
-</div> -->
+<!-- <section class="services-list-section" *ngIf="layoutType=='hh'">
 <div *ngIf="minimal">
 <section class="our-services-section">
   <div class="our-services-section-heading">
@@ -60,6 +53,40 @@
         </div>
       </div>
   </div>
+</section> -->
+<div>Item List</div>
+<div
+  [ngClass]="{
+    'parallax-container': isParallax && sectionImageUrl,
+    'regular-image-container': !isParallax && sectionImageUrl,
+    'solid-bg-container': !sectionImageUrl
+  }"
+  [ngStyle]="{'background-image': sectionImageUrl ? 'url(' + sectionImageUrl + ')' : 'none'}">
 
+  <div class="content">
+    <div class="services-container">
+      <!-- ✅ Use sectionTitle dynamically -->
+      <h2 class="services-title">{{ sectionTitle }}</h2>
 
-</section>
+      <!-- ✅ Minimal mode: Show only icons and titles -->
+      <div *ngIf="isMinimal" class="minimal-services-grid">
+        <div class="service-item" *ngFor="let item of items">
+          <i [class]="item.icon" aria-hidden="true"></i>
+          <h3 class="service-title">{{ item.title }}</h3>
+        </div>
+      </div>
+
+      <!-- ✅ Full mode: Show icons, titles, and descriptions -->
+      <div *ngIf="!isMinimal" class="services-grid">
+        <div class="service-item" *ngFor="let item of items">
+          <i [class]="item.icon" aria-hidden="true"></i>
+          <h3 class="service-title">{{ item.title }}</h3>
+          <p class="service-description">{{ item.description }}</p>
+        </div>
+      </div>
+
+      <!-- ✅ Show button only if enabled -->
+      <button *ngIf="showLearnMore" class="afhBtn" routerLink="/services">Learn More</button>
+    </div>
+  </div>
+</div>

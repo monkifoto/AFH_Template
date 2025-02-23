@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ListItem } from 'src/app/model/business-questions.model';
 
 @Component({
   selector: 'app-item-list',
@@ -7,12 +6,22 @@ import { ListItem } from 'src/app/model/business-questions.model';
   styleUrls: ['./item-list.component.css']
 })
 export class ItemListComponent implements OnInit {
-  @Input() services!: ListItem[];
-  @Input() layoutType: string = 'demo';
-  @Input() minimal: boolean = false;
+  @Input() sectionTitle: string = 'Our Services';  // ✅ Dynamically set from the section
+  @Input() items: any[] = []; // ✅ List of items in the section
+  @Input() isMinimal: boolean = false; // ✅ Controls minimal/full view
+  @Input() showLearnMore: boolean = false; // ✅ Toggle Learn More button
+  @Input() sectionImageUrl: string | null = null; // ✅ Background image
+  @Input() isParallax: boolean = true; // ✅ Controls whether parallax effect is applied
 
-  ngOnInit(): void{
-    console.log("List Items: ", this.services);
-    console.log("List Items layoutType", this.layoutType);
+  constructor() {}
+
+  ngOnInit(): void {
+    console.log("📌 Item List Initialized:", {
+      title: this.sectionTitle,
+      items: this.items,
+      isMinimal: this.isMinimal,
+      sectionImageUrl: this.sectionImageUrl,
+      isParallax: this.isParallax
+    });
   }
 }
