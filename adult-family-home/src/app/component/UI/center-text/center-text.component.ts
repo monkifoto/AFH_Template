@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './center-text.component.html',
   styleUrls: ['./center-text.component.css']
 })
-export class CenterTextComponent {
+export class CenterTextComponent implements OnInit {
   @Input() themeType!: string;
   @Input() title!: string;
   @Input() subTitle!: string;
@@ -20,6 +20,9 @@ export class CenterTextComponent {
   sanitizedContent!: SafeHtml;
 
   constructor(private sanitizer: DomSanitizer, private router: Router) {}
+  ngOnInit(): void {
+    console.log('Center Text Component Loaded , themeType: '+ this.themeType+  ' Business Name:' + this._businessName + ' Title: ' + this.title);
+  }
 
 
   @Input()

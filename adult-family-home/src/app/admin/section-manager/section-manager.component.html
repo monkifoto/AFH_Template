@@ -64,7 +64,7 @@
             </select>
           </div>
         </div>
-        <div *ngIf="section.get('component')?.value !== 'list-item'">
+        <div *ngIf="section.get('component')?.value !== 'item-list' || section.get('component')?.value === 'icon-list'">
         <label>Content</label>
         <textarea formControlName="sectionContent" class="form-control"></textarea>
 
@@ -94,7 +94,7 @@
       </div>
 
       <!-- ✅ List-Item Section -->
-      <div *ngIf="section.get('component')?.value === 'list-item'">
+      <div *ngIf="section.get('component')?.value === 'item-list' || section.get('component')?.value === 'icon-list' ">
         <h3>List Items</h3>
         <button (click)="addItem(i)" class="afhBtn">+ Add Item</button>
 
