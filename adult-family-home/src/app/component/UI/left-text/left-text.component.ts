@@ -13,13 +13,17 @@ export class LeftTextComponent {
   @Input() subTitle!: string;
   @Input() imageURL!: string;
   @Input() showBtn: boolean = false;
-  @Input() showImage: boolean = false;
+  @Input() showImage: boolean =false;
   @Input() _businessName: string = '';
 
   private _content!: string;
   sanitizedContent!: SafeHtml;
 
   constructor(private sanitizer: DomSanitizer, private router: Router) {}
+  ngOnInit(): void {
+    console.log('Left Text Component Loaded , themeType: '+ this.themeType+  ' Business Name:' + this._businessName + ' Title: ' + this.title);
+  }
+
   @Input()
   set content(value: string) {
     this._content = value;

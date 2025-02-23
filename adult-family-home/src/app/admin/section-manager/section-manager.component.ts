@@ -17,7 +17,7 @@ export class SectionManagerComponent implements OnInit {
     collapsedSections: boolean[] = [];
     pages = ['home', 'aboutus', 'services', 'faq', 'contactus', 'gallery', 'testimonials'];
     locations = ['', 'left', 'right', 'top', 'bottom'];
-    componentTypes = ['center-text', 'left-text', 'right-text', 'list-item'];
+    componentTypes = ['center-text', 'left-text', 'right-text', 'item-list', 'icon-list'];
     fontStyles = ['normal', 'bold', 'italic'];
 
     uploadProgress: { [key: number]: Observable<number> } = {};
