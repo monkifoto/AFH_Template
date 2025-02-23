@@ -98,8 +98,8 @@ export class HomeComponent implements OnInit {
 
     // Define allowed components per theme
     const themeSectionsMap: Record<string, string[]> = {
-      hh: [ "icon-list", "center-text", "item-list", "right-text", "left-text"],
-      demo: ["icon-list", "center-text", "item-list", "right-text", "left-text"],
+      hh: [ "center-text", "item-list", "right-text", "left-text"],
+      demo: [ "center-text", "item-list", "right-text", "left-text"],
       ae: ["center-text", "right-text", "left-text", "testimonials"],
       clemo: ["features", "testimonials"],
       sb: ["center-text", "item-list"],
@@ -163,9 +163,9 @@ export class HomeComponent implements OnInit {
           _businessName: this.business?.businessName || '',
           showImage: !!section.sectionImageUrl,
           themeType: this.business?.theme?.themeType,
-
-          // ✅ Pass items for item-list and icon-list components
-          ...(section.component === 'item-list' || section.component === 'icon-list' ? { items: section.items || [] } : {})
+          items: section.items || [] ,
+          isMinimal: section.isMinimal || false,
+          isParallax: section.isParallax ?? true
         });
         console.log(`✅ Component Data for ${section.component}:`, componentRef.instance);
       }

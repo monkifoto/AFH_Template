@@ -17,7 +17,7 @@ export class SectionManagerComponent implements OnInit {
     collapsedSections: boolean[] = [];
     pages = ['home', 'aboutus', 'services', 'faq', 'contactus', 'gallery', 'testimonials'];
     locations = ['', 'left', 'right', 'top', 'bottom'];
-    componentTypes = ['center-text', 'left-text', 'right-text', 'item-list', 'icon-list'];
+    componentTypes = ['center-text', 'left-text', 'right-text', 'item-list'];
     fontStyles = ['normal', 'bold', 'italic'];
 
     uploadProgress: { [key: number]: Observable<number> } = {};
@@ -29,7 +29,8 @@ export class SectionManagerComponent implements OnInit {
     constructor(private fb: FormBuilder, private businessSectionsService: BusinessSectionsService, private uploadService: UploadService) {}
 
     ngOnInit(): void {
-      this.collapsedSections = Array(this.sections.length).fill(false);
+      this.collapsedSections = this.sections.controls.map(() => true);
+      // this.collapsedSections = Array(this.sections.length).fill(false);
       this.loadSections();
     }
 
@@ -56,6 +57,8 @@ export class SectionManagerComponent implements OnInit {
             sectionContent: [section.sectionContent],
             sectionImageUrl: [section.sectionImageUrl],
             showLearnMore: [section.showLearnMore || false],
+            isMinimal: [section.isMinimal || false],
+            isParallax: [section.isParallax || false],
             items: this.fb.array(section.items ? section.items.map(item => this.createItemForm(item)) : [])
           }));
         });
@@ -70,9 +73,7 @@ export class SectionManagerComponent implements OnInit {
       });
     }
 
-    toggleSection(index: number) {
-      this.collapsedSections[index] = !this.collapsedSections[index];
-    }
+
 
     addSection() {
       const newSection = this.fb.group({
@@ -158,12 +159,6 @@ export class SectionManagerComponent implements OnInit {
       }
     }
 
-
-    // updateSection(index: number) {
-    //   const section = this.sections.at(index).value;
-    //   console.log("✅ Section updated successfully:", section);
-    // }
-
     updateSection(index: number) {
       const section = this.sections.at(index).value;
       if (this.businessId) {
@@ -174,4 +169,12 @@ export class SectionManagerComponent implements OnInit {
         });
       }
     }
+
+
+
+    toggleSection(index: number): void {
+      this.collapsedSections[index] = !this.collapsedSections[index];
+    }
+
+
 }

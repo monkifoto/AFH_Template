@@ -145,6 +145,8 @@ export class BusinessModel {
           sectionStyle: 'hh',
           order:0,
           items: [],
+          isMinimal:false,
+          isParallax:false,
         },
         {
           id:'',
@@ -160,6 +162,8 @@ export class BusinessModel {
           sectionStyle: 'hh',
           order:0,
           items: [],
+          isMinimal:false,
+          isParallax:false,
         },
         {
           id:'',
@@ -175,6 +179,8 @@ export class BusinessModel {
           sectionStyle: 'hh',
           order:0,
           items: [],
+          isMinimal:false,
+          isParallax:false,
         },
         {
           id:'',
@@ -190,6 +196,8 @@ export class BusinessModel {
           sectionStyle: 'hh',
           order:0,
           items: [],
+          isMinimal:false,
+          isParallax:false,
         },
         {
           id:'',
@@ -205,6 +213,8 @@ export class BusinessModel {
           sectionStyle: 'hh',
           order:0,
           items: [],
+          isMinimal:false,
+          isParallax:false,
         },
         {
           id:'',
@@ -220,6 +230,8 @@ export class BusinessModel {
           sectionStyle: 'hh',
           order:0,
           items: [],
+          isMinimal:false,
+          isParallax:false,
         },
       ],
       heroImages: [''],

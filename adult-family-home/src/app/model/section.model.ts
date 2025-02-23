@@ -17,4 +17,6 @@ export  interface Section {
   sectionImageUrl?: string;
   items?: any[];
   order: number;
+  isMinimal:boolean;
+  isParallax:boolean;
 }
