@@ -9,7 +9,7 @@ import { authGuard } from './auth.guard';
 import { LoginComponent } from './admin/login/login.component';
 import { ResidentIntakeFormComponent } from './component/PAGES/resident-intake-form/resident-intake-form.component';
 import { TestimonialsListComponent } from './component/PAGES/testimonials/testimonials.component';
-import { FaqComponent } from './component/faq/faq.component';
+import { FaqComponent } from './component/UI/faq/faq.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },

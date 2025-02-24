@@ -13,8 +13,8 @@
     <div class="features-container">
 
       <div class="feature-list">
-        <div *ngFor="let feature of uniqueService" class="feature-item">
-          <div class="feature-list-item-title" [innerHTML]="feature.name"></div>
+        <div *ngFor="let feature of items" class="feature-item">
+          <div class="feature-list-item-title" [innerHTML]="feature.title"></div>
           <div class="feature-list-item-description" [innerHTML]="feature.description"></div>
         </div>
     </div>
@@ -48,5 +48,26 @@
     </div>
   </section> -->
 
+</ng-container>
+<ng-container *ngSwitchDefault>
+  <section class="features-section">
+    <div class="features-section-heading">
+      <span class="features-section-title main">Our Unique </span>
+      <span class="features-section-title highlight"> Features</span>
+    </div>
+    <p class="features-section-description">
+      What sets us appart.
+    </p>
+
+      <div class="features-container">
+
+        <div class="feature-list">
+          <div *ngFor="let feature of items" class="feature-item">
+            <div class="feature-list-item-title" [innerHTML]="feature.title"></div>
+            <div class="feature-list-item-description" [innerHTML]="feature.description"></div>
+          </div>
+      </div>
+    </div>
+  </section>
 </ng-container>
 </div>

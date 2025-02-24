@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { BusinessService } from 'src/app/services/business.service';
 import { UploadService } from 'src/app/services/upload.service';
@@ -21,6 +21,7 @@ import { take } from 'rxjs/operators';
   selector: 'app-edit-business',
   templateUrl: './edit-business.component.html',
   styleUrls: ['./edit-business.component.css'],
+  encapsulation: ViewEncapsulation.Emulated, // Default, isolates styles to this component
 })
 export class EditBusinessComponent implements OnInit, AfterViewInit {
   @ViewChild(EmployeeComponent) employeeComponent!: EmployeeComponent;
