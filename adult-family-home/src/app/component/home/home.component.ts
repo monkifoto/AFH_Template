@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, Type } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MetaService } from 'src/app/services/meta-service.service';
@@ -8,11 +9,12 @@ import { RightTextComponent } from '../UI/right-text/right-text.component';
 import { LeftTextComponent } from '../UI/left-text/left-text.component';
 import { HeroSliderComponent } from '../UI/hero-slider/hero-slider.component';
 import { ItemListComponent } from '../UI/item-list/item-list.component';
-import { FeaturesComponent } from '../features/features.component';
+import { FeaturesComponent } from '../UI/features/features.component';
 import { TestimonialsComponent } from '../testimonials/testimonials.component';
 import { TestimonialCarouselComponent } from '../UI/testimonial-carousel/testimonial-carousel.component';
-import { ConsultationComponent } from '../consultation/consultation.component';
-import { WhyUsComponent } from '../why-us/why-us.component';
+import { ConsultationComponent } from '../UI/consultation/consultation.component';
+import { WhyUsComponent } from '../UI/why-us/why-us.component';
+import { GoogleMapsComponent } from '../UI/google-maps/google-maps.component';
 import { Business } from 'src/app/model/business-questions.model';
 import { switchMap } from 'rxjs';
 import { IconListComponent } from '../UI/icon-list/icon-list.component';
@@ -35,10 +37,11 @@ export class HomeComponent implements OnInit {
     'left-text': LeftTextComponent,
     'item-list': ItemListComponent,
     'icon-list': IconListComponent,
-    'features': FeaturesComponent,
+    'unique-features': FeaturesComponent,
     'testimonials': TestimonialsComponent,
     'testimonials-carousel': TestimonialCarouselComponent,
-    'why-us': WhyUsComponent
+    'why-us': WhyUsComponent,
+    'google-map': GoogleMapsComponent,
   };
 
   @ViewChild('dynamicContainer', { read: ViewContainerRef, static: true }) container!: ViewContainerRef;
@@ -99,11 +102,11 @@ export class HomeComponent implements OnInit {
     // Define allowed components per theme
     const themeSectionsMap: Record<string, string[]> = {
       hh: [ "center-text", "item-list", "right-text", "left-text"],
-      demo: [ "center-text", "item-list", "right-text", "left-text"],
+      demo: ["why-us", "unique-features", "center-text", "item-list", "right-text", "left-text"],
       ae: ["center-text", "right-text", "left-text", "testimonials"],
-      clemo: ["features", "testimonials"],
+      clemo: ["right-text", "testimonials","google-map"],
       sb: ["center-text", "item-list"],
-      prestige: []
+      prestige: ["why-us", "unique-features", "center-text", "item-list", "right-text", "left-text"]
     };
 
     // ✅ Sort sections by order before filtering
@@ -155,7 +158,7 @@ export class HomeComponent implements OnInit {
 
       if (componentRef.instance && typeof componentRef.instance === 'object') {
         Object.assign(componentRef.instance, {
-          title: this.applyReplaceKeyword(section.sectionTitle || ''),
+          title: this.applyReplaceKeyword(section.sectionTtitle || ''),
           subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
           content: this.applyReplaceKeyword(section.sectionContent || ''),
           imageURL: section.sectionImageUrl || '',
@@ -246,6 +249,19 @@ export class HomeComponent implements OnInit {
       id: this.business?.id || '',
       layoutType: this.business?.theme?.themeType || 'demo',
       businessName: this.business?.businessName || 'Demo'
+    });
+  }
+
+  if (this.business?.placeId && this.business?.theme?.themeType == 'clemo') {
+    console.log("Loading GoogleMapComponent");
+
+    const gmapFactory = this.resolver.resolveComponentFactory(GoogleMapsComponent);
+    const gmapRef = this.container.createComponent(gmapFactory, undefined, this.injector);
+
+    Object.assign(gmapRef.instance, {
+      // id: this.business?.id || '',
+      layoutType: this.business?.theme?.themeType || 'demo',
+      address: this.business?.address || 'Demo'
     });
   }
 

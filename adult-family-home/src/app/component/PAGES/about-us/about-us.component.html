@@ -1,6 +1,3 @@
-<div #dynamicContainer></div>
-
-
 <div *ngIf="business">
   <div [ngSwitch]="business.theme.themeType">
     <ng-container *ngSwitchCase="'hh'">
@@ -12,6 +9,27 @@
           </div>
         </div>
       </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'ae'">
+      <app-hero></app-hero>
+    </ng-container>
+    <ng-container *ngSwitchCase="'clemo'">
+      <app-hero [layoutType]="'clemo'"></app-hero>
+    </ng-container>
+    <ng-container *ngSwitchCase="'sb'">
+      <app-hero [layoutType]="'sb'"></app-hero>
+    </ng-container>
+  </div>
+  <div #dynamicContainer class="container"></div>
+</div>
+
+
+
+
+<!-- <div *ngIf="business">
+  <div [ngSwitch]="business.theme.themeType">
+    <ng-container *ngSwitchCase="'hh'">
+
       <div class="container">
         <section *ngFor="let section of business.sections">
           <div class="heading-container">
@@ -107,4 +125,4 @@
       </div>
     </ng-container>
   </div>
-</div>
+</div> -->

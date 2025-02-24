@@ -1213,3 +1213,7 @@ section {
 }
 
 .clemo-text-center{}
+
+.admin-container{
+  width: 100%;
+}

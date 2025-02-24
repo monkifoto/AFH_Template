@@ -119,9 +119,9 @@ export class ServicesComponent implements OnInit, AfterViewInit {
       const componentRef = this.container.createComponent(factory, undefined, this.injector);
 
       Object.assign(componentRef.instance, {
-        title: section.sectionTitle || '',
-        subTitle: section.sectionSubTitle || '',
-        content: section.sectionContent || '',
+        title: this.applyReplaceKeyword(section.sectionTitle || ''),
+        subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
+        content: this.applyReplaceKeyword(section.sectionContent || ''),
         imageURL: section.sectionImageUrl || '',
         showBtn: section.showLearnMore || false,
         _businessName: this.business?.businessName || '',
@@ -132,5 +132,12 @@ export class ServicesComponent implements OnInit, AfterViewInit {
         isParallax: section.isParallax ?? true
       });
     });
+  }
+
+  applyReplaceKeyword(value: string): string {
+    if (!value || !this.business?.businessName) return value;
+
+    // Match {{businessName}} instead of {businessName}
+    return value.replace(/{{\s*businessName\s*}}/g, this.business.businessName);
   }
 }

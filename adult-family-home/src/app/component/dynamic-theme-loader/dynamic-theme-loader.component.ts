@@ -3,11 +3,11 @@ import { ThemeService } from 'src/app/services/theme-service.service';
 import { HeroSliderComponent } from '../UI/hero-slider/hero-slider.component';
 import { CenterTextComponent } from '../UI/center-text/center-text.component';
 import { ItemListComponent } from '../UI/item-list/item-list.component';
-import { WhyUsComponent } from '../why-us/why-us.component';
-import { FeaturesComponent } from '../features/features.component';
+import { WhyUsComponent } from '../UI/why-us/why-us.component';
+import { FeaturesComponent } from '../UI/features/features.component';
 import { TestimonialsComponent } from '../testimonials/testimonials.component';
 import { TestimonialCarouselComponent } from '../UI/testimonial-carousel/testimonial-carousel.component';
-import { ConsultationComponent } from '../consultation/consultation.component';
+import { ConsultationComponent } from '../UI/consultation/consultation.component';
 import { GoogleMapsComponent } from '../UI/google-maps/google-maps.component';
 import { ComponentRef } from '@angular/core';
 

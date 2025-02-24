@@ -17,7 +17,7 @@ export class SectionManagerComponent implements OnInit {
     collapsedSections: boolean[] = [];
     pages = ['home', 'aboutus', 'services', 'faq', 'contactus', 'gallery', 'testimonials'];
     locations = ['', 'left', 'right', 'top', 'bottom'];
-    componentTypes = ['center-text', 'left-text', 'right-text', 'item-list'];
+    componentTypes = ['center-text', 'left-text', 'right-text', 'item-list', 'why-us','unique-features'];
     fontStyles = ['normal', 'bold', 'italic'];
 
     uploadProgress: { [key: number]: Observable<number> } = {};
@@ -38,9 +38,15 @@ export class SectionManagerComponent implements OnInit {
       if (!this.businessId) return;
       this.businessSectionsService.getAllBusinessSections(this.businessId).subscribe(sections => {
         this.sections.clear();
+
         sections.forEach((section, index) => {
           console.log(`🔍 Section ${index + 1}:`, section); // Logs each section received
           console.log(`🖼️ Image URL for Section ${index + 1}:`, section.sectionImageUrl); // Specifically logs the image URL
+
+          sections.sort((a, b) => {
+            const pageComparison = this.pages.indexOf(a.page) - this.pages.indexOf(b.page);
+            return pageComparison !== 0 ? pageComparison : (a.order || 0) - (b.order || 0);
+          });
 
           this.sections.push(this.fb.group({
             id: [section.id],

@@ -10,7 +10,10 @@
     >
     <div class="row">
       <div class="col">
-        <h3>Section {{ i + 1 }}</h3>
+        <h3>{{i+1}}, {{section.get("sectionTitle")?.value}}</h3>
+      </div>
+      <div class="col">
+        <label class="page">{{ section.get("order")?.value }}</label>
       </div>
       <div class="col">
         <label class="page">{{ section.get("page")?.value }}</label>
@@ -131,7 +134,8 @@
         <div class="row">
           <div class="col">
             <label>Image Upload</label>
-            <input type="file" (change)="uploadImage($event, i)" />
+            <input type="text" formControlName="sectionImageUrl" placeholder="Image URL" readonly class="form-control"/>
+            <input type="file" (change)="uploadImage($event, i)" class="form-control"/>
           </div>
           <div class="col">
             <!-- ✅ Upload Progress Tracking -->
@@ -152,7 +156,7 @@
           </div>
         </div>
 
-        <p>Image URL: {{ section.get("sectionImageUrl")?.value }}</p>
+        <!-- <p>Image URL: {{ section.get("sectionImageUrl")?.value }}</p> -->
 
         <label>Show Learn More Button?</label>
         <input type="checkbox" formControlName="showLearnMore" />
@@ -162,7 +166,8 @@
       <div
         *ngIf="
           section.get('component')?.value === 'item-list' ||
-          section.get('component')?.value === 'icon-list'
+          section.get('component')?.value === 'why-us'||
+          section.get('component')?.value === 'unique-features'
         "
       >
         <h3>List Items</h3>
