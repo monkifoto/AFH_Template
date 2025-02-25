@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, Type } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MetaService } from 'src/app/services/meta-service.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 import { BusinessSectionsService } from 'src/app/services/business-sections.service';
@@ -36,7 +36,8 @@ export class ServicesComponent implements OnInit, AfterViewInit {
     private injector: Injector,
     private route: ActivatedRoute,
     private metaService: MetaService,
-    private businessDataService: BusinessDataService
+    private businessDataService: BusinessDataService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -139,5 +140,11 @@ export class ServicesComponent implements OnInit, AfterViewInit {
 
     // Match {{businessName}} instead of {businessName}
     return value.replace(/{{\s*businessName\s*}}/g, this.business.businessName);
+  }
+
+  navigateToContact(): void {
+    if (this.businessId) {
+      this.router.navigate(['/contact-us'], { queryParams: { id: this.businessId } });
+    }
   }
 }

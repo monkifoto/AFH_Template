@@ -1,42 +1,35 @@
-<section class="right-text-section" *ngIf="themeType!='clemo' && themeType!='sb'&& themeType!='sp'">
-
+<section class="right-text-section" *ngIf="themeType === 'hh'">
   <div class="image-container">
-      <img src="{{imageURL}}" alt="{{title}}">
+    <img src="{{ imageURL }}" alt="{{ title }}" />
   </div>
-
   <div class="text-container">
-      <h2>{{title}}</h2>
-      <h4>{{content}}</h4>
+    <h2>{{ title }}</h2>
+    <h4 [innerHTML]="sanitizedContent"></h4>
   </div>
-
 </section>
 
-
-
-<section class="content-container" *ngIf="themeType=='clemo' || themeType=='sb' || themeType=='sp'">
+<section
+  class="content-container"
+  *ngIf="
+    themeType === 'clemo' ||
+    themeType === 'ae' ||
+    themeType === 'sb' ||
+    themeType === 'sp'
+  "
+>
   <div class="content-area">
-  <div class="row">
-
-  <div class="left-image-container">
-      <img src="{{imageURL}}" alt="{{title}}">
-  </div>
-
-  <div class="text-container">
-      <h3>
-        {{ titleParts.part1 }}</h3>
-        <h2><span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span></h2>
-
+    <div class="row">
+      <div class="left-image-container">
+        <img src="{{ imageURL }}" alt="{{ title }}" />
+      </div>
+      <div class="text-container">
+        <h3>{{ titleParts.part1 }}</h3>
+        <h2 *ngIf="titleParts.part2">
+          <span>{{ titleParts.part2 }}</span>
+        </h2>
         <div class="separator2"></div>
-      <p [innerHTML]="sanitizedContent" >{{content}}</p>
-      <!-- <h4 class="center-text-description" [innerHTML]="sanitizedContent"></h4> -->
-
-      <!-- <a href="#" class="btn">learn more</a> -->
+        <p [innerHTML]="sanitizedContent">{{ content }}</p>
+      </div>
+    </div>
   </div>
-</div>
-</div>
-
 </section>
-
-
-
-

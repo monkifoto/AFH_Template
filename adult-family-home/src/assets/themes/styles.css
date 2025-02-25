@@ -792,44 +792,6 @@ section {
   color:  var(--primary-color);
   text-align: center;
 }
-/*
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background: rgba(0, 0, 0, 0.5);
-  color:  var(--primary-color);
-  font-family: 'Playfair Display', serif;
-}
-
-.hero-overlay h1 {
-  font-size: 5rem;
-  letter-spacing: 0.3rem;
-  text-transform: uppercase;
-  font-weight: 700;
-  margin: 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.hero-subtitle{
-  font-size: 2rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
- */
-
 
 .contact-info {
   padding: 50px 0;
@@ -1217,3 +1179,197 @@ section {
 .admin-container{
   width: 100%;
 }
+
+
+/*---------------------Footer -----------*/
+
+
+.footer {
+  /* padding: 40px; */
+  text-align: center;
+  padding-top: 6.6vmax;
+  padding-bottom: 6.6vmax;
+}
+
+.footer-title {
+  color: var(--button-color);
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.footer-divider {
+  border: none;
+  height: 1px;
+  background-color: var(--button-color);
+  margin: 20px auto;
+  width: 60%;
+}
+
+.footer-info {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: var(--site-max-width);
+  margin: 0 auto;
+}
+
+
+.footer-column {
+  flex: 1;
+  margin: 10px;
+  min-width: 250px;
+}
+
+.footer-column-title {
+  color: var(--text-color);
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.footer-column address,
+.footer-column p {
+  color: var(--text-color);
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.footer a {
+  color: var(--dark-background-color);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+
+
+/*------Debugger section ----- */
+
+.footer-theme-file {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color:  var(--dark-background-color);
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+.debugger-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.debugger-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.debugger-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px;
+  border: 1px solid  var(--dark-background-color);
+  border-radius: 4px;
+  background-color:  var(--background-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.debugger-label {
+  font-weight: bold;
+  color: #555;
+}
+
+.debugger-value {
+  color:  var(--dark-background-color);
+  word-break: break-word;
+}
+
+
+/* Ensure footer elements don't exceed screen width */
+.footer, .ae-footer, .clemo-footer {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Wrap flex elements properly */
+.footer-info,
+.ae-footer-columns,
+.clemo-footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+.footer-info,
+.ae-footer-columns
+ {
+  display: flex;
+  flex-wrap: nowrap; /* Ensures columns stay in a row */
+  justify-content: space-between; /* Space out the columns */
+  align-items: flex-start; /* Align items to the top */
+  width: 100%;
+  max-width: var(--site-max-width, 1200px);
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 20px; /* Add some padding */
+}
+
+.clemo-footer-content{
+  display: grid;
+}
+
+.footer-column,
+.ae-footer-column {
+  flex: 1;
+  min-width: 250px; /* Prevents columns from shrinking too much */
+  text-align: left;
+}
+
+/* Ensure it stacks only on smaller screens */
+@media (max-width: 768px) {
+  .footer-info,
+  .ae-footer-columns,
+  .clemo-footer-content {
+    flex-direction: column; /* Stack on mobile */
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-column,
+  .ae-footer-column {
+    width: 100%; /* Full width when stacked */
+  }
+}
+
+.copy {
+  max-width: var(--site-max-width);
+  display: flex;
+  justify-content: space-between; /* Corrected property */
+  align-items: center; /* Ensures vertical alignment */
+  /* border: solid 1px black; */
+  padding: 10px; /* Adds some spacing */
+  margin: 0 auto;
+}
+
+.design, .rights {
+  display: flex;
+  align-items: center;
+}
+

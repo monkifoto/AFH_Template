@@ -164,7 +164,7 @@ export class HomeComponent implements OnInit {
           imageURL: section.sectionImageUrl || '',
           showBtn: section.showLearnMore || false,
           _businessName: this.business?.businessName || '',
-          showImage: !!section.sectionImageUrl,
+          showImage: section.showImage,
           themeType: this.business?.theme?.themeType,
           items: section.items || [] ,
           isMinimal: section.isMinimal || false,
