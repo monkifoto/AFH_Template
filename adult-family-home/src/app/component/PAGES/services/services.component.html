@@ -1,3 +1,43 @@
 
+<div *ngIf="business">
+  <div [ngSwitch]="business.theme.themeType">
+    <ng-container *ngSwitchCase="'hh'">
+      <div class="hero-services">
+        <div class="hero-overlay">
+          <h1>Our Services</h1>
+          <div class="hero-subtitle">
+            <p>Providing exceptional care tailored to your needs</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
 
+    <ng-container *ngSwitchCase="'ae'">
+      <app-hero></app-hero>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'clemo'">
+      <app-hero [layoutType]="'clemo'"></app-hero>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'sb'">
+      <app-hero [layoutType]="'sb'"></app-hero>
+    </ng-container>
+
+  </div>
+</div>
     <div #dynamicContainer class="container"></div>
+
+
+    <div class="cta-section services-cta">
+      <div class="cta-content">
+        <h2>Ready to Experience Exceptional Care?</h2>
+        <p>
+          Schedule a free consultation today and let’s discuss how we can meet
+          your needs with our personalized services.
+        </p>
+        <button type="button" class="afhBtn" (click)="navigateToContact()">
+          Book a Consultation
+        </button>
+      </div>
+    </div>

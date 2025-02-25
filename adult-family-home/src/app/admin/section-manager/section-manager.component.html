@@ -8,221 +8,289 @@
       [formGroupName]="i"
       class="sectionForm-container"
     >
-    <div class="row">
-      <div class="col">
-        <h3>{{i+1}}, {{section.get("sectionTitle")?.value}}</h3>
-      </div>
-      <div class="col">
-        <label class="page">{{ section.get("order")?.value }}</label>
-      </div>
-      <div class="col">
-        <label class="page">{{ section.get("page")?.value }}</label>
-      </div>
-      <div class="col">
-        <label class="location">{{ section.get("location")?.value }}</label>
-      </div>
-      <div class="col">
-        <label class="component">{{
-          section.get("component")?.value
-        }}</label>
-      </div>
-      <div class="col">
-        <button (click)="toggleSection(i)" class="icon-btn">
-          <i
-            class="fa-solid"
-            [ngClass]="
-              collapsedSections[i] ? 'fa-angles-down' : 'fa-angles-up'
-            "
-          ></i>
-        </button>
-      </div>
-    </div>
-
-    <div *ngIf="collapsedSections[i]">
-
-      <div class="section-header">
-        <div class="row">
-
-        </div>
-      </div>
-
       <div class="row">
         <div class="col">
-          <label>Order</label>
-          <input type="number" formControlName="order" class="form-control" />
+          <h3>{{ i + 1 }}, {{ section.get("sectionTitle")?.value }}</h3>
         </div>
         <div class="col">
-          <label>Page</label>
-          <select formControlName="page" class="form-control">
-            <option *ngFor="let p of pages" [value]="p">{{ p }}</option>
-          </select>
+          <label class="page">{{ section.get("order")?.value }}</label>
         </div>
         <div class="col">
-          <label>Location</label>
-          <select formControlName="location" class="form-control">
-            <option *ngFor="let loc of locations" [value]="loc">
-              {{ loc }}
-            </option>
-          </select>
+          <label class="page">{{ section.get("page")?.value }}</label>
         </div>
         <div class="col">
-          <label>Component Type</label>
-          <select formControlName="component" class="form-control">
-            <option *ngFor="let type of componentTypes" [value]="type">
-              {{ type }}
-            </option>
-          </select>
+          <label class="location">{{ section.get("location")?.value }}</label>
+        </div>
+        <div class="col">
+          <label class="component">{{ section.get("component")?.value }}</label>
+        </div>
+        <div class="col">
+          <button (click)="toggleSection(i)" class="icon-btn">
+            <i
+              class="fa-solid"
+              [ngClass]="
+                collapsedSections[i] ? 'fa-angles-down' : 'fa-angles-up'
+              "
+            ></i>
+          </button>
         </div>
       </div>
-      <div>
-        <!-- ✅ Title Fields in One Row -->
+
+      <div *ngIf="collapsedSections[i]">
+        <div class="section-header">
+          <div class="row"></div>
+        </div>
+
         <div class="row">
           <div class="col">
-            <label>Title</label>
-            <input formControlName="sectionTitle" class="form-control" />
+            <label>Order</label>
+            <input type="number" formControlName="order" class="form-control" />
           </div>
           <div class="col">
-            <label>Title Font Size</label>
-            <input
-              type="number"
-              formControlName="titleFontSize"
-              class="form-control"
-            />
+            <label>Page</label>
+            <select formControlName="page" class="form-control">
+              <option *ngFor="let p of pages" [value]="p">{{ p }}</option>
+            </select>
           </div>
           <div class="col">
-            <label>Title Font Style</label>
-            <select formControlName="titleFontStyle" class="form-control">
-              <option *ngFor="let style of fontStyles" [value]="style">
-                {{ style }}
+            <label>Location</label>
+            <select formControlName="location" class="form-control">
+              <option *ngFor="let loc of locations" [value]="loc">
+                {{ loc }}
+              </option>
+            </select>
+          </div>
+          <div class="col">
+            <label>Component Type</label>
+            <select formControlName="component" class="form-control">
+              <option *ngFor="let type of componentTypes" [value]="type">
+                {{ type }}
               </option>
             </select>
           </div>
         </div>
-
-        <!-- ✅ Subtitle Fields in One Row -->
-        <div class="row">
-          <div class="col">
-            <label>Subtitle</label>
-            <input formControlName="sectionSubTitle" class="form-control" />
+        <div>
+          <!-- ✅ Title Fields in One Row -->
+          <div class="row">
+            <div class="col">
+              <label>Title</label>
+              <input formControlName="sectionTitle" class="form-control" />
+            </div>
+            <div class="col">
+              <label>Title Font Size</label>
+              <input
+                type="number"
+                formControlName="titleFontSize"
+                class="form-control"
+              />
+            </div>
+            <div class="col">
+              <label>Title Font Style</label>
+              <select formControlName="titleFontStyle" class="form-control">
+                <option *ngFor="let style of fontStyles" [value]="style">
+                  {{ style }}
+                </option>
+              </select>
+            </div>
           </div>
-          <div class="col">
-            <label>Subtitle Font Size</label>
-            <input
-              type="number"
-              formControlName="subtitleFontSize"
+
+          <!-- ✅ Subtitle Fields in One Row -->
+          <div class="row">
+            <div class="col">
+              <label>Subtitle</label>
+              <input formControlName="sectionSubTitle" class="form-control" />
+            </div>
+            <div class="col">
+              <label>Subtitle Font Size</label>
+              <input
+                type="number"
+                formControlName="subtitleFontSize"
+                class="form-control"
+              />
+            </div>
+            <div class="col">
+              <label>Subtitle Font Style</label>
+              <select formControlName="subtitleFontStyle" class="form-control">
+                <option *ngFor="let style of fontStyles" [value]="style">
+                  {{ style }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div *ngIf="section.get('component')?.value !== 'item-list'">
+            <label>Content</label>
+            <textarea
+              formControlName="sectionContent"
               class="form-control"
-            />
+            ></textarea>
           </div>
-          <div class="col">
-            <label>Subtitle Font Style</label>
-            <select formControlName="subtitleFontStyle" class="form-control">
-              <option *ngFor="let style of fontStyles" [value]="style">
-                {{ style }}
-              </option>
-            </select>
-          </div>
-        </div>
 
-        <div *ngIf="section.get('component')?.value !== 'item-list'">
-          <label>Content</label>
-          <textarea
-            formControlName="sectionContent"
-            class="form-control"
-          ></textarea>
-        </div>
-
-        <div class="row">
-          <div class="col">
-            <label>Image Upload</label>
-            <input type="text" formControlName="sectionImageUrl" placeholder="Image URL" readonly class="form-control"/>
-            <input type="file" (change)="uploadImage($event, i)" class="form-control"/>
-          </div>
-          <div class="col">
-            <!-- ✅ Upload Progress Tracking -->
-            <div *ngIf="uploadProgress[i] as progress$">
-              <div *ngIf="progress$ | async as progress">
-                <div *ngIf="progress < 100">Uploading... {{ progress }}%</div>
+          <div class="row">
+            <!-- <div class="col">
+              <label>Image Upload</label>
+              <input
+                type="text"
+                formControlName="sectionImageUrl"
+                placeholder="Image URL"
+                readonly
+                class="form-control"
+              />
+              <input
+                type="file"
+                (change)="uploadImage($event, i)"
+                class="form-control"
+              />
+            </div>
+            <div class="col">
+              <div *ngIf="uploadProgress[i] as progress$">
+                <div *ngIf="progress$ | async as progress">
+                  <div *ngIf="progress < 100">Uploading... {{ progress }}%</div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col">
-            <!-- ✅ Image Preview with 100px Size -->
-            <label>Image Preview</label>
-            <img
-              *ngIf="section.get('sectionImageUrl')?.value"
-              [src]="section.get('sectionImageUrl')?.value"
-              class="uploaded-image-preview"
-            />
-          </div>
-        </div>
-
-        <!-- <p>Image URL: {{ section.get("sectionImageUrl")?.value }}</p> -->
-
-        <label>Show Learn More Button?</label>
-        <input type="checkbox" formControlName="showLearnMore" />
-      </div>
-
-      <!-- ✅ List-Item Section -->
-      <div
-        *ngIf="
-          section.get('component')?.value === 'item-list' ||
-          section.get('component')?.value === 'why-us'||
-          section.get('component')?.value === 'unique-features'
-        "
-      >
-        <h3>List Items</h3>
-        <div class="row">
-          <div class="col">
-            <label>Parallax</label>
-            <input type="checkbox" formControlName="isParallax" />
-          </div>
-          <div class="col">
-            <label>Minimal </label>
-            <input type="checkbox" formControlName="isMinimal" />
-          </div>
-        </div>
-        <button (click)="addItem(i)" class="afhBtn">+ Add Item</button>
-
-        <div *ngIf="getItems(section) as items">
-          <div formArrayName="items">
-            <div
-              *ngFor="let item of items.controls; let j = index"
-              [formGroupName]="j"
-            >
-              <div>
-                <i [class]="item.get('icon')?.value || 'fa fa-star'"></i>
-                <span class="service-name"
-                  >{{ "Title " + (j + 1) }}:
-                  {{ item.get("title")?.value }}</span
-                >
-              </div>
-              <label>Title:</label>
-              <input
-                formControlName="title"
-                class="form-control"
-                placeholder="Title"
+            <div class="col">
+              <label>Image Preview</label>
+              <img
+                *ngIf="section.get('sectionImageUrl')?.value"
+                [src]="section.get('sectionImageUrl')?.value"
+                class="uploaded-image-preview"
               />
-              <label>Description:</label>
-              <input
-                formControlName="description"
-                class="form-control"
-                placeholder="Description"
-              />
-              <label>Icon:</label>
-              <input
-                formControlName="icon"
-                class="form-control"
-                placeholder="Icon"
-              />
-              <button (click)="removeItem(i, j)">Remove</button>
-            </div>
+            </div> -->
           </div>
-        </div>
-      </div>
+          <!-- Image Section -->
+<div class="row">
+   <div class="col">
+      <label>Image Preview</label>
+      <img *ngIf="section.get('sectionImageUrl')?.value"
+           [src]="section.get('sectionImageUrl')?.value"
+           class="uploaded-image-preview" />
+    </div>
+  <div class="col">
+    <label>Image Upload</label>
+    <input type="text" formControlName="sectionImageUrl" placeholder="Image URL" readonly class="form-control"/>
+    <!-- File upload remains available for uploading images -->
+    <input type="file" (change)="uploadImage($event, i)" class="form-control"/>
+  </div>
 
-      <button (click)="updateSection(i)">Update</button>
-      <button (click)="removeSection(i)">Delete</button>
+  <!-- Clear Image Button -->
+  <div class="col">
+    <button type="button" (click)="clearImage(i)">Clear Image</button>
+  </div>
+
+  <!-- Show Image Toggle -->
+  <div class="col">
+    <label>Show Image?</label>
+    <input type="checkbox" formControlName="showImage" />
+  </div>
+
+
+
 </div>
+
+<!-- Image Source Selection -->
+<div class="row" style="margin-top:10px;">
+  <div class="col">
+    <label>
+      <input type="radio" formControlName="imageSource" value="upload" />
+      Upload Your Own Image
+    </label>
+  </div>
+  <div class="col">
+    <label>
+      <input type="radio" formControlName="imageSource" value="predefined" />
+      Choose Preferred Image
+    </label>
+  </div>
+</div>
+
+<!-- Predefined Images (shown when 'predefined' is selected) -->
+<!-- Predefined Images Grid (shown when 'predefined' is selected) -->
+<div style="margin-top:10px;">
+  <h4>Select a Preferred Image</h4>
+  <div class="row">
+    <div class="col" *ngFor="let image of predefinedImages">
+      <label style="display: block; text-align: center;">
+        <img [src]="image.url"
+             class="uploaded-image-preview"
+             style="cursor: pointer; display: block; margin: auto;"/>
+        <!-- Checkbox bound to the current image selection -->
+        <input type="checkbox"
+               [checked]="section.get('sectionImageUrl')?.value === image.url"
+               (change)="selectCheckboxImage(i, image.url, $event)" />
+      </label>
+    </div>
+  </div>
+</div>
+
+
+          <!-- <p>Image URL: {{ section.get("sectionImageUrl")?.value }}</p> -->
+
+          <label>Show Learn More Button?</label>
+          <input type="checkbox" formControlName="showLearnMore" />
+        </div>
+
+        <!-- ✅ List-Item Section -->
+        <div
+          *ngIf="
+            section.get('component')?.value === 'item-list' ||
+            section.get('component')?.value === 'why-us' ||
+            section.get('component')?.value === 'unique-features'
+          "
+        >
+          <h3>List Items</h3>
+          <div class="row">
+            <div class="col">
+              <label>Parallax</label>
+              <input type="checkbox" formControlName="isParallax" />
+            </div>
+            <div class="col">
+              <label>Minimal </label>
+              <input type="checkbox" formControlName="isMinimal" />
+            </div>
+          </div>
+          <button (click)="addItem(i)" class="afhBtn">+ Add Item</button>
+
+          <div *ngIf="getItems(section) as items">
+            <div formArrayName="items">
+              <div
+                *ngFor="let item of items.controls; let j = index"
+                [formGroupName]="j"
+              >
+                <div>
+                  <i [class]="item.get('icon')?.value || 'fa fa-star'"></i>
+                  <span class="service-name"
+                    >{{ "Title " + (j + 1) }}:
+                    {{ item.get("title")?.value }}</span
+                  >
+                </div>
+                <label>Title:</label>
+                <input
+                  formControlName="title"
+                  class="form-control"
+                  placeholder="Title"
+                />
+                <label>Description:</label>
+                <input
+                  formControlName="description"
+                  class="form-control"
+                  placeholder="Description"
+                />
+                <label>Icon:</label>
+                <input
+                  formControlName="icon"
+                  class="form-control"
+                  placeholder="Icon"
+                />
+                <button (click)="removeItem(i, j)">Remove</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button (click)="updateSection(i)">Update</button>
+        <button (click)="removeSection(i)">Delete</button>
+      </div>
     </div>
   </div>
 </form>

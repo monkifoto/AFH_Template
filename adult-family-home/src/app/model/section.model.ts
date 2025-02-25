@@ -15,6 +15,7 @@ export  interface Section {
   subtitleFontStyle?: string;
   showLearnMore?: boolean;
   sectionImageUrl?: string;
+  showImage?:string;
   items?: any[];
   order: number;
   isMinimal:boolean;
