@@ -12,6 +12,7 @@ export class ItemListComponent implements OnInit {
   @Input() showLearnMore: boolean = false; // ✅ Toggle Learn More button
   @Input() sectionImageUrl: string | null = null; // ✅ Background image
   @Input() isParallax: boolean = true; // ✅ Controls whether parallax effect is applied
+  @Input() layoutType: string = 'demo';
 
   constructor() {}
 

@@ -158,7 +158,8 @@ export class HomeComponent implements OnInit {
 
       if (componentRef.instance && typeof componentRef.instance === 'object') {
         Object.assign(componentRef.instance, {
-          title: this.applyReplaceKeyword(section.sectionTtitle || ''),
+          // title:section.sectionTitle,
+          title: this.applyReplaceKeyword(section.sectionTitle || ''),
           subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
           content: this.applyReplaceKeyword(section.sectionContent || ''),
           imageURL: section.sectionImageUrl || '',
