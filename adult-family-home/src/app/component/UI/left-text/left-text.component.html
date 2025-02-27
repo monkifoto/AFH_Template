@@ -1,6 +1,8 @@
 <section class="left-text-section" *ngIf="themeType === 'hh'">
   <div class="text-container">
-    <h2>{{ title }}</h2>
+    <div  class="heading-container">
+      <h2 class="styled-heading">{{title}}</h2>
+    </div>
     <h4 [innerHTML]="sanitizedContent"></h4>
   </div>
 
