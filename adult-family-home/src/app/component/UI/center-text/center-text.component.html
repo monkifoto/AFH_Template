@@ -1,11 +1,13 @@
 
 
-  <div class="welcome-info-container" [ngClass]="themeType" *ngIf="themeType=='hh'">
-    <div class="welcome-overlay">
-      <div class="welcome-content garamond">
+  <div class="center-text-container" [ngClass]="themeType" *ngIf="themeType=='hh'">
+    <div class="center-text-overlay">
+      <div class="center-text-content garamond">
         <h3> <span class="brand-name">{{ subTitle | replaceKeyword: { businessName: _businessName } }}</span></h3>
-        <h1>{{title}}</h1>
-        <p [innerHTML]="sanitizedContent"></p>
+        <div  class="heading-container">
+          <h2 class="styled-heading">{{title}}</h2>
+        </div>
+        <p class="center-text-description" [innerHTML]="sanitizedContent"></p>
         <div class="buttons">
           <button *ngIf="showBtn" type="button" class="afhBtn" (click)="navigateToContact()">Contact Us</button>
         </div>

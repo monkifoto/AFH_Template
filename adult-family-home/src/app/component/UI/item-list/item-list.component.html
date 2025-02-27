@@ -55,6 +55,10 @@
   </div>
 </section> -->
 <!-- Layout for layoutType 'hh' -->
+
+
+
+
 <section class="services-list-section" *ngIf="themeType === 'hh'">
   <div
     [ngClass]="{
@@ -65,27 +69,36 @@
     [ngStyle]="{ 'background-image': sectionImageUrl ? 'url(' + sectionImageUrl + ')' : 'none' }">
 
     <!-- Minimal version -->
-    <div *ngIf="isMinimal">
+    <div *ngIf="!isMinimal">
       <section class="our-services-section">
-        <div class="our-services-section-heading">
+        <div  class="heading-container">
+          <h2 class="styled-heading">{{title}}</h2>
+        </div>
+        <!-- <div class="our-services-section-heading">
           <span class="our-services-title main">{{title}} </span>
           <span class="our-services-title highlight">{{subTitle}}</span>
-        </div>
-        <h3 class="our-services-description">Home Care From Trained Professionals</h3>
+        </div> -->
+        <h3 class="our-services-description">{{subTitle}}</h3>
         <div class="our-services-container">
           <div *ngFor="let service of items" class="our-services-item">
+            <div style="display: flex;">
             <i [ngClass]="service.icon" class="our-services-item-icon"></i>
-            <h3 class="our-services-item-title">{{ service.name }}</h3>
+            <h2>{{ service.title }}</h2>
+            <!-- <h3 class="our-services-item-title">{{ service.title }}</h3> -->
+          </div>
+            <div class="our-services-item-description">
+              <p>{{ service.description }}</p>
+            </div>
           </div>
         </div>
       </section>
     </div>
 
     <!-- Full version -->
-    <div *ngIf="!isMinimal" class="services-list">
+    <div *ngIf="isMinimal" class="services-list">
       <ul>
         <li *ngFor="let service of items" class="service-list-item">
-          <h2>{{ service.name }}</h2>
+          <h2>{{ service.title }}</h2>
           <div class="our-services-item-description">
             <p>{{ service.description }}</p>
           </div>
@@ -94,6 +107,8 @@
     </div>
 
   </div>
+
+
 </section>
 
 
