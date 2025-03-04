@@ -39,6 +39,23 @@ export class SectionManagerComponent implements OnInit {
   ];
   fontStyles = ['normal', 'bold', 'italic'];
 
+  predefinedColors = [
+    { name: 'Primary', value: 'var(--primary-color)' },
+    { name: 'Secondary', value: 'var(--secondary-color)' },
+    { name: 'Accent', value: 'var(--accent-color)' },
+    { name: 'Background', value: 'var(--background-color)' },
+    { name: 'Dark Background', value: 'var(--dark-background-color)' },
+    { name: 'Text', value: 'var(--text-color)' },
+    { name: 'Nav Background', value: 'var(--nav-background-color)' },
+    { name: 'Nav Text', value: 'var(--nav-text-color)' },
+    { name: 'Nav Active Background', value: 'var(--nav-active-background)' },
+    { name: 'Nav Active Text', value: 'var(--nav-active-text)' },
+    { name: 'Button', value: 'var(--button-color)' },
+    { name: 'Button Hover', value: 'var(--button-hover-color)' },
+    { name: 'Button Text', value: 'var(--button-text-color)' },
+    { name: 'Border', value: 'var(--border-color)' }
+  ]
+
   uploadProgress: { [key: number]: Observable<number> } = {};
 
   predefinedImages = [
@@ -132,9 +149,19 @@ export class SectionManagerComponent implements OnInit {
               sectionContent: [section.sectionContent],
               sectionImageUrl: [section.sectionImageUrl],
               showImage: [section.showImage],
-              showLearnMore: [section.showLearnMore || false],
+              showButton: [section.showButton || false],
+              buttonText:[section.buttonText || 'Learn More'],
+              buttonLink: [section.buttonLink || 'contact-us'],
+              alignText: [section.alignText || 'left'],
+              boxShadow:[section.boxShadow|| false],
+              borderRadius: [section.borderRadius || 10],
               isMinimal: [section.isMinimal || false],
               isParallax: [section.isParallax || false],
+              backgroundColor: [section.backgroundColor],
+              textColor: [section.textColor],
+              titleColor: [section.titleColor],
+              subtitleColor: [section.subtitleColor],
+              fullWidth:[section.fullWidth],
               imageSource: ['upload'],
               items: this.fb.array(
                 section.items
@@ -175,6 +202,16 @@ export class SectionManagerComponent implements OnInit {
       showLearnMore: [false],
       showImage: [false],
       imageSource: ['upload'],
+      showButton: [false],
+      buttonText:['Learn More'],
+      buttonLink: ['contact-us'],
+      alignText: [ 'left'],
+      boxShadow:[false],
+      borderRadius: [0],
+      backgroundColor: ['#ffffff'],
+      textColor: ['#000000'],
+      titleColor: ['#000000'],
+      subtitleColor: ['#000000'],
       items: this.fb.array([]),
     });
     this.sections.push(newSection);

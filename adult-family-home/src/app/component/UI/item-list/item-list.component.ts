@@ -14,6 +14,22 @@ export class ItemListComponent implements OnInit {
   @Input() sectionImageUrl: string | null = null; // ✅ Background image
   @Input() isParallax: boolean = true; // ✅ Controls whether parallax effect is applied
   @Input() themeType: string = 'demo';
+   // ✅ New inputs
+   @Input() page: string ='';
+   @Input() location: string ='';
+   @Input() backgroundColor: string = '#ffffff';
+   @Input() textColor: string = '#000000';
+   @Input() titleColor: string = '#000000';
+   @Input() titleFontSize: string = '34';
+   @Input() subtitleColor: string = '#000000';
+   @Input() subtitleFontSize: string = '14';
+   @Input() fullWidth: boolean = false;
+   @Input() showButton: boolean = false;
+   @Input() buttonText: string ='Learn More';
+   @Input() buttonLink: string ='contact-us';
+   @Input() alignText: string= 'left';
+   @Input() boxShadow: boolean = false;
+   @Input() borderRadius: number = 0;
 
   constructor() {}
 
@@ -24,7 +40,12 @@ export class ItemListComponent implements OnInit {
       items: this.items,
       isMinimal: this.isMinimal,
       sectionImageUrl: this.sectionImageUrl,
-      isParallax: this.isParallax
+      isParallax: this.isParallax,
+      backgroundColor: this.backgroundColor,
+      titleColor : this.titleColor,
+      subtitleColor: this.subtitleColor,
+      textColor: this.textColor,
+      fullWidth: this.fullWidth
     });
   }
 }

@@ -1,15 +1,13 @@
 
 <div [ngSwitch]="layoutType">
-  <ng-container *ngSwitchCase="'hh'">
+  <ng-container *ngSwitchCase="'hh'"
+  [ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+  [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
 <section class="features-section">
   <div class="features-section-heading">
-    <span class="features-section-title main">Our Unique </span>
-    <span class="features-section-title highlight"> Features</span>
+    <span class="features-section-title main">{{title}} </span>
+    <span class="features-section-title highlight">{{subTitle}}</span>
   </div>
-  <p class="features-section-description">
-    What sets us appart.
-  </p>
-
     <div class="features-container">
 
       <div class="feature-list">
@@ -52,13 +50,9 @@
 <ng-container *ngSwitchDefault>
   <section class="features-section">
     <div class="features-section-heading">
-      <span class="features-section-title main">Our Unique </span>
-      <span class="features-section-title highlight"> Features</span>
+      <span class="features-section-title main">{{title}} </span>
+      <span class="features-section-title highlight">{{subTitle}}</span>
     </div>
-    <p class="features-section-description">
-      What sets us appart.
-    </p>
-
       <div class="features-container">
 
         <div class="feature-list">

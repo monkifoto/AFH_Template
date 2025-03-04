@@ -31,18 +31,17 @@
 <section class="business-team">
   <app-meet-the-team [businessId]="business.id"></app-meet-the-team>
 </section>
-<ng-container *ngSwitchCase!="'hh'">
+
+<div [ngSwitch]="business.theme.themeType">
+<ng-container *ngSwitchCase="'hh'">
 
   <app-testimonial-image
-  [imageURL]="
-    '../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'
-  "
+  [imageURL]="'../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'"
   [author]="business.testimonials[0].name"
-  [text]="business.testimonials[0].quote"
-></app-testimonial-image>
+  [text]="business.testimonials[0].quote"></app-testimonial-image>
 
 </ng-container>
-
+</div>
 <app-call-to-action
   [text]="'Have more questions?'"
   [buttonText]="'Contact Us'"
