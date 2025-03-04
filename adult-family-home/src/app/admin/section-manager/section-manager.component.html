@@ -92,6 +92,14 @@
                 </option>
               </select>
             </div>
+            <div class="col">
+              <label>Title Color</label>
+              <select formControlName="titleColor" class="form-control">
+                <option *ngFor="let color of predefinedColors" [value]="color.value">
+                  {{ color.name }}
+                </option>
+              </select>
+            </div>
           </div>
 
           <!-- ✅ Subtitle Fields in One Row -->
@@ -116,6 +124,56 @@
                 </option>
               </select>
             </div>
+            <div class="col">
+              <label>Subtitle Color</label>
+              <select formControlName="subtitleColor" class="form-control">
+                <option *ngFor="let color of predefinedColors" [value]="color.value">
+                  {{ color.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label>Background Color</label>
+              <select formControlName="backgroundColor" class="form-control">
+                <option *ngFor="let color of predefinedColors" [value]="color.value">
+                  {{ color.name }}
+                </option>
+              </select>
+            </div>
+            <div class="col">
+              <label>Text Color</label>
+              <select formControlName="textColor" class="form-control">
+                <option *ngFor="let color of predefinedColors" [value]="color.value">
+                  {{ color.name }}
+                </option>
+              </select>
+            </div>
+            <div class="col">
+              <label>Text Alignment</label>
+              <select formControlName="alignText" class="form-control">
+                <option value="left">Left</option>
+                <option value="center">Center</option>
+                <option value="right">Right</option>
+              </select>
+            </div>
+            <div class="col">
+              <label>Layout</label>
+              <select formControlName="fullWidth" class="form-control">
+                <option [value]="true">Full Width (100%)</option>
+                <option [value]="false">Centered (1200px)</option>
+              </select>
+            </div>
+            <div class="col">
+              <label>Box Shadow</label>
+              <input type="checkbox" formControlName="boxShadow" />
+            </div>
+            <div class="col">
+              <label>Border Radius (px)</label>
+              <input type="number" formControlName="borderRadius" class="form-control" />
+            </div>
           </div>
 
           <div *ngIf="section.get('component')?.value !== 'item-list'">
@@ -126,39 +184,8 @@
             ></textarea>
           </div>
 
-          <div class="row">
-            <!-- <div class="col">
-              <label>Image Upload</label>
-              <input
-                type="text"
-                formControlName="sectionImageUrl"
-                placeholder="Image URL"
-                readonly
-                class="form-control"
-              />
-              <input
-                type="file"
-                (change)="uploadImage($event, i)"
-                class="form-control"
-              />
-            </div>
-            <div class="col">
-              <div *ngIf="uploadProgress[i] as progress$">
-                <div *ngIf="progress$ | async as progress">
-                  <div *ngIf="progress < 100">Uploading... {{ progress }}%</div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <label>Image Preview</label>
-              <img
-                *ngIf="section.get('sectionImageUrl')?.value"
-                [src]="section.get('sectionImageUrl')?.value"
-                class="uploaded-image-preview"
-              />
-            </div> -->
-          </div>
-          <!-- Image Section -->
+
+
 <div class="row">
    <div class="col">
       <label>Image Preview</label>
@@ -225,9 +252,20 @@
 
 
           <!-- <p>Image URL: {{ section.get("sectionImageUrl")?.value }}</p> -->
-
-          <label>Show Learn More Button?</label>
-          <input type="checkbox" formControlName="showLearnMore" />
+          <div class="row">
+            <div class="col">
+              <label>Show Button?</label>
+              <input type="checkbox" formControlName="showButton" />
+            </div>
+            <div class="col" *ngIf="section.get('showButton')?.value">
+              <label>Button Text</label>
+              <input type="text" formControlName="buttonText" class="form-control" />
+            </div>
+            <div class="col" *ngIf="section.get('showButton')?.value">
+              <label>Button Link</label>
+              <input type="text" formControlName="buttonLink" class="form-control" />
+            </div>
+          </div>
         </div>
 
         <!-- ✅ List-Item Section -->

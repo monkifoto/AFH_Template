@@ -163,13 +163,27 @@ export class HomeComponent implements OnInit {
           subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
           content: this.applyReplaceKeyword(section.sectionContent || ''),
           imageURL: section.sectionImageUrl || '',
-          showBtn: section.showLearnMore || false,
+          showButton: section.showButton || false,
+          buttonText: section.buttonText || 'Learn More',
+          buttonLink: section.buttonLink || '',
           _businessName: this.business?.businessName || '',
           showImage: section.showImage,
           themeType: this.business?.theme?.themeType,
           items: section.items || [] ,
           isMinimal: section.isMinimal || false,
-          isParallax: section.isParallax ?? true
+          isParallax: section.isParallax ?? true,
+          backgroundColor: section.backgroundColor || '#ffffff',
+          textColor: section.textColor || '#000000',
+          titleColor: section.titleColor || '#000000',
+          titleFontSize: section.titleFontSize || '36',
+          subtitleColor: section.subtitleColor || '#000000',
+          subtitleFontSize: section.subtitleFontSize || '14',
+          fullWidth: section.fullWidth || false,
+          alignText: section.alignText || 'left',
+          boxShadow: section.boxShadow || false,
+          borderRadius: section.borderRadius ?? 10,
+          page: section.page,
+          location: section.location
         });
         console.log(`✅ Component Data for ${section.component}:`, componentRef.instance);
       }

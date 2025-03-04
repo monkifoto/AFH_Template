@@ -1,15 +1,27 @@
 
 
-  <div class="center-text-container" [ngClass]="themeType" *ngIf="themeType=='hh'">
+  <div class="center-text-container"
+  *ngIf="themeType=='hh'"
+  [ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+  [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
     <div class="center-text-overlay">
-      <div class="center-text-content garamond">
+      <div class="center-text-content">
+        <div *ngIf="page=='home'">
+          <div class="features-section-heading" [ngStyle]="{ 'text-align': alignText}">
+            <span class="features-section-title highlight" [ngStyle]="{ 'color': subtitleColor, 'font-size': subtitleFontSize+'px' }">{{subTitle | replaceKeyword: { businessName: _businessName } }}</span>
+            <br>
+            <span class="features-section-title main" [ngStyle]="{ 'color': titleColor, 'font-size': titleFontSize+'px' }" >{{title}} </span>
+          </div>
+        </div>
+        <div *ngIf="page!='home'">
         <h3> <span class="brand-name">{{ subTitle | replaceKeyword: { businessName: _businessName } }}</span></h3>
         <div  class="heading-container">
           <h2 class="styled-heading">{{title}}</h2>
         </div>
+      </div>
         <p class="center-text-description" [innerHTML]="sanitizedContent"></p>
         <div class="buttons">
-          <button *ngIf="showBtn" type="button" class="afhBtn" (click)="navigateToContact()">Contact Us</button>
+          <button *ngIf="showButton" type="button" class="afhBtn" (click)="navigateToContact(buttonLink)">{{buttonText}}</button>
         </div>
       </div>
     </div>
@@ -23,7 +35,7 @@
   <h3 class="center-text-title">{{ subTitle }}</h3>
   <h2 class="center-text-title">{{ title }}</h2>
   <h4 class="center-text-description" [innerHTML]="sanitizedContent"></h4>
-  <button *ngIf="showBtn" class="afhBtn">Schedule A Visit</button>
+  <button *ngIf="showButton" class="afhBtn">Schedule A Visit</button>
 </div>
 
 <div class="center-text-section-clemo" [ngClass]="themeType" *ngIf="themeType=='clemo'">
@@ -36,7 +48,7 @@
     <div class="separator2"></div>
   <p class="center-text-description" [innerHTML]="sanitizedContent"></p>
 </div>
-  <button *ngIf="showBtn" class="afhBtn">Schedule A Visit</button>
+  <button *ngIf="showButton" class="afhBtn">Schedule A Visit</button>
 </div>
 
 <div class="center-text-section-clemo" [ngClass]="themeType" *ngIf="themeType=='sb' || themeType=='sp'">
@@ -49,6 +61,6 @@
     <div class="separator2"></div>
   <p class="center-text-description" [innerHTML]="sanitizedContent"></p>
 </div>
-  <button *ngIf="showBtn" class="afhBtn">Schedule A Visit</button>
+  <button *ngIf="showButton" class="afhBtn">Schedule A Visit</button>
 </div>
 

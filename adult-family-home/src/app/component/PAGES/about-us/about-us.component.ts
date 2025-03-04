@@ -109,7 +109,22 @@ export class AboutUsComponent implements OnInit {
         themeType: this.business?.theme?.themeType,
         items: section.items || [],
         isMinimal: section.isMinimal || false,
-        isParallax: section.isParallax ?? true
+        isParallax: section.isParallax ?? true,
+        backgroundColor: section.backgroundColor || '#ffffff',
+        textColor: section.textColor || '#000000',
+        titleColor: section.titleColor || '#000000',
+        subtitleColor: section.subtitleColor || '#000000',
+        fullWidth: section.fullWidth || false,
+        showButton: section.showButton || false,
+        buttonText: section.buttonText || 'Learn More',
+        buttonLink: section.buttonLink || '',
+        titleFontSize: section.titleFontSize || '36',
+        subtitleFontSize: section.subtitleFontSize || '14',
+        alignText: section.alignText || 'left',
+        boxShadow: section.boxShadow || false,
+        borderRadius: section.borderRadius ?? 10,
+        page: section.page,
+        location: section.location
       });
     });
   }

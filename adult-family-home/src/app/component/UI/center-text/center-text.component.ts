@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -12,9 +13,28 @@ export class CenterTextComponent implements OnInit {
   @Input() title!: string;
   @Input() subTitle!: string;
   @Input() imageURL!: string;
-  @Input() showBtn: boolean = false;
   @Input() showImage: boolean =false;
   @Input() _businessName: string = '';
+  @Input() page: string ='';
+  @Input() location: string ='';
+  @Input() backgroundColor: string = '#ffffff';
+  @Input() textColor: string = '#000000';
+  @Input() titleColor: string = '#000000';
+  @Input() titleFontSize: string = '34';
+  @Input() subtitleColor: string = '#000000';
+  @Input() subtitleFontSize: string = '14';
+  @Input() fullWidth: boolean = false;
+  @Input() showButton: boolean = false;
+  @Input() buttonText: string ='Learn More';
+  @Input() buttonLink: string ='contact-us';
+  @Input() alignText: string= 'left';
+  @Input() boxShadow: boolean = false;
+  @Input() borderRadius: number = 0;
+  @Input() items: any[] = []; // ✅ List of items in the section
+  @Input() isMinimal: boolean = false; // ✅ Controls minimal/full view
+  @Input() showLearnMore: boolean = false; // ✅ Toggle Learn More button
+  @Input() sectionImageUrl: string | null = null; // ✅ Background image
+  @Input() isParallax: boolean = true; // ✅ Controls whether parallax effect is applied
 
   private _content!: string;
   sanitizedContent!: SafeHtml;
@@ -22,6 +42,34 @@ export class CenterTextComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer, private router: Router) {}
   ngOnInit(): void {
     console.log('Center Text Component Loaded , themeType: '+ this.themeType+  ' Business Name:' + this._businessName + ' Title: ' + this.title);
+
+    console.log("📌 Section Center Text- Initialized:", {
+      title: this.title,
+      titleColor: this.titleColor,
+      titleFontSize: this.titleFontSize,
+
+      subTitle: this.subTitle,
+      subTitileColor: this.subtitleColor,
+      subtitleFontSize: this.subtitleFontSize,
+
+      showButton: this.showButton ,
+      buttonText: this.buttonText ,
+      buttonLink: this.buttonLink ,
+
+      alignText: this.alignText,
+      boxShadow: this.boxShadow,
+      borderRadius: this.borderRadius,
+
+      items: this.items,
+      isMinimal: this.isMinimal,
+      sectionImageUrl: this.sectionImageUrl,
+      isParallax: this.isParallax,
+      backgroundColor: this.backgroundColor,
+
+      subtitleColor: this.subtitleColor,
+      textColor: this.textColor,
+      fullWidth: this.fullWidth
+    });
   }
 
 
@@ -43,8 +91,8 @@ export class CenterTextComponent implements OnInit {
     return this._content;
   }
 
-  navigateToContact() {
-    this.router.navigate(['/contact-us']);
+  navigateToContact(buttonLink:string) {
+    this.router.navigate([buttonLink]);
   }
 
 }

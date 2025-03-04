@@ -1,9 +1,13 @@
-<section class="left-text-section" *ngIf="themeType === 'hh'">
+<section class="left-text-section"
+*ngIf="themeType === 'hh'"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+
   <div class="text-container">
     <div  class="heading-container">
       <h2 class="styled-heading">{{title}}</h2>
     </div>
-    <h4 [innerHTML]="sanitizedContent"></h4>
+    <p [innerHTML]="sanitizedContent"></p>
   </div>
 
   <div class="image-container">

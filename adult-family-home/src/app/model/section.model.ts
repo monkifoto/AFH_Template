@@ -1,4 +1,9 @@
 export  interface Section {
+  subtitleColor: any;
+  titleColor: any;
+  textColor: any;
+  backgroundColor: any;
+  fullWidth: false,
   id?: string;
   sectionType: string;
   sectionName: string;
@@ -13,11 +18,16 @@ export  interface Section {
   subtitleFontSize?: number;
   titleFontStyle?: string;
   subtitleFontStyle?: string;
-  showLearnMore?: boolean;
+  showButton?: boolean;
+  buttonText: string;
+  buttonLink: string;
   sectionImageUrl?: string;
   showImage?:string;
   items?: any[];
   order: number;
   isMinimal:boolean;
   isParallax:boolean;
+  alignText:string;
+  boxShadow:boolean;
+  borderRadius:number;
 }
