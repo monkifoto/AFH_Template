@@ -34,6 +34,7 @@ export class ItemListComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    this.fullWidth = this.convertToBoolean(this.fullWidth);
     console.log("📌 Item List Initialized:", {
       title: this.title,
       subTitle: this.subTitle,
@@ -47,5 +48,11 @@ export class ItemListComponent implements OnInit {
       textColor: this.textColor,
       fullWidth: this.fullWidth
     });
+  }
+
+  private convertToBoolean(value: any): boolean {
+    if (typeof value === 'boolean') return value; // Already boolean
+    if (typeof value === 'string') return value.toLowerCase() === 'true'; // Convert string to boolean
+    return false; // Default case
   }
 }

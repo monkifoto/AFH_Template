@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class SectionTitleComponent {
   @Input() title!: string;
+  @Input() titleColor: string = '#000000';
 }
