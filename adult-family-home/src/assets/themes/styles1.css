@@ -60,7 +60,7 @@ body {
     font-weight: 600;
     font-style: normal;
     margin-bottom: 2rem;
-    font-size: calc(var(--heading-2-size-value) * 2rem);
+    font-size: calc(var(--heading-2-size-value) * 2.5rem);
   }
 
   h2 {
@@ -68,14 +68,14 @@ body {
     font-weight: 500;
     font-style: normal;
     margin-bottom: 2rem;
-    font-size: calc(var(--heading-2-size-value) * 1.5rem);
+    font-size: calc(var(--heading-2-size-value) * 2rem);
   }
 
   h3{
     font-weight: 400;
     font-style: normal;
     margin-bottom: 2rem;
-    font-size: calc(var(--large-text-size-value) * 1.6rem);
+    font-size: calc(var(--heading-2-size-value) * 1rem);
     line-height: 1.6;
   }
 
@@ -1029,4 +1029,399 @@ textarea{
     flex: 1 1 100%;
     max-width: 100%;
   }
+}
+
+
+/* Slider Container */
+/* .clemo-slider-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+} */
+
+
+.clemo-slider-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  opacity: var(--slider-opacity, 1); /* Use dynamic opacity */
+  transition: opacity 0.3s ease; /* Smooth transition */
+  pointer-events: auto; /* Prevent blocking scroll interaction */
+}
+
+.clemo-slider-container.hidden {
+  pointer-events: none; /* Disable interaction when fully faded */
+}
+
+/* Slides */
+.clemo-slides {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none; /* Hidden by default */
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+
+  &.clemo-active {
+    display: block; /* Show the active slide */
+    opacity: 1;
+  }
+}
+
+/* Single Slide */
+.clemo-single-home-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Background Overlay */
+/* .clemo-home-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.9;
+  z-index: 1;
+} */
+
+.clemo-home-overlay {
+  /* outline: 2px solid blue; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover; /* Ensures the image covers the container */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  opacity: 0.8; /* Adjust opacity if needed */
+  z-index: 1;
+}
+
+
+/* Slide Content */
+.clemo-main-home {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Always keep the content centered */
+  text-align: center;
+  z-index: 2; /* Above the overlay */
+  color: #000;
+  animation: fade-in-opacity 1s ease-in-out; /* Fade in without changing position */
+}
+
+.clemo-main-home h1 {
+  font-size: 5rem;
+  font-weight: bold;
+  margin: 0;
+  color: #fff;
+}
+.clemo-main-home h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0;
+  color: #fff;
+}
+
+.clemo-separator {
+  width: 50px;
+  height: 2px;
+  background-color: #fff;
+  margin: 20px auto;
+}
+
+.clemo-subtitle {
+  font-size: var(--subtitle-size, 1.5rem);
+  font-weight: var(--subtitle-weight, 400);
+  /* font-size: 1.5rem; */
+  color: #fff;
+  margin: 20px 0;
+  line-height: 1.5;
+}
+
+.clemo-home-btn {
+  margin-top: 20px;
+
+}
+/* Button Styles */
+.clemo-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #000;
+  background-color: #fff;
+  border-radius: var(--button-border-radius, 25px);
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  margin-right: 50px;
+  &:hover {
+    background-color: #fff;
+    color: #000;
+  }
+}
+
+/* Outline Button Styles */
+.clemo-btn-outline {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: transparent;
+  border: 1px solid #fff;
+  border-radius: var(--button-border-radius, 25px);
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #fff;
+    color: #000;
+  }
+}
+
+
+/* Navigation Diamonds */
+.clemo-slider-navigation {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
+}
+
+/* Bottom Navigation Style */
+.clemo-slider-navigation.bottom-nav {
+  right: auto;
+  bottom: 20px;
+  top: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: row;
+}
+
+/* Default Diamond Indicator */
+.clemo-nav-item {
+  width: 20px;
+  height: 20px;
+  background-color: #fff;/*diamonds*/
+  /* clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); */
+  border-radius: 50%; /* Makes it a circle */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.clemo-nav-item:hover {
+  background-color: #555;
+}
+
+.clemo-nav-item.clemo-active {
+  background-color: transparent;
+  border-color: #fff;
+}
+
+/* Bottom Navigation Line Indicator */
+.clemo-nav-item.line-style {
+  width: 30px;
+  height: 4px;
+  background-color: #fff;
+  clip-path: none;
+  border-radius: 2px;
+}
+
+/* Animations */
+@keyframes fade-in-opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* Container for the scroll animation */
+.mouse-scroll {
+  position: absolute;
+  bottom: calc(-50% + 40px);
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 100;
+  font-family: Arial, sans-serif;
+}
+
+.mouse {
+  width: 30px;
+  height: 50px;
+  border: 2px solid #fff;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 10px auto;
+  position: relative;
+}
+
+.scroll {
+  width: 6px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 3px;
+  animation: scroll 1.5s infinite;
+}
+
+/* Text below the scroll indicator */
+.mouse-scroll p {
+  color: #fff;
+  font-size: 14px;
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Scroll animation */
+@keyframes scroll {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .clemo-main-home h1 {
+    font-size: 3.5rem; /* Reduce size on tablets */
+  }
+
+  .clemo-main-home h2 {
+    font-size: 2.5rem;
+  }
+
+  .clemo-subtitle {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .clemo-main-home h1 {
+    font-size: 2.5rem; /* Adjust size for smaller tablets */
+  }
+
+  .clemo-main-home h2 {
+    font-size: 2rem;
+  }
+
+  .clemo-subtitle {
+    font-size: 1rem !important;
+  }
+
+  .clemo-home-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Stack buttons vertically */
+  }
+
+  .clemo-btn,
+  .clemo-btn-outline {
+    font-size: 0.9rem;
+    padding: 8px 15px; /* Reduce padding for smaller screens */
+    margin-right: 0; /* Remove large right margin */
+  }
+
+  .mouse-scroll {
+    bottom: -150px; /* Adjust scroll indicator position */
+  }
+}
+
+@media (max-width: 480px) {
+  .clemo-main-home h1 {
+    font-size: 2rem; /* Further reduce for mobile */
+  }
+
+  .clemo-main-home h2 {
+    font-size: 1.5rem;
+  }
+
+  .clemo-subtitle {
+    font-size: 0.9rem !important;
+    line-height: 1.4;
+  }
+
+  .clemo-btn,
+  .clemo-btn-outline {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+
+  .mouse-scroll {
+    bottom: -120px;
+  }
+}
+
+
+.cta-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  padding-top: 6.6vmax;
+  padding-bottom: 6.6vmax;
+}
+
+.cta-button,
+.cta-link {
+  margin-top: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.cta-link {
+  text-decoration: underline;
+}
+
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  .cta-container h2 {
+    font-size: 1.75rem; /* Slightly smaller heading for tablets */
+  }
+
+}
+
+@media (max-width: 480px) {
+  .cta-container {
+    padding: 15px; /* Reduce padding for very small screens */
+    text-align: center; /* Maintain alignment */
+  }
+
+  .cta-container h2 {
+    font-size: 1.5rem; /* Smaller heading for very small screens */
+  }
+
 }

@@ -1,10 +1,17 @@
 <div *ngIf="business">
-  <app-center-text
-    *ngIf="business.sections | sectionFilter:'Gallery' : 'CenterTop' as section"
-    [title]="section.sectionTitle || ''"
-    [content]="section.sectionContent || ''"
-    [imageURL]="section.sectionImageUrl || ''"
-  ></app-center-text>
+  <div [ngSwitch]="business.theme.themeType">
+    <ng-container *ngSwitchCase="'hh'">
+      <div class="hero-about">
+        <div class="page-hero-overlay">
+          <h1>Our Home</h1>
+          <div class="hero-subtitle">
+            <p>Feel at Home: A Peek into Our Caring Environment</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <ng-container #dynamicContainer></ng-container>
 
   <section class="gallery">
     <div class="section-heading"><h2>Explore Our Gallery</h2></div>
@@ -16,10 +23,11 @@
   </section>
 
   <app-call-to-action
-    [text]="'Come Visit Us!'"
+    [title]="'Come Meet Our Family!'"
+    [content]="'We would love to meet you! Schedule a visit and see firsthand how our caring environment feels like home.'"
     [buttonText]="'Schedule a Visit'"
     [isButton]="true"
-    [bgColor]="business.theme.backgroundColor"
+    [bgColor]="business.theme.primaryColor"
     [textColor]="business.theme.textColor"
   ></app-call-to-action>
 </div>

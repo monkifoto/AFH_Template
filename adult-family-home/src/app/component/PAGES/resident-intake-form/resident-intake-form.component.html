@@ -1,7 +1,7 @@
 <!-- <app-hero></app-hero> -->
 <div *ngIf="business">
-  <div [ngSwitch]="layoutType">
-    <ng-container *ngSwitchCase="'hh'">
+  <!-- <div [ngSwitch]="layoutType">
+    <ng-container *ngSwitchCase="'hh'"> -->
 
 <form [formGroup]="intakeForm" (ngSubmit)="onSubmit()">
   <!-- Personal Information -->
@@ -182,6 +182,6 @@
   <!-- Submit Button -->
   <button type="submit" [disabled]="intakeForm.invalid">Submit</button>
 </form>
-    </ng-container>
-  </div>
+    <!-- </ng-container> -->
+  <!-- </div> -->
   </div>
