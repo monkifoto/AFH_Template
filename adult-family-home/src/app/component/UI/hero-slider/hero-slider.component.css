@@ -1,52 +1,46 @@
-/* Slider Container */
-/* .clemo-slider-container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-} */
-
+/*
 
 .clemo-slider-container {
   position: relative;
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  opacity: var(--slider-opacity, 1); /* Use dynamic opacity */
-  transition: opacity 0.3s ease; /* Smooth transition */
-  pointer-events: auto; /* Prevent blocking scroll interaction */
+  opacity: var(--slider-opacity, 1);
+  transition: opacity 0.3s ease;
+  pointer-events: auto;
 }
 
 .clemo-slider-container.hidden {
-  pointer-events: none; /* Disable interaction when fully faded */
+  pointer-events: none;
 }
 
-/* Slides */
+
 .clemo-slides {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  display: none; /* Hidden by default */
+  display: none;
   opacity: 0;
   transition: opacity 1s ease-in-out;
 
   &.clemo-active {
-    display: block; /* Show the active slide */
+    display: block;
     opacity: 1;
   }
 }
 
-/* Single Slide */
+
 .clemo-single-home-slider {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-/* Background Overlay */
-/* .clemo-home-overlay {
+
+.clemo-home-overlay {
+
   position: absolute;
   top: 0;
   left: 0;
@@ -54,35 +48,21 @@
   height: 100%;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   opacity: 0.9;
-  z-index: 1;
-} */
-
-.clemo-home-overlay {
-  /* outline: 2px solid blue; */
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover; /* Ensures the image covers the container */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Prevents the image from repeating */
-  opacity: 0.9; /* Adjust opacity if needed */
   z-index: 1;
 }
 
 
-/* Slide Content */
 .clemo-main-home {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Always keep the content centered */
+  transform: translate(-50%, -50%);
   text-align: center;
-  z-index: 2; /* Above the overlay */
+  z-index: 2;
   color: #000;
-  animation: fade-in-opacity 1s ease-in-out; /* Fade in without changing position */
+  animation: fade-in-opacity 1s ease-in-out;
 }
 
 .clemo-main-home h1 {
@@ -108,7 +88,7 @@
 .clemo-subtitle {
   font-size: var(--subtitle-size, 1.5rem);
   font-weight: var(--subtitle-weight, 400);
-  /* font-size: 1.5rem; */
+
   color: #fff;
   margin: 20px 0;
   line-height: 1.5;
@@ -118,7 +98,7 @@
   margin-top: 20px;
 
 }
-/* Button Styles */
+
 .clemo-btn {
   display: inline-block;
   padding: 10px 20px;
@@ -137,7 +117,7 @@
   }
 }
 
-/* Outline Button Styles */
+
 .clemo-btn-outline {
   display: inline-block;
   padding: 10px 20px;
@@ -158,7 +138,7 @@
 }
 
 
-/* Navigation Diamonds */
+
 .clemo-slider-navigation {
   position: absolute;
   right: 20px;
@@ -170,7 +150,7 @@
   z-index: 10;
 }
 
-/* Bottom Navigation Style */
+
 .clemo-slider-navigation.bottom-nav {
   right: auto;
   bottom: 20px;
@@ -180,13 +160,13 @@
   flex-direction: row;
 }
 
-/* Default Diamond Indicator */
+
 .clemo-nav-item {
   width: 20px;
   height: 20px;
-  background-color: #fff;/*diamonds*/
-  /* clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); */
-  border-radius: 50%; /* Makes it a circle */
+  background-color: #fff;
+
+  border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
   border: 2px solid transparent;
@@ -201,7 +181,7 @@
   border-color: #fff;
 }
 
-/* Bottom Navigation Line Indicator */
+
 .clemo-nav-item.line-style {
   width: 30px;
   height: 4px;
@@ -210,7 +190,7 @@
   border-radius: 2px;
 }
 
-/* Animations */
+
 @keyframes fade-in-opacity {
   from {
     opacity: 0;
@@ -221,7 +201,6 @@
 }
 
 
-/* Container for the scroll animation */
 .mouse-scroll {
   position: absolute;
   bottom: calc(-50% + 40px);
@@ -252,7 +231,7 @@
   animation: scroll 1.5s infinite;
 }
 
-/* Text below the scroll indicator */
+
 .mouse-scroll p {
   color: #fff;
   font-size: 14px;
@@ -260,7 +239,7 @@
   opacity: 0.8;
 }
 
-/* Scroll animation */
+
 @keyframes scroll {
   0% {
     opacity: 0;
@@ -277,10 +256,9 @@
 }
 
 
-/* Responsive Styles */
 @media (max-width: 1024px) {
   .clemo-main-home h1 {
-    font-size: 3.5rem; /* Reduce size on tablets */
+    font-size: 3.5rem;
   }
 
   .clemo-main-home h2 {
@@ -294,7 +272,7 @@
 
 @media (max-width: 768px) {
   .clemo-main-home h1 {
-    font-size: 2.5rem; /* Adjust size for smaller tablets */
+    font-size: 2.5rem;
   }
 
   .clemo-main-home h2 {
@@ -308,24 +286,24 @@
   .clemo-home-btn {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Stack buttons vertically */
+    gap: 10px;
   }
 
   .clemo-btn,
   .clemo-btn-outline {
     font-size: 0.9rem;
-    padding: 8px 15px; /* Reduce padding for smaller screens */
-    margin-right: 0; /* Remove large right margin */
+    padding: 8px 15px;
+    margin-right: 0;
   }
 
   .mouse-scroll {
-    bottom: -150px; /* Adjust scroll indicator position */
+    bottom: -150px;
   }
 }
 
 @media (max-width: 480px) {
   .clemo-main-home h1 {
-    font-size: 2rem; /* Further reduce for mobile */
+    font-size: 2rem;
   }
 
   .clemo-main-home h2 {
@@ -346,4 +324,4 @@
   .mouse-scroll {
     bottom: -120px;
   }
-}
+} */
