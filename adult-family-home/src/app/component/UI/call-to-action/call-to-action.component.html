@@ -1,7 +1,7 @@
 
-  <div class="cta-container" [ngStyle]="{ 'background-color': bgColor, 'color': textColor }">
+  <!-- <div class="cta-container" [ngStyle]="{ 'background-color': bgColor, 'color': textColor }">
     <app-section-tilte [title]="title"></app-section-tilte>
-    <!-- <h1>{{title}}</h1> -->
+
     <h2>{{ content }}</h2>
     <ng-container *ngIf="isButton; else linkTemplate">
       <button class="cta-button">{{ buttonText }}</button>
@@ -9,4 +9,47 @@
     <ng-template #linkTemplate>
       <a href="#" class="afhBtn">{{ buttonText }}</a>
     </ng-template>
-  </div>
+  </div> -->
+
+
+  <div
+  class="cta-container"
+  [ngClass]="layout"
+  [ngStyle]="{
+    'background-color': bgColor,
+    'color': textColor,
+    'border-radius': borderRadius,
+    'box-shadow': boxShadow
+  }"
+>
+  <!-- <app-section-tilte [title]="title"></app-section-tilte> -->
+  <h2 [ngStyle]="{ 'color': titleColor }">{{ title }}</h2>
+  <p [ngStyle]="{ 'color': contentColor }">{{ content }}</p>
+
+  <ng-container *ngIf="isButton; else linkTemplate">
+    <button
+    (click)="navigate()"
+      class="cta-btn"
+      [ngStyle]="{
+        'background-color': buttonBgColor,
+        'color': buttonTextColor
+      }"
+    >
+      {{ buttonText }}
+    </button>
+  </ng-container>
+
+  <ng-template #linkTemplate>
+    <a
+    (click)="navigate()"
+      href="#"
+      class="cta-btn"
+      [ngStyle]="{
+        'background-color': buttonBgColor,
+        'color': buttonTextColor
+      }"
+    >
+      {{ buttonText }}
+    </a>
+  </ng-template>
+</div>

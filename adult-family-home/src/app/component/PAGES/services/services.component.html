@@ -1,4 +1,3 @@
-
 <div *ngIf="business">
   <div [ngSwitch]="business.theme.themeType">
     <ng-container *ngSwitchCase="'hh'">
@@ -27,23 +26,52 @@
     <ng-container *ngSwitchCase="'prestige'">
       <app-hero [layoutType]="'prestige'"></app-hero>
     </ng-container>
-
   </div>
-</div>
-<div class="service-page-main-container">
+
+  <div class="service-page-main-container">
     <div #dynamicContainer class="container"></div>
   </div>
-
-
-    <div class="cta-section services-cta">
-      <div class="cta-content">
-        <h2>Ready to Experience Exceptional Care?</h2>
-        <p>
-          Schedule a free consultation today and let’s discuss how we can meet
-          your needs with our personalized services.
-        </p>
-        <button type="button" class="afhBtn" (click)="navigateToContact()">
-          Book a Consultation
-        </button>
-      </div>
+  <div [ngSwitch]="business.theme.themeType">
+  <ng-container *ngSwitchCase="'ae'">
+    <app-testimonial-image
+      [imageURL]="
+        '../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'
+      "
+      [author]="business.testimonials[1].name || ''"
+      [text]="business.testimonials[1].quote || ''"
+    ></app-testimonial-image>
+  </ng-container>
+  </div>
+  <!-- <div class="cta-section services-cta">
+    <div class="cta-content">
+      <h2>Ready to Experience Exceptional Care?</h2>
+      <p>
+        Schedule a free consultation today and let’s discuss how we can meet
+        your needs with our personalized services.
+      </p>
+      <button type="button" class="afhBtn" (click)="navigateToContact()">
+        Book a Consultation
+      </button>
     </div>
+  </div> -->
+
+
+  <app-call-to-action
+  title="Ready to Experience Exceptional Care?"
+  content=" Schedule a free consultation today and let’s discuss how we can meet
+  your needs with our personalized services."
+  buttonText="Book a Consultation"
+  [isButton]="true"
+  bgColor="var(--background-color)"
+  textColor="var(--text-color)"
+  titleColor="var(--accent-color)"
+  contentColor="var(--dark-background-color)"
+  buttonBgColor="var(--button-color)"
+  buttonTextColor="var(--button-text-color)"
+  borderRadius="0px"
+  boxShadow="0px 6px 10px rgba(0,0,0,0.3)"
+  layout="full-width"
+  page="contact-us"
+  [businessId] ="business.id"
+></app-call-to-action>
+</div>

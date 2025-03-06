@@ -23,11 +23,21 @@
   </section>
 
   <app-call-to-action
-    [title]="'Come Meet Our Family!'"
-    [content]="'We would love to meet you! Schedule a visit and see firsthand how our caring environment feels like home.'"
-    [buttonText]="'Schedule a Visit'"
-    [isButton]="true"
-    [bgColor]="business.theme.primaryColor"
-    [textColor]="business.theme.textColor"
-  ></app-call-to-action>
+  title="Come Meet Our Family"
+  content="We’d love to meet you! Schedule a visit and see firsthand how our caring environment feels like home."
+  buttonText="Schedule A Visit"
+  [isButton]="true"
+  bgColor="var(--dark-background-color)"
+  textColor="var(--text-color)"
+  titleColor="var(--accent-color)"
+  contentColor="var(--secondary-color)"
+  buttonBgColor="var(--button-color)"
+  buttonTextColor="var(--button-text-color)"
+  borderRadius="10px"
+  boxShadow="0px 6px 10px rgba(0,0,0,0.3)"
+  layout="centered"
+  page="contact-us"
+  [businessId] ="business.id"
+></app-call-to-action>
+
 </div>
