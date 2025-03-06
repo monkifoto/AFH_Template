@@ -28,17 +28,29 @@
   </div>
 
 
-<div class="center-text-section"
-[ngClass]="themeType"
-*ngIf="themeType!='clemo' && themeType!='hh' && themeType!='sb' && themeType!='sp'">
+<div class="center-text-container"
+*ngIf="themeType=='ae'"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+  <img *ngIf="imageURL && showImage"  [src]="imageURL" alt="Section Image" class="center-text-image" />
+  <h3 class="center-text-title">{{ subTitle }}</h3>
+  <h2 class="center-text-title">{{ title }}</h2>
+  <p class="center-text-description" [innerHTML]="sanitizedContent"></p>
+  <button *ngIf="showButton" class="afhBtn">Schedule A Visit</button>
+</div>
+
+<!-- <div class="center-text-container"
+*ngIf="themeType!='clemo' && themeType!='hh' && themeType!='sb' && themeType!='sp'"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
   <img *ngIf="imageURL && showImage"  [src]="imageURL" alt="Section Image" class="center-text-image" />
   <h3 class="center-text-title">{{ subTitle }}</h3>
   <h2 class="center-text-title">{{ title }}</h2>
   <h4 class="center-text-description" [innerHTML]="sanitizedContent"></h4>
   <button *ngIf="showButton" class="afhBtn">Schedule A Visit</button>
-</div>
+</div> -->
 
-<div class="center-text-section-clemo" [ngClass]="themeType" *ngIf="themeType=='clemo'">
+<!-- <div class="center-text-section-clemo" [ngClass]="themeType" *ngIf="themeType=='clemo'">
   <img *ngIf="imageURL && showImage"  [src]="imageURL" alt="Section Image" class="center-text-image" />
   <div class="text-container">
   <h3>
@@ -62,5 +74,5 @@
   <p class="center-text-description" [innerHTML]="sanitizedContent"></p>
 </div>
   <button *ngIf="showButton" class="afhBtn">Schedule A Visit</button>
-</div>
+</div> -->
 
