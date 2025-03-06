@@ -73,80 +73,49 @@
 
 
 </section>
-</div>
+<section class="services-list-section" *ngIf="themeType === 'ae'"
+ [ngClass]="{
+      'parallax-container': isParallax && sectionImageUrl,
+      'regular-image-container': !isParallax && sectionImageUrl,
+      'solid-bg-container': !sectionImageUrl,
+      'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow
+    }"
+    [ngStyle]="{ 'background-image': sectionImageUrl ? 'url(' + sectionImageUrl + ')' : 'none',
+     'background-color': backgroundColor,
+     'color': textColor ,
+     'text-align': alignText,
+     'border-radius': borderRadius + 'px' }">
+  <div>
 
-
-<div class="item-list-container" >
-  <section class="services-list-section" *ngIf="themeType === 'prestige'">
-    <div
-      >
-
-      <!-- Minimal version -->
-      <div *ngIf="!isMinimal">
-        <section class="our-services-section">
-          <div  class="heading-container">
-            <h2 class="styled-heading" [ngStyle]="{ 'color': titleColor }">{{title}}</h2>
-          </div>
-          <!-- <div class="our-services-section-heading">
-            <span class="our-services-title main">{{title}} </span>
-            <span class="our-services-title highlight">{{subTitle}}</span>
-          </div> -->
-          <h3 class="our-services-description" [ngStyle]="{ 'color': subtitleColor }">{{subTitle}}</h3>
-          <div class="our-services-container">
-            <div *ngFor="let service of items" class="our-services-item">
-              <div style="display: flex;">
-              <i [ngClass]="service.icon" class="our-services-item-icon"></i>
-              <h2>{{ service.title }}</h2>
-              <!-- <h3 class="our-services-item-title">{{ service.title }}</h3> -->
-            </div>
-              <div class="our-services-item-description">
-                <p>{{ service.description }}</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <!-- Full version -->
-      <div *ngIf="isMinimal" >
-        <div
-        [ngClass]="{
-          'parallax-container': isParallax && sectionImageUrl,
-          'regular-image-container': !isParallax && sectionImageUrl,
-          'solid-bg-container': !sectionImageUrl,
-          'full-width': fullWidth, 'centered': !fullWidth
-        }"
-        [ngStyle]="{ 'background-image': sectionImageUrl ? 'url(' + sectionImageUrl + ')' : 'none', 'background-color': backgroundColor, 'color': textColor  }">
+    <!-- Minimal version -->
+    <div *ngIf="!isMinimal">
+      <section class="our-services-section">
         <div  class="heading-container">
           <h2 class="styled-heading" [ngStyle]="{ 'color': titleColor }">{{title}}</h2>
         </div>
-        <div class="services-grid">
-          <div *ngFor="let service of items" class="service-item">
-            <i [ngStyle]="{ 'color': titleColor }" [ngClass]="service.icon" class="services-item-icon"></i>
-              <h2 [ngStyle]="{ 'color': titleColor }">{{service.title}}</h2>
-              <p [ngStyle]="{ 'color': subtitleColor }" >{{service.description}}</p>
-          </div>
-        </div>
-        </div>
-        <!-- <ul>
-          <li *ngFor="let service of items" class="service-list-item">
+        <!-- <div class="our-services-section-heading">
+          <span class="our-services-title main">{{title}} </span>
+          <span class="our-services-title highlight">{{subTitle}}</span>
+        </div> -->
+        <!-- <h3 class="our-services-description" [ngStyle]="{ 'color': subtitleColor }">{{subTitle}}</h3> -->
+        <div class="our-services-container">
+          <div *ngFor="let service of items" class="our-services-item">
+            <div style="display: flex;">
+            <i [ngClass]="service.icon" class="our-services-item-icon"></i>
             <h2>{{ service.title }}</h2>
+            <!-- <h3 class="our-services-item-title">{{ service.title }}</h3> -->
+          </div>
             <div class="our-services-item-description">
               <p>{{ service.description }}</p>
             </div>
-          </li>
-        </ul> -->
-      </div>
-
+          </div>
+        </div>
+      </section>
     </div>
 
-
-  </section>
-  </div>
-
-<!-- Layout for layoutType not 'hh' and not 'sb'/'sp' -->
-<section class="services-section" *ngIf="themeType !== 'hh' && themeType !== 'sb' && themeType !== 'sp'">
-  <app-section-tilte [title]=title></app-section-tilte>
+    <!-- Full version -->
+    <div *ngIf="isMinimal" >
+      <app-section-tilte [title]=title></app-section-tilte>
   <div
     [ngClass]="{
       'parallax-container': isParallax && sectionImageUrl,
@@ -157,70 +126,80 @@
     <div class="services-grid">
       <div *ngFor="let service of items" class="service-item">
         <i [ngClass]="service.icon" class="services-item-icon"></i>
-        <h2>{{ service.name }}</h2>
+        <h2>{{ service.title }}</h2>
         <p>{{ service.description }}</p>
       </div>
     </div>
   </div>
-</section>
+    </div>
 
-<!-- Layout for layoutType 'sb' or 'sp' -->
-<section class="sb-services-section" *ngIf="themeType === 'sb' || themeType === 'sp'">
-  <app-section-tilte [title]="title"></app-section-tilte>
+  </div>
+
+
+</section>
+<section class="services-list-section" *ngIf="themeType === 'prestige'">
   <div
-    [ngClass]="{
-      'parallax-container': isParallax && sectionImageUrl,
-      'regular-image-container': !isParallax && sectionImageUrl,
-      'solid-bg-container': !sectionImageUrl
-    }"
-    [ngStyle]="{ 'background-image': sectionImageUrl ? 'url(' + sectionImageUrl + ')' : 'none' }">
-    <div class="sb-services-grid">
-      <div *ngFor="let service of items" class="sb-service-item">
-        <div class="sb-service-icon-wrapper">
-          <i [ngClass]="service.icon" class="sb-services-item-icon"></i>
+    >
+
+    <!-- Minimal version -->
+    <div *ngIf="!isMinimal">
+      <section class="our-services-section">
+        <div  class="heading-container">
+          <h2 class="styled-heading" [ngStyle]="{ 'color': titleColor }">{{title}}</h2>
         </div>
-        <div class="sb-service-content">
-          <h2 class="sb-service-title">{{ service.name }}</h2>
-          <p class="sb-service-description">{{ service.description }}</p>
+        <!-- <div class="our-services-section-heading">
+          <span class="our-services-title main">{{title}} </span>
+          <span class="our-services-title highlight">{{subTitle}}</span>
+        </div> -->
+        <h3 class="our-services-description" [ngStyle]="{ 'color': subtitleColor }">{{subTitle}}</h3>
+        <div class="our-services-container">
+          <div *ngFor="let service of items" class="our-services-item">
+            <div style="display: flex;">
+            <i [ngClass]="service.icon" class="our-services-item-icon"></i>
+            <h2>{{ service.title }}</h2>
+            <!-- <h3 class="our-services-item-title">{{ service.title }}</h3> -->
+          </div>
+            <div class="our-services-item-description">
+              <p>{{ service.description }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Full version -->
+    <div *ngIf="isMinimal" >
+      <div
+      [ngClass]="{
+        'parallax-container': isParallax && sectionImageUrl,
+        'regular-image-container': !isParallax && sectionImageUrl,
+        'solid-bg-container': !sectionImageUrl,
+        'full-width': fullWidth, 'centered': !fullWidth
+      }"
+      [ngStyle]="{ 'background-image': sectionImageUrl ? 'url(' + sectionImageUrl + ')' : 'none', 'background-color': backgroundColor, 'color': textColor  }">
+      <div  class="heading-container">
+        <h2 class="styled-heading" [ngStyle]="{ 'color': titleColor }">{{title}}</h2>
+      </div>
+      <div class="services-grid">
+        <div *ngFor="let service of items" class="service-item">
+          <i [ngStyle]="{ 'color': titleColor }" [ngClass]="service.icon" class="services-item-icon"></i>
+            <h2 [ngStyle]="{ 'color': titleColor }">{{service.title}}</h2>
+            <p [ngStyle]="{ 'color': subtitleColor }" >{{service.description}}</p>
         </div>
       </div>
+      </div>
+      <!-- <ul>
+        <li *ngFor="let service of items" class="service-list-item">
+          <h2>{{ service.title }}</h2>
+          <div class="our-services-item-description">
+            <p>{{ service.description }}</p>
+          </div>
+        </li>
+      </ul> -->
     </div>
+
   </div>
+
+
 </section>
-
-<!--
-<div
-  [ngClass]="{
-    'parallax-container': isParallax && sectionImageUrl,
-    'regular-image-container': !isParallax && sectionImageUrl,
-    'solid-bg-container': !sectionImageUrl
-  }"
-  [ngStyle]="{'background-image': sectionImageUrl ? 'url(' + sectionImageUrl + ')' : 'none'}">
-
-  <div class="content">
-    <div class="services-container">
-
-      <h2 class="services-title">{{ sectionTitle }}</h2>
-
-
-      <div *ngIf="isMinimal" class="minimal-services-grid">
-        <div class="service-item" *ngFor="let item of items">
-          <i [class]="item.icon" aria-hidden="true"></i>
-          <h3 class="service-title">{{ item.title }}</h3>
-        </div>
-      </div>
-
-
-      <div *ngIf="!isMinimal" class="services-grid">
-        <div class="service-item" *ngFor="let item of items">
-          <i [class]="item.icon" aria-hidden="true"></i>
-          <h3 class="service-title">{{ item.title }}</h3>
-          <p class="service-description">{{ item.description }}</p>
-        </div>
-      </div>
-
-
-      <button *ngIf="showLearnMore" class="afhBtn" routerLink="/services">Learn More</button>
-    </div>
   </div>
-</div> -->
