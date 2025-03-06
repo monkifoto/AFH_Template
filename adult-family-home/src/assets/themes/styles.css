@@ -1356,7 +1356,7 @@ textarea{
   padding: 2rem 1rem;
   width: 100%;
   margin:   1.6vmax auto;
-  width: var(--site-max-width);
+  max-width: var(--site-max-width);
 }
 
 .services-list-section{
@@ -1394,22 +1394,46 @@ textarea{
  padding: 2rem 5rem;
 }
 
-/* Mobile-specific adjustments */
+/* Responsive Design for Mobile */
 @media (max-width: 768px) {
-  .center-text-section {
-    padding: 1.5rem 1rem;
+  .center-text-container {
+    width: 95%; /* Make it fit smaller screens */
+    padding: 15px;
   }
 
-  .center-text-title {
-    font-size: 1.25rem; /* Smaller font size for mobile */
+  .center-text-content {
+    max-width: 90%;
+  }
+
+  h2.styled-heading {
+    font-size: 1.75rem;
   }
 
   .center-text-description {
-    padding: 0 1rem;
-    font-size: 0.9rem; /* Slightly smaller text for compactness */
+    line-height: 1.9rem;
+    font-size: 1.2rem;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .center-text-container {
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
   }
 
+  h2.styled-heading {
+    font-size: 1.5rem;
+  }
+
+  .center-text-description {
+    line-height: 1.5rem;
+    font-size: 1rem;
+    padding: 10px;
+  }
 }
+
 .text-section {
   display: flex;
   flex-direction: row;

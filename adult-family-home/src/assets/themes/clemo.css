@@ -1417,3 +1417,41 @@ input::-ms-input-placeholder {
 }
 
 
+
+
+.cta-container {
+
+  text-align: center;
+  padding: 60px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 6rem auto;
+}
+
+
+.cta-content h2 {
+  font-size: 4rem;
+  margin-bottom: 25px;
+}
+
+.cta-content p {
+  margin-bottom: 30px;
+}
+
+.cta-btn {
+  background-color: var(--button-color);
+  color: var(--primary-color);
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cta-btn:hover {
+  background-color: var(--button-hover-color);
+}
+

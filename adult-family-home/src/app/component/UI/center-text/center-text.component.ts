@@ -41,9 +41,11 @@ export class CenterTextComponent implements OnInit {
 
   constructor(private sanitizer: DomSanitizer, private router: Router) {}
   ngOnInit(): void {
+    this.fullWidth = this.convertToBoolean(this.fullWidth);
     console.log('Center Text Component Loaded , themeType: '+ this.themeType+  ' Business Name:' + this._businessName + ' Title: ' + this.title);
 
     console.log("📌 Section Center Text- Initialized:", {
+
       title: this.title,
       titleColor: this.titleColor,
       titleFontSize: this.titleFontSize,
@@ -93,6 +95,12 @@ export class CenterTextComponent implements OnInit {
 
   navigateToContact(buttonLink:string) {
     this.router.navigate([buttonLink]);
+  }
+
+  private convertToBoolean(value: any): boolean {
+    if (typeof value === 'boolean') return value; // Already boolean
+    if (typeof value === 'string') return value.toLowerCase() === 'true'; // Convert string to boolean
+    return false; // Default case
   }
 
 }
