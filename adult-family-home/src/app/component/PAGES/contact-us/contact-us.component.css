@@ -1,5 +1,4 @@
-.hero-contact {
-  /* background-image: url("../../../../assets/sharedAssets/istockphoto-2032240867-2048x2048") no-repeat center center/cover; */
+/* .hero-contact {
   background: url('../../../../assets/sharedAssets/istockphoto-2032240867-2048x2048.jpg') no-repeat center center/cover;
   background-size: cover;
   background-position: center;
@@ -222,7 +221,7 @@ ul li strong {
     font-size: 0.9rem;
   }
 }
-/*----------------------AE ----------------*/
+
 
 .ae-contact-us-container {
   display: flex;
@@ -238,8 +237,8 @@ ul li strong {
 .ae-contact-details,
 .ae-contact-form,
 .ae-map-container {
-  flex: 1 1 48%; /* 50% width minus gap, allows for responsiveness */
-  max-width: calc(var(--site-max-width) / 2 - 20px); /* Adjust for gap */
+  flex: 1 1 48%;
+  max-width: calc(var(--site-max-width) / 2 - 20px);
 }
 
 
@@ -278,12 +277,11 @@ ul li strong {
   line-height: 1.5;
 }
 
-/* Map container styling */
+
 .ae-map-container {
   height: 400px;
 }
 
-/* Contact form styling */
 .ae-contact-form form {
   width: 100%;
 }
@@ -328,11 +326,11 @@ ul li strong {
     letter-spacing: 1px;
     margin: 0;
     font-size: 1.125rem;
-    /* border-radius: 50px; */
+
     margin-top: 20px;
     background-color: var(--dark-background-color);
     transition: .5s;
     border:1px solid var(--primary-color);
 }
 
-
+ */

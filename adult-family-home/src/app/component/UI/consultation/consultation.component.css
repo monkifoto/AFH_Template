@@ -1,4 +1,4 @@
-.section-container {
+/* .section-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -96,7 +96,7 @@
     font-size: 1rem;
   }
 }
-/*-------------------------- AE-------------------------------*/
+
 
 .ae-section-container {
   display: flex;
@@ -163,4 +163,4 @@
   color: var(--accent-color);
 }
 
-
+ */

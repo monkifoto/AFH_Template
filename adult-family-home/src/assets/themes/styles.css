@@ -50,21 +50,6 @@
 }
 
 
-a{
-  color: var(--button-color);
-}
-.blue{
-  background-color: var(--background-color);
-}
-.yellow{
-  background-color: var(--secondary-color);
-}
-.red{
-  background-color: var(--accent-color);
-}
-.primary{
-  color: var(--primary-color) !important;
-}
 
 body {
   margin: 0;
@@ -427,77 +412,6 @@ button:focus, select:focus {
   }
 }
 
-
-@media (max-width: 1024px) {
-  .clemo-main-home h1 {
-    font-size: 3.5rem;
-  }
-
-  .clemo-main-home h2 {
-    font-size: 2.5rem;
-  }
-
-  .clemo-subtitle {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .clemo-main-home h1 {
-    font-size: 2.5rem;
-  }
-
-  .clemo-main-home h2 {
-    font-size: 2rem;
-  }
-
-  .clemo-subtitle {
-    font-size: 1rem !important;
-  }
-
-  .clemo-home-btn {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .clemo-btn,
-  .clemo-btn-outline {
-    font-size: 0.9rem;
-    padding: 8px 15px;
-    margin-right: 0;
-  }
-
-  .mouse-scroll {
-    bottom: -150px;
-  }
-}
-
-@media (max-width: 480px) {
-  .clemo-main-home h1 {
-    font-size: 2rem;
-  }
-
-  .clemo-main-home h2 {
-    font-size: 1.5rem;
-  }
-
-  .clemo-subtitle {
-    font-size: 0.9rem !important;
-    line-height: 1.4;
-  }
-
-  .clemo-btn,
-  .clemo-btn-outline {
-    font-size: 0.85rem;
-    padding: 6px 12px;
-  }
-
-  .mouse-scroll {
-    bottom: -120px;
-  }
-}
-
 .carousel-item {
   display: none;
   position: relative;
@@ -524,6 +438,16 @@ button:focus, select:focus {
   object-fit: cover;
 }
 
+.page-hero {
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
 
 .page-hero-overlay {
   position: absolute;
@@ -598,37 +522,7 @@ font-size: 1.4rem;
   transform: rotate(-45deg);
 }
 
-@media (max-width: 768px) {
-  .hero-overlay h1 {
-    font-size: 2rem;
-  }
 
-  .hero-overlay p {
-    font-size: 1rem;
-  }
-
-  .carousel-item {
-    height: 300px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-overlay {
-    padding: 10px;
-  }
-
-  .hero-overlay h1 {
-    font-size: 1.5rem;
-  }
-
-  .hero-overlay p {
-    font-size: 0.875rem;
-  }
-
-  .carousel-item {
-    height: 200px;
-  }
-}
 .carousel {
   position: relative;
 }
@@ -717,21 +611,6 @@ font-size: 1.4rem;
   margin: 0;
 }
 
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .left, .right {
-    margin: 0;
-    text-align: center;
-  }
-
-  .left h1, .right p {
-    font-size: 24px;
-  }
-}
 
 
 .features-section {
@@ -787,37 +666,6 @@ font-size: 1.4rem;
   font-size: 1.5em;
   color: var(--text-color);
   margin: 0;
-}
-
-@media (min-width: 1024px) {
-  .feature-item {
-    flex: 1 1 calc(33.333% - 20px); /* Three items per row on desktop */
-    max-width: calc(33.333% - 20px);
-  }
-}
-
-@media (max-width: 768px) {
-  .feature-item {
-    flex: 1 1 calc(50% - 20px); /* Two items per row on tablets */
-    max-width: calc(50% - 20px);
-  }
-
-  .features-section {
-    flex: 1 1 100%;
-    min-width: 100%;
-    margin-bottom: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .feature-item {
-    flex: 1 1 100%; /* One item per row on mobile */
-    max-width: 100%;
-  }
-
-  .features-section {
-    min-width: 100%;
-  }
 }
 
 
@@ -914,61 +762,6 @@ section {
   color: #666;
 }
 
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-  .hero-overlay h1 {
-    font-size: 3rem;
-  }
-
-  .mission-vision {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .mission, .vision {
-    width: 100%;
-    padding: 30px 20px;
-    margin: 20px 0;
-  }
-
-  /* .business-story h2, .mission h2, .vision h2 {
-    font-size: 2rem;
-  } */
-}
-
-@media (max-width: 480px) {
-  .hero-overlay h1 {
-    font-size: 2.5rem;
-    letter-spacing: 0.2rem;
-  }
-
-  .mission-vision {
-    margin-bottom: 20px;
-  }
-
-  .mission, .vision {
-    padding: 20px 10px;
-  }
-
-
-  .team-item {
-    width: 100%;
-    margin: 10px 0;
-  }
-
-  .team-item img {
-    width: 80px;
-    height: 80px;
-  }
-
-  .team-info h3 {
-    font-size: 1rem;
-  }
-
-  .team-info p {
-    font-size: 0.8rem;
-  }
-}
 
 .heading-container {
   text-align: center;
@@ -1179,68 +972,6 @@ textarea{
 }
 
 
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-  .hero-overlay h1 {
-    font-size: 3rem;
-    letter-spacing: 0.2rem;
-  }
-
-  .contact-details {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .contact-item {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-
-  .map-section {
-    margin-bottom: 30px;
-  }
-  .service_heading {
-    padding-top: 0.5rem;
-    padding-bottom: 0.25rem;
-  }
-
-  .styled-heading {
-    font-size: 1.25rem;
-    padding: 6px 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-overlay h1 {
-    font-size: 2.5rem;
-    letter-spacing: 0.1rem;
-  }
-
-  .contact-item {
-    width: 100%;
-    margin-bottom: 15px;
-  }
-
-  .form-group input, .form-group textarea {
-    padding: 8px;
-  }
-
-  .button {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-  }
-  .service_heading {
-    padding-top: 0.5rem;
-    padding-bottom: 0.25rem;
-  }
-
-  .styled-heading {
-    font-size: 1.25rem;
-    padding: 6px 12px;
-  }
-
-}
-
 /*----------------------------General Layout ----------------------*/
 
 
@@ -1318,21 +1049,6 @@ textarea{
   margin: 15px 0 0;
 }
 
-@media (max-width: 768px) {
-  .team-member {
-    flex: 1 1 calc(50% - 20px);
-    max-width: calc(50% - 20px);
-  }
-}
-
-@media (max-width: 480px) {
-  .team-member {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
-}
-
-
 
 .service-page-main-container,
 .aboutus-page-main-container,
@@ -1394,46 +1110,6 @@ textarea{
  padding: 2rem 5rem;
 }
 
-/* Responsive Design for Mobile */
-@media (max-width: 768px) {
-  .center-text-container {
-    width: 95%; /* Make it fit smaller screens */
-    padding: 15px;
-  }
-
-  .center-text-content {
-    max-width: 90%;
-  }
-
-  h2.styled-heading {
-    font-size: 1.75rem;
-  }
-
-  .center-text-description {
-    line-height: 1.9rem;
-    font-size: 1.2rem;
-    padding: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .center-text-container {
-    padding: 10px;
-    width: 100%;
-    border-radius: 5px;
-  }
-
-  h2.styled-heading {
-    font-size: 1.5rem;
-  }
-
-  .center-text-description {
-    line-height: 1.5rem;
-    font-size: 1rem;
-    padding: 10px;
-  }
-}
-
 .text-section {
   display: flex;
   flex-direction: row;
@@ -1480,37 +1156,6 @@ textarea{
   justify-content: center;
 }
 
-/* Adjustments for mobile */
-@media (max-width: 768px) {
-  .text-section {
-    flex-direction: column;
-    padding: 1.5rem 1rem;
-  }
-
-  .text-container,
-  .image-container {
-    max-width: 100%;
-    text-align: center;
-  }
-
-  .image-container {
-    margin: 1rem 0;
-  }
-
-  .text-container h2 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .text-container h3 {
-    font-size: 1.4rem;
-  }
-
-  .text-container h4 {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-  }
-}
 
 /*---------------------------- Content Area ----------------------*/
 
@@ -1555,28 +1200,7 @@ textarea{
   object-fit: cover;
 }
 
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  .row {
-    flex-direction: column;
-    gap: 20px;
-  }
 
-  .left-image-container,
-  .right-image-container {
-    padding: 20px;
-  }
-
-  .content-area {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .btn {
-    font-size: 1rem;
-    padding: 0.8rem 1.2rem;
-  }
-}
 
 /*---------------------------- Button Styles ----------------------*/
 
@@ -1605,63 +1229,6 @@ section {
   position: relative;
   overflow: hidden;
 }
-
-
-@media (max-width: 768px) {
-  .hero-overlay h1 {
-    font-size: 3rem;
-  }
-
-  .mission-vision, .tours-consulting {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .mission, .vision, .tours, .consulting {
-    width: 100%;
-    padding: 30px 20px;
-    margin: 20px 0;
-  }
-
-  .service-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-overlay h1 {
-    font-size: 2rem;
-    letter-spacing: 0.2rem;
-  }
-
-  .mission-vision {
-    margin-bottom: 20px;
-  }
-
-  .mission, .vision, .special-programs {
-    padding: 20px 10px;
-  }
-
-  .team-item {
-    width: 100%;
-    margin: 10px 0;
-  }
-
-  .team-item img {
-    width: 80px;
-    height: 80px;
-  }
-
-  .team-info h3 {
-    font-size: 1rem;
-  }
-
-  .team-info p {
-    font-size: 0.8rem;
-  }
-}
-
 
 
 .admin-container{
@@ -1830,21 +1397,7 @@ section {
   text-align: left;
 }
 
-/* Ensure it stacks only on smaller screens */
-@media (max-width: 768px) {
-  .footer-info,
-  .ae-footer-columns,
-  .clemo-footer-content {
-    flex-direction: column; /* Stack on mobile */
-    align-items: center;
-    text-align: center;
-  }
 
-  .footer-column,
-  .ae-footer-column {
-    width: 100%; /* Full width when stacked */
-  }
-}
 
 .copy {
   max-width: var(--site-max-width);
@@ -2076,52 +1629,6 @@ section {
 }
 
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .our-services-section,
-  .services-list {
-    padding: 20px;
-  }
-
-  .styled-heading {
-    font-size: 20px;
-  }
-
-  .our-services-item h3 {
-    font-size: 20px;
-  }
-
-  .our-services-item p {
-    font-size: 14px;
-  }
-}
-
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-  .hero-overlay h1 {
-    font-size: 3rem;
-  }
-  .service-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .service_heading {
-    padding-top: 1rem;
-    padding-bottom: 0.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-overlay h1 {
-    font-size: 2rem;
-  }
-
-
-  .service-item {
-    padding: 15px;
-  }
-}
 
 
 .services-cta {
@@ -2297,36 +1804,6 @@ font-size: 2.5em;
 }
 
 
-@media (min-width: 1024px) {
-  .whychoose-item {
-    flex: 1 1 calc(33.333% - 20px);
-    max-width: calc(33.333% - 20px);
-  }
-}
-
-@media (max-width: 768px) {
-  .whychoose-item {
-    flex: 1 1 calc(50% - 20px);
-    max-width: calc(50% - 20px);
-  }
-
-  .whychoose-section {
-    flex: 1 1 100%;
-    min-width: 100%;
-    margin-bottom: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .whychoose-item {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
-
-  .whychoose-section {
-    min-width: 100%;
-  }
-}
 
 
 .features-section {
@@ -2453,14 +1930,213 @@ font-size: 2.5em;
 }
 
 
-@media (min-width: 1024px) {
+
+
+
+.section-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+  min-height: 600px;
+  background-color: var(--dark-background-color);
+  color: var(--primary-color);
+}
+
+.section-heading{
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.5em;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+  }
+
+  .section-title-main {
+    color: var(--primary-color);
+  }
+
+  .section-title-highlight {
+    color: var(--button-color);
+  }
+
+.section-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.section-container p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+}
+
+.btn-book-consultation {
+  padding: 20px;
+  background-color: var(--button-color);
+  font-size: 1.4rem;
+  border: none;
+  color: var(--button-text-color);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-book-consultation:hover {
+  background-color: var(--button-hover-color);
+  color: var(--button-text-color);
+}
+
+
+/*-------------------------- AE-------------------------------*/
+
+.ae-section-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+  min-height: 600px;
+  background-color: var(--dark-background-color);
+  width: 100%;
+}
+.cta-container {
+  display: flex;
+  background-color: var(--dark-background-color);
+  color: #fff;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.cta-content {
+  max-width: 600px;
+}
+
+.cta-content h2 {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.cta-content p {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color:var(--primary-color);
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.cta-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+.consultation-title {
+  font-size: 2.5em;
+    margin-bottom: 15px;
+  }
+
+.consultation-title.main {
+  color: var(--primary-color);
+}
+
+.consultation-title.highlight {
+  color: var(--accent-color);
+}
+
+
+/*-------------------Mobile ------------------*/
+
+
+@media (max-width: 1024px) {
   .feature-item {
+    flex: 1 1 calc(33.333% - 20px); /* Three items per row on desktop */
+    max-width: calc(33.333% - 20px);
+  }
+  .clemo-main-home h1 {
+    font-size: 3.5rem;
+  }
+
+  .clemo-main-home h2 {
+    font-size: 2.5rem;
+  }
+
+  .clemo-subtitle {
+    font-size: 1.2rem;
+  }
+  .whychoose-item {
     flex: 1 1 calc(33.333% - 20px);
     max-width: calc(33.333% - 20px);
   }
 }
 
 @media (max-width: 768px) {
+  /* Layout Adjustments */
+  .row,
+  .content-area,
+  .mission-vision,
+  .container,
+  .contact-details,
+  .tours-consulting {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .left-text-section,
+   .right-text-section {
+    max-width: 100vw;
+  }
+
+  .services-list-section{
+    max-width: 100vw;
+    padding: 0;
+    margin: 0;
+  }
+
+  .left-image-container,
+  .right-image-container,
+  .center-text-container {
+    padding: 20px;
+  }
+
+  .center-text-description{
+   padding: 0;
+  }
+
+  .mission,
+  .vision,
+  .special-programs,
+  .tours,
+  .consulting {
+    width: 100%;
+    padding: 30px 20px;
+    margin: 20px 0;
+  }
+
+  .service-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  h2{
+    font-size: 1.4rem;
+  }
+
+  .business-team {
+    width: 100%;
+  }
+  .team-member,
   .feature-item {
     flex: 1 1 calc(50% - 20px);
     max-width: calc(50% - 20px);
@@ -2471,9 +2147,265 @@ font-size: 2.5em;
     min-width: 100%;
     margin-bottom: 20px;
   }
+
+  .center-text-container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .center-text-content {
+    max-width: 100%;
+  }
+
+  .left,
+  .right {
+    margin: 0;
+    text-align: center;
+  }
+
+  .text-section {
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+  }
+
+  .text-container,
+  .image-container {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .text-container {
+    font-size: 1.2rem;
+    line-height: 2rem;
+    padding: 0 20px;
+  }
+
+
+
+  .image-container {
+    margin: 1rem 0;
+  }
+
+  .contact-item {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .map-section {
+    margin-bottom: 30px;
+  }
+
+  .section-container {
+    padding: 50px 20px;
+  }
+
+  /* Typography Adjustments */
+  .hero-overlay h1 {
+    font-size: 3rem;
+    letter-spacing: 0.2rem;
+  }
+
+  .hero-overlay p {
+    font-size: 1rem;
+  }
+
+  .clemo-main-home h1 {
+    font-size: 2.5rem;
+  }
+
+  .clemo-main-home h2,
+  h2.styled-heading {
+    font-size: 2rem;
+  }
+
+  .clemo-subtitle {
+    font-size: 1rem !important;
+  }
+
+  .text-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .text-container h3 {
+    font-size: 1.4rem;
+  }
+
+  .text-container h4 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .styled-heading {
+    font-size: 1.25rem;
+    padding: 6px 12px;
+  }
+
+
+
+  .service_heading {
+    padding-top: 0.5rem;
+    padding-bottom: 0.25rem;
+  }
+
+  /* Buttons */
+  .btn,
+  .clemo-btn,
+  .clemo-btn-outline {
+    font-size: 1rem;
+    padding: 0.8rem 1.2rem;
+  }
+
+  .clemo-btn,
+  .clemo-btn-outline {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+    margin-right: 0;
+  }
+
+  .clemo-home-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Miscellaneous */
+  .mouse-scroll {
+    bottom: -150px;
+  }
+
+  .carousel-item {
+    height: 300px;
+  }
+
+  .clemo-footer-bottom{
+    font-size: 0.9rem;
+    max-width: 80vw;
+    display: flex;
+    align-items: center;
+
+  }
+  .footer-info,
+  .ae-footer-columns,
+  .clemo-footer-content {
+    flex-direction: column; /* Stack on mobile */
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-column,
+  .ae-footer-column {
+    width: 100%; /* Full width when stacked */
+  }
+
+  .whychoose-item {
+    flex: 1 1 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+
+  .whychoose-section {
+    flex: 1 1 100%;
+    min-width: 100%;
+    margin-bottom: 20px;
+  }
+  .consultation-container {
+    padding: 20px;
+    min-height: 400px;
+  }
+
+  .consultation-container h1 {
+    font-size: 2rem;
+  }
+
+  .consultation-container p {
+    font-size: 1rem;
+  }
+  .section-description{
+    padding: 20px;
+  }
+  .btn-book-consultation {
+    padding: 15px;
+    font-size: 1.2rem;
+  }
+  .hero-about,
+  .hero-services,
+  .hero-contact{
+    height: 200px;
+  }
+
+  .page-hero-overlay h1 {
+    padding-top: 100px;
+    font-size: 2rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    word-break: break-all;
+    max-width: 50vw;
+  }
+
+  .feature-item {
+    flex: 1 1 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+
+  .features-section {
+    flex: 1 1 100%;
+    min-width: 100%;
+    margin-bottom: 20px;
+  }
+  .our-services-section,
+  .services-list {
+    padding: 20px;
+  }
+
+  .styled-heading {
+    font-size: 20px;
+  }
+
+  .our-services-item h3 {
+    font-size: 20px;
+  }
+
+  .our-services-item p {
+    font-size: 14px;
+  }
+
+  .hero-overlay h1 {
+    font-size: 3rem;
+  }
+  .service-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .service_heading {
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .gallery-item{
+    width: 100%;
+    height: 100%;
+  }
+
 }
 
 @media (max-width: 480px) {
+  /* Layout Adjustments */
+  .hero-overlay h1 {
+    font-size: 2rem;
+  }
+
+
+  .service-item {
+    padding: 15px;
+  }
   .feature-item {
     flex: 1 1 100%;
     max-width: 100%;
@@ -2482,7 +2414,147 @@ font-size: 2.5em;
   .features-section {
     min-width: 100%;
   }
+  .feature-item,
+  .team-member {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .features-section,
+  .center-text-container {
+    /* min-width: 100%; */
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .section-container {
+    padding: 50px 20px;
+  }
+
+  /* Typography Adjustments */
+  .clemo-main-home h1,
+  .hero-overlay h1 {
+    font-size: 2rem;
+    letter-spacing: 0.2rem;
+  }
+
+  .clemo-main-home h2,
+  h2.styled-heading {
+    font-size: 1.5rem;
+  }
+
+  .clemo-subtitle {
+    font-size: 0.9rem !important;
+    line-height: 1.4;
+  }
+
+  .hero-overlay p,
+  .team-info p {
+    font-size: 0.875rem;
+  }
+
+  .team-info h3{
+    font-size: 1rem;
+  }
+
+  .styled-heading {
+    font-size: 1.25rem;
+    padding: 6px 12px;
+  }
+
+  /* Buttons */
+  .clemo-btn,
+  .clemo-btn-outline,
+  .button {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+
+  .button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  /* Hero Section */
+  .hero-overlay {
+    padding: 10px;
+  }
+
+  .mouse-scroll {
+    bottom: -120px;
+  }
+
+  /* Team Section */
+  .team-item {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .team-item img {
+    width: 80px;
+    height: 80px;
+  }
+
+  /* Form Elements */
+  .form-group input,
+  .form-group textarea {
+    padding: 8px;
+  }
+
+  /* Contact Section */
+  .contact-item {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  /* Mission & Vision */
+  .mission-vision {
+    margin-bottom: 20px;
+  }
+
+  .mission,
+  .vision,
+  .special-programs {
+    padding: 20px 10px;
+  }
+
+  /* Miscellaneous */
+  .carousel-item {
+    height: 200px;
+  }
+
+  .service_heading {
+    padding-top: 0.5rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .whychoose-item {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .whychoose-section {
+    min-width: 100%;
+  }
+
+  .consultation-container {
+    min-height: 350px;
+    padding: 10px;
+  }
+
+  .consultation-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .consultation-container p {
+    font-size: 0.9rem;
+  }
+  .section-description{
+    padding: 20px;
+  }
+  .btn-book-consultation {
+    padding: 10px;
+    font-size: 1rem;
+  }
 }
-
-
 
