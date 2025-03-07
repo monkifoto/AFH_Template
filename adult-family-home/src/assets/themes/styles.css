@@ -2111,8 +2111,11 @@ font-size: 2.5em;
     padding: 20px;
   }
 
-  .center-text-description{
-   padding: 0;
+  .center-text-description {
+    font-size: 1.2rem;
+    line-height: 1.9rem;
+    padding: 0 40px;
+    text-align: center;
   }
 
   .mission,
