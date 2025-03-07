@@ -18,6 +18,7 @@ import { GoogleMapsComponent } from '../UI/google-maps/google-maps.component';
 import { Business } from 'src/app/model/business-questions.model';
 import { switchMap } from 'rxjs';
 import { IconListComponent } from '../UI/icon-list/icon-list.component';
+import { LatestProductsComponent } from '../UI/latest-products/latest-products.component';
 
 @Component({
   selector: 'app-home',
@@ -42,6 +43,7 @@ export class HomeComponent implements OnInit {
     'testimonials-carousel': TestimonialCarouselComponent,
     'why-us': WhyUsComponent,
     'google-map': GoogleMapsComponent,
+    'latest-products':LatestProductsComponent
   };
 
   @ViewChild('dynamicContainer', { read: ViewContainerRef, static: true }) container!: ViewContainerRef;
@@ -105,7 +107,7 @@ export class HomeComponent implements OnInit {
       demo: ["why-us", "unique-features", "center-text", "item-list", "right-text", "left-text"],
       ae: ["center-text", "right-text", "left-text", "testimonials"],
       clemo: ["right-text", "testimonials","google-map"],
-      sb: ["center-text", "item-list"],
+      sb: ["center-text", "latest-products","item-list"],
       prestige: ["why-us", "unique-features", "center-text", "item-list", "right-text", "left-text"]
     };
 
@@ -230,8 +232,19 @@ export class HomeComponent implements OnInit {
   //   });
   // }
 
+  if (this.business?.theme?.themeType == 'sb') {
+    console.log("Loading LatestProductsComponent");
+
+    const consultationFactory = this.resolver.resolveComponentFactory(LatestProductsComponent);
+    const consultationRef = this.container.createComponent(consultationFactory, undefined, this.injector);
+
+    Object.assign(consultationRef.instance, {
+      layoutType: this.business?.theme?.themeType || 'sb'
+    });
+  }
+
   // Manually Load TestimonialsComponent if Business Has Testimonials and No Google Place ID
-  if (this.business?.testimonials?.length && !this.business?.placeId) {
+  if (this.business?.testimonials?.length && !this.business?.placeId && this.business?.theme?.themeType != 'sb') {
     console.log("Loading TestimonialsComponent");
 
     const testimonialsFactory = this.resolver.resolveComponentFactory(TestimonialsComponent);
@@ -266,6 +279,8 @@ export class HomeComponent implements OnInit {
       businessName: this.business?.businessName || 'Demo'
     });
   }
+
+
 
   if (this.business?.placeId && this.business?.theme?.themeType == 'clemo') {
     console.log("Loading GoogleMapComponent");

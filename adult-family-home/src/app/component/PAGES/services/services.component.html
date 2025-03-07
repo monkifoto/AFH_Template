@@ -19,9 +19,9 @@
       <app-hero [layoutType]="'clemo'"></app-hero>
     </ng-container>
 
-    <ng-container *ngSwitchCase="'sb'">
+    <ng-container *ngSwitchCase="'sb' ">
       <app-hero [layoutType]="'sb'"></app-hero>
-    </ng-container>
+      </ng-container>
 
     <ng-container *ngSwitchCase="'prestige'">
       <app-hero [layoutType]="'prestige'"></app-hero>
@@ -56,22 +56,48 @@
   </div> -->
 
 
-  <app-call-to-action
-  title="Ready to Experience Exceptional Care?"
-  content=" Schedule a free consultation today and let’s discuss how we can meet
-  your needs with our personalized services."
-  buttonText="Book a Consultation"
-  [isButton]="true"
-  bgColor="var(--background-color)"
-  textColor="var(--text-color)"
-  titleColor="var(--accent-color)"
-  contentColor="var(--dark-background-color)"
-  buttonBgColor="var(--button-color)"
-  buttonTextColor="var(--button-text-color)"
-  borderRadius="0px"
-  boxShadow="0px 6px 10px rgba(0,0,0,0.3)"
-  layout="full-width"
-  page="contact-us"
-  [businessId] ="business.id"
-></app-call-to-action>
+
+  <div [ngSwitch]="business.theme.themeType">
+    <ng-container *ngSwitchCase="'sb'">
+      <app-call-to-action
+      title="Are you ready to see your new website?"
+      content="We’d love to meet you! Schedule a consultation to discuss your new website."
+      buttonText="Schedule A Consultation"
+      [isButton]="true"
+      bgColor="#72b7de"
+      textColor="var(--text-color)"
+      titleColor="#253945"
+      contentColor="var(--secondary-color)"
+      buttonBgColor="var(--button-color)"
+      buttonTextColor="var(--button-text-color)"
+      borderRadius="0px"
+      boxShadow="0px 6px 10px rgba(0,0,0,0.3)"
+      layout="centered"
+      page="contact-us"
+      [businessId] ="business.id"
+    ></app-call-to-action>
+      </ng-container>
+      <ng-container *ngSwitchDefault >
+        <app-call-to-action
+        title="Ready to Experience Exceptional Care?"
+        content=" Schedule a free consultation today and let’s discuss how we can meet
+        your needs with our personalized services."
+        buttonText="Book a Consultation"
+        [isButton]="true"
+        bgColor="var(--background-color)"
+        textColor="var(--text-color)"
+        titleColor="var(--accent-color)"
+        contentColor="var(--dark-background-color)"
+        buttonBgColor="var(--button-color)"
+        buttonTextColor="var(--button-text-color)"
+        borderRadius="0px"
+        boxShadow="0px 6px 10px rgba(0,0,0,0.3)"
+        layout="full-width"
+        page="contact-us"
+        [businessId] ="business.id"
+      ></app-call-to-action>
+    </ng-container>
+    </div>
+
+
 </div>

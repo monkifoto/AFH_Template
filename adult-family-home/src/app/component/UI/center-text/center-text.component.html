@@ -19,7 +19,9 @@
           <h2 class="styled-heading">{{title}}</h2>
         </div>
       </div>
+      <div class="text-container">
         <p class="center-text-description" [innerHTML]="sanitizedContent"></p>
+      </div>
         <div class="buttons">
           <button *ngIf="showButton" type="button" class="afhBtn" (click)="navigateToContact(buttonLink)">{{buttonText}}</button>
         </div>
@@ -61,9 +63,12 @@
   <p class="center-text-description" [innerHTML]="sanitizedContent"></p>
 </div>
   <button *ngIf="showButton" class="afhBtn">Schedule A Visit</button>
-</div>
+</div>-->
 
-<div class="center-text-section-clemo" [ngClass]="themeType" *ngIf="themeType=='sb' || themeType=='sp'">
+<div class="center-text-section-clemo"
+*ngIf="themeType=='sb' || themeType=='sp'"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
   <img *ngIf="imageURL && showImage"  [src]="imageURL" alt="Section Image" class="center-text-image" />
   <div class="text-container">
   <h3>
@@ -74,5 +79,5 @@
   <p class="center-text-description" [innerHTML]="sanitizedContent"></p>
 </div>
   <button *ngIf="showButton" class="afhBtn">Schedule A Visit</button>
-</div> -->
+</div>
 

@@ -202,4 +202,22 @@
 
 
 </section>
+
+
+<section class="sb-services-section" *ngIf="themeType=='sb' || themeType =='sp'">
+  <app-section-tilte [title]="'Our Services'"></app-section-tilte>
+  <div class="sb-services-grid">
+      <div *ngFor="let service of items" class="sb-service-item">
+        <div class="sb-service-icon-wrapper">
+        <i [ngClass]="service.icon" class="sb-services-item-icon"></i>
+        </div>
+        <div class="sb-service-content">
+          <h2 class="sb-service-title">{{service.name}}</h2>
+          <p class="sb-service-description">{{service.description}}</p>
+        </div>
+      </div>
+  </div>
+
+
+</section>
   </div>

@@ -70,24 +70,46 @@
     </div>
   </div> -->
 
-  <app-call-to-action
-  title="Come Meet Our Family"
-  content="We’d love to meet you! Schedule a visit and see firsthand how our caring environment feels like home."
-  buttonText="Schedule A Visit"
-  [isButton]="true"
-  bgColor="var(--dark-background-color)"
-  textColor="var(--text-color)"
-  titleColor="var(--accent-color)"
-  contentColor="var(--secondary-color)"
-  buttonBgColor="var(--button-color)"
-  buttonTextColor="var(--button-text-color)"
-  borderRadius="0px"
-  boxShadow="0px 6px 10px rgba(0,0,0,0.3)"
-  layout="full-width"
-  page="contact-us"
-  [businessId] ="business.id"
-></app-call-to-action>
-
+  <div [ngSwitch]="business.theme.themeType">
+    <ng-container *ngSwitchCase="'sb'">
+      <app-call-to-action
+        title="Are you ready to see your new website?"
+        content="We’d love to meet you! Schedule a consultation to discuss your new website."
+        buttonText="Schedule A Consultation"
+        [isButton]="true"
+        bgColor="#72b7de"
+        textColor="var(--text-color)"
+        titleColor="#253945"
+        contentColor="var(--secondary-color)"
+        buttonBgColor="var(--button-color)"
+        buttonTextColor="var(--button-text-color)"
+        borderRadius="0px"
+        boxShadow="0px 6px 10px rgba(0,0,0,0.3)"
+        layout="centered"
+        page="contact-us"
+        [businessId]="business.id"
+      ></app-call-to-action>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <app-call-to-action
+        title="Come Meet Our Family"
+        content="We’d love to meet you! Schedule a visit and see firsthand how our caring environment feels like home."
+        buttonText="Schedule A Visit"
+        [isButton]="true"
+        bgColor="var(--dark-background-color)"
+        textColor="var(--text-color)"
+        titleColor="var(--accent-color)"
+        contentColor="var(--secondary-color)"
+        buttonBgColor="var(--button-color)"
+        buttonTextColor="var(--button-text-color)"
+        borderRadius="0px"
+        boxShadow="0px 6px 10px rgba(0,0,0,0.3)"
+        layout="full-width"
+        page="contact-us"
+        [businessId]="business.id"
+      ></app-call-to-action>
+    </ng-container>
+  </div>
 </div>
 
 <!-- <div *ngIf="business">
