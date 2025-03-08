@@ -132,6 +132,11 @@
       </div>
     </div>
   </div>
+
+  <div *ngIf="showButton" class="button-container">
+    <button type="button" class="cta-btn" (click)="navigateTo('contact-us')">{{ buttonText }}</button>
+    <!-- <a [href]="buttonLink" class="cta-btn " (click)="navigateTo('contact-us')"></a> -->
+  </div>
     </div>
 
   </div>

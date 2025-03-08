@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-item-list',
@@ -30,8 +31,9 @@ export class ItemListComponent implements OnInit {
    @Input() alignText: string= 'left';
    @Input() boxShadow: boolean = false;
    @Input() borderRadius: number = 0;
+   @Input() businessId : number = 0;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.fullWidth = this.convertToBoolean(this.fullWidth);
@@ -54,5 +56,9 @@ export class ItemListComponent implements OnInit {
     if (typeof value === 'boolean') return value; // Already boolean
     if (typeof value === 'string') return value.toLowerCase() === 'true'; // Convert string to boolean
     return false; // Default case
+  }
+
+  navigateTo(page:string) {
+    this.router.navigate(['/'+page], { queryParams: { id: this.businessId } });
   }
 }
