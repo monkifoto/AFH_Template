@@ -93,6 +93,14 @@ export class SectionManagerComponent implements OnInit {
     { url: 'assets/sharedAssets/istockphoto-2032240867-2048x2048.jpg' },
     { url: 'assets/sharedAssets/5388429572_df9a403081_k.jpg' },
     { url: 'assets/sharedAssets/9676303919_32372bf834_o.jpg' },
+    { url: 'adult-family-home/src/assets/sharedAssets/istockphoto-590615058-2048x2048.jpg' },
+    { url: 'adult-family-home/src/assets/sharedAssets/istockphoto-1145276617-2048x2048.jpg' },
+    { url: 'adult-family-home/src/assets/sharedAssets/istockphoto-1296176596-2048x2048.jpg' },
+    { url: 'adult-family-home/src/assets/sharedAssets/istockphoto-1321691755-2048x2048.jpg' },
+    { url: 'adult-family-home/src/assets/sharedAssets/istockphoto-1389452512-2048x2048.jpg' },
+    { url: 'adult-family-home/src/assets/sharedAssets/istockphoto-1629902196-2048x2048.jpg' },
+   { url: 'adult-family-home/src/assets/sharedAssets/istockphoto-1860450584-2048x2048.jpg' },
+   { url: 'adult-family-home/src/assets/sharedAssets/istockphoto-2163609093-2048x2048.jpg' },
   ];
 
   get sections(): FormArray {
@@ -136,6 +144,7 @@ export class SectionManagerComponent implements OnInit {
           this.sections.push(
             this.fb.group({
               id: [section.id],
+              isActive: [section.isActive !== undefined ? section.isActive : true],
               component: [section.component || 'center-text'],
               order: [section.order || 0],
               sectionTitle: [section.sectionTitle],
@@ -187,6 +196,7 @@ export class SectionManagerComponent implements OnInit {
   addSection() {
     const newSection = this.fb.group({
       id: [null],
+      isActive: [true],
       component: ['center-text'],
       order: [0],
       sectionTitle: [''],

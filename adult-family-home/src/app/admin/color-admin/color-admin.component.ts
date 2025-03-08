@@ -22,13 +22,14 @@ export class ColorAdminComponent implements OnInit {
 
   defaultThemeFileName = 'assets/themes/default.css';
   availableThemes = [
-    { name: 'Helping Hand Style', fileName: 'styles.css' },
-    { name: 'A&E Style', fileName: 'styles1.css' },
+    { name: 'Helping Hand Style', fileName: 'styles.css' , type: 'hh'},
+    { name: 'A&E Style', fileName: 'styles1.css' , type: 'ae'},
     { name: 'EHC Style', fileName: 'styles2.css' },
-    { name: 'Clemo Style', fileName: 'clemo.css' },
-    { name: 'SB Style', fileName: 'sb.css' },
-    { name: 'Demo Style', fileName: 'demo.css' },
-    { name: 'Single Page Style', fileName: 'single_page.css' }
+    { name: 'Clemo Style', fileName: 'clemo.css', type: 'clemo' },
+    { name: 'SB Style', fileName: 'sb.css' , type: 'sb'},
+    { name: 'Demo Style', fileName: 'demo.css', type: 'demo' },
+    { name: 'Single Page Style', fileName: 'single_page.css', type: 'sp' },
+    { name: 'Prestige', fileName: 'prestige.css', type: 'prestige'}
     // Add other theme file names here
   ];
 
@@ -65,6 +66,7 @@ export class ColorAdminComponent implements OnInit {
         // Initialize the form with controls
         this.themeForm = this.fb.group({
           themeFileName: [this.defaultThemeFileName],
+          themeType: [''],
           backgroundColor: ['', [Validators.required, this.hexValidator]],
           darkBackgroundColor: ['', [Validators.required, this.hexValidator]],
           primaryColor: ['', [Validators.required, this.hexValidator]],
@@ -178,17 +180,37 @@ export class ColorAdminComponent implements OnInit {
     this.themeForm.patchValue({ themeFileName: selectedThemeFile });
   }
 
-  onThemeFileChange(event: Event) {
-    const selectedThemeFile = (event.target as HTMLSelectElement).value;
+  // onThemeFileChange(event: Event) {
+  //   const selectedThemeFile = (event.target as HTMLSelectElement).value;
 
-    // Update the theme file name in Firestore
-    this.businessService.updateThemeFileName(selectedThemeFile).then(() => {
-      console.log(`Theme file updated to: ${selectedThemeFile}`);
-      this.themeForm.patchValue({ themeFileName: selectedThemeFile });
-    this.themeService.applyThemeFile(selectedThemeFile);
-    }).catch(error => {
-      console.error('Error updating theme file:', error);
-    });
+  //   // Update the theme file name in Firestore
+  //   this.businessService.updateThemeFileName(selectedThemeFile).then(() => {
+  //     console.log(`Theme file updated to: ${selectedThemeFile}`);
+  //     this.themeForm.patchValue({ themeFileName: selectedThemeFile });
+  //   this.themeService.applyThemeFile(selectedThemeFile);
+  //   }).catch(error => {
+  //     console.error('Error updating theme file:', error);
+  //   });
+  // }
+
+  onThemeFileChange(event: any) {
+    const selectedThemeFile = event.target.value;
+
+    // Find the selected theme in the availableThemes array
+    const selectedTheme = this.availableThemes.find(theme => theme.fileName === selectedThemeFile);
+
+    if (selectedTheme) {
+      // Extract the theme file and type (default to empty string if undefined)
+      const themeType = selectedTheme.type || '';
+
+      // Update the form values
+      this.themeForm.patchValue({
+        themeFileName: selectedThemeFile,
+        themeType: themeType
+      });
+
+      console.log(`Selected Theme File: ${selectedThemeFile}, Type: ${themeType}`);
+    }
   }
 
 }

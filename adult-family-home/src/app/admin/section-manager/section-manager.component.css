@@ -6,7 +6,17 @@ body {
   margin: 0;
   padding: 0;
 }
+/* Active Section - White Background */
+.active-section {
+  background-color: white;
+}
 
+
+.inactive-section {
+  opacity: 0.4;
+  background-color: black;
+  /* pointer-events: none; Prevent interactions */
+}
 
 /* Headings */
 h2 {
@@ -30,7 +40,7 @@ h3 {
   border-radius: 10px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 15px;
-  border-left: 4px solid #e67e22;
+  border-left: 8px solid #01ff41;
 }
 
 /* Flex Layout for Rows */

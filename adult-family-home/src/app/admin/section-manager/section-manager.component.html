@@ -4,10 +4,12 @@
 
   <div formArrayName="sections">
     <div
-      *ngFor="let section of sections.controls; let i = index"
-      [formGroupName]="i"
-      class="sectionForm-container"
-    >
+    *ngFor="let section of sections.controls; let i = index"
+    [formGroupName]="i"
+    class="sectionForm-container"
+    [class.inactive-section]="!section.get('isActive')?.value"
+    [class.active-section]="section.get('isActive')?.value"
+  >
       <div class="row">
         <div class="col">
           <h3>{{ i + 1 }}, {{ section.get("sectionTitle")?.value }}</h3>
@@ -25,6 +27,10 @@
           <label class="component">{{ section.get("component")?.value }}</label>
         </div>
         <div class="col">
+          <label>Active</label>
+          <input type="checkbox" formControlName="isActive" />
+        </div>
+        <div class="col">
           <button (click)="toggleSection(i)" class="icon-btn">
             <i
               class="fa-solid"
@@ -33,6 +39,9 @@
               "
             ></i>
           </button>
+        </div>
+        <div class="col">
+          <button (click)="updateSection(i)">Update</button>
         </div>
       </div>
 
@@ -95,7 +104,10 @@
             <div class="col">
               <label>Title Color</label>
               <select formControlName="titleColor" class="form-control">
-                <option *ngFor="let color of predefinedColors" [value]="color.value">
+                <option
+                  *ngFor="let color of predefinedColors"
+                  [value]="color.value"
+                >
                   {{ color.name }}
                 </option>
               </select>
@@ -127,7 +139,10 @@
             <div class="col">
               <label>Subtitle Color</label>
               <select formControlName="subtitleColor" class="form-control">
-                <option *ngFor="let color of predefinedColors" [value]="color.value">
+                <option
+                  *ngFor="let color of predefinedColors"
+                  [value]="color.value"
+                >
                   {{ color.name }}
                 </option>
               </select>
@@ -138,7 +153,10 @@
             <div class="col">
               <label>Background Color</label>
               <select formControlName="backgroundColor" class="form-control">
-                <option *ngFor="let color of predefinedColors" [value]="color.value">
+                <option
+                  *ngFor="let color of predefinedColors"
+                  [value]="color.value"
+                >
                   {{ color.name }}
                 </option>
               </select>
@@ -146,7 +164,10 @@
             <div class="col">
               <label>Text Color</label>
               <select formControlName="textColor" class="form-control">
-                <option *ngFor="let color of predefinedColors" [value]="color.value">
+                <option
+                  *ngFor="let color of predefinedColors"
+                  [value]="color.value"
+                >
                   {{ color.name }}
                 </option>
               </select>
@@ -172,7 +193,11 @@
             </div>
             <div class="col">
               <label>Border Radius (px)</label>
-              <input type="number" formControlName="borderRadius" class="form-control" />
+              <input
+                type="number"
+                formControlName="borderRadius"
+                class="form-control"
+              />
             </div>
           </div>
 
@@ -184,72 +209,92 @@
             ></textarea>
           </div>
 
+          <div class="row">
+            <div class="col">
+              <label>Image Preview</label>
+              <img
+                *ngIf="section.get('sectionImageUrl')?.value"
+                [src]="section.get('sectionImageUrl')?.value"
+                class="uploaded-image-preview"
+              />
+            </div>
+            <div class="col">
+              <label>Image Upload</label>
+              <input
+                type="text"
+                formControlName="sectionImageUrl"
+                placeholder="Image URL"
+                readonly
+                class="form-control"
+              />
+              <!-- File upload remains available for uploading images -->
+              <input
+                type="file"
+                (change)="uploadImage($event, i)"
+                class="form-control"
+              />
+            </div>
 
+            <!-- Clear Image Button -->
+            <div class="col">
+              <button type="button" (click)="clearImage(i)">Clear Image</button>
+            </div>
 
-<div class="row">
-   <div class="col">
-      <label>Image Preview</label>
-      <img *ngIf="section.get('sectionImageUrl')?.value"
-           [src]="section.get('sectionImageUrl')?.value"
-           class="uploaded-image-preview" />
-    </div>
-  <div class="col">
-    <label>Image Upload</label>
-    <input type="text" formControlName="sectionImageUrl" placeholder="Image URL" readonly class="form-control"/>
-    <!-- File upload remains available for uploading images -->
-    <input type="file" (change)="uploadImage($event, i)" class="form-control"/>
-  </div>
+            <!-- Show Image Toggle -->
+            <div class="col">
+              <label>Show Image?</label>
+              <input type="checkbox" formControlName="showImage" />
+            </div>
+          </div>
 
-  <!-- Clear Image Button -->
-  <div class="col">
-    <button type="button" (click)="clearImage(i)">Clear Image</button>
-  </div>
+          <!-- Image Source Selection -->
+          <div class="row" style="margin-top: 10px">
+            <div class="col">
+              <label>
+                <input
+                  type="radio"
+                  formControlName="imageSource"
+                  value="upload"
+                />
+                Upload Your Own Image
+              </label>
+            </div>
+            <div class="col">
+              <label>
+                <input
+                  type="radio"
+                  formControlName="imageSource"
+                  value="predefined"
+                />
+                Choose Preferred Image
+              </label>
+            </div>
+          </div>
 
-  <!-- Show Image Toggle -->
-  <div class="col">
-    <label>Show Image?</label>
-    <input type="checkbox" formControlName="showImage" />
-  </div>
-
-
-
-</div>
-
-<!-- Image Source Selection -->
-<div class="row" style="margin-top:10px;">
-  <div class="col">
-    <label>
-      <input type="radio" formControlName="imageSource" value="upload" />
-      Upload Your Own Image
-    </label>
-  </div>
-  <div class="col">
-    <label>
-      <input type="radio" formControlName="imageSource" value="predefined" />
-      Choose Preferred Image
-    </label>
-  </div>
-</div>
-
-<!-- Predefined Images (shown when 'predefined' is selected) -->
-<!-- Predefined Images Grid (shown when 'predefined' is selected) -->
-<div style="margin-top:10px;">
-  <h4>Select a Preferred Image</h4>
-  <div class="row">
-    <div class="col" *ngFor="let image of predefinedImages">
-      <label style="display: block; text-align: center;">
-        <img [src]="image.url"
-             class="uploaded-image-preview"
-             style="cursor: pointer; display: block; margin: auto;"/>
-        <!-- Checkbox bound to the current image selection -->
-        <input type="checkbox"
-               [checked]="section.get('sectionImageUrl')?.value === image.url"
-               (change)="selectCheckboxImage(i, image.url, $event)" />
-      </label>
-    </div>
-  </div>
-</div>
-
+          <!-- Predefined Images (shown when 'predefined' is selected) -->
+          <!-- Predefined Images Grid (shown when 'predefined' is selected) -->
+          <div style="margin-top: 10px">
+            <h4>Select a Preferred Image</h4>
+            <div class="row">
+              <div class="col" *ngFor="let image of predefinedImages">
+                <label style="display: block; text-align: center">
+                  <img
+                    [src]="image.url"
+                    class="uploaded-image-preview"
+                    style="cursor: pointer; display: block; margin: auto"
+                  />
+                  <!-- Checkbox bound to the current image selection -->
+                  <input
+                    type="checkbox"
+                    [checked]="
+                      section.get('sectionImageUrl')?.value === image.url
+                    "
+                    (change)="selectCheckboxImage(i, image.url, $event)"
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
 
           <!-- <p>Image URL: {{ section.get("sectionImageUrl")?.value }}</p> -->
           <div class="row">
@@ -259,11 +304,19 @@
             </div>
             <div class="col" *ngIf="section.get('showButton')?.value">
               <label>Button Text</label>
-              <input type="text" formControlName="buttonText" class="form-control" />
+              <input
+                type="text"
+                formControlName="buttonText"
+                class="form-control"
+              />
             </div>
             <div class="col" *ngIf="section.get('showButton')?.value">
               <label>Button Link</label>
-              <input type="text" formControlName="buttonLink" class="form-control" />
+              <input
+                type="text"
+                formControlName="buttonLink"
+                class="form-control"
+              />
             </div>
           </div>
         </div>

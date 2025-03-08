@@ -132,6 +132,7 @@ export class BusinessModel {
       sections: [
         {
           id:'',
+          isActive: true,
           page:'home',
           location:'top',
           component:'center-text',
@@ -161,6 +162,7 @@ export class BusinessModel {
         },
         {
           id:'',
+          isActive: true,
           page:'aboutus',
           location:'right',
           component:'right-text',
@@ -189,6 +191,7 @@ export class BusinessModel {
         },
         {
           id:'',
+          isActive: true,
           page:'aboutus',
           location:'left',
           component:'left-text',
@@ -217,6 +220,7 @@ export class BusinessModel {
         },
         {
           id:'',
+          isActive: true,
           page:'services',
           location:'right',
           component:'right-text',
@@ -245,6 +249,7 @@ export class BusinessModel {
         },
         {
           id:'',
+          isActive: true,
           page:'services',
           location:'left',
           component:'left-text',
@@ -273,6 +278,7 @@ export class BusinessModel {
         },
         {
           id:'',
+          isActive: true,
           page:'gallery',
           location:'top',
           component:'center-text',
