@@ -5,7 +5,7 @@
   align-items: center;
   padding: 10px 20px;
   height: 100px;
-  max-width: 1200px;
+  max-width: var(--site-max-width);
   margin: 0 auto;
 }
 
@@ -173,6 +173,24 @@
 }
 
 /* Mobile-specific adjustments */
+@media (max-width: 1081px) {
+  .navbar_{
+    max-width: 100vw;
+  }
+  .navbar-container {
+    justify-content: space-between; /* Maintain space between logo and menu icon */
+    width: 100%;
+  }
+  .nav-item{
+    font-size: .8rem;
+    font-weight: 500;
+    padding: 0px;
+  }
+
+  .ae-navbar-container .logo .afhBtn{
+    display: none;
+  }
+}
 @media (max-width: 768px) {
   .navbar-container {
     justify-content: space-between; /* Maintain space between logo and menu icon */

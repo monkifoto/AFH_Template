@@ -1,4 +1,5 @@
 export  interface Section {
+  isActive: boolean,
   subtitleColor: any;
   titleColor: any;
   textColor: any;

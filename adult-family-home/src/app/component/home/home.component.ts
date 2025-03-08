@@ -87,48 +87,34 @@ export class HomeComponent implements OnInit {
         return;
       }
 
-      // No mapping needed, directly assign sections
-      // this.sections = sections;
-      this.sections = sections.sort((a, b) => (a.order || 0) - (b.order || 0));
+      // ✅ Apply filtering to remove inactive sections BEFORE using them
+      this.sections = sections
+        .filter(section => section.isActive !== false) // ❌ Remove inactive sections
+        .sort((a, b) => (a.order || 0) - (b.order || 0)); // ✅ Sort by order
 
-      console.log("✅ Final Sections to Load:", this.sections);
+      console.log("✅ Final Active Sections to Load:", this.sections);
 
-      this.loadComponents();
+      this.loadComponents(); // ✅ Now load components ONLY for active sections
     });
-  }
+}
 
+//   getFilteredSections(sections: any[]): any[] {
+//     console.log(`📌 Raw Sections from Firebase:`, sections);
 
-  getFilteredSections(themeType: string, sections: any[]): any[] {
-    console.log(`📌 Filtering sections for themeType: ${themeType}`, sections);
+//     // ✅ Ensure sections with isActive explicitly set to false are removed
+//     const activeSections = sections.filter(section => {
+//         const isActive = section.isActive !== false; // Default to true if undefined
+//         console.log(`🔎 Checking section ${section.id} - isActive: ${section.isActive}, Included: ${isActive}`);
+//         return isActive;
+//     });
 
-    // Define allowed components per theme
-    const themeSectionsMap: Record<string, string[]> = {
-      hh: [ "center-text", "item-list", "right-text", "left-text"],
-      demo: ["why-us", "unique-features", "center-text", "item-list", "right-text", "left-text"],
-      ae: ["center-text", "right-text", "left-text", "testimonials"],
-      clemo: ["right-text", "testimonials","google-map"],
-      sb: ["center-text", "latest-products","item-list"],
-      prestige: ["why-us", "unique-features", "center-text", "item-list", "right-text", "left-text"]
-    };
+//     // ✅ Sort sections by order
+//     const sortedSections = activeSections.sort((a, b) => (a.order || 0) - (b.order || 0));
 
-    // ✅ Sort sections by order before filtering
-    const sortedSections = sections.sort((a, b) => (a.order || 0) - (b.order || 0));
+//     console.log("✅ Final Sections to Load (Ordered & Active Only):", sortedSections);
 
-    // ✅ Get allowed components for this theme
-    const allowedComponents = themeSectionsMap[themeType] || [];
-
-    // ✅ Filter sections that match the allowed components
-    const filteredSections = allowedComponents
-      .map(componentType => sortedSections.find(section => section.component === componentType))
-      .filter(section => section !== undefined);
-
-    console.log("✅ Allowed Components for Theme:", allowedComponents);
-    console.log("✅ Final Filtered Sections (Ordered):", filteredSections);
-
-    return filteredSections;
-  }
-
-
+//     return sortedSections;
+// }
 
   loadComponents() {
     this.container.clear();
@@ -147,6 +133,7 @@ export class HomeComponent implements OnInit {
 
     this.sections.forEach((section, index) => {
       console.log(`🔄 Loading Component for Section ${index + 1}:`, section.component);
+      const isActive = section.isActive !== undefined ? section.isActive : true;
 
       const componentType = this.componentsMap[section.component as keyof typeof this.componentsMap] as Type<any>;
 
@@ -160,7 +147,7 @@ export class HomeComponent implements OnInit {
 
       if (componentRef.instance && typeof componentRef.instance === 'object') {
         Object.assign(componentRef.instance, {
-          // title:section.sectionTitle,
+          isActive : [isActive],
           title: this.applyReplaceKeyword(section.sectionTitle || ''),
           subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
           content: this.applyReplaceKeyword(section.sectionContent || ''),
