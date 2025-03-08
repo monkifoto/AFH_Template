@@ -186,7 +186,8 @@ export class HomeComponent implements OnInit {
           boxShadow: section.boxShadow || false,
           borderRadius: section.borderRadius ?? 10,
           page: section.page,
-          location: section.location
+          location: section.location,
+          businessId: this.business?.id
         });
         console.log(`✅ Component Data for ${section.component}:`, componentRef.instance);
       }

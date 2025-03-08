@@ -55,6 +55,11 @@
   justify-content: center;
 }
 
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 /* Add a faded overlay on top of the background */
 .parallax-container::before {
   content: "";
@@ -63,7 +68,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay with 50% opacity */
+  background-color: rgba(255, 255, 255, 0.5); /* Dark overlay with 50% opacity */
   z-index: 1; /* Ensures it sits above the background */
 }
 
@@ -1112,6 +1117,8 @@ textarea {
   justify-content: center;
   gap: 10rem;
   padding: 3rem 0;
+  margin: 0 auto;
+  max-width: var(--site-max-width);
 }
 
 .service-item {
@@ -1190,14 +1197,13 @@ textarea {
   color: var(--primary-color);
   padding: 15px 30px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-/* .cta-btn:hover {
+.cta-btn:hover {
  background-color: var(--button-hover-color);
-} */
+}
 
 .page-hero-overlay {
   height: 400px;
@@ -1925,7 +1931,7 @@ ul li strong {
   }
 
   .mouse-scroll {
-    bottom: -150px;
+    bottom: -180px;
   }
 }
 
@@ -1983,6 +1989,6 @@ ul li strong {
   }
 
   .mouse-scroll {
-    bottom: -120px;
+    bottom: -180px;
   }
 }
