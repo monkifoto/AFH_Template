@@ -42,13 +42,12 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 300px;
   height: 200px;
 }
 
 .gallery-item img {
-  width: 300px;  /* Fixed width */
-  height: 200px; /* Fixed height */
+
+  height: 200px;
   object-fit: cover; /* Ensures image fills the container without distortion */
   object-position: top; /* Centers the image */
   overflow: hidden; /* Hides any part that exceeds container */

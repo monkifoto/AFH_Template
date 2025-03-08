@@ -3,7 +3,7 @@
  [ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
   [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
   <div class="image-container">
-    <img src="{{ imageURL }}" alt="{{ title }}" />
+    <img src="{{ sectionImageUrl }}" alt="{{ title }}" />
   </div>
   <div class="text-container">
     <div  class="heading-container">
@@ -25,7 +25,7 @@
   <div class="content-area">
     <div class="row">
       <div class="left-image-container">
-        <img src="{{ imageURL }}" alt="{{ title }}" />
+        <img src="{{ sectionImageUrl }}" alt="{{ title }}" />
       </div>
       <div class="text-container">
         <h3>{{ titleParts.part1 }}</h3>

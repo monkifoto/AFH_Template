@@ -123,7 +123,7 @@ export class ServicesComponent implements OnInit, AfterViewInit {
         title: this.applyReplaceKeyword(section.sectionTitle || ''),
         subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
         content: this.applyReplaceKeyword(section.sectionContent || ''),
-        imageURL: section.sectionImageUrl || '',
+        sectionImageUrl: section.sectionImageUrl || '',
         showBtn: section.showLearnMore || false,
         _businessName: this.business?.businessName || '',
         showImage: !!section.sectionImageUrl,

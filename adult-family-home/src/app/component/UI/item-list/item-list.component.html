@@ -115,7 +115,8 @@
 
     <!-- Full version -->
     <div *ngIf="isMinimal" >
-      <app-section-tilte [title]=title></app-section-tilte>
+      <!-- <h2 class="styled-heading" [ngStyle]="{ 'color': titleColor }">{{title}}</h2> -->
+      <app-section-tilte [titleColor]=titleColor [title]=title></app-section-tilte>
   <div
     [ngClass]="{
       'parallax-container': isParallax && sectionImageUrl,
