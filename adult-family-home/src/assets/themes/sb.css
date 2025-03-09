@@ -1712,7 +1712,7 @@ input::-ms-input-placeholder {
 .clemo-navbar-toggler {
   display: none; /* Hide toggler by default */
 }
-/*
+
 .clemo-navbar-toggler-icon {
   width: 25px;
   height: 2px;
@@ -1738,7 +1738,7 @@ input::-ms-input-placeholder {
 
 .clemo-navbar-toggler-icon::after {
   top: 7px;
-} */
+}
 
 /* For mobile screens */
 @media (max-width: 991px) {

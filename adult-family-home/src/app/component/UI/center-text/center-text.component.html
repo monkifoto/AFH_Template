@@ -66,7 +66,7 @@
 </div>-->
 
 <div class="center-text-section-clemo"
-*ngIf="themeType=='sb' || themeType=='sp'"
+*ngIf="themeType=='sb' || themeType=='sp' || themeType=='prestige'"
 [ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
 [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
   <img *ngIf="imageURL && showImage"  [src]="imageURL" alt="Section Image" class="center-text-image" />
