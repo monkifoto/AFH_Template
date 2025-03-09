@@ -8,6 +8,7 @@ import {
 import { Observable } from 'rxjs';
 import { BusinessSectionsService } from 'src/app/services/business-sections.service';
 import { UploadService } from 'src/app/services/upload.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-section-manager',
@@ -17,6 +18,7 @@ import { UploadService } from 'src/app/services/upload.service';
 export class SectionManagerComponent implements OnInit {
   @Input() form!: FormGroup;
   @Input() businessId!: string;
+  showInactiveSections: boolean = false;
 
   collapsedSections: boolean[] = [];
   pages = [
@@ -110,7 +112,8 @@ export class SectionManagerComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private businessSectionsService: BusinessSectionsService,
-    private uploadService: UploadService
+    private uploadService: UploadService,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -380,5 +383,10 @@ export class SectionManagerComponent implements OnInit {
 
   toggleSection(index: number): void {
     this.collapsedSections[index] = !this.collapsedSections[index];
+  }
+
+  toggleShowInactive(): void {
+    console.log("🔄 Toggling Show Inactive Sections:", this.showInactiveSections);
+    this.cdRef.detectChanges(); // ✅ Force UI update
   }
 }

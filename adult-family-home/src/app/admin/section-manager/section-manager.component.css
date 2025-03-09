@@ -15,6 +15,7 @@ body {
 .inactive-section {
   opacity: 0.4;
   background-color: black;
+  border-left: 8px solid #ff0000 !important;
   /* pointer-events: none; Prevent interactions */
 }
 
