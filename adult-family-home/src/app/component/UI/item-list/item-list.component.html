@@ -149,7 +149,13 @@
 
     <!-- Minimal version -->
     <div *ngIf="!isMinimal">
-      <section class="our-services-section">
+      <section class="our-services-section"
+      [ngClass]="{
+        'parallax-container': isParallax && sectionImageUrl,
+        'regular-image-container': !isParallax && sectionImageUrl,
+        'solid-bg-container': !sectionImageUrl,
+        'full-width': fullWidth, 'centered': !fullWidth
+      }">
         <div  class="heading-container">
           <h2 class="styled-heading" [ngStyle]="{ 'color': titleColor }">{{title}}</h2>
         </div>
