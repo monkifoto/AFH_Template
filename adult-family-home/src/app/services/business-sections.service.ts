@@ -13,6 +13,11 @@ export class BusinessSectionsService {
 
   constructor(private firestore: AngularFirestore, private uploadService: UploadService) {}
 
+  generateNewId(): string {
+    return this.firestore.createId();
+  }
+
+
   /**
    * Fetches all sections for a given business ID.
    * @param businessId The unique identifier of the business.

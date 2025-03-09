@@ -93,14 +93,14 @@ export class SectionManagerComponent implements OnInit {
     { url: 'assets/sharedAssets/istockphoto-2032240867-2048x2048.jpg' },
     { url: 'assets/sharedAssets/5388429572_df9a403081_k.jpg' },
     { url: 'assets/sharedAssets/9676303919_32372bf834_o.jpg' },
-    { url: 'adult-family-home/src/assets/sharedAssets/istockphoto-590615058-2048x2048.jpg' },
-    { url: 'adult-family-home/src/assets/sharedAssets/istockphoto-1145276617-2048x2048.jpg' },
-    { url: 'adult-family-home/src/assets/sharedAssets/istockphoto-1296176596-2048x2048.jpg' },
-    { url: 'adult-family-home/src/assets/sharedAssets/istockphoto-1321691755-2048x2048.jpg' },
-    { url: 'adult-family-home/src/assets/sharedAssets/istockphoto-1389452512-2048x2048.jpg' },
-    { url: 'adult-family-home/src/assets/sharedAssets/istockphoto-1629902196-2048x2048.jpg' },
-   { url: 'adult-family-home/src/assets/sharedAssets/istockphoto-1860450584-2048x2048.jpg' },
-   { url: 'adult-family-home/src/assets/sharedAssets/istockphoto-2163609093-2048x2048.jpg' },
+    { url: 'assets/sharedAssets/istockphoto-590615058-2048x2048.jpg' },
+    { url: 'assets/sharedAssets/istockphoto-1145276617-2048x2048.jpg' },
+    { url: 'assets/sharedAssets/istockphoto-1296176596-2048x2048.jpg' },
+    { url: 'assets/sharedAssets/istockphoto-1321691755-2048x2048.jpg' },
+    { url: 'assets/sharedAssets/istockphoto-1389452512-2048x2048.jpg' },
+    { url: 'assets/sharedAssets/istockphoto-1629902196-2048x2048.jpg' },
+    { url: 'assets/sharedAssets/istockphoto-1860450584-2048x2048.jpg' },
+    { url: 'assets/sharedAssets/istockphoto-2163609093-2048x2048.jpg' },
   ];
 
   get sections(): FormArray {
@@ -346,6 +346,37 @@ export class SectionManagerComponent implements OnInit {
         });
     }
   }
+
+  duplicateSection(index: number) {
+    const section = this.sections.at(index).value;
+
+    if (!this.businessId) {
+      console.error("❌ Cannot duplicate: Business ID is missing");
+      return;
+    }
+
+    // Create a copy of the section with a new ID
+    const duplicatedSection = {
+      ...section,
+      id: this.businessSectionsService.generateNewId(), // Generate a new Firestore ID
+      sectionTitle: section.sectionTitle + " (Copy)", // Rename to indicate duplication
+      order: section.order + 1 // Increment order to prevent conflicts
+    };
+
+    // Save the duplicated section to Firestore
+    this.businessSectionsService
+      .saveSection(this.businessId, duplicatedSection)
+      .then(() => {
+        console.log("✅ Section duplicated successfully:", duplicatedSection);
+
+        // Add the new section to the form array
+        this.sections.push(this.fb.group(duplicatedSection));
+      })
+      .catch((err) => {
+        console.error("❌ Error duplicating section:", err);
+      });
+  }
+
 
   toggleSection(index: number): void {
     this.collapsedSections[index] = !this.collapsedSections[index];
