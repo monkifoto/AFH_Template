@@ -1334,3 +1334,75 @@
   border:1px solid var(--primary-color);
  }
 
+/* Services Grid Layout */
+.services-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  text-align: center;
+  gap: 20px;
+  padding: 40px 10%;
+}
+
+/* Individual Service Item */
+.service-item {
+  flex: 1;
+  max-width: 25%;
+}
+
+/* Service Title */
+.service-item h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+/* Service Description */
+.service-item p {
+  font-size: 14px;
+  color: #7f8c8d;
+  margin-top: 5px;
+  line-height: 1.5;
+}
+
+/* Icon Styling */
+.services-item-icon {
+  font-size: 24px;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+/* Underline separator */
+.service-item h2::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: #2c3e50;
+  margin: 8px auto;
+}
+
+/* Responsive Styling */
+@media (max-width: 1024px) {
+  .services-grid {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .service-item {
+    max-width: 40%;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .service-item {
+    max-width: 80%;
+  }
+}

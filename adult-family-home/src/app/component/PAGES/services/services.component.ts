@@ -65,7 +65,8 @@ export class ServicesComponent implements OnInit, AfterViewInit {
         console.warn("❗ No sections retrieved from the service.");
         return;
       }
-      this.sections = sections.sort((a, b) => (a.order || 0) - (b.order || 0));
+      this.sections = sections  .filter(section => section.isActive !== false)
+      .sort((a, b) => (a.order || 0) - (b.order || 0));
       setTimeout(() => {
         this.loadComponents();
       });
@@ -115,11 +116,13 @@ export class ServicesComponent implements OnInit, AfterViewInit {
         console.error(`❌ Component Not Found:`, section.component);
         return;
       }
+      const isActive = section.isActive !== undefined ? section.isActive : true;
 
       const factory = this.resolver.resolveComponentFactory(componentType);
       const componentRef = this.container.createComponent(factory, undefined, this.injector);
 
       Object.assign(componentRef.instance, {
+        isActive : [isActive],
         title: this.applyReplaceKeyword(section.sectionTitle || ''),
         subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
         content: this.applyReplaceKeyword(section.sectionContent || ''),

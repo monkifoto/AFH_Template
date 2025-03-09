@@ -39,7 +39,7 @@
 }
 
 .centered {
-  width: var(--site-max-width);
+  max-width: var(--site-max-width);
   margin: 0 auto;
 }
 
@@ -1730,6 +1730,12 @@ ul li strong {
 } */
 
 @media (max-width: 1024px) {
+
+.nav-item{
+  font-size: 1rem;
+  font-weight: 300;
+}
+
   .clemo-main-home h1 {
     font-size: 3.5rem;
   }
