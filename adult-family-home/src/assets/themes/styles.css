@@ -1274,15 +1274,15 @@ section {
 } */
 .cta-container {
 	text-align: center;
-	padding: 60px;
+	padding: 80px;
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	margin: 6rem auto;
-	width: 100%;
 }
+
 /* .cta-content h2 {
 	font-size: 4rem;
 	margin-bottom: 25px;
@@ -1561,16 +1561,7 @@ section {
 	background-color: var(--dark-background-color);
 	width: 100%;
 } */
-.cta-container {
-	display: flex;
-	background-color: var(--dark-background-color);
-	color: #fff;
-	padding: 40px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-}
+
 /* .cta-content {
 	max-width: 600px;
 }

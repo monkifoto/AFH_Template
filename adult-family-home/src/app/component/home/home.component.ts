@@ -19,6 +19,8 @@ import { Business } from 'src/app/model/business-questions.model';
 import { switchMap } from 'rxjs';
 import { IconListComponent } from '../UI/icon-list/icon-list.component';
 import { LatestProductsComponent } from '../UI/latest-products/latest-products.component';
+import { CallToActionComponent } from '../UI/call-to-action/call-to-action.component';
+
 
 @Component({
   selector: 'app-home',
@@ -43,7 +45,9 @@ export class HomeComponent implements OnInit {
     'testimonials-carousel': TestimonialCarouselComponent,
     'why-us': WhyUsComponent,
     'google-map': GoogleMapsComponent,
-    'latest-products':LatestProductsComponent
+    'latest-products':LatestProductsComponent,
+    'cta': CallToActionComponent,
+    'consultation': ConsultationComponent
   };
 
   @ViewChild('dynamicContainer', { read: ViewContainerRef, static: true }) container!: ViewContainerRef;

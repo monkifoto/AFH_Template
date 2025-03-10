@@ -38,6 +38,8 @@ export class SectionManagerComponent implements OnInit {
     'item-list',
     'why-us',
     'unique-features',
+    'cta',
+    'consultation'
   ];
   fontStyles = ['normal', 'bold', 'italic'];
 
