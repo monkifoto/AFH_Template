@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, Type } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, Type, ComponentRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MetaService } from 'src/app/services/meta-service.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
@@ -28,8 +28,8 @@ export class AboutUsComponent implements OnInit {
     'right-text': RightTextComponent,
     'left-text': LeftTextComponent,
     'item-list': ItemListComponent,
-    'cta' : CallToActionComponent,
-    'consultatioin' : ConsultationComponent
+    'cta': CallToActionComponent,
+    'consultation': ConsultationComponent
   };
 
   @ViewChild('dynamicContainer', { read: ViewContainerRef }) container!: ViewContainerRef;
@@ -63,7 +63,7 @@ export class AboutUsComponent implements OnInit {
 
   ngAfterViewInit(): void {
     if (this.business) {
-      this.loadComponents();  // Ensure components load only after ViewChild is initialized
+      this.loadComponents();
     }
   }
 
@@ -74,9 +74,7 @@ export class AboutUsComponent implements OnInit {
         console.warn("❗ No sections retrieved from the service.");
         return;
       }
-      this.sections = sections
-      // .filter(section => section.isActive !== false)
-      .sort((a, b) => (a.order || 0) - (b.order || 0));
+      this.sections = sections.sort((a, b) => (a.order || 0) - (b.order || 0));
       this.loadComponents();
     });
   }
@@ -87,29 +85,141 @@ export class AboutUsComponent implements OnInit {
       return;
     }
 
-    this.container.clear(); // ✅ Safe to clear now
-
+    this.container.clear(); // ✅ Clear previous components
 
     if (!this.sections.length) {
       console.warn("❗ No sections available to load.");
       return;
     }
 
+    // ✅ Sort sections based on 'order' from the database
+    this.sections.sort((a, b) => (a.order || 0) - (b.order || 0));
 
+    let leftRightSections: any[] = [];
+    let firstCenterText: any = null;
+    let secondCenterText: any = null;
+    let ctaSection: any = null;
+    let otherSections: any[] = [];
+    let wrapperElement: HTMLElement;
 
+    // ✅ Identify `center-text`, `left-text/right-text` groups, and `cta`
     this.sections.forEach((section) => {
-      const componentType = this.componentsMap[section.component as keyof typeof this.componentsMap] as Type<any>;
-      if (!componentType) {
-        console.error(`❌ Component Not Found:`, section.component);
-        return;
+      if (section.component === 'center-text') {
+        if (!firstCenterText) {
+          firstCenterText = section;
+        } else {
+          secondCenterText = section;
+        }
+      } else if (section.component === 'left-text' || section.component === 'right-text') {
+        leftRightSections.push(section);
+      } else if (section.component === 'cta') {
+        ctaSection = section;
+      } else {
+        otherSections.push(section);
       }
-      // const isActive = section.isActive !== undefined ? section.isActive : true;
+    });
 
-      const factory = this.resolver.resolveComponentFactory(componentType);
-      const componentRef = this.container.createComponent(factory, undefined, this.injector);
+    // ✅ 1️⃣ Render first `center-text` before wrapper
+    if (firstCenterText) {
+      console.log("✅ Rendering first center-text BEFORE wrapper...");
+      this.createComponent(firstCenterText);
+    }
 
-      Object.assign(componentRef.instance, {
-        // isActive : [isActive],
+    // ✅ 2️⃣ Create wrapper but DO NOT append it yet
+    if (leftRightSections.length > 0) {
+      console.log("✅ Creating wrapper...");
+      wrapperElement = document.createElement('div');
+      wrapperElement.className = 'text-wrapper';
+
+      // ✅ Sort left-text before right-text
+      leftRightSections.sort((a, b) => (a.component === 'left-text' ? -1 : 1));
+
+      // ✅ Insert left-text and right-text into wrapper
+      leftRightSections.forEach((section) => {
+        const componentRef = this.createComponent(section);
+        if (componentRef) {
+          wrapperElement.appendChild(componentRef.location.nativeElement);
+        }
+      });
+
+      // ✅ Now insert wrapper AFTER first center-text
+      this.container.element.nativeElement.appendChild(wrapperElement);
+    }
+
+    // ✅ 3️⃣ Render second `center-text` AFTER wrapper
+    if (secondCenterText) {
+      console.log("✅ Rendering second center-text...");
+      this.createComponent(secondCenterText);
+    }
+
+    // ✅ 4️⃣ Render all other sections normally
+    otherSections.forEach((section) => {
+      this.createComponent(section);
+    });
+
+    // ✅ 5️⃣ Ensure CTA is always last
+    if (ctaSection) {
+      console.log("✅ Rendering CTA at last position...");
+      this.createComponent(ctaSection);
+    }
+  }
+
+
+  createWrapper(group: any[]) {
+    if (!group.length) return;
+
+    // ✅ Create wrapper div dynamically
+    const wrapperElement = document.createElement('div');
+    wrapperElement.className = 'text-wrapper'; // ✅ Apply CSS styles
+
+    // ✅ Ensure left-text is inserted FIRST before right-text
+    group.sort((a, b) => (a.component === 'left-text' ? -1 : 1));
+
+    // ✅ Insert left-text and right-text immediately inside the wrapper
+    group.forEach((section) => {
+      const componentRef = this.createComponent(section);
+      if (componentRef !== null) { // ✅ Ensures valid component
+        wrapperElement.appendChild(componentRef.location.nativeElement);
+      }
+    });
+
+    // ✅ Append the wrapper to the container AFTER inserting left-text and right-text
+    this.container.element.nativeElement.appendChild(wrapperElement);
+  }
+
+  createComponent(section: any, insertBeforeElement?: HTMLElement): ComponentRef<any> | null {
+    const componentType = this.componentsMap[section.component as keyof typeof this.componentsMap] as Type<any>;
+    if (!componentType) {
+      console.error(`❌ Component Not Found:`, section.component);
+      return null; // Prevent errors if the component is not found
+    }
+
+    const factory = this.resolver.resolveComponentFactory(componentType);
+    const componentRef = this.container.createComponent(factory);
+
+    this.applyComponentProperties(componentRef.instance, section);
+
+    // ✅ If we need to insert before the wrapper, do it manually
+    if (insertBeforeElement) {
+      this.container.element.nativeElement.insertBefore(
+        componentRef.location.nativeElement,
+        insertBeforeElement
+      );
+    } else {
+      this.container.element.nativeElement.appendChild(componentRef.location.nativeElement);
+    }
+
+    return componentRef;
+  }
+
+
+
+
+  applyComponentProperties(componentInstance: any, section: any) {
+
+    const isActive = section.isActive !== undefined ? section.isActive : true;
+    Object.assign(componentInstance, {
+      isActive : [isActive],
         title: this.applyReplaceKeyword(section.sectionTitle || ''),
         subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
         content: this.applyReplaceKeyword(section.sectionContent || ''),
@@ -136,15 +246,10 @@ export class AboutUsComponent implements OnInit {
         borderRadius: section.borderRadius ?? 10,
         page: section.page,
         location: section.location
-      });
     });
   }
 
   applyReplaceKeyword(value: string): string {
-    if (!value || !this.business?.businessName) return value;
-
-    // Match {{businessName}} instead of {businessName}
-    return value.replace(/{{\s*businessName\s*}}/g, this.business.businessName);
+    return value.replace(/{{\s*businessName\s*}}/g, this.business?.businessName || '');
   }
-
 }
