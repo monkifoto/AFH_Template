@@ -9,6 +9,8 @@ import { CenterTextComponent } from '../../UI/center-text/center-text.component'
 import { RightTextComponent } from '../../UI/right-text/right-text.component';
 import { LeftTextComponent } from '../../UI/left-text/left-text.component';
 import { ItemListComponent } from '../../UI/item-list/item-list.component';
+import { CallToActionComponent } from '../../UI/call-to-action/call-to-action.component';
+import { ConsultationComponent } from '../../UI/consultation/consultation.component';
 
 @Component({
   selector: 'app-services',
@@ -26,6 +28,8 @@ export class ServicesComponent implements OnInit, AfterViewInit {
     'right-text': RightTextComponent,
     'left-text': LeftTextComponent,
     'item-list': ItemListComponent,
+    'cta': CallToActionComponent,
+    'consultatioin' : ConsultationComponent
   };
 
   @ViewChild('dynamicContainer', { read: ViewContainerRef }) container!: ViewContainerRef;

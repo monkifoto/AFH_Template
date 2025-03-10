@@ -41,6 +41,7 @@ export class LeftTextComponent {
 
   constructor(private sanitizer: DomSanitizer, private router: Router) {}
   ngOnInit(): void {
+    this.fullWidth = this.convertToBoolean(this.fullWidth);
     console.log('Left Text Component Loaded , themeType: '+ this.themeType+  ' Business Name:' + this._businessName + ' Title: ' + this.title);
     console.log("📌 Section Left Text- Initialized:", {
       title: this.title,
@@ -87,5 +88,11 @@ export class LeftTextComponent {
 
   get contentText(): string {
     return this._content;
+  }
+
+  private convertToBoolean(value: any): boolean {
+    if (typeof value === 'boolean') return value; // Already boolean
+    if (typeof value === 'string') return value.toLowerCase() === 'true'; // Convert string to boolean
+    return false; // Default case
   }
 }

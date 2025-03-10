@@ -14,16 +14,10 @@
 
   <div
   class="cta-container"
-  [ngClass]="layout"
-  [ngStyle]="{
-    'background-color': bgColor,
-    'color': textColor,
-    'border-radius': borderRadius,
-    'box-shadow': boxShadow
-  }"
->
+  [ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+  [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
   <!-- <app-section-tilte [title]="title"></app-section-tilte> -->
-  <h2 [ngStyle]="{ 'color': titleColor }">{{ title }}</h2>
+  <h2 [ngStyle]="{ 'color': titleColor ,'font-size': titleFontSize+'px' }">{{ title }}</h2>
   <p [ngStyle]="{ 'color': contentColor }">{{ content }}</p>
 
   <ng-container *ngIf="isButton; else linkTemplate">

@@ -1,54 +1,52 @@
-<div [ngSwitch]="layoutType">
-  <ng-container *ngSwitchCase="'hh'">
-    <div class="section-container">
+<div [ngSwitch]="themeType">
+   <div *ngSwitchCase="'hh'"
+  [ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+  [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+   <div class="section-container">
       <div class="section-heading">
-        <span class="section-title-main">Ready to </span>
-        <span class="section-title-highlight">Take the Next Step?</span>
+        <span class="section-title-main" [ngStyle]="{ 'color': titleColor ,'font-size': titleFontSize+'px' }">{{title}} </span>
+        <span class="section-title-highlight" [ngStyle]="{ 'color': subtitleColor ,'font-size': subtitleFontSize+'px' }">{{subTitle}}</span>
       </div>
-      <p class="section-description">
-        We’d love to welcome you into our home. Fill out our resident intake form, and let’s start planning the care and comfort your loved one deserves.
-      </p>
+      <!-- <p class="section-description">
+        {{content}}
+      </p> -->
+      <p class="section-description" [innerHTML]="sanitizedContent"></p>
       <button type="button" class="afhBtn" (click)="navigateTo('resident-form')">Get Started</button>
     </div>
-<!-- <div class="section-container">
-  <div class="section-heading">
-    <span class="section-title-main">Book a </span>
-    <span class="section-title-highlight"> Consultation</span>
-  </div>
-  <p class="section-description">
-    We would love to meet you! Contact us to schedule a tour.
-  </p>
-  <button type="button" class="afhBtn"  (click)="navigateToContact(id)">Book Consultation</button>
-</div> -->
-</ng-container>
+</div>
 
-<ng-container *ngSwitchCase="'ae'">
+<ng-container *ngSwitchCase="'ae'"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
   <div class="ae-section-container">
   <div class="cta-container">
     <div class="cta-content">
       <div class="our-services-section-heading">
-        <span class="consultation-title main">Ready to experience </span>
-        <span class="consultation-title highlight">{{ businessName }}?</span>
+        <span class="consultation-title main" [ngStyle]="{ 'color': titleColor ,'font-size': titleFontSize+'px' }"> {{title}}  Ready to experience </span>
+        <span class="consultation-title highlight"[ngStyle]="{ 'color': subtitleColor ,'font-size': subtitleFontSize+'px' }">{{subTitle}}{{ _businessName }}?</span>
       </div>
       <p>Discover what makes our services unique and tailored to your needs.</p>
+      {{content}}
       <div class="cta-buttons">
-        <button class="afhBtn" (click)="navigateToContact(id)">Schedule a Visit</button>
+        <button class="afhBtn" (click)="navigateToContact(businessId)">Schedule a Visit</button>
       </div>
     </div>
   </div>
 </div>
 </ng-container>
-<ng-container *ngSwitchCase="'sb'">
+<ng-container *ngSwitchCase="'sb'"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
   <div class="ae-section-container">
   <div class="cta-container">
     <div class="cta-content">
       <div class="our-services-section-heading">
         <span class="consultation-title main">Ready to experience </span>
-        <span class="consultation-title highlight">{{ businessName }}?</span>
+        <span class="consultation-title highlight">{{ _businessName }}?</span>
       </div>
       <p>Discover what makes our services unique and tailored to your needs.</p>
       <div class="cta-buttons">
-        <button class="btn" (click)="navigateToContact(id)">Let's Talk</button>
+        <button class="btn" (click)="navigateToContact(businessId)">Let's Talk</button>
       </div>
     </div>
   </div>
