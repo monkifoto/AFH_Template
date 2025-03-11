@@ -18,7 +18,7 @@
   [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
   <!-- <app-section-tilte [title]="title"></app-section-tilte> -->
   <h2 [ngStyle]="{ 'color': titleColor ,'font-size': titleFontSize+'px' }">{{ title }}</h2>
-  <p [ngStyle]="{ 'color': contentColor }">{{ content }}</p>
+  <p [ngStyle]="{ 'color': textColor }">{{ content }}</p>
 
   <ng-container *ngIf="isButton; else linkTemplate">
     <button
