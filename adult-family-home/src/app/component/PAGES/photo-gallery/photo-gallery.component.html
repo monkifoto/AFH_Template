@@ -17,6 +17,7 @@
       <app-hero [layoutType]="'prestige'"></app-hero>
     </ng-container>
   </div>
+
   <ng-container #dynamicContainer></ng-container>
 
   <section class="gallery">
@@ -28,8 +29,9 @@
     </div>
   </section>
 
+  <ng-container #ctaContainer></ng-container>
 
-  <div [ngSwitch]="business.theme.themeType">
+  <!-- <div [ngSwitch]="business.theme.themeType">
     <ng-container *ngSwitchCase="'sb'">
       <app-call-to-action
       title="Let's build a vision together"
@@ -66,7 +68,7 @@
         page="contact-us"
         [businessId] ="business.id"
       ></app-call-to-action></ng-container>
-    </div>
+    </div> -->
 
 
 </div>

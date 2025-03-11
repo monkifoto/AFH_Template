@@ -13,6 +13,7 @@ import { RightTextComponent } from '../../UI/right-text/right-text.component';
 import { LeftTextComponent } from '../../UI/left-text/left-text.component';
 import { ItemListComponent } from '../../UI/item-list/item-list.component';
 import { BusinessSectionsService } from 'src/app/services/business-sections.service';
+import { CallToActionComponent } from '../../UI/call-to-action/call-to-action.component';
 
 
 @Component({
@@ -41,9 +42,11 @@ export class PhotoGalleryComponent implements OnInit {
       'right-text': RightTextComponent,
       'left-text': LeftTextComponent,
       'item-list': ItemListComponent,
+      'cta': CallToActionComponent
     };
 
     @ViewChild('dynamicContainer', { read: ViewContainerRef }) container!: ViewContainerRef;
+    @ViewChild('ctaContainer', { read: ViewContainerRef }) ctaContainer!: ViewContainerRef;
 
 
     constructor(
@@ -80,6 +83,7 @@ export class PhotoGalleryComponent implements OnInit {
       }
       this.sections = sections.sort((a, b) => (a.order || 0) - (b.order || 0));
       this.loadComponents();
+      this.loadCTAComponent();
     });
   }
 
@@ -88,52 +92,111 @@ export class PhotoGalleryComponent implements OnInit {
       console.error("❌ ViewContainerRef is undefined.");
       return;
     }
-
     this.container.clear(); // Clear previous components
 
     if (!this.sections.length) {
       console.warn("❗ No sections available to load.");
       return;
     }
+    const gallerySections = this.sections.filter(section => section.component !== 'cta');
+    gallerySections.forEach((section) => {
+      this.createDynamicComponent(section, this.container);
+    });
+    // this.sections.forEach((section) => {
+    //   const componentType = this.componentsMap[section.component as keyof typeof this.componentsMap] as Type<any>;
+    //   if (!componentType) {
+    //     console.error(`❌ Component Not Found:`, section.component);
+    //     return;
+    //   }
 
-    this.sections.forEach((section) => {
-      const componentType = this.componentsMap[section.component as keyof typeof this.componentsMap] as Type<any>;
-      if (!componentType) {
-        console.error(`❌ Component Not Found:`, section.component);
-        return;
-      }
+    //   const factory = this.resolver.resolveComponentFactory(componentType);
+    //   const componentRef = this.container.createComponent(factory, undefined, this.injector);
 
-      const factory = this.resolver.resolveComponentFactory(componentType);
-      const componentRef = this.container.createComponent(factory, undefined, this.injector);
+    //   Object.assign(componentRef.instance, {
+    //     title: this.applyReplaceKeyword(section.sectionTitle || ''),
+    //     subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
+    //     content: this.applyReplaceKeyword(section.sectionContent || ''),
+    //     imageURL: section.sectionImageUrl || '',
+    //     showBtn: section.showLearnMore || false,
+    //     _businessName: this.business?.businessName || '',
+    //     showImage: !!section.sectionImageUrl,
+    //     themeType: this.business?.theme?.themeType,
+    //     items: section.items || [],
+    //     isMinimal: section.isMinimal || false,
+    //     isParallax: section.isParallax ?? true,
+    //     backgroundColor: section.backgroundColor || '#ffffff',
+    //     textColor: section.textColor || '#000000',
+    //     titleColor: section.titleColor || '#000000',
+    //     subtitleColor: section.subtitleColor || '#000000',
+    //     fullWidth: section.fullWidth || false,
+    //     showButton: section.showButton || false,
+    //     buttonText: section.buttonText || 'Learn More',
+    //     buttonLink: section.buttonLink || '',
+    //     titleFontSize: section.titleFontSize || '36',
+    //     subtitleFontSize: section.subtitleFontSize || '14',
+    //     alignText: section.alignText || 'left',
+    //     boxShadow: section.boxShadow || false,
+    //     borderRadius: section.borderRadius ?? 10,
+    //     page: section.page,
+    //     location: section.location
+    //   });
+    // });
+  }
 
-      Object.assign(componentRef.instance, {
-        title: this.applyReplaceKeyword(section.sectionTitle || ''),
-        subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
-        content: this.applyReplaceKeyword(section.sectionContent || ''),
-        imageURL: section.sectionImageUrl || '',
-        showBtn: section.showLearnMore || false,
-        _businessName: this.business?.businessName || '',
-        showImage: !!section.sectionImageUrl,
-        themeType: this.business?.theme?.themeType,
-        items: section.items || [],
-        isMinimal: section.isMinimal || false,
-        isParallax: section.isParallax ?? true,
-        backgroundColor: section.backgroundColor || '#ffffff',
-        textColor: section.textColor || '#000000',
-        titleColor: section.titleColor || '#000000',
-        subtitleColor: section.subtitleColor || '#000000',
-        fullWidth: section.fullWidth || false,
-        showButton: section.showButton || false,
-        buttonText: section.buttonText || 'Learn More',
-        buttonLink: section.buttonLink || '',
-        titleFontSize: section.titleFontSize || '36',
-        subtitleFontSize: section.subtitleFontSize || '14',
-        alignText: section.alignText || 'left',
-        boxShadow: section.boxShadow || false,
-        borderRadius: section.borderRadius ?? 10,
-        page: section.page,
-        location: section.location
-      });
+  loadCTAComponent() {
+    if (!this.ctaContainer) {
+      console.error("❌ CTA ViewContainerRef is undefined.");
+      return;
+    }
+
+    this.ctaContainer.clear(); // Clear previous CTA component
+
+    const ctaSection = this.sections.find(section => section.component === 'cta');
+    if (!ctaSection) {
+      console.warn("❗ No CTA section found.");
+      return;
+    }
+
+    this.createDynamicComponent(ctaSection, this.ctaContainer);
+  }
+
+  createDynamicComponent(section: any, containerRef: ViewContainerRef) {
+    const componentType = this.componentsMap[section.component as keyof typeof this.componentsMap] as Type<any>;
+    if (!componentType) {
+      console.error(`❌ Component Not Found:`, section.component);
+      return;
+    }
+
+    const factory = this.resolver.resolveComponentFactory(componentType);
+    const componentRef = containerRef.createComponent(factory, undefined, this.injector);
+
+    Object.assign(componentRef.instance, {
+      title: this.applyReplaceKeyword(section.sectionTitle || ''),
+      subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
+      content: this.applyReplaceKeyword(section.sectionContent || ''),
+      imageURL: section.sectionImageUrl || '',
+      showBtn: section.showLearnMore || false,
+      _businessName: this.business?.businessName || '',
+      showImage: !!section.sectionImageUrl,
+      themeType: this.business?.theme?.themeType,
+      items: section.items || [],
+      isMinimal: section.isMinimal || false,
+      isParallax: section.isParallax ?? true,
+      backgroundColor: section.backgroundColor || '#ffffff',
+      textColor: section.textColor || '#000000',
+      titleColor: section.titleColor || '#000000',
+      subtitleColor: section.subtitleColor || '#000000',
+      fullWidth: section.fullWidth || false,
+      showButton: section.showButton || false,
+      buttonText: section.buttonText || 'Learn More',
+      buttonLink: section.buttonLink || '',
+      titleFontSize: section.titleFontSize || '36',
+      subtitleFontSize: section.subtitleFontSize || '14',
+      alignText: section.alignText || 'left',
+      boxShadow: section.boxShadow || false,
+      borderRadius: section.borderRadius ?? 10,
+      page: section.page,
+      location: section.location
     });
   }
 

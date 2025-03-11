@@ -14,7 +14,6 @@ export class CallToActionComponent implements OnInit {
   @Input() bgColor: string = 'var(--background-color)';
   @Input() textColor: string = 'var(--text-color)';
   @Input() titleColor: string = 'var(--accent-color)';
-  @Input() contentColor: string = 'var(--secondary-color)';
   @Input() buttonBgColor: string = 'var(--button-color)';
   @Input() buttonTextColor: string = 'var(--button-text-color)';
   @Input() borderRadius: string = '10px';
