@@ -1,34 +1,39 @@
 export  interface Section {
-  isActive: boolean,
-  subtitleColor: any;
-  titleColor: any;
-  textColor: any;
-  backgroundColor: any;
-  fullWidth: false,
   id?: string;
-  sectionType: string;
-  sectionName: string;
-  sectionStyle:string;
+  order: number;
   page: string;
   location: string;
-  sectionTitle: string;
-  sectionSubTitle?: string;
-  sectionContent?: string;
   component: string;
-  titleFontSize?: number;
-  subtitleFontSize?: number;
+
+  isActive: boolean,
+
+  sectionTitle: string;
   titleFontStyle?: string;
+  titleFontSize?: number;
+  titleColor: any;
+
+  sectionSubTitle?: string;
+  subtitleColor: any;
+  subtitleFontSize?: number;
   subtitleFontStyle?: string;
+
+  alignText:string;
+  textColor: any;
+  sectionContent?: string;
+
+  items?: any[];
+
   showButton?: boolean;
   buttonText: string;
   buttonLink: string;
+
   sectionImageUrl?: string;
   showImage?:string;
-  items?: any[];
-  order: number;
+
   isMinimal:boolean;
   isParallax:boolean;
-  alignText:string;
+  fullWidth: boolean,
+  backgroundColor: any;
   boxShadow:boolean;
   borderRadius:number;
 }
