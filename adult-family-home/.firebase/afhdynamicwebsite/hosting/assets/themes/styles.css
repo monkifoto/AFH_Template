@@ -826,6 +826,26 @@ textarea{
 	color: #666;
 	margin: 15px 0 0;
 }
+
+.text-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.text-section {
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+	margin: 0 auto;
+	padding-bottom: 6.6vmax;
+}
+.text-container {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
 .service-page-main-container,.aboutus-page-main-container,.home-page-main-container{
 	display: flex;
 	gap: 50px;
@@ -853,7 +873,7 @@ textarea{
 	align-items: center;
 	text-align: left;
 	padding: 2rem 1rem;
-	width: 575px;
+	width: 500px;
 	max-width: calc(var(--cell-max-width) * 24);
 	margin: 1.6vmax auto;
 	max-width: 600px;
@@ -871,21 +891,7 @@ textarea{
 	line-height: 2rem;
 	padding: 2rem 5rem;
 }
-.text-section {
-	display: flex;
-	flex-direction: row;
-	gap: 3rem;
-	padding: 0 5rem;
-	max-width: calc(var(--cell-max-width) * 24);
-	margin: 0 auto;
-	padding-bottom: 6.6vmax;
-}
-.text-container {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-}
+
 .text-container,.image-container {
 	flex: 1;
 	max-width: calc(var(--cell-max-width) * 11);
@@ -1274,15 +1280,15 @@ section {
 } */
 .cta-container {
 	text-align: center;
-	padding: 60px;
+	padding: 80px;
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	margin: 6rem auto;
-	width: 100%;
 }
+
 /* .cta-content h2 {
 	font-size: 4rem;
 	margin-bottom: 25px;
@@ -1561,16 +1567,7 @@ section {
 	background-color: var(--dark-background-color);
 	width: 100%;
 } */
-.cta-container {
-	display: flex;
-	background-color: var(--dark-background-color);
-	color: #fff;
-	padding: 40px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-}
+
 /* .cta-content {
 	max-width: 600px;
 }
@@ -1991,3 +1988,7 @@ section {
 		font-size: 1rem;
 	} */
 }
+
+/* .text-wrapper {
+  order: unset !important;
+} */

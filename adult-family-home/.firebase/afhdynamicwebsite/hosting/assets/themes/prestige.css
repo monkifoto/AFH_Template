@@ -31,7 +31,22 @@
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
  }
-
+ .container {
+	max-width: 1200px;
+	margin: 0 auto;
+	background-color: var(--background-color);
+}
+.full-width {
+	width: 100%;
+	max-width: 100%;
+}
+.centered {
+	width: var(--site-max-width);
+	margin: 0 auto;
+}
+.shadow {
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
  img {
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -1086,6 +1101,37 @@
   display: none;
  }
 
+/* Responsive toggler */
+.clemo-navbar-toggler {
+  display: none; /* Hide toggler by default */
+}
+
+.clemo-navbar-toggler-icon {
+  width: 25px;
+  height: 2px;
+  background-color: #333;
+  display: block;
+  position: relative;
+}
+
+.clemo-navbar-toggler-icon::before,
+.clemo-navbar-toggler-icon::after {
+  content: '';
+  width: 25px;
+  height: 2px;
+  background-color: #333;
+  position: absolute;
+  left: 0;
+  transition: transform 0.3s ease;
+}
+
+.clemo-navbar-toggler-icon::before {
+  top: -7px;
+}
+
+.clemo-navbar-toggler-icon::after {
+  top: 7px;
+}
 
 
  @media (max-width: 991px) {
@@ -1333,4 +1379,78 @@
   transition: .5s;
   border:1px solid var(--primary-color);
  }
+
+/* Services Grid Layout */
+.services-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  text-align: center;
+  gap: 20px;
+  padding: 40px 10%;
+}
+
+/* Individual Service Item */
+.service-item {
+  flex: 1;
+  max-width: 25%;
+}
+
+/* Service Title */
+.service-item h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+/* Service Description */
+.service-item p {
+  font-size: 14px;
+  color: #7f8c8d;
+  margin-top: 5px;
+  line-height: 1.5;
+}
+
+/* Icon Styling */
+.services-item-icon {
+  font-size: 24px;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+/* Underline separator */
+.service-item h2::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: #2c3e50;
+  margin: 8px auto;
+}
+
+/* Responsive Styling */
+@media (max-width: 1024px) {
+  .services-grid {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .service-item {
+    max-width: 40%;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .service-item {
+    max-width: 80%;
+  }
+}
+
 
