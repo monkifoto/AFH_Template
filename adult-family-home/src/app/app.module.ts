@@ -79,6 +79,7 @@ import { SpHeroComponentComponent } from './component/UI/sp-hero-component/sp-he
 import { DynamicThemeLoaderComponent } from './component/dynamic-theme-loader/dynamic-theme-loader.component';
 import { SafeUrlPipe } from './pipe/safe-url.pipe';
 import { BusinessLocationsComponent } from './admin/business-locations/business-locations.component';
+import { LocationPageComponent } from './component/PAGES/location-page/location-page.component';
 
 
     // Map hostnames to business IDs
@@ -221,7 +222,8 @@ export function combinedInitializer(
     SpHeroComponentComponent,
     DynamicThemeLoaderComponent,
     SafeUrlPipe,
-    BusinessLocationsComponent
+    BusinessLocationsComponent,
+    LocationPageComponent
   ],
   imports: [
     BrowserModule,

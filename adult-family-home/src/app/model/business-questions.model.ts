@@ -62,13 +62,15 @@ export interface Business {
 }
 
 export interface BusinessLocation{
+locationName:string;
   street:string;
   city:string;
   state:string;
   zipcode: string;
-  phoneNumber:string;
+  phone:string;
   fax:string;
   email:string;
+
 }
 
 export interface HeroSlide {
@@ -417,11 +419,12 @@ export class BusinessModel {
       // ratings: 'Google: 4.8 stars, Yelp: 5 stars',
       locations:[
         {
+          locationName:'Location 1',
           street: '4567 Compassionate Ln,',
           city:' Kindness City',
           state:'ST',
           zipcode:'56789',
-          phoneNumber:'(987) 654-3210',
+          phone:'(987) 654-3210',
           fax: '(987) 654-3211',
           email: 'contact@carefullivingafh.com'
         }
