@@ -195,4 +195,40 @@ export class BusinessService {
     return this.afs.doc(`${this.basePath}/${businessId}/sections/${sectionId}`).delete();
   }
 
+  addLocation(businessId: string, location: any): Promise<void> {
+    const locationRef = this.afs.collection(`businesses/${businessId}/locations`);
+    const newLocationId = this.afs.createId(); // Generate unique ID for the location
+    return locationRef.doc(newLocationId).set({ id: newLocationId, ...location });
+  }
+
+  /** 📌 Get All Locations for a Business */
+  getLocations(businessId: string): Observable<any[]> {
+    return this.afs.collection(`businesses/${businessId}/locations`).snapshotChanges().pipe(
+      map(actions => {
+        if (!actions.length) {
+          console.warn(`⚠️ No locations found in Firestore for Business ID: ${businessId}`);
+        }
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          if (typeof data === 'object' && data !== null) {
+            return { id: a.payload.doc.id, ...data }; // ✅ Include document ID
+          } else {
+            console.error(`❌ Firestore data format error:`, data);
+            return { id: a.payload.doc.id }; // ✅ At least return ID
+          }
+        });
+      })
+    );
+  }
+
+  /** 📌 Update an Existing Location */
+  updateLocation(businessId: string, locationId: string, location: any): Promise<void> {
+    return this.afs.doc(`businesses/${businessId}/locations/${locationId}`).update(location);
+  }
+
+  /** 📌 Delete a Location */
+  deleteLocation(businessId: string, locationId: string): Promise<void> {
+    return this.afs.doc(`businesses/${businessId}/locations/${locationId}`).delete();
+  }
+
 }

@@ -16,6 +16,7 @@ export class ExpandableNavigationComponent  implements OnInit {
   isShrunk: boolean = false;
   menuOpen: boolean = false;
   locationsOpen: boolean = false;
+  selectedLocation: any = null;
 
 
   constructor(
@@ -25,15 +26,24 @@ export class ExpandableNavigationComponent  implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Subscribe to the businessId from the service
     this.businessDataService.getBusinessId().subscribe((businessId) => {
       if (businessId) {
         this.businessId = businessId;
+
         this.businessDataService.getBusinessData().subscribe((data) => {
           this.business = data;
           this.layoutType = this.business?.theme.themeType;
-          console.log("Navigation Logo", this.business?.logoImage);
-          console.log("Navigation ID", this.business?.id);
+          // this.locations = this.business?.locations || []; // Store locations
+
+          // console.log("🔍 Loaded Locations:", this.locations); // ✅ Debugging
+          // if (this.locations.length === 0) {
+          //   console.warn("⚠️ No locations found for this business.");
+          // }
+        });
+
+        this.businessDataService.getLocations().subscribe((locations) => {
+          this.locations = locations;
+          console.log("📍 Locations Updated in Navigation:", this.locations);
         });
       }
     });
@@ -65,9 +75,16 @@ export class ExpandableNavigationComponent  implements OnInit {
     });
   }
 
+  selectLocation(index: number): void {
+    console.log("📍 Selected Location Index:", index);
+    this.router.navigate(['/location'], {
+      queryParams: { locationIndex: index }
+    });
+  }
   toggleLocations(): void {
     this.locationsOpen = !this.locationsOpen;
-    console.log('toggle location menu', this.locationsOpen);
+    console.log("📂 Locations Dropdown Toggled:", this.locationsOpen);
+    console.log("🔍 Locations Array:", this.locations);
   }
 
   closeMenu(): void {

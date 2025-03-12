@@ -11,13 +11,14 @@ export class HeroComponent implements  OnInit {
   backgroundImage: string = '';
   message: string = '';
 
-  private imagesAndMessages: { [key in 'services' | 'gallery' | 'about-us' | 'contact-us' | 'testimonials' | 'resident-form']: { image: string; message: string } } = {
+  private imagesAndMessages: { [key in 'services' | 'gallery' | 'about-us' | 'contact-us' | 'testimonials' | 'resident-form' | 'location']: { image: string; message: string } } = {
     'services': { image: '../../../../assets/sharedAssets/istockphoto-1344063915-2048x2048.jpg', message: 'Discover our Services' },
     'gallery': { image: '../../../../assets/sharedAssets/istockphoto-1551967154-2048x2048.jpg', message: 'Explore our Gallery' },
     'about-us': { image: '../../../../assets/sharedAssets/istockphoto-1162510523-2048x2048.jpg', message: 'Learn About Us' },
     'contact-us': { image: '../../../../assets/sharedAssets/istockphoto-1066099806-2048x2048.jpg', message: 'Get in Touch' },
     'testimonials': { image: '../../../../assets/sharedAssets/istockphoto-653191338-2048x2048.jpg', message: 'What they say about us' },
-    'resident-form': { image: '../../../../assets/sharedAssets/istockphoto-1453597643-2048x2048.jpg', message: 'Let us make you feel at home'}
+    'resident-form': { image: '../../../../assets/sharedAssets/istockphoto-1453597643-2048x2048.jpg', message: 'Let us make you feel at home'},
+    'location': { image: '../../../../assets/sharedAssets/istockphoto-1344063915-2048x2048.jpg', message: 'Discover our Services' },
   };
 
   private imagesAndMessagesSB: { [key in 'services' | 'gallery' | 'about-us' | 'contact-us' | 'testimonials' | 'resident-form']: { image: string; message: string } } = {

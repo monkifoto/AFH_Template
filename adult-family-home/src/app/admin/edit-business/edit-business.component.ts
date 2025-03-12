@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { BusinessService } from 'src/app/services/business.service';
 import { UploadService } from 'src/app/services/upload.service';
@@ -29,8 +35,8 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
   @ViewChild(ReviewsComponent) reviewComponent!: ReviewsComponent;
   @ViewChild(ServicesPageComponent) serviceComponent!: ServicesPageComponent;
   @ViewChild(SectionManagerComponent) sectionManager!: SectionManagerComponent;
-  @ViewChild(BusinessLocationsComponent) locationsManager!: BusinessLocationsComponent;
-
+  @ViewChild(BusinessLocationsComponent)
+  locationsManager!: BusinessLocationsComponent;
 
   business!: Business;
   businessForm!: FormGroup;
@@ -59,7 +65,8 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.pipe(take(1)).subscribe((params) => { // ✅ Take only the first subscription
+    this.route.paramMap.pipe(take(1)).subscribe((params) => {
+      // ✅ Take only the first subscription
       this.businessId = params.get('id')!;
 
       if (this.businessId) {
@@ -72,24 +79,27 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     });
   }
 
-
   loadBusinessData(): void {
     this.businessService.getBusiness(this.businessId).subscribe(
       (business) => {
         if (business) {
-          //console.log('Business data:', business); // Debugging line
+          console.log('Business data:', business); // Debugging line
           this.business = business;
           this.populateForm(business);
 
-           // Ensure each section has an ID
-        if (business.sections) {
-          business.sections.forEach((s, index) => {
-            console.log(`🔥 Load Business Data in Edit Business Section ${index}:`, s);
-            if (!s.id) {
-              console.warn(`⚠️ Section at index ${index} is missing an ID!`);
-            }
-          });
-        }
+
+          // Ensure each section has an ID
+          if (business.sections) {
+            business.sections.forEach((s, index) => {
+              console.log(
+                `🔥 Load Business Data in Edit Business Section ${index}:`,
+                s
+              );
+              if (!s.id) {
+                console.warn(`⚠️ Section at index ${index} is missing an ID!`);
+              }
+            });
+          }
           // Check if the logo image is a Firebase storage path
           if (
             business.logoImage &&
@@ -170,6 +180,31 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     });
     this.benefitsForm = this.fb.group({
       name: [''],
+    });
+  }
+
+  setLocations(locations: any[]) {
+    const locationArray = this.businessForm.get('locations') as FormArray;
+    locationArray.clear(); // Clear existing locations before populating
+
+    locations.forEach((location) => {
+      locationArray.push(
+        this.fb.group({
+          name: [location.name, Validators.required],
+          city: [location.city, Validators.required],
+          state: [location.state, Validators.required],
+          zipcode: [location.zipcode, Validators.required],
+          phone: [
+            location.phone,
+            [Validators.required, Validators.pattern(/^\d{10}$/)],
+          ],
+          fax: [
+            location.fax,
+            [Validators.required, Validators.pattern(/^\d{10}$/)],
+          ],
+          email: [location.email, [Validators.required, Validators.email]],
+        })
+      );
     });
   }
 
@@ -272,7 +307,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
             street: [location.street],
             city: [location.city],
             zipcode: [location.zipcode],
-            phoneNumber: [location.phoneNumber],
+            phone: [location.phone],
             fax: [location.fax],
             email: [location.email],
           })
@@ -297,6 +332,29 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
   populateForm(business: Business): void {
     this.businessForm.patchValue(business);
 
+     // Ensure locations are set
+  if (business.locations && business.locations.length) {
+    this.businessForm.setControl(
+      'locations',
+      new FormArray(
+        business.locations.map((loc) =>
+          this.fb.group({
+            street: [loc.street, Validators.required],
+            city: [loc.city, Validators.required],
+            state: [loc.state, Validators.required],
+            zipcode: [loc.zipcode, Validators.required],
+            phone: [loc.phone, [Validators.required, Validators.pattern(/^\d{10}$/)]],
+            fax: [loc.fax, [Validators.required, Validators.pattern(/^\d{10}$/)]],
+            email: [loc.email, [Validators.required, Validators.email]],
+          })
+        )
+      )
+    );
+    console.log('Locations populated in form:', this.businessForm.get('locations')?.value); // Debugging
+  } else {
+    console.warn('⚠️ No locations found to populate the form.');
+  }
+
     if (this.employeeComponent) {
       this.employeeComponent.populateEmployees(business.employees ?? []);
     }
@@ -308,7 +366,6 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     if (this.locationsManager) {
       this.locationsManager.loadLocations();
     }
-
 
     if (this.reviewComponent) {
       this.reviewComponent.populateTestimonials(business.testimonials ?? []);
@@ -348,57 +405,70 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     }
   }
 
+  updateLocations(locations: any) {
+    console.log('Locations received from child:', locations); // ✅ Debugging
+
+    if (this.businessForm.get('locations')) {
+      this.businessForm.patchValue({ locations: locations });
+    } else {
+      console.error('Locations form control is missing!');
+    }
+  }
 
   onSubmit(): void {
     if (this.isSubmitting) return; // Prevent multiple submissions
     this.isSubmitting = true;
 
-    console.log("onSubmit() called"); // Debugging
+    console.log('onSubmit() called'); // Debugging
+    const locations = this.businessForm.get('locations')?.value || [];
+    const formValue: Business = {
+      ...this.businessForm.value,
+      locations: this.businessForm.get('locations')?.value || [], // 🔥 Ensure locations are included
+    };
+
+    console.log('Final Data to Save:', formValue); // ✅ Debugging
 
     if (this.businessForm.valid) {
-
-        console.log("Form Value Before Saving:", this.businessForm.value); // 🔍 Debugging
-        console.log("Unique Services:", this.businessForm.get('uniqueService')?.value); // 🔍 Debugging
-        console.log("Why Choose:", this.businessForm.get('whyChoose')?.value); // 🔍 Debugging
-
-
-      const formValue: Business = this.businessForm.value;
+      console.log('Form Value Before Saving:', this.businessForm.value); // 🔍 Debugging
 
       if (this.businessId) {
         this.businessService
           .updateBusiness(this.businessId, formValue)
           .then(() => {
-            console.log("Business details updated successfully!");
+            console.log('Business details updated successfully!');
             this.isSubmitting = false;
           })
           .catch((err) => {
-            console.error("Error updating business details", err);
+            console.error('Error updating business details', err);
             this.isSubmitting = false;
           });
       } else {
-        this.businessService.createBusiness(formValue)
+        this.businessService
+          .createBusiness(formValue)
           .pipe(take(1)) // ✅ Ensure only one execution
-          .subscribe((bus) => {
-            if (bus && bus.id) {
-              this.business = bus;
-              this.businessId = bus.id; // ✅ Save the new business ID
-              console.log("Business created with ID:", this.businessId);
+          .subscribe(
+            (bus) => {
+              if (bus && bus.id) {
+                this.business = bus;
+                this.businessId = bus.id; // ✅ Save the new business ID
+                console.log('Business created with ID:', this.businessId);
+              }
+              this.confirmationMessage =
+                'Business has been successfully created!';
+              this.showConfirmation = true;
+              this.isSubmitting = false;
+            },
+            (err) => {
+              console.error('Error creating business:', err);
+              this.isSubmitting = false;
             }
-            this.confirmationMessage = "Business has been successfully created!";
-            this.showConfirmation = true;
-            this.isSubmitting = false;
-          }, (err) => {
-            console.error("Error creating business:", err);
-            this.isSubmitting = false;
-          });
+          );
       }
     } else {
-      console.log("Business Form is not valid!");
+      console.log('Business Form is not valid!');
       this.isSubmitting = false;
     }
   }
-
-
 
   closeConfirmation(): void {
     this.showConfirmation = false;

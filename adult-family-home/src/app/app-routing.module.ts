@@ -10,6 +10,7 @@ import { LoginComponent } from './admin/login/login.component';
 import { ResidentIntakeFormComponent } from './component/PAGES/resident-intake-form/resident-intake-form.component';
 import { TestimonialsListComponent } from './component/PAGES/testimonials/testimonials.component';
 import { FaqComponent } from './component/UI/faq/faq.component';
+import { LocationPageComponent } from './component/PAGES/location-page/location-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'resident-form', component: ResidentIntakeFormComponent},
   { path: 'testimonials', component: TestimonialsListComponent},
   { path: 'faq', component: FaqComponent},
+  { path: 'location', component: LocationPageComponent },
 
 
     // Admin routes (must come before the dynamic :id route to avoid conflicts)

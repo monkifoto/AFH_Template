@@ -2,6 +2,7 @@
   <h2>Manage Business Locations</h2>
 
   <form [formGroup]="locationForm" (ngSubmit)="saveLocations()">
+    <button type="button" (click)="addLocation()" class="add-btn">+ Add Location</button>
     <div formArrayName="locations">
       <div *ngFor="let location of locations.controls; let i = index" [formGroupName]="i" class="section-container">
 
@@ -13,11 +14,17 @@
             <button type="button" (click)="removeLocation(i)" class="delete-btn">Remove</button>
           </div>
         </div>
+        <div class="row">
+          <div class="col">
+            <label>Location Name</label>
+            <input formControlName="locationName" type="text" class="form-control" required/>
+          </div>
+        </div>
 
         <div class="row">
           <div class="col">
-            <label>Name</label>
-            <input formControlName="name" type="text" class="form-control" required/>
+            <label>Street</label>
+            <input formControlName="street" type="text" class="form-control" required/>
           </div>
           <div class="col">
             <label>City</label>
@@ -29,7 +36,7 @@
           </div>
           <div class="col">
             <label>ZipCode</label>
-            <input formControlName="zipCode" type="text" class="form-control" required/>
+            <input formControlName="zipcode" type="text" class="form-control" required/>
           </div>
         </div>
 
@@ -43,23 +50,24 @@
           </div>
           <div class="col">
             <label>Fax Number</label>
-            <input formControlName="fax" type="text" class="form-control" required/>
+            <input formControlName="fax" type="text" class="form-control" />
             <small *ngIf="location.get('fax')?.invalid && location.get('fax')?.touched" class="error">
               Please enter a valid 10-digit phone number.
             </small>
           </div>
           <div class="col">
             <label>Email</label>
-            <input formControlName="email" type="text" class="form-control" required/>
+            <input formControlName="email" type="text" class="form-control" />
           </div>
         </div>
 
       </div>
     </div>
 
-    <button type="button" (click)="addLocation()" class="add-btn">+ Add Location</button>
+
 
     <button type="submit" class="save-btn" [disabled]="isSaving">Save Locations</button>
+
   </form>
 
   <div *ngIf="message" class="message">{{ message }}</div>

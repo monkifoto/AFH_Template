@@ -14,6 +14,12 @@
             </button>
           </li>
           <li class="nav-item" role="presentation">
+            <button class="nav-link" id="locations-tab" data-bs-toggle="tab" data-bs-target="#locations"
+              type="button" role="tab" aria-controls="locations" aria-selected="false">
+              LOCATIONS <span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span>
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
             <button class="nav-link" id="hero-slider-tab" data-bs-toggle="tab" data-bs-target="#hero-slider-theme"
               type="button" role="tab" aria-controls="hero-slider-theme" aria-selected="false">
               HERO SLIDER <span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span>
@@ -34,19 +40,19 @@
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="media-reviews-tab" data-bs-toggle="tab" data-bs-target="#media-reviews"
               type="button" role="tab" aria-controls="media-reviews" aria-selected="false">
-              Media & Reviews <span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span>
+              MEDIA & REVIEWS <span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span>
             </button>
           </li>
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="contact-us-page-tab" data-bs-toggle="tab" data-bs-target="#contact-us-page"
               type="button" role="tab" aria-controls="contact-us-page" aria-selected="false">
-              Contact Us
+              CONTACT US
             </button>
           </li>
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="employee-profiles-tab" data-bs-toggle="tab" data-bs-target="#employee-profiles"
               type="button" role="tab" aria-controls="employee-profiles" aria-selected="false">
-              Employee Profiles <span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span>
+              EMPLOYEE PROFILES <span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span>
             </button>
           </li>
           <li class="nav-item" role="presentation">
@@ -55,26 +61,26 @@
               THEME <span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span>
             </button>
           </li>
-<!--
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="services-page-tab" data-bs-toggle="tab" data-bs-target="#services-page"
-              type="button" role="tab" aria-controls="services-page" aria-selected="false">
-              Services Page <span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span>
-            </button>
-          </li> -->
         </ul>
       </div>
 
       <!-- Main Content Area -->
       <div class="main-content">
         <div class="tab-content" id="businessTabContent">
+          <!-- Basic Info Tab -->
           <div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="basic-info-tab">
             <app-basic-info [form]="businessForm" [business]="business" [businessId]="businessId"></app-basic-info>
-            <div class="sub-section">
-              <h3>Locations</h3>
-              <app-business-locations [businessId]="businessId"></app-business-locations>
-            </div>
           </div>
+
+          <!-- NEW: Locations Tab -->
+          <div class="tab-pane fade" id="locations" role="tabpanel" aria-labelledby="locations-tab">
+            <h3>Manage Locations</h3>
+            <app-business-locations
+              [businessId]="businessId"
+              (locationsUpdated)="updateLocations($event)">
+            </app-business-locations>
+          </div>
+
           <div class="tab-pane fade" id="services-page" role="tabpanel" aria-labelledby="services-page-tab">
             <app-services-page [form]="businessForm" [business]="business" [businessId]="businessId"></app-services-page>
           </div>
