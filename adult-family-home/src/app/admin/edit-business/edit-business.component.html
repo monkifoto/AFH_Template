@@ -70,6 +70,10 @@
         <div class="tab-content" id="businessTabContent">
           <div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="basic-info-tab">
             <app-basic-info [form]="businessForm" [business]="business" [businessId]="businessId"></app-basic-info>
+            <div class="sub-section">
+              <h3>Locations</h3>
+              <app-business-locations [businessId]="businessId"></app-business-locations>
+            </div>
           </div>
           <div class="tab-pane fade" id="services-page" role="tabpanel" aria-labelledby="services-page-tab">
             <app-services-page [form]="businessForm" [business]="business" [businessId]="businessId"></app-services-page>

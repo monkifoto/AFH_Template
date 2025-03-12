@@ -18,6 +18,16 @@
     <div class="clemo-navbar-collapse" [ngClass]="{'clemo-show': menuOpen}">
       <ul class="clemo-navbar-nav">
         <li class="clemo-nav-linkitem"><span class="clemo-nav-link"  (click)="navigateTo('home')">Home</span></li>
+        <li class="clemo-nav-linkitem dropdown" *ngIf="layoutType === 'prestige'">
+          <span class="clemo-nav-link dropdown-toggle" (click)="toggleLocations()">
+            Locations
+          </span>
+          <ul class="dropdown-menu" *ngIf="locationsOpen">
+            <li class="dropdown-item" *ngFor="let location of locations">
+              <span (click)="navigateTo(location.link)">{{ location.city }}</span>
+            </li>
+          </ul>
+        </li>
         <li class="clemo-nav-linkitem"><span class="clemo-nav-link" (click)="navigateTo('about-us')">About Us</span></li>
         <li class="clemo-nav-linkitem" ><span class="clemo-nav-link" (click)="navigateTo('services')">Services</span></li>
         <li class="clemo-nav-linkitem" *ngIf="layoutType!='sb'"><span class="clemo-nav-link" (click)="navigateTo('gallery')">Our Home</span></li>

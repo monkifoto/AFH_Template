@@ -15,6 +15,7 @@ import { ReviewsComponent } from '../reviews/reviews.component';
 import { ServicesPageComponent } from '../services-page/services-page.component';
 import { AboutUsComponent } from 'src/app/component/PAGES/about-us/about-us.component';
 import { SectionManagerComponent } from '../section-manager/section-manager.component';
+import { BusinessLocationsComponent } from '../business-locations/business-locations.component';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -28,6 +29,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
   @ViewChild(ReviewsComponent) reviewComponent!: ReviewsComponent;
   @ViewChild(ServicesPageComponent) serviceComponent!: ServicesPageComponent;
   @ViewChild(SectionManagerComponent) sectionManager!: SectionManagerComponent;
+  @ViewChild(BusinessLocationsComponent) locationsManager!: BusinessLocationsComponent;
 
 
   business!: Business;
@@ -136,8 +138,8 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
       certifications: [''],
 
       //Services Page
-      services: this.fb.array([]),
-      benefits: this.fb.array([]),
+      // services: this.fb.array([]),
+      // benefits: this.fb.array([]),
       specialPrograms: [''],
       tours: [''],
       freeConsulting: [''],
@@ -148,6 +150,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
       mediaFeatures: [''],
       ratings: [''],
       testimonials: this.fb.array([]),
+      locations: this.fb.array([]),
       socialMedia: [''],
 
       //Contact Us Page
@@ -159,7 +162,6 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
       // photoGalleryText: [''],
 
       isActive: true,
-
       //Employee Page
       employees: this.fb.array([]),
     });
@@ -179,13 +181,13 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     return this.businessForm.get('testimonials') as FormArray;
   }
 
-  services(): FormArray {
-    return this.businessForm.get('services') as FormArray;
-  }
+  // services(): FormArray {
+  //   return this.businessForm.get('services') as FormArray;
+  // }
 
-  benefits(): FormArray {
-    return this.businessForm.get('benefits') as FormArray;
-  }
+  // benefits(): FormArray {
+  //   return this.businessForm.get('benefits') as FormArray;
+  // }
 
   uniqueService(): FormArray {
     return this.businessForm.get('uniqueService') as FormArray;
@@ -211,14 +213,12 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
       certifications: [defaultBusiness.certifications],
       logoImage: [defaultBusiness.logoImage],
       faviconUrl: [defaultBusiness.faviconUrl],
-
       address: [defaultBusiness.address],
       phone: [defaultBusiness.phone],
       fax: [defaultBusiness.fax],
       email: [defaultBusiness.email],
       businessHours: [defaultBusiness.businessHours],
       socialMedia: [defaultBusiness.socialMedia],
-
       contactFormDetails: [defaultBusiness.contactFormDetails],
       contactUsImageUrl: [defaultBusiness.contactUsImageUrl],
       isActive: [defaultBusiness.isActive],
@@ -244,22 +244,6 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
         )
       ),
 
-      services: this.fb.array(
-        defaultBusiness.services.map((service) =>
-          this.fb.group({
-            name: [service.name],
-          })
-        )
-      ),
-
-      benefits: this.fb.array(
-        defaultBusiness.benefits.map((benefit) =>
-          this.fb.group({
-            name: [benefit.name],
-          })
-        )
-      ),
-
       testimonials: this.fb.array(
         (defaultBusiness.testimonials ?? []).map((testimonial) =>
           this.fb.group({
@@ -281,19 +265,19 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
           })
         )
       ),
-      // sections: this.fb.array(
-      //   (defaultBusiness.sections ?? []).map((section) =>
-      //     this.fb.group({
-      //       sectionName: [section.sectionName || ''],
-      //       sectionTitle: [section.sectionTitle || ''],
-      //       sectionSubTitle: [section.sectionSubTitle || ''],
-      //       sectionContent: [section.sectionContent || ''],
-      //       sectionImageUrl: [section.sectionImageUrl || ''],
-      //       sectionType: [section.sectionType || ''],
-      //       sectionStyle: [section.sectionStyle || ''],
-      //     })
-      //   )
-      // ),
+
+      locations: this.fb.array(
+        (defaultBusiness.locations ?? []).map((location) =>
+          this.fb.group({
+            street: [location.street],
+            city: [location.city],
+            zipcode: [location.zipcode],
+            phoneNumber: [location.phoneNumber],
+            fax: [location.fax],
+            email: [location.email],
+          })
+        )
+      ),
     });
   }
 
@@ -321,9 +305,8 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
       this.reviewComponent.populateTestimonials(business.testimonials ?? []);
     }
 
-    if (this.serviceComponent) {
-      this.serviceComponent.populateServices(business.services ?? []);
-      this.serviceComponent.populateBenefits(business.benefits ?? []);
+    if (this.locationsManager) {
+      this.locationsManager.loadLocations();
     }
 
 

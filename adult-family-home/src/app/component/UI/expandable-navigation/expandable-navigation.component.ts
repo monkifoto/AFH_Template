@@ -12,8 +12,10 @@ export class ExpandableNavigationComponent  implements OnInit {
   businessId: string = '';
   business: Business | null = null;
   layoutType?: string = 'demo';
+  locations: any;
   isShrunk: boolean = false;
   menuOpen: boolean = false;
+  locationsOpen: boolean = false;
 
 
   constructor(
@@ -63,6 +65,10 @@ export class ExpandableNavigationComponent  implements OnInit {
     });
   }
 
+  toggleLocations(): void {
+    this.locationsOpen = !this.locationsOpen;
+    console.log('toggle location menu', this.locationsOpen);
+  }
 
   closeMenu(): void {
     this.menuOpen = false;

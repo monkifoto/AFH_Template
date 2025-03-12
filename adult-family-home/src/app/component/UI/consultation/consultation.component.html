@@ -15,7 +15,7 @@
     </div>
 </div>
 
-<ng-container *ngSwitchCase="'ae'"
+<div *ngSwitchCase="'ae'"
 [ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
 [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
   <div class="ae-section-container">
@@ -33,8 +33,8 @@
     </div>
   </div>
 </div>
-</ng-container>
-<ng-container *ngSwitchCase="'sb'"
+</div>
+<div *ngSwitchCase="'sb'"
 [ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
 [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
   <div class="ae-section-container">
@@ -51,5 +51,24 @@
     </div>
   </div>
 </div>
-</ng-container>
+</div>
+
+<div *ngSwitchCase="'prestige'"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+  <div class="ae-section-container">
+  <div class="cta-container">
+    <div class="cta-content">
+      <div class="our-services-section-heading">
+        <span class="consultation-title main" [ngStyle]="{ 'color': titleColor ,'font-size': titleFontSize+'px' }">{{title}} </span>
+        <span class="section-title-highlight" [ngStyle]="{ 'color': subtitleColor ,'font-size': subtitleFontSize+'px' }">{{subTitle}}</span>
+      </div>
+      <p class="section-description" [innerHTML]="sanitizedContent"></p>
+      <div class="cta-buttons">
+        <button type="button" class="cta-btn" (click)="navigateTo('resident-form')">{{buttonText}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 </div>

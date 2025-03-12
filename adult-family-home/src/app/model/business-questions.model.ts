@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Section } from './section.model';
 
 export interface Business {
@@ -28,12 +29,13 @@ export interface Business {
   sliderConfig?: SliderConfig;
   heroImages: string[];
   sections: Section[];
-  services: ListItem[];
+  // services: ListItem[];
   testimonials: Testimonial[];
-  benefits: ListItem[];
+  // benefits: ListItem[];
   uniqueService: ListItem[];
   whyChoose: ListItem[];
   employees: Employee[];
+  locations: BusinessLocation[];
 
 //to be removed
    certifications: string;
@@ -57,6 +59,16 @@ export interface Business {
   metaKeywords: string;
   metaDescription: string;
   theme: Theme;
+}
+
+export interface BusinessLocation{
+  street:string;
+  city:string;
+  state:string;
+  zipcode: string;
+  phoneNumber:string;
+  fax:string;
+  email:string;
 }
 
 export interface HeroSlide {
@@ -174,13 +186,10 @@ export class BusinessModel {
           page:'home',
           location:'bottom',
           component:'consultation',
-          sectionName: 'HomeCTAt',
           sectionTitle: 'Ready to Experience {{businessName}}',
           sectionSubTitle: 'Come See the difference.',
           sectionContent:
             'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
-          sectionType: 'Story',
-          sectionStyle: 'hh',
           order:5,
           items: [],
           isMinimal:false,
@@ -203,13 +212,10 @@ export class BusinessModel {
           page:'aboutus',
           location:'right',
           component:'right-text',
-          sectionName: 'AboutUsRight',
           sectionTitle: 'Our Story',
           sectionSubTitle: 'Caring with compassion for every senior.',
           sectionContent:
             'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
-          sectionType: 'Story',
-          sectionStyle: 'hh',
           order:0,
           items: [],
           isMinimal:false,
@@ -232,13 +238,10 @@ export class BusinessModel {
           page:'aboutus',
           location:'left',
           component:'left-text',
-          sectionName: 'AboutUsLeft',
           sectionTitle: 'Our Vision',
           sectionSubTitle: 'Caring with compassion for every senior.',
           sectionContent:
             'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
-          sectionType: 'Vision',
-          sectionStyle: 'hh',
           order:0,
           items: [],
           isMinimal:false,
@@ -261,13 +264,10 @@ export class BusinessModel {
           page:'services',
           location:'right',
           component:'right-text',
-          sectionName: 'ServicesRight',
           sectionTitle: 'Our Mission',
           sectionSubTitle: 'Caring with compassion for every senior.',
           sectionContent:
             'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
-          sectionType: 'Mission',
-          sectionStyle: 'hh',
           order:0,
           items: [],
           isMinimal:false,
@@ -290,13 +290,10 @@ export class BusinessModel {
           page:'services',
           location:'left',
           component:'left-text',
-          sectionName: 'ServicesLeft',
           sectionTitle: 'Our Motivation',
           sectionSubTitle: 'Caring with compassion for every senior.',
           sectionContent:
             'Founded by healthcare professionals passionate about senior care, Careful Living AFH aims to provide a nurturing environment for the elderly.',
-          sectionType: 'Motivation',
-          sectionStyle: 'hh',
           order:0,
           items: [],
           isMinimal:false,
@@ -319,13 +316,10 @@ export class BusinessModel {
           page:'gallery',
           location:'top',
           component:'center-text',
-          sectionName: 'GalleryCenterTop',
           sectionTitle: 'OurHome',
           sectionSubTitle: 'Welcome to our gallery',
           sectionContent:
             'Gallery Text',
-          sectionType: 'Other',
-          sectionStyle: 'hh',
           order:0,
           items: [],
           isMinimal:false,
@@ -421,10 +415,21 @@ export class BusinessModel {
 
       // mediaFeatures: 'Featured in Healthcare Journal, Senior Care Monthly.',
       // ratings: 'Google: 4.8 stars, Yelp: 5 stars',
-      address: '4567 Compassionate Ln, Kindness City, ST 56789',
-      phone: '(987) 654-3210',
-      fax: '(987) 654-3211',
-      email: 'contact@carefullivingafh.com',
+      locations:[
+        {
+          street: '4567 Compassionate Ln,',
+          city:' Kindness City',
+          state:'ST',
+          zipcode:'56789',
+          phoneNumber:'(987) 654-3210',
+          fax: '(987) 654-3211',
+          email: 'contact@carefullivingafh.com'
+        }
+      ],
+      address: '',
+      phone: '',
+      fax: '',
+      email: '',
 
       businessHours: 'Mon-Fri: 8am-6pm, Sat-Sun: 9am-5pm',
       socialMedia:
@@ -458,22 +463,22 @@ export class BusinessModel {
         },
         // Other reasons...
       ],
-      services: [
-        { name: 'Medication & Health Management', icon: 'fa-solid fa-prescription-bottle', description: 'Proper medication administration, doctor visits, lab work, and therapy to maintain well-being.' },
-        { name: '24/7 Assistance & Health Monitoring', icon: 'fa-solid fa-bed-pulse', description: 'Around-the-clock care, including vital signs monitoring and professional nursing support.' },
-        { name: 'Daily Living & Personal Care', icon: 'fa-solid fa-shower', description: 'Assistance with bathing, dressing, grooming, mobility, and incontinence support.' },
-        { name: 'Nutritious Meals & Special Diets', icon: 'fa-solid fa-utensils', description: 'Thoughtfully planned meals tailored to dietary and medical needs.' },
-        { name: 'Engaging Activities & Entertainment', icon: 'fa-solid fa-compact-disc', description: 'Personalized activities, social programs, and entertainment for enrichment and connection.' },
-        { name: 'Comfortable & Accessible Living', icon: 'fa-solid fa-wheelchair', description: 'Housekeeping, wheelchair accessibility, and a clean, safe environment.' },
-        // Other services...
-      ],
-      benefits: [
-        { name: 'Private & Accessible Rooms', icon: 'fa-solid fa-lock', description: 'Private rooms with optional shared bathrooms, equipped with a calling system, phone, cable TV, and high-speed wireless internet.' },
-        { name: 'Safe & Secure Environment', icon: 'fa-brands fa-accessible-icon', description: 'Handicap-accessible design, smoke alarms, a security system, emergency call buttons, and an electric generator for backup power.' },
-        { name: 'Spacious & Inviting Common Areas', icon: 'fa-solid fa-expand', description: 'Open floor plan with high ceilings, hardwood floors, and a covered deck for relaxation.' },
-        { name: 'Engaging Activities & Social Events', icon: 'fa-solid fa-compact-disc', description: 'Music and audiobook therapy, card and board games, knitting, word searches, puzzles, crafts, movie nights, and birthday celebrations.' },
-        // Other benefits...
-      ],
+      // services: [
+      //   { name: 'Medication & Health Management', icon: 'fa-solid fa-prescription-bottle', description: 'Proper medication administration, doctor visits, lab work, and therapy to maintain well-being.' },
+      //   { name: '24/7 Assistance & Health Monitoring', icon: 'fa-solid fa-bed-pulse', description: 'Around-the-clock care, including vital signs monitoring and professional nursing support.' },
+      //   { name: 'Daily Living & Personal Care', icon: 'fa-solid fa-shower', description: 'Assistance with bathing, dressing, grooming, mobility, and incontinence support.' },
+      //   { name: 'Nutritious Meals & Special Diets', icon: 'fa-solid fa-utensils', description: 'Thoughtfully planned meals tailored to dietary and medical needs.' },
+      //   { name: 'Engaging Activities & Entertainment', icon: 'fa-solid fa-compact-disc', description: 'Personalized activities, social programs, and entertainment for enrichment and connection.' },
+      //   { name: 'Comfortable & Accessible Living', icon: 'fa-solid fa-wheelchair', description: 'Housekeeping, wheelchair accessibility, and a clean, safe environment.' },
+      //   // Other services...
+      // ],
+      // benefits: [
+      //   { name: 'Private & Accessible Rooms', icon: 'fa-solid fa-lock', description: 'Private rooms with optional shared bathrooms, equipped with a calling system, phone, cable TV, and high-speed wireless internet.' },
+      //   { name: 'Safe & Secure Environment', icon: 'fa-brands fa-accessible-icon', description: 'Handicap-accessible design, smoke alarms, a security system, emergency call buttons, and an electric generator for backup power.' },
+      //   { name: 'Spacious & Inviting Common Areas', icon: 'fa-solid fa-expand', description: 'Open floor plan with high ceilings, hardwood floors, and a covered deck for relaxation.' },
+      //   { name: 'Engaging Activities & Social Events', icon: 'fa-solid fa-compact-disc', description: 'Music and audiobook therapy, card and board games, knitting, word searches, puzzles, crafts, movie nights, and birthday celebrations.' },
+      //   // Other benefits...
+      // ],
       testimonials: [
         {
           id: '',
