@@ -78,6 +78,7 @@ import { SpContactUsComponentComponent } from './component/UI/sp-contact-us-comp
 import { SpHeroComponentComponent } from './component/UI/sp-hero-component/sp-hero-component.component';
 import { DynamicThemeLoaderComponent } from './component/dynamic-theme-loader/dynamic-theme-loader.component';
 import { SafeUrlPipe } from './pipe/safe-url.pipe';
+import { BusinessLocationsComponent } from './admin/business-locations/business-locations.component';
 
 
     // Map hostnames to business IDs
@@ -220,6 +221,7 @@ export function combinedInitializer(
     SpHeroComponentComponent,
     DynamicThemeLoaderComponent,
     SafeUrlPipe,
+    BusinessLocationsComponent
   ],
   imports: [
     BrowserModule,

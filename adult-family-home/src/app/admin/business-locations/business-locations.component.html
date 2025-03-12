@@ -1,0 +1,66 @@
+<div class="admin-locations">
+  <h2>Manage Business Locations</h2>
+
+  <form [formGroup]="locationForm" (ngSubmit)="saveLocations()">
+    <div formArrayName="locations">
+      <div *ngFor="let location of locations.controls; let i = index" [formGroupName]="i" class="section-container">
+
+        <div class="row">
+          <div class="col">
+            <h3>Location {{ i + 1 }}</h3>
+          </div>
+          <div class="col">
+            <button type="button" (click)="removeLocation(i)" class="delete-btn">Remove</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label>Name</label>
+            <input formControlName="name" type="text" class="form-control" required/>
+          </div>
+          <div class="col">
+            <label>City</label>
+            <input formControlName="city" type="text" class="form-control" required/>
+          </div>
+          <div class="col">
+            <label>State</label>
+            <input formControlName="state" type="text" class="form-control" required/>
+          </div>
+          <div class="col">
+            <label>ZipCode</label>
+            <input formControlName="zipCode" type="text" class="form-control" required/>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label>Phone Number</label>
+            <input formControlName="phone" type="text" class="form-control" required/>
+            <small *ngIf="location.get('phone')?.invalid && location.get('phone')?.touched" class="error">
+              Please enter a valid 10-digit phone number.
+            </small>
+          </div>
+          <div class="col">
+            <label>Fax Number</label>
+            <input formControlName="fax" type="text" class="form-control" required/>
+            <small *ngIf="location.get('fax')?.invalid && location.get('fax')?.touched" class="error">
+              Please enter a valid 10-digit phone number.
+            </small>
+          </div>
+          <div class="col">
+            <label>Email</label>
+            <input formControlName="email" type="text" class="form-control" required/>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <button type="button" (click)="addLocation()" class="add-btn">+ Add Location</button>
+
+    <button type="submit" class="save-btn" [disabled]="isSaving">Save Locations</button>
+  </form>
+
+  <div *ngIf="message" class="message">{{ message }}</div>
+</div>

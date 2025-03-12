@@ -141,21 +141,21 @@
  }
 
 
- .btn {
+ .afhBtn {
   display: inline-block;
   min-width: 180px;
   padding: .4em;
   height: 45px;
   text-align: center;
-  color: #fff;
+  color: var(--dark-background-color);
   letter-spacing: 1px;
   margin: 0;
   font-size: 1.125rem;
 
   margin-top: 20px;
-  background-color: var(--dark-button-color);
+  background-color: var(--background-color);
   transition: .5s;
-  border:1px solid var(--primary-color);
+  border:1px solid  var(--dark-background-color);
 
  }
 
@@ -187,14 +187,14 @@
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
  }
 
- .sb-services-item-icon {
-  font-size: 40px;
-  color: #6c757d;
+ .services-item-icon {
+  font-size: 50px;
+  color: var(--dark-background-color) !important;
   margin-bottom: 15px;
   display: block;
  }
 
- .sb-service-title {
+ .service-title {
   font-size: 20px;
   font-weight: 600;
   color: #343a40;
@@ -867,7 +867,41 @@
   border-radius: 2px;
  }
 
+/* Style the dropdown */
+.dropdown {
+  position: relative;
+  cursor: pointer;
+}
 
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: 150px;
+  z-index: 1000;
+}
+
+.dropdown-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background: #f0f0f0;
+}
+
+/* Dropdown toggle styling */
+.dropdown-toggle {
+  cursor: pointer;
+  padding: 10px;
+}
 
 
 
@@ -1205,13 +1239,20 @@
  }
 
  .cta-btn {
-  background-color: var(--button-color);
-  color: var(--primary-color);
-  padding: 15px 30px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  display: inline-block;
+  min-width: 180px;
+  padding: .4em;
+  height: 45px;
+  text-align: center;
+  color: #fff;
+  letter-spacing: 1px;
+  margin: 0;
+  font-size: 1.125rem;
+
+  margin-top: 20px;
+  background-color: var(--dark-button-color);
+  transition: .5s;
+  border:1px solid var(--primary-color);
  }
 
 
@@ -1412,12 +1453,7 @@
   line-height: 1.5;
 }
 
-/* Icon Styling */
-.services-item-icon {
-  font-size: 24px;
-  color: #2c3e50;
-  margin-bottom: 10px;
-}
+
 
 /* Underline separator */
 .service-item h2::after {
