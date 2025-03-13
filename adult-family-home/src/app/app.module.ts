@@ -90,6 +90,8 @@ import { LocationPageComponent } from './component/PAGES/location-page/location-
       "www.aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1",
       "sbmediahub.com": "MGou3rzTVIbP77OLmZa7",
       "sp.sbmediahub.com": "KyQfU7hjez0uXRfAjqcu",
+      "prestige.sbmediahub.com": "pDJgpl34XUnRblyIlBA7",
+      "elderlyhc.sbmediahub.com": "SJgFxBYkopnPR4WibCAf",
       "www.sbmediahub.com": "MGou3rzTVIbP77OLmZa7",
       "countrycrestafh.com": "yrNc50SvfPqwTSkvvygA",
       "www.countrycrestafh.com": "yrNc50SvfPqwTSkvvygA"

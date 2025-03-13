@@ -30,8 +30,8 @@ export class NavigationComponent implements OnInit {
         this.businessDataService.getBusinessData().subscribe((data) => {
           this.business = data;
           this.layoutType = this.business?.theme.themeType;
-          console.log("Navigation Logo", this.business?.logoImage);
-          console.log("Navigation ID", this.business?.id);
+          //console.log("Navigation Logo", this.business?.logoImage);
+          //console.log("Navigation ID", this.business?.id);
         });
       }
     });
@@ -42,7 +42,7 @@ export class NavigationComponent implements OnInit {
 
   navigateTo(page: string): void {
     const queryParams = this.businessId ? { id: this.businessId } : {};
-    console.log('This Business id from query string:', this.businessId);
+    //console.log('This Business id from query string:', this.businessId);
     this.closeMenu();
     this.router.navigate([`/${page}`], { queryParams }).then(success => {
       if (!success) {

@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.businessDataService.getBusinessId().pipe(
       switchMap((businessId) => {
-        console.log("Business ID Retrieved:", businessId); // Debugging output
+       // console.log("Business ID Retrieved:", businessId); // Debugging output
         if (businessId) {
           this.businessId = businessId;
           this.metaService.loadAndApplyMeta(businessId);
@@ -84,7 +84,7 @@ export class HomeComponent implements OnInit {
 
   loadSections() {
     this.sectionService.getBusinessSections(this.businessId, 'home').subscribe((sections) => {
-      console.log("📌 Sections Retrieved:", sections);
+     // console.log("📌 Sections Retrieved:", sections);
 
       if (!sections || sections.length === 0) {
         console.warn("❗ No sections retrieved from the database");
@@ -105,10 +105,10 @@ export class HomeComponent implements OnInit {
 
 loadComponents() {
   this.container.clear();
-  console.log("✅ Starting to Load Components");
+ // console.log("✅ Starting to Load Components");
 
   // Load HeroSliderComponent First
-  console.log("✅ Adding HeroSliderComponent");
+  //console.log("✅ Adding HeroSliderComponent");
   const heroSliderFactory = this.resolver.resolveComponentFactory(HeroSliderComponent);
   this.container.createComponent(heroSliderFactory, undefined, this.injector);
 
@@ -120,7 +120,7 @@ loadComponents() {
   let consultationSection = null; // Store consultation section separately
 
   this.sections.forEach((section, index) => {
-    console.log(`🔄 Loading Component for Section ${index + 1}:`, section.component);
+   // console.log(`🔄 Loading Component for Section ${index + 1}:`, section.component);
 
     const componentType = this.componentsMap[section.component as keyof typeof this.componentsMap] as Type<any>;
 
@@ -146,7 +146,7 @@ loadComponents() {
 
   // ✅ Finally, inject the consultation section at the end
   if (consultationSection) {
-    console.log("✅ Loading ConsultationComponent at the end");
+   // console.log("✅ Loading ConsultationComponent at the end");
     const consultationFactory = this.resolver.resolveComponentFactory(ConsultationComponent);
     const consultationRef = this.container.createComponent(consultationFactory, undefined, this.injector);
     this.assignComponentProperties(consultationRef, consultationSection);
@@ -156,7 +156,7 @@ loadComponents() {
 loadManualComponents() {
   // Manually Load TestimonialsComponent if Business Has Testimonials and No Google Place ID
   if (this.business?.testimonials?.length && !this.business?.placeId && this.business?.theme?.themeType !== 'sb') {
-    console.log("Loading TestimonialsComponent");
+    //console.log("Loading TestimonialsComponent");
     const testimonialsFactory = this.resolver.resolveComponentFactory(TestimonialsComponent);
     const testimonialsRef = this.container.createComponent(testimonialsFactory, undefined, this.injector);
 
@@ -168,7 +168,7 @@ loadManualComponents() {
 
   // Manually Load TestimonialCarouselComponent if Business Has a Google Place ID
   if (this.business?.placeId) {
-    console.log("Loading TestimonialCarouselComponent");
+    //console.log("Loading TestimonialCarouselComponent");
     const testimonialCarouselFactory = this.resolver.resolveComponentFactory(TestimonialCarouselComponent);
     const testimonialCarouselRef = this.container.createComponent(testimonialCarouselFactory, undefined, this.injector);
 
@@ -179,7 +179,7 @@ loadManualComponents() {
 
   // Manually Load GoogleMapsComponent for 'clemo' theme
   if (this.business?.placeId && this.business?.theme?.themeType === 'clemo') {
-    console.log("Loading GoogleMapComponent");
+    //console.log("Loading GoogleMapComponent");
     const gmapFactory = this.resolver.resolveComponentFactory(GoogleMapsComponent);
     const gmapRef = this.container.createComponent(gmapFactory, undefined, this.injector);
 
@@ -221,7 +221,7 @@ assignComponentProperties(componentRef: any, section: any) {
       location: section.location,
       businessId: this.business?.id
     });
-    console.log(`✅ Component Data for ${section.component}:`, componentRef.instance);
+    //console.log(`✅ Component Data for ${section.component}:`, componentRef.instance);
   }
 }
 
