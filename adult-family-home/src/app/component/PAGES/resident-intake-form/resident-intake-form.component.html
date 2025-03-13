@@ -2,9 +2,9 @@
 <div *ngIf="business">
   <!-- <div [ngSwitch]="layoutType">
     <ng-container *ngSwitchCase="'hh'"> -->
-      <div *ngIf="business.theme.themeType === 'prestige'">
-        <app-hero [layoutType]="'prestige'"></app-hero>
-      </div>
+
+        <app-hero [layoutType]="business.theme.themeType"></app-hero>
+
 <form [formGroup]="intakeForm" (ngSubmit)="onSubmit()">
   <!-- Personal Information -->
   <div class="form-section">
