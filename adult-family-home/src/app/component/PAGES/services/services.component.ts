@@ -69,13 +69,13 @@ export class ServicesComponent implements OnInit, AfterViewInit {
         return;
       }
       if (this.business && this.sections.length) {
-        console.log("✅ View and Sections Ready – Loading Components...");
+        //console.log("✅ View and Sections Ready – Loading Components...");
         this.loadComponents();
       } else {
         console.warn("❗ Sections are not loaded yet, retrying...");
         setTimeout(() => {
           if (this.sections.length) {
-            console.log("✅ Sections loaded after retry – Loading Components...");
+            //console.log("✅ Sections loaded after retry – Loading Components...");
             this.loadComponents();
           }
         }, 500);
@@ -85,12 +85,14 @@ export class ServicesComponent implements OnInit, AfterViewInit {
 
   loadSections() {
     this.sectionService.getBusinessSections(this.businessId, 'services').subscribe((sections) => {
-      console.log("📌 Retrieved Sections:", sections);
+     // console.log("📌 Retrieved Sections:", sections);
       if (!sections || sections.length === 0) {
         console.warn("❗ No sections retrieved from the service.");
         return;
       }
-      this.sections = sections.sort((a, b) => (a.order || 0) - (b.order || 0));
+      this.sections = sections
+      .filter(section => section.isActive !== false)
+      .sort((a, b) => (a.order || 0) - (b.order || 0));
       this.loadComponents();
     });
   }
@@ -140,19 +142,19 @@ export class ServicesComponent implements OnInit, AfterViewInit {
 
     // ✅ 1️⃣ Render first `item-list`
     if (firstItemList) {
-      console.log("✅ Rendering first item-list...");
+      //console.log("✅ Rendering first item-list...");
       this.createComponent(firstItemList);
     }
 
     // ✅ 2️⃣ Render second `item-list`
     if (secondItemList) {
-      console.log("✅ Rendering second item-list...");
+      //console.log("✅ Rendering second item-list...");
       this.createComponent(secondItemList);
     }
 
     // ✅ 3️⃣ Create wrapper but DO NOT append it yet
     if (leftRightSections.length > 0) {
-      console.log("✅ Creating wrapper for left-right text...");
+      //console.log("✅ Creating wrapper for left-right text...");
       wrapperElement = document.createElement('div');
       wrapperElement.className = 'text-wrapper';
 
@@ -173,13 +175,13 @@ export class ServicesComponent implements OnInit, AfterViewInit {
 
     // ✅ 4️⃣ Render center-text AFTER wrapper
     if (centerTextSection) {
-      console.log("✅ Rendering center-text...");
+      //console.log("✅ Rendering center-text...");
       this.createComponent(centerTextSection);
     }
 
     // ✅ 5️⃣ Ensure CTA is last
     if (ctaSection) {
-      console.log("✅ Rendering CTA at last position...");
+      //console.log("✅ Rendering CTA at last position...");
       this.createComponent(ctaSection);
     }
   }

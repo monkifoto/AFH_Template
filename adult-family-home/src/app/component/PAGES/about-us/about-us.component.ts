@@ -69,12 +69,12 @@ export class AboutUsComponent implements OnInit {
 
   loadSections() {
     this.sectionService.getBusinessSections(this.businessId, 'aboutus').subscribe((sections) => {
-      console.log("📌 Retrieved Sections:", sections);
+      //console.log("📌 Retrieved Sections:", sections);
       if (!sections || sections.length === 0) {
         console.warn("❗ No sections retrieved from the service.");
         return;
       }
-      this.sections = sections.sort((a, b) => (a.order || 0) - (b.order || 0));
+      this.sections = sections.filter(section => section.isActive !== false) .sort((a, b) => (a.order || 0) - (b.order || 0));
       this.loadComponents();
     });
   }
@@ -121,13 +121,13 @@ export class AboutUsComponent implements OnInit {
 
     // ✅ 1️⃣ Render first `center-text` before wrapper
     if (firstCenterText) {
-      console.log("✅ Rendering first center-text BEFORE wrapper...");
+      //console.log("✅ Rendering first center-text BEFORE wrapper...");
       this.createComponent(firstCenterText);
     }
 
     // ✅ 2️⃣ Create wrapper but DO NOT append it yet
     if (leftRightSections.length > 0) {
-      console.log("✅ Creating wrapper...");
+      //console.log("✅ Creating wrapper...");
       wrapperElement = document.createElement('div');
       wrapperElement.className = 'text-wrapper';
 
@@ -148,7 +148,7 @@ export class AboutUsComponent implements OnInit {
 
     // ✅ 3️⃣ Render second `center-text` AFTER wrapper
     if (secondCenterText) {
-      console.log("✅ Rendering second center-text...");
+      //console.log("✅ Rendering second center-text...");
       this.createComponent(secondCenterText);
     }
 
@@ -159,7 +159,7 @@ export class AboutUsComponent implements OnInit {
 
     // ✅ 5️⃣ Ensure CTA is always last
     if (ctaSection) {
-      console.log("✅ Rendering CTA at last position...");
+      //console.log("✅ Rendering CTA at last position...");
       this.createComponent(ctaSection);
     }
   }
