@@ -91,7 +91,9 @@ import { LocationPageComponent } from './component/PAGES/location-page/location-
       "sbmediahub.com": "MGou3rzTVIbP77OLmZa7",
       "sp.sbmediahub.com": "KyQfU7hjez0uXRfAjqcu",
       "prestige.sbmediahub.com": "pDJgpl34XUnRblyIlBA7",
-      "elderlyhc.sbmediahub.com": "SJgFxBYkopnPR4WibCAf",
+      "cc.sbmediahub.com": "yrNc50SvfPqwTSkvvygA",
+      "hh.sbmediahub.com": "vfCMoPjAu2ROVBbKvk0D",
+      "ae.sbmediahub.com": "UiSDf9elSjwcbQs2HZb1",
       "www.sbmediahub.com": "MGou3rzTVIbP77OLmZa7",
       "countrycrestafh.com": "yrNc50SvfPqwTSkvvygA",
       "www.countrycrestafh.com": "yrNc50SvfPqwTSkvvygA"

@@ -1,5 +1,7 @@
 
 <app-hero [layoutType]="'prestige'"></app-hero>
+
+
 <div class="location-page-container">
   <h2>{{ location?.city || 'Location' }}</h2>
   <p><strong>Address:</strong> {{ location?.street }}, {{ location?.city }}, {{ location?.state }} {{ location?.zipcode }}</p>
@@ -7,6 +9,7 @@
   <p><strong>Phone:</strong> {{ location?.phone }}</p>
   <p><strong>Fax:</strong> {{ location?.fax }}</p>
 
+  <h1>Createa a row and add image for each location</h1>
   <!-- Google Map -->
   <div id="map" class="map-container"></div>
 </div>

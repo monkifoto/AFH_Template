@@ -29,9 +29,13 @@
 
   </div>
 
-  <div class="aboutus-page-main-container">
+  <div *ngIf="business.theme.themeType!='prestige'" class="aboutus-page-main-container">
     <div class="container text-section" #dynamicContainer></div>
   </div>
+  <div *ngIf="business.theme.themeType=='prestige'" class="aboutus-page-main-container">
+    <div class="" #dynamicContainer></div>
+  </div>
+
   <section class="business-team">
     <app-meet-the-team [businessId]="business.id"></app-meet-the-team>
   </section>

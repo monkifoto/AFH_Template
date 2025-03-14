@@ -95,6 +95,8 @@ export class AboutUsComponent implements OnInit {
     // ✅ Sort sections based on 'order' from the database
     this.sections.sort((a, b) => (a.order || 0) - (b.order || 0));
 
+    if (this.business?.theme?.themeType === 'hh') {
+
     let leftRightSections: any[] = [];
     let firstCenterText: any = null;
     let secondCenterText: any = null;
@@ -162,6 +164,13 @@ export class AboutUsComponent implements OnInit {
       //console.log("✅ Rendering CTA at last position...");
       this.createComponent(ctaSection);
     }
+  }else{
+      // Load components based on the 'order' property
+      this.sections.sort((a, b) => (a.order || 0) - (b.order || 0));
+      this.sections.forEach((section) => {
+          this.createComponent(section);
+      });
+  }
   }
 
 
