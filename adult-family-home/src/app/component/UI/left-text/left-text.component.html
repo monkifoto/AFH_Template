@@ -21,8 +21,7 @@
     themeType === 'clemo' ||
     themeType === 'ae' ||
     themeType === 'sb' ||
-    themeType === 'sp' ||
-    themeType === 'prestige'
+    themeType === 'sp'
   "
 >
   <div class="content-area">
@@ -47,23 +46,23 @@
 </section>
 
 
-<section class="left-text-section">
-  <div class="text-container">
-      <div class="heading-container">
-          <h2 class="styled-heading"> Mission & Vision</h2>
-      </div>
-      <p>Our mission is to lead the aviation industry by delivering innovative and reliable Boeing 737 aircraft that enhance connectivity and efficiency for airlines and passengers worldwide. We are committed to advancing aviation technology, ensuring safety, and providing exceptional customer service, all while minimizing our environmental impact.
-      <br><br>
-      Our vision is to be the preferred choice for airlines and travelers by continuously improving the Boeing 737 fleet through cutting-edge design, sustainable practices, and unparalleled performance. We aspire to shape the future of air travel, making it more accessible, efficient, and environmentally friendly, while fostering a culture of excellence and innovation within the aviation community.</p>
-  </div>
+<section *ngIf="themeType === 'prestige'" class="left-text-section"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+<div class="text-container">
+  <h3>{{ titleParts.part1 }}</h3>
+  <h2><span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span></h2>
+    <div class="separator2"></div>
+  <p class="center-text-description" [innerHTML]="sanitizedContent"></p>
+</div>
 
   <div class="image-container">
-      <img src="https://images.unsplash.com/photo-1741107788017-80a0b6d04e1e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+    <img src="{{ sectionImageUrl }}" alt="{{ title }}" />
   </div>
 </section>
 
 <!-- Testimonials Section -->
-<section class="testimonials-section">
+<!-- <section class="testimonials-section">
   <div class="heading-container">
       <h2 class="styled-heading">Testimonials</h2>
   </div>
@@ -101,4 +100,4 @@
       <br><br>
       Our vision is to be the preferred choice for airlines and travelers by continuously improving the Boeing 737 fleet through cutting-edge design, sustainable practices, and unparalleled performance. We aspire to shape the future of air travel, making it more accessible, efficient, and environmentally friendly, while fostering a culture of excellence and innovation within the aviation community.</p>
   </div>
-</section>
+</section> -->

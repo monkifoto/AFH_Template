@@ -71,10 +71,8 @@
 [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
   <img *ngIf="imageURL && showImage"  [src]="imageURL" alt="Section Image" class="center-text-image" />
   <div class="text-container">
-  <h3>
-    {{ titleParts.part1 }}</h3>
-    <h2><span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span></h2>
-
+  <h3>{{ titleParts.part1 }}</h3>
+  <h2><span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span></h2>
     <div class="separator2"></div>
   <p class="center-text-description" [innerHTML]="sanitizedContent"></p>
 </div>

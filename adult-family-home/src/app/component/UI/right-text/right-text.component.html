@@ -19,8 +19,7 @@
     themeType === 'clemo' ||
     themeType === 'ae' ||
     themeType === 'sb' ||
-    themeType === 'sp' ||
-    themeType === 'prestige'
+    themeType === 'sp'
   "
 >
   <div class="content-area">
@@ -37,5 +36,35 @@
         <p [innerHTML]="sanitizedContent">{{ content }}</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section *ngIf="themeType === 'prestige'" class="left-text-section"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+
+<div class="image-container">
+  <img src="{{ sectionImageUrl }}" alt="{{ title }}" />
+</div>
+  <!-- <div class="text-container">
+      <div class="heading-container">
+        <h3>
+          {{ titleParts.part1 }}
+        </h3>
+        <h2>
+          <span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span>
+        </h2>
+          <div class="separator2"></div>
+      </div>
+
+
+      <p [innerHTML]="sanitizedContent"></p>
+  </div> -->
+
+  <div class="text-container">
+    <h3>{{ titleParts.part1 }}</h3>
+    <h2><span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span></h2>
+      <div class="separator2"></div>
+    <p class="center-text-description" [innerHTML]="sanitizedContent"></p>
   </div>
 </section>
