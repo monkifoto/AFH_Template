@@ -1,0 +1,77 @@
+.left-text-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start; /* Align items to the start */
+  padding: 20px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  background-color: #f9f9f9; /* Example background color */
+  color: #333; /* Example text color */
+  max-height: 50vh; /* Limit the height to 50% of the viewport height */
+  overflow: hidden; /* Hide overflow content */
+}
+
+.text-container {
+  width: 400px; /* Fixed width for the text container */
+  padding: 50px; /* Space between text and image */
+}
+
+.heading-container {
+  margin-bottom: 10px; /* Space between heading and paragraph */
+}
+
+.styled-heading {
+  font-size: 3em; /* Adjust font size as needed */
+  font-weight: bold;
+}
+
+.image-container {
+  flex: 1; /* Allow the image container to grow */
+  display: flex;
+  justify-content: center; /* Center the image */
+  align-items: center;
+  overflow: hidden;
+}
+
+.image-container img {
+  min-width: 400px;
+  width: 100%; /* Make the image fill the container */
+  height: 100%; /* Ensure the image covers the container */
+  object-fit: cover; /* Cover the container while maintaining aspect ratio */
+}
+
+.testimonials-section {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.testimonials-section h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.testimonial {
+  display: inline-block;
+  width: 250px; /* Fixed width for each testimonial */
+  margin: 0 15px; /* Space between testimonials */
+  padding: 20px;
+  background-color: #fff; /* White background for testimonials */
+  position: relative;
+}
+
+.testimonial p {
+  font-style: italic; /* Italicize testimonial text */
+}
+
+.testimonial h4 {
+  margin-top: 10px; /* Space above the name */
+  font-weight: bold; /* Bold name */
+}
+.quote-icon {
+  font-size: 2em; /* Size of the quote icon */
+  color: #333; /* Color of the quote icon */
+  position: absolute; /* Positioning for centering */
+  top: -20px; /* Adjust as needed */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Centering adjustment */
+}
