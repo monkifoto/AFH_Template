@@ -167,6 +167,37 @@
                 </select>
               </div>
             </div>
+            <div class="row">
+              <div class="col" *ngIf="section.get('component')?.value !== 'item-list'">
+              <label>Content</label>
+              <textarea
+                formControlName="sectionContent"
+                class="form-control"
+              ></textarea>
+            </div>
+             <div class="col">
+                <label>Text Color</label>
+                <select formControlName="textColor" class="form-control">
+                  <option
+                    *ngFor="let color of predefinedColors"
+                    [value]="color.value"
+                  >
+                    {{ color.name }}
+                  </option>
+                </select>
+              </div>
+               <div class="col">
+                <label>Text Alignment</label>
+                <select formControlName="alignText" class="form-control">
+                  <option value="left">Left</option>
+                  <option value="center">Center</option>
+                  <option value="right">Right</option>
+                </select>
+              </div>
+              <div class="col"> Font Size</div>
+
+              <div class="col"> Font style</div>
+            </div>
 
             <div class="row">
               <div class="col">
@@ -180,25 +211,8 @@
                   </option>
                 </select>
               </div>
-              <div class="col">
-                <label>Text Color</label>
-                <select formControlName="textColor" class="form-control">
-                  <option
-                    *ngFor="let color of predefinedColors"
-                    [value]="color.value"
-                  >
-                    {{ color.name }}
-                  </option>
-                </select>
-              </div>
-              <div class="col">
-                <label>Text Alignment</label>
-                <select formControlName="alignText" class="form-control">
-                  <option value="left">Left</option>
-                  <option value="center">Center</option>
-                  <option value="right">Right</option>
-                </select>
-              </div>
+
+
               <div class="col">
                 <label>Layout</label>
                 <select formControlName="fullWidth" class="form-control">
@@ -220,14 +234,8 @@
               </div>
             </div>
 
-            <div *ngIf="section.get('component')?.value !== 'item-list'">
-              <label>Content</label>
-              <textarea
-                formControlName="sectionContent"
-                class="form-control"
-              ></textarea>
-            </div>
-            
+
+
             <div class="row">
               <div class="col">
                 <label>Show Button?</label>
