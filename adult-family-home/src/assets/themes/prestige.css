@@ -915,7 +915,24 @@
 /* Fix for mobile screens: keep dropdown hidden */
 @media (max-width: 768px) {
   .dropdown-menu {
-    display: none !important;
+    display: none;
+    position: relative; /* Ensures it stays inside the nav */
+    background-color: transparent;
+    box-shadow: none;
+    padding-left: 15px;
+    border: 0;
+
+  }
+  .dropdown-menu.show {
+    display: block;
+  }
+
+  /* Make sure dropdown items align properly */
+  .dropdown-item {
+    padding: 10px 15px;
+    text-transform: uppercase;
+    font-weight: 300;
+    padding-left: 30px;
   }
 }
 

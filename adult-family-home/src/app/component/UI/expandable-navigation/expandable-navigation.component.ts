@@ -17,6 +17,7 @@ export class ExpandableNavigationComponent  implements OnInit {
   menuOpen: boolean = false;
   locationsOpen: boolean = false;
   selectedLocation: any = null;
+  expandedDropdownIndex: number | null = null;
 
 
   constructor(
@@ -75,6 +76,11 @@ export class ExpandableNavigationComponent  implements OnInit {
     });
   }
 
+  toggleDropdown(index: number) {
+    this.expandedDropdownIndex = this.expandedDropdownIndex === index ? null : index;
+  }
+
+
   selectLocation(index: number): void {
     console.log("📍 Selected Location Index:", index);
 
@@ -89,6 +95,8 @@ export class ExpandableNavigationComponent  implements OnInit {
     this.router.navigate(['/location'], { queryParams }).then(success => {
       if (!success) {
         console.error('❌ Navigation failed!');
+      } else {
+        this.closeMenu();  // 🔥 Close menu after selecting a location
       }
     });
   }
