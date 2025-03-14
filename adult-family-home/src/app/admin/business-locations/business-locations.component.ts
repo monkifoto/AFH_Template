@@ -55,7 +55,8 @@ export class BusinessLocationsComponent implements OnInit {
         zipcode: [location.zipcode, Validators.required],
         phone: [location.phone, [Validators.required, Validators.pattern(/^\d{10}$/)]],
         fax: [location.fax],
-        email: [location.email]
+        email: [location.email],
+        image: [location.image]
       })
     );
   }
@@ -123,7 +124,8 @@ export class BusinessLocationsComponent implements OnInit {
           zipcode: [location.zipcode || location.zipcode || '', Validators.required], // 🔥 Ensure correct naming
           phone: [location.phone || ''],
           fax: [location.fax || ''],
-          email: [location.email || '', [Validators.required, Validators.email]]
+          email: [location.email || '', [Validators.required, Validators.email]],
+          image: [location.image || ''],
         })
       );
     });

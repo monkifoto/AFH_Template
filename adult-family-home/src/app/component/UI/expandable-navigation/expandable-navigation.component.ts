@@ -77,10 +77,22 @@ export class ExpandableNavigationComponent  implements OnInit {
 
   selectLocation(index: number): void {
     console.log("📍 Selected Location Index:", index);
-    this.router.navigate(['/location'], {
-      queryParams: { locationIndex: index }
+
+    const queryParams: any = { locationIndex: index };
+
+    if (this.businessId) {
+      queryParams.id = this.businessId; // Ensure businessId is included
+    }
+
+    console.log("🚀 Navigating to location with Params:", queryParams);
+
+    this.router.navigate(['/location'], { queryParams }).then(success => {
+      if (!success) {
+        console.error('❌ Navigation failed!');
+      }
     });
   }
+
   toggleLocations(): void {
     this.locationsOpen = !this.locationsOpen;
     console.log("📂 Locations Dropdown Toggled:", this.locationsOpen);
