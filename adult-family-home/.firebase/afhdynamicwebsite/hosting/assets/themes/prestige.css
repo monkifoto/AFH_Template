@@ -32,12 +32,20 @@
   font-weight: 300;
  }
  .container {
-	max-width: 1200px;
+	/* max-width: 1200px; */
 	margin: 0 auto;
 	background-color: var(--background-color);
 }
+.container {
+  /* max-width: 1200px; */
+  margin: 0 auto;
+  /* padding: 20px; */
+ }
+
+
+
 .full-width {
-	width: 100%;
+	width: 100vw;
 	max-width: 100%;
 }
 .centered {
@@ -231,8 +239,8 @@
   padding-right: 5rem;
   max-width: var(--site-max-width);
   margin: 0 auto;
-  padding-top: 2.6vmax;
-  padding-bottom: 2.6vmax;
+  padding-top: 6.6vmax;
+  padding-bottom: 6.6vmax;
  }
 
  .center-text-title {
@@ -441,7 +449,7 @@
  }
 
  .page-hero {
-  height: 400px;
+  height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -457,12 +465,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  max-height: 400px;
+  max-height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.3);
   color: var(--primary-color);
   font-family: 'Playfair Display', serif;
  }
@@ -476,7 +484,10 @@
   font-weight: 700;
   margin: 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-  color: var(--primary-color);
+  color: var(--background-color);
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
   }
 
 
@@ -1258,12 +1269,6 @@
  }
 
 
- .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
- }
-
 
  .section-heading {
   font-size: 36px;
@@ -1489,6 +1494,288 @@
   .service-item {
     max-width: 80%;
   }
+
+  .centered{
+    width: 100vw;
+  }
 }
 
 
+
+
+/******* NEW CSS *********/
+
+.left-text-section {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch; /* Ensure both text and image containers stretch to full height */
+  justify-content: space-between;
+  background-color: #f9f9f9;
+  color: #333;
+  height: 70vh; /* Ensure the section has a defined height */
+  overflow: hidden;
+}
+
+/* Ensure text container has a fixed width */
+.left-text-section .text-container {
+  flex: 1; /* Allow text to take space but not more than needed */
+  max-width: 600px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.left-text-section .text-container p {
+  line-height: 2rem;
+  padding: 60px;
+}
+
+.left-text-section .text-container h2, h3 {
+  padding-left: 60px;
+}
+
+.left-text-section .text-container .separator2 {
+  margin-left: 60px;
+}
+
+.center-text-section-clemo .text-container h3{
+  padding-left: 0px;
+}
+/* .left-text-section .text-container h3 {
+  padding-left: 60px;
+} */
+
+/* Image container should always take the full height and width */
+.image-container {
+  flex: 1; /* Allow it to take available space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 100%; /* Ensure it fills the section height */
+}
+
+/* Image always fills its container */
+.image-container img {
+  width: 100%; /* Ensures it fully stretches */
+  height: 100%; /* Ensures it fully covers */
+  object-fit: cover; /* Ensures the image fills the container without distortion */
+}
+
+/* Mobile view: Stack image above text */
+@media screen and (max-width: 768px) {
+  .left-text-section {
+    flex-direction: column; /* Stack items vertically */
+    height: auto; /* Allow height to adjust dynamically */
+  }
+
+  .image-container {
+    order: -1; /* Move the image to the top */
+    width: 100%; /* Full width */
+    height: 300px; /* Adjust height for mobile */
+  }
+
+  .image-container img {
+    width: 100%; /* Fill the width */
+    height: 100%; /* Fill the height */
+  }
+
+  .text-container {
+    max-width: 100%;
+    text-align: center;
+  }
+}
+
+.testimonials-section {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.testimonials-section h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.testimonial {
+  display: inline-block;
+  width: 250px; /* Fixed width for each testimonial */
+  margin: 0 15px; /* Space between testimonials */
+  padding: 20px;
+  background-color: #fff; /* White background for testimonials */
+  position: relative;
+}
+
+.testimonial p {
+  font-style: italic; /* Italicize testimonial text */
+}
+
+.testimonial h4 {
+  margin-top: 10px; /* Space above the name */
+  font-weight: bold; /* Bold name */
+}
+.quote-icon {
+  font-size: 2em; /* Size of the quote icon */
+  color: #333; /* Color of the quote icon */
+  position: absolute; /* Positioning for centering */
+  top: -20px; /* Adjust as needed */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Centering adjustment */
+}
+.our-services-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.our-services-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background: rgba(0, 0, 0, 0.5); */
+  z-index: 0;
+}
+
+.our-services-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+.heading-container h2 {
+  font-size: 42px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.our-services-description {
+  font-size: 22px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  max-width: 800px;
+  margin-bottom: 50px;
+}
+
+/* Services Container */
+.our-services-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  max-width: 1400px;
+  padding: 0 20px;
+}
+
+/* Service Card */
+.our-services-item {
+  background: var(--dark-background-color);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  text-align: left;
+  transition: transform 0.3s ease-in-out;
+  position: relative;
+  color: white;
+}
+
+.our-services-item:hover {
+  transform: translateY(-15px);
+}
+
+.our-services-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background: rgba(0, 0, 0, 0.6); */
+  z-index: 0;
+}
+
+/* Card Image */
+.our-services-item::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* Dynamically setting background */
+.our-services-item[ngStyle]::after {
+  background-image: var(--service-bg);
+}
+
+/* Card Content */
+.our-services-item > div {
+  padding: 40px;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.our-services-item > div > i{
+  font-size: 60px;
+  padding-bottom: 2rem;
+}
+
+.our-services-item h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.our-services-item p {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+}
+
+/* Call to Action Button */
+.our-services-item a {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 20px;
+  background-color: #f39c12;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.3s ease-in-out;
+}
+
+.our-services-item a:hover {
+  background-color: #e67e22;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .our-services-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .our-services-item {
+    width: 90%;
+    max-width: 400px;
+  }
+}
