@@ -28,9 +28,15 @@
     </ng-container>
   </div>
 
-  <div class="aboutus-page-main-container">
+
+  <div *ngIf="business.theme.themeType!='prestige'" class="aboutus-page-main-container">
     <div class="container text-section" #dynamicContainer></div>
   </div>
+  <div *ngIf="business.theme.themeType=='prestige'" class="aboutus-page-main-container">
+    <div class="" #dynamicContainer></div>
+  </div>
+
+
   <div [ngSwitch]="business.theme.themeType">
   <ng-container *ngSwitchCase="'ae'">
     <app-testimonial-image

@@ -39,18 +39,6 @@ export interface Business {
 
 //to be removed
    certifications: string;
-  // specialPrograms: string;
-  // toursImageUrl: string;
-  // tours: string;
-  // freeConsulting: string;
-  // consultingImageUrl: string;
-  // websiteGoals: string;
-  // mediaFeatures: string;
-  // ratings: string;
-  // ownerImagesBios: string;
-  // staffImagesBios: string;
-//to be removed
-
   //Contact us page
   contactFormDetails: string;
   contactUsImageUrl: string;
@@ -70,6 +58,7 @@ locationName:string;
   phone:string;
   fax:string;
   email:string;
+  image:string;
 
 }
 
@@ -426,7 +415,8 @@ export class BusinessModel {
           zipcode:'56789',
           phone:'(987) 654-3210',
           fax: '(987) 654-3211',
-          email: 'contact@carefullivingafh.com'
+          email: 'contact@carefullivingafh.com',
+          image: ''
         }
       ],
       address: '',
