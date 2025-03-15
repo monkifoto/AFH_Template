@@ -105,22 +105,22 @@ export class HomeComponent implements OnInit {
 
 loadComponents() {
   this.container.clear();
- // console.log("✅ Starting to Load Components");
+  console.log("✅ Starting to Load Components");
 
-  // Load HeroSliderComponent First
-  //console.log("✅ Adding HeroSliderComponent");
-  const heroSliderFactory = this.resolver.resolveComponentFactory(HeroSliderComponent);
-  this.container.createComponent(heroSliderFactory, undefined, this.injector);
+  // ✅ Load HeroSliderComponent First
+  console.log("✅ Adding HeroSliderComponent");
+  this.container.createComponent(HeroSliderComponent);
 
   if (!this.sections.length) {
     console.warn("❗ No sections available to load.");
     return;
   }
 
-  let consultationSection = null; // Store consultation section separately
+  let consultationSection: any = null; // ✅ Store consultation section to load last
 
+  // ✅ Load all sections except 'consultation'
   this.sections.forEach((section, index) => {
-   // console.log(`🔄 Loading Component for Section ${index + 1}:`, section.component);
+    console.log(`🔄 Loading Component for Section ${index + 1}:`, section.component);
 
     const componentType = this.componentsMap[section.component as keyof typeof this.componentsMap] as Type<any>;
 
@@ -129,71 +129,79 @@ loadComponents() {
       return;
     }
 
-    // If it's the 'consultation' section, store it to load later
+    // ✅ Store consultation section to load after everything else
     if (section.component === 'consultation') {
       consultationSection = section;
       return;
     }
 
-    const factory = this.resolver.resolveComponentFactory(componentType);
-    const componentRef = this.container.createComponent(factory, undefined, this.injector);
-
-    this.assignComponentProperties(componentRef, section);
+    const componentRef = this.container.createComponent(componentType);
+    this.assignComponentProperties(componentRef.instance, section);
   });
 
   // ✅ Now inject manually added components
   this.loadManualComponents();
 
-  // ✅ Finally, inject the consultation section at the end
+  // ✅ Finally, inject ConsultationComponent at the very end
   if (consultationSection) {
-   // console.log("✅ Loading ConsultationComponent at the end");
-    const consultationFactory = this.resolver.resolveComponentFactory(ConsultationComponent);
-    const consultationRef = this.container.createComponent(consultationFactory, undefined, this.injector);
-    this.assignComponentProperties(consultationRef, consultationSection);
+    console.log("🟢 Loading Consultation Section LAST");
+
+    const consultationComponentType = this.componentsMap['consultation'] as Type<any>;
+
+    if (consultationComponentType) {
+      const consultationRef = this.container.createComponent(consultationComponentType);
+      this.assignComponentProperties(consultationRef.instance, consultationSection);
+    } else {
+      console.error(`❌ Consultation Component Not Found!`);
+    }
   }
 }
+
 
 loadManualComponents() {
   // Manually Load TestimonialsComponent if Business Has Testimonials and No Google Place ID
   if (this.business?.testimonials?.length && !this.business?.placeId && this.business?.theme?.themeType !== 'sb') {
-    //console.log("Loading TestimonialsComponent");
     const testimonialsFactory = this.resolver.resolveComponentFactory(TestimonialsComponent);
-    const testimonialsRef = this.container.createComponent(testimonialsFactory, undefined, this.injector);
-
-    Object.assign(testimonialsRef.instance, {
-      testimonials: this.business?.testimonials || [],
-      layoutType: this.business?.theme?.themeType || 'demo'
+    const testimonialsRef = this.container.createComponent(TestimonialsComponent,{
+      index: undefined,
+      injector: this.injector
     });
   }
 
   // Manually Load TestimonialCarouselComponent if Business Has a Google Place ID
   if (this.business?.placeId) {
-    //console.log("Loading TestimonialCarouselComponent");
     const testimonialCarouselFactory = this.resolver.resolveComponentFactory(TestimonialCarouselComponent);
-    const testimonialCarouselRef = this.container.createComponent(testimonialCarouselFactory, undefined, this.injector);
-
-    Object.assign(testimonialCarouselRef.instance, {
-      placeId: this.business?.placeId || ''
-    });
+    const testimonialCarouselRef = this.container.createComponent(TestimonialCarouselComponent, {
+      index: undefined,
+      injector: this.injector});
   }
 
-  // Manually Load GoogleMapsComponent for 'clemo' theme
   if (this.business?.placeId && this.business?.theme?.themeType === 'clemo') {
-    //console.log("Loading GoogleMapComponent");
     const gmapFactory = this.resolver.resolveComponentFactory(GoogleMapsComponent);
-    const gmapRef = this.container.createComponent(gmapFactory, undefined, this.injector);
+    const gmapRef = this.container.createComponent(GoogleMapsComponent,{
+      index: undefined,
+      injector: this.injector
 
-    Object.assign(gmapRef.instance, {
-      layoutType: this.business?.theme?.themeType || 'demo',
-      address: this.business?.address || 'Demo'
     });
+    gmapRef.instance.layoutType =  this.business?.theme?.themeType || 'demo';
+    gmapRef.instance.address = this.business?.address || '';
+  }
+
+  if (this.business?.theme?.themeType == 'sb') {
+    const latestProductsFactory = this.resolver.resolveComponentFactory(LatestProductsComponent);
+    const latestProductsRef = this.container.createComponent(LatestProductsComponent, {
+      index: undefined, // You can specify an index if needed
+      injector: this.injector,
+    });
+    latestProductsRef.instance.layoutType = this.business?.theme?.themeType;
+    latestProductsRef.changeDetectorRef.detectChanges();
   }
 }
 
 
-assignComponentProperties(componentRef: any, section: any) {
-  if (componentRef.instance && typeof componentRef.instance === 'object') {
-    Object.assign(componentRef.instance, {
+assignComponentProperties(componentInstance: any, section: any) {
+  if (componentInstance && typeof componentInstance === 'object') {
+    Object.assign(componentInstance, {
       title: this.applyReplaceKeyword(section.sectionTitle || ''),
       subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
       content: this.applyReplaceKeyword(section.sectionContent || ''),
@@ -221,7 +229,13 @@ assignComponentProperties(componentRef: any, section: any) {
       location: section.location,
       businessId: this.business?.id
     });
-    //console.log(`✅ Component Data for ${section.component}:`, componentRef.instance);
+
+    // ✅ Ensure UI updates after setting properties
+    if (componentInstance.changeDetectorRef) {
+      componentInstance.changeDetectorRef.detectChanges();
+    }
+
+    console.log(`✅ Component Data for ${section.component}:`, componentInstance);
   }
 }
 

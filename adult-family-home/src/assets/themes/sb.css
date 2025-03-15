@@ -1787,7 +1787,16 @@ input::-ms-input-placeholder {
 }
 
 
-
+.consultation-container{
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 6rem auto;
+}
 
 .cta-container {
 
@@ -1820,6 +1829,27 @@ input::-ms-input-placeholder {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
+.consultation-btn {
+  background-color: var(--button-color);
+  color: var(--primary-color);
+  padding: 15px 30px;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.consultation-btn:hover {
+  background-color: var(--primary-color);
+  color: var(--button-color);
+  padding: 15px 30px;
+  border: 1px solid var(--button-color);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+/*
 /*
 .cta-btn:hover {
   background-color: var(--button-hover-color);
