@@ -174,6 +174,8 @@ loadManualComponents() {
     const testimonialCarouselRef = this.container.createComponent(TestimonialCarouselComponent, {
       index: undefined,
       injector: this.injector});
+
+      testimonialCarouselRef.instance.placeId = this.business.placeId;
   }
 
   if (this.business?.placeId && this.business?.theme?.themeType === 'clemo') {
