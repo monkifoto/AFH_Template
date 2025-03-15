@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './consultation.component.html',
   styleUrls: ['./consultation.component.css']
 })
-export class ConsultationComponent  {
+export class ConsultationComponent{
  @Input() themeType!: string;
  @Input() title!: string;
  @Input() subTitle!: string;
