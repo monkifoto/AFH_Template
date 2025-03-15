@@ -41,6 +41,19 @@
   <button *ngIf="showButton" class="afhBtn">Schedule A Visit</button>
 </div>
 
+
+<div class="center-text-container"
+*ngIf="themeType=='clemo'"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+  <img *ngIf="imageURL && showImage"  [src]="imageURL" alt="Section Image" class="center-text-image" />
+  <h3 class="center-text-title">{{ subTitle }}</h3>
+  <h2 class="center-text-title">{{ title }}</h2>
+  <p class="center-text-description" [innerHTML]="sanitizedContent"></p>
+  <button *ngIf="showButton" class="afhBtn">Schedule A Visit</button>
+</div>
+
+
 <!-- <div class="center-text-container"
 *ngIf="themeType!='clemo' && themeType!='hh' && themeType!='sb' && themeType!='sp'"
 [ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"

@@ -20,6 +20,7 @@ import { switchMap } from 'rxjs';
 import { IconListComponent } from '../UI/icon-list/icon-list.component';
 import { LatestProductsComponent } from '../UI/latest-products/latest-products.component';
 import { CallToActionComponent } from '../UI/call-to-action/call-to-action.component';
+import { FaqComponent } from '../UI/faq/faq.component';
 
 
 @Component({
@@ -188,6 +189,28 @@ loadManualComponents() {
     gmapRef.instance.layoutType =  this.business?.theme?.themeType || 'demo';
     gmapRef.instance.address = this.business?.address || '';
   }
+
+  if (this.business?.placeId && this.business?.theme?.themeType === 'clemo') {
+    const gmapFactory = this.resolver.resolveComponentFactory(GoogleMapsComponent);
+    const gmapRef = this.container.createComponent(GoogleMapsComponent,{
+      index: undefined,
+      injector: this.injector
+
+    });
+    gmapRef.instance.layoutType =  this.business?.theme?.themeType || 'demo';
+    gmapRef.instance.address = this.business?.address || '';
+  }
+
+if(this.business?.theme?.themeType ==='clemo'){
+
+    const faqRef = this.container.createComponent(FaqComponent,{
+      index: undefined,
+      injector: this.injector
+
+    });
+    // faqRef.instance.layoutType =  this.business?.theme?.themeType || 'demo';
+    // faqRef.instance.address = this.business?.address || '';
+}
 
   if (this.business?.theme?.themeType == 'sb') {
     const latestProductsFactory = this.resolver.resolveComponentFactory(LatestProductsComponent);
