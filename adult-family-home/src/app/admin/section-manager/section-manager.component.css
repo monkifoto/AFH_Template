@@ -55,7 +55,7 @@ h3 {
 /* Flex Columns */
 .col {
   flex: 1;
-  min-width: 180px;
+  min-width: 50px;
 }
 
 /* Form Elements */
@@ -126,7 +126,13 @@ button[type="button"] {
 button[type="button"]:hover {
   background-color: #c0392b;
 }
-
+.predefinedImages{
+  display: flex;
+  flex-wrap: wrap;
+}
+.imageThumbs{
+  min-width: 100px;
+}
 /* Image Upload Preview */
 .uploaded-image-preview {
   width: 100px;

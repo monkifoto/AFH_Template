@@ -1,7 +1,8 @@
 <form [formGroup]="form">
-  <h2>Sections</h2>
-  <button (click)="addSection()" class="afhBtn">+ Add Section</button>
-  <label>
+
+  <div class="row">
+    <div class="col"> <button (click)="addSection()" class="afhBtn">+ Add Section</button></div>
+    <div class="col"><label>
     <input
       type="checkbox"
       [(ngModel)]="showInactiveSections"
@@ -9,7 +10,8 @@
       (change)="toggleShowInactive()"
     />
     Show Inactive Sections
-  </label>
+  </label></div>
+  </div>
 
   <div formArrayName="sections">
     <ng-container *ngFor="let section of sections.controls; let i = index">
@@ -22,10 +24,20 @@
       >
         <div class="row">
           <div class="col">
-            <h3>{{ i + 1 }}, {{ section.get("sectionTitle")?.value }}</h3>
+            <button (click)="toggleSection(i)" class="icon-btn">
+              <i
+                class="fa-solid"
+                [ngClass]="
+                  collapsedSections[i] ? 'fa-angles-down' : 'fa-angles-up'
+                "
+              ></i>
+            </button>
           </div>
           <div class="col">
             <label class="page">{{ section.get("order")?.value }}</label>
+          </div>
+          <div class="col">
+            <h3>{{ i + 1 }}, {{ section.get("sectionTitle")?.value }}</h3>
           </div>
           <div class="col">
             <label class="page">{{ section.get("page")?.value }}</label>
@@ -39,21 +51,11 @@
             }}</label>
           </div>
           <div class="col">
+            <button (click)="updateSection(i)">Update</button>
+          </div>
+          <div class="col">
             <label>Active</label>
             <input type="checkbox" formControlName="isActive" />
-          </div>
-          <div class="col">
-            <button (click)="toggleSection(i)" class="icon-btn">
-              <i
-                class="fa-solid"
-                [ngClass]="
-                  collapsedSections[i] ? 'fa-angles-down' : 'fa-angles-up'
-                "
-              ></i>
-            </button>
-          </div>
-          <div class="col">
-            <button (click)="updateSection(i)">Update</button>
           </div>
         </div>
 
@@ -327,7 +329,9 @@
             <div style="margin-top: 10px">
               <h4>Select a Preferred Image</h4>
               <div class="row">
-                <div class="col" *ngFor="let image of predefinedImages">
+                <div class="col predefinedImages">
+
+                  <div *ngFor="let image of predefinedImages" class="imageThumbs">
                   <label style="display: block; text-align: center">
                     <img
                       [src]="image.url"
@@ -343,6 +347,7 @@
                       (change)="selectCheckboxImage(i, image.url, $event)"
                     />
                   </label>
+                </div>
                 </div>
               </div>
             </div>
