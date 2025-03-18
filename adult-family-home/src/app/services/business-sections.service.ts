@@ -17,7 +17,9 @@ export class BusinessSectionsService {
     return this.firestore.createId();
   }
 
-
+  getAllBusinesses(): Observable<any[]> {
+    return this.firestore.collection('businesses').valueChanges();
+  }
   /**
    * Fetches all sections for a given business ID.
    * @param businessId The unique identifier of the business.

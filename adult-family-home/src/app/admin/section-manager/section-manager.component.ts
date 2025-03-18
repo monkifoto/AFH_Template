@@ -19,7 +19,8 @@ export class SectionManagerComponent implements OnInit {
   @Input() form!: FormGroup;
   @Input() businessId!: string;
   showInactiveSections: boolean = false;
-
+  businessesList: any[] = []; // Stores available businesses
+  selectedBusinessId: string = ''; // Default selected business
   collapsedSections: { [sectionId: string]: boolean } = {};
   sectionGroups: { [key: string]: FormGroup[] } = {};
   pages = [
@@ -133,6 +134,17 @@ export class SectionManagerComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadSections();
+    this.loadBusinesses();
+  }
+
+  loadBusinesses() {
+    this.businessSectionsService.getAllBusinesses().subscribe((businesses) => {
+      this.businessesList = businesses;
+      if (businesses.length > 0) {
+        this.selectedBusinessId = businesses[0].id; // Select first business by default
+      }
+      this.cdRef.detectChanges();
+    });
   }
 
   loadSections() {
@@ -377,21 +389,26 @@ export class SectionManagerComponent implements OnInit {
       .catch((err) => console.error('❌ Error updating section:', err));
   }
 
-  duplicateSection(sectionId: string) {
+  duplicateSection(sectionId: string, targetBusinessId: string) {
     const originalSection = this.findSectionById(sectionId);
     if (!originalSection) return;
 
+    // ✅ Create a new unique ID for the duplicated section
     const duplicatedSection = {
       ...originalSection.value,
-      id: this.businessSectionsService.generateNewId(), // Assign new ID
+      id: this.businessSectionsService.generateNewId(),
       sectionTitle: originalSection.value.sectionTitle + " (Copy)",
     };
 
-    const newSectionForm = this.fb.group(duplicatedSection);
-    const pageKey = duplicatedSection.page || 'uncategorized';
-
-    this.sectionGroups[pageKey].push(newSectionForm);
-    this.cdRef.detectChanges();
+    // ✅ Save the duplicated section to the selected business
+    this.businessSectionsService
+      .saveSection(targetBusinessId, duplicatedSection)
+      .then(() => {
+        console.log(`✅ Section duplicated successfully to business: ${targetBusinessId}`, duplicatedSection);
+      })
+      .catch((err) => {
+        console.error("❌ Error duplicating section:", err);
+      });
   }
 
   toggleSection(sectionId: string): void {
