@@ -489,13 +489,13 @@
                   </div>
                 </div>
               </div>
+              <div class="actions">
 
-              <button (click)="updateSection(section)">Save</button>
-              <button (click)="removeSection(section.get('id')?.value)">
-                Delete
-              </button>
+
               <!-- Business Selection Dropdown -->
               <div class="row">
+                <div class="col"><button class="save-btn" (click)="updateSection(section)">Save</button></div>
+                <div class="col"> <button class="delete-btn" (click)="removeSection(section.get('id')?.value)"> Delete </button></div>
                 <div class="col">
                   <label>Copy Section To:</label>
                   <select [(ngModel)]="selectedBusinessId" class="form-control">
@@ -508,7 +508,7 @@
                   </select>
                 </div>
                 <div class="col">
-                  <button
+                  <button class="duplicate-btn"
                     (click)="
                       duplicateSection(
                         section.get('id')?.value,
@@ -519,6 +519,7 @@
                     Copy to Another Business
                   </button>
                 </div>
+              </div>
               </div>
               <!-- Duplicate Button -->
             </div>
