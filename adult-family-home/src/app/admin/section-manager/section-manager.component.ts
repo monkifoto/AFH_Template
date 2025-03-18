@@ -20,7 +20,8 @@ export class SectionManagerComponent implements OnInit {
   @Input() businessId!: string;
   showInactiveSections: boolean = false;
 
-  collapsedSections: boolean[] = [];
+  collapsedSections: { [sectionId: string]: boolean } = {};
+  sectionGroups: { [key: string]: FormGroup[] } = {};
   pages = [
     'home',
     'aboutus',
@@ -30,6 +31,18 @@ export class SectionManagerComponent implements OnInit {
     'gallery',
     'testimonials',
   ];
+  pageGroups = [
+    'home',
+    'aboutus',
+    'services',
+    'gallery',
+    'location',
+    'testimonials',
+    'faq',
+    'contactus',
+    'uncategorized',
+  ];
+
   locations = ['', 'left', 'right', 'top', 'bottom'];
   componentTypes = [
     'center-text',
@@ -119,13 +132,12 @@ export class SectionManagerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.collapsedSections = this.sections.controls.map(() => true);
-    // this.collapsedSections = Array(this.sections.length).fill(false);
     this.loadSections();
   }
 
   loadSections() {
     if (!this.businessId) return;
+
     this.businessSectionsService
       .getAllBusinessSections(this.businessId)
       .subscribe((sections) => {
@@ -139,52 +151,62 @@ export class SectionManagerComponent implements OnInit {
             : (a.order || 0) - (b.order || 0);
         });
 
+        this.sectionGroups = {};
+        this.pageGroups.forEach((page) => (this.sectionGroups[page] = []));
+
         sections.forEach((section, index) => {
           console.log(`🔍 Section ${index + 1}:`, section); // Logs each section received
-          console.log(
-            `🖼️ Image URL for Section ${index + 1}:`,
-            section.sectionImageUrl
-          ); // Specifically logs the image URL
+          console.log(`🖼️ Image URL for Section ${index + 1}:`,section.sectionImageUrl ); // Specifically logs the image URL
 
-          this.sections.push(
-            this.fb.group({
-              id: [section.id],
-              isActive: [section.isActive !== undefined ? section.isActive : true],
-              component: [section.component || 'center-text'],
-              order: [section.order || 0],
-              sectionTitle: [section.sectionTitle],
-              titleFontSize: [section.titleFontSize || 16],
-              titleFontStyle: [section.titleFontStyle || 'normal'],
-              sectionSubTitle: [section.sectionSubTitle],
-              subtitleFontSize: [section.subtitleFontSize || 14],
-              subtitleFontStyle: [section.subtitleFontStyle || 'normal'],
-              page: [section.page],
-              location: [section.location],
-              sectionContent: [section.sectionContent],
-              sectionImageUrl: [section.sectionImageUrl],
-              showImage: [section.showImage],
-              showButton: [section.showButton || false],
-              buttonText:[section.buttonText || 'Learn More'],
-              buttonLink: [section.buttonLink || 'contact-us'],
-              alignText: [section.alignText || 'left'],
-              boxShadow:[section.boxShadow|| false],
-              borderRadius: [section.borderRadius || 10],
-              isMinimal: [section.isMinimal || false],
-              isParallax: [section.isParallax || false],
-              backgroundColor: [section.backgroundColor],
-              textColor: [section.textColor],
-              titleColor: [section.titleColor],
-              subtitleColor: [section.subtitleColor],
-              fullWidth:[section.fullWidth],
-              imageSource: ['upload'],
-              items: this.fb.array(
-                section.items
-                  ? section.items.map((item) => this.createItemForm(item))
-                  : []
-              ),
-            })
-          );
+          if (!section.id) {
+            section.id = this.businessSectionsService.generateNewId(); // Ensure each section has an ID
+          }
+
+
+          const sectionForm = this.fb.group({
+            id: [section.id],
+            isActive: [section.isActive !== undefined ? section.isActive : true],
+            component: [section.component || 'center-text'],
+            order: [section.order || 0],
+            sectionTitle: [section.sectionTitle],
+            titleFontSize: [section.titleFontSize || 16],
+            titleFontStyle: [section.titleFontStyle || 'normal'],
+            sectionSubTitle: [section.sectionSubTitle],
+            subtitleFontSize: [section.subtitleFontSize || 14],
+            subtitleFontStyle: [section.subtitleFontStyle || 'normal'],
+            page: [section.page],
+            location: [section.location],
+            sectionContent: [section.sectionContent],
+            sectionImageUrl: [section.sectionImageUrl],
+            showImage: [section.showImage],
+            showButton: [section.showButton || false],
+            buttonText:[section.buttonText || 'Learn More'],
+            buttonLink: [section.buttonLink || 'contact-us'],
+            alignText: [section.alignText || 'left'],
+            boxShadow:[section.boxShadow|| false],
+            borderRadius: [section.borderRadius || 10],
+            isMinimal: [section.isMinimal || false],
+            isParallax: [section.isParallax || false],
+            backgroundColor: [section.backgroundColor],
+            textColor: [section.textColor],
+            titleColor: [section.titleColor],
+            subtitleColor: [section.subtitleColor],
+            fullWidth:[section.fullWidth],
+            imageSource: ['upload'],
+            items: this.fb.array(
+              section.items
+                ? section.items.map((item) => this.createItemForm(item))
+                : []
+            ),
+          });
+
+          const pageKey = this.pageGroups.includes(section.page) ? section.page : 'uncategorized';
+          this.sectionGroups[pageKey].push(sectionForm);
+
+          this.collapsedSections[section.id] = true;
+
         });
+        this.cdRef.detectChanges();
       });
   }
 
@@ -199,6 +221,8 @@ export class SectionManagerComponent implements OnInit {
   }
 
   addSection() {
+    const newSectionId = this.businessSectionsService.generateNewId(); // Generate a unique ID
+    const defaultPage = 'home'; // Default section placement
     const newSection = this.fb.group({
       id: [null],
       isActive: [true],
@@ -229,36 +253,49 @@ export class SectionManagerComponent implements OnInit {
       subtitleColor: ['#000000'],
       items: this.fb.array([]),
     });
-    this.sections.push(newSection);
+
+
+  // ✅ Ensure the section group exists before adding the section
+  if (!this.sectionGroups[defaultPage]) {
+    this.sectionGroups[defaultPage] = [];
   }
 
-  removeSection(index: number) {
-    const section = this.sections.at(index).value;
-    if (this.businessId && section.id) {
-      this.businessSectionsService
-        .deleteSection(this.businessId, section.id)
-        .then(() => {
-          console.log('✅ Section deleted successfully:', section.id);
-          this.sections.removeAt(index);
-        })
-        .catch((err) => {
-          console.error('❌ Error deleting section:', err);
-        });
-    }
+  // ✅ Add the new section to the correct group
+  this.sectionGroups[defaultPage].push(newSection);
+
+  // ✅ Collapse the new section by default
+  this.collapsedSections[newSectionId] = true;
+
+  // ✅ Trigger UI update
+  this.cdRef.detectChanges();
+
+  console.log('✅ New section added:', newSection.value);
   }
 
-  addItem(sectionIndex: number) {
-    const section = this.sections.at(sectionIndex) as FormGroup;
+  removeSection(sectionId: string) {
+    Object.keys(this.sectionGroups).forEach((page) => {
+      this.sectionGroups[page] = this.sectionGroups[page].filter(
+        (s) => s.get('id')?.value !== sectionId
+      );
+    });
+    this.cdRef.detectChanges();
+  }
+
+  addItem(sectionId: string) {
+    const section = this.findSectionById(sectionId);
+    if (!section) return;
+
     const items = section.get('items') as FormArray;
     items.push(this.createItemForm());
   }
 
-  removeItem(sectionIndex: number, itemIndex: number) {
-    const section = this.sections.at(sectionIndex) as FormGroup;
+  removeItem(sectionId: string, itemIndex: number) {
+    const section = this.findSectionById(sectionId);
+    if (!section) return;
+
     const items = section.get('items') as FormArray;
     items.removeAt(itemIndex);
   }
-
   getItems(section: AbstractControl | null): FormArray | null {
     if (section instanceof FormGroup) {
       const items = section.get('items') as FormArray;
@@ -267,12 +304,12 @@ export class SectionManagerComponent implements OnInit {
     }
     return null;
   }
-
-  async uploadImage(event: Event, index: number): Promise<void> {
+  async uploadImage(event: Event, sectionId: string): Promise<void> {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (!file || !this.businessId) return;
 
-    const section = this.sections.at(index) as FormGroup;
+    const section = this.findSectionById(sectionId);
+    if (!section) return;
 
     try {
       const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(
@@ -281,12 +318,10 @@ export class SectionManagerComponent implements OnInit {
         'sectionsImages'
       );
 
-      this.uploadProgress[index] = uploadProgress; // Track progress
-
       downloadUrl.subscribe((url) => {
         if (url) {
-          section.patchValue({ sectionImageUrl: url }); // Update form with image URL
-          section.get('sectionImageUrl')?.updateValueAndValidity(); // Ensure Angular detects the change
+          section.patchValue({ sectionImageUrl: url });
+          section.get('sectionImageUrl')?.updateValueAndValidity();
           console.log(`✅ Image uploaded successfully: ${url}`);
         }
       });
@@ -295,11 +330,12 @@ export class SectionManagerComponent implements OnInit {
     }
   }
 
-  clearImage(index: number): void {
-    const section = this.sections.at(index);
-    section.get('sectionImageUrl')?.setValue('');
+  clearImage(sectionId: string): void {
+    const section = this.findSectionById(sectionId);
+    if (section) {
+      section.get('sectionImageUrl')?.setValue('');
+    }
   }
-
   // Sets the image source (either 'upload' or 'predefined').
   setImageSource(index: number, source: string): void {
     const section = this.sections.at(index);
@@ -317,78 +353,68 @@ export class SectionManagerComponent implements OnInit {
   }
 
   // Called when a checkbox for a predefined image is toggled.
-  selectCheckboxImage(sectionIndex: number, url: string, event: Event): void {
+  selectCheckboxImage(sectionId: string, url: string, event: Event): void {
     const checkbox = event.target as HTMLInputElement;
-    const section = this.sections.at(sectionIndex);
+    const section = this.findSectionById(sectionId);
+
+    if (!section) return;
 
     if (checkbox.checked) {
-      // When checking an image, set the sectionImageUrl to the selected url.
       section.get('sectionImageUrl')?.setValue(url);
     } else {
-      // When unchecking, clear the value only if it currently matches the image.
       if (section.get('sectionImageUrl')?.value === url) {
         section.get('sectionImageUrl')?.setValue('');
       }
     }
   }
+  updateSection(section: FormGroup) {
+    if (!this.businessId) return;
 
-  updateSection(index: number) {
-    const section = this.sections.at(index).value;
-    if (this.businessId) {
-
-      if(!section.sectionImageUrl)
-      {
-        section.sectionImageUrl = null;
-      }
-
-      this.businessSectionsService
-        .saveSection(this.businessId, section)
-        .then(() => {
-          console.log('✅ Section updated successfully:', section);
-        })
-        .catch((err) => {
-          console.error('❌ Error updating section:', err);
-        });
-    }
+    const sectionData = section.value;
+    this.businessSectionsService
+      .saveSection(this.businessId, sectionData)
+      .then(() => console.log('✅ Section updated:', sectionData))
+      .catch((err) => console.error('❌ Error updating section:', err));
   }
 
-  duplicateSection(index: number) {
-    const section = this.sections.at(index).value;
+  duplicateSection(sectionId: string) {
+    const originalSection = this.findSectionById(sectionId);
+    if (!originalSection) return;
 
-    if (!this.businessId) {
-      console.error("❌ Cannot duplicate: Business ID is missing");
-      return;
-    }
-
-    // Create a copy of the section with a new ID
     const duplicatedSection = {
-      ...section,
-      id: this.businessSectionsService.generateNewId(), // Generate a new Firestore ID
-      sectionTitle: section.sectionTitle + " (Copy)", // Rename to indicate duplication
-      order: section.order + 1 // Increment order to prevent conflicts
+      ...originalSection.value,
+      id: this.businessSectionsService.generateNewId(), // Assign new ID
+      sectionTitle: originalSection.value.sectionTitle + " (Copy)",
     };
 
-    // Save the duplicated section to Firestore
-    this.businessSectionsService
-      .saveSection(this.businessId, duplicatedSection)
-      .then(() => {
-        console.log("✅ Section duplicated successfully:", duplicatedSection);
+    const newSectionForm = this.fb.group(duplicatedSection);
+    const pageKey = duplicatedSection.page || 'uncategorized';
 
-        // Add the new section to the form array
-        this.sections.push(this.fb.group(duplicatedSection));
-      })
-      .catch((err) => {
-        console.error("❌ Error duplicating section:", err);
-      });
+    this.sectionGroups[pageKey].push(newSectionForm);
+    this.cdRef.detectChanges();
   }
 
+  toggleSection(sectionId: string): void {
+    if (!sectionId) return;
 
-  toggleSection(index: number): void {
-    this.collapsedSections[index] = !this.collapsedSections[index];
+    // Toggle section's collapsed state
+    this.collapsedSections[sectionId] = !this.collapsedSections[sectionId];
+
+    this.cdRef.detectChanges(); // ✅ Ensure UI updates immediately
   }
 
   toggleShowInactive(): void {
     console.log("🔄 Toggling Show Inactive Sections:", this.showInactiveSections);
     this.cdRef.detectChanges(); // ✅ Force UI update
+  }
+
+  findSectionById(sectionId: string): FormGroup | null {
+    for (const page of Object.keys(this.sectionGroups)) {
+      const section = this.sectionGroups[page].find(
+        (s) => s.get('id')?.value === sectionId
+      );
+      if (section) return section;
+    }
+    return null;
   }
 }

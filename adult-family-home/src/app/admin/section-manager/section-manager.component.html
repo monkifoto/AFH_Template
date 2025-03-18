@@ -2,6 +2,9 @@
 
   <div class="row">
     <div class="col"> <button (click)="addSection()" class="afhBtn">+ Add Section</button></div>
+    <div class="col">
+      <button (click)="loadSections()" class="afhBtn">Reload Sections</button>
+    </div>
     <div class="col"><label>
     <input
       type="checkbox"
@@ -13,10 +16,14 @@
   </label></div>
   </div>
 
+  <div *ngFor="let page of pageGroups">
+    <div *ngIf="sectionGroups[page]?.length">
+      <h2>{{ page | titlecase }}</h2>
+
   <div formArrayName="sections">
-    <ng-container *ngFor="let section of sections.controls; let i = index">
+    <div *ngFor="let section of sectionGroups[page]">
       <div
-        [formGroupName]="i"
+        [formGroup]="section"
         class="sectionForm-container"
         *ngIf="showInactiveSections || section.get('isActive')?.value !== false"
         [class.inactive-section]="!section.get('isActive')?.value"
@@ -24,20 +31,15 @@
       >
         <div class="row">
           <div class="col">
-            <button (click)="toggleSection(i)" class="icon-btn">
-              <i
-                class="fa-solid"
-                [ngClass]="
-                  collapsedSections[i] ? 'fa-angles-down' : 'fa-angles-up'
-                "
-              ></i>
+            <button (click)="toggleSection(section.get('id')?.value)" class="icon-btn">
+              <i class="fa-solid" [ngClass]="collapsedSections[section.get('id')?.value] ? 'fa-angles-down' : 'fa-angles-up'"></i>
             </button>
           </div>
           <div class="col">
             <label class="page">{{ section.get("order")?.value }}</label>
           </div>
           <div class="col">
-            <h3>{{ i + 1 }}, {{ section.get("sectionTitle")?.value }}</h3>
+            <h3>{{ section.get("sectionTitle")?.value }}</h3>
           </div>
           <div class="col">
             <label class="page">{{ section.get("page")?.value }}</label>
@@ -51,7 +53,8 @@
             }}</label>
           </div>
           <div class="col">
-            <button (click)="updateSection(i)">Update</button>
+            <button (click)="updateSection(section)">Update</button>
+            <button (click)="removeSection(section.get('id')?.value)">Delete</button>
           </div>
           <div class="col">
             <label>Active</label>
@@ -59,7 +62,7 @@
           </div>
         </div>
 
-        <div *ngIf="collapsedSections[i]">
+        <div *ngIf="!collapsedSections[section.get('id')?.value]">
           <div class="section-header">
             <div class="row"></div>
           </div>
@@ -280,15 +283,15 @@
                 />
                 <!-- File upload remains available for uploading images -->
                 <input
-                  type="file"
-                  (change)="uploadImage($event, i)"
-                  class="form-control"
-                />
+                type="file"
+                (change)="uploadImage($event, section.get('id')?.value)"
+                class="form-control"
+              />
               </div>
 
               <!-- Clear Image Button -->
               <div class="col">
-                <button type="button" (click)="clearImage(i)">
+                <button type="button" (click)="clearImage(section.get('id')?.value)">
                   Clear Image
                 </button>
               </div>
@@ -340,12 +343,10 @@
                     />
                     <!-- Checkbox bound to the current image selection -->
                     <input
-                      type="checkbox"
-                      [checked]="
-                        section.get('sectionImageUrl')?.value === image.url
-                      "
-                      (change)="selectCheckboxImage(i, image.url, $event)"
-                    />
+                    type="checkbox"
+                    [checked]="section.get('sectionImageUrl')?.value === image.url"
+                    (change)="selectCheckboxImage(section.get('id')?.value, image.url, $event)"
+                  />
                   </label>
                 </div>
                 </div>
@@ -375,7 +376,7 @@
                 <input type="checkbox" formControlName="isMinimal" />
               </div>
             </div>
-            <button (click)="addItem(i)" class="afhBtn">+ Add Item</button>
+            <button (click)="addItem(section.get('id')?.value)" class="afhBtn">+ Add Item</button>
 
             <div *ngIf="getItems(section) as items">
               <div formArrayName="items">
@@ -408,17 +409,19 @@
                     class="form-control"
                     placeholder="Icon"
                   />
-                  <button (click)="removeItem(i, j)">Remove</button>
+                  <button (click)="removeItem(section.get('id')?.value, j)">Remove</button>
                 </div>
               </div>
             </div>
           </div>
 
-          <button (click)="updateSection(i)">Update</button>
-          <button (click)="removeSection(i)">Delete</button>
-          <button (click)="duplicateSection(i)">Copy</button>
+          <button (click)="updateSection(section)">Save</button>
+          <button (click)="removeSection(section.get('id')?.value)">Delete</button>
+          <button (click)="duplicateSection(section.get('id')?.value)">Copy</button>
         </div>
       </div>
-    </ng-container>
+    </div>
+  </div>
+    </div>
   </div>
 </form>
