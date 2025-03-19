@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WebContentService } from 'src/app/services/web-content.service';
-import { Business } from 'src/app/model/business-questions.model';
+import { Business, BusinessLocation } from 'src/app/model/business-questions.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MetaService } from 'src/app/services/meta-service.service';
@@ -18,7 +18,7 @@ import { EmailService } from 'src/app/services/email.service';
 export class ContactUsComponent  implements OnInit{
 
   business: Business | null = null;
-
+  location: BusinessLocation | null = null;
   layoutType: string | undefined = 'demo';
 
   formData = {
@@ -43,21 +43,33 @@ export class ContactUsComponent  implements OnInit{
 
 
       get sanitizedBusinessHours(): SafeHtml {
-        return this.business?.businessHours
-          ? this.sanitizer.bypassSecurityTrustHtml(this.business.businessHours)
+        return this.location?.businessHours
+          ? this.sanitizer.bypassSecurityTrustHtml(this.location?.businessHours)
           : '';
       }
 
-  ngOnInit(): void {
-    this.businessDataService.businessData$.subscribe((business) => {
-      this.business = business;
+      ngOnInit(): void {
+        this.businessDataService.businessData$.subscribe((business) => {
+          if (business) {
+            this.business = business;
 
-      if (business?.id) {
-        this.metaService.loadAndApplyMeta(business?.id);
-        this.layoutType = this.business?.theme.themeType;
+            this.businessDataService.getLocations().subscribe((locations) => {
+              if (locations.length > 0) {
+                this.location = locations[0]; // ✅ Set first available location
+                console.log('📍 Updated Location [0]:', this.location);
+              } else {
+                console.warn('⚠️ No locations available.');
+                this.location = null;
+              }
+            });
+
+            if (business?.id) {
+              this.metaService.loadAndApplyMeta(business.id);
+              this.layoutType = business.theme?.themeType || 'demo';
+            }
+          }
+        });
       }
-    });
-  }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -96,6 +108,17 @@ export class ContactUsComponent  implements OnInit{
       return parts.slice(-2).join('.'); // Keep the last two parts (e.g., example.com)
     }
     return hostname; // If no subdomains, return as is
+  }
+
+  get formattedAddress(): string {
+    return [
+      this.location?.street,
+      this.location?.city,
+      this.location?.state,
+      this.location?.zipcode
+    ]
+    .filter(part => part) // ✅ Remove undefined/null values
+    .join(' '); // ✅ Join into a single string
   }
 
   showModal() {

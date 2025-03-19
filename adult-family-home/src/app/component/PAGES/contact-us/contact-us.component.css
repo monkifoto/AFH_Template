@@ -334,3 +334,10 @@ ul li strong {
 }
 
  */
+ .source-indicator {
+  font-size: 12px;
+  color: #777;
+  font-style: italic;
+  margin-top: 2px;
+  display: block;
+}

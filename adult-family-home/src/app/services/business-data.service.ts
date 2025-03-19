@@ -31,9 +31,7 @@ export class BusinessDataService {
         // Ensure sections are included
         if (!business.sections) {
           business.sections = [];
-          console.warn(
-            '⚠️ No sections found in Firestore. Initializing empty array.'
-          );
+          console.warn('⚠️ No sections found in Firestore. Initializing empty array.');
         }
 
         return business;
@@ -44,7 +42,7 @@ export class BusinessDataService {
         this.businessIdSubject.next(businessId);
 
         this.businessService.getLocations(businessId).subscribe((locations) => {
-          //console.log("📍 Firestore Locations Retrieved:", locations);
+          // console.log("📍 Firestore Locations Retrieved:", locations);
           this.locationsSubject.next(locations);
         });
       })

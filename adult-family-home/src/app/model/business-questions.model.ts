@@ -59,6 +59,7 @@ locationName:string;
   fax:string;
   email:string;
   image:string;
+  businessHours:string;
 
 }
 
@@ -416,7 +417,8 @@ export class BusinessModel {
           phone:'(987) 654-3210',
           fax: '(987) 654-3211',
           email: 'contact@carefullivingafh.com',
-          image: ''
+          image: '',
+          businessHours: ''
         }
       ],
       address: '',

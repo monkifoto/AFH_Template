@@ -45,10 +45,10 @@ export class BusinessLocationsComponent implements OnInit {
   }
 
   /** 📌 Add a new empty location field in UI */
-  addLocation(location: any = { street: '', city: '', state: '', zipcode: '', phone: '', fax: '', email: '' }): void {
+  addLocation(location: any = {locationName:'', street: '', city: '', state: '', zipcode: '', phone: '', fax: '', email: '', image: '', businessHours:'' }): void {
     this.locations.push(
       this.fb.group({
-        name : [location.locationName, Validators.required],
+        locationName : [location.locationName, Validators.required],
         street: [location.street, Validators.required],
         city: [location.city, Validators.required],
         state: [location.state, Validators.required],
@@ -56,7 +56,8 @@ export class BusinessLocationsComponent implements OnInit {
         phone: [location.phone, [Validators.required, Validators.pattern(/^\d{10}$/)]],
         fax: [location.fax],
         email: [location.email],
-        image: [location.image]
+        image: [location.image],
+        businessHours: [location.businessHours]
       })
     );
   }
@@ -111,21 +112,22 @@ export class BusinessLocationsComponent implements OnInit {
     console.log("📥 Setting Locations in Form:", locations);
 
     const locationArray = this.locationForm.get('locations') as FormArray;
-    locationArray.clear(); // Clear old locations before setting new ones
+    locationArray.clear();
 
     locations.forEach(location => {
       locationArray.push(
         this.fb.group({
-          id: [location.id || null], // Store Firestore doc ID
+          id: [location.id || null],
           locationName: [location.locationName || '' , Validators.required],
           street: [location.street || '', Validators.required],
           city: [location.city || '', Validators.required],
           state: [location.state || '', Validators.required],
-          zipcode: [location.zipcode || location.zipcode || '', Validators.required], // 🔥 Ensure correct naming
+          zipcode: [location.zipcode || location.zipcode || '', Validators.required],
           phone: [location.phone || ''],
           fax: [location.fax || ''],
           email: [location.email || '', [Validators.required, Validators.email]],
           image: [location.image || ''],
+          businessHours: [location.businessHours || '']
         })
       );
     });
