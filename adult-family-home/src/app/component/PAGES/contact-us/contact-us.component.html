@@ -18,23 +18,24 @@
               <div class="contact-details">
                 <div class="contact-item">
                   <h3>Address</h3>
-                  <p>{{ business.address }}</p>
+                  <p>{{ location?.street }}, {{ location?.city }}, {{ location?.state }} {{ location?.zipcode }}</p>
+                  <small class="source-indicator">📍 From {{ location?.locationName }}</small>
                 </div>
                 <div class="contact-item">
                   <h3>Phone</h3>
-                  <p>{{ business.phone }}</p>
+                  <p>{{ location?.phone | phoneFormat }}</p>
                 </div>
                 <div class="contact-item" *ngIf="business.email">
                   <h3>Email</h3>
                   <p>
-                    <a href="mailto:{{ business.email }}">{{
-                      business.email
+                    <a href="mailto:{{ location?.email }}">{{
+                      location?.email
                     }}</a>
                   </p>
                 </div>
-                <div class="contact-item" *ngIf="business.fax">
+                <div class="contact-item" *ngIf="location?.fax">
                   <h3>Fax</h3>
-                  <p>{{ business.fax }}</p>
+                  <p>{{ location?.fax | phoneFormat}}</p>
                 </div>
                 <div class="contact-item" *ngIf="business.socialMedia">
                   <h3>Social Media</h3>
@@ -120,19 +121,22 @@
             </div>
           </div>
         </section>
+
         <app-information
-          [phoneNumber]="business.phone"
-          [address]="business.address"
-          [email]="business.email"
+          [phoneNumber]="(location?.phone | phoneFormat) ||''"
+          [address]="formattedAddress"
+          [email]="location?.email || ''"
         >
         </app-information>
+
         <app-google-maps
-          [address]="business.address || ''"
+          [address]="formattedAddress || ''"
           [layoutType]="business.theme.themeType || 'demo'"
         ></app-google-maps>
       </div>
-      <!-- <button class="afhBtn" (click)="navigateTo('resident-form')">Resident Form</button> -->
+
       <app-faq></app-faq>
+
     </ng-container>
 
     <ng-container *ngSwitchCase="'ae'">
@@ -140,16 +144,21 @@
       <div class="ae-contact-us-container">
         <div class="ae-contact-details">
           <h2>Contact us</h2>
-          <div class="ae-contact-item" *ngIf="business.email">
+          <div class="ae-contact-item" *ngIf="location?.email">
             <p>
-              <a href="mailto:{{ business.email }}">{{ business.email }}</a>
+              <a href="mailto:{{ location?.email }}">{{ location?.email }}</a>
             </p>
           </div>
           <div class="ae-contact-item">
-            <p>{{ business.phone }}</p>
+            <p>{{ location?.phone | phoneFormat }}</p>
           </div>
+          <div class="ae-contact-item" *ngIf="location?.fax">
+            <h3>Fax</h3>
+            <p>{{ location?.fax | phoneFormat}}</p>
+          </div>
+
           <div class="ae-contact-item">
-            <p>{{ business.address }}</p>
+            <p>{{ location?.street }}, {{ location?.city }}, {{ location?.state }} {{ location?.zipcode }}</p>
           </div>
 
           <!-- <div class="ae-contact-item" *ngIf="business.fax">
@@ -218,7 +227,7 @@
 
         <div class="ae-map-container">
           <app-google-maps
-            [address]="business.address || ''"
+            [address]="formattedAddress || ''"
             [layoutType]="business.theme.themeType || 'demo'"
           ></app-google-maps>
         </div>
@@ -230,16 +239,20 @@
       <div class="ae-contact-us-container">
         <div class="ae-contact-details">
           <h2>Contact us</h2>
-          <div class="ae-contact-item" *ngIf="business.email">
+          <div class="ae-contact-item" *ngIf="location?.email">
             <p>
-              <a href="mailto:{{ business.email }}">{{ business.email }}</a>
+              <a href="mailto:{{ location?.email }}">{{ location?.email }}</a>
             </p>
           </div>
           <div class="ae-contact-item">
-            <p>{{ business.phone }}</p>
+            <p>{{ location?.phone | phoneFormat }}</p>
+          </div>
+          <div class="ae-contact-item" *ngIf="location?.fax">
+            <h3>Fax</h3>
+            <p>{{ location?.fax | phoneFormat}}</p>
           </div>
           <div class="ae-contact-item">
-            <p>{{ business.address }}</p>
+            <p>{{ location?.street }}, {{ location?.city }}, {{ location?.state }} {{ location?.zipcode }}</p>
           </div>
 
           <!-- <div class="ae-contact-item" *ngIf="business.fax">
@@ -308,7 +321,7 @@
 
         <div class="ae-map-container">
           <app-google-maps
-            [address]="business.address || ''"
+            [address]="formattedAddress || ''"
             [layoutType]="business.theme.themeType || 'demo'"
           ></app-google-maps>
         </div>
@@ -320,16 +333,21 @@
       <div class="ae-contact-us-container">
         <div class="ae-contact-details">
           <h2>Contact us</h2>
-          <div class="ae-contact-item" *ngIf="business.email">
+          <div class="ae-contact-item" *ngIf="location?.email">
             <p>
-              <a href="mailto:{{ business.email }}">{{ business.email }}</a>
+              <a href="mailto:{{ location?.email }}">{{ location?.email }}</a>
             </p>
           </div>
           <div class="ae-contact-item">
-            <p>{{ business.phone }}</p>
+            <p>{{ location?.phone | phoneFormat }}</p>
           </div>
+          <div class="ae-contact-item" *ngIf="location?.fax">
+            <h3>Fax</h3>
+            <p>{{ location?.fax | phoneFormat}}</p>
+          </div>
+
           <div class="ae-contact-item">
-            <p>{{ business.address }}</p>
+            <p>{{ formattedAddress }}</p>
           </div>
 
           <!-- <div class="ae-contact-item" *ngIf="business.fax">
@@ -398,7 +416,7 @@
 
         <div class="ae-map-container">
           <app-google-maps
-            [address]="business.address || ''"
+            [address]="formattedAddress || ''"
             [layoutType]="business.theme.themeType || 'demo'"
           ></app-google-maps>
         </div>
@@ -410,16 +428,21 @@
       <div class="ae-contact-us-container">
         <div class="ae-contact-details">
           <h2>Contact us</h2>
-          <div class="ae-contact-item" *ngIf="business.email">
+          <div class="ae-contact-item" *ngIf="location?.email">
             <p>
-              <a href="mailto:{{ business.email }}">{{ business.email }}</a>
+              <a href="mailto:{{ location?.email }}">{{ location?.email }}</a>
             </p>
           </div>
           <div class="ae-contact-item">
-            <p>{{ business.phone }}</p>
+            <p>{{ location?.phone | phoneFormat }}</p>
           </div>
+          <div class="ae-contact-item" *ngIf="location?.fax">
+            <h3>Fax</h3>
+            <p>{{ location?.fax | phoneFormat}}</p>
+          </div>
+
           <div class="ae-contact-item">
-            <p>{{ business.address }}</p>
+            <p>{{ location?.street }}, {{ location?.city }}, {{ location?.state }} {{ location?.zipcode }}</p>
           </div>
 
           <!-- <div class="ae-contact-item" *ngIf="business.fax">
@@ -488,7 +511,7 @@
 
         <div class="ae-map-container">
           <app-google-maps
-            [address]="business.address || ''"
+            [address]="formattedAddress || ''"
             [layoutType]="business.theme.themeType || 'demo'"
           ></app-google-maps>
         </div>
@@ -497,19 +520,25 @@
 
 
     <ng-container *ngSwitchDefault>
+      <app-hero></app-hero>
       <div class="ae-contact-us-container">
         <div class="ae-contact-details">
           <h2>Contact us</h2>
-          <div class="ae-contact-item" *ngIf="business.email">
+          <div class="ae-contact-item" *ngIf="location?.email">
             <p>
-              <a href="mailto:{{ business.email }}">{{ business.email }}</a>
+              <a href="mailto:{{ location?.email }}">{{ location?.email }}</a>
             </p>
           </div>
           <div class="ae-contact-item">
-            <p>{{ business.phone }}</p>
+            <p>{{ location?.phone | phoneFormat }}</p>
           </div>
+          <div class="ae-contact-item" *ngIf="location?.fax">
+            <h3>Fax</h3>
+            <p>{{ location?.fax | phoneFormat}}</p>
+          </div>
+
           <div class="ae-contact-item">
-            <p>{{ business.address }}</p>
+            <p>{{ location?.street }}, {{ location?.city }}, {{ location?.state }} {{ location?.zipcode }}</p>
           </div>
 
           <!-- <div class="ae-contact-item" *ngIf="business.fax">
@@ -571,14 +600,14 @@
       <div class="ae-contact-us-container">
         <div class="ae-contact-details">
           <div>
+            <h2>Visitation Hours</h2>
             <div [innerHTML]="sanitizedBusinessHours"></div>
-
           </div>
         </div>
 
         <div class="ae-map-container">
           <app-google-maps
-            [address]="business.address || ''"
+            [address]="formattedAddress || ''"
             [layoutType]="business.theme.themeType || 'demo'"
           ></app-google-maps>
         </div>

@@ -80,6 +80,7 @@ import { DynamicThemeLoaderComponent } from './component/dynamic-theme-loader/dy
 import { SafeUrlPipe } from './pipe/safe-url.pipe';
 import { BusinessLocationsComponent } from './admin/business-locations/business-locations.component';
 import { LocationPageComponent } from './component/PAGES/location-page/location-page.component';
+import { PhoneFormatPipe } from './pipe/phone-format.pipe';
 
 
     // Map hostnames to business IDs
@@ -228,7 +229,8 @@ export function combinedInitializer(
     DynamicThemeLoaderComponent,
     SafeUrlPipe,
     BusinessLocationsComponent,
-    LocationPageComponent
+    LocationPageComponent,
+    PhoneFormatPipe
   ],
   imports: [
     BrowserModule,
