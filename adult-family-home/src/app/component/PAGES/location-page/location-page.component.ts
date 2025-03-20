@@ -30,20 +30,20 @@ export class LocationPageComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.locationIndex = Number(params['locationIndex']);
 
-      console.log("🔢 Location Index from URL:", this.locationIndex);
+      //console.log("🔢 Location Index from URL:", this.locationIndex);
 
       if (this.locationIndex !== null) {
         this.businessDataService.getBusinessId().pipe(
           switchMap((businessId) => {
             if (businessId) {
-              console.log("✅ Business ID Found:", businessId);
+             // console.log("✅ Business ID Found:", businessId);
               return this.businessDataService.loadBusinessData(businessId);
             }
             return [];
           })
         ).subscribe((business) => {
           if (business) {
-            console.log("✅ Business Data Ready:", business);
+           // console.log("✅ Business Data Ready:", business);
             this.business = business;
             this.loadBusinessData(); // 🔥 Now call loadBusinessData AFTER ensuring business data is available
           }
@@ -73,14 +73,14 @@ export class LocationPageComponent implements OnInit {
       this.layoutType = business.theme?.themeType;
 
       // 🔥 Debug: Log locations BEFORE using locationIndex
-      console.log("📍 Locations in Business Data:", business.locations);
-      console.log("🔢 Requested Location Index:", this.locationIndex);
+      //console.log("📍 Locations in Business Data:", business.locations);
+      //console.log("🔢 Requested Location Index:", this.locationIndex);
       this.businessDataService.getLocations().subscribe((locations) => {
-        console.log("📍 Firestore Locations Retrieved:", locations);
+       // console.log("📍 Firestore Locations Retrieved:", locations);
 
         if (locations && this.locationIndex! < locations.length) {
           this.location = locations[this.locationIndex!];
-          console.log("✅ Loaded Firestore Location:", this.location);
+          //console.log("✅ Loaded Firestore Location:", this.location);
           this.loadMap();
         } else {
           console.error("❌ Location index is out of range. Available Firestore locations:", locations.length);

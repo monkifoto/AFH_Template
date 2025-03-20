@@ -33,7 +33,7 @@ export class BusinessLocationsComponent implements OnInit {
   /** 📌 Load locations from Firestore */
   loadLocations(): void {
     this.businessService.getLocations(this.businessId).subscribe(locations => {
-      console.log("📍 Firestore Locations Retrieved:", locations); // Debugging
+      //console.log("📍 Firestore Locations Retrieved:", locations); // Debugging
       if (locations && locations.length > 0) {
         this.setLocations(locations);
       } else {
@@ -77,7 +77,7 @@ export class BusinessLocationsComponent implements OnInit {
 
   /** 📌 Save all locations in Firestore */
   saveLocations(): void {
-    console.log("🔥 Saving Locations...");
+    //console.log("🔥 Saving Locations...");
 
     if (this.locationForm.invalid) {
       console.error("❌ Location Form is INVALID:", this.locationForm.value);
@@ -109,7 +109,7 @@ export class BusinessLocationsComponent implements OnInit {
   }
 
   setLocations(locations: any[]): void {
-    console.log("📥 Setting Locations in Form:", locations);
+    //console.log("📥 Setting Locations in Form:", locations);
 
     const locationArray = this.locationForm.get('locations') as FormArray;
     locationArray.clear();
@@ -132,7 +132,7 @@ export class BusinessLocationsComponent implements OnInit {
       );
     });
 
-    console.log("✅ Locations populated in Form:", this.locationForm.value);
+    //console.log("✅ Locations populated in Form:", this.locationForm.value);
     this.cdr.detectChanges(); // 🔥 Force UI to update
   }
 }

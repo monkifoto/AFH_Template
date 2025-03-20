@@ -35,6 +35,7 @@ export class LeftTextComponent {
   @Input() showLearnMore: boolean = false; // ✅ Toggle Learn More button
   @Input() sectionImageUrl: string | null = null; // ✅ Background image
   @Input() isParallax: boolean = true; // ✅ Controls whether parallax effect is applied
+  @Input() order: number = 0;
 
   private _content!: string;
   sanitizedContent!: SafeHtml;
@@ -44,6 +45,7 @@ export class LeftTextComponent {
     this.fullWidth = this.convertToBoolean(this.fullWidth);
     console.log('Left Text Component Loaded , themeType: '+ this.themeType+  ' Business Name:' + this._businessName + ' Title: ' + this.title);
     console.log("📌 Section Left Text- Initialized:", {
+      order: this.order,
       title: this.title,
       titleColor: this.titleColor,
       titleFontSize: this.titleFontSize,

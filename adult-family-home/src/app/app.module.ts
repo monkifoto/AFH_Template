@@ -115,7 +115,7 @@ export function themeInitializerFactory(
     const url = new URL(window.location.href);
     let businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
 
-    console.log("themeInitializerFactory app.module businessId: " +  businessId + ' - hostname: ' + hostname);
+    //console.log("themeInitializerFactory app.module businessId: " +  businessId + ' - hostname: ' + hostname);
     // Pass the businessId to ThemeInitializerService
     return themeInitializer.loadTheme(businessId);
   };
@@ -131,11 +131,11 @@ export function initializeBusinessData(
   let businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
   // Get business ID based on hostname or fallback to default
   // const businessId = businessIdMap[hostname] || "Z93oAAVwFAwhmdH2lLtB"; // Default ID
-  console.log("initializeBusinessData app.module businessId:: " +  businessId + ' - hostname: ' + hostname)
+  //console.log("initializeBusinessData app.module businessId:: " +  businessId + ' - hostname: ' + hostname)
 
   return () => {
     businessDataService.loadBusinessData(businessId).toPromise().then(() => {
-      console.log("Business data loaded successfully");
+      //console.log("Business data loaded successfully");
     }).catch(error => {
       console.error("Error loading business data:", error);
     });

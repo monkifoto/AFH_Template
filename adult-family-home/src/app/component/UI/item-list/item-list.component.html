@@ -190,6 +190,102 @@
           }"
         >
           <div class="heading-container">
+            <div class="text-container">
+            <h3 [ngStyle]="{ color: titleColor }">{{ titleParts.part1 }}</h3 >
+            <h2><span *ngIf="titleParts.part2" [ngStyle]="{ color: titleColor }"> {{ titleParts.part2 }}</span></h2>
+              <div class="separator2"></div>
+
+            </div>
+            <!-- <h2 class="styled-heading" [ngStyle]="{ color: titleColor }">
+              {{ title }}
+            </h2> -->
+          </div>
+
+          <h3
+            class="our-services-description"
+            [ngStyle]="{ color: subtitleColor }"
+          >
+            {{ subTitle }}
+          </h3>
+
+          <div class="our-services-container">
+            <div *ngFor="let service of items" class="our-services-item">
+              <div >
+                <i [ngClass]="service.icon" class="our-services-item-icon"></i>
+                <h2>{{ service.title }}</h2>
+              </div>
+              <div class="our-services-item-description">
+                <p>{{ service.description }}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Full version -->
+      <div *ngIf="isMinimal">
+        <div
+          [ngClass]="{
+            'parallax-container': isParallax && sectionImageUrl,
+            'regular-image-container': !isParallax && sectionImageUrl,
+            'solid-bg-container': !sectionImageUrl,
+            'full-width': fullWidth,
+            centered: !fullWidth
+          }"
+          [ngStyle]="{
+            'background-image': sectionImageUrl
+              ? 'url(' + sectionImageUrl + ')'
+              : 'none',
+            'background-color': backgroundColor,
+            color: textColor
+          }"
+        >
+          <div class="heading-container">
+            <h2 class="styled-heading" [ngStyle]="{ color: titleColor }">
+              {{ title }}
+            </h2>
+          </div>
+          <div class="services-grid">
+            <div *ngFor="let service of items" class="service-item">
+              <i
+                [ngStyle]="{ color: titleColor }"
+                [ngClass]="service.icon"
+                class="services-item-icon"
+              ></i>
+              <h2 [ngStyle]="{ color: titleColor }">{{ service.title }}</h2>
+              <p [ngStyle]="{ color: subtitleColor }">
+                {{ service.description }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- <ul>
+        <li *ngFor="let service of items" class="service-list-item">
+          <h2>{{ service.title }}</h2>
+          <div class="our-services-item-description">
+            <p>{{ service.description }}</p>
+          </div>
+        </li>
+      </ul> -->
+      </div>
+    </div>
+  </section>
+
+  <section class="services-list-section" *ngIf="themeType === 'clemo'">
+    <div>
+      <!-- Minimal version -->
+      <div *ngIf="!isMinimal">
+        <section
+          class="our-services-section"
+          [ngStyle]="{
+            'background-image': sectionImageUrl
+              ? 'url(' + sectionImageUrl + ')'
+              : 'none',
+            'background-color': backgroundColor,
+            color: textColor
+          }"
+        >
+          <div class="heading-container">
             <h2 class="styled-heading" [ngStyle]="{ color: titleColor }">
               {{ title }}
             </h2>

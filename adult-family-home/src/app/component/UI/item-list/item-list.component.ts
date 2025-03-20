@@ -32,12 +32,14 @@ export class ItemListComponent implements OnInit {
    @Input() boxShadow: boolean = false;
    @Input() borderRadius: number = 0;
    @Input() businessId : number = 0;
+   @Input() order: number =0;
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.fullWidth = this.convertToBoolean(this.fullWidth);
     console.log("📌 Item List Initialized:", {
+      order:this.order,
       title: this.title,
       subTitle: this.subTitle,
       items: this.items,
@@ -56,6 +58,14 @@ export class ItemListComponent implements OnInit {
     if (typeof value === 'boolean') return value; // Already boolean
     if (typeof value === 'string') return value.toLowerCase() === 'true'; // Convert string to boolean
     return false; // Default case
+  }
+
+  get titleParts(): { part1: string; part2: string | null } {
+    if (this.title.includes('|')) {
+      const [part1, part2] = this.title.split('|').map(part => part.trim());
+      return { part1, part2 };
+    }
+    return { part1: this.title, part2: null };
   }
 
   navigateTo(page:string) {

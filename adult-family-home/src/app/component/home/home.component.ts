@@ -97,7 +97,7 @@ export class HomeComponent implements OnInit {
         .filter(section => section.isActive !== false) // ❌ Remove inactive sections
         .sort((a, b) => (a.order || 0) - (b.order || 0)); // ✅ Sort by order
 
-      console.log("✅ Final Active Sections to Load:", this.sections);
+      //console.log("✅ Final Active Sections to Load:", this.sections);
 
       this.loadComponents(); // ✅ Now load components ONLY for active sections
     });
@@ -106,10 +106,10 @@ export class HomeComponent implements OnInit {
 
 loadComponents() {
   this.container.clear();
-  console.log("✅ Starting to Load Components");
+  //console.log("✅ Starting to Load Components");
 
   // ✅ Load HeroSliderComponent First
-  console.log("✅ Adding HeroSliderComponent");
+  //console.log("✅ Adding HeroSliderComponent");
   this.container.createComponent(HeroSliderComponent);
 
   if (!this.sections.length) {
@@ -121,7 +121,7 @@ loadComponents() {
 
   // ✅ Load all sections except 'consultation'
   this.sections.forEach((section, index) => {
-    console.log(`🔄 Loading Component for Section ${index + 1}:`, section.component);
+    //console.log(`🔄 Loading Component for Section ${index + 1}:`, section.component);
 
     const componentType = this.componentsMap[section.component as keyof typeof this.componentsMap] as Type<any>;
 
@@ -145,7 +145,7 @@ loadComponents() {
 
   // ✅ Finally, inject ConsultationComponent at the very end
   if (consultationSection) {
-    console.log("🟢 Loading Consultation Section LAST");
+    //console.log("🟢 Loading Consultation Section LAST");
 
     const consultationComponentType = this.componentsMap['consultation'] as Type<any>;
 
@@ -260,7 +260,7 @@ assignComponentProperties(componentInstance: any, section: any) {
       componentInstance.changeDetectorRef.detectChanges();
     }
 
-    console.log(`✅ Component Data for ${section.component}:`, componentInstance);
+    //console.log(`✅ Component Data for ${section.component}:`, componentInstance);
   }
 }
 

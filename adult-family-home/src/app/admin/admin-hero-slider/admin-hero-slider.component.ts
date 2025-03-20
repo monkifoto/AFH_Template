@@ -86,7 +86,7 @@ export class AdminHeroSliderComponent implements OnInit {
         subtitleWeight: config.subtitleWeight ?? '600'
       }
     });
-    console.log('AdminHeroSliderComponent - Loaded slider config:', config);
+    //console.log('AdminHeroSliderComponent - Loaded slider config:', config);
   }
 
   addSlide(slide: any = { title: '', subtitle: '', backgroundImage: '', buttons: [] }): void {

@@ -32,12 +32,14 @@ export class WhyUsComponent implements OnInit {
   @Input() alignText: string= 'left';
   @Input() boxShadow: boolean = false;
   @Input() borderRadius: number = 0;
+  @Input() order: number = 0;
 
   constructor( private route: ActivatedRoute){}
   ngOnInit(): void {
     console.log('Why Us Component Loaded , themeType: '+ this.themeType+  ' Business Name:' + this._businessName + ' Title: ' + this.title);
 
     console.log("📌 Section Why Us- Initialized:", {
+      order:this.order,
       title: this.title,
       titleColor: this.titleColor,
       titleFontSize: this.titleFontSize,

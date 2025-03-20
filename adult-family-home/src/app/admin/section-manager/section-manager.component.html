@@ -498,24 +498,20 @@
                 <div class="col"> <button class="delete-btn" (click)="removeSection(section.get('id')?.value)"> Delete </button></div>
                 <div class="col">
                   <label>Copy Section To:</label>
-                  <select [(ngModel)]="selectedBusinessId" class="form-control">
-                    <option
-                      *ngFor="let business of businessesList"
-                      [value]="business.id"
-                    >
-                      {{ business.businessName }}
+                  <select
+                    formControlName="activeBusinessId"
+                    class="form-control"
+                    (change)="logActiveBusinessId(section)">
+                    <option value="">-- Select a Business --</option>
+                    <option *ngFor="let business of businessesList" [value]="business.id">
+                      {{ business.businessName }} ({{ business.id }})
                     </option>
                   </select>
                 </div>
+
                 <div class="col">
                   <button class="duplicate-btn"
-                    (click)="
-                      duplicateSection(
-                        section.get('id')?.value,
-                        selectedBusinessId
-                      )
-                    "
-                  >
+                    (click)="duplicateSection(section.get('id')?.value, section.get('activeBusinessId')?.value)">
                     Copy to Another Business
                   </button>
                 </div>

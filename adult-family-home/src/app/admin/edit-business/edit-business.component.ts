@@ -5,7 +5,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 import { BusinessService } from 'src/app/services/business.service';
 import { UploadService } from 'src/app/services/upload.service';
 import {
@@ -37,7 +37,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
   @ViewChild(SectionManagerComponent) sectionManager!: SectionManagerComponent;
   @ViewChild(BusinessLocationsComponent)
   locationsManager!: BusinessLocationsComponent;
-
+  private isFormPopulated = false;
   business!: Business;
   businessForm!: FormGroup;
   uploadProgress: { [key: string]: Observable<number | undefined> } = {};
@@ -70,10 +70,10 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
       this.businessId = params.get('id')!;
 
       if (this.businessId) {
-        console.log('Edit-Business: ngOnInit: Business', this.business);
+        //console.log('Edit-Business: ngOnInit: Business', this.business);
         this.loadBusinessData();
       } else {
-        console.log('Loading default data');
+        //console.log('Loading default data');
         this.loadDefaultData();
       }
     });
@@ -82,19 +82,17 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
   loadBusinessData(): void {
     this.businessService.getBusiness(this.businessId).subscribe(
       (business) => {
-        if (business) {
-          console.log('Business data:', business); // Debugging line
+        if (business && !this.isFormPopulated) {
+         // console.log('Business data:', business); // Debugging line
           this.business = business;
           this.populateForm(business);
+          this.isFormPopulated = true;
 
 
           // Ensure each section has an ID
           if (business.sections) {
             business.sections.forEach((s, index) => {
-              console.log(
-                `🔥 Load Business Data in Edit Business Section ${index}:`,
-                s
-              );
+             // console.log(`🔥 Load Business Data in Edit Business Section ${index}:`,  s);
               if (!s.id) {
                 console.warn(`⚠️ Section at index ${index} is missing an ID!`);
               }
@@ -112,6 +110,9 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
                 business.logoImage = url; // Update the URL for display
               });
           }
+        }
+        else{
+          console.warn("⚠️ Form already populated, skipping redundant calls.");
         }
       },
       (error) => {
@@ -144,6 +145,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
       whyChoose: this.fb.array([]),
 
       sections: this.fb.array([]),
+
       //About Us
       certifications: [''],
 
@@ -259,7 +261,6 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
       isActive: [defaultBusiness.isActive],
       theme: [defaultBusiness.theme],
       placeId: [defaultBusiness.placeId],
-
       // Initialize FormArrays
       uniqueService: this.fb.array(
         (defaultBusiness.uniqueService ?? []).map((service) =>
@@ -330,9 +331,12 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
   }
 
   populateForm(business: Business): void {
+    if (!this.businessForm) {
+      console.error("❌ businessForm is not initialized!");
+      return;
+    }
     this.businessForm.patchValue(business);
 
-     // Ensure locations are set
   if (business.locations && business.locations.length) {
     this.businessForm.setControl(
       'locations',
@@ -350,7 +354,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
         )
       )
     );
-    console.log('Locations populated in form:', this.businessForm.get('locations')?.value); // Debugging
+   // console.log('Locations populated in form:', this.businessForm.get('locations')?.value); // Debugging
   } else {
     console.warn('⚠️ No locations found to populate the form.');
   }
@@ -406,7 +410,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
   }
 
   updateLocations(locations: any) {
-    console.log('Locations received from child:', locations); // ✅ Debugging
+    //console.log('Locations received from child:', locations); // ✅ Debugging
 
     if (this.businessForm.get('locations')) {
       this.businessForm.patchValue({ locations: locations });
@@ -426,10 +430,10 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
       locations: this.businessForm.get('locations')?.value || [], // 🔥 Ensure locations are included
     };
 
-    console.log('Final Data to Save:', formValue); // ✅ Debugging
+   // console.log('Final Data to Save:', formValue); // ✅ Debugging
 
     if (this.businessForm.valid) {
-      console.log('Form Value Before Saving:', this.businessForm.value); // 🔍 Debugging
+   //  console.log('Form Value Before Saving:', this.businessForm.value); // 🔍 Debugging
 
       if (this.businessId) {
         this.businessService
@@ -451,7 +455,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
               if (bus && bus.id) {
                 this.business = bus;
                 this.businessId = bus.id; // ✅ Save the new business ID
-                console.log('Business created with ID:', this.businessId);
+                //console.log('Business created with ID:', this.businessId);
               }
               this.confirmationMessage =
                 'Business has been successfully created!';

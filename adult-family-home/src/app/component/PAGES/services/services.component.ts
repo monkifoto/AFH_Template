@@ -85,7 +85,7 @@ export class ServicesComponent implements OnInit, AfterViewInit {
 
   loadSections() {
     this.sectionService.getBusinessSections(this.businessId, 'services').subscribe((sections) => {
-     // console.log("📌 Retrieved Sections:", sections);
+      console.log("📌 Retrieved Sections:", sections);
       if (!sections || sections.length === 0) {
         console.warn("❗ No sections retrieved from the service.");
         return;
@@ -112,7 +112,9 @@ export class ServicesComponent implements OnInit, AfterViewInit {
 
     // ✅ Sort sections based on 'order' from the database
     this.sections.sort((a, b) => (a.order || 0) - (b.order || 0));
+
     if (this.business?.theme?.themeType === 'hh') {
+      console.log("Loading sections for HH layout");
     let leftRightSections: any[] = [];
     let firstItemList: any = null;
     let secondItemList: any = null;
@@ -186,6 +188,7 @@ export class ServicesComponent implements OnInit, AfterViewInit {
     }
   }else{
     // Load components based on the 'order' property
+    console.log("Loading sections based on order");
     this.sections.sort((a, b) => (a.order || 0) - (b.order || 0));
     this.sections.forEach((section) => {
         this.createComponent(section);
@@ -274,7 +277,8 @@ export class ServicesComponent implements OnInit, AfterViewInit {
         boxShadow: section.boxShadow || false,
         borderRadius: section.borderRadius ?? 10,
         page: section.page,
-        location: section.location
+        location: section.location,
+        order: section.order
     });
   }
   applyReplaceKeyword(value: string): string {

@@ -24,6 +24,7 @@ export class ContactUsComponent  implements OnInit{
   formData = {
     name: '',
     email: '',
+    phone: '',
     message: '',
     website: this.extractBaseDomain(window.location.hostname)
   };
