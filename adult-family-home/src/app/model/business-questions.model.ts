@@ -24,11 +24,13 @@ export interface Business {
   businessHours: string;
   socialMedia: string;
 
+
   // Hero Slider
   heroSlider: HeroSlide[];
   sliderConfig?: SliderConfig;
   heroImages: string[];
   sections: Section[];
+  activeBusinessId: string;
   // services: ListItem[];
   testimonials: Testimonial[];
   // benefits: ListItem[];
@@ -329,6 +331,7 @@ export class BusinessModel {
           borderRadius:  0,
         },
       ],
+      activeBusinessId:'',
       heroImages: [''],
       heroSlider: [
         {

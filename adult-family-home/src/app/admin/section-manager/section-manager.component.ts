@@ -4,6 +4,7 @@ import {
   FormArray,
   FormBuilder,
   AbstractControl,
+  FormControl,
 } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { BusinessSectionsService } from 'src/app/services/business-sections.service';
@@ -20,7 +21,7 @@ export class SectionManagerComponent implements OnInit {
   @Input() businessId!: string;
   showInactiveSections: boolean = false;
   businessesList: any[] = []; // Stores available businesses
-  selectedBusinessId: string = ''; // Default selected business
+
   collapsedSections: { [sectionId: string]: boolean } = {};
   sectionGroups: { [key: string]: FormGroup[] } = {};
   pages = [
@@ -133,16 +134,25 @@ export class SectionManagerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadSections();
+    if (!this.form) {
+      console.error("❌ Form is missing! Ensure the parent provides it.");
+      return;
+    }
+
+    // ✅ Add `activeBusinessId` to the form if it's missing
+    if (!this.form.get('activeBusinessId')) {
+      console.warn("⚠️ Adding missing 'activeBusinessId' to form.");
+      this.form.addControl('activeBusinessId', new FormControl(''));
+    }
     this.loadBusinesses();
+    this.loadSections();
   }
+
 
   loadBusinesses() {
     this.businessSectionsService.getAllBusinesses().subscribe((businesses) => {
       this.businessesList = businesses;
-      if (businesses.length > 0) {
-        this.selectedBusinessId = businesses[0].id; // Select first business by default
-      }
+
       this.cdRef.detectChanges();
     });
   }
@@ -167,8 +177,8 @@ export class SectionManagerComponent implements OnInit {
         this.pageGroups.forEach((page) => (this.sectionGroups[page] = []));
 
         sections.forEach((section, index) => {
-          console.log(`🔍 Section ${index + 1}:`, section); // Logs each section received
-          console.log(`🖼️ Image URL for Section ${index + 1}:`,section.sectionImageUrl ); // Specifically logs the image URL
+         // console.log(`🔍 Section ${index + 1}:`, section); // Logs each section received
+         // console.log(`🖼️ Image URL for Section ${index + 1}:`,section.sectionImageUrl ); // Specifically logs the image URL
 
           if (!section.id) {
             section.id = this.businessSectionsService.generateNewId(); // Ensure each section has an ID
@@ -210,6 +220,7 @@ export class SectionManagerComponent implements OnInit {
                 ? section.items.map((item) => this.createItemForm(item))
                 : []
             ),
+            activeBusinessId:[''],
           });
 
           const pageKey = this.pageGroups.includes(section.page) ? section.page : 'uncategorized';
@@ -281,17 +292,43 @@ export class SectionManagerComponent implements OnInit {
   // ✅ Trigger UI update
   this.cdRef.detectChanges();
 
-  console.log('✅ New section added:', newSection.value);
+  //console.log('✅ New section added:', newSection.value);
   }
 
-  removeSection(sectionId: string) {
-    Object.keys(this.sectionGroups).forEach((page) => {
-      this.sectionGroups[page] = this.sectionGroups[page].filter(
-        (s) => s.get('id')?.value !== sectionId
-      );
-    });
-    this.cdRef.detectChanges();
-  }
+  async removeSection(sectionId: string) {
+    if (!this.businessId) {
+        console.error("❌ Cannot remove section: Business ID is missing.");
+        return;
+    }
+
+    // 🔴 Ask for confirmation before deleting
+    const confirmed = confirm("⚠️ Are you sure you want to delete this section? This action cannot be undone.");
+    if (!confirmed) {
+        console.log("❌ Deletion cancelled by user.");
+        return;
+    }
+
+    console.log(`🗑️ Attempting to remove section with ID: ${sectionId} from Business ID: ${this.businessId}`);
+
+    try {
+        // 🔥 Delete from Firestore
+        await this.businessSectionsService.deleteSection(this.businessId, sectionId);
+
+        // ✅ Remove from local state
+        Object.keys(this.sectionGroups).forEach((page) => {
+            this.sectionGroups[page] = this.sectionGroups[page].filter(
+                (s) => s.get('id')?.value !== sectionId
+            );
+        });
+
+        // ✅ Trigger UI update
+        this.cdRef.detectChanges();
+
+        console.log(`✅ Section successfully removed from Business ID: ${this.businessId}`);
+    } catch (error) {
+        console.error("❌ Error removing section:", error);
+    }
+}
 
   addItem(sectionId: string) {
     const section = this.findSectionById(sectionId);
@@ -311,7 +348,7 @@ export class SectionManagerComponent implements OnInit {
   getItems(section: AbstractControl | null): FormArray | null {
     if (section instanceof FormGroup) {
       const items = section.get('items') as FormArray;
-      console.log('📌 Items for section:', items.value);
+      //console.log('📌 Items for section:', items.value);
       return items;
     }
     return null;
@@ -379,37 +416,70 @@ export class SectionManagerComponent implements OnInit {
       }
     }
   }
+
   updateSection(section: FormGroup) {
     if (!this.businessId) return;
 
     const sectionData = section.value;
+
+    if (!sectionData.id || sectionData.id.trim() === '') {
+      console.warn("⚠️ Section is missing an ID, preventing accidental duplication.");
+      return;
+    }
+
     this.businessSectionsService
       .saveSection(this.businessId, sectionData)
       .then(() => console.log('✅ Section updated:', sectionData))
       .catch((err) => console.error('❌ Error updating section:', err));
   }
 
-  duplicateSection(sectionId: string, targetBusinessId: string) {
-    const originalSection = this.findSectionById(sectionId);
-    if (!originalSection) return;
+async duplicateSection(sectionId: string, targetBusinessId: string) {
+    console.log("🛠️ Attempting to duplicate section...");
+    console.log("📌 Section ID:", sectionId);
+    console.log("📌 Target Business ID (before validation):", targetBusinessId);
 
-    // ✅ Create a new unique ID for the duplicated section
-    const duplicatedSection = {
-      ...originalSection.value,
-      id: this.businessSectionsService.generateNewId(),
-      sectionTitle: originalSection.value.sectionTitle + " (Copy)",
-    };
+    if (!targetBusinessId) {
+        console.error("❌ Target Business ID is missing! Ensure a business is selected.");
+        return;
+    }
 
-    // ✅ Save the duplicated section to the selected business
-    this.businessSectionsService
-      .saveSection(targetBusinessId, duplicatedSection)
-      .then(() => {
+    try {
+        // Find the original section using its ID
+        const originalSection = this.findSectionById(sectionId);
+
+        if (!originalSection) {
+            console.error(`❌ Section with ID ${sectionId} not found.`);
+            return;
+        }
+
+        // Extract section data from FormGroup
+        const sectionData = originalSection.value;
+
+        if (!sectionData) {
+            console.error("❌ Failed to retrieve section data.");
+            return;
+        }
+
+        console.log("🔍 Original Section Data:", sectionData);
+
+        // ✅ Create a properly structured duplicated section
+        const duplicatedSection = {
+            ...sectionData,  // Copy all data
+            id: this.businessSectionsService.generateNewId(),  // Generate a new ID
+            sectionTitle: `${sectionData.sectionTitle || "Untitled"} (Copy)`,  // Append "Copy" to title
+            items: sectionData.items ? [...sectionData.items] : []  // Ensure deep copy of items array
+        };
+
+        console.log("📌 Duplicated Section Data:", duplicatedSection);
+
+        // ✅ Save the duplicated section to the target business
+        await this.businessSectionsService.saveSection(targetBusinessId, duplicatedSection);
+
         console.log(`✅ Section duplicated successfully to business: ${targetBusinessId}`, duplicatedSection);
-      })
-      .catch((err) => {
+    } catch (err) {
         console.error("❌ Error duplicating section:", err);
-      });
-  }
+    }
+}
 
   toggleSection(sectionId: string): void {
     if (!sectionId) return;
@@ -433,5 +503,9 @@ export class SectionManagerComponent implements OnInit {
       if (section) return section;
     }
     return null;
+  }
+
+  logActiveBusinessId(section: FormGroup) {
+    console.log("🔍 Selected Business ID:", section.get('activeBusinessId')?.value);
   }
 }

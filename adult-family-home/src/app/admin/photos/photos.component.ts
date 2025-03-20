@@ -21,7 +21,7 @@ export class PhotosComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    console.log("Admin Photos business obj:", this.business);
+    //console.log("Admin Photos business obj:", this.business);
   }
 
 

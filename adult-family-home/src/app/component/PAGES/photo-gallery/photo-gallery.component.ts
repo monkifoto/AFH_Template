@@ -76,7 +76,7 @@ export class PhotoGalleryComponent implements OnInit {
 
   loadSections() {
     this.sectionService.getBusinessSections(this.businessId, 'gallery').subscribe((sections) => {
-      console.log("📌 Retrieved Sections:", sections);
+     // console.log("📌 Retrieved Sections:", sections);
       if (!sections || sections.length === 0) {
         console.warn("❗ No sections retrieved.");
         return;
@@ -220,7 +220,7 @@ export class PhotoGalleryComponent implements OnInit {
     imageCategories.forEach(({ key, target }) => {
       this.webContent.getBusinessUploadedImagesById(this.businessId, key).pipe(
         switchMap((images) => {
-          console.log(`Raw Firestore images for ${key}:`, images); // Debugging Step 1
+          //console.log(`Raw Firestore images for ${key}:`, images); // Debugging Step 1
 
           // Convert async calls to a Promise array
           const checks = images.map(async (image) => {
@@ -232,7 +232,7 @@ export class PhotoGalleryComponent implements OnInit {
         }),
         map((images) => images.filter((image) => image !== null)),
         map((filteredImages) => {
-          console.log(`Filtered images for ${target}:`, filteredImages); // Debugging Step 2
+         // console.log(`Filtered images for ${target}:`, filteredImages); // Debugging Step 2
 
           return filteredImages
             .map(img => ({
@@ -245,7 +245,7 @@ export class PhotoGalleryComponent implements OnInit {
             .sort((a, b) => a.order - b.order);
         })
       ).subscribe((sortedImages) => {
-        console.log(`Sorted images for ${target}:`, sortedImages); // Debugging Step 3
+        //console.log(`Sorted images for ${target}:`, sortedImages); // Debugging Step 3
 
         // Ensure target exists
         if (!this[target]) {

@@ -26,7 +26,7 @@ export class BusinessSectionsService {
    * @returns Observable of section data
    */
   getAllBusinessSections(businessId: string): Observable<Section[]> {
-    console.log(`Fetching All Sections from Collection for Business ID: ${businessId}`);
+    //console.log(`Fetching All Sections from Collection for Business ID: ${businessId}`);
 
     return this.firestore
       .collection(this.collectionName)
@@ -35,7 +35,7 @@ export class BusinessSectionsService {
       .snapshotChanges()
       .pipe(
         map(actions => {
-          console.log("Firestore Raw Actions:", actions);
+          //console.log("Firestore Raw Actions:", actions);
 
           return actions.map(a => {
             const data = a.payload.doc.data() as Section;
@@ -52,7 +52,7 @@ export class BusinessSectionsService {
    * @returns Observable of section data
    */
   getBusinessSections(businessId: string, page: string): Observable<Section[]> {
-    console.log(`Fetching Sections for Business ID: ${businessId}, Page: ${page}`);
+   // console.log(`Fetching Sections for Business ID: ${businessId}, Page: ${page}`);
 
     return this.firestore
       .collection(this.collectionName)
@@ -61,7 +61,7 @@ export class BusinessSectionsService {
       .snapshotChanges()
       .pipe(
         map(actions => {
-          console.log("Firestore Raw Actions:", actions);
+          //console.log("Firestore Raw Actions:", actions);
           return actions.map(a => {
             const data = a.payload.doc.data() as Section;
             return { ...data, id: a.payload.doc.id };
@@ -77,15 +77,21 @@ export class BusinessSectionsService {
    * @returns A promise that resolves when the save is complete.
    */
   saveSection(businessId: string, section: Section): Promise<void> {
-    if (!section.id) {
-      section.id = this.firestore.createId();
+    console.log("🔄 Attempting to save section:", section);
+
+    // Ensure section ID is NOT overwritten if it already exists
+    if (!section.id || section.id.trim() === '') {
+      section.id = this.firestore.createId();  // ✅ Generate ID only for new sections
+    } else {
+      console.log("✏️ Updating existing section with ID:", section.id);
     }
+
     return this.firestore
       .collection(this.collectionName)
       .doc(businessId)
       .collection('sections')
       .doc(section.id)
-      .set(section, { merge: true });
+      .set(section, { merge: true });  // ✅ Merge ensures it updates instead of replacing everything
   }
 
   /**

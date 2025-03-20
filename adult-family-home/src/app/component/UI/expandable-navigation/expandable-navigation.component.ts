@@ -44,7 +44,7 @@ export class ExpandableNavigationComponent  implements OnInit {
 
         this.businessDataService.getLocations().subscribe((locations) => {
           this.locations = locations;
-          console.log("📍 Locations Updated in Navigation:", this.locations);
+         // console.log("📍 Locations Updated in Navigation:", this.locations);
         });
       }
     });
@@ -67,7 +67,7 @@ export class ExpandableNavigationComponent  implements OnInit {
 
   navigateTo(page: string): void {
     const queryParams = this.businessId ? { id: this.businessId } : {};
-    console.log('This Business id from query string:', this.businessId);
+    //console.log('This Business id from query string:', this.businessId);
     this.closeMenu();
     this.router.navigate([`/${page}`], { queryParams }).then(success => {
       if (!success) {
@@ -82,7 +82,7 @@ export class ExpandableNavigationComponent  implements OnInit {
 
 
   selectLocation(index: number): void {
-    console.log("📍 Selected Location Index:", index);
+    //console.log("📍 Selected Location Index:", index);
 
     const queryParams: any = { locationIndex: index };
 
@@ -90,7 +90,7 @@ export class ExpandableNavigationComponent  implements OnInit {
       queryParams.id = this.businessId; // Ensure businessId is included
     }
 
-    console.log("🚀 Navigating to location with Params:", queryParams);
+    //console.log("🚀 Navigating to location with Params:", queryParams);
 
     this.router.navigate(['/location'], { queryParams }).then(success => {
       if (!success) {
@@ -103,8 +103,8 @@ export class ExpandableNavigationComponent  implements OnInit {
 
   toggleLocations(): void {
     this.locationsOpen = !this.locationsOpen;
-    console.log("📂 Locations Dropdown Toggled:", this.locationsOpen);
-    console.log("🔍 Locations Array:", this.locations);
+    //"📂 Locations Dropdown Toggled:", this.locationsOpen);
+    //console.log("🔍 Locations Array:", this.locations);
   }
 
   closeMenu(): void {

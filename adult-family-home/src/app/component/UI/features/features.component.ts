@@ -36,7 +36,7 @@ export class FeaturesComponent implements OnInit {
   constructor( private route: ActivatedRoute){}
 
   ngOnInit(): void {
-    console.log('Features  Component Loaded , themeType: '+ this.themeType+  ' Business Name:' + this._businessName + ' Title: ' + this.title);
+    //console.log('Features  Component Loaded , themeType: '+ this.themeType+  ' Business Name:' + this._businessName + ' Title: ' + this.title);
 
     console.log("📌 Section Features- Initialized:", {
       title: this.title,

@@ -67,7 +67,7 @@ export class ContactUsPageComponent implements OnInit {
   }
 
   onImageSelection(url: string) {
-    console.log("Admin: Contact Us: onImageSelected: url: ", url)
+    //console.log("Admin: Contact Us: onImageSelected: url: ", url)
     this.form.patchValue({
       contactUsImageUrl: url
     });

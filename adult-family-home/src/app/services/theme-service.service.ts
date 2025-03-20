@@ -42,7 +42,7 @@ export class ThemeService {
   }
 
   getThemeColors(businessId: string): Observable<any> {
-    console.log('Theme Service: - Fetching theme for business ID:', businessId);
+   // console.log('Theme Service: - Fetching theme for business ID:', businessId);
 
     const businessDocRef = this.firestore.collection('businesses').doc(businessId);
     const themeDocRef = businessDocRef.collection('theme').doc('themeDoc');
@@ -66,7 +66,7 @@ export class ThemeService {
             } else {
               return from(themeDocRef.set(this.defaultTheme)).pipe(
                 switchMap(() => {
-                  console.log('Theme Service: - Created new theme with default values.');
+                 // console.log('Theme Service: - Created new theme with default values.');
                   this.applyThemeFile(this.defaultTheme.themeFileName);
                   return themeDocRef.valueChanges();
                 })
@@ -89,11 +89,11 @@ export class ThemeService {
       .collection('theme')
       .doc('themeDoc'); // Directly reference the document by ID
 
-    console.log("Theme Service: - BusinessId: " + businessId + " theme service updateColors: ", colors);
+   // console.log("Theme Service: - BusinessId: " + businessId + " theme service updateColors: ", colors);
 
     return themeDocRef.set(colors, { merge: true }) // Use 'merge: true' to avoid overwriting the entire document
       .then(() => {
-        console.log('Theme Service: - Colors updated successfully');
+      //  console.log('Theme Service: - Colors updated successfully');
         if (colors.themeFileName) {
           this.applyThemeFile(colors.themeFileName);
         }
@@ -117,7 +117,7 @@ export class ThemeService {
 
   private loadCss(url: string): Promise<void> {
     return new Promise((resolve, reject) => {
-      console.log('Load css from  file:',url);
+     // console.log('Load css from  file:',url);
       const link = document.createElement('link');
       link.rel = 'stylesheet';
       link.href = url;

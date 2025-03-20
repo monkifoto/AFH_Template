@@ -81,7 +81,7 @@ export class BusinessService {
               return { ...sectionData, id: a.payload.doc.id };
             });
 
-            console.log("🔥 Loaded Sections from Firestore Collection:", sections);
+            //console.log("🔥 Loaded Sections from Firestore Collection:", sections);
             return { ...businessData, sections };
           }),
           switchMap(updatedBusiness => {
@@ -147,16 +147,16 @@ export class BusinessService {
     const businessDocRef = this.afs.collection<Business>(this.basePath).doc(businessId);
     const themeDocRef = businessDocRef.collection('theme').doc('themeDoc');
 
-    console.log(`Fetching theme for business ID: ${businessId}`);
+    //console.log(`Fetching theme for business ID: ${businessId}`);
 
     return themeDocRef.get().toPromise().then(doc => {
       if (doc && doc.exists) {
         const themeData = doc.data();
-        console.log(`Theme document found:`, themeData);
+        //console.log(`Theme document found:`, themeData);
 
         // Accessing the themeFileName directly without folder structure
         const themeFileName = themeData?.['themeFileName'] || 'styles.css';
-        console.log(`Retrieved themeFileName: ${themeFileName}`);
+       // console.log(`Retrieved themeFileName: ${themeFileName}`);
         return themeFileName; // Ensure this is just the filename
       } else {
         console.warn(`No theme document found for business ID: ${businessId}. Using default theme.`);
