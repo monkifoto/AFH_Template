@@ -54,7 +54,8 @@ export class SectionManagerComponent implements OnInit {
     'why-us',
     'unique-features',
     'cta',
-    'consultation'
+    'consultation',
+    'item-list-image'
   ];
   fontStyles = ['normal', 'bold', 'italic'];
 

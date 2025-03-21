@@ -81,6 +81,7 @@ import { SafeUrlPipe } from './pipe/safe-url.pipe';
 import { BusinessLocationsComponent } from './admin/business-locations/business-locations.component';
 import { LocationPageComponent } from './component/PAGES/location-page/location-page.component';
 import { PhoneFormatPipe } from './pipe/phone-format.pipe';
+import { ItemListImageComponent } from './component/UI/item-list-image/item-list-image.component';
 
 
     // Map hostnames to business IDs
@@ -230,7 +231,8 @@ export function combinedInitializer(
     SafeUrlPipe,
     BusinessLocationsComponent,
     LocationPageComponent,
-    PhoneFormatPipe
+    PhoneFormatPipe,
+    ItemListImageComponent
   ],
   imports: [
     BrowserModule,

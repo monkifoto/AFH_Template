@@ -11,6 +11,7 @@ import { LeftTextComponent } from '../../UI/left-text/left-text.component';
 import { ItemListComponent } from '../../UI/item-list/item-list.component';
 import { CallToActionComponent } from '../../UI/call-to-action/call-to-action.component';
 import { ConsultationComponent } from '../../UI/consultation/consultation.component';
+import { ItemListImageComponent } from '../../UI/item-list-image/item-list-image.component';
 
 @Component({
   selector: 'app-services',
@@ -29,7 +30,8 @@ export class ServicesComponent implements OnInit, AfterViewInit {
     'left-text': LeftTextComponent,
     'item-list': ItemListComponent,
     'cta': CallToActionComponent,
-    'consultatioin' : ConsultationComponent
+    'consultatioin' : ConsultationComponent,
+    'item-list-image': ItemListImageComponent
   };
 
   @ViewChild('dynamicContainer', { read: ViewContainerRef }) container!: ViewContainerRef;
@@ -193,6 +195,7 @@ export class ServicesComponent implements OnInit, AfterViewInit {
     this.sections.forEach((section) => {
         this.createComponent(section);
     });
+
 }
   }
 

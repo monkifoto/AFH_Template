@@ -1499,7 +1499,7 @@ input::-ms-input-placeholder {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: var(--site-max-width);
   margin: 0 auto;
   padding: 20px;
 }
@@ -1513,7 +1513,7 @@ input::-ms-input-placeholder {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  max-width: 1200px;
+  max-width: var(--site-max-width);
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -1970,3 +1970,118 @@ ul li strong {
     max-width: 400px;
   }
 }
+
+
+/********* ITEM LIST IMAGE *************/
+.parent {
+  position: relative;
+  /* min-width: 1024px; */
+  /* width: calc(var(--site-max-width) * 0.999); */
+  max-width: calc(var(--site-max-width) * 0.999);
+width: 100%;
+  /* height: 1400px; */
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0;
+  border:0;
+  /* gap:20px; */
+}
+
+.child {
+  position: relative;
+  width: 33.33%;
+  height: 600px;
+  z-index: 2;
+  background-color: transparent;
+  border-right: 0px solid white;
+  border-left: 5px solid white;
+  border-top: 0px solid white;
+  border-bottom: 5px solid white;
+  backdrop-filter: blur(2px);
+  /* padding: 20px; */
+  /* border: solid 1px red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.child::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.child:hover::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.child .content{
+  max-width: 100%;
+  padding: 40px;
+  position: absolute;
+  top:45%;
+  color: white;
+  font-size: .9rem;
+
+  z-index: 1;
+}
+.content-header{
+  font-size: 1.5rem;
+  padding-bottom: 20px;
+}
+
+.content-header h2{
+  font-size: 2rem;
+  color: white;
+  line-height: 2rem;
+}
+
+.content-icon{
+  color: white;
+  font-size: 50px;
+
+}
+
+.content-header::after{
+  content: "";
+  position: absolute;
+
+  left: 40px;
+
+  border-bottom: 3px solid var(--secondary-color);
+  width: 20%;
+}
+
+.child .content-text p{
+  font-size: 1rem;
+  line-height: 1.4rem !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.content-link{
+  margin-top: 50px;
+  letter-spacing: .5ch;
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+
+.content-link a{
+  color: #fff;
+}
+
+
+
