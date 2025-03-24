@@ -57,7 +57,7 @@
 
     </div>
   </div>
-  <a [href]="googleReviewLink" target="_blank" class="afhBtn" *ngIf="business?.placeId">
+  <a [href]="googleReviewLink" target="_blank" class="afhBtn" *ngIf="business?.placeId != '0'">
     Leave us a Google Review
   </a>
 </div>
