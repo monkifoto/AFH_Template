@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { BusinessDataService } from 'src/app/services/business-data.service';
 
 @Component({
   selector: 'app-consultation',
@@ -35,7 +36,6 @@ export class ConsultationComponent{
  @Input() sectionImageUrl: string | null = null; // ✅ Background image
  @Input() isParallax: boolean = true; // ✅ Controls whether parallax effect is applied
  @Input() businessId: string ='';
-
  @Input()
  set content(value: string) {
    this._content = value;
@@ -45,13 +45,23 @@ export class ConsultationComponent{
    private _content!: string;
    sanitizedContent!: SafeHtml;
 
-  constructor(private sanitizer: DomSanitizer, private router: Router) {}
+  constructor(
+    private sanitizer: DomSanitizer,
+     private router: Router,
+     private businessDataService: BusinessDataService
+    ) {}
 
   navigateToContact(id: string | undefined | null) {
     this.router.navigate(['/contact-us'], { queryParams: { id } });
   }
 
   navigateTo(page:string) {
+   this.businessDataService.getBusinessId().subscribe((businessId) => {
+      if (businessId) {
+        this.businessId = businessId;
+      }
+    });
+    
     this.router.navigate(['/'+page], { queryParams: { id: this.businessId } });
   }
 }

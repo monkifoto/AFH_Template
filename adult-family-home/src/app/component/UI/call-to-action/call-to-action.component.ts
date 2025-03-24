@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BusinessDataService } from 'src/app/services/business-data.service';
 
 @Component({
   selector: 'app-call-to-action',
@@ -41,7 +42,7 @@ export class CallToActionComponent implements OnInit {
   @Input() sectionImageUrl: string | null = null; // ✅ Background image
   @Input() isParallax: boolean = true; // ✅ Controls whether parallax effect is applied
 
-  constructor(private router: Router) {}
+  constructor(private router: Router ,private businessDataService: BusinessDataService) {}
 
   ngOnInit(): void {
     console.log("CTA Initialized with:", {
@@ -55,12 +56,17 @@ export class CallToActionComponent implements OnInit {
     this.fullWidth = this.convertToBoolean(this.fullWidth);
   }
 
-  navigate() {
-    if (this.page && this.businessId) {
-      this.router.navigate([this.page]);
-      this.router.navigate([this.page], { queryParams: { id: this.businessId } });
-    }
-  }
+
+  navigateTo(page:string) {
+    this.businessDataService.getBusinessId().subscribe((businessId) => {
+       if (businessId) {
+         this.businessId = businessId;
+       }
+     });
+     console.log('Page: '+ page + ' Parameters = '+ this.businessId);
+     debugger;
+     this.router.navigate(['/'+page], { queryParams: { id: this.businessId } });
+   }
 
   private convertToBoolean(value: any): boolean {
     if (typeof value === 'boolean') return value; // Already boolean

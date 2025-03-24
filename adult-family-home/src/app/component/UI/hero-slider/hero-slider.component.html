@@ -39,7 +39,8 @@
       <div class="clemo-home-btn">
         <ng-container *ngFor="let button of slide.buttons">
           <a
-            [routerLink]="button.link"
+            [routerLink]="button.link "
+            [queryParams]="{id: business?.id }"
             [ngClass]="{
               'clemo-btn': !button.outline,
               'clemo-btn-outline': button.outline

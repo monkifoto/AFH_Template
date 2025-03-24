@@ -81,7 +81,9 @@ export class PhotoGalleryComponent implements OnInit {
         console.warn("❗ No sections retrieved.");
         return;
       }
-      this.sections = sections.sort((a, b) => (a.order || 0) - (b.order || 0));
+      this.sections = sections
+      .filter(section => section.isActive !== false) // ❌ Remove inactive sections
+      .sort((a, b) => (a.order || 0) - (b.order || 0)); // ✅ Sort by order
       this.loadComponents();
       this.loadCTAComponent();
     });

@@ -1,5 +1,13 @@
 import { Title } from '@angular/platform-browser';
-import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, Type } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ViewContainerRef,
+  ComponentFactoryResolver,
+  Injector,
+  Type,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MetaService } from 'src/app/services/meta-service.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
@@ -22,11 +30,10 @@ import { LatestProductsComponent } from '../UI/latest-products/latest-products.c
 import { CallToActionComponent } from '../UI/call-to-action/call-to-action.component';
 import { FaqComponent } from '../UI/faq/faq.component';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   sections: any[] = [];
@@ -46,12 +53,13 @@ export class HomeComponent implements OnInit {
     'testimonials-carousel': TestimonialCarouselComponent,
     'why-us': WhyUsComponent,
     'google-map': GoogleMapsComponent,
-    'latest-products':LatestProductsComponent,
+    'latest-products': LatestProductsComponent,
     'cta': CallToActionComponent,
-    'consultation': ConsultationComponent
+    'consultation': ConsultationComponent,
   };
 
-  @ViewChild('dynamicContainer', { read: ViewContainerRef, static: true }) container!: ViewContainerRef;
+  @ViewChild('dynamicContainer', { read: ViewContainerRef, static: true })
+  container!: ViewContainerRef;
 
   constructor(
     private sectionService: BusinessSectionsService,
@@ -63,212 +71,221 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.businessDataService.getBusinessId().pipe(
-      switchMap((businessId) => {
-       // console.log("Business ID Retrieved:", businessId); // Debugging output
-        if (businessId) {
-          this.businessId = businessId;
-          this.metaService.loadAndApplyMeta(businessId);
-          return this.businessDataService.loadBusinessData(businessId);
+    this.businessDataService
+      .getBusinessId()
+      .pipe(
+        switchMap((businessId) => {
+          if (businessId) {
+            this.businessId = businessId;
+            this.metaService.loadAndApplyMeta(businessId);
+            return this.businessDataService.loadBusinessData(businessId);
+          }
+          return [];
+        })
+      )
+      .subscribe((business) => {
+        if (business) {
+          this.business = business;
+          this.loadSections();
         }
-        return [];
-      })
-    ).subscribe((business) => {
-      console.log("Business Data Retrieved:", business); // Debugging output
-      if (business) {
-        this.business = business;
-        this.loadSections();
-      }
-    });
+      });
   }
 
-
   loadSections() {
-    this.sectionService.getBusinessSections(this.businessId, 'home').subscribe((sections) => {
-     // console.log("📌 Sections Retrieved:", sections);
+    this.sectionService
+      .getBusinessSections(this.businessId, 'home')
+      .subscribe((sections) => {
 
-      if (!sections || sections.length === 0) {
-        console.warn("❗ No sections retrieved from the database");
+        if (!sections || sections.length === 0) {
+          console.warn('❗ No sections retrieved from the database');
+          return;
+        }
+
+        this.sections = sections
+          .filter((section) => section.isActive !== false)
+          .sort((a, b) => (a.order || 0) - (b.order || 0));
+        this.loadComponents();
+      });
+  }
+
+  loadComponents() {
+    this.container.clear();
+    this.container.createComponent(HeroSliderComponent);
+
+    if (!this.sections.length) {
+      console.warn('❗ No sections available to load.');
+      return;
+    }
+
+    let consultationSection: any = null;
+
+    this.sections.forEach((section, index) => {
+
+      const componentType = this.componentsMap[
+        section.component as keyof typeof this.componentsMap
+      ] as Type<any>;
+
+      if (!componentType) {
+        console.error(`Component Not Found:`, section.component);
         return;
       }
 
-      // ✅ Apply filtering to remove inactive sections BEFORE using them
-      this.sections = sections
-        .filter(section => section.isActive !== false) // ❌ Remove inactive sections
-        .sort((a, b) => (a.order || 0) - (b.order || 0)); // ✅ Sort by order
+      if (section.component === 'consultation') {
+        consultationSection = section;
+        return;
+      }
 
-      //console.log("✅ Final Active Sections to Load:", this.sections);
-
-      this.loadComponents(); // ✅ Now load components ONLY for active sections
+      const componentRef = this.container.createComponent(componentType);
+      this.assignComponentProperties(componentRef.instance, section);
     });
-}
 
 
-loadComponents() {
-  this.container.clear();
-  //console.log("✅ Starting to Load Components");
+    this.loadManualComponents();
 
-  // ✅ Load HeroSliderComponent First
-  //console.log("✅ Adding HeroSliderComponent");
-  this.container.createComponent(HeroSliderComponent);
+    if (consultationSection) {
+      const consultationComponentType = this.componentsMap[
+        'consultation'
+      ] as Type<any>;
 
-  if (!this.sections.length) {
-    console.warn("❗ No sections available to load.");
-    return;
-  }
-
-  let consultationSection: any = null; // ✅ Store consultation section to load last
-
-  // ✅ Load all sections except 'consultation'
-  this.sections.forEach((section, index) => {
-    //console.log(`🔄 Loading Component for Section ${index + 1}:`, section.component);
-
-    const componentType = this.componentsMap[section.component as keyof typeof this.componentsMap] as Type<any>;
-
-    if (!componentType) {
-      console.error(`❌ Component Not Found:`, section.component);
-      return;
-    }
-
-    // ✅ Store consultation section to load after everything else
-    if (section.component === 'consultation') {
-      consultationSection = section;
-      return;
-    }
-
-    const componentRef = this.container.createComponent(componentType);
-    this.assignComponentProperties(componentRef.instance, section);
-  });
-
-  // ✅ Now inject manually added components
-  this.loadManualComponents();
-
-  // ✅ Finally, inject ConsultationComponent at the very end
-  if (consultationSection) {
-    //console.log("🟢 Loading Consultation Section LAST");
-
-    const consultationComponentType = this.componentsMap['consultation'] as Type<any>;
-
-    if (consultationComponentType) {
-      const consultationRef = this.container.createComponent(consultationComponentType);
-      this.assignComponentProperties(consultationRef.instance, consultationSection);
-    } else {
-      console.error(`❌ Consultation Component Not Found!`);
+      if (consultationComponentType) {
+        const consultationRef = this.container.createComponent(
+          consultationComponentType
+        );
+        this.assignComponentProperties(
+          consultationRef.instance,
+          consultationSection
+        );
+      } else {
+        console.error(`Consultation Component Not Found!`);
+      }
     }
   }
-}
 
+  loadManualComponents() {
+    if (
+      this.business?.testimonials?.length &&
+      !this.business?.placeId &&
+      this.business?.theme?.themeType !== 'sb'
+    ) {
+      const testimonialsFactory = this.resolver.resolveComponentFactory(
+        TestimonialsComponent
+      );
+      const testimonialsRef = this.container.createComponent(
+        TestimonialsComponent,
+        {
+          index: undefined,
+          injector: this.injector,
+        }
+      );
 
-loadManualComponents() {
-  // Manually Load TestimonialsComponent if Business Has Testimonials and No Google Place ID
-  if (this.business?.testimonials?.length && !this.business?.placeId && this.business?.theme?.themeType !== 'sb') {
-    const testimonialsFactory = this.resolver.resolveComponentFactory(TestimonialsComponent);
-    const testimonialsRef = this.container.createComponent(TestimonialsComponent,{
-      index: undefined,
-      injector: this.injector
-    });
-  }
+      testimonialsRef.instance.layoutType =
+        this.business?.theme?.themeType || '';
+      testimonialsRef.instance.testimonials = this.business?.testimonials;
+    }
 
-  // Manually Load TestimonialCarouselComponent if Business Has a Google Place ID
-  if (this.business?.placeId) {
-    const testimonialCarouselFactory = this.resolver.resolveComponentFactory(TestimonialCarouselComponent);
-    const testimonialCarouselRef = this.container.createComponent(TestimonialCarouselComponent, {
-      index: undefined,
-      injector: this.injector});
+    // Manually Load TestimonialCarouselComponent if Business Has a Google Place ID
+    if (this.business?.placeId) {
+      const testimonialCarouselFactory = this.resolver.resolveComponentFactory(
+        TestimonialCarouselComponent
+      );
+      const testimonialCarouselRef = this.container.createComponent(
+        TestimonialCarouselComponent,
+        {
+          index: undefined,
+          injector: this.injector,
+        }
+      );
 
       testimonialCarouselRef.instance.placeId = this.business.placeId;
-  }
-
-  if (this.business?.placeId && this.business?.theme?.themeType === 'clemo') {
-    const gmapFactory = this.resolver.resolveComponentFactory(GoogleMapsComponent);
-    const gmapRef = this.container.createComponent(GoogleMapsComponent,{
-      index: undefined,
-      injector: this.injector
-
-    });
-    gmapRef.instance.layoutType =  this.business?.theme?.themeType || 'demo';
-    gmapRef.instance.address = this.business?.address || '';
-  }
-
-  if (this.business?.placeId && this.business?.theme?.themeType === 'clemo') {
-    const gmapFactory = this.resolver.resolveComponentFactory(GoogleMapsComponent);
-    const gmapRef = this.container.createComponent(GoogleMapsComponent,{
-      index: undefined,
-      injector: this.injector
-
-    });
-    gmapRef.instance.layoutType =  this.business?.theme?.themeType || 'demo';
-    gmapRef.instance.address = this.business?.address || '';
-  }
-
-if(this.business?.theme?.themeType ==='clemo'){
-
-    const faqRef = this.container.createComponent(FaqComponent,{
-      index: undefined,
-      injector: this.injector
-
-    });
-    // faqRef.instance.layoutType =  this.business?.theme?.themeType || 'demo';
-    // faqRef.instance.address = this.business?.address || '';
-}
-
-  if (this.business?.theme?.themeType == 'sb') {
-    const latestProductsFactory = this.resolver.resolveComponentFactory(LatestProductsComponent);
-    const latestProductsRef = this.container.createComponent(LatestProductsComponent, {
-      index: undefined, // You can specify an index if needed
-      injector: this.injector,
-    });
-    latestProductsRef.instance.layoutType = this.business?.theme?.themeType;
-    latestProductsRef.changeDetectorRef.detectChanges();
-  }
-}
-
-
-assignComponentProperties(componentInstance: any, section: any) {
-  if (componentInstance && typeof componentInstance === 'object') {
-    Object.assign(componentInstance, {
-      title: this.applyReplaceKeyword(section.sectionTitle || ''),
-      subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
-      content: this.applyReplaceKeyword(section.sectionContent || ''),
-      sectionImageUrl: section.sectionImageUrl || '',
-      showButton: section.showButton || false,
-      buttonText: section.buttonText || 'Learn More',
-      buttonLink: section.buttonLink || '',
-      _businessName: this.business?.businessName || '',
-      showImage: section.showImage,
-      themeType: this.business?.theme?.themeType,
-      items: section.items || [],
-      isMinimal: section.isMinimal || false,
-      isParallax: section.isParallax ?? true,
-      backgroundColor: section.backgroundColor || '#ffffff',
-      textColor: section.textColor || '#000000',
-      titleColor: section.titleColor || '#000000',
-      titleFontSize: section.titleFontSize || '36',
-      subtitleColor: section.subtitleColor || '#000000',
-      subtitleFontSize: section.subtitleFontSize || '14',
-      fullWidth: section.fullWidth || false,
-      alignText: section.alignText || 'left',
-      boxShadow: section.boxShadow || false,
-      borderRadius: section.borderRadius ?? 10,
-      page: section.page,
-      location: section.location,
-      businessId: this.business?.id
-    });
-
-    // ✅ Ensure UI updates after setting properties
-    if (componentInstance.changeDetectorRef) {
-      componentInstance.changeDetectorRef.detectChanges();
     }
 
-    //console.log(`✅ Component Data for ${section.component}:`, componentInstance);
+    if (this.business?.placeId && this.business?.theme?.themeType === 'clemo') {
+      const gmapFactory =
+        this.resolver.resolveComponentFactory(GoogleMapsComponent);
+      const gmapRef = this.container.createComponent(GoogleMapsComponent, {
+        index: undefined,
+        injector: this.injector,
+      });
+      gmapRef.instance.layoutType = this.business?.theme?.themeType || 'demo';
+      gmapRef.instance.address = this.business?.address || '';
+    }
+
+    if (this.business?.placeId && this.business?.theme?.themeType === 'clemo') {
+      const gmapFactory =
+        this.resolver.resolveComponentFactory(GoogleMapsComponent);
+      const gmapRef = this.container.createComponent(GoogleMapsComponent, {
+        index: undefined,
+        injector: this.injector,
+      });
+      gmapRef.instance.layoutType = this.business?.theme?.themeType || 'demo';
+      gmapRef.instance.address = this.business?.address || '';
+    }
+
+    if (this.business?.theme?.themeType === 'clemo' ||this.business?.theme?.themeType === 'sp') {
+      const faqRef = this.container.createComponent(FaqComponent, {
+        index: undefined,
+        injector: this.injector,
+      });
+      // faqRef.instance.layoutType =  this.business?.theme?.themeType || 'demo';
+      // faqRef.instance.address = this.business?.address || '';
+    }
+
+    if (this.business?.theme?.themeType == 'sb') {
+      const latestProductsFactory = this.resolver.resolveComponentFactory(
+        LatestProductsComponent
+      );
+      const latestProductsRef = this.container.createComponent(
+        LatestProductsComponent,
+        {
+          index: undefined,
+          injector: this.injector,
+        }
+      );
+      latestProductsRef.instance.layoutType = this.business?.theme?.themeType;
+      latestProductsRef.changeDetectorRef.detectChanges();
+    }
   }
-}
+
+  assignComponentProperties(componentInstance: any, section: any) {
+    if (componentInstance && typeof componentInstance === 'object') {
+      Object.assign(componentInstance, {
+        title: this.applyReplaceKeyword(section.sectionTitle || ''),
+        subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
+        content: this.applyReplaceKeyword(section.sectionContent || ''),
+        sectionImageUrl: section.sectionImageUrl || '',
+        showButton: section.showButton || false,
+        buttonText: section.buttonText || 'Learn More',
+        buttonLink: section.buttonLink || '',
+        _businessName: this.business?.businessName || '',
+        showImage: section.showImage,
+        themeType: this.business?.theme?.themeType,
+        items: section.items || [],
+        isMinimal: section.isMinimal || false,
+        isParallax: section.isParallax ?? true,
+        backgroundColor: section.backgroundColor || '#ffffff',
+        textColor: section.textColor || '#000000',
+        titleColor: section.titleColor || '#000000',
+        titleFontSize: section.titleFontSize || '36',
+        subtitleColor: section.subtitleColor || '#000000',
+        subtitleFontSize: section.subtitleFontSize || '14',
+        fullWidth: section.fullWidth || false,
+        alignText: section.alignText || 'left',
+        boxShadow: section.boxShadow || false,
+        borderRadius: section.borderRadius ?? 10,
+        page: section.page,
+        location: section.location,
+        businessId: this.business?.id,
+      });
+
+      if (componentInstance.changeDetectorRef) {
+        componentInstance.changeDetectorRef.detectChanges();
+      }
+
+    }
+  }
 
   applyReplaceKeyword(value: string): string {
     if (!value || !this.business?.businessName) return value;
-
-    // Match {{businessName}} instead of {businessName}
     return value.replace(/{{\s*businessName\s*}}/g, this.business.businessName);
   }
-
 }

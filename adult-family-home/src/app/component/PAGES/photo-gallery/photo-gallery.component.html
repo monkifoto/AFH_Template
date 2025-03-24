@@ -36,45 +36,12 @@
   </section>
 
   <ng-container #ctaContainer></ng-container>
+</div>
 
-  <!-- <div [ngSwitch]="business.theme.themeType">
-    <ng-container *ngSwitchCase="'sb'">
-      <app-call-to-action
-      title="Let's build a vision together"
-      content="We’d love to meet you! Schedule a consultation to discuss your new website."
-      buttonText="Schedule A Consultation"
-      [isButton]="true"
-      bgColor="var(--dark-background-color)"
-      textColor="var(--text-color)"
-      titleColor="var(--accent-color)"
-      contentColor="var(--secondary-color)"
-      buttonBgColor="var(--button-color)"
-      buttonTextColor="var(--button-text-color)"
-      borderRadius="0px"
-      boxShadow="0px 6px 10px rgba(0,0,0,0.3)"
-      layout="centered"
-      page="contact-us"
-      [businessId] ="business.id"
-    ></app-call-to-action>
-      </ng-container>
-      <ng-container *ngSwitchDefault >      <app-call-to-action
-        title="Come Meet Our Family"
-        content="We’d love to meet you! Schedule a visit and see firsthand how our caring environment feels like home."
-        buttonText="Schedule A Visit"
-        [isButton]="true"
-        bgColor="var(--dark-background-color)"
-        textColor="var(--text-color)"
-        titleColor="var(--accent-color)"
-        contentColor="var(--secondary-color)"
-        buttonBgColor="var(--button-color)"
-        buttonTextColor="var(--button-text-color)"
-        borderRadius="10px"
-        boxShadow="0px 6px 10px rgba(0,0,0,0.3)"
-        layout="centered"
-        page="contact-us"
-        [businessId] ="business.id"
-      ></app-call-to-action></ng-container>
-    </div> -->
-
-
+<!-- Image Modal -->
+<div class="image-modal" *ngIf="selectedImageUrl" (click)="onCloseModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="onCloseModal()">&times;</button>
+    <img [src]="selectedImageUrl" alt="Full Image">
+  </div>
 </div>
