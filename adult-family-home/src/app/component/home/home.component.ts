@@ -29,6 +29,7 @@ import { IconListComponent } from '../UI/icon-list/icon-list.component';
 import { LatestProductsComponent } from '../UI/latest-products/latest-products.component';
 import { CallToActionComponent } from '../UI/call-to-action/call-to-action.component';
 import { FaqComponent } from '../UI/faq/faq.component';
+import { ItemListImageComponent } from '../UI/item-list-image/item-list-image.component';
 
 @Component({
   selector: 'app-home',
@@ -56,6 +57,7 @@ export class HomeComponent implements OnInit {
     'latest-products': LatestProductsComponent,
     'cta': CallToActionComponent,
     'consultation': ConsultationComponent,
+    'item-list-image': ItemListImageComponent
   };
 
   @ViewChild('dynamicContainer', { read: ViewContainerRef, static: true })
@@ -199,6 +201,19 @@ export class HomeComponent implements OnInit {
       testimonialCarouselRef.instance.placeId = this.business.placeId;
     }
 
+    // GOOGLE MAP COMPONENT DUPE?
+    // if (this.business?.placeId && this.business?.theme?.themeType === 'clemo') {
+    //   const gmapFactory =
+    //     this.resolver.resolveComponentFactory(GoogleMapsComponent);
+    //   const gmapRef = this.container.createComponent(GoogleMapsComponent, {
+    //     index: undefined,
+    //     injector: this.injector,
+    //   });
+    //   gmapRef.instance.layoutType = this.business?.theme?.themeType || 'demo';
+    //   gmapRef.instance.address = this.business?.address || '';
+    // }
+
+    // GOOGLE MAP COMPONENT
     if (this.business?.placeId && this.business?.theme?.themeType === 'clemo') {
       const gmapFactory =
         this.resolver.resolveComponentFactory(GoogleMapsComponent);
@@ -210,17 +225,7 @@ export class HomeComponent implements OnInit {
       gmapRef.instance.address = this.business?.address || '';
     }
 
-    if (this.business?.placeId && this.business?.theme?.themeType === 'clemo') {
-      const gmapFactory =
-        this.resolver.resolveComponentFactory(GoogleMapsComponent);
-      const gmapRef = this.container.createComponent(GoogleMapsComponent, {
-        index: undefined,
-        injector: this.injector,
-      });
-      gmapRef.instance.layoutType = this.business?.theme?.themeType || 'demo';
-      gmapRef.instance.address = this.business?.address || '';
-    }
-
+    // FAQ COMPONENT
     if (this.business?.theme?.themeType === 'clemo' ||this.business?.theme?.themeType === 'sp') {
       const faqRef = this.container.createComponent(FaqComponent, {
         index: undefined,

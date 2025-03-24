@@ -27,6 +27,7 @@
 
     <!-- Slide Content -->
     <div class="clemo-main-home" *ngIf="slide.title?.trim()">
+      <div class="clemo-main-home-content">
       <h1>{{ slide.title }}</h1>
       <div class="clemo-separator"></div>
       <h2
@@ -52,7 +53,7 @@
           </a>
         </ng-container>
       </div>
-
+    </div>
       <!-- Scroll Indicator -->
       <div class="mouse-scroll">
         <div class="mouse">
@@ -65,10 +66,7 @@
 
   <!-- Navigation -->
   <div *ngIf="slides.length > 1">
-    <div
-      class="clemo-slider-navigation"
-      [ngClass]="{ 'bottom-nav': navigation === 'bottom' }"
-    >
+    <div class="clemo-slider-navigation" [ngClass]="{ 'bottom-nav': navigation === 'bottom' }">
       <div
         *ngFor="let slide of slides; let i = index"
         [class.clemo-active]="i === currentSlide"
