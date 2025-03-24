@@ -107,37 +107,29 @@
   >
     <div>
       <!-- Minimal version -->
-      <div *ngIf="!isMinimal">
-        <h1>Not Minimal</h1>
-        <section class="our-services-section">
-          <div class="heading-container">
-            <h2 class="styled-heading" [ngStyle]="{ color: titleColor }">
-              {{ title }}
-            </h2>
-          </div>
-          <!-- <div class="our-services-section-heading">
-          <span class="our-services-title main">{{title}} </span>
-          <span class="our-services-title highlight">{{subTitle}}</span>
-        </div> -->
-          <!-- <h3 class="our-services-description" [ngStyle]="{ 'color': subtitleColor }">{{subTitle}}</h3> -->
-          <div class="our-services-container">
-            <div *ngFor="let service of items" class="our-services-item">
-              <div style="display: flex">
-                <i [ngClass]="service.icon" class="our-services-item-icon"></i>
-                <h2>{{ service.title }}</h2>
-                <!-- <h3 class="our-services-item-title">{{ service.title }}</h3> -->
-              </div>
-              <div class="our-services-item-description">
-                <p>{{ service.description }}</p>
-              </div>
+      <section class="modern-service-section" *ngIf="!isMinimal">
+        <div
+          *ngFor="let service of items; let i = index"
+          class="service-section"
+          [class.alt-section]="i % 2 !== 0"
+        >
+          <div class="section-content">
+            <div class="section-right">
+              <div class="section-number">{{ i + 1 }}</div>
             </div>
+            <div class="section-left">
+              <!-- <div class="section-category">({{ service.category || titleParts.part1 }})</div> -->
+              <h2 class="section-title">{{ service.title }}</h2>
+              <p class="section-description">{{ service.description }}</p>
+            </div>
+
+
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
 
       <!-- Full version -->
       <div *ngIf="isMinimal">
-        <h1>Minimal</h1>
         <!-- <h2 class="styled-heading" [ngStyle]="{ 'color': titleColor }">{{title}}</h2> -->
         <app-section-tilte
           [titleColor]="titleColor"

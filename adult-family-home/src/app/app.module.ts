@@ -94,6 +94,8 @@ import { ItemListImageComponent } from './component/UI/item-list-image/item-list
       "sp.sbmediahub.com": "KyQfU7hjez0uXRfAjqcu",
       "elderlyhc.sbmediahub.com": "SJgFxBYkopnPR4WibCAf",
       "prestige.sbmediahub.com": "pDJgpl34XUnRblyIlBA7",
+      "prestigecareafh.com": "pDJgpl34XUnRblyIlBA7",
+      "www.prestigecareafh.com": "pDJgpl34XUnRblyIlBA7",
       "cc.sbmediahub.com": "yrNc50SvfPqwTSkvvygA",
       "hh.sbmediahub.com": "vfCMoPjAu2ROVBbKvk0D",
       "ae.sbmediahub.com": "UiSDf9elSjwcbQs2HZb1",
