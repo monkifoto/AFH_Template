@@ -1,3 +1,4 @@
+import { Business } from 'src/app/model/business-questions.model';
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { trigger, style, animate, transition } from '@angular/animations';
@@ -37,6 +38,8 @@ declare var google: any;
 export class TestimonialCarouselComponent implements OnInit, OnDestroy {
   @Input() businessId!: string;
   @Input() placeId!: string; // For Google reviews
+  business: Business | null = null;
+  business$ = this.businessDataService.businessData$;
   testimonials: any[] = [];
   currentIndex = 0;
   private autoPlayInterval: any;
@@ -49,6 +52,15 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    console.log("Testimonial Carousel Loading for ID: ",  this.businessId);
+
+    this.businessDataService.businessData$.subscribe((data) => {
+      if (data) {
+        this.business = data;
+    }
+  });
+
+
     this.loadGoogleReviews();
     this.loadTestimonials();
     this.startAutoPlay();
@@ -128,10 +140,12 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
     }
   }
 
-  // nextSlide() {
-  //   this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
-  // }
-
+  previousSlide() {
+    if (this.testimonials.length > 0) {
+      this.currentIndex =
+        (this.currentIndex - 1 + this.testimonials.length) % this.testimonials.length;
+    }
+  }
   nextSlide() {
     if (this.testimonials.length > 0) {
       this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;

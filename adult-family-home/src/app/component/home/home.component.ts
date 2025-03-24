@@ -164,26 +164,27 @@ export class HomeComponent implements OnInit {
   }
 
   loadManualComponents() {
-    if (
-      this.business?.testimonials?.length &&
-      !this.business?.placeId &&
-      this.business?.theme?.themeType !== 'sb'
-    ) {
-      const testimonialsFactory = this.resolver.resolveComponentFactory(
-        TestimonialsComponent
-      );
-      const testimonialsRef = this.container.createComponent(
-        TestimonialsComponent,
-        {
-          index: undefined,
-          injector: this.injector,
-        }
-      );
+    // if (
+    //   this.business?.testimonials?.length &&
+    //   !this.business?.placeId &&
+    //   this.business?.theme?.themeType !== 'sb' &&
+    //   this.business?.theme?.themeType !== 'prestige'
+    // ) {
+    //   const testimonialsFactory = this.resolver.resolveComponentFactory(
+    //     TestimonialsComponent
+    //   );
+    //   const testimonialsRef = this.container.createComponent(
+    //     TestimonialsComponent,
+    //     {
+    //       index: undefined,
+    //       injector: this.injector,
+    //     }
+    //   );
 
-      testimonialsRef.instance.layoutType =
-        this.business?.theme?.themeType || '';
-      testimonialsRef.instance.testimonials = this.business?.testimonials;
-    }
+    //   testimonialsRef.instance.layoutType =
+    //     this.business?.theme?.themeType || '';
+    //   testimonialsRef.instance.testimonials = this.business?.testimonials;
+    // }
 
     // Manually Load TestimonialCarouselComponent if Business Has a Google Place ID
     if (this.business?.placeId) {
