@@ -15,7 +15,7 @@
   --button-text-color: var(--primary-color);
   --border-color:var(--text-color);
   --heading-2-size : 4rem;
-  --site-max-width:1200px;
+  --site-max-width:1400px;
   --cell-max-width: calc((var(--site-max-width, 1500px) - (11.0px * (24 - 1))) / 24);
 
  }
@@ -531,7 +531,6 @@
   flex-direction: column;
   background-color: var(--dark-background-color);
   padding: 10px;
-  border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 1200px;
   margin: 0 auto;
@@ -558,7 +557,6 @@
   justify-content: space-between;
   padding: 8px 16px;
   border: 1px solid var(--dark-background-color);
-  border-radius: 4px;
   background-color: var(--background-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
  }
@@ -636,7 +634,6 @@
 
  .team-member {
   background: var(--background-color);
-  border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin: 10px;
   padding: 40px;
@@ -804,7 +801,7 @@
   text-transform: uppercase;
   color: #000;
   background-color: #fff;
-  border-radius: var(--button-border-radius, 25px);
+  /* border-radius: var(--button-border-radius, 25px); */
   text-decoration: none;
   transition: all 0.3s ease-in-out;
   margin-right: 50px;
@@ -824,7 +821,7 @@
   color: #fff;
   background-color: transparent;
   border: 1px solid #fff;
-  border-radius: var(--button-border-radius, 25px);
+  /* border-radius: var(--button-border-radius, 25px); */
   text-decoration: none;
   transition: all 0.3s ease-in-out;
 
@@ -1250,7 +1247,7 @@
 
   text-align: center;
   padding: 60px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1324,7 +1321,7 @@
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  /* border-radius: 4px; */
  }
 
 
@@ -1661,6 +1658,18 @@
   z-index: 0;
 }
 
+.our-services-section .heading-container .text-container .separator2 {
+  margin-left: 60px;
+}
+
+.our-services-section .heading-container .text-container h2 {
+  padding-left: 0;
+}
+
+.our-services-section .heading-container .text-container h3 {
+  padding-left: 0;
+}
+
 .our-services-section > * {
   position: relative;
   z-index: 1;
@@ -1697,7 +1706,6 @@
 .our-services-item {
   background: var(--dark-background-color);
   backdrop-filter: blur(10px);
-  border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   width: 400px;
@@ -1776,7 +1784,7 @@
   color: white;
   font-weight: bold;
   text-decoration: none;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   transition: background 0.3s ease-in-out;
 }
 
@@ -1796,3 +1804,120 @@
     max-width: 400px;
   }
 }
+
+
+
+/*********** Item List Image *******/
+.parent {
+  position: relative;
+  /* min-width: 1024px; */
+  /* width: calc(var(--site-max-width) * 0.999); */
+  max-width: calc(var(--site-max-width) * 0.999);
+width: 100%;
+  /* height: 1400px; */
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0;
+  border:0;
+  /* gap:20px; */
+}
+
+.child {
+  position: relative;
+  width: 33.33%;
+  height: 600px;
+  z-index: 2;
+  background-color: transparent;
+  border-right: 15px solid white;
+  border-left: 15px solid white;
+  border-top: 10px solid white;
+  border-bottom: 10px solid white;
+  backdrop-filter: blur(2px);
+  /* padding: 20px; */
+  /* border: solid 1px red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.child::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.child:hover::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+
+.child .content{
+  max-width: 100%;
+  padding: 40px;
+  position: absolute;
+  top:45%;
+  color: white;
+  font-size: .9rem;
+
+  z-index: 1;
+}
+.content-header{
+  font-size: 1.5rem;
+  padding-bottom: 20px;
+}
+
+.content-header h2{
+  font-size: 2rem;
+  color: white;
+  line-height: 2rem;
+}
+
+.content-icon{
+  color: white;
+  font-size: 50px;
+
+}
+
+.content-header::after{
+  content: "";
+  position: absolute;
+
+  left: 40px;
+
+  border-bottom: 3px solid var(--secondary-color);
+  width: 20%;
+}
+
+.content-text{
+  font-size: 1.1rem;
+  line-height: 1.3rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.content-link{
+  margin-top: 50px;
+  letter-spacing: .5ch;
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+
+.content-link a{
+  color: #fff;
+}
+
+
+

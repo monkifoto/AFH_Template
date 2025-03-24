@@ -7,15 +7,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./item-list-image.component.css']
 })
 export class ItemListImageComponent implements OnInit {
-  @Input() title: string = 'Our Services';  // ✅ Dynamically set from the section
+  @Input() title: string = 'Our Services';
   @Input() subTitle:string ='';
-  @Input() items: any[] = []; // ✅ List of items in the section
-  @Input() isMinimal: boolean = false; // ✅ Controls minimal/full view
-  @Input() showLearnMore: boolean = false; // ✅ Toggle Learn More button
-  @Input() sectionImageUrl: string | null = null; // ✅ Background image
-  @Input() isParallax: boolean = true; // ✅ Controls whether parallax effect is applied
+  @Input() items: any[] = [];
+  @Input() isMinimal: boolean = false;
+  @Input() showLearnMore: boolean = false;
+  @Input() sectionImageUrl: string | null = null;
+  @Input() isParallax: boolean = true;
   @Input() themeType: string = 'demo';
-   // ✅ New inputs
    @Input() page: string ='';
    @Input() location: string ='';
    @Input() backgroundColor: string = '#ffffff';

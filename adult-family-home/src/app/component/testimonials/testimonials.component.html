@@ -83,7 +83,32 @@
 
   <ng-container *ngSwitchCase="'prestige'">
 
+    <div class="content-wrapper">
+      <section class="ae-testimonial-comp">
+        <div class="ae-testimonial-heading">
+          <h2 class="ae-testimonial-section-heading">Word of mouth</h2>
+          <p class="ae-testimonial-subheading">You should hear what people have to say about us</p>
+        </div>
 
+        <div class="ae-testimonial-container">
+          <div class="ae-testimonial-grid">
+            <div class="ae-testimonial-card" *ngFor="let testimonial of testimonials | slice:0:4">
+              <div class="ae-testimonial-content">
+                <div class="ae-testimonial-quote-icon">❝</div>
+                <p class="ae-testimonial-quote">{{ testimonial.quote }}</p>
+                <h4 class="ae-testimonial-author">{{ testimonial.name }}</h4>
+              </div>
+            </div>
+          </div>
+          <div class="ae-testimonials-button">
+            <button class="view-all-testimonials" routerLink="/testimonials">
+              View All Testimonials
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </div>
     </ng-container>
 
 
