@@ -128,7 +128,4 @@ export class ContactUsComponent  implements OnInit{
     }
   }
 
-  navigateTo(page:string) {
-    this.router.navigate(['/'+page], { queryParams: { id: this.business?.id } });
-  }
 }

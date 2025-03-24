@@ -772,6 +772,12 @@ textarea {
 .rights {
   display: flex;
   align-items: center;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 1;
 }
 
 .meet-the-team {
@@ -1676,7 +1682,11 @@ ul li strong {
   }
 
   .page-hero-overlay h1 {
-    font-size: 1.2rem;
+    position: relative;
+    letter-spacing: 0ch;
+    margin: 0 auto;
+    font-size: 1.3rem;
+
   }
 
   /* .right-text-section {
@@ -2045,10 +2055,24 @@ ul li strong {
     flex-direction: column;
     padding: 20px;
   }
+  .ae-map-container{
+    width: 100%;
+  }
 
   .ae-contact-details,
   .ae-contact-form {
     width: 100%;
     padding: 20px;
   }
+
+  .clemo-footer-bottom .copy{
+    flex-direction: column-reverse;
+
+  }
+
+  .design, .rights p{
+    font-size: 0.9rem;
+  }
+
+
 }

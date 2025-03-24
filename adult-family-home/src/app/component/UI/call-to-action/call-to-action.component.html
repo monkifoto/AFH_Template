@@ -22,7 +22,7 @@
 
   <ng-container *ngIf="isButton; else linkTemplate">
     <button
-    (click)="navigate()"
+    (click)="navigateTo(buttonLink)"
       class="cta-btn"
       [ngStyle]="{
         'background-color': buttonBgColor,
@@ -35,8 +35,7 @@
 
   <ng-template #linkTemplate>
     <a
-    (click)="navigate()"
-      href="#"
+    (click)="navigateTo(buttonLink)"
       class="cta-btn"
       [ngStyle]="{
         'background-color': buttonBgColor,
