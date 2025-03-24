@@ -108,6 +108,7 @@
     <div>
       <!-- Minimal version -->
       <div *ngIf="!isMinimal">
+        <h1>Not Minimal</h1>
         <section class="our-services-section">
           <div class="heading-container">
             <h2 class="styled-heading" [ngStyle]="{ color: titleColor }">
@@ -136,6 +137,7 @@
 
       <!-- Full version -->
       <div *ngIf="isMinimal">
+        <h1>Minimal</h1>
         <!-- <h2 class="styled-heading" [ngStyle]="{ 'color': titleColor }">{{title}}</h2> -->
         <app-section-tilte
           [titleColor]="titleColor"
