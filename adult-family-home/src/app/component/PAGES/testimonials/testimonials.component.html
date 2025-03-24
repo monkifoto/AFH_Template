@@ -1,4 +1,4 @@
-<app-hero></app-hero>
+<!-- <app-hero></app-hero>
 <div class="content-wrapper">
   <div class="testimonials-container" *ngIf="testimonials.length > 0">
     <div *ngFor="let testimonial of testimonials" class="testimonial-card">
@@ -10,4 +10,54 @@
       </div>
     </div>
   </div>
+</div> -->
+
+
+<app-hero></app-hero>
+
+<div class="testimonial-section">
+  <h1 class="section-title">What Clients Say</h1>
+  <p class="section-description">
+    We place huge value on strong relationships and have seen the benefit they bring to our business.
+    Customer feedback is vital in helping us to get it right.
+  </p>
+
+  <div class="testimonial-grid">
+    <div class="testimonial-card" *ngFor="let testimonial of testimonials">
+
+      <div class="author-info">
+        <img
+          *ngIf="testimonial.photoURL; else fallbackAvatar"
+          [src]="testimonial.photoURL"
+          alt="{{ testimonial.name }}"
+          class="author-photo"
+        />
+        <ng-template #fallbackAvatar>
+          <div class="author-photo placeholder">
+            {{ testimonial.name.charAt(0).toUpperCase() }}
+          </div>
+        </ng-template>
+
+
+      </div>
+
+      <blockquote class="testimonial-quote">
+        <div class="quote-icon">“</div>
+        <p class="quote-text">{{ testimonial.quote }}</p>
+      </blockquote>
+
+      <div class="author-info">
+        <div>
+          <p class="author-name">{{ testimonial.name }}</p>
+          <p class="author-role">{{ testimonial.relationship }}</p>
+          <div *ngIf="testimonial.isGoogle" class="google-stars">★★★★★</div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+  <a [href]="googleReviewLink" target="_blank" class="afhBtn" *ngIf="business?.placeId">
+    Leave us a Google Review
+  </a>
 </div>

@@ -92,6 +92,9 @@
         <p class="intro-subtext">
           Here’s what others had to say about us.
         </p>
+        <a [href]="googleReviewLink" target="_blank" class="afhBtn" *ngIf="business?.placeId != '0'">
+      Leave us a Google Review
+    </a>
         <div class="carousel-arrows">
           <button (click)="previousSlide()" aria-label="Previous testimonial">&#8592;</button>
           <button (click)="nextSlide()" aria-label="Next testimonial">&#8594;</button>
@@ -138,6 +141,7 @@
     <ng-template #noTestimonials>
       <p class="no-testimonials-message">No testimonials available at the moment.</p>
     </ng-template>
+
   </div>
 
 

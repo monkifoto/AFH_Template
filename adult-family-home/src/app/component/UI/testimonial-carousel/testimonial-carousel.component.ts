@@ -60,8 +60,9 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
     }
   });
 
-
+  if (this.business?.placeId != '0') {
     this.loadGoogleReviews();
+  }
     this.loadTestimonials();
     this.startAutoPlay();
   }

@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { BusinessService } from 'src/app/services/business.service';
+import { BusinessDataService } from 'src/app/services/business-data.service';
 
 @Component({
   selector: 'app-business-locations',
@@ -14,7 +15,7 @@ export class BusinessLocationsComponent implements OnInit {
   message: string | null = null;
   @Output() locationsUpdated = new EventEmitter<any>();
 
-  constructor(private fb: FormBuilder, private businessService: BusinessService, private cdr: ChangeDetectorRef) {
+  constructor(private fb: FormBuilder, private businessService: BusinessService, private businessDataService: BusinessDataService, private cdr: ChangeDetectorRef) {
     this.locationForm = this.fb.group({
       locations: this.fb.array([])
     });
@@ -32,7 +33,7 @@ export class BusinessLocationsComponent implements OnInit {
 
   /** 📌 Load locations from Firestore */
   loadLocations(): void {
-    this.businessService.getLocations(this.businessId).subscribe(locations => {
+    this.businessDataService.getLocations().subscribe(locations => {
       //console.log("📍 Firestore Locations Retrieved:", locations); // Debugging
       if (locations && locations.length > 0) {
         this.setLocations(locations);
