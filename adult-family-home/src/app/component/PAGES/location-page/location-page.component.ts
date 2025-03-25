@@ -73,14 +73,14 @@ export class LocationPageComponent implements OnInit {
       this.layoutType = business.theme?.themeType;
 
       // 🔥 Debug: Log locations BEFORE using locationIndex
-      //console.log("📍 Locations in Business Data:", business.locations);
-      //console.log("🔢 Requested Location Index:", this.locationIndex);
+      console.log("📍 Locations in Business Data:", business.locations);
+      console.log("🔢 Requested Location Index:", this.locationIndex);
       this.businessDataService.getLocations().subscribe((locations) => {
        // console.log("📍 Firestore Locations Retrieved:", locations);
 
         if (locations && this.locationIndex! < locations.length) {
           this.location = locations[this.locationIndex!];
-          //console.log("✅ Loaded Firestore Location:", this.location);
+          console.log("✅ Loaded Firestore Location:", this.location);
           this.loadMap();
         } else {
           console.error("❌ Location index is out of range. Available Firestore locations:", locations.length);

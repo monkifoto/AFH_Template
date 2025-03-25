@@ -44,8 +44,8 @@ export class ContactUsComponent  implements OnInit{
 
 
       get sanitizedBusinessHours(): SafeHtml {
-        return this.location?.businessHours
-          ? this.sanitizer.bypassSecurityTrustHtml(this.location?.businessHours)
+        return this.business?.businessHours
+          ? this.sanitizer.bypassSecurityTrustHtml(this.business?.businessHours)
           : '';
       }
 

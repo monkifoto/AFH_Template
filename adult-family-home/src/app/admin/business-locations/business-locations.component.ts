@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } fro
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { BusinessService } from 'src/app/services/business.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-business-locations',
@@ -33,16 +34,21 @@ export class BusinessLocationsComponent implements OnInit {
 
   /** 📌 Load locations from Firestore */
   loadLocations(): void {
-    this.businessDataService.getLocations().subscribe(locations => {
-      //console.log("📍 Firestore Locations Retrieved:", locations); // Debugging
-      if (locations && locations.length > 0) {
-        this.setLocations(locations);
-      } else {
-        console.warn("⚠️ No locations found in Firestore.");
+    this.businessDataService.getLocationsForBusiness(this.businessId)
+    .pipe(take(1))
+    .subscribe(
+      locations => {
+        console.log("📍 Firestore Locations Retrieved:", locations);
+        if (locations && locations.length > 0) {
+          this.setLocations(locations);
+        } else {
+          console.warn("⚠️ No locations found in Firestore.");
+        }
+      },
+      error => {
+        console.error("❌ Error retrieving locations:", error);
       }
-    }, error => {
-      console.error("❌ Error retrieving locations:", error);
-    });
+    );
   }
 
   /** 📌 Add a new empty location field in UI */

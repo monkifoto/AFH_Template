@@ -60,4 +60,8 @@ export class BusinessDataService {
   getLocations(): Observable<any[]> {
     return this.locationsSubject.asObservable();
   }
+
+  getLocationsForBusiness(businessId: string): Observable<any[]> {
+    return this.businessService.getLocations(businessId);
+  }
 }

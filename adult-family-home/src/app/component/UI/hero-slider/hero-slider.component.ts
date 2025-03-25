@@ -2,11 +2,72 @@ import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Business, SliderConfig } from 'src/app/model/business-questions.model';
 import { BusinessDataService } from 'src/app/services/business-data.service';
+import {
+  trigger,
+  transition,
+  style,
+  animate,
+  query,
+  stagger,
+  group,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-hero-slider',
   templateUrl: './hero-slider.component.html',
-  styleUrls: ['./hero-slider.component.css']
+  styleUrls: ['./hero-slider.component.css'],
+  animations: [
+    trigger('slideFadeIn', [
+      transition(':enter', [
+        query('h1, h2, .clemo-separator', [
+          style({ opacity: 0, transform: 'translateY(20px)' }),
+          stagger(150, animate('800ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))),
+        ]),
+      ]),
+    ]),
+    trigger('slideTransition', [
+      transition(':increment', [
+        style({ position: 'relative' }),
+        query(':enter, :leave', [
+          style({
+            position: 'absolute',
+            width: '100%',
+            top: 0,
+            left: 0
+          })
+        ]),
+        group([
+          query(':leave', [
+            animate('600ms ease', style({ opacity: 0, transform: 'translateX(-5%)' }))
+          ]),
+          query(':enter', [
+            style({ opacity: 0, transform: 'translateX(5%)' }),
+            animate('600ms ease', style({ opacity: 1, transform: 'translateX(0)' }))
+          ])
+        ])
+      ]),
+      transition(':decrement', [
+        style({ position: 'relative' }),
+        query(':enter, :leave', [
+          style({
+            position: 'absolute',
+            width: '100%',
+            top: 0,
+            left: 0
+          })
+        ]),
+        group([
+          query(':leave', [
+            animate('600ms ease', style({ opacity: 0, transform: 'translateX(5%)' }))
+          ]),
+          query(':enter', [
+            style({ opacity: 0, transform: 'translateX(-5%)' }),
+            animate('600ms ease', style({ opacity: 1, transform: 'translateX(0)' }))
+          ])
+        ])
+      ])
+    ])
+  ],
 })
 export class HeroSliderComponent implements OnInit {
   business: Business | null = null;
@@ -20,12 +81,14 @@ export class HeroSliderComponent implements OnInit {
 
   currentSlide = 0;
   sliderOpacity = 1; // Initial opacity for the slider
+  enableTransitions = true;
 
   constructor(private router: Router, private businessDataService: BusinessDataService) {
     this.autoSlide();
   }
 
   ngOnInit(): void {
+    setTimeout(() => this.enableTransitions = true, 50);
     console.log('HeroSliderComponent - ngOnInit');
     this.fetchHeroSliderData();
     this.autoSlide();
