@@ -164,6 +164,20 @@ export class HomeComponent implements OnInit {
   }
 
   loadManualComponents() {
+    if (this.business?.theme?.themeType == 'sb') {
+      const latestProductsFactory = this.resolver.resolveComponentFactory(
+        LatestProductsComponent
+      );
+      const latestProductsRef = this.container.createComponent(
+        LatestProductsComponent,
+        {
+          index: undefined,
+          injector: this.injector,
+        }
+      );
+      latestProductsRef.instance.layoutType = this.business?.theme?.themeType;
+      latestProductsRef.changeDetectorRef.detectChanges();
+    }
     // if (
     //   this.business?.testimonials?.length &&
     //   !this.business?.placeId &&
@@ -236,20 +250,7 @@ export class HomeComponent implements OnInit {
       // faqRef.instance.address = this.business?.address || '';
     }
 
-    if (this.business?.theme?.themeType == 'sb') {
-      const latestProductsFactory = this.resolver.resolveComponentFactory(
-        LatestProductsComponent
-      );
-      const latestProductsRef = this.container.createComponent(
-        LatestProductsComponent,
-        {
-          index: undefined,
-          injector: this.injector,
-        }
-      );
-      latestProductsRef.instance.layoutType = this.business?.theme?.themeType;
-      latestProductsRef.changeDetectorRef.detectChanges();
-    }
+
   }
 
   assignComponentProperties(componentInstance: any, section: any) {

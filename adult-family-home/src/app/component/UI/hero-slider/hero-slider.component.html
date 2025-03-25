@@ -13,6 +13,10 @@
     *ngFor="let slide of slides; let i = index"
     [class.clemo-active]="i === currentSlide"
     class="clemo-slides clemo-single-home-slider"
+
+    [@slideTransition]
+  [@.disabled]="!enableTransitions"
+  [@slideTransition]="currentSlide"
   >
     <!-- Background Image -->
     <div
@@ -26,7 +30,8 @@
     ></div>
 
     <!-- Slide Content -->
-    <div class="clemo-main-home" *ngIf="slide.title?.trim()">
+    <div class="clemo-main-home" *ngIf="slide.title?.trim() && i === currentSlide" @slideFadeIn>
+
       <div class="clemo-main-home-content">
       <h1>{{ slide.title }}</h1>
       <div class="clemo-separator"></div>
