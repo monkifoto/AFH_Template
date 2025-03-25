@@ -54,13 +54,6 @@ a span {
   -o-transition: 0.2s ease-in-out;
   transition: 0.2s ease-in-out;
 }
-/* .btn.extra-width {
-  padding: 13px 40px;
-}
-.btn:focus,
-.btn:active {
-  outline: inherit;
-} */
 *,
 *:before,
 *:after {
@@ -193,6 +186,582 @@ p{
     border-color: #522bac;
 } */
 
+
+/************************************************************ CLEMO NAVIGATION ***********************************************************/
+
+/* Style the dropdown */
+.dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%; /* Ensures it appears below the parent */
+  left: 0;
+  background-color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  list-style: none;
+  padding: 0px;
+  margin: 0;
+  min-width: 200px;
+  z-index: 1000;
+}
+.dropdown-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.dropdown-item-link {
+  padding: 20px;
+}
+/* Show dropdown when hovering over the parent */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Fix for mobile screens: keep dropdown hidden */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    display: none;
+    position: relative; /* Ensures it stays inside the nav */
+    background-color: transparent;
+    box-shadow: none;
+    padding-left: 15px;
+    border: 0;
+  }
+  .dropdown-menu.show {
+    display: block;
+  }
+
+  /* Make sure dropdown items align properly */
+  .dropdown-item {
+    padding: 10px 15px;
+    text-transform: uppercase;
+    font-weight: 300;
+    padding-left: 30px;
+  }
+}
+
+.clemo-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  height: 150px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.clemo-header.clemo-shrink {
+  height: 70px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.clemo-logo {
+  max-height: 100px;
+  transition: max-height 0.3s ease;
+}
+
+.clemo-header.clemo-shrink .clemo-logo {
+  max-height: 40px;
+}
+
+.clemo-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.clemo-navbar-brand {
+  margin-left: 0;
+  display: flex;
+  align-items: center;
+}
+
+.clemo-navbar-collapse {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  transition: max-height 0.3s ease;
+  align-items: center;
+}
+
+.clemo-navbar-collapse.clemo-show {
+  display: flex;
+}
+
+.clemo-navbar-nav {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.clemo-nav-linkitem {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.clemo-nav-link {
+  color: #333;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  padding: 15px 0;
+  display: block;
+  transition: font-size 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+.clemo-nav-link:hover {
+  color: var(--dark-background-color);
+}
+
+.clemo-navbar-toggler {
+  display: none;
+}
+
+/* Responsive toggler */
+.clemo-navbar-toggler {
+  display: none; /* Hide toggler by default */
+}
+
+.clemo-navbar-toggler-icon {
+  width: 25px;
+  height: 2px;
+  background-color: #333;
+  display: block;
+  position: relative;
+}
+
+.clemo-navbar-toggler-icon::before,
+.clemo-navbar-toggler-icon::after {
+  content: "";
+  width: 25px;
+  height: 2px;
+  background-color: #333;
+  position: absolute;
+  left: 0;
+  transition: transform 0.3s ease;
+}
+
+.clemo-navbar-toggler-icon::before {
+  top: -7px;
+}
+
+.clemo-navbar-toggler-icon::after {
+  top: 7px;
+}
+
+@media (max-width: 991px) {
+  .clemo-navbar-nav {
+    display: block;
+    height: 80vh;
+  }
+  .clemo-navbar-collapse {
+    display: none;
+    flex-direction: column;
+    background-color: var(--background-color);
+    position: absolute;
+    top: 170px;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .clemo-nav-linkitem {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .clemo-nav-link {
+    padding: 10px;
+    font-size: 1.25rem;
+  }
+
+  .clemo-navbar-toggler {
+    display: block;
+    padding: 20px;
+
+    background-color: transparent;
+    border: 0px;
+  }
+
+  .clemo-navbar-collapse.clemo-show {
+    display: flex;
+  }
+
+  .clemo-navbar-collapse {
+    top: 170px;
+  }
+}
+
+/********************************************************* CLEMO NAVIGATION ********************************************************/
+
+
+/******************************************************* HERO SLIDER ******************************************************/
+.clemo-slider-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  opacity: var(--slider-opacity, 1);
+  transition: opacity 0.3s ease;
+  pointer-events: auto;
+}
+
+.clemo-slides {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+
+  &.clemo-active {
+    display: block;
+    opacity: 1;
+  }
+}
+
+.clemo-single-home-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.clemo-home-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 1;
+  z-index: 1;
+  transition: background-image 0.8s ease-in-out, opacity 0.8s ease-in-out;
+}
+
+.clemo-home-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2); /* adjust opacity as needed */
+  z-index: 1;
+}
+
+.clemo-main-home {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+  color: #000;
+  animation: fade-in-opacity 1s ease-in-out;
+  z-index: 2;
+  height: 100%;
+}
+
+.clemo-main-home-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.clemo-main-home h1 {
+  font-size: 5rem;
+  font-weight: bold;
+  margin: 0;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+.clemo-main-home h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.clemo-separator {
+  width: 50px;
+  height: 2px;
+  background-color: #fff;
+  margin: 20px auto;
+}
+
+.clemo-subtitle {
+  font-size: var(--subtitle-size, 1.5rem);
+  font-weight: var(--subtitle-weight, 400);
+
+  color: #fff;
+  margin: 20px 0;
+  line-height: 1.5;
+}
+
+.clemo-home-btn {
+  margin-top: 20px;
+}
+
+.clemo-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #000;
+  background-color: #fff;
+  /* border-radius: var(--button-border-radius, 25px); */
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  margin-right: 50px;
+  &:hover {
+    background-color: #fff;
+    color: #000;
+  }
+}
+
+.clemo-btn-outline {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: transparent;
+  border: 1px solid #fff;
+  /* border-radius: var(--button-border-radius, 25px); */
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #fff;
+    color: #000;
+  }
+}
+
+.clemo-slider-navigation {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
+}
+.clemo-nav-item,
+.carousel-control-prev,
+.carousel-control-next {
+  transition: all 0.3s ease-in-out;
+}
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4; /* higher than the overlay */
+  background: rgba(0, 0, 0, 0); /* optional styling */
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.carousel-control-prev {
+  left: 20px;
+}
+
+.carousel-control-next {
+  right: 20px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* filter: invert(1); white arrow if needed */
+}
+
+.bottom-nav {
+  top: auto;
+  bottom: 30px;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  flex-direction: row;
+  gap: 12px;
+}
+
+.clemo-nav-item {
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.clemo-nav-item.clemo-active {
+  background-color: transparent;
+  border-color: #fff;
+}
+
+.clemo-nav-item.line-style {
+  width: 30px;
+  height: 4px;
+  background-color: #fff;
+  clip-path: none;
+  border-radius: 2px;
+}
+
+
+.mouse-scroll {
+  position: absolute;
+  /* bottom: calc(-50% + 40px); */
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 100;
+  font-family: Arial, sans-serif;
+}
+
+.mouse {
+  width: 30px;
+  height: 50px;
+  border: 2px solid #fff;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 10px auto;
+  position: relative;
+}
+
+.scroll {
+  width: 6px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 3px;
+  animation: scroll 1.5s infinite;
+}
+
+.mouse-scroll p {
+  color: #fff;
+  font-size: 14px;
+  margin: 0;
+  opacity: 0.8;
+}
+
+@keyframes scroll {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .clemo-main-home h1 {
+    font-size: 3.5rem;
+  }
+
+  .clemo-main-home h2 {
+    font-size: 2.5rem;
+  }
+
+  .clemo-subtitle {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .clemo-main-home h1 {
+    font-size: 2.5rem;
+  }
+
+  .clemo-main-home h2 {
+    font-size: 2rem;
+  }
+
+  .clemo-subtitle {
+    font-size: 1rem !important;
+  }
+
+  .clemo-home-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .clemo-btn,
+  .clemo-btn-outline {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .clemo-main-home h1 {
+    font-size: 2rem;
+  }
+
+  .clemo-main-home h2 {
+    font-size: 1.5rem;
+  }
+
+  .clemo-subtitle {
+    font-size: 0.9rem !important;
+    line-height: 1.4;
+  }
+
+  .clemo-btn,
+  .clemo-btn-outline {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+}
+
+
+/******************************************************* HERO SLIDER ******************************************************/
+
+
+
+
 .btn {
     display: inline-block;
     min-width: 180px;
@@ -210,120 +779,6 @@ p{
     border:1px solid var(--primary-color);
 
 }
-/* .btn:hover {
-    background-color:var(--accent-color);
-    color: #000;
-    text-decoration: none;
-    border:1px solid var(--accent-color);
-}
-.btn-default {
-    color: #333;
-    background-color: #fff;
-    border-color: #ccc;
-}
-.btn-default:hover {
-    color: #333;
-    background-color: #fff;
-    border-color:#000;
-} */
-
-/*
-.margin-top-20 {
-    margin-top: 20px;
-}
-.margin-bottom-20 {
-    margin-bottom: 20px;
-}
-.margin-top-40 {
-    margin-top: 40px;
-}
-.margin-bottom-40 {
-    margin-bottom: 40px;
-}
-.margin-top-60 {
-    margin-top: 60px;
-}
-.margin-top-80 {
-    margin-top: 80px;
-}
-.margin-top-120 {
-    margin-top: 120px;
-}
-.margin-80 {
-    margin-top: 80px;
-    margin-bottom: 80px;
-}
-.margin-bottom-60 {
-    margin-bottom: 60px;
-}
-
-.margin-bottom-80 {
-    margin-bottom: 80px;
-}
-.padding-top-20 {
-    padding-top: 1.33rem;
-}
-.padding-bottom-20 {
-    padding-bottom: 1.33rem;
-}
-.padding-top-40 {
-    padding-top: 2.66rem;
-}
-.padding-bottom-40 {
-    padding-bottom: 2.66rem;
-}
-.padding-top-60 {
-    padding-top: 5rem;
-}
-.padding-bottom-60 {
-    padding-bottom: 5rem;
-}
-.padding-bottom-0 {
-    padding-bottom: 0;
-}
-
-.padding-twenty {
-    padding: 10px 0;
-}
-.padding-fourty {
-    padding: 20px 0;
-}
-.padding-sixty {
-    padding: 30px 0;
-}
-.padding-eighty {
-    padding: 40px 0;
-}
-h1 span {
-    color: #5e9a28;
-    font-weight: 400;
-}
-
-
-input::-webkit-input-placeholder {
-    color: #555555;
-}
-input::-moz-placeholder {
-    color: #555555;
-}
-input::-ms-input-placeholder {
-    color: #555555;
-}
-
-
-.clemo-head-title{
-  margin-bottom:60px;
-}
-.clemo-head-title h2{
-  font-size:3.125rem;
-  color:#223d61;
-}
-.clemo-head-title p{
-  font-size:1rem;
-}
- */
-
-
 
 
 
@@ -1248,535 +1703,6 @@ input::-ms-input-placeholder {
   .team-member {
     flex: 1 1 100%;
     max-width: 100%;
-  }
-}
-
-
-/* Slider Container */
-/* .clemo-slider-container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-} */
-
-
-.clemo-slider-container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  opacity: var(--slider-opacity, 1); /* Use dynamic opacity */
-  transition: opacity 0.3s ease; /* Smooth transition */
-  pointer-events: auto; /* Prevent blocking scroll interaction */
-}
-
-/* .clemo-slider-container.hidden {
-  pointer-events: none;
-} */
-
-/* Slides */
-.clemo-slides {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: none; /* Hidden by default */
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-
-  &.clemo-active {
-    display: block; /* Show the active slide */
-    opacity: 1;
-  }
-}
-
-/* Single Slide */
-.clemo-single-home-slider {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-/* Background Overlay */
-/* .clemo-home-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  opacity: 0.9;
-  z-index: 1;
-} */
-
-.clemo-home-overlay {
-  /* outline: 2px solid blue; */
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover; /* Ensures the image covers the container */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Prevents the image from repeating */
-  opacity: 0.9; /* Adjust opacity if needed */
-  z-index: 1;
-}
-
-
-/* Slide Content */
-.clemo-main-home {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Always keep the content centered */
-  text-align: center;
-  z-index: 2; /* Above the overlay */
-  color: #000;
-  animation: fade-in-opacity 1s ease-in-out; /* Fade in without changing position */
-}
-
-.clemo-main-home h1 {
-  font-size: 5rem;
-  font-weight: bold;
-  margin: 0;
-  color: #fff;
-}
-.clemo-main-home h2 {
-  font-size: 3rem;
-  font-weight: bold;
-  margin: 0;
-  color: #fff;
-}
-
-.clemo-separator {
-  width: 50px;
-  height: 2px;
-  background-color: #fff;
-  margin: 20px auto;
-}
-
-.clemo-subtitle {
-  font-size: var(--subtitle-size, 1.5rem);
-  font-weight: var(--subtitle-weight, 400);
-  /* font-size: 1.5rem; */
-  color: #fff;
-  margin: 20px 0;
-  line-height: 1.5;
-}
-
-.clemo-home-btn {
-  margin-top: 20px;
-
-}
-/* Button Styles */
-.clemo-btn {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #000;
-  background-color: #fff;
-  border-radius: var(--button-border-radius, 25px);
-  text-decoration: none;
-  transition: all 0.3s ease-in-out;
-  margin-right: 50px;
-  &:hover {
-    background-color: #fff;
-    color: #000;
-  }
-}
-
-/* Outline Button Styles */
-.clemo-btn-outline {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #fff;
-  background-color: transparent;
-  border: 1px solid #fff;
-  border-radius: var(--button-border-radius, 25px);
-  text-decoration: none;
-  transition: all 0.3s ease-in-out;
-
-  &:hover {
-    background-color: #fff;
-    color: #000;
-  }
-}
-
-
-/* Navigation Diamonds */
-.clemo-slider-navigation {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 10;
-}
-
-/* Bottom Navigation Style */
-/* .clemo-slider-navigation.bottom-nav {
-  right: auto;
-  bottom: 20px;
-  top: auto;
-  left: 50%;
-  transform: translateX(-50%);
-  flex-direction: row;
-} */
-
-/* Default Diamond Indicator */
-.clemo-nav-item {
-  width: 20px;
-  height: 20px;
-  background-color: #fff;/*diamonds*/
-  /* clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); */
-  border-radius: 50%; /* Makes it a circle */
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-}
-
-/* .clemo-nav-item:hover {
-  background-color: #555;
-} */
-
-.clemo-nav-item.clemo-active {
-  background-color: transparent;
-  border-color: #fff;
-}
-
-/* Bottom Navigation Line Indicator */
-.clemo-nav-item.line-style {
-  width: 30px;
-  height: 4px;
-  background-color: #fff;
-  clip-path: none;
-  border-radius: 2px;
-}
-
-/* Animations */
-/* @keyframes fade-in-opacity {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-} */
-
-
-/* Container for the scroll animation */
-.mouse-scroll {
-  position: absolute;
-  bottom: calc(-50% + 40px);
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  z-index: 100;
-  font-family: Arial, sans-serif;
-}
-
-.mouse {
-  width: 30px;
-  height: 50px;
-  border: 2px solid #fff;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto 10px auto;
-  position: relative;
-}
-
-.scroll {
-  width: 6px;
-  height: 10px;
-  background-color: #fff;
-  border-radius: 3px;
-  animation: scroll 1.5s infinite;
-}
-
-/* Text below the scroll indicator */
-.mouse-scroll p {
-  color: #fff;
-  font-size: 14px;
-  margin: 0;
-  opacity: 0.8;
-}
-
-
-@keyframes scroll {
-  0% {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-  50% {
-    opacity: 1;
-    transform: translateY(5px);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-}
-
-
-
-@media (max-width: 1024px) {
-  .clemo-main-home h1 {
-    font-size: 3.5rem;
-  }
-
-  .clemo-main-home h2 {
-    font-size: 2.5rem;
-  }
-
-  .clemo-subtitle {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .clemo-main-home h1 {
-    font-size: 2.5rem;
-  }
-
-  .clemo-main-home h2 {
-    font-size: 2rem;
-  }
-
-  .clemo-subtitle {
-    font-size: 1rem !important;
-  }
-
-  .clemo-home-btn {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .clemo-btn,
-  .clemo-btn-outline {
-    font-size: 0.9rem;
-    padding: 8px 15px;
-    margin-right: 0;
-  }
-
-  .mouse-scroll {
-    bottom: -150px;
-  }
-}
-
-@media (max-width: 480px) {
-  .clemo-main-home h1 {
-    font-size: 2rem;
-  }
-
-  .clemo-main-home h2 {
-    font-size: 1.5rem;
-  }
-
-  .clemo-subtitle {
-    font-size: 0.9rem !important;
-    line-height: 1.4;
-  }
-
-  .clemo-btn,
-  .clemo-btn-outline {
-    font-size: 0.85rem;
-    padding: 6px 12px;
-  }
-
-  .mouse-scroll {
-    bottom: -120px;
-  }
-}
-
-
-
-/* Container for the entire navbar */
-.clemo-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 9999;
-  background-color: #fff;
-  transition: all 0.3s ease;
-  height: 150px; /* Initial height */
-  /* width: 100%; */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Shrinking effect */
-.clemo-header.clemo-shrink {
-  height: 70px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Logo styles */
-.clemo-logo {
-  max-height: 100px; /* Initial size of the logo */
-  transition: max-height 0.3s ease; /* Smooth transition for resizing */
-}
-
-/* Shrink logo when navbar shrinks */
-.clemo-header.clemo-shrink .clemo-logo {
-  max-height: 40px; /* Shrunk size of the logo */
-}
-
-/* Navbar styles */
-.clemo-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 20px; /* Horizontal padding around the container */
-  display: flex;
-  justify-content: space-between; /* Space out the logo and links */
-  align-items: center; /* Vertically center logo and links */
-  width: 100%;
-}
-
-.clemo-navbar-brand {
-  margin-left: 0; /* Align the logo to the left */
-  display: flex;
-  align-items: center; /* Vertically center the logo */
-}
-
-
-/* Navbar collapse container */
-.clemo-navbar-collapse {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  transition: max-height 0.3s ease; /* Smooth opening/closing animation */
-  align-items: center; /* Vertically align with the logo */
-}
-
-.clemo-navbar-collapse.clemo-show {
-  display: flex; /* Show navbar links when toggled */
-}
-
-
-
-.clemo-navbar-nav {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.clemo-nav-linkitem {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-.clemo-nav-link {
-  color: #333;
-  font-size: 1.3rem; /* Larger font size initially */
-  text-transform: uppercase;
-  padding: 15px 0;
-  display: block;
-  transition: font-size 0.3s ease, color 0.3s ease; /* Smooth transition for font size */
-  cursor: pointer;
-}
-
-/* .clemo-header.clemo-shrink .clemo-nav-link {
-  font-size: 1rem;
-} */
-
-.clemo-nav-link:hover {
-  color: var(--dark-background-color);
-}
-
-/* Responsive toggler */
-.clemo-navbar-toggler {
-  display: none; /* Hide toggler by default */
-}
-
-.clemo-navbar-toggler-icon {
-  width: 25px;
-  height: 2px;
-  background-color: #333;
-  display: block;
-  position: relative;
-}
-
-.clemo-navbar-toggler-icon::before,
-.clemo-navbar-toggler-icon::after {
-  content: '';
-  width: 25px;
-  height: 2px;
-  background-color: #333;
-  position: absolute;
-  left: 0;
-  transition: transform 0.3s ease;
-}
-
-.clemo-navbar-toggler-icon::before {
-  top: -7px;
-}
-
-.clemo-navbar-toggler-icon::after {
-  top: 7px;
-}
-
-/* For mobile screens */
-@media (max-width: 991px) {
-
-  .clemo-navbar-nav{
-    display: block;
-    height: 80vh;
-  }
-  .clemo-navbar-collapse {
-    display: none; /* Hide links by default */
-    flex-direction: column;
-    background-color: var(--background-color); /* Optional: Add background for mobile menu */
-    position: absolute;
-    top: 170px; /* Position below the navbar */
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-  }
-
-  .clemo-nav-linkitem {
-    width: 100%;
-    text-align: center;
-    padding: 15px;
-  }
-
-  .clemo-nav-link {
-    padding: 10px;
-    font-size: 1.25rem; /* Adjust font size for mobile view */
-  }
-
-  .clemo-navbar-toggler {
-    display: block; /* Show toggler on small screens */
-    padding: 20px;
-    /* border-radius: 15px; */
-    background-color: transparent;
-    border:0px;
-  }
-
-  .clemo-navbar-collapse.clemo-show {
-    display: flex; /* Show menu when toggled */
-  }
-
-  .clemo-navbar-collapse {
-    top: 170px; /* Ensure menu doesn't cover toggler */
   }
 }
 
