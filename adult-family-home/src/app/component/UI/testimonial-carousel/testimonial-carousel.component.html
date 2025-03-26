@@ -109,12 +109,21 @@
           [@slideIn]
         >
           <div class="quote-icon">“</div>
-          <p class="quote-text">
-            {{ truncateText(testimonial.quote) }}
-            <span *ngIf="isTruncated(testimonial.quote)">
-              ... <button class="read-more" (click)="navigateToTestimonials()">Read More</button>
-            </span>
-          </p>
+ <!-- Google reviews: plain text -->
+<p class="quote-text" *ngIf="testimonial.isGoogle">
+  {{ truncateText(testimonial.quote) }}
+  <span *ngIf="isTruncated(testimonial.quote)">
+    ... <button class="read-more" (click)="navigateTo('testimonials')">Read More</button>
+  </span>
+</p>
+
+<!-- Testimonials: sanitized HTML -->
+<p class="quote-text" *ngIf="!testimonial.isGoogle">
+  <span [innerHTML]="truncateText(testimonial.rawQuote)"></span>
+  <span *ngIf="isTruncated(testimonial.rawQuote)">
+    ... <button class="read-more" (click)="navigateTo('testimonials')">Read More</button>
+  </span>
+</p>
 
           <div class="author-info">
             <img

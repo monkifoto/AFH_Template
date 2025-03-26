@@ -21,9 +21,10 @@
     We place huge value on strong relationships and have seen the benefit they bring to our business.
     Customer feedback is vital in helping us to get it right.
   </p>
-
+  <div *ngIf="googleReviewsLoading" class="spinner"></div>
+      <p *ngIf="googleReviewsLoading" class="loading-text">Loading Google Reviews...</p>
   <div class="testimonial-grid">
-    <div class="testimonial-card" *ngFor="let testimonial of testimonials">
+    <div class="testimonial-card" *ngFor="let testimonial of testimonials"  [ngClass]="{ 'full-width': testimonial.rawQuote.length > 1000 }">
 
       <div class="author-info">
         <img
@@ -43,7 +44,14 @@
 
       <blockquote class="testimonial-quote">
         <div class="quote-icon">“</div>
-        <p class="quote-text">{{ testimonial.quote }}</p>
+
+        <!-- Google reviews: plain text -->
+        <p class="quote-text-page" *ngIf="testimonial.isGoogle">
+          {{ testimonial.quote }}
+        </p>
+
+        <!-- Business testimonials: sanitized HTML -->
+        <p class="quote-text-page" *ngIf="!testimonial.isGoogle" [innerHTML]="testimonial.quote"></p>
       </blockquote>
 
       <div class="author-info">
@@ -57,6 +65,9 @@
 
     </div>
   </div>
+
+</div>
+<div class="googleReviewLink">
   <a [href]="googleReviewLink" target="_blank" class="afhBtn" *ngIf="business?.placeId != '0'">
     Leave us a Google Review
   </a>

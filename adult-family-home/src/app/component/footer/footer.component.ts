@@ -39,14 +39,19 @@ export class FooterComponent implements OnInit {
   }
 
   navigateTo(page: string): void {
-    const queryParams = this.businessId ? { id: this.businessId } : {};
-    this.router.navigate([`/${page}`], { queryParams }).then(success => {
-      if (!success) {
-        console.error('Navigation failed!');
-      }
+    this.businessDataService.getBusinessId().subscribe((businessId) => {
+      const id = businessId || this.businessId;
+      const queryParams = id ? { id } : {};
+
+      console.log('Navigating to:', page, 'with params:', queryParams);
+
+      this.router.navigate([`/${page}`], { queryParams }).then(success => {
+        if (!success) {
+          console.error('Navigation failed!');
+        }
+      });
     });
   }
-
 
   ngOnInit(): void {
     // Subscribe to the business data from the BusinessDataService

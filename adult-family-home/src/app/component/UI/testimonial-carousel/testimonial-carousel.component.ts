@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 import { GoogleMapsLoaderService } from 'src/app/services/google-maps-loader.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
 
 declare var google: any;
 
@@ -39,6 +41,7 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
   @Input() businessId!: string;
   @Input() placeId!: string; // For Google reviews
   business: Business | null = null;
+
   business$ = this.businessDataService.businessData$;
   testimonials: any[] = [];
   currentIndex = 0;
@@ -48,7 +51,8 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
   constructor(
     private businessDataService: BusinessDataService,
     private googleMapsLoader: GoogleMapsLoaderService,
-    private router: Router
+    private router: Router,
+    private sanitizer: DomSanitizer,
   ) {}
 
   ngOnInit() {
@@ -76,7 +80,10 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
       if (business && business.testimonials) {
         const formattedTestimonials = business.testimonials.map((testimonial: any) => ({
           ...testimonial,
-          relationship: 'Testimonial', // Set the relationship property
+          relationship: 'Testimonial',
+          isGoogle: false,
+          rawQuote: testimonial.quote,
+          quote: this.sanitizeHtml(testimonial.quote),
         }));
         this.testimonials = [...this.testimonials, ...formattedTestimonials];
       }
@@ -114,11 +121,6 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
       );
     });
   }
-
-
-  // get currentTestimonial() {
-  //   return this.testimonials[this.currentIndex];
-  // }
 
   get currentTestimonial() {
     return this.testimonials.length > 0 ? this.testimonials[this.currentIndex] : null;
@@ -170,6 +172,22 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
   navigateToTestimonials() {
     this.router.navigate(['/testimonials']); // Update with your testimonials page route
   }
+
+
+  navigateTo(page:string) {
+    this.businessDataService.getBusinessId().subscribe((businessId) => {
+       if (businessId) {
+         this.businessId = businessId;
+       }
+     });
+     console.log('Page: '+ page + ' Parameters = '+ this.businessId);
+     this.router.navigate(['/'+page], { queryParams: { id: this.businessId } });
+   }
+
+   sanitizeHtml(html: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
+  }
+
   get googleReviewLink(): string {
     return `https://search.google.com/local/writereview?placeid=${this.placeId}`;
   }
