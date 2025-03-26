@@ -1,18 +1,3 @@
-<!-- <app-hero></app-hero>
-<div class="content-wrapper">
-  <div class="testimonials-container" *ngIf="testimonials.length > 0">
-    <div *ngFor="let testimonial of testimonials" class="testimonial-card">
-      <blockquote class="testimonial-quote">
-        <h4>"{{ testimonial.quote }}"</h4>
-      </blockquote>
-      <div class="testimonial-author">
-        <p>{{ testimonial.name }}</p>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-
 <app-hero></app-hero>
 
 <div class="testimonial-section">
@@ -21,8 +6,8 @@
     We place huge value on strong relationships and have seen the benefit they bring to our business.
     Customer feedback is vital in helping us to get it right.
   </p>
-  <div *ngIf="googleReviewsLoading" class="spinner"></div>
-      <p *ngIf="googleReviewsLoading" class="loading-text">Loading Google Reviews...</p>
+  <div *ngIf="googleReviewsLoading && business?.placeId != '0'" class="spinner"></div>
+      <p *ngIf="googleReviewsLoading && business?.placeId != '0'" class="loading-text">Loading Google Reviews...</p>
   <div class="testimonial-grid">
     <div class="testimonial-card" *ngFor="let testimonial of testimonials"  [ngClass]="{ 'full-width': testimonial.rawQuote.length > 1000 }">
 
