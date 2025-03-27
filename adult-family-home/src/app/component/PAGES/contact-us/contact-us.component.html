@@ -262,6 +262,48 @@
     <ng-container *ngSwitchCase="'clemo'">
       <app-hero></app-hero>
       <div class="ae-contact-us-container">
+        <div class="ae-contact-details">
+        <h2>Let's Get in touch</h2>
+        <p>{{business.contactFormDetails}}</p>
+      </div>
+
+        <div class="ae-contact-details">
+
+
+          <div class="ae-contact-item">
+            <span class="label">Address:</span> <p>{{ location?.street }}
+               {{ location?.zipcode }} {{ location?.city }}
+               {{ location?.state }}</p>
+          </div>
+          <div class="ae-contact-item">
+            <span class="label">Phone: </span>
+            <p>{{ location?.phone | phoneFormat }}</p>
+          </div>
+          <div class="ae-contact-item" *ngIf="location?.fax">
+            <span class="label">Fax: </span>
+            <p>{{ location?.fax | phoneFormat}}</p>
+          </div>
+          <div class="ae-contact-item" *ngIf="location?.email">
+            <span class="label">Email: </span>
+            <p>
+              <a href="mailto:{{ location?.email }}">{{ location?.email }}</a>
+            </p>
+          </div>
+          <div class="ae-contact-item" *ngIf="location?.fax">
+            <span class="label">Hours: </span>
+            <p [innerHTML]="sanitizedBusinessHours"></p>
+          </div>
+          <div class="ae-social-media" *ngIf="business.socialMedia">
+            <a href="{{ business.socialMedia }}" target="_blank">
+              <i class="fab fa-facebook"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="ae-contact-us-container">
+
         <div class="ae-contact-form">
           <form (submit)="onSubmit()">
             <div class="form-group">
@@ -279,7 +321,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="email">Email <span>(required)</span></label>
+              <label for="email">Email:  <span>(required)</span></label>
               <input
                 type="email"
                 id="email"
@@ -317,49 +359,6 @@
             <button type="submit" class="btn">Send</button>
           </form>
         </div>
-        <div class="ae-contact-details">
-          <h2>Let's Talk</h2>
-          <div class="ae-contact-item" *ngIf="location?.email">
-            <h4>Email</h4>
-            <p>
-              <a href="mailto:{{ location?.email }}">{{ location?.email }}</a>
-            </p>
-          </div>
-          <div class="ae-contact-item">
-            <h4>Phone</h4>
-            <p>{{ location?.phone | phoneFormat }}</p>
-          </div>
-          <div class="ae-contact-item" *ngIf="location?.fax">
-            <h4>Fax</h4>
-            <p>{{ location?.fax | phoneFormat}}</p>
-          </div>
-
-          <div class="ae-contact-item">
-            <h4>Address</h4>
-            <p>{{ location?.street }}<br>
-               {{ location?.zipcode }} {{ location?.city }}<br>
-               {{ location?.state }}</p>
-          </div>
-
-
-          <!-- <div class="ae-contact-item" *ngIf="business.fax">
-          <h3>Fax</h3>
-          <p>{{ business.fax }}</p>
-        </div> -->
-          <div class="ae-social-media" *ngIf="business.socialMedia">
-            <a href="{{ business.socialMedia }}" target="_blank">
-              <i class="fab fa-facebook"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="ae-contact-us-container">
-        <div class="ae-contact-details">
-            <h2>Visitation Hours</h2>
-            <p [innerHTML]="sanitizedBusinessHours"></p>
-        </div>
-
         <div class="ae-map-container">
           <app-google-maps
             [address]="formattedAddress || ''"
