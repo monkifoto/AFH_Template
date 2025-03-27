@@ -65,16 +65,13 @@
   animation: fade-in-opacity 1s ease-in-out;
   z-index: 2;
   height: 100%;
-  width: 100%;
 }
 
 .clemo-main-home-content {
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translateX(-50%);
-  width: 100%;
-
 }
 
 .clemo-main-home h1 {
@@ -232,7 +229,7 @@
 .mouse-scroll {
   position: absolute;
   /* bottom: calc(-50% + 40px); */
-  bottom: 5%;
+  bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
