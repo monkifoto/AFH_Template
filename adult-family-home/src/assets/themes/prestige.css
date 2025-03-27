@@ -860,3 +860,87 @@ h3 {
 }
 
 
+@media (max-width: 1080px), (max-width: 1024px) {
+  .cta-container {
+    padding: 30px 10px;
+  }
+
+  .clemo-main-home h1 {
+    font-size: 3rem;
+  }
+
+  .clemo-main-home h2 {
+    font-size: 2.5rem;
+  }
+
+  .clemo-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .team-member {
+    flex: 1 1 50%;
+    max-width: 50%;
+  }
+
+  .services-grid {
+    gap: 2rem;
+  }
+
+  .service-item {
+    max-width: 100%;
+    font-size: 1.25rem;
+  }
+
+  .service-item i {
+    font-size: 2.5rem;
+  }
+
+  .service-title {
+    font-size: 1.1rem;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .center-text-section-clemo {
+    max-width: 100%;
+    margin: 0 auto;
+    line-height: 1.3rem !important;
+    font-size: 1rem !important;
+  }
+
+  .center-text-description {
+    line-height: 1.3rem !important;
+    padding: 0 60px;
+    font-size: 1rem !important;
+  }
+  /* .text-container p {
+    line-height: 1.3rem;
+    padding: 0 60px;
+    font-size: 1.1rem;
+  } */
+
+  .left-text-section .text-container p {
+    line-height: 1.3rem !important;
+    padding: 0 60px;
+    font-size: 1rem !important;
+  }
+
+  .clemo-nav-link {
+    font-size: 1rem;
+  }
+
+  .left-text-section .text-container p {
+    line-height: 2rem;
+    padding:0 60px;
+  }
+
+  .cta-container{
+    max-width: 100%;
+  }
+  .ae-map-container, .ae-contact-form, .ae-contact-details{
+    max-width: 100%;
+  }
+}
