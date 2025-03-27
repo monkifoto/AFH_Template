@@ -25,12 +25,24 @@
   </div>
 
   <ng-container #dynamicContainer></ng-container>
-
+<!--
   <section class="gallery">
     <div class="section-heading"><h2>Explore Our Gallery</h2></div>
     <div class="gallery-grid">
       <div *ngFor="let image of images" class="gallery-item" (click)="onImageClick(image.url)">
         <img [src]="image.url" alt="Gallery Image">
+      </div>
+    </div>
+  </section> -->
+  <section class="gallery">
+    <div class="section-heading"><h2>Explore Our Gallery</h2></div>
+    <div class="gallery-grid">
+      <div *ngFor="let image of images" class="gallery-item" (click)="onImageClick(image.url)">
+        <img [src]="image.url" alt="Gallery Image">
+        <div class="gallery-item-overlay">
+          <h3>{{ image.title }}</h3> <!-- Image Title -->
+          <p>{{ image.description }}</p> <!-- Image Description -->
+        </div>
       </div>
     </div>
   </section>

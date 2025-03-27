@@ -1,4 +1,4 @@
- .hero-contact {
+ /* .hero-contact {
   background-image: url('../../../../assets/sharedAssets/istockphoto-1022730404-2048x2048.jpg');
   background-size: cover;
   background-position: center;
@@ -48,16 +48,16 @@
 .gallery-item img {
 
   height: 200px;
-  object-fit: cover; /* Ensures image fills the container without distortion */
-  object-position: top; /* Centers the image */
-  overflow: hidden; /* Hides any part that exceeds container */
+  object-fit: cover;
+  object-position: top;
+  overflow: hidden;
   display: block;
-  border-radius: 8px; /* Optional: for rounded corners */
+  border-radius: 8px;
 }
 
 .image-info {
   position: relative;
-  z-index: 2; /* Ensure text is above the image */
+  z-index: 2;
 }
 
 .gallery-item:hover {
@@ -104,20 +104,16 @@
 .gallery-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 20px; /* Adjust spacing as needed */
-  padding: 20px; /* Optional: adds padding around the entire gallery */
+  gap: 20px;
+  padding: 20px;
 }
 
 .ae-gallery {
-  /* background: linear-gradient(to bottom, #f9f9f9, #ececec); */
+
   border-radius: 8px;
   padding: 40px 120px;
 }
 
-/* .gallery-item {
-  overflow: hidden;
-  border-radius: 8px;
-} */
 
 .gallery-item img {
   width: 100%;
@@ -125,12 +121,12 @@
   object-fit: cover;
   display: block;
   position: relative;
-  z-index: 1; /* Ensure image doesn't overlap text */
+  z-index: 1;
 }
 
 .image-info {
   position: relative;
-  z-index: 2; /* Ensure text is above the image */
+  z-index: 2;
 }
 
 .ae-gallery-container {
@@ -206,7 +202,7 @@
   animation-delay: 0.2s;
 }
 
-/* Add more delays as needed */
+
 
 @keyframes ae-fadeInUp {
   0% {
@@ -221,7 +217,7 @@
 
 @media (max-width: 768px) {
   .ae-gallery {
-    /* background: linear-gradient(to bottom, #f9f9f9, #ececec); */
+
     padding: 40px 20px;
   }
 }
@@ -277,4 +273,141 @@
 
 .close-btn:hover {
   color: #000;
+} */
+/* Container for the gallery */
+.gallery {
+  padding: 20px;
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Responsive grid */
+  gap: 20px; /* Adds spacing between the images */
+}
+
+/* Individual gallery item */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer; /* Show pointer on hover */
+}
+
+/* Gallery image */
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the full space */
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect */
+/* .gallery-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+} */
+.gallery-item:hover img {
+  transform: scale(1.1); /* Slightly enlarges the image */
+}
+
+/* Overlay for captions */
+.gallery-item-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 25%;
+  background-color: rgba(0, 0, 0, 0.2); /* Dark semi-transparent overlay */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(10%); /* Initially hidden off-screen */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  padding: 10px;
+}
+
+/* Title and description inside the overlay */
+.gallery-item-overlay h3 {
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+.gallery-item-overlay p {
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Hover effect to show the overlay */
+.gallery-item:hover .gallery-item-overlay {
+  opacity: 1;
+  transform: translateY(0); /* Moves the overlay into view */
+}
+
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  position: relative;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  max-width: 90%;
+  max-height: 90%;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content img {
+  max-width: 100%;
+  max-height: 80vh;
+
+}
+
+.close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #333;
+  cursor: pointer;
+  font-weight: bold;
+  line-height: 1;
+  z-index: 1001;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+/* Optional responsiveness for very small screens */
+@media (max-width: 600px) {
+  .gallery-grid {
+    grid-template-columns: 1fr; /* Stack items on smaller screens */
+  }
 }
