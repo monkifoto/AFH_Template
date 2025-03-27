@@ -326,36 +326,6 @@ p {
   color: #000;
 }
 
-@media (max-width: 768px) {
-  .row {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .left-image-container {
-    padding: 20px;
-  }
-
-  .content-area {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .text-container h3 {
-    font-size: 1.4rem;
-  }
-
-  .text-container h2 {
-    font-size: 1.8rem;
-  }
-
-  .btn {
-    font-size: 1rem;
-    padding: 0.8rem 1.2rem;
-  }
-}
-
-
 
 .section-heading {
   font-size: 36px;
@@ -395,48 +365,6 @@ ul li strong {
   /* border-radius: 4px; */
 }
 
-@media (max-width: 768px) {
-  .hero-overlay h1 {
-    font-size: 3rem;
-    letter-spacing: 0.2rem;
-  }
-
-  .contact-details {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .contact-item {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-
-  .map-section {
-    margin-bottom: 30px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-overlay h1 {
-    font-size: 2.5rem;
-    letter-spacing: 0.1rem;
-  }
-
-  .contact-item {
-    width: 100%;
-    margin-bottom: 15px;
-  }
-
-  .form-group input,
-  .form-group textarea {
-    padding: 8px;
-  }
-
-  .button {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-  }
-}
 
 .ae-contact-us-container {
   display: flex;
@@ -542,33 +470,7 @@ ul li strong {
   margin: 8px auto;
 }
 
-/* Responsive Styling */
-@media (max-width: 1024px) {
-  .services-grid {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-  }
 
-  .service-item {
-    max-width: 40%;
-  }
-}
-
-@media (max-width: 768px) {
-  .services-grid {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .service-item {
-    max-width: 80%;
-  }
-
-  .centered {
-    width: 100vw;
-  }
-}
 
 /******* NEW CSS *********/
 
@@ -631,29 +533,6 @@ h3 {
   object-fit: cover; /* Ensures the image fills the container without distortion */
 }
 
-/* Mobile view: Stack image above text */
-@media screen and (max-width: 768px) {
-  .left-text-section {
-    flex-direction: column; /* Stack items vertically */
-    height: auto; /* Allow height to adjust dynamically */
-  }
-
-  .image-container {
-    order: -1; /* Move the image to the top */
-    width: 100%; /* Full width */
-    height: 300px; /* Adjust height for mobile */
-  }
-
-  .image-container img {
-    width: 100%; /* Fill the width */
-    height: 100%; /* Fill the height */
-  }
-
-  .text-container {
-    max-width: 100%;
-    text-align: center;
-  }
-}
 
 .testimonials-section {
   padding: 40px 20px;
@@ -847,7 +726,10 @@ h3 {
 }
 
 /* Responsive Adjustments */
-@media (max-width: 1024px) {
+
+
+@media (max-width: 1080px) {
+
   .our-services-container {
     flex-direction: column;
     align-items: center;
@@ -857,10 +739,7 @@ h3 {
     width: 90%;
     max-width: 400px;
   }
-}
 
-
-@media (max-width: 1080px), (max-width: 1024px) {
   .cta-container {
     padding: 30px 10px;
   }
@@ -943,4 +822,152 @@ h3 {
   .ae-map-container, .ae-contact-form, .ae-contact-details{
     max-width: 100%;
   }
+  .services-grid {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .service-item {
+    max-width: 40%;
+  }
 }
+
+
+/* Mobile view: Stack image above text */
+@media screen and (max-width: 768px) {
+
+  .services-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .service-item {
+    max-width: 80%;
+  }
+
+  .centered {
+    width: 100vw;
+  }
+
+  .center-text-section-clemo {
+    max-width: 100%;
+    margin: 0 auto;
+    line-height: 1.3rem !important;
+    font-size: 1rem !important;
+  }
+
+  .center-text-description {
+    line-height: 1.3rem !important;
+    padding: 0 60px;
+    font-size: 1rem !important;
+  }
+
+  .left-text-section {
+    flex-direction: column; /* Stack items vertically */
+    height: auto; /* Allow height to adjust dynamically */
+  }
+
+  .image-container {
+    order: -1; /* Move the image to the top */
+    width: 100%; /* Full width */
+    height: 300px; /* Adjust height for mobile */
+  }
+
+  .image-container img {
+    width: 100%; /* Fill the width */
+    height: 100%; /* Fill the height */
+  }
+
+  .text-container {
+    max-width: 100%;
+    text-align: center;
+  }
+  .row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .left-image-container {
+    padding: 20px;
+  }
+
+  .content-area {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .text-container h3 {
+    font-size: 1.4rem;
+  }
+
+  .text-container h2 {
+    font-size: 1.8rem;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 0.8rem 1.2rem;
+  }
+
+  .hero-overlay h1 {
+    font-size: 3rem;
+    letter-spacing: 0.2rem;
+  }
+
+  .contact-details {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-item {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .map-section {
+    margin-bottom: 30px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .center-text-section-clemo {
+    max-width: 100%;
+    margin: 0 auto;
+    line-height: 1.3rem !important;
+    font-size: 1rem !important;
+    padding: 5px;
+  }
+
+  .center-text-description {
+    line-height: 1.3rem !important;
+    padding: 0 20px;
+    font-size: 1rem !important;
+    text-align: left;
+  }
+
+  .hero-overlay h1 {
+    font-size: 2.5rem;
+    letter-spacing: 0.1rem;
+  }
+
+  .contact-item {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 8px;
+  }
+
+  .button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+
+
+
