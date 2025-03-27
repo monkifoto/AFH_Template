@@ -1969,9 +1969,7 @@ ul li strong {
       margin-right: 0;
     }
 
-    .mouse-scroll {
-      bottom: -180px;
-    }
+
   }
 
   @media (max-width: 480px) {
@@ -2027,8 +2025,5 @@ ul li strong {
       padding: 6px 12px;
     }
 
-    .mouse-scroll {
-      bottom: -180px;
-    }
   }
 

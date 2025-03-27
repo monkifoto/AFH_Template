@@ -1,3 +1,4 @@
+@import url(components/hero-slider.css);
 @import url("https: //fonts.googleapis.com/css2?family=Cormorant+Garamond: ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
 @import url("https: //fonts.googleapis.com/css2?family=Montserrat: ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https: //fonts.googleapis.com/css2?family=Catamaran: wght@100..900&display=swap");
@@ -78,28 +79,6 @@
   z-index: 2; /* Places text above the overlay */
 }
 
-
-/* .shadow {
- box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-} */
-
-/*
-a{
- color: var(--button-color);
-}
-.blue{
- background-color: var(--background-color);
-}
-.yellow{
- background-color: var(--secondary-color);
-}
-.red{
- background-color: var(--accent-color);
-}
-.primary{
- color: var(--primary-color) !important;
-} */
-
 body {
   margin: 0;
   font-family: "Cormorant Garamond", serif;
@@ -145,26 +124,6 @@ p {
   font-size: calc(var(--large-text-size-value) * 1.3rem);
 }
 
-/* .garamond{
- font-family: "Cormorant Garamond", serif;
- font-weight: 900;
- font-style: normal;
- font-size: 1.2rem;
- }
-
- .montserrat-hero {
- font-family: "Montserrat", sans-serif;
- font-optical-sizing: auto;
- font-weight: 500;
- font-style: bold;
- }
-
- .catamaran-font {
- font-family: "Catamaran", sans-serif;
- font-optical-sizing: auto;
- font-weight: 400;
- font-style: normal;
- } */
 
 button,
 select {
@@ -187,10 +146,6 @@ select:hover {
   background-color: var(--button-hover-color);
 }
 
-/* button:focus, select:focus {
- outline: none;
- box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
-} */
 
 input[type="text"],
 input[type="email"],
@@ -841,250 +796,6 @@ textarea {
   margin: 15px 0 0;
 }
 
-.clemo-slider-container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  opacity: var(--slider-opacity, 1);
-  transition: opacity 0.3s ease;
-  pointer-events: auto;
-}
-
-/* .clemo-slider-container.hidden {
- pointer-events: none;
-} */
-
-.clemo-slides {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: none;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-
-  &.clemo-active {
-    display: block;
-    opacity: 1;
-  }
-}
-
-.clemo-single-home-slider {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.clemo-home-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.8;
-  z-index: 1;
-}
-
-.clemo-main-home {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 2;
-  color: #000;
-  animation: fade-in-opacity 1s ease-in-out;
-}
-
-.clemo-main-home h1 {
-  font-size: 5rem;
-  font-weight: bold;
-  margin: 0;
-  color: #fff;
-}
-
-.clemo-main-home h2 {
-  font-size: 3rem;
-  font-weight: bold;
-  margin: 0;
-  color: #fff;
-}
-
-.clemo-separator {
-  width: 50px;
-  height: 2px;
-  background-color: #fff;
-  margin: 20px auto;
-}
-
-.clemo-subtitle {
-  font-size: var(--subtitle-size, 1.5rem);
-  font-weight: var(--subtitle-weight, 400);
-
-  color: #fff;
-  margin: 20px 0;
-  line-height: 1.5;
-}
-
-.clemo-home-btn {
-  margin-top: 20px;
-}
-
-.clemo-btn {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #000;
-  background-color: #fff;
-  border-radius: var(--button-border-radius, 25px);
-  text-decoration: none;
-  transition: all 0.3s ease-in-out;
-  margin-right: 0px;
-
-  &:hover {
-    background-color: #fff;
-    color: #000;
-  }
-}
-
-/*
-.clemo-btn-outline {
- display: inline-block;
- padding: 10px 20px;
- font-size: 1rem;
- font-weight: bold;
- text-transform: uppercase;
- color: #fff;
- background-color: transparent;
- border: 1px solid #fff;
- border-radius: var(--button-border-radius, 25px);
- text-decoration: none;
- transition: all 0.3s ease-in-out;
-
- &:hover {
- background-color: #fff;
- color: #000;
- }
-} */
-
-.clemo-slider-navigation {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 10;
-}
-
-/* .clemo-slider-navigation.bottom-nav {
- right: auto;
- bottom: 20px;
- top: auto;
- left: 50%;
- transform: translateX(-50%);
- flex-direction: row;
-} */
-
-.clemo-nav-item {
-  width: 20px;
-  height: 20px;
-  background-color: #fff;
-
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-}
-
-/* .clemo-nav-item:hover {
- background-color: #555;
-} */
-
-.clemo-nav-item.clemo-active {
-  background-color: transparent;
-  border-color: #fff;
-}
-
-/* .clemo-nav-item.line-style {
- width: 30px;
- height: 4px;
- background-color: #fff;
- clip-path: none;
- border-radius: 2px;
-} */
-
-@keyframes fade-in-opacity {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-.mouse-scroll {
-  position: absolute;
-  bottom: calc(-50% + 10px);
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  z-index: 100;
-  font-family: Arial, sans-serif;
-}
-
-.mouse {
-  width: 30px;
-  height: 50px;
-  border: 2px solid #fff;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto 10px auto;
-  position: relative;
-}
-
-.scroll {
-  width: 6px;
-  height: 10px;
-  background-color: #fff;
-  border-radius: 3px;
-  animation: scroll 1.5s infinite;
-}
-
-.mouse-scroll p {
-  color: #fff;
-  font-size: 14px;
-  margin: 0;
-  opacity: 0.8;
-}
-
-@keyframes scroll {
-  0% {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-
-  50% {
-    opacity: 1;
-    transform: translateY(5px);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-}
 
 .cta-container {
   display: flex;
@@ -1637,281 +1348,6 @@ ul li strong {
 
 
 
-@media (max-width: 1024px) {
-
-.nav-item{
-  font-size: 1rem;
-  font-weight: 300;
-}
-
-  .clemo-main-home h1 {
-    font-size: 3.5rem;
-  }
-
-  .clemo-main-home h2 {
-    font-size: 2.5rem;
-  }
-
-  .clemo-subtitle {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 768px) {
-
-  .cta-button,
-  .afhBtn {
-    font-size: 0.9rem;
-    padding: 0.5rem 1.25rem;
-  }
-
-  .centered {
-    max-width: 100vw;
-  }
-
-  .cta-button,
-  .afhBtn {
-    font-size: 0.85rem;
-    padding: 0.5rem 1rem;
-  }
-
-
-
-  .page-hero-overlay {
-    height: 200px;
-  }
-
-  .page-hero-overlay h1 {
-    position: relative;
-    letter-spacing: 0ch;
-    margin: 0 auto;
-    font-size: 1.3rem;
-
-  }
-
-  /* .right-text-section {
-  flex-direction: column;
-  padding: 1.5rem 1rem;
-  } */
-
-  .text-container,
-  .image-container {
-    max-width: 100%;
-    text-align: center;
-  }
-
-  /* .image-container {
-    margin: 1rem 0;
-    } */
-
-  .text-container h2 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  /* .text-container h4 {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    } */
-  /* .left-text-section {
-  flex-direction: column;
-  padding: 1.5rem 1rem;
-  } */
-
-  .text-container,
-  .image-container {
-    max-width: 100%;
-    text-align: center;
-  }
-
-  /*
-    .image-container {
-    margin: 1rem 0;
-    } */
-
-  .text-container h2 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  /* .text-container h4 {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    } */
-  /* .hero {
-    height: 400px;
-    }
-
-    .hero-overlay {
-    padding: 15px;
-    align-items: flex-end;
-    } */
-
-  h1 {
-    font-size: 2rem;
-    bottom: 8px;
-    left: 15px;
-  }
-
-  /* .btn {
-      font-size: 1rem;
-      padding: 0.8rem 1.2rem;
-      } */
-  .row {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .left-image-container {
-    padding: 20px;
-  }
-
-  .content-area {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .text-container h3 {
-    font-size: 1.4rem;
-  }
-
-  .text-container h2 {
-    font-size: 1.8rem;
-  }
-
-  .footer-info,
-  .ae-footer-columns,
-  .clemo-footer-content {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .footer-column,
-  .ae-footer-column {
-    width: 100%;
-  }
-
-  .cta-container h2 {
-    font-size: 1.75rem;
-  }
-
-  .team-member {
-    flex: 1 1 calc(50% - 20px);
-    max-width: calc(50% - 20px);
-  }
-
-  .services-grid {
-    gap: 1.5rem;
-  }
-
-  .service-item {
-    max-width: 100%;
-    font-size: 1.25rem;
-  }
-
-  .service-item i {
-    font-size: 2.5rem;
-  }
-
-  .service-item h3 {
-    font-size: 2.5rem;
-  }
-
-
-  .service-title {
-    font-size: 1.1rem;
-  }
-
-  .clemo-main-home h1 {
-    font-size: 2.5rem;
-  }
-
-  .clemo-main-home h2 {
-    font-size: 2rem;
-  }
-
-  .clemo-subtitle {
-    font-size: 1rem !important;
-  }
-
-  .clemo-home-btn {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .clemo-btn,
-  .clemo-btn-outline {
-    font-size: 0.9rem;
-    padding: 8px 15px;
-    margin-right: 0;
-  }
-
-  .mouse-scroll {
-    bottom: -180px;
-  }
-}
-
-@media (max-width: 480px) {
-  /* .hero {
-  height: 300px;
-  } */
-
-  h1 {
-    font-size: 1.5rem;
-    bottom: 5px;
-    left: 10px;
-  }
-
-  .cta-container {
-    padding: 15px;
-    text-align: center;
-  }
-
-  .team-member {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
-
-  .cta-container h2 {
-    font-size: 1.5rem;
-  }
-
-  .services-container {
-    padding: 1.5rem 1rem;
-  }
-
-  .services-title {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .clemo-main-home h1 {
-    font-size: 2rem;
-  }
-
-  .clemo-main-home h2 {
-    font-size: 1.5rem;
-  }
-
-  .clemo-subtitle {
-    font-size: 0.9rem !important;
-    line-height: 1.4;
-  }
-
-  .clemo-btn,
-  .clemo-btn-outline {
-    font-size: 0.85rem;
-    padding: 6px 12px;
-  }
-
-  .mouse-scroll {
-    bottom: -180px;
-  }
-}
-
-
 
 /*---------------New ae-contact-us ----------------*/
 
@@ -2348,3 +1784,251 @@ ul li strong {
     z-index: 1 !important;
   }
 }
+
+
+
+@media (max-width: 1080px), (max-width: 1024px) {
+
+  .nav-item{
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+    .clemo-main-home h1 {
+      font-size: 3.5rem;
+    }
+
+    .clemo-main-home h2 {
+      font-size: 2.5rem;
+    }
+
+    .clemo-subtitle {
+      font-size: 1.2rem;
+    }
+    .testimonial-image {
+      position: relative;
+      max-width: 400px;
+    }
+  }
+
+  @media (max-width: 768px) {
+
+    .cta-button,
+    .afhBtn {
+      font-size: 0.9rem;
+      padding: 0.5rem 1.25rem;
+    }
+
+    .centered {
+      max-width: 100vw;
+    }
+
+    .cta-button,
+    .afhBtn {
+      font-size: 0.85rem;
+      padding: 0.5rem 1rem;
+    }
+
+
+
+    .page-hero-overlay {
+      height: 200px;
+    }
+
+    .page-hero-overlay h1 {
+      position: relative;
+      letter-spacing: 0ch;
+      margin: 0 auto;
+      font-size: 1.3rem;
+
+    }
+
+
+    .text-container,
+    .image-container {
+      max-width: 100%;
+      text-align: center;
+    }
+
+
+    .text-container h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+
+
+    .text-container,
+    .image-container {
+      max-width: 100%;
+      text-align: center;
+    }
+
+
+    .text-container h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+
+    h1 {
+      font-size: 2rem;
+      bottom: 8px;
+      left: 15px;
+    }
+
+
+    .row {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .left-image-container {
+      padding: 20px;
+    }
+
+    .content-area {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .text-container h3 {
+      font-size: 1.4rem;
+    }
+
+    .text-container h2 {
+      font-size: 1.8rem;
+    }
+
+    .footer-info,
+    .ae-footer-columns,
+    .clemo-footer-content {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer-column,
+    .ae-footer-column {
+      width: 100%;
+    }
+
+    .cta-container h2 {
+      font-size: 1.75rem;
+    }
+
+    .team-member {
+      flex: 1 1 calc(50% - 20px);
+      max-width: calc(50% - 20px);
+    }
+
+    .services-grid {
+      gap: 1.5rem;
+    }
+
+    .service-item {
+      max-width: 100%;
+      font-size: 1.25rem;
+    }
+
+    .service-item i {
+      font-size: 2.5rem;
+    }
+
+    .service-item h3 {
+      font-size: 2.5rem;
+    }
+
+
+    .service-title {
+      font-size: 1.1rem;
+    }
+
+    .clemo-main-home h1 {
+      font-size: 2.5rem;
+    }
+
+    .clemo-main-home h2 {
+      font-size: 2rem;
+    }
+
+    .clemo-subtitle {
+      font-size: 1rem !important;
+    }
+
+    .clemo-home-btn {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .clemo-btn,
+    .clemo-btn-outline {
+      font-size: 0.9rem;
+      padding: 8px 15px;
+      margin-right: 0;
+    }
+
+    .mouse-scroll {
+      bottom: -180px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    /* .hero {
+    height: 300px;
+    } */
+
+    h1 {
+      font-size: 1.5rem;
+      bottom: 5px;
+      left: 10px;
+    }
+
+    .cta-container {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .team-member {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+
+    .cta-container h2 {
+      font-size: 1.5rem;
+    }
+
+    .services-container {
+      padding: 1.5rem 1rem;
+    }
+
+    .services-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .clemo-main-home h1 {
+      font-size: 2rem;
+    }
+
+    .clemo-main-home h2 {
+      font-size: 1.5rem;
+    }
+
+    .clemo-subtitle {
+      font-size: 0.9rem !important;
+      line-height: 1.4;
+    }
+
+    .clemo-btn,
+    .clemo-btn-outline {
+      font-size: 0.85rem;
+      padding: 6px 12px;
+    }
+
+    .mouse-scroll {
+      bottom: -180px;
+    }
+  }
+
