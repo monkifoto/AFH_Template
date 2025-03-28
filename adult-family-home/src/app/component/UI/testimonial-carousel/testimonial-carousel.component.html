@@ -143,7 +143,16 @@
               <div *ngIf="testimonial.isGoogle" class="google-stars">★★★★★</div>
             </div>
           </div>
+          <div class="testimonial-dots">
+            <div
+              *ngFor="let testimonial of testimonials; let i = index"
+              [class.active]="i === currentIndex"
+              (click)="goToSlide(i)"
+            ></div>
+          </div>
         </div>
+        <!-- Slide Indicators -->
+
       </ng-container>
     </div>
 
