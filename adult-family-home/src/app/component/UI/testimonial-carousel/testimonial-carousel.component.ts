@@ -191,4 +191,5 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
   get googleReviewLink(): string {
     return `https://search.google.com/local/writereview?placeid=${this.placeId}`;
   }
+
 }
