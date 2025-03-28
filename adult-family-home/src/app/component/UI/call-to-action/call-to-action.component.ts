@@ -64,7 +64,6 @@ export class CallToActionComponent implements OnInit {
        }
      });
      console.log('Page: '+ page + ' Parameters = '+ this.businessId);
-     debugger;
      this.router.navigate(['/'+page], { queryParams: { id: this.businessId } });
    }
 

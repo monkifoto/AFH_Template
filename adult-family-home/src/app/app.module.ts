@@ -30,7 +30,7 @@ import { PhotoGalleryUploadComponent } from './admin/photo-gallery-upload/photo-
 import { ImageViewerModalComponent } from './component/image-viewer-modal/image-viewer-modal.component';
 import { ConfirmationDialogComponent } from './component/UI/confirmation-dialog/confirmation-dialog.component';
 import { TestimonialsComponent } from './component/testimonials/testimonials.component';
-import { InformationComponent } from './component/UI/information/information.component';
+import { InformationComponent } from './component/UI/Deprecated/information/information.component';
 import { OurServicesHomeComponent } from './component/our-services-home/our-services-home.component';
 import { ConsultationComponent } from './component/UI/consultation/consultation.component';
 import { FeaturesComponent } from './component/UI/features/features.component';
@@ -50,14 +50,14 @@ import { CenterTextComponent } from './component/UI/center-text/center-text.comp
 import { RightTextComponent } from './component/UI/right-text/right-text.component';
 import { LeftTextComponent } from './component/UI/left-text/left-text.component';
 import { ItemListComponent } from './component/UI/item-list/item-list.component';
-import { IconListComponent } from './component/UI/icon-list/icon-list.component';
+import { IconListComponent } from './component/UI/Deprecated/icon-list/icon-list.component';
 import { HeroComponent } from './component/UI/hero/hero.component';
 import { TestimonialImageComponent } from './component/UI/testimonial-image/testimonial-image.component';
 import { CallToActionComponent } from './component/UI/call-to-action/call-to-action.component';
 import { UiTestComponent } from './component/UI/ui-test/ui-test.component';
 import { TestimonialsListComponent } from './component/PAGES/testimonials/testimonials.component';
 import { ParallaxTextComponent } from './component/UI/parallax-text/parallax-text.component';
-import { ParallaxStatsComponent } from './component/UI/parallax-stats/parallax-stats.component';
+import { StatsComponent } from './component/UI/stats/stats.component';
 import { HeroSliderComponent } from './component/UI/hero-slider/hero-slider.component';
 import { ExpandableNavigationComponent } from './component/UI/expandable-navigation/expandable-navigation.component';
 import { TestimonialCarouselComponent } from './component/UI/testimonial-carousel/testimonial-carousel.component';
@@ -211,7 +211,7 @@ export function combinedInitializer(
     UiTestComponent,
     TestimonialsListComponent,
     ParallaxTextComponent,
-    ParallaxStatsComponent,
+    StatsComponent,
     HeroSliderComponent,
     ExpandableNavigationComponent,
     TestimonialCarouselComponent,

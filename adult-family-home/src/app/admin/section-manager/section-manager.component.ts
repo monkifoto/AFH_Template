@@ -207,7 +207,7 @@ export class SectionManagerComponent implements OnInit {
             buttonLink: [section.buttonLink || 'contact-us'],
             alignText: [section.alignText || 'left'],
             boxShadow:[section.boxShadow|| false],
-            borderRadius: [section.borderRadius || 10],
+            borderRadius: [section.borderRadius || 0],
             isMinimal: [section.isMinimal || false],
             isParallax: [section.isParallax || false],
             backgroundColor: [section.backgroundColor],
