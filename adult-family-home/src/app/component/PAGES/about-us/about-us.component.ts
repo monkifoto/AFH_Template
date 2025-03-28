@@ -11,6 +11,7 @@ import { LeftTextComponent } from '../../UI/left-text/left-text.component';
 import { ItemListComponent } from '../../UI/item-list/item-list.component';
 import { CallToActionComponent } from '../../UI/call-to-action/call-to-action.component';
 import { ConsultationComponent } from '../../UI/consultation/consultation.component';
+import { LatestProductsComponent } from '../../UI/latest-products/latest-products.component';
 
 @Component({
   selector: 'app-about-us',
@@ -170,7 +171,26 @@ export class AboutUsComponent implements OnInit {
       this.sections.forEach((section) => {
           this.createComponent(section);
       });
+      this.loadManualComponents();
   }
+  }
+
+
+  loadManualComponents() {
+    if (this.business?.theme?.themeType == 'clemo') {
+      const latestProductsFactory = this.resolver.resolveComponentFactory(
+        LatestProductsComponent
+      );
+      const latestProductsRef = this.container.createComponent(
+        LatestProductsComponent,
+        {
+          index: undefined,
+          injector: this.injector,
+        }
+      );
+      latestProductsRef.instance.layoutType = this.business?.theme?.themeType;
+      latestProductsRef.changeDetectorRef.detectChanges();
+    }
   }
 
 

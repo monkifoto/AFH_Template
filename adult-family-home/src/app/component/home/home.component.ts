@@ -25,11 +25,12 @@ import { WhyUsComponent } from '../UI/why-us/why-us.component';
 import { GoogleMapsComponent } from '../UI/google-maps/google-maps.component';
 import { Business } from 'src/app/model/business-questions.model';
 import { switchMap } from 'rxjs';
-import { IconListComponent } from '../UI/icon-list/icon-list.component';
+import { IconListComponent } from '../UI/Deprecated/icon-list/icon-list.component';
 import { LatestProductsComponent } from '../UI/latest-products/latest-products.component';
 import { CallToActionComponent } from '../UI/call-to-action/call-to-action.component';
 import { FaqComponent } from '../UI/faq/faq.component';
 import { ItemListImageComponent } from '../UI/item-list-image/item-list-image.component';
+import { StatsComponent } from '../UI/stats/stats.component';
 
 @Component({
   selector: 'app-home',
@@ -177,6 +178,21 @@ export class HomeComponent implements OnInit {
       );
       latestProductsRef.instance.layoutType = this.business?.theme?.themeType;
       latestProductsRef.changeDetectorRef.detectChanges();
+    }
+
+    if (this.business?.theme?.themeType == 'clemo') {
+      const statsFactory = this.resolver.resolveComponentFactory(
+        StatsComponent
+      );
+      const statsRef = this.container.createComponent(
+        StatsComponent,
+        {
+          index: undefined,
+          injector: this.injector,
+        }
+      );
+      statsRef.instance.businessId = this.business?.id;
+      statsRef.changeDetectorRef.detectChanges();
     }
     // if (
     //   this.business?.testimonials?.length &&
