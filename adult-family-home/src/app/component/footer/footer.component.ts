@@ -7,6 +7,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ThemeService } from 'src/app/services/theme-service.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-footer',
@@ -20,6 +22,10 @@ export class FooterComponent implements OnInit {
   isAuthenticated$: Observable<boolean> | undefined;
   themeFileName?: string;
   layoutType?: string = 'demo';
+  envName = environment.production ? 'Production' : 'Development';
+  useMockMap = environment.useMockGoogleMap;
+useMockReviews = environment.useMockGoogleReviews;
+
 
   constructor(
     private route: ActivatedRoute,

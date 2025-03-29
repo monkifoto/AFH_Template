@@ -1,4 +1,9 @@
 <div class="reviews-carousel">
+    <!-- Mock Badge -->
+    <div *ngIf="useMockReviews" class="mock-badge">
+      <span>Mock Reviews Enabled</span>
+    </div>
+
   <!-- Reviews -->
   <div class="review" *ngFor="let review of reviews; let i = index" [class.active]="i === currentReviewIndex">
     <div class="review-header">

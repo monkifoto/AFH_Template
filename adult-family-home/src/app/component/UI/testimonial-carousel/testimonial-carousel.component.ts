@@ -5,6 +5,9 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 import { GoogleMapsLoaderService } from 'src/app/services/google-maps-loader.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+
 
 
 declare var google: any;
@@ -41,7 +44,7 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
   @Input() businessId!: string;
   @Input() placeId!: string; // For Google reviews
   business: Business | null = null;
-
+  useMockReviews = environment.useMockGoogleReviews;
   business$ = this.businessDataService.businessData$;
   testimonials: any[] = [];
   currentIndex = 0;
@@ -53,6 +56,7 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
     private googleMapsLoader: GoogleMapsLoaderService,
     private router: Router,
     private sanitizer: DomSanitizer,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -64,7 +68,10 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
     }
   });
 
-  if (this.business?.placeId != '0') {
+
+  if (this.useMockReviews) {
+    this.loadMockGoogleReviews();
+  } else if (this.business?.placeId !== '0') {
     this.loadGoogleReviews();
   }
     this.loadTestimonials();
@@ -73,6 +80,23 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.stopAutoPlay();
+  }
+
+  private loadMockGoogleReviews() {
+    this.http.get<any[]>('/assets/mocks/mock-reviews.json').subscribe({
+      next: (mockData) => {
+        const googleReviews = mockData.map((review: any) => ({
+          name: review.author_name,
+          quote: review.text,
+          relationship: 'Mock Google Review',
+          isGoogle: true,
+        }));
+
+        this.testimonials = [...googleReviews, ...this.testimonials];
+        this.currentIndex = 0;
+      },
+      error: (err) => console.error('Failed to load mock reviews', err)
+    });
   }
 
   private loadTestimonials() {

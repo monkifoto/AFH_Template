@@ -68,7 +68,7 @@
 }
 
 .parallax-container {
-  background-image: url('../../../../assets/sharedAssets/istockphoto-1319783351-2048x2048.jpg'); /* Replace with your image path */
+  background-image: url('/assets/sharedAssets/istockphoto-1319783351-2048x2048.jpg'); /* Replace with your image path */
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;

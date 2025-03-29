@@ -73,6 +73,18 @@
   background: #555;
 }
 
+.mock-badge {
+  background-color: #fffae6;
+  color: #a67c00;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid #ffe58f;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;

@@ -8,6 +8,7 @@ import { Modal } from 'bootstrap';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { EmailService } from 'src/app/services/email.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class ContactUsComponent  implements OnInit{
   business: Business | null = null;
   location: BusinessLocation | null = null;
   layoutType: string | undefined = 'demo';
+  useMockMap = environment.useMockGoogleMap;
 
   formData = {
     name: '',
