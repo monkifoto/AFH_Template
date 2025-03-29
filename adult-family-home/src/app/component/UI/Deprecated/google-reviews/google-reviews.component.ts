@@ -1,5 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GoogleMapsLoaderService } from 'src/app/services/google-maps-loader.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+
+
+
 
 declare var google: any;
 
@@ -13,25 +18,43 @@ export class GoogleReviewsComponent implements OnInit {
   reviews: any[] = []; // Array to store reviews
   currentReviewIndex: number = 0; // Index of the currently displayed review
   intervalId: any; // ID of the interval for automatic rotation
+  useMockReviews = environment.useMockGoogleReviews;
 
-  constructor(private googleMapsLoader: GoogleMapsLoaderService) {}
+  constructor(private googleMapsLoader: GoogleMapsLoaderService,   private http: HttpClient) {}
 
   ngOnInit(): void {
-    if (!this.placeId) {
-      console.error('Place ID is required to fetch reviews.');
-      return;
-    }
+    if (this.useMockReviews) {
+      this.loadMockReviews();
+      this.startCarousel();
+    } else {
+      if (!this.placeId) {
+        console.error('Place ID is required to fetch reviews.');
+        return;
+      }
 
-    this.googleMapsLoader
-      .loadScript()
-      .then(() => {
-        this.fetchReviews(this.placeId);
-        this.startCarousel(); // Start the carousel swapping
-      })
-      .catch((error) => {
-        console.error('Error loading Google Maps script:', error);
-      });
+      this.googleMapsLoader
+        .loadScript()
+        .then(() => {
+          this.fetchReviews(this.placeId);
+          this.startCarousel();
+        })
+        .catch((error) => {
+          console.error('Error loading Google Maps script:', error);
+        });
+    }
   }
+  private loadMockReviews(): void {
+    this.http.get<any[]>('/assets/mocks/mock-reviews.json').subscribe({
+      next: (data) => {
+        this.reviews = data;
+      },
+      error: (err) => {
+        console.error('Error loading mock reviews:', err);
+      }
+    });
+  }
+
+
 
   private fetchReviews(placeId: string): void {
     const service = new google.maps.places.PlacesService(document.createElement('div'));

@@ -4,6 +4,9 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 import { Business } from 'src/app/model/business-questions.model';
 import { GoogleMapsLoaderService } from 'src/app/services/google-maps-loader.service';
 import { switchMap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+
+
 
 declare var google: any;
 
@@ -19,7 +22,7 @@ export class LocationPageComponent implements OnInit {
   locationIndex: number | null = null;
   private map: any;
   private geocoder: any;
-
+  useMockMap = environment.useMockGoogleMap;
   constructor(
     private route: ActivatedRoute,
     private businessDataService: BusinessDataService,
@@ -92,6 +95,11 @@ export class LocationPageComponent implements OnInit {
 
 
   private loadMap(): void {
+    if (this.useMockMap) {
+      console.log('Mock map mode: displaying static map image.');
+      return;
+    }
+    
     this.googleMapsLoader.loadScript().then(() => {
       this.initializeMap();
       this.showAddressOnMap(`${this.location.street}, ${this.location.city}, ${this.location.state} ${this.location.zipcode}`);

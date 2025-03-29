@@ -64,8 +64,8 @@ import { TestimonialCarouselComponent } from './component/UI/testimonial-carouse
 import { AdminHeroSliderComponent } from './admin/admin-hero-slider/admin-hero-slider.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GoogleMapsComponent } from './component/UI/google-maps/google-maps.component';
-import { GoogleReviewsComponent } from './component/UI/google-reviews/google-reviews.component';
-import { InstagramFeedComponent } from './component/UI/instagram-feed/instagram-feed.component';
+import { GoogleReviewsComponent } from './component/UI/Deprecated/google-reviews/google-reviews.component';
+import { InstagramFeedComponent } from './component/UI/Deprecated/instagram-feed/instagram-feed.component';
 import { SectionTitleComponent } from './component/UI/section-title/section-title.component';
 import { VideoComponent } from './component/UI/video/video.component';
 import { Tour3DComponent } from './component/UI/tour-3-d/tour-3-d.component';

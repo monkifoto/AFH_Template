@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { GoogleMapsLoaderService } from 'src/app/services/google-maps-loader.service'; // Adjust the path as necessary
+import { environment } from 'src/environments/environment';
 
 declare var google: any; // Declare google object for TypeScript
 
@@ -12,6 +13,8 @@ export class GoogleMapsComponent implements OnInit, OnChanges {
   @Input() address: string = ''; // Input for the address to display on the map
   @Input() layoutType: string = 'demo'; // Example additional input
 
+  useMockMap = environment.useMockGoogleMap;
+
   private map: any;
   private geocoder: any;
 
@@ -19,6 +22,11 @@ export class GoogleMapsComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     console.log('Google Map Address:', this.address);
+
+    if (this.useMockMap) {
+      console.log('Mock map mode: displaying static map image.');
+      return;
+    }
 
     // Load the Google Maps script via the service
     this.googleMapsLoader
@@ -35,6 +43,8 @@ export class GoogleMapsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.useMockMap) return;
+
     if (changes['address'] && !changes['address'].firstChange) {
       this.showAddressOnMap(changes['address'].currentValue);
     }
