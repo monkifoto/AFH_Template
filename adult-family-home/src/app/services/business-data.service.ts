@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BusinessService } from './business.service';
+import { BusinessPageHeroService } from './business-page-hero.service';
 import { Business } from '../model/business-questions.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -11,10 +12,11 @@ export class BusinessDataService {
   private businessDataSubject = new BehaviorSubject<Business | null>(null);
   private businessIdSubject = new BehaviorSubject<string | null>(null);
   private locationsSubject = new BehaviorSubject<any[]>([]);
+  private pageHeroSubject = new BehaviorSubject<any[]>([]);
   public businessData$: Observable<Business | null> =
     this.businessDataSubject.asObservable();
 
-  constructor(private businessService: BusinessService) {}
+  constructor(private businessService: BusinessService, private businessPageHeroService: BusinessPageHeroService) {}
 
   // Method to load business data on app initialization
   loadBusinessData(businessId: string): Observable<Business | null> {
@@ -42,8 +44,10 @@ export class BusinessDataService {
         this.businessIdSubject.next(businessId);
 
         this.businessService.getLocations(businessId).subscribe((locations) => {
-          // console.log("📍 Firestore Locations Retrieved:", locations);
           this.locationsSubject.next(locations);
+        });
+        this.businessPageHeroService.getPageHeroes(businessId).subscribe((pageHero) => {
+          this.pageHeroSubject.next(pageHero);
         });
       })
     );
@@ -59,6 +63,9 @@ export class BusinessDataService {
 
   getLocations(): Observable<any[]> {
     return this.locationsSubject.asObservable();
+  }
+  getPageHeros(): Observable<any[]> {
+    return this.pageHeroSubject.asObservable();
   }
 
   getLocationsForBusiness(businessId: string): Observable<any[]> {
