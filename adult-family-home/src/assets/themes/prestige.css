@@ -411,6 +411,14 @@ ul li strong {
   margin: 0;
 }
 
+.mock-data{
+  width: 100% !important;
+}
+
+.mock-map{
+  width: 100% !important;
+}
+
 .btnSBSend {
   display: inline-block;
   min-width: 180px;

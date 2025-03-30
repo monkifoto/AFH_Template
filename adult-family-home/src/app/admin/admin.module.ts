@@ -13,6 +13,7 @@ import { BusinessListComponent } from './business-list/business-list.component';
     LoginComponent,
     AdminComponent,
     BusinessListComponent,
+    // HeroManagerComponent,
     // BusinessLocationsComponent,
   ],
   imports: [

@@ -25,6 +25,7 @@
     "@types/googlemaps": "^3.43.3",
     "bootstrap": "^5.3.3",
     "firebase": "^10.12.2",
+    "firebase-admin": "^13.2.0",
     "jquery": "^3.7.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
