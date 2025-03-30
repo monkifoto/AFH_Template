@@ -80,6 +80,16 @@ export interface SliderConfig {
   subtitleWeight: string;
 }
 
+export interface PageHero {
+  id?: string;
+  businessId: string;
+  page: string; // e.g. 'about-us', 'services'
+  imageUrl: string;
+  message: string;
+  isActive?: boolean;
+  order?: number;
+}
+
 
 export interface HeroButton {
   text: string; // Button text

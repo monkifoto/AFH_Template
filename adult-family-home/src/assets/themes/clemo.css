@@ -963,6 +963,13 @@ input::-ms-input-placeholder {
   color: #fff;
 }
 
+.mock-map{
+  width: 100% !important;
+  height: 600px;
+  max-width: 100%;
+  overflow: hidden;
+}
+
 @media (max-width: 1024px) {
   .child {
     width: 50%; /* 2 columns on tablets */
