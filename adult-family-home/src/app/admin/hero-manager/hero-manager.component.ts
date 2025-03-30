@@ -1,6 +1,6 @@
 // hero-manager.component.ts
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { BusinessPageHeroService } from 'src/app/services/business-page-hero.service';
 import { UploadService } from 'src/app/services/upload.service';
 import { Observable } from 'rxjs';
@@ -15,7 +15,7 @@ export class HeroManagerComponent implements OnInit {
   @Input() businessId!: string;
   heroForm: FormGroup;
   businesses: any[] = [];
-targetBusinessId: string = '';
+  targetBusinessControl = new FormControl('');
 
   predefinedPages = [
     { value: 'home', label: 'Home' },
@@ -58,6 +58,9 @@ targetBusinessId: string = '';
 
   get heroes(): FormArray {
     return this.heroForm.get('heroes') as FormArray;
+  }
+  get targetBusinessId(): string {
+    return this.targetBusinessControl.value || '';
   }
 
   loadHeroes() {
@@ -155,10 +158,14 @@ targetBusinessId: string = '';
       .catch(err => console.error('❌ Save failed', err));
   }
 
-  copyHeroToBusiness(index: number, targetBusinessId: string): void {
+  copyHeroToBusiness(index: number): void {
     const originalHero = this.heroes.at(index)?.value;
+    const targetBusinessId = this.targetBusinessControl.value;
 
-    if (!originalHero || !targetBusinessId) return;
+    if (!originalHero || !targetBusinessId) {
+      console.warn('❌ Missing hero data or target business ID');
+      return;
+    }
 
     const newHero = {
       ...originalHero,
@@ -168,9 +175,13 @@ targetBusinessId: string = '';
 
     this.pageHeroService
       .savePageHero(targetBusinessId, newHero)
-      .then(() => console.log('✅ Hero copied to:', targetBusinessId))
+      .then(() => {
+        console.log('✅ Hero copied to:', targetBusinessId);
+        alert('Hero copied successfully!');
+      })
       .catch(err => console.error('❌ Error copying hero:', err));
   }
+
   loadBusinesses() {
     this.businessService.getAllBusinesses().subscribe(businesses => {
       this.businesses = businesses;

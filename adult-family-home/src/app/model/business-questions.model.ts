@@ -27,6 +27,7 @@ export interface Business {
 
   // Hero Slider
   heroSlider: HeroSlide[];
+  pageHeroes: PageHero[];
   sliderConfig?: SliderConfig;
   heroImages: string[];
   sections: Section[];
@@ -387,6 +388,51 @@ export class BusinessModel {
           ],
         },
       ],
+      pageHeroes:[{
+        id: '',
+        businessId: '',
+        page: 'home',
+        imageUrl: '../../assets/sharedAssets/istockphoto-1022730404-2048x2048.jpg',
+        message: 'Welcome to Careful Living AFH',
+        isActive: true,
+        order: 1,
+      },
+      {
+        id: '',
+        businessId: '',
+        page: 'about-us',
+        imageUrl: '../../assets/sharedAssets/istockphoto-1022730404-2048x2048.jpg',
+        message: 'Learn About Us',
+        isActive: true,
+        order: 2,
+      },
+      {
+        id: '',
+        businessId: '',
+        page: 'services',
+        imageUrl: '../../assets/sharedAssets/istockphoto-1022730404-2048x2048.jpg',
+        message: 'Discover Our Services',
+        isActive: true,
+        order: 3,
+      },
+      {
+        id: '',
+        businessId: '',
+        page: 'gallery',
+        imageUrl: '../../assets/sharedAssets/istockphoto-1022730404-2048x2048.jpg',
+        message: 'Explore Our Gallery',
+        isActive: true,
+        order: 4,
+      },
+      {
+        id:'',
+          businessId:'',
+          page:'contact-us',
+          imageUrl:'../../assets/sharedAssets/istockphoto-1022730404-2048x2048.jpg',
+          message:'Get in Touch',
+          isActive:true,
+          order:5
+      }],
       businessData: '',
       id: '',
       faqs: '',

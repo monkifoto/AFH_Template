@@ -50,7 +50,7 @@
         </div>
         <div class="col-4">
           <label>Current URL</label>
-          <input formControlName="imageUrl" class="form-control" readonly />
+          <input formControlName="imageUrl" class="form-control" />
         </div>
       </div>
 
@@ -76,10 +76,16 @@
         </div>
       </div>
       <div class="row">
-        <div class="col"><select [(ngModel)]="targetBusinessId">
-          <option *ngFor="let biz of businesses" [value]="biz.id">{{ biz.businessName }}</option>
-        </select></div>
-        <div class="col"><button (click)="copyHeroToBusiness(i, targetBusinessId)">Copy</button></div>
+        <div class="col">
+          <select class="form-control" [formControl]="targetBusinessControl">
+            <option *ngFor="let biz of businesses" [value]="biz.id">{{ biz.businessName }}</option>
+          </select>
+      </div>
+        <div class="col">
+          <button type="button" class="duplicate-btn" (click)="copyHeroToBusiness(i)">
+            Copy
+          </button>
+        </div>
       </div>
       <hr />
     </div>
