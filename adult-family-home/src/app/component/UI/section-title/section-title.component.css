@@ -4,7 +4,7 @@
   align-items: center;
   text-align: center;
   /* padding: 4rem 2rem; */
-  max-width: calc(var(--cell-max-width) * 24);
+  /* max-width: calc(var(--cell-max-width) * 24); */
   margin: 0 auto;
 }
 

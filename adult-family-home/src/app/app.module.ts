@@ -83,6 +83,7 @@ import { LocationPageComponent } from './component/PAGES/location-page/location-
 import { PhoneFormatPipe } from './pipe/phone-format.pipe';
 import { ItemListImageComponent } from './component/UI/item-list-image/item-list-image.component';
 import { HeroManagerComponent } from './admin/hero-manager/hero-manager.component';
+import { TextWrapperComponent } from './component/text-wrapper/text-wrapper.component';
 
 
     // Map hostnames to business IDs
@@ -236,7 +237,8 @@ export function combinedInitializer(
     LocationPageComponent,
     PhoneFormatPipe,
     ItemListImageComponent,
-    HeroManagerComponent
+    HeroManagerComponent,
+    TextWrapperComponent
   ],
   imports: [
     BrowserModule,

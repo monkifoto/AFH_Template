@@ -122,7 +122,144 @@
                   </div>
                 </div>
               </div>
+              <div class="settings-group">
+                <h4>Content</h4>
+                <!-- ✅ Title Fields in One Row -->
+                <div class="row">
+                  <div class="col">
+                    <label>Title</label>
+                    <input
+                      formControlName="sectionTitle"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col">
+                    <label>Title Font Size</label>
+                    <input
+                      type="number"
+                      formControlName="titleFontSize"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col">
+                    <label>Title Font Style</label>
+                    <select
+                      formControlName="titleFontStyle"
+                      class="form-control"
+                    >
+                      <option *ngFor="let style of fontStyles" [value]="style">
+                        {{ style }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <label>Title Color</label>
+                    <select formControlName="titleColor" class="form-control">
+                      <option
+                        *ngFor="let color of predefinedColors"
+                        [value]="color.value"
+                      >
+                        {{ color.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <!-- ✅ Subtitle Fields in One Row -->
+                <div class="row">
+                  <div class="col">
+                    <label>Subtitle</label>
+                    <input
+                      formControlName="sectionSubTitle"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col">
+                    <label>Subtitle Font Size</label>
+                    <input
+                      type="number"
+                      formControlName="subtitleFontSize"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col">
+                    <label>Subtitle Font Style</label>
+                    <select
+                      formControlName="subtitleFontStyle"
+                      class="form-control"
+                    >
+                      <option *ngFor="let style of fontStyles" [value]="style">
+                        {{ style }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <label>Subtitle Color</label>
+                    <select
+                      formControlName="subtitleColor"
+                      class="form-control"
+                    >
+                      <option
+                        *ngFor="let color of predefinedColors"
+                        [value]="color.value"
+                      >
+                        {{ color.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row" *ngIf="section.get('component')?.value !== 'item-list'">
+                  <div class="col"  >
+                    <label>Content</label>
+                    <textarea
+                      formControlName="sectionContent"
+                      class="form-control"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="row" *ngIf="section.get('component')?.value !== 'item-list'">
 
+                  <div class="col">
+                    <label>Text Color</label>
+                    <select formControlName="textColor" class="form-control">
+                      <option
+                        *ngFor="let color of predefinedColors"
+                        [value]="color.value"
+                      >
+                        {{ color.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <label>Text Alignment</label>
+                    <select formControlName="alignText" class="form-control">
+                      <option value="left">Left</option>
+                      <option value="center">Center</option>
+                      <option value="right">Right</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <label>Font Size</label>
+                    <input
+                      type="number"
+                      formControlName="textFontSize"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col">
+                    <label>Font Style</label>
+                    <select
+                      formControlName="textFontStyle"
+                      class="form-control"
+                    >
+                      <option *ngFor="let style of fontStyles" [value]="style">
+                        {{ style }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- <p>Image URL: {{ section.get("sectionImageUrl")?.value }}</p> -->
+              </div>
               <div class="settings-group">
                 <h4>Appearance</h4>
                 <div class="row">
@@ -300,128 +437,7 @@
                 </div>
               </div>
 
-              <div class="settings-group">
-                <h4>Content</h4>
-                <!-- ✅ Title Fields in One Row -->
-                <div class="row">
-                  <div class="col">
-                    <label>Title</label>
-                    <input
-                      formControlName="sectionTitle"
-                      class="form-control"
-                    />
-                  </div>
-                  <div class="col">
-                    <label>Title Font Size</label>
-                    <input
-                      type="number"
-                      formControlName="titleFontSize"
-                      class="form-control"
-                    />
-                  </div>
-                  <div class="col">
-                    <label>Title Font Style</label>
-                    <select
-                      formControlName="titleFontStyle"
-                      class="form-control"
-                    >
-                      <option *ngFor="let style of fontStyles" [value]="style">
-                        {{ style }}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="col">
-                    <label>Title Color</label>
-                    <select formControlName="titleColor" class="form-control">
-                      <option
-                        *ngFor="let color of predefinedColors"
-                        [value]="color.value"
-                      >
-                        {{ color.name }}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <!-- ✅ Subtitle Fields in One Row -->
-                <div class="row">
-                  <div class="col">
-                    <label>Subtitle</label>
-                    <input
-                      formControlName="sectionSubTitle"
-                      class="form-control"
-                    />
-                  </div>
-                  <div class="col">
-                    <label>Subtitle Font Size</label>
-                    <input
-                      type="number"
-                      formControlName="subtitleFontSize"
-                      class="form-control"
-                    />
-                  </div>
-                  <div class="col">
-                    <label>Subtitle Font Style</label>
-                    <select
-                      formControlName="subtitleFontStyle"
-                      class="form-control"
-                    >
-                      <option *ngFor="let style of fontStyles" [value]="style">
-                        {{ style }}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="col">
-                    <label>Subtitle Color</label>
-                    <select
-                      formControlName="subtitleColor"
-                      class="form-control"
-                    >
-                      <option
-                        *ngFor="let color of predefinedColors"
-                        [value]="color.value"
-                      >
-                        {{ color.name }}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row">
-                  <div
-                    class="col"
-                    *ngIf="section.get('component')?.value !== 'item-list'"
-                  >
-                    <label>Content</label>
-                    <textarea
-                      formControlName="sectionContent"
-                      class="form-control"
-                    ></textarea>
-                  </div>
-                  <div class="col">
-                    <label>Text Color</label>
-                    <select formControlName="textColor" class="form-control">
-                      <option
-                        *ngFor="let color of predefinedColors"
-                        [value]="color.value"
-                      >
-                        {{ color.name }}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="col">
-                    <label>Text Alignment</label>
-                    <select formControlName="alignText" class="form-control">
-                      <option value="left">Left</option>
-                      <option value="center">Center</option>
-                      <option value="right">Right</option>
-                    </select>
-                  </div>
-                  <div class="col">Font Size</div>
 
-                  <div class="col">Font style</div>
-                </div>
-
-                <!-- <p>Image URL: {{ section.get("sectionImageUrl")?.value }}</p> -->
-              </div>
 
               <!-- ✅ List-Item Section -->
               <div
@@ -445,8 +461,7 @@
                 </div>
                 <button
                   (click)="addItem(section.get('id')?.value)"
-                  class="afhBtn"
-                >
+                  class="afhBtn">
                   + Add Item
                 </button>
 

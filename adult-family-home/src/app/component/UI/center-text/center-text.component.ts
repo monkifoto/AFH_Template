@@ -10,24 +10,38 @@ import { Router } from '@angular/router';
 })
 export class CenterTextComponent implements OnInit {
   @Input() themeType!: string;
-  @Input() title!: string;
-  @Input() subTitle!: string;
+
+
   @Input() imageURL!: string;
   @Input() showImage: boolean =false;
   @Input() _businessName: string = '';
   @Input() page: string ='';
   @Input() location: string ='';
   @Input() backgroundColor: string = '#ffffff';
+
+
+  private _content!: string;
+  sanitizedContent!: SafeHtml;
   @Input() textColor: string = '#000000';
+  @Input() textFontSize: string = '16';
+  @Input() textFontStyle: string = 'normal';
+  @Input() alignText: string= 'left';
+
+ @Input() title!: string;
   @Input() titleColor: string = '#000000';
   @Input() titleFontSize: string = '34';
+  @Input() titleFontStyle: string = '#normal';
+
+  @Input() subTitle!: string;
   @Input() subtitleColor: string = '#000000';
   @Input() subtitleFontSize: string = '14';
+  @Input() subtitleFontStyle: string = '#normal';
+
   @Input() fullWidth: boolean = false;
   @Input() showButton: boolean = false;
   @Input() buttonText: string ='Learn More';
   @Input() buttonLink: string ='contact-us';
-  @Input() alignText: string= 'left';
+
   @Input() boxShadow: boolean = false;
   @Input() borderRadius: number = 0;
   @Input() items: any[] = []; // ✅ List of items in the section
@@ -37,8 +51,6 @@ export class CenterTextComponent implements OnInit {
   @Input() isParallax: boolean = true; // ✅ Controls whether parallax effect is applied
   @Input() order: number = 0;
 
-  private _content!: string;
-  sanitizedContent!: SafeHtml;
 
   constructor(private sanitizer: DomSanitizer, private router: Router) {}
   ngOnInit(): void {

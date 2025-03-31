@@ -8,13 +8,13 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
   styleUrls: ['./call-to-action.component.css']
 })
 export class CallToActionComponent implements OnInit {
-  @Input() title: string = 'Come Meet Our Family!';
-  @Input() content: string = 'Questions before getting started?';
+
+
   @Input() buttonText: string = 'Get in touch';
   @Input() isButton: boolean = false;
   @Input() bgColor: string = 'var(--background-color)';
-  @Input() textColor: string = 'var(--text-color)';
-  @Input() titleColor: string = 'var(--accent-color)';
+
+
   @Input() buttonBgColor: string = 'var(--button-color)';
   @Input() buttonTextColor: string = 'var(--button-text-color)';
   @Input() borderRadius: string = '10px';
@@ -29,18 +29,30 @@ export class CallToActionComponent implements OnInit {
   @Input() _businessName: string = '';
   @Input() location: string ='';
   @Input() backgroundColor: string = '#ffffff';
+
+  @Input() title: string = 'Come Meet Our Family!';
+  @Input() titleColor: string = 'var(--accent-color)';
   @Input() titleFontSize: string = '34';
+  @Input() titleFontStyle: string = '#normal';
+
   @Input() subtitleColor: string = '#000000';
   @Input() subtitleFontSize: string = '14';
+  @Input() subtitleFontStyle: string = '#normal';
+
+  @Input() content: string = 'Questions before getting started?';
+  @Input() textFontSize: string = '16';
+  @Input() textFontStyle: string = 'normal';
+  @Input() textColor: string = 'var(--text-color)';
+
   @Input() fullWidth: boolean = false;
   @Input() showButton: boolean = false;
   @Input() buttonLink: string ='contact-us';
   @Input() alignText: string= 'left';
-  @Input() items: any[] = []; // ✅ List of items in the section
-  @Input() isMinimal: boolean = false; // ✅ Controls minimal/full view
-  @Input() showLearnMore: boolean = false; // ✅ Toggle Learn More button
-  @Input() sectionImageUrl: string | null = null; // ✅ Background image
-  @Input() isParallax: boolean = true; // ✅ Controls whether parallax effect is applied
+  @Input() items: any[] = [];
+  @Input() isMinimal: boolean = false;
+  @Input() showLearnMore: boolean = false;
+  @Input() sectionImageUrl: string | null = null;
+  @Input() isParallax: boolean = true;
 
   constructor(private router: Router ,private businessDataService: BusinessDataService) {}
 
