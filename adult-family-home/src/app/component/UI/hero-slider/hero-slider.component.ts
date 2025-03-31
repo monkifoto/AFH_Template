@@ -35,15 +35,15 @@ import {
             top: 0,
             left: 0
           })
-        ]),
+        ], { optional: true }),
         group([
           query(':leave', [
             animate('600ms ease', style({ opacity: 0, transform: 'translateX(-5%)' }))
-          ]),
+          ], { optional: true }),
           query(':enter', [
             style({ opacity: 0, transform: 'translateX(5%)' }),
             animate('600ms ease', style({ opacity: 1, transform: 'translateX(0)' }))
-          ])
+          ], { optional: true })
         ])
       ]),
       transition(':decrement', [
@@ -59,11 +59,11 @@ import {
         group([
           query(':leave', [
             animate('600ms ease', style({ opacity: 0, transform: 'translateX(5%)' }))
-          ]),
+          ], { optional: true }),
           query(':enter', [
             style({ opacity: 0, transform: 'translateX(-5%)' }),
             animate('600ms ease', style({ opacity: 1, transform: 'translateX(0)' }))
-          ])
+          ], { optional: true })
         ])
       ])
     ])
