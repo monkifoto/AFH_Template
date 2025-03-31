@@ -1,9 +1,11 @@
 @import url(components/clemo-nav.css);
 @import url(components/hero-slider.css);
 @import url(components/page-hero.css);
+@import url(components/clemo-center-text.css);
 @import url(components/clemo-contact-us.css);
 @import url(components/dark-footer.css);
 @import url(components/clemo-testimonials.css);
+@import url(components/clemo-left-text.css);
 
 /* Root Variables */
 :root {
@@ -356,14 +358,13 @@ input::-ms-input-placeholder {
 
 /*************************** COMPONENTS *************************/
 /*--------------------------CENTER TEXT-------------------------*/
-.center-text-section {
+/* .center-text-section {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   max-width: var(--site-max-width);
   margin: 0 auto;
-  /* padding: 6.6vmax 0; */
 }
 .center-text-section-clemo {
   display: flex;
@@ -379,32 +380,12 @@ input::-ms-input-placeholder {
 .center-text-description {
   line-height: 2rem;
 }
-.text-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
-
-.text-container p {
-  line-height: 2rem;
-  font-size: 1.3rem;
-  padding: 60px !important;
-}
-
-.text-container h2, h3 {
-  padding: 0 60px !important;
-}
-.text-container .separator2{
-  margin: 0 60px !important;
-}
 
 .clemo-center-title {
   padding-bottom: 3rem;
 }
 
-/* Mobile-specific adjustments for Center Text */
+
 @media (max-width: 768px) {
   .center-text-section {
     padding: 1.5rem 1rem;
@@ -416,16 +397,16 @@ input::-ms-input-placeholder {
     padding: 0 1rem;
     font-size: 0.9rem;
   }
-}
+} */
 
 
 /*--------------------------RIGHT & LEFT TEXT SECTIONS-------------------------*/
-.right-text-section,
+/* .right-text-section,
 .left-text-section {
   display: flex;
   flex-direction: row;
   gap: 3rem;
-  /* padding: 6.6vmax 5rem 0; */
+
   max-width: calc(var(--cell-max-width) * 24);
   margin: 0 auto;
 }
@@ -461,7 +442,29 @@ input::-ms-input-placeholder {
   display: flex;
   flex-direction: column;
   justify-content: center;
+} */
+
+.text-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
+
+.text-container p {
+  /* line-height: 2rem;
+  font-size: 1.3rem;
+  padding: 60px !important; */
+}
+
+.text-container h2, h3 {
+  /* padding: 0 60px !important; */
+}
+.text-container .separator2{
+  /* margin: 0 60px !important; */
+}
+
 
 /* Mobile-specific adjustments for Right & Left Text Sections */
 @media (max-width: 768px) {
@@ -515,17 +518,17 @@ input::-ms-input-placeholder {
 }
 
 .content-container {
-  max-width: 1400px;
+  max-width: var(--site-max-width);
   margin: 0 auto;
   /* padding: 6.6vmax 20px 0; */
 }
 
-.left-image-container {
+/* .left-image-container {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding: 80px; */
+
 }
 
 .left-image-container img {
@@ -533,7 +536,7 @@ input::-ms-input-placeholder {
   max-width: 600px;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-}
+} */
 
 /*------- CLEMO----------*/
 

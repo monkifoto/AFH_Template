@@ -1,0 +1,105 @@
+.center-text-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 40px;
+  gap: 60px;
+  max-width: 1200px;
+  margin: auto;
+  flex-wrap: wrap;
+  align-items: stretch;
+
+}
+
+.center-text-container.full-width {
+  width: 100%;
+}
+
+.center-text-container.centered {
+  margin: 0 auto;
+}
+
+.center-text-title {
+  margin: 0;
+  font-weight: 700;
+}
+
+.center-text-title:first-of-type {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #333;
+}
+
+.center-text-title:last-of-type {
+  line-height: 1.2;
+  color: #111;
+}
+
+.center-text-description {
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 24px;
+}
+
+.afhBtn {
+  background-color: black;
+  color: white;
+  padding: 14px 28px;
+  font-size: 16px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.afhBtn:hover {
+  background-color: #222;
+}
+
+/* Layout styling */
+.center-text-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.center-text-container > div {
+  flex: 1;
+  padding: 20px;
+}
+
+.text-container h2, h3 {
+  padding: 0 !important;
+}
+
+
+.left-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* height: 100%; */
+  min-height: 300px; /* or whatever makes sense visually */
+  /* .center-text-title {
+    margin:0;
+    padding: 0;
+  } */
+}
+
+.right-column{
+border-left: solid 1px #000;
+}
+
+@media (max-width: 768px) {
+  .center-text-container {
+    flex-direction: column;
+  }
+
+  .center-text-container::before {
+    display: none;
+  }
+
+  .center-text-title:last-of-type {
+    font-size: 36px;
+  }
+}

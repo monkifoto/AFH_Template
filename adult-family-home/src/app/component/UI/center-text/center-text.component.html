@@ -42,7 +42,7 @@
 </div>
 
 
-<div class="center-text-container"
+<!-- <div class="center-text-container"
 *ngIf="themeType=='clemo'"
 [ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
 [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
@@ -51,7 +51,26 @@
   <h2 class="center-text-title">{{ title }}</h2>
   <p class="center-text-description" [innerHTML]="sanitizedContent"></p>
   <button *ngIf="showButton" class="afhBtn">Schedule A Visit</button>
+</div> -->
+
+<div class="center-text-container" *ngIf="themeType=='clemo'"
+     [ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+     [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'border-radius': borderRadius + 'px'  }">
+
+  <div class="left-column">
+    <div>
+    <h2 class="center-text-title" [ngStyle]="{ 'color': titleColor, 'font-size': titleFontSize+'px' }" >{{ title }}</h2>
+    <h3 class="center-text-title" [ngStyle]="{ 'color': subtitleColor, 'font-size': subtitleFontSize+'px' }">{{subTitle | replaceKeyword: { businessName: _businessName } }}</h3>
+  </div>
+    <button *ngIf="showButton" class="afhBtn">Contact Us</button>
+  </div>
+
+  <div class="right-column">
+    <p class="center-text-description" [innerHTML]="sanitizedContent"></p>
+
+  </div>
 </div>
+
 
 
 <!-- <div class="center-text-container"
