@@ -31,6 +31,7 @@ import { CallToActionComponent } from '../UI/call-to-action/call-to-action.compo
 import { FaqComponent } from '../UI/faq/faq.component';
 import { ItemListImageComponent } from '../UI/item-list-image/item-list-image.component';
 import { StatsComponent } from '../UI/stats/stats.component';
+import { VideoComponent } from '../UI/video/video.component';
 
 @Component({
   selector: 'app-home',
@@ -165,13 +166,21 @@ export class HomeComponent implements OnInit {
   }
 
   loadManualComponents() {
+    if (this.business?.theme?.themeType === 'clemo') {
+      const videoFactory =
+        this.resolver.resolveComponentFactory(VideoComponent);
+      const videoRef = this.container.createComponent(VideoComponent, {
+        index: undefined,
+        injector: this.injector,
+      });
+    }
+
+    // Manually Load LatestProductsComponent if Business is SB
     if (this.business?.theme?.themeType == 'sb') {
-      const latestProductsFactory = this.resolver.resolveComponentFactory(
-        LatestProductsComponent
-      );
-      const latestProductsRef = this.container.createComponent(
-        LatestProductsComponent,
-        {
+      const latestProductsFactory =
+      this.resolver.resolveComponentFactory(LatestProductsComponent);
+      const latestProductsRef =
+      this.container.createComponent(LatestProductsComponent,{
           index: undefined,
           injector: this.injector,
         }
@@ -180,13 +189,12 @@ export class HomeComponent implements OnInit {
       latestProductsRef.changeDetectorRef.detectChanges();
     }
 
+    // Manually Load StatusComponent if Business is Clemo
     if (this.business?.theme?.themeType == 'clemo') {
-      const statsFactory = this.resolver.resolveComponentFactory(
-        StatsComponent
-      );
-      const statsRef = this.container.createComponent(
-        StatsComponent,
-        {
+      const statsFactory =
+      this.resolver.resolveComponentFactory(StatsComponent);
+      const statsRef =
+      this.container.createComponent(StatsComponent, {
           index: undefined,
           injector: this.injector,
         }
@@ -194,36 +202,13 @@ export class HomeComponent implements OnInit {
       statsRef.instance.businessId = this.business?.id;
       statsRef.changeDetectorRef.detectChanges();
     }
-    // if (
-    //   this.business?.testimonials?.length &&
-    //   !this.business?.placeId &&
-    //   this.business?.theme?.themeType !== 'sb' &&
-    //   this.business?.theme?.themeType !== 'prestige'
-    // ) {
-    //   const testimonialsFactory = this.resolver.resolveComponentFactory(
-    //     TestimonialsComponent
-    //   );
-    //   const testimonialsRef = this.container.createComponent(
-    //     TestimonialsComponent,
-    //     {
-    //       index: undefined,
-    //       injector: this.injector,
-    //     }
-    //   );
-
-    //   testimonialsRef.instance.layoutType =
-    //     this.business?.theme?.themeType || '';
-    //   testimonialsRef.instance.testimonials = this.business?.testimonials;
-    // }
 
     // Manually Load TestimonialCarouselComponent if Business Has a Google Place ID
     if (this.business?.placeId) {
-      const testimonialCarouselFactory = this.resolver.resolveComponentFactory(
-        TestimonialCarouselComponent
-      );
-      const testimonialCarouselRef = this.container.createComponent(
-        TestimonialCarouselComponent,
-        {
+      const testimonialCarouselFactory =
+      this.resolver.resolveComponentFactory(TestimonialCarouselComponent);
+      const testimonialCarouselRef =
+      this.container.createComponent(TestimonialCarouselComponent, {
           index: undefined,
           injector: this.injector,
         }
@@ -231,18 +216,6 @@ export class HomeComponent implements OnInit {
 
       testimonialCarouselRef.instance.placeId = this.business.placeId;
     }
-
-    // GOOGLE MAP COMPONENT DUPE?
-    // if (this.business?.placeId && this.business?.theme?.themeType === 'clemo') {
-    //   const gmapFactory =
-    //     this.resolver.resolveComponentFactory(GoogleMapsComponent);
-    //   const gmapRef = this.container.createComponent(GoogleMapsComponent, {
-    //     index: undefined,
-    //     injector: this.injector,
-    //   });
-    //   gmapRef.instance.layoutType = this.business?.theme?.themeType || 'demo';
-    //   gmapRef.instance.address = this.business?.address || '';
-    // }
 
     // GOOGLE MAP COMPONENT
     if (this.business?.placeId && this.business?.theme?.themeType === 'clemo') {
@@ -257,42 +230,57 @@ export class HomeComponent implements OnInit {
     }
 
     // FAQ COMPONENT
-    if (this.business?.theme?.themeType === 'clemo' ||this.business?.theme?.themeType === 'sp') {
+    if (this.business?.theme?.themeType === 'sp') {
       const faqRef = this.container.createComponent(FaqComponent, {
         index: undefined,
         injector: this.injector,
       });
-      // faqRef.instance.layoutType =  this.business?.theme?.themeType || 'demo';
-      // faqRef.instance.address = this.business?.address || '';
     }
 
 
   }
 
   assignComponentProperties(componentInstance: any, section: any) {
+
+    const isActive = section.isActive !== undefined ? section.isActive : true;
     if (componentInstance && typeof componentInstance === 'object') {
       Object.assign(componentInstance, {
-        title: this.applyReplaceKeyword(section.sectionTitle || ''),
-        subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
-        content: this.applyReplaceKeyword(section.sectionContent || ''),
-        sectionImageUrl: section.sectionImageUrl || '',
-        showButton: section.showButton || false,
-        buttonText: section.buttonText || 'Learn More',
-        buttonLink: section.buttonLink || '',
+        isActive : [isActive],
+        order: section.order || 0,
+
         _businessName: this.business?.businessName || '',
-        showImage: section.showImage,
+
         themeType: this.business?.theme?.themeType,
         items: section.items || [],
         isMinimal: section.isMinimal || false,
         isParallax: section.isParallax ?? true,
         backgroundColor: section.backgroundColor || '#ffffff',
+
+        content: this.applyReplaceKeyword(section.sectionContent || ''),
         textColor: section.textColor || '#000000',
+        textFontSize: section.textFontSize || '16',
+        textFontStyle: section.textFontStyle || 'normal',
+        alignText: section.alignText || 'left',
+
+        title: this.applyReplaceKeyword(section.sectionTitle || ''),
         titleColor: section.titleColor || '#000000',
         titleFontSize: section.titleFontSize || '36',
+        titleFontStyle: section.titleFontStyle || 'normal',
+
+        subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
         subtitleColor: section.subtitleColor || '#000000',
         subtitleFontSize: section.subtitleFontSize || '14',
+        subtitleFontStyle: section.subtitleFontStyle || 'normal',
+
         fullWidth: section.fullWidth || false,
-        alignText: section.alignText || 'left',
+        showBtn: section.showLearnMore || false,
+        showButton: section.showButton || false,
+        buttonText: section.buttonText || 'Learn More',
+        buttonLink: section.buttonLink || '',
+
+        showImage: !!section.sectionImageUrl,
+        sectionImageUrl: section.sectionImageUrl || '',
+
         boxShadow: section.boxShadow || false,
         borderRadius: section.borderRadius ?? 10,
         page: section.page,

@@ -27,12 +27,10 @@
         <img src="{{ sectionImageUrl }}" alt="{{ title }}" />
       </div>
       <div class="text-container">
-        <h3>{{ titleParts.part1 }}</h3>
-        <h2 *ngIf="titleParts.part2">
-          <span>{{ titleParts.part2 }}</span>
-        </h2>
-        <div class="separator2"></div>
-        <p [innerHTML]="sanitizedContent">{{ content }}</p>
+        <h3 [ngStyle]="{ 'color': subtitleColor, 'font-size': subtitleFontSize+'px', 'font-style':titleFontStyle }">{{ titleParts.part1 }}</h3>
+        <h2 [ngStyle]="{ 'color': titleColor, 'font-size': titleFontSize+'px', 'font-style':subtitleFontStyle }"><span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span></h2>
+          <div class="separator2"></div>
+          <p class="center-text-description" [ngStyle]="{ 'color': textColor, 'font-size': textFontSize+'px', 'font-style':textFontStyle }" [innerHTML]="sanitizedContent"></p>
       </div>
     </div>
   </div>
@@ -45,10 +43,10 @@
         <img [src]="sectionImageUrl" [alt]="title" />
       </div>
       <div class="left-text-container">
-        <h3 [ngStyle]="{ 'color': titleColor, 'font-size': titleFontSize+'px' }">{{ title }}</h3>
-        <h2 [ngStyle]="{ 'color': subtitleColor, 'font-size': subtitleFontSize+'px' }">{{ subTitle }}</h2>
-        <div class="separator2"></div>
-        <p [innerHTML]="sanitizedContent"></p>
+        <h3 [ngStyle]="{ 'color': titleColor, 'font-size': titleFontSize+'px', 'font-style':titleFontStyle  }">{{ title }}</h3>
+        <h2 [ngStyle]="{ 'color': subtitleColor, 'font-size': subtitleFontSize+'px', 'font-style' :subtitleFontStyle }">{{ subTitle }}</h2>
+        <!-- <div class="separator2"></div> -->
+        <p [ngStyle]="{ 'color': textColor, 'font-size': textFontSize+'px', 'font-style':textFontStyle }" [innerHTML]="sanitizedContent" [innerHTML]="sanitizedContent"></p>
 
       </div>
     </div>
@@ -62,25 +60,11 @@
 <div class="image-container">
   <img src="{{ sectionImageUrl }}" alt="{{ title }}" />
 </div>
-  <!-- <div class="text-container">
-      <div class="heading-container">
-        <h3>
-          {{ titleParts.part1 }}
-        </h3>
-        <h2>
-          <span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span>
-        </h2>
-          <div class="separator2"></div>
-      </div>
 
-
-      <p [innerHTML]="sanitizedContent"></p>
-  </div> -->
-
-  <div class="text-container">
-    <h3>{{ titleParts.part1 }}</h3>
-    <h2><span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span></h2>
-      <div class="separator2"></div>
-    <p class="center-text-description" [innerHTML]="sanitizedContent"></p>
-  </div>
+<div class="text-container">
+  <h3 [ngStyle]="{ 'color': subtitleColor, 'font-size': subtitleFontSize+'px', 'font-style':subtitleFontStyle }">{{ titleParts.part1 }}</h3>
+  <h2 [ngStyle]="{ 'color': titleColor, 'font-size': titleFontSize+'px', 'font-style':titleFontStyle }"><span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span></h2>
+    <div class="separator2"></div>
+    <p class="center-text-description" [ngStyle]="{ 'color': textColor, 'font-size': textFontSize+'px', 'font-style':textFontStyle }" [innerHTML]="sanitizedContent"></p>
+</div>
 </section>

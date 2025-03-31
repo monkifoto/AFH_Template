@@ -1,4 +1,13 @@
-import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, Type, ComponentRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ViewContainerRef,
+  ComponentFactoryResolver,
+  Injector,
+  Type,
+  ComponentRef,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MetaService } from 'src/app/services/meta-service.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
@@ -12,11 +21,13 @@ import { ItemListComponent } from '../../UI/item-list/item-list.component';
 import { CallToActionComponent } from '../../UI/call-to-action/call-to-action.component';
 import { ConsultationComponent } from '../../UI/consultation/consultation.component';
 import { LatestProductsComponent } from '../../UI/latest-products/latest-products.component';
+import { MeetTheTeamComponent } from '../../UI/meet-the-team/meet-the-team.component';
+import { TextWrapperComponent } from '../../text-wrapper/text-wrapper.component';
 
 @Component({
   selector: 'app-about-us',
   templateUrl: './about-us.component.html',
-  styleUrls: ['./about-us.component.css']
+  styleUrls: ['./about-us.component.css'],
 })
 export class AboutUsComponent implements OnInit {
   sections: any[] = [];
@@ -29,11 +40,14 @@ export class AboutUsComponent implements OnInit {
     'right-text': RightTextComponent,
     'left-text': LeftTextComponent,
     'item-list': ItemListComponent,
-    'cta': CallToActionComponent,
-    'consultation': ConsultationComponent
+    cta: CallToActionComponent,
+    consultation: ConsultationComponent,
+    'meet-the-team': MeetTheTeamComponent,
+    'latest-products': LatestProductsComponent,
   };
 
-  @ViewChild('dynamicContainer', { read: ViewContainerRef }) container!: ViewContainerRef;
+  @ViewChild('dynamicContainer', { read: ViewContainerRef })
+  container!: ViewContainerRef;
 
   constructor(
     private sectionService: BusinessSectionsService,
@@ -45,21 +59,24 @@ export class AboutUsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.businessDataService.getBusinessId().pipe(
-      switchMap((businessId) => {
-        if (businessId) {
-          this.businessId = businessId;
-          this.metaService.loadAndApplyMeta(businessId);
-          return this.businessDataService.loadBusinessData(businessId);
+    this.businessDataService
+      .getBusinessId()
+      .pipe(
+        switchMap((businessId) => {
+          if (businessId) {
+            this.businessId = businessId;
+            this.metaService.loadAndApplyMeta(businessId);
+            return this.businessDataService.loadBusinessData(businessId);
+          }
+          return [];
+        })
+      )
+      .subscribe((business) => {
+        if (business) {
+          this.business = business;
+          this.loadSections();
         }
-        return [];
-      })
-    ).subscribe((business) => {
-      if (business) {
-        this.business = business;
-        this.loadSections();
-      }
-    });
+      });
   }
 
   ngAfterViewInit(): void {
@@ -69,15 +86,19 @@ export class AboutUsComponent implements OnInit {
   }
 
   loadSections() {
-    this.sectionService.getBusinessSections(this.businessId, 'aboutus').subscribe((sections) => {
-      //console.log("📌 Retrieved Sections:", sections);
-      if (!sections || sections.length === 0) {
-        console.warn("❗ No sections retrieved from the service.");
-        return;
-      }
-      this.sections = sections.filter(section => section.isActive !== false) .sort((a, b) => (a.order || 0) - (b.order || 0));
-      this.loadComponents();
-    });
+    this.sectionService
+      .getBusinessSections(this.businessId, 'aboutus')
+      .subscribe((sections) => {
+        //console.log("📌 Retrieved Sections:", sections);
+        if (!sections || sections.length === 0) {
+          console.warn('❗ No sections retrieved from the service.');
+          return;
+        }
+        this.sections = sections
+          .filter((section) => section.isActive !== false)
+          .sort((a, b) => (a.order || 0) - (b.order || 0));
+        this.loadComponents();
+      });
   }
 
   loadComponents() {
@@ -86,94 +107,80 @@ export class AboutUsComponent implements OnInit {
       return;
     }
 
-    this.container.clear(); // ✅ Clear previous components
+    this.container.clear();
 
     if (!this.sections.length) {
       console.warn("❗ No sections available to load.");
       return;
     }
 
-    // ✅ Sort sections based on 'order' from the database
+    // Extract CTA first
+    let ctaSection: any = null;
     this.sections.sort((a, b) => (a.order || 0) - (b.order || 0));
+    this.sections = this.sections.filter(section => {
+      if (section.component === 'cta') {
+        ctaSection = section;
+        return false;
+      }
+      return true;
+    });
 
     if (this.business?.theme?.themeType === 'hh') {
+      let leftRightSections: any[] = [];
+      let firstCenterText: any = null;
+      let secondCenterText: any = null;
+      let otherSections: any[] = [];
 
-    let leftRightSections: any[] = [];
-    let firstCenterText: any = null;
-    let secondCenterText: any = null;
-    let ctaSection: any = null;
-    let otherSections: any[] = [];
-    let wrapperElement: HTMLElement;
-
-    // ✅ Identify `center-text`, `left-text/right-text` groups, and `cta`
-    this.sections.forEach((section) => {
-      if (section.component === 'center-text') {
-        if (!firstCenterText) {
-          firstCenterText = section;
+      this.sections.forEach(section => {
+        if (section.component === 'center-text') {
+          if (!firstCenterText) firstCenterText = section;
+          else secondCenterText = section;
+        } else if (section.component === 'left-text' || section.component === 'right-text') {
+          leftRightSections.push(section);
         } else {
-          secondCenterText = section;
-        }
-      } else if (section.component === 'left-text' || section.component === 'right-text') {
-        leftRightSections.push(section);
-      } else if (section.component === 'cta') {
-        ctaSection = section;
-      } else {
-        otherSections.push(section);
-      }
-    });
-
-    // ✅ 1️⃣ Render first `center-text` before wrapper
-    if (firstCenterText) {
-      //console.log("✅ Rendering first center-text BEFORE wrapper...");
-      this.createComponent(firstCenterText);
-    }
-
-    // ✅ 2️⃣ Create wrapper but DO NOT append it yet
-    if (leftRightSections.length > 0) {
-      //console.log("✅ Creating wrapper...");
-      wrapperElement = document.createElement('div');
-      wrapperElement.className = 'text-wrapper';
-
-      // ✅ Sort left-text before right-text
-      leftRightSections.sort((a, b) => (a.component === 'left-text' ? -1 : 1));
-
-      // ✅ Insert left-text and right-text into wrapper
-      leftRightSections.forEach((section) => {
-        const componentRef = this.createComponent(section);
-        if (componentRef) {
-          wrapperElement.appendChild(componentRef.location.nativeElement);
+          otherSections.push(section);
         }
       });
 
-      // ✅ Now insert wrapper AFTER first center-text
-      this.container.element.nativeElement.appendChild(wrapperElement);
+      if (firstCenterText) {
+        this.createComponent(firstCenterText);
+      }
+
+      if (leftRightSections.length > 0) {
+        const wrapperRef = this.container.createComponent(TextWrapperComponent);
+        leftRightSections.sort((a, b) => (a.component === 'left-text' ? -1 : 1));
+        leftRightSections.forEach(section => {
+          const compType = this.componentsMap[section.component];
+          const childRef = wrapperRef.instance.container.createComponent(compType);
+          this.applyComponentProperties(childRef.instance, section);
+          childRef.changeDetectorRef.detectChanges();
+        });
+      }
+
+      if (secondCenterText) {
+        this.createComponent(secondCenterText);
+      }
+
+      otherSections.forEach(section => {
+        this.createComponent(section);
+      });
+
+    } else {
+      // Other themes (clemo, etc.)
+      this.sections.forEach(section => {
+        this.createComponent(section);
+      });
     }
 
-    // ✅ 3️⃣ Render second `center-text` AFTER wrapper
-    if (secondCenterText) {
-      //console.log("✅ Rendering second center-text...");
-      this.createComponent(secondCenterText);
-    }
+    // 🔁 Manual components like Meet the Team and Latest Products
+    this.loadManualComponents();
 
-    // ✅ 4️⃣ Render all other sections normally
-    otherSections.forEach((section) => {
-      this.createComponent(section);
-    });
-
-    // ✅ 5️⃣ Ensure CTA is always last
+    // ✅ CTA always last
     if (ctaSection) {
-      //console.log("✅ Rendering CTA at last position...");
       this.createComponent(ctaSection);
     }
-  }else{
-      // Load components based on the 'order' property
-      this.sections.sort((a, b) => (a.order || 0) - (b.order || 0));
-      this.sections.forEach((section) => {
-          this.createComponent(section);
-      });
-      this.loadManualComponents();
   }
-  }
+
 
 
   loadManualComponents() {
@@ -191,8 +198,18 @@ export class AboutUsComponent implements OnInit {
       latestProductsRef.instance.layoutType = this.business?.theme?.themeType;
       latestProductsRef.changeDetectorRef.detectChanges();
     }
-  }
 
+    const meetTheTeamRef = this.container.createComponent(
+      MeetTheTeamComponent,
+      {
+        index: undefined,
+        injector: this.injector,
+      }
+    );
+    this.container.insert(meetTheTeamRef.hostView); // <-- required
+    meetTheTeamRef.changeDetectorRef.detectChanges();
+    meetTheTeamRef.changeDetectorRef.detectChanges();
+  }
 
   createWrapper(group: any[]) {
     if (!group.length) return;
@@ -207,7 +224,8 @@ export class AboutUsComponent implements OnInit {
     // ✅ Insert left-text and right-text immediately inside the wrapper
     group.forEach((section) => {
       const componentRef = this.createComponent(section);
-      if (componentRef !== null) { // ✅ Ensures valid component
+      if (componentRef !== null) {
+        // ✅ Ensures valid component
         wrapperElement.appendChild(componentRef.location.nativeElement);
       }
     });
@@ -216,69 +234,70 @@ export class AboutUsComponent implements OnInit {
     this.container.element.nativeElement.appendChild(wrapperElement);
   }
 
-  createComponent(section: any, insertBeforeElement?: HTMLElement): ComponentRef<any> | null {
+  createComponent(section: any): ComponentRef<any> | null {
     const componentType = this.componentsMap[section.component as keyof typeof this.componentsMap] as Type<any>;
     if (!componentType) {
       console.error(`❌ Component Not Found:`, section.component);
-      return null; // Prevent errors if the component is not found
+      return null;
     }
 
     const factory = this.resolver.resolveComponentFactory(componentType);
     const componentRef = this.container.createComponent(factory);
-
     this.applyComponentProperties(componentRef.instance, section);
-
-    // ✅ If we need to insert before the wrapper, do it manually
-    if (insertBeforeElement) {
-      this.container.element.nativeElement.insertBefore(
-        componentRef.location.nativeElement,
-        insertBeforeElement
-      );
-    } else {
-      this.container.element.nativeElement.appendChild(componentRef.location.nativeElement);
-    }
-
+    componentRef.changeDetectorRef.detectChanges();
     return componentRef;
   }
 
-
-
-
   applyComponentProperties(componentInstance: any, section: any) {
-
     const isActive = section.isActive !== undefined ? section.isActive : true;
     Object.assign(componentInstance, {
-      isActive : [isActive],
-        title: this.applyReplaceKeyword(section.sectionTitle || ''),
-        subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
-        content: this.applyReplaceKeyword(section.sectionContent || ''),
-        sectionImageUrl: section.sectionImageUrl || '',
-        showBtn: section.showLearnMore || false,
-        _businessName: this.business?.businessName || '',
-        showImage: !!section.sectionImageUrl,
-        themeType: this.business?.theme?.themeType,
-        items: section.items || [],
-        isMinimal: section.isMinimal || false,
-        isParallax: section.isParallax ?? true,
-        backgroundColor: section.backgroundColor || '#ffffff',
-        textColor: section.textColor || '#000000',
-        titleColor: section.titleColor || '#000000',
-        subtitleColor: section.subtitleColor || '#000000',
-        fullWidth: section.fullWidth || false,
-        showButton: section.showButton || false,
-        buttonText: section.buttonText || 'Learn More',
-        buttonLink: section.buttonLink || '',
-        titleFontSize: section.titleFontSize || '36',
-        subtitleFontSize: section.subtitleFontSize || '14',
-        alignText: section.alignText || 'left',
-        boxShadow: section.boxShadow || false,
-        borderRadius: section.borderRadius ?? 10,
-        page: section.page,
-        location: section.location
+      isActive: [isActive],
+      order: section.order || 0,
+
+      _businessName: this.business?.businessName || '',
+
+      themeType: this.business?.theme?.themeType,
+      items: section.items || [],
+      isMinimal: section.isMinimal || false,
+      isParallax: section.isParallax ?? true,
+      backgroundColor: section.backgroundColor || '#ffffff',
+
+      content: this.applyReplaceKeyword(section.sectionContent || ''),
+      textColor: section.textColor || '#000000',
+      textFontSize: section.textFontSize || '16',
+      textFontStyle: section.textFontStyle || 'normal',
+      alignText: section.alignText || 'left',
+
+      title: this.applyReplaceKeyword(section.sectionTitle || ''),
+      titleColor: section.titleColor || '#000000',
+      titleFontSize: section.titleFontSize || '36',
+      titleFontStyle: section.titleFontStyle || 'normal',
+
+      subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
+      subtitleColor: section.subtitleColor || '#000000',
+      subtitleFontSize: section.subtitleFontSize || '14',
+      subtitleFontStyle: section.subtitleFontStyle || 'normal',
+
+      fullWidth: section.fullWidth || false,
+      showBtn: section.showLearnMore || false,
+      showButton: section.showButton || false,
+      buttonText: section.buttonText || 'Learn More',
+      buttonLink: section.buttonLink || '',
+
+      showImage: !!section.sectionImageUrl,
+      sectionImageUrl: section.sectionImageUrl || '',
+
+      boxShadow: section.boxShadow || false,
+      borderRadius: section.borderRadius ?? 10,
+      page: section.page,
+      location: section.location,
     });
   }
 
   applyReplaceKeyword(value: string): string {
-    return value.replace(/{{\s*businessName\s*}}/g, this.business?.businessName || '');
+    return value.replace(
+      /{{\s*businessName\s*}}/g,
+      this.business?.businessName || ''
+    );
   }
 }

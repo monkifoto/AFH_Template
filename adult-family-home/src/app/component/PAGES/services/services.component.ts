@@ -255,33 +255,44 @@ export class ServicesComponent implements OnInit, AfterViewInit {
     const isActive = section.isActive !== undefined ? section.isActive : true;
     Object.assign(componentInstance, {
       isActive : [isActive],
-        title: this.applyReplaceKeyword(section.sectionTitle || ''),
-        subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
-        content: this.applyReplaceKeyword(section.sectionContent || ''),
-        sectionImageUrl: section.sectionImageUrl || '',
-        showBtn: section.showLearnMore || false,
-        _businessName: this.business?.businessName || '',
-        showImage: !!section.sectionImageUrl,
-        themeType: this.business?.theme?.themeType,
-        items: section.items || [],
-        isMinimal: section.isMinimal || false,
-        isParallax: section.isParallax ?? true,
-        backgroundColor: section.backgroundColor || '#ffffff',
-        textColor: section.textColor || '#000000',
-        titleColor: section.titleColor || '#000000',
-        subtitleColor: section.subtitleColor || '#000000',
-        fullWidth: section.fullWidth || false,
-        showButton: section.showButton || false,
-        buttonText: section.buttonText || 'Learn More',
-        buttonLink: section.buttonLink || '',
-        titleFontSize: section.titleFontSize || '36',
-        subtitleFontSize: section.subtitleFontSize || '14',
-        alignText: section.alignText || 'left',
-        boxShadow: section.boxShadow || false,
-        borderRadius: section.borderRadius ?? 10,
-        page: section.page,
-        location: section.location,
-        order: section.order
+      order: section.order || 0,
+      _businessName: this.business?.businessName || '',
+
+      themeType: this.business?.theme?.themeType,
+      items: section.items || [],
+      isMinimal: section.isMinimal || false,
+      isParallax: section.isParallax ?? true,
+      backgroundColor: section.backgroundColor || '#ffffff',
+
+      content: this.applyReplaceKeyword(section.sectionContent || ''),
+      textColor: section.textColor || '#000000',
+      textFontSize: section.textFontSize || '16',
+      textFontStyle: section.textFontStyle || 'normal',
+      alignText: section.alignText || 'left',
+
+      title: this.applyReplaceKeyword(section.sectionTitle || ''),
+      titleColor: section.titleColor || '#000000',
+      titleFontSize: section.titleFontSize || '36',
+      titleFontStyle: section.titleFontStyle || 'normal',
+
+      subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
+      subtitleColor: section.subtitleColor || '#000000',
+      subtitleFontSize: section.subtitleFontSize || '14',
+      subtitleFontStyle: section.subtitleFontStyle || 'normal',
+
+      fullWidth: section.fullWidth || false,
+      showBtn: section.showLearnMore || false,
+      showButton: section.showButton || false,
+      buttonText: section.buttonText || 'Learn More',
+      buttonLink: section.buttonLink || '',
+
+      showImage: !!section.sectionImageUrl,
+      sectionImageUrl: section.sectionImageUrl || '',
+
+      boxShadow: section.boxShadow || false,
+      borderRadius: section.borderRadius ?? 10,
+      page: section.page,
+      location: section.location
     });
   }
   applyReplaceKeyword(value: string): string {

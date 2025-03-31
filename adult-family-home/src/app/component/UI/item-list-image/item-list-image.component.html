@@ -7,7 +7,7 @@
       <div class="text-container">
       <h3 [ngStyle]="{ color: titleColor }">{{ titleParts.part1 }}</h3 >
       <h2><span *ngIf="titleParts.part2" [ngStyle]="{ color: titleColor }"> {{ titleParts.part2 }}</span></h2>
-        <div class="separator2"></div>
+        <div *ngIf="titleParts.part2" class="separator2"></div>
 
       </div>
       <!-- <h2 class="styled-heading" [ngStyle]="{ color: titleColor }">

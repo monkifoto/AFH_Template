@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { WebContentService } from 'src/app/services/web-content.service';
-import { Observable, forkJoin, of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
-import { Business, Employee } from 'src/app/model/business-questions.model';
+import { BusinessDataService } from 'src/app/services/business-data.service';
+import { Observable, of } from 'rxjs';
+import { catchError, switchMap, filter } from 'rxjs/operators';
+import { Employee } from 'src/app/model/business-questions.model';
 
 @Component({
   selector: 'app-meet-the-team',
@@ -11,70 +11,25 @@ import { Business, Employee } from 'src/app/model/business-questions.model';
   styleUrls: ['./meet-the-team.component.css']
 })
 export class MeetTheTeamComponent implements OnInit {
-  @Input() businessId!: string;
   employees$!: Observable<Employee[]>;
 
   constructor(
-    private route: ActivatedRoute,
-    private employeeService: WebContentService
+    private employeeService: WebContentService,
+    private businessDataService: BusinessDataService
   ) {}
 
   ngOnInit(): void {
-    this.employees$ = this.route.queryParamMap.pipe(
-      map(params => params.get('id') || ''), // Default to empty string if id is not provided
-      switchMap(businessId => {
-        // if (!businessId) {
-        //   throw new Error('Business ID is required');
-        // }
-        return this.employeeService.getEmployeesByBusinessId(businessId);
-      }),
-      catchError(error => {
-        console.error('Error fetching employees:', error);
-        return of([] as Employee[]); // Return an empty array in case of error
-      })
+    console.log('Meet The Team Component Initialized');
+    this.employees$ = this.businessDataService.getBusinessId().pipe(
+      filter((id): id is string => !!id), // Type guard to ensure id is not null
+      switchMap(businessId =>
+        this.employeeService.getEmployeesByBusinessId(businessId).pipe(
+          catchError(error => {
+            console.error('Error fetching employees:', error);
+            return of([] as Employee[]);
+          })
+        )
+      )
     );
   }
-
-  // ngOnInit(): void {
-  //   console.log(this.businessId);
-  //   if (this.businessId) {
-  //     this.employees$ = this.employeeService.getEmployeesByBusinessId(this.businessId).pipe(
-  //       switchMap(employees => {
-  //         console.log(employees);
-  //         const photoObservables = employees.map(employee =>
-  //           this.employeeService.getEmployeePhoto(employee.photoPath).pipe(
-  //             map(photoUrl => ({
-  //               ...employee,
-  //               photoUrl
-  //             }))
-  //           )
-  //         );
-  //         return forkJoin(photoObservables);
-  //       })
-  //     );
-  //   }
-  // }
-  // ngOnInit(): void {
-  //   this.employees$ = this.route.paramMap.pipe(
-  //     switchMap(params => {
-  //       const businessId = params.get('id');
-  //       if (!businessId) {
-  //         throw new Error('Business ID is required');
-  //       }
-  //       return this.employeeService.getEmployeesByBusinessId(businessId).pipe(
-  //         switchMap(employees => {
-  //           const photoObservables = employees.map(employee =>
-  //             this.employeeService.getEmployeePhoto(employee.photoPath).pipe(
-  //               map(photoUrl => ({
-  //                 ...employee,
-  //                 photoUrl
-  //               }))
-  //             )
-  //           );
-  //           return forkJoin(photoObservables);
-  //         })
-  //       );
-  //     })
-  //   );
-  // }
 }

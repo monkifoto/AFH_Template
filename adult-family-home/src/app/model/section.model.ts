@@ -17,6 +17,15 @@ export  interface Section {
   subtitleFontSize?: number;
   subtitleFontStyle?: string;
 
+  textFontSize?: number;
+  textFontStyle?: string;
+  // contentFontWeight?: string;
+  // contentLineHeight?: number;
+  // contentTextAlign?: string;
+  // contentTextTransform?: string;
+  // contentTextDecoration?: string;
+  // contentTextIndent?: number;
+
   alignText:string;
   textColor: any;
   sectionContent?: string;

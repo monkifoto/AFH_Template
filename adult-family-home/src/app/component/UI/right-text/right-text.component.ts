@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
 })
 export class RightTextComponent {
   @Input() themeType!: string;
-  @Input() title!: string;
-  @Input() subTitle!: string;
+
   @Input() imageURL!: string;
   @Input() showBtn: boolean = false;
   @Input() showImage: boolean =false;
@@ -18,11 +17,23 @@ export class RightTextComponent {
   @Input() page: string ='';
   @Input() location: string ='';
   @Input() backgroundColor: string = '#ffffff';
+
+  private _content!: string;
+  sanitizedContent!: SafeHtml;
   @Input() textColor: string = '#000000';
+  @Input() textFontSize: string = '16';
+  @Input() textFontStyle: string = 'normal';
+
+  @Input() title!: string;
   @Input() titleColor: string = '#000000';
   @Input() titleFontSize: string = '34';
+  @Input() titleFontStyle: string = '#normal';
+
+  @Input() subTitle!: string;
   @Input() subtitleColor: string = '#000000';
   @Input() subtitleFontSize: string = '14';
+  @Input() subtitleFontStyle: string = '#normal';
+
   @Input() fullWidth: boolean = false;
   @Input() showButton: boolean = false;
   @Input() buttonText: string ='Learn More';
@@ -37,8 +48,6 @@ export class RightTextComponent {
   @Input() isParallax: boolean = true; // ✅ Controls whether parallax effect is applied
   @Input() order: number = 0;
 
-  private _content!: string;
-  sanitizedContent!: SafeHtml;
 
   constructor(private sanitizer: DomSanitizer, private router: Router) {}
   ngOnInit(): void {

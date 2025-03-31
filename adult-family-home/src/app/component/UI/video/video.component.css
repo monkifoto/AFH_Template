@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full viewport height */
   background-color: var(--background-color);
   padding: 20px; /* Add padding to avoid content touching edges */
   box-sizing: border-box; /* Ensure padding is included in the dimensions */
@@ -10,8 +9,10 @@
 
 video,
 iframe {
-  max-width: 100%; /* Ensure it scales within the container */
+  max-width: var(--site-max-width); /* Ensure it scales within the container */
   max-height: 100%; /* Prevent overflow */
+  width: 1024px; /* Set a default width */
+  height: 576px; /* Set a default height */
   border: 1px solid #ccc;
   border-radius: 8px;
   aspect-ratio: 16 / 9; /* Maintain a 16:9 aspect ratio */

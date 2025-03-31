@@ -2,9 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  background: #fff;
+  background: var(--background-color);
   padding: 40px;
-  color: #333;
+  color: var(--text-color);
   max-width: var(--site-max-width);
   margin: 0 auto;
 }
@@ -17,7 +17,7 @@
   min-height: 350px;
 }
 .ae-contact-details:nth-child(even) {
-border-left: solid 1px black;
+border-left: solid 1px var(--text-color);
 }
 
 .ae-contact-details h2 {
@@ -45,9 +45,9 @@ border-left: solid 1px black;
 .ae-contact-form {
   width: 50%;
   padding: 20px;
-  background: #ffffff;
+  background: var(--background-color);
   min-height: 300px;
-  border-right: solid 1px black;
+  border-right: solid 1px var(--text-color);
 }
 
 /* Map Container */
@@ -76,7 +76,7 @@ border-left: solid 1px black;
 .form-group label {
   font-weight: bold;
   font-size: 14px;
-  color: #333;
+  color: var(--text-color);
   display: block;
   margin-bottom: 5px;
 }
@@ -97,7 +97,7 @@ border-left: solid 1px black;
 /* Button */
 .ae-contact-form .btn {
   background-color: var(--dark-background-color);/* Button color */
-  color: white;
+  color:var(--background-color);
   border: none;
   padding: 10px 15px;
   border-radius: 50px; /* Rounded corners */
@@ -109,9 +109,9 @@ border-left: solid 1px black;
 }
 
 .ae-contact-form .btn:hover {
-  background-color: white; /* Darker shade on hover */
-  color: black;
-  border: solid 1px black; /* Add border on hover */
+  background-color: var(--background-color); /* Darker shade on hover */
+  color: var(--text-color);
+  border: solid 1px var(--text-color); /* Add border on hover */
 }
 
 

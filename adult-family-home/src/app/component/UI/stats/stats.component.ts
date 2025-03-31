@@ -31,14 +31,14 @@ export class StatsComponent {
     },
     {
       title: 'Happy Families',
-      number: '44',
-      description: 'Thousands of families served with compassionate and personalized care.',
+      number: '60+',
+      description: 'Families served with compassionate and personalized care.',
       imageUrl: '/assets/sharedAssets/istockphoto-1307432717-2048x2048.jpg',
       link:'/about-us'
     },
     {
       title: 'Services Offered',
-      number: '11',
+      number: '36',
       description: 'Comprehensive range of care services tailored to meet every need.',
       imageUrl: '/assets/sharedAssets/istockphoto-2012854188-2048x2048.jpg',
       link:'/services'

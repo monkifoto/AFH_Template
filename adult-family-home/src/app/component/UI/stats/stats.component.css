@@ -1,64 +1,3 @@
-/* .parallax-container {
-  width: 100vw;
-
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  color: white;
-  box-sizing: border-box;
-}
-
-.stats-overlay {
-  display: flex;
-  gap: 150px;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 150px;
-  width: 100vw;
-  height: 100%;
-  height: auto;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 10px;
-}
-
-.stat .number {
-  font-size: 5.5rem;
-}
-
-
-@media (max-width: 768px) {
-  .parallax-container {
-    height: auto;
-    background-attachment: scroll;
-  }
-
-  .stats-overlay {
-    gap: 20px;
-    padding: 15px;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-
-  .stat .number {
-    font-size: 3rem;
-  }
-
-  .stat .label {
-    font-size: 0.9rem;
-  }
-} */
 .tab-container {
   font-family: 'Segoe UI', sans-serif;
   padding: 2rem;
@@ -73,7 +12,7 @@
   justify-content: center;
   border-bottom: 1px solid #ccc;
   margin-bottom: 1rem;
-  background: #fafafa;
+  background: var(--secondary-color);
 }
 
 .tab {
@@ -93,7 +32,7 @@
   gap: 2rem;
   align-items: center;
   flex-wrap: wrap;
-  background: #fafafa;
+  background: var(--secondary-color);
 }
 
 .image {
@@ -103,8 +42,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
-  background: #eee;
+  background: var(--background-color);
 }
 
 
@@ -121,6 +59,7 @@
 .number {
   font-size: 10rem;
   font-weight: bold;
+  color: var(--dark-background-color);
 }
 
 .title {
