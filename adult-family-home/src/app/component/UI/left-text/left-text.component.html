@@ -26,8 +26,9 @@
   <div class="content-area">
     <div class="row">
       <div class="text-container">
-        <h3 [ngStyle]="{ 'color': subtitleColor, 'font-size': subtitleFontSize+'px', 'font-style':titleFontStyle }">{{ titleParts.part1 }}</h3>
-        <h2 [ngStyle]="{ 'color': titleColor, 'font-size': titleFontSize+'px', 'font-style':subtitleFontStyle }"><span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span></h2>
+        <h2 [ngStyle]="{ 'color': titleColor, 'font-size': titleFontSize+'px', 'font-style':titleFontStyle }">{{ titleParts.part1 }}</h2>
+        <h3 [ngStyle]="{ 'color': subtitleColor, 'font-size': subtitleFontSize+'px', 'font-style':subtitleFontStyle }"><span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span></h3>
+
           <div class="separator2"></div>
           <p class="center-text-description" [ngStyle]="{ 'color': textColor, 'font-size': textFontSize+'px', 'font-style':textFontStyle }" [innerHTML]="sanitizedContent"></p>
       </div>

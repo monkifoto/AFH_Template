@@ -1,5 +1,7 @@
+
 .mock-data{
-  width: var(--site-max-width);
+  max-width: var(--site-max-width);
+  width: 100%;
   margin: 0 auto;
   text-align: center;
 }

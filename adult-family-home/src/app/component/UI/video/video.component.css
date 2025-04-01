@@ -3,31 +3,40 @@
   justify-content: center;
   align-items: center;
   background-color: var(--background-color);
-  padding: 20px; /* Add padding to avoid content touching edges */
-  box-sizing: border-box; /* Ensure padding is included in the dimensions */
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 video,
 iframe {
-  max-width: var(--site-max-width); /* Ensure it scales within the container */
-  max-height: 100%; /* Prevent overflow */
-  width: 1024px; /* Set a default width */
-  height: 576px; /* Set a default height */
+  width: 100%; /* Fill container by default */
+  max-width: var(--site-max-width); /* Constrain to site max width */
+  aspect-ratio: 16 / 9;
+  height: auto; /* Maintain aspect ratio */
   border: 1px solid #ccc;
   border-radius: 8px;
-  aspect-ratio: 16 / 9; /* Maintain a 16:9 aspect ratio */
 }
 
-/* For smaller screens */
+/* Tablet and below */
 @media (max-width: 768px) {
   .video-container {
-    height: auto; /* Allow the container to adjust based on content */
-    padding: 10px; /* Adjust padding for smaller screens */
+    padding: 10px;
   }
 
   video,
   iframe {
-    width: 100%; /* Use full width of the container */
-    max-height: 60vh; /* Limit height to ensure it doesn’t take over the screen */
+    max-height: 60vh;
+  }
+}
+
+/* Phones (small devices) */
+@media (max-width: 480px) {
+  .video-container {
+    padding: 8px;
+  }
+
+  video,
+  iframe {
+    max-height: 50vh; /* More conservative height on small screens */
   }
 }
