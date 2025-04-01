@@ -480,25 +480,21 @@
           <h2>Contact us</h2>
           <div class="ae-contact-item" *ngIf="location?.email">
             <p>
-              <a href="mailto:{{ location?.email }}">{{ location?.email }}</a>
+             <i class="fa-solid fa-envelope"></i> <a href="mailto:{{ location?.email }}">{{ location?.email }}</a>
             </p>
           </div>
           <div class="ae-contact-item">
-            <p>{{ location?.phone | phoneFormat }}</p>
+            <p><i class="fa-solid fa-phone"></i>{{ location?.phone | phoneFormat }}</p>
           </div>
           <div class="ae-contact-item" *ngIf="location?.fax">
-            <p>{{ location?.fax | phoneFormat}}</p>
+           <p> <i class="fa-solid fa-fax"></i>{{ location?.fax | phoneFormat}}</p>
           </div>
 
           <div class="ae-contact-item">
-            <p>{{ location?.street }}, {{ location?.city }}, {{ location?.state }} {{ location?.zipcode }}</p>
+            <p><i class="fa-solid fa-map-location-dot"></i>{{ location?.street }}, {{ location?.city }}, {{ location?.state }} {{ location?.zipcode }}</p>
           </div>
 
-          <!-- <div class="ae-contact-item" *ngIf="business.fax">
-                      <h3>Fax</h3>
-                      <p>{{ business.fax }}</p>
-                    </div> -->
-          <div class="ae-social-media" *ngIf="business.socialMedia">
+          <div class="ae-contact-item" *ngIf="business.socialMedia">
             <a href="{{ business.socialMedia }}" target="_blank">
               <i class="fab fa-facebook"></i>
             </a>
@@ -563,6 +559,13 @@
       </div>
 
       <div class="ae-contact-us-container">
+        <div class="ae-map-container">
+          <app-google-maps
+            [address]="formattedAddress || ''"
+            [layoutType]="business.theme.themeType || 'demo'"
+          ></app-google-maps>
+        </div>
+        
         <div class="ae-contact-details">
           <div>
             <h2>Hours</h2>
@@ -570,12 +573,7 @@
           </div>
         </div>
 
-        <div class="ae-map-container">
-          <app-google-maps
-            [address]="formattedAddress || ''"
-            [layoutType]="business.theme.themeType || 'demo'"
-          ></app-google-maps>
-        </div>
+
       </div>
     </ng-container>
 
