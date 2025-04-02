@@ -74,7 +74,7 @@
 
 
 <div class="content-container"
-*ngIf="themeType=='sb' || themeType=='sp' || themeType=='prestige'"
+*ngIf="themeType=='sb' || themeType=='sp'"
 [ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
 [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
   <img *ngIf="imageURL && showImage"  [src]="imageURL" alt="Section Image" class="center-text-image" />
