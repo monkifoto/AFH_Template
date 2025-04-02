@@ -73,8 +73,22 @@
 </div>
 
 
-<div class="center-text-section-clemo"
+<div class="content-container"
 *ngIf="themeType=='sb' || themeType=='sp' || themeType=='prestige'"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+  <img *ngIf="imageURL && showImage"  [src]="imageURL" alt="Section Image" class="center-text-image" />
+  <div class="text-container">
+    <h2 [ngStyle]="{ 'color': titleColor, 'font-size': titleFontSize+'px', 'font-style':titleFontStyle }">{{ titleParts.part1 }}</h2>
+    <h3 [ngStyle]="{ 'color': subtitleColor, 'font-size': subtitleFontSize+'px', 'font-style':subtitleFontStyle }"><span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span></h3>
+    <div class="separator2"></div>
+    <p class="center-text-description" [ngStyle]="{ 'color': textColor, 'font-size': textFontSize+'px', 'font-style':textFontStyle }" [innerHTML]="sanitizedContent"></p>
+</div>
+  <button *ngIf="showButton" class="afhBtn">Schedule A Visit</button>
+</div>
+
+<div class="center-text-container"
+*ngIf="themeType=='prestige'"
 [ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
 [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
   <img *ngIf="imageURL && showImage"  [src]="imageURL" alt="Section Image" class="center-text-image" />
@@ -86,4 +100,3 @@
 </div>
   <button *ngIf="showButton" class="afhBtn">Schedule A Visit</button>
 </div>
-

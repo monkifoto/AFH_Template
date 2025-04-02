@@ -250,7 +250,7 @@ export class SectionManagerComponent implements OnInit {
     const newSectionId = this.businessSectionsService.generateNewId(); // Generate a unique ID
     const defaultPage = 'home'; // Default section placement
     const newSection = this.fb.group({
-      id: [null],
+      id: [newSectionId],
       isActive: [true],
       component: ['center-text'],
       order: [0],
@@ -262,7 +262,7 @@ export class SectionManagerComponent implements OnInit {
       subtitleFontStyle: ['normal'],
       textFontSize: [14],
       textFontStyle: ['normal'],
-      page: ['home'],
+      page: [defaultPage],
       location: ['center'],
       sectionImageUrl: [''],
       sectionContent: [''],
@@ -280,6 +280,8 @@ export class SectionManagerComponent implements OnInit {
       titleColor: ['#000000'],
       subtitleColor: ['#000000'],
       items: this.fb.array([]),
+      activeBusinessId: [''],
+      fullWidth: [false]
     });
 
 
