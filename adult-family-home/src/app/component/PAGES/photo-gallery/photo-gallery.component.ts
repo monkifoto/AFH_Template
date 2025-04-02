@@ -252,13 +252,14 @@ export class PhotoGalleryComponent implements OnInit {
          // console.log(`Filtered images for ${target}:`, filteredImages); // Debugging Step 2
 
           return filteredImages
-            .map(img => ({
-              url: img.url,
-              title: img.title || 'No Title',
-              description: img.description || 'No Description',
-              link: img.link || 'No Link',
-              order: !isNaN(Number(img.order)) ? Number(img.order) : 999 // Ensure valid number
-            }))
+          .map(img => ({
+            url: img.url,
+            title: img.title?.trim() || null,
+            description: img.description?.trim() || null,
+            link: img.link?.trim() || null,
+            order: !isNaN(Number(img.order)) ? Number(img.order) : 999
+          }))
+
             .sort((a, b) => a.order - b.order);
         })
       ).subscribe((sortedImages) => {

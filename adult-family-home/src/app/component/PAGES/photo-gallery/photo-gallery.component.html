@@ -39,9 +39,15 @@
     <div class="gallery-grid">
       <div *ngFor="let image of images" class="gallery-item" (click)="onImageClick(image.url)">
         <img [src]="image.url" alt="Gallery Image">
-        <div class="gallery-item-overlay">
-          <h3>{{ image.title }}</h3> <!-- Image Title -->
-          <p>{{ image.description }}</p> <!-- Image Description -->
+        <div *ngIf="image.title" class="gallery-item-overlay">
+          <h3>{{ image.title }}</h3>
+          <p>{{ image.description }}</p>
+          <a href="{{ image.link }}" target="_blank" >View Page</a>
+        </div>
+        <div>
+          <div>
+
+          </div>
         </div>
       </div>
     </div>

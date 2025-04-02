@@ -94,8 +94,8 @@ import { TextWrapperComponent } from './component/text-wrapper/text-wrapper.comp
       "aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1",
       "www.aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1",
 
-      'elderlyhomecareafh.com/':'SJgFxBYkopnPR4WibCAf',
-      'www.elderlyhomecareafh.com/':'SJgFxBYkopnPR4WibCAf',
+      'elderlyhomecareafh.com':'SJgFxBYkopnPR4WibCAf',
+      'www.elderlyhomecareafh.com':'SJgFxBYkopnPR4WibCAf',
 
       "prestigecareafh.com": "pDJgpl34XUnRblyIlBA7",
       "www.prestigecareafh.com": "pDJgpl34XUnRblyIlBA7",
