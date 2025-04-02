@@ -26,46 +26,15 @@ import {
       ]),
     ]),
     trigger('slideTransition', [
-      transition(':increment', [
-        style({ position: 'relative' }),
-        query(':enter, :leave', [
-          style({
-            position: 'absolute',
-            width: '100%',
-            top: 0,
-            left: 0
-          })
-        ], { optional: true }),
-        group([
-          query(':leave', [
-            animate('600ms ease', style({ opacity: 0, transform: 'translateX(-5%)' }))
-          ], { optional: true }),
-          query(':enter', [
-            style({ opacity: 0, transform: 'translateX(5%)' }),
-            animate('600ms ease', style({ opacity: 1, transform: 'translateX(0)' }))
-          ], { optional: true })
-        ])
-      ]),
-      transition(':decrement', [
-        style({ position: 'relative' }),
-        query(':enter, :leave', [
-          style({
-            position: 'absolute',
-            width: '100%',
-            top: 0,
-            left: 0
-          })
-        ]),
-        group([
-          query(':leave', [
-            animate('600ms ease', style({ opacity: 0, transform: 'translateX(5%)' }))
-          ], { optional: true }),
-          query(':enter', [
-            style({ opacity: 0, transform: 'translateX(-5%)' }),
-            animate('600ms ease', style({ opacity: 1, transform: 'translateX(0)' }))
-          ], { optional: true })
-        ])
-      ])
+      transition('* => enter', [
+        style({ opacity: 0, transform: 'translateX({{directionEnter}})', position: 'absolute', top: 0, left: 0, width: '100%' }),
+        animate('1200ms ease', style({ opacity: 1, transform: 'translateX(0)' }))
+      ], { params: { directionEnter: '100%' } }),
+
+      transition('* => leave', [
+        style({ position: 'absolute', top: 0, left: 0, width: '100%' }),
+        animate('1200ms ease', style({ opacity: 0, transform: 'translateX({{directionLeave}})' }))
+      ], { params: { directionLeave: '-100%' } })
     ])
   ],
 })
@@ -143,31 +112,57 @@ export class HeroSliderComponent implements OnInit {
     return text.replace(/{{businessName}}/g, this.business.businessName);
   }
 
-  navigateToSlide(index: number): void {
-    this.currentSlide = index;
-  }
+  // navigateToSlide(index: number): void {
+  //   this.currentSlide = index;
+  // }
 
   autoSlide(): void {
     setInterval(() => {
       this.currentSlide = (this.currentSlide + 1) % this.slides.length;
     }, 15000);
   }
+  slideDirection: 'left' | 'right' = 'left';
+  previousSlide = 0;
+  isTransitioning = false;
 
-  prevSlide() {
-    this.currentSlide = (this.currentSlide === 0) ? this.slides.length - 1 : this.currentSlide - 1;
+  navigateToSlide(index: number): void {
+    if (this.isTransitioning || index === this.currentSlide) return;
+    this.slideDirection = index > this.currentSlide ? 'left' : 'right';
+    this.previousSlide = this.currentSlide;
+    this.currentSlide = index;
+    this.isTransitioning = true;
+    console.log('HeroSliderComponent - navigateToSlide:', index);
   }
 
-  nextSlide() {
-    this.currentSlide = (this.currentSlide === this.slides.length - 1) ? 0 : this.currentSlide + 1;
+  prevSlide(): void {
+    if (this.isTransitioning) return;
+    this.slideDirection = 'right';
+    this.previousSlide = this.currentSlide;
+    this.currentSlide = this.currentSlide === 0 ? this.slides.length - 1 : this.currentSlide - 1;
+    this.isTransitioning = true;
+  }
+
+  nextSlide(): void {
+    if (this.isTransitioning) return;
+    this.slideDirection = 'left';
+    this.previousSlide = this.currentSlide;
+    this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+    this.isTransitioning = true;
+  }
+
+  onSlideTransitionDone(i: number): void {
+    if (i === this.previousSlide) {
+      this.previousSlide = -1;
+    }
+    this.isTransitioning = false;
   }
 
   // Scroll event listener to adjust opacity
   @HostListener('window:scroll', ['$event'])
   onScroll(): void {
-    const scrollY = window.scrollY; // Get the current scroll position
-    const viewportHeight = window.innerHeight; // Get the viewport height
+    const scrollY = window.scrollY;
+    const viewportHeight = window.innerHeight;
 
-    // Calculate the new opacity based on scroll position
     this.sliderOpacity = Math.max(1 - scrollY / viewportHeight, 0);
   }
 }
