@@ -23,6 +23,7 @@ import { ConsultationComponent } from '../../UI/consultation/consultation.compon
 import { LatestProductsComponent } from '../../UI/latest-products/latest-products.component';
 import { MeetTheTeamComponent } from '../../UI/meet-the-team/meet-the-team.component';
 import { TextWrapperComponent } from '../../text-wrapper/text-wrapper.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-about-us',
@@ -55,10 +56,17 @@ export class AboutUsComponent implements OnInit {
     private injector: Injector,
     private route: ActivatedRoute,
     private metaService: MetaService,
-    private businessDataService: BusinessDataService
+    private businessDataService: BusinessDataService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+
+  const id = this.route.snapshot.queryParamMap.get('id');
+  if (id) {
+    window.history.replaceState({}, '', this.router.url.split('?')[0]);
+  }
+
     this.businessDataService
       .getBusinessId()
       .pipe(

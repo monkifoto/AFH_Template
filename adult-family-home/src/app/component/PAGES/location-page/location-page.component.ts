@@ -35,6 +35,14 @@ export class LocationPageComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.locationIndex = Number(params['locationIndex']);
 
+      if (params['locationIndex']) {
+        this.router.navigate([], {
+          relativeTo: this.route,
+          queryParams: {},
+          replaceUrl: true
+        });
+      }
+
       //console.log("🔢 Location Index from URL:", this.locationIndex);
 
       if (this.locationIndex !== null) {
