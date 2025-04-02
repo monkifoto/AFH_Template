@@ -7,7 +7,7 @@
   h2 {
     font-size: 28px;
     font-weight: 700;
-    color: #333;
+    color: var(--dark-background-color);
   }
 
   .description {
@@ -15,7 +15,7 @@
     max-width: 1024px;
     margin: 0 auto 20px;
     padding: 20px;
-    font-size: 16px;
+    font-size: 20px;
     // border: solid 1px black;
   }
 
@@ -58,7 +58,7 @@
         margin: 15px 0;
       }
       .company-description {
-        font-size: 14px;
+        font-size: 20px;
         color: #444;
       }
 
@@ -76,21 +76,23 @@
       }
 
       .category {
-        font-size: 14px;
-        color: #999;
+        font-size: 20px;
+        color: var(--text-color);
         text-transform: uppercase;
         font-weight: bold;
       }
 
       p {
-        font-size: 14px;
-        color: #666;
+        font-size: 20px;
+        color: var(--text-color);
         margin: 10px 0;
+        line-height: 1.9rem;
+        padding: 10px;
       }
 
       .read-more {
-        font-size: 14px;
-        color: #007bff;
+        font-size: 20px;
+        color: var(--secondary-color);
         font-weight: bold;
         text-decoration: none;
         display: inline-block;
@@ -99,64 +101,3 @@
     }
   }
 }
-
-/*
-.container {
-  text-align: center;
-  padding: 20px;
-}
-.description {
-  margin-bottom: 20px;
-  font-size: 16px;
-  color: #666;
-}
-.card-container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-.card {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 300px;
-  text-align: left;
-  position: relative;
-}
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.logo {
-  width: 100px;
-  max-height: 40px;
-
-}
-.index {
-  font-size: 24px;
-  color: rgba(0, 0, 0, 0.1);
-  font-weight: bold;
-}
-.company-name {
-  text-align: center;
-  font-size: 20px;
-  margin: 15px 0;
-}
-.company-description {
-  font-size: 14px;
-  color: #444;
-}
-.learn-more {
-  display: block;
-  text-align: center;
-  margin-top: 10px;
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
-}
-.learn-more:hover {
-  text-decoration: underline;
-} */

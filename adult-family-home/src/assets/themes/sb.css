@@ -23,7 +23,7 @@
   --button-text-color: var(--primary-color);
   --border-color:var(--text-color);
   --heading-2-size : 4rem;
-  --site-max-width:1200px;
+  --site-max-width:1400px;
   --cell-max-width: calc((var(--site-max-width, 1500px) - (11.0px * (24 - 1))) / 24);
 
 }
@@ -187,6 +187,21 @@ p{
 
 .center-text-description {
  line-height: 2rem;
+}
+.content-container p{
+  padding: 0 80px;
+}
+
+.content-container h2{
+  padding: 0 80px;
+}
+
+.content-container h3{
+  padding: 0 80px;
+}
+
+.content-container .separator2{
+  margin: 0 80px;
 }
 
 .text-container {
@@ -438,7 +453,7 @@ p{
 .content-area {
   display: flex;
   align-items: center;
-  margin-bottom: 80px;
+  /* margin-bottom: 80px; */
   flex-wrap: wrap; /* Ensures proper stacking on smaller screens */
   gap: 40px; /* Add larger gap between text and image */
 }
@@ -460,7 +475,7 @@ p{
   display: flex;
   justify-content: center;
   align-items: center; /* Center the image vertically */
-  padding: 80px; /* Add padding around the image */
+  padding: 0px; /* Add padding around the image */
 }
 
 .left-image-container img {
