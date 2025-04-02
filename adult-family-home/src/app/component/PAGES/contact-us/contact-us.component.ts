@@ -52,6 +52,12 @@ export class ContactUsComponent  implements OnInit{
       }
 
       ngOnInit(): void {
+        const id = this.route.snapshot.queryParamMap.get('id');
+        if (id) {
+          window.history.replaceState({}, '', this.router.url.split('?')[0]);
+        }
+
+
         this.businessDataService.businessData$.subscribe((business) => {
           if (business) {
             this.business = business;

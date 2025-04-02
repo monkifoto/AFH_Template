@@ -47,6 +47,12 @@ export class ServicesComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
+    const id = this.route.snapshot.queryParamMap.get('id');
+    if (id) {
+      window.history.replaceState({}, '', this.router.url.split('?')[0]);
+    }
+
+
     this.businessDataService.getBusinessId().pipe(
       switchMap((businessId) => {
         if (businessId) {

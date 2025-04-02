@@ -8,6 +8,7 @@ import { EmailService } from 'src/app/services/email.service';
 import { Modal } from 'bootstrap';
 import { MetaService } from 'src/app/services/meta-service.service';
 import { Business } from 'src/app/model/business-questions.model';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-resident-intake-form',
@@ -27,7 +28,9 @@ export class ResidentIntakeFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private intakeService: IntakeService,
     private businessDataService: BusinessDataService,
     private emailService: EmailService,
-    private metaService: MetaService)
+    private metaService: MetaService,
+    private router: Router,
+    private route: ActivatedRoute)
     {
 
     this.intakeForm = this.fb.group({
@@ -62,10 +65,11 @@ export class ResidentIntakeFormComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    // Subscribe to the businessId from the BusinessDataService
-    // this.businessDataService.getBusinessId().subscribe((id) => {
-    //   this.businessId = id;
-    // });
+    const id = this.route.snapshot.queryParamMap.get('id');
+    if (id) {
+      window.history.replaceState({}, '', this.router.url.split('?')[0]);
+    }
+
 
     this.businessDataService.businessData$.subscribe((business) => {
       this.business = business;
