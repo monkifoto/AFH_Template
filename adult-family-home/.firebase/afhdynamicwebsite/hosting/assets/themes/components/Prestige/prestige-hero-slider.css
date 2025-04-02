@@ -1,6 +1,6 @@
 
 /******************************************************* HERO SLIDER ******************************************************/
-.clemo-slider-container {
+/* .clemo-slider-container {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -8,7 +8,7 @@
   opacity: var(--slider-opacity, 1);
   transition: opacity 0.3s ease;
   pointer-events: auto;
-}
+} */
 
 .clemo-slides {
   position: absolute;
@@ -16,14 +16,20 @@
   left: 0;
   width: 100%;
   height: 100%;
-  display: none;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
+  z-index: 1;
+}
 
-  &.clemo-active {
-    display: block;
-    opacity: 1;
-  }
+.clemo-slider-container {
+  position: relative;
+  background-color: var(--background-color, #000); /* prevents white flash */
+  overflow: hidden;
+  opacity: var(--slider-opacity, 1);
+  transition: opacity 0.3s ease;
+}
+
+.clemo-active {
+  opacity: 1;
+  z-index: 2;
 }
 
 .clemo-single-home-slider {
