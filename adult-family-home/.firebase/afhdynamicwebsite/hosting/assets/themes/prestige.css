@@ -1,11 +1,13 @@
-@import url(components/clemo-nav.css);
-@import url(components/hero-slider.css);
-@import url(components/meet-the-team.css);
-@import url(components/page-hero.css);
-@import url(components/shared-testimonials.css);
-@import url(components/list-item-image.css);
-@import url(components/cta.css);
-@import url(components/clemo-footer.css);
+@import url(components/Prestige/prestige-nav.css);
+@import url(components/Prestige/prestige-hero-slider.css);
+@import url(components/Prestige/meet-the-team.css);
+@import url(components/Prestige/prestige-page-hero.css);
+@import url(components/Prestige/shared-testimonials.css);
+@import url(components/Prestige/list-item-image.css);
+@import url(components/Prestige/prestige-cta.css);
+@import url(components/Prestige/prestige-footer.css);
+@import url(components/Prestige/prestige-contact-us.css);
+@import url(components/shared.css);
 
 :root {
   --primary-color: #fffaf2;
@@ -365,7 +367,7 @@ ul li strong {
   /* border-radius: 4px; */
 }
 
-
+/*
 .ae-contact-us-container {
   display: flex;
   flex-wrap: wrap;
@@ -409,6 +411,15 @@ ul li strong {
 .ae-contact-item p {
   padding: 0;
   margin: 0;
+} */
+
+.mock-map{
+  max-width: var(--site-max-width);
+  width: 100%;
+}
+.mock-data{
+  max-width: var(--site-max-width);
+  width: 100%;
 }
 
 .btnSBSend {

@@ -285,3 +285,26 @@ button[type="button"]:hover {
   border-radius: 5px;
   margin-top: 5px;
 }
+
+.color-picker-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.color-preview {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.inline-color-preview {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+  border: 1px solid #ccc;
+  vertical-align: middle;
+  border-radius: 3px;
+}

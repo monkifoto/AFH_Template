@@ -22,7 +22,7 @@
 	--cell-max-width: calc((var(--site-max-width, 1500px) - (11.0px * (24 - 1))) / 24);
 }
 .container {
-	max-width: 1200px;
+	max-width: var(--site-max-width);
 	margin: 0 auto;
 	background-color: var(--background-color);
 }
@@ -772,9 +772,11 @@ textarea{
 	border-radius: 12px;
 }
 .meet-the-team {
-	padding: 50px 20px;
+	padding: 50px 0px;
 	background-color: var(--dark-background-color);
 	text-align: center;
+  border-radius: 12px;
+  width: 100%;
 }
 .meet-the-team h2 {
 	font-size: 2.5em;
@@ -863,6 +865,10 @@ textarea{
 	margin: 1.6vmax auto;
 	max-width: var(--site-max-width);
 }
+
+.center-text-section{
+  width: var(--site-max-width);
+}
 .services-list-section{
 	padding: 4rem 1rem;
 	margin: 1.6vmax auto;
@@ -873,10 +879,10 @@ textarea{
 	align-items: center;
 	text-align: left;
 	padding: 2rem 1rem;
-	width: 500px;
-	max-width: calc(var(--cell-max-width) * 24);
+	/* width: 500px; */
+	max-width: 50%;
 	margin: 1.6vmax auto;
-	max-width: 600px;
+	max-width: 590px;
 }
 .left-text-section{
 	flex-direction: column-reverse;
@@ -1174,7 +1180,7 @@ section {
 .services-section {
 	text-align: center;
 	padding: 2rem;
-	max-width: calc(var(--cell-max-width) * 24);
+	/* max-width: calc(var(--cell-max-width) * 24); */
 	margin: auto;
 }
 .services-grid {
@@ -1287,6 +1293,7 @@ section {
 	align-items: center;
 	justify-content: center;
 	margin: 0 auto;
+  width: var(--site-max-width);
 }
 
 /* .cta-content h2 {
