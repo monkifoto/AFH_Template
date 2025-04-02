@@ -9,16 +9,20 @@
     '--subtitle-weight': subtitleWeight
   }"
 >
+<ng-container *ngFor="let slide of slides; let i = index">
   <div
-    *ngFor="let slide of slides; let i = index"
-    [class.clemo-active]="i === currentSlide"
-    class="clemo-slides clemo-single-home-slider"
-
-    [@slideTransition]
-  [@.disabled]="!enableTransitions"
-  [@slideTransition]="currentSlide"
-  >
-    <!-- Background Image -->
+  *ngIf="i === currentSlide || i === previousSlide"
+  class="clemo-slides clemo-single-home-slider"
+  [@slideTransition]="{
+    value: i === currentSlide ? 'enter' : 'leave',
+    params: {
+      directionEnter: slideDirection === 'left' ? '100%' : '-100%',
+      directionLeave: slideDirection === 'left' ? '-100%' : '100%'
+    }
+  }"
+  (@slideTransition.done)="onSlideTransitionDone(i)"
+>
+    <!-- Background -->
     <div
       class="clemo-home-overlay"
       [ngStyle]="{
@@ -30,45 +34,41 @@
     ></div>
 
     <!-- Slide Content -->
-    <div class="clemo-main-home" *ngIf="slide.title?.trim() && i === currentSlide" @slideFadeIn>
-
+    <div class="clemo-main-home" @slideFadeIn>
       <div class="clemo-main-home-content">
-      <h1>{{ slide.title }}</h1>
-      <div class="clemo-separator"></div>
-      <h2
-        class="clemo-subtitle"
-        [ngStyle]="{ 'font-size': subtitleSize, 'font-weight': subtitleWeight }"
-        [innerHTML]="slide.subtitle"
-      ></h2>
+        <h1>{{ slide.title }}</h1>
+        <div class="clemo-separator"></div>
+        <h2
+          class="clemo-subtitle"
+          [ngStyle]="{ 'font-size': subtitleSize, 'font-weight': subtitleWeight }"
+          [innerHTML]="slide.subtitle"
+        ></h2>
 
-      <!-- Dynamic Buttons -->
-      <div class="clemo-home-btn">
-        <ng-container *ngFor="let button of slide.buttons">
-          <a
-            [routerLink]="button.link "
-            [queryParams]="{id: business?.id }"
-            [ngClass]="{
-              'clemo-btn': !button.outline,
-              'clemo-btn-outline': button.outline
-            }"
-            [ngStyle]="{ 'border-radius': buttonBorderRadius }"
-            routerLinkActive="active"
-          >
-            {{ button.text }}
-          </a>
-        </ng-container>
-      </div>
-    </div>
-      <!-- Scroll Indicator -->
-      <div class="mouse-scroll">
-        <div class="mouse">
-          <div class="scroll"></div>
+        <div class="clemo-home-btn">
+          <ng-container *ngFor="let button of slide.buttons">
+            <a
+              [routerLink]="button.link"
+              [queryParams]="{ id: business?.id }"
+              [ngClass]="{
+                'clemo-btn': !button.outline,
+                'clemo-btn-outline': button.outline
+              }"
+              [ngStyle]="{ 'border-radius': buttonBorderRadius }"
+              routerLinkActive="active"
+            >
+              {{ button.text }}
+            </a>
+          </ng-container>
         </div>
+      </div>
+
+      <div class="mouse-scroll">
+        <div class="mouse"><div class="scroll"></div></div>
         <p>Scroll down</p>
       </div>
     </div>
   </div>
-
+</ng-container>
   <!-- Navigation -->
   <div *ngIf="slides.length > 1">
     <div class="clemo-slider-navigation" [ngClass]="{ 'bottom-nav': navigation === 'bottom' }">

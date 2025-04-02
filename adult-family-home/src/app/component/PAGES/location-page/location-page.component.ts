@@ -5,6 +5,7 @@ import { Business } from 'src/app/model/business-questions.model';
 import { GoogleMapsLoaderService } from 'src/app/services/google-maps-loader.service';
 import { switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 
 
@@ -26,7 +27,8 @@ export class LocationPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private businessDataService: BusinessDataService,
-    private googleMapsLoader: GoogleMapsLoaderService
+    private googleMapsLoader: GoogleMapsLoaderService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -99,7 +101,7 @@ export class LocationPageComponent implements OnInit {
       console.log('Mock map mode: displaying static map image.');
       return;
     }
-    
+
     this.googleMapsLoader.loadScript().then(() => {
       this.initializeMap();
       this.showAddressOnMap(`${this.location.street}, ${this.location.city}, ${this.location.state} ${this.location.zipcode}`);
@@ -130,4 +132,8 @@ export class LocationPageComponent implements OnInit {
       }
     });
   }
+
+  navigateTo(page:string) {
+     this.router.navigate(['/'+page], { queryParams: { id: this.business?.id } });
+   }
 }
