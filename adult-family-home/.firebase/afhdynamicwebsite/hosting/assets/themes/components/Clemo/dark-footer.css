@@ -2,11 +2,11 @@
 .clemo-footer {
   max-width: 100%;
   overflow-x: hidden;
-  background-color: var(--dark-background-color);
+  background-color: var(--secondary-color);
   text-align: center;
   padding: 40px 20px;
   font-family: Arial, sans-serif;
-  color: var(--background-color);
+  color: var(--text-color);
 }
 
 .clemo-footer-links {
@@ -21,7 +21,7 @@
 
 .clemo-footer-link {
   font-size: 14px;
-  color: var(--background-color);
+  color: var(--text-color);
   text-decoration: none;
   margin: 0 15px;
   font-weight: bold;
@@ -96,10 +96,10 @@
 }
 
 .clemo-footer-section-heading{
-  color: var(--background-color);
+  color: var(--text-color);
 }
 .clemo-footer-design a {
-  color: var(--background-color);
+  color: var(--text-color);
   text-decoration: none;
   font-weight: bold;
   margin-left: 5px;
