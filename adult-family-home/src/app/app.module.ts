@@ -90,21 +90,27 @@ import { TextWrapperComponent } from './component/text-wrapper/text-wrapper.comp
     const businessIdMap: { [key: string]: string } = {
       "helpinghandafh.com": "vfCMoPjAu2ROVBbKvk0D",
       "www.helpinghandafh.com": "vfCMoPjAu2ROVBbKvk0D",
+
       "aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1",
       "www.aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1",
+
+      'elderlyhomecareafh.com/':'SJgFxBYkopnPR4WibCAf',
+      'www.elderlyhomecareafh.com/':'SJgFxBYkopnPR4WibCAf',
+
+      "prestigecareafh.com": "pDJgpl34XUnRblyIlBA7",
+      "www.prestigecareafh.com": "pDJgpl34XUnRblyIlBA7",
+
+      "countrycrestafh.com": "yrNc50SvfPqwTSkvvygA",
+      "www.countrycrestafh.com": "yrNc50SvfPqwTSkvvygA",
+
       "sbmediahub.com": "MGou3rzTVIbP77OLmZa7",
       "sp.sbmediahub.com": "KyQfU7hjez0uXRfAjqcu",
       "elderlyhc.sbmediahub.com": "SJgFxBYkopnPR4WibCAf",
       "prestige.sbmediahub.com": "pDJgpl34XUnRblyIlBA7",
-      "prestigecareafh.com": "pDJgpl34XUnRblyIlBA7",
-      "www.prestigecareafh.com": "pDJgpl34XUnRblyIlBA7",
       "cc.sbmediahub.com": "yrNc50SvfPqwTSkvvygA",
       "hh.sbmediahub.com": "vfCMoPjAu2ROVBbKvk0D",
       "ae.sbmediahub.com": "UiSDf9elSjwcbQs2HZb1",
       "www.sbmediahub.com": "MGou3rzTVIbP77OLmZa7",
-      "countrycrestafh.com": "yrNc50SvfPqwTSkvvygA",
-      "www.countrycrestafh.com": "yrNc50SvfPqwTSkvvygA"
-
     };
 
 
