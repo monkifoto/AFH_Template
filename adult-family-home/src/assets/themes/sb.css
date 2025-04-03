@@ -395,7 +395,6 @@ p{
   margin-top: 20px;
 }
 
-/*------Debugger section ----- */
 
 .footer-theme-file {
   display: flex;
@@ -711,16 +710,6 @@ ul li strong {
 
 
 
-/* .ae-contact-details h1 {
-  font-size: 2em;
-  margin-bottom: 0;
-}
-
-.ae-contact-item h3 {
-  font-size: 1.2em;
-  margin: 5px 0 5px;
-} */
-
 .ae-contact-item p,
 .ae-contact-item a {
   font-size: 1em;
@@ -731,19 +720,6 @@ ul li strong {
   text-decoration: none;
   color: var(--link-color);
 }
-/*
-.ae-contact-item a:hover {
-  text-decoration: underline;
-}
-
-.ae-contact-item ul {
-  padding-left: 20px;
-}
-
-.ae-contact-item ul li {
-  font-size: 1em;
-  line-height: 1.5;
-} */
 
 
 .ae-map-container {
@@ -758,31 +734,10 @@ ul li strong {
   margin-bottom: 15px;
 }
 
-/* .ae-contact-info h2 {
-  font-size: 1.5rem;
-  margin-bottom: 0;
-}
-
-.ae-contact-info p {
-  margin: 5px 0;
-  font-size: 1em;
-
-} */
 .ae-contact-item p{
   padding: 0;
   margin: 0;
 }
-
-/* .ae-social-media {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.ae-social-media a {
-  font-size: 1.5em;
-} */
-
 
 .btnSBSend{
   display: inline-block;
