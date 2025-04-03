@@ -46,7 +46,6 @@ img {
   -ms-user-select: none;
   user-select: none;
   -webkit-user-drag: none;
-  user-drag: none;
 }
 a,
 a:hover,
@@ -73,10 +72,7 @@ a span {
 p {
   margin: 0 0 15px;
 }
-a{}
-/* .clear {
-  clear: both;
-} */
+
 img {
   max-width: 100%;
 }

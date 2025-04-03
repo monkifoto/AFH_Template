@@ -210,62 +210,14 @@ p{
   flex-direction: column;
   justify-content: center;
 }
-/*
-.clemo-center-title{
-  padding-bottom: 3rem;
-}
-
-
-@media (max-width: 768px) {
-  .center-text-section {
-    padding: 1.5rem 1rem;
-  }
-
-  .center-text-title {
-    font-size: 1.25rem;
-  }
-
-  .center-text-description {
-    padding: 0 1rem;
-    font-size: 0.9rem;
-  }
-
-} */
 
 
 /*----------------------------RIGHT TEXT ----------------------*/
-
-/* .right-text-section {
-  display: flex;
-  flex-direction: row;
-  gap: 3rem;
-  padding-left: 5rem;
-  padding-right: 5rem;
-  max-width: calc(var(--cell-max-width) * 24);
-  margin: 0 auto;
-  padding-bottom: 6.6vmax;
-} */
 
 .text-container, .image-container {
   flex: 1;
   /* max-width: calc(var(--cell-max-width) * 11); */
 }
-
-/* .image-container {
-  width: 100%;
-  max-width: 500px;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-} */
-
-/* .image-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-} */
 
 .text-container {
   flex: 1;
@@ -274,105 +226,6 @@ p{
   justify-content: center;
 }
 
-/*
-
-@media (max-width: 768px) {
-  .right-text-section {
-    flex-direction: column;
-    padding: 1.5rem 1rem;
-  }
-
-  .text-container, .image-container {
-    max-width: 100%;
-    text-align: center;
-  }
-
-  .image-container {
-    margin: 1rem 0;
-  }
-
-  .text-container h2 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .text-container h4 {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-  }
-}
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0 auto;
-}
-
-.content-area {
-  display: flex;
-  align-items: center;
-  margin-bottom: 80px;
-  flex-wrap: wrap;
-  gap: 40px;
-}
-
-.content-area p {
-  line-height: 1.9;
-}
-
-.content-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 20px;
-  padding-top: 6.6vmax;
-}
-
-.left-image-container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 80px;
-}
-
-.left-image-container img {
-  width: 100%;
-  max-width: 600px;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-}
-
-
-@media (max-width: 768px) {
-  .row {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .left-image-container {
-    padding: 20px;
-  }
-
-  .content-area {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .text-container h3 {
-    font-size: 1.4rem;
-  }
-
-  .text-container h2 {
-    font-size: 1.8rem;
-  }
-
-  .btn {
-    font-size: 1rem;
-    padding: 0.8rem 1.2rem;
-  }
-} */
 
 .btn {
   border: solid 1px black;
@@ -383,63 +236,6 @@ p{
   transition: all 0.3s ease;
 }
 
-
-/**--------------------------LEFT TEXT --------------------**/
-/* .left-text-section {
-  display: flex;
-  flex-direction: row;
-  gap: 3rem;
-  padding-left: 5rem;
-  padding-right: 5rem;
-  max-width: calc(var(--cell-max-width) * 24);
-  margin: 0 auto;
-  padding-bottom: 6.6vmax;
-}
-
-.image-container {
-  width: 100%;
-  max-width: 500px;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.image-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-} */
-
-
-/*
-@media (max-width: 768px) {
-  .left-text-section {
-    flex-direction: column;
-    padding: 1.5rem 1rem;
-  }
-
-  .text-container, .image-container {
-    max-width: 100%;
-    text-align: center;
-  }
-
-  .image-container {
-    margin: 1rem 0;
-  }
-
-  .text-container h2 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .text-container h4 {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-  }
-}
- */
 
 
 .row {
@@ -501,6 +297,22 @@ p{
   }
 
   .left-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center the image vertically */
+    padding: 0px; /* Add padding around the image */
+  }
+
+  .left-image-container img {
+    width: 100%; /* Let the image scale with its container */
+    max-width: 340px; /* Set a maximum width for the square */
+    aspect-ratio: 1 / 1; /* Ensure the image stays square */
+    object-fit: cover; /* Ensure the image fills the square without distortion */
+
+  }
+
+  .left-image-container {
     padding: 20px;
   }
 
@@ -537,13 +349,7 @@ p{
   max-width: 200px;
 }
 
-/* Logo and Contact Info */
-/* .clemo-footer-logo-text {
-  font-size: 22px;
-  font-weight: bold;
-  color: var(--text-color);
-  margin-bottom: 10px;
-} */
+
 
 .clemo-footer-phone,
 .clemo-footer-address {
@@ -665,46 +471,11 @@ p{
   padding: 0 10px;
 }
 
-/* .footer-info,
-.ae-footer-columns
- {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  width: 100%;
-  max-width: var(--site-max-width, 1200px);
-  margin: 0 auto;
-  box-sizing: border-box;
-  padding: 0 20px;
-} */
+
 
 .clemo-footer-content{
   display: grid;
 }
-/*
-.footer-column,
-.ae-footer-column {
-  flex: 1;
-  min-width: 250px;
-  text-align: left;
-}
-
-@media (max-width: 768px) {
-  .footer-info,
-  .ae-footer-columns,
-  .clemo-footer-content {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .footer-column,
-  .ae-footer-column {
-    width: 100%;
-  }
-} */
-
 .copy {
   max-width: var(--site-max-width);
   display: flex;
@@ -834,6 +605,19 @@ ul li strong {
 
 
 @media (max-width: 768px) {
+
+  .content-container p,
+  .content-container h2,
+  .content-container h3 {
+    padding: 0 20px;
+  }
+
+  .content-container .separator2 {
+    margin: 0 20px;
+  }
+  .reverse-on-mobile .row {
+    flex-direction: column-reverse;
+  }
   .hero-overlay h1 {
     font-size: 3rem;
     letter-spacing: 0.2rem;
@@ -851,6 +635,40 @@ ul li strong {
 
   .map-section {
     margin-bottom: 30px;
+  }
+  .consultation-container {
+    padding: 20px;
+    margin: 2rem auto;
+  }
+
+  .cta-container {
+    padding: 20px;
+  }
+
+  .consultation-title.main {
+    font-size: 2rem !important;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .section-description {
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+  }
+
+  .consultation-btn {
+    font-size: 1rem;
+    padding: 12px 24px;
+    text-align: center;
+    width: auto;
   }
 }
 
