@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { BusinessDataService } from './business-data.service';
 import { Business } from '../model/business-questions.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +11,21 @@ export class MetaService {
   constructor(
     private meta: Meta,
     private title: Title,
-    private businessDataService: BusinessDataService
+    private businessDataService: BusinessDataService,
+    private router: Router
   ) {}
 
-  updateMetaTags(metaData: { title: string; description: string; keywords: string }) {
+  updateMetaTags(metaData: { title: string; description: string; keywords: string, ogImage?: string, faviconUrl?: string, }) {
     this.title.setTitle(metaData.title);
     this.meta.updateTag({ name: 'description', content: metaData.description });
     this.meta.updateTag({ name: 'keywords', content: metaData.keywords });
     this.meta.updateTag({ property: 'og:title', content: metaData.title });
     this.meta.updateTag({ property: 'og:description', content: metaData.description });
+    this.meta.updateTag({ property: 'og:title', content: metaData.title });
+    this.meta.updateTag({ property: 'og:description', content: metaData.description });
+    this.meta.updateTag({ property: 'og:image', content: metaData.ogImage || '/default.jpg' });
+    this.meta.updateTag({ property: 'og:url', content: this.router.url });
+
   }
 
   updateFavicon(faviconUrl: string) {
@@ -42,6 +49,8 @@ export class MetaService {
           title: business.metaTitle || 'Default Title',
           description: business.metaDescription || 'Default Description',
           keywords: business.metaKeywords || 'default, keywords',
+          ogImage: business.metaImage || '/default.jpg',
+          faviconUrl: business.faviconUrl || '/default-favicon.ico'
         };
         this.updateMetaTags(metaData);
 
