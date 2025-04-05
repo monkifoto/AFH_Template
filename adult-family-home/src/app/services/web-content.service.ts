@@ -1,43 +1,37 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Observable, catchError, map, of, tap } from 'rxjs';
+import {
+  Firestore, doc, docData, collection, collectionData, getDoc
+} from '@angular/fire/firestore';
+import {
+  Storage, ref as storageRef, getDownloadURL
+} from '@angular/fire/storage';
+import { Observable, catchError, map, of, from } from 'rxjs';
 import { Business, Employee, HeroImage } from '../model/business-questions.model';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebContentService {
-
-  constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) { }
-
   private defaultBusinessId = 'Z93oAAVwFAwhmdH2lLtB';
-  private defaultImage: string = 'assets/sharedAssets/missingTestimonialImage.png';
+  private defaultImage = 'assets/sharedAssets/missingTestimonialImage.png';
+
+  constructor(private firestore: Firestore, private storage: Storage) {}
 
   getBusinessData(businessId: string | null | undefined): Observable<Business | undefined> {
-    // Check if the businessId is null, empty, or undefined, then use the defaultBusinessId
-    const resolvedBusinessId = businessId && businessId.trim() ? businessId : this.defaultBusinessId;
+    const resolvedId = businessId?.trim() || this.defaultBusinessId;
+    const businessRef = doc(this.firestore, `businesses/${resolvedId}`);
 
-    return this.firestore.collection('businesses').doc<Business>(resolvedBusinessId).snapshotChanges().pipe(
-      map(action => {
-        const data = action.payload.data();
-        const docId = action.payload.id;
-        if (data) {
-          // Remove the existing id property if present
-          const { id: _, testimonials = [], ...rest } = data;
+    return docData(businessRef).pipe(
+      map(data => {
+        if (!data) return undefined;
+        const { id: _, testimonials = [], ...rest } = data as Business;
 
-          // Check each testimonial's photoURL and replace if missing
-          const updatedTestimonials = testimonials.map(testimonial => {
-            return {
-              ...testimonial,
-              photoURL: testimonial.photoURL && testimonial.photoURL.trim() ? testimonial.photoURL : this.defaultImage
-            };
-          });
+        const updatedTestimonials = testimonials.map(t => ({
+          ...t,
+          photoURL: t.photoURL?.trim() ? t.photoURL : this.defaultImage
+        }));
 
-          return { id: docId, testimonials: updatedTestimonials, ...rest };
-        }
-        return undefined;
+        return { id: resolvedId, testimonials: updatedTestimonials, ...rest };
       })
     );
   }
@@ -47,80 +41,61 @@ export class WebContentService {
   }
 
   getEmployees(): Observable<Employee[]> {
-    return this.firestore.collection<Employee>('employees').valueChanges({ idField: 'id' });
+    const employeesRef = collection(this.firestore, 'employees');
+    return collectionData(employeesRef, { idField: 'id' }) as Observable<Employee[]>;
   }
 
   getEmployeePhoto(photoPath: string): Observable<string> {
-    return this.storage.ref(photoPath).getDownloadURL().pipe(
+    const fileRef = storageRef(this.storage, photoPath);
+    return from(getDownloadURL(fileRef)).pipe(
       catchError(error => {
         console.error('Error fetching photo URL:', error);
-        return of(''); // Return an empty string or default URL in case of error
+        return of('');
       })
     );
   }
 
-
   getEmployeesByBusinessId(businessId: string): Observable<Employee[]> {
-    //console.log('Fetching employees for business ID:', businessId);
+    const resolvedId = businessId?.trim() || this.defaultBusinessId;
+    const businessRef = doc(this.firestore, `businesses/${resolvedId}`);
 
-    if(businessId == undefined || businessId == "" || businessId ==="" ){
-      businessId = this.defaultBusinessId;
-    }
-
-    return this.firestore.collection<Business>('businesses').doc(businessId).get().pipe(
-      map(doc => {
-        if (doc.exists) {
-          const data = doc.data();
-          if (data && data.employees) {
-            //console.log('Fetched employees:', data.employees);
-            return data.employees;
-          } else {
-            console.warn('No employees found in the document.');
-            return [] as Employee[];
-          }
-        } else {
+    return from(getDoc(businessRef)).pipe(
+      map(docSnap => {
+        if (!docSnap.exists()) {
           console.warn('Business document does not exist.');
-          return [] as Employee[];
+          return [];
         }
+
+        const data = docSnap.data();
+        return (data && data['employees']) ? data['employees'] : [];
       }),
       catchError(error => {
         console.error('Error fetching employees:', error);
-        return of([] as Employee[]); // Return an empty array in case of error
+        return of([]);
       })
     );
   }
 
   getBusinessGalleryImagesById(businessId: string): Observable<any[]> {
-   // console.log("Web content getBusinessGalleryImagesByID: " , businessId);
-    if(businessId == undefined || businessId == "" || businessId ===""  ){
-      businessId = this.defaultBusinessId;
-    }
-    return this.firestore.collection('businesses').doc(businessId)
-      .collection('gallery').valueChanges();
+    const resolvedId = businessId?.trim() || this.defaultBusinessId;
+    const galleryRef = collection(this.firestore, `businesses/${resolvedId}/gallery`);
+    return collectionData(galleryRef);
   }
 
   getBusinessLifeStyleGalleryImagesById(businessId: string): Observable<any[]> {
-    // console.log("Web content getBusinessGalleryImagesByID: " , businessId);
-     if(businessId == undefined || businessId == "" || businessId ===""  ){
-       businessId = this.defaultBusinessId;
-     }
-     return this.firestore.collection('businesses').doc(businessId)
-       .collection('gallery').valueChanges();
-   }
-
-  getBusinessUploadedImagesById(businessId: string, uploadLocation: string): Observable<any[]> {
-   // console.log("Web content getBusinessGalleryImagesByID: " , businessId);
-    if(businessId == undefined || businessId == "" || businessId ===""  ){
-      businessId = this.defaultBusinessId;
-    }
-    return this.firestore.collection('businesses').doc(businessId)
-    .collection<HeroImage>(uploadLocation).valueChanges();
+    return this.getBusinessGalleryImagesById(businessId); // Assuming same collection for now
   }
 
+  getBusinessUploadedImagesById(businessId: string, uploadLocation: string): Observable<HeroImage[]> {
+    const resolvedId = businessId?.trim() || this.defaultBusinessId;
+    const uploadRef = collection(this.firestore, `businesses/${resolvedId}/${uploadLocation}`);
+    return collectionData(uploadRef) as Observable<HeroImage[]>;
+  }
 
   checkImageExists(imageUrl: string): Promise<boolean> {
-    return this.storage.refFromURL(imageUrl).getDownloadURL().toPromise()
-      .then(() => true)  // Image exists
-      .catch(() => false);  // Image does not exist
+    const ref = storageRef(this.storage, imageUrl);
+    return getDownloadURL(ref)
+      .then(() => true)
+      .catch(() => false);
   }
 }

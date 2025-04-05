@@ -261,10 +261,10 @@ export class PhotoGalleryComponent implements OnInit {
           return filteredImages
           .map(img => ({
             url: img.url,
-            title: img.title?.trim() || null,
-            description: img.description?.trim() || null,
-            link: img.link?.trim() || null,
-            order: !isNaN(Number(img.order)) ? Number(img.order) : 999
+            title: (img as any).title?.trim() || null,
+            description: (img as any).description?.trim() || null,
+            link: (img as any).link?.trim() || null,
+            order: !isNaN(Number((img as any).order)) ? Number((img as any).order) : 999
           }))
 
             .sort((a, b) => a.order - b.order);

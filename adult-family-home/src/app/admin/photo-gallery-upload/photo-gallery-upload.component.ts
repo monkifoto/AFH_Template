@@ -110,10 +110,10 @@ export class PhotoGalleryUploadComponent implements OnInit {
     ).subscribe(filteredImages => {
       this.images = filteredImages.map(img => ({
         ...img,
-        title: img.title || '',
-        description: img.description || '',
-        link: img.link || '',
-        order: img.order || ''
+        title: (img as any).title || '',
+        description: (img as any).description || '',
+        link: (img as any).link || '',
+        order: (img as any).order || ''
       }));
     });
 

@@ -13,12 +13,9 @@ import { NavigationComponent } from './component/navigation/navigation.component
 import { environment } from 'src/environments/environment.prod';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 import { SplitCommaPipe } from './pipe/split-comma.pipe';
 import { MeetTheTeamComponent } from './component/UI/meet-the-team/meet-the-team.component';
 import { FooterComponent } from './component/footer/footer.component';
@@ -250,28 +247,39 @@ export function combinedInitializer(
     BrowserModule,
     RouterModule,
     AppRoutingModule,
-    AngularFirestoreModule,
-    AngularFireStorageModule,
-    AngularFireAuthModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage()),
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
   ],
   providers: [
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
+    provideAuth(() => getAuth()),
     provideAppInitializer(() => {
-        const initializerFn = (themeInitializerFactory)(inject(ThemeInitializerService), inject(Location), inject(Router));
-        return initializerFn();
-      }),
+      const themeInitializer = inject(ThemeInitializerService);
+      const location = inject(Location);
+      const router = inject(Router);
+      return themeInitializerFactory(themeInitializer, location, router)(); // ← note ()
+    }),
     provideAppInitializer(() => {
-        const initializerFn = (initializeBusinessData)(inject(BusinessDataService), inject(Location), inject(Router));
-        return initializerFn();
-      })
+      const businessDataService = inject(BusinessDataService);
+      const location = inject(Location);
+      const router = inject(Router);
+      return initializeBusinessData(businessDataService, location, router)(); // ← note ()
+    })
   ],
+  // providers: [
+  //   provideAppInitializer(() => {
+  //       const initializerFn = (themeInitializerFactory)(inject(ThemeInitializerService), inject(Location), inject(Router));
+  //       return initializerFn();
+  //     }),
+  //   provideAppInitializer(() => {
+  //       const initializerFn = (initializeBusinessData)(inject(BusinessDataService), inject(Location), inject(Router));
+  //       return initializerFn();
+  //     })
+  // ],
   // providers: [
   //   {
   //     provide: APP_INITIALIZER,

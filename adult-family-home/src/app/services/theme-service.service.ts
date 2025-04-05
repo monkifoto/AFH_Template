@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+  Firestore, doc, getDoc, setDoc, collection,
+  collectionData, docData, DocumentReference
+} from '@angular/fire/firestore';
 import { from, Observable, of, throwError } from 'rxjs';
-import { catchError, map, switchMap, take } from 'rxjs/operators';
+import { catchError, switchMap, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
   private themeLink: HTMLLinkElement;
-  constructor(private firestore: AngularFirestore) {
+
+  constructor(private firestore: Firestore) {
     this.themeLink = document.createElement('link');
     this.themeLink.rel = 'stylesheet';
     document.head.appendChild(this.themeLink);
   }
 
-  // Default theme colors
   public defaultTheme = {
     themeFileName: 'styles.css',
     primaryColor: '#fffaf2',
@@ -31,44 +34,36 @@ export class ThemeService {
     buttonHoverColor: '#c9605b'
   };
 
-
   getBusinessTheme(businessId: string): Observable<any> {
-    return this.firestore
-      .collection('businesses')
-      .doc(businessId)
-      .collection('theme')
-      .doc('themeDoc')
-      .valueChanges();
+    const themeRef = doc(this.firestore, `businesses/${businessId}/theme/themeDoc`);
+    return docData(themeRef);
   }
 
   getThemeColors(businessId: string): Observable<any> {
-   // console.log('Theme Service: - Fetching theme for business ID:', businessId);
+    const businessRef = doc(this.firestore, `businesses/${businessId}`);
+    const themeRef = doc(this.firestore, `businesses/${businessId}/theme/themeDoc`);
 
-    const businessDocRef = this.firestore.collection('businesses').doc(businessId);
-    const themeDocRef = businessDocRef.collection('theme').doc('themeDoc');
-
-    return businessDocRef.snapshotChanges().pipe(
+    return from(getDoc(businessRef)).pipe(
       take(1),
-      switchMap(businessSnapshot => {
-        if (!businessSnapshot.payload.exists) {
+      switchMap(businessSnap => {
+        if (!businessSnap.exists()) {
           console.error('Theme Service: - Business document does not exist!');
-          return throwError('Theme Service: - Business document does not exist');
+          return throwError(() => new Error('Theme Service: - Business document does not exist'));
         }
 
-        return themeDocRef.get().pipe(
-          switchMap(docSnapshot => {
-            if (docSnapshot.exists) {
-              const themeData = docSnapshot.data();
+        return from(getDoc(themeRef)).pipe(
+          switchMap(themeSnap => {
+            if (themeSnap.exists()) {
+              const themeData = themeSnap.data();
               if (themeData?.['themeFileName']) {
-               // this.applyThemeFile(themeData['themeFileName']);
+                // this.applyThemeFile(themeData['themeFileName']);
               }
-              return themeDocRef.valueChanges();
+              return docData(themeRef);
             } else {
-              return from(themeDocRef.set(this.defaultTheme)).pipe(
+              return from(setDoc(themeRef, this.defaultTheme)).pipe(
                 switchMap(() => {
-                 // console.log('Theme Service: - Created new theme with default values.');
                   this.applyThemeFile(this.defaultTheme.themeFileName);
-                  return themeDocRef.valueChanges();
+                  return docData(themeRef);
                 })
               );
             }
@@ -84,16 +79,9 @@ export class ThemeService {
   }
 
   updateColors(businessId: string, colors: any): Promise<void> {
-    const themeDocRef = this.firestore.collection('businesses')
-      .doc(businessId)
-      .collection('theme')
-      .doc('themeDoc'); // Directly reference the document by ID
-
-   // console.log("Theme Service: - BusinessId: " + businessId + " theme service updateColors: ", colors);
-
-    return themeDocRef.set(colors, { merge: true }) // Use 'merge: true' to avoid overwriting the entire document
+    const themeRef = doc(this.firestore, `businesses/${businessId}/theme/themeDoc`);
+    return setDoc(themeRef, colors, { merge: true })
       .then(() => {
-      //  console.log('Theme Service: - Colors updated successfully');
         if (colors.themeFileName) {
           this.applyThemeFile(colors.themeFileName);
         }
@@ -105,19 +93,17 @@ export class ThemeService {
   }
 
   resetToDefaultColors(): Observable<any> {
-    return this.firestore.collection('defaultSettings')
-      .doc('colors')
-      .valueChanges();
+    const defaultRef = doc(this.firestore, 'defaultSettings/colors');
+    return docData(defaultRef);
   }
 
   applyThemeFile(themeFileName: string): Promise<void> {
-    const themePath = `assets/themes/${themeFileName}`; // Ensure this path is correct
+    const themePath = `assets/themes/${themeFileName}`;
     return this.loadCss(themePath);
   }
 
   private loadCss(url: string): Promise<void> {
     return new Promise((resolve, reject) => {
-     // console.log('Load css from  file:',url);
       const link = document.createElement('link');
       link.rel = 'stylesheet';
       link.href = url;
