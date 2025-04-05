@@ -73,10 +73,10 @@ constructor(
           return filteredImages
             .map(img => ({
               url: img.url,
-              title: img.title || 'No Title',
-              description: img.description || 'No Description',
-              link: img.link || 'No Link',
-              order: !isNaN(Number(img.order)) ? Number(img.order) : 999 // Ensure valid number
+              title: (img as any).title || 'No Title', // Cast to 'any' to bypass type error
+              description:  (img as any).description || 'No Description',
+              link:  (img as any).link || 'No Link',
+              order: !isNaN(Number( (img as any).order)) ? Number( (img as any).order) : 999 // Ensure valid number
             }))
             .sort((a, b) => a.order - b.order);
         })

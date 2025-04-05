@@ -1,27 +1,26 @@
-// auth.service.ts
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { from, Observable, of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
-import firebase from 'firebase/compat/app';
+import { Auth, authState, signInWithEmailAndPassword, signOut, User } from '@angular/fire/auth';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  user$: Observable<any>;
+  user$: Observable<User | null>;
 
-  constructor(private afAuth: AngularFireAuth, private router: Router) {
-    this.user$ = afAuth.authState;
+  constructor(private auth: Auth, private router: Router) {
+    this.user$ = authState(this.auth);
   }
 
-  login(email: string, password: string) {
-    return this.afAuth.signInWithEmailAndPassword(email, password);
+  login(email: string, password: string): Promise<User | null> {
+    return signInWithEmailAndPassword(this.auth, email, password)
+      .then((userCredential) => userCredential.user);
   }
 
-  logout() {
-    return this.afAuth.signOut().then(() => {
+  logout(): Promise<void> {
+    return signOut(this.auth).then(() => {
       this.router.navigate(['/login']);
     });
   }
@@ -31,8 +30,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    const user = localStorage.getItem('user');
-    return !!user;
+    // Optional: use a more reliable state system here if needed
+    return !!localStorage.getItem('user');
   }
-
 }
