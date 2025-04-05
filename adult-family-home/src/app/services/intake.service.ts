@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+  Firestore, collection, collectionData, doc, docData, setDoc,
+  updateDoc, deleteDoc
+} from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
-import { IntakeForm } from '../model/intake-form.model'; // Create this model for your intake form data
+import { map } from 'rxjs/operators';
+import { IntakeForm } from '../model/intake-form.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +13,14 @@ import { IntakeForm } from '../model/intake-form.model'; // Create this model fo
 export class IntakeService {
   private basePath = 'businesses';
 
-  constructor(private afs: AngularFirestore) {}
+  constructor(private firestore: Firestore) {}
 
-  // Save the intake form data under the business ID
   saveIntakeForm(intakeForm: IntakeForm, businessId: string): Observable<IntakeForm> {
-    const intakeId = this.afs.createId(); // Creates a new unique ID for the intake document
-    const intakeRef = this.afs.collection(`${this.basePath}/${businessId}/intake`).doc(intakeId);
+    const intakeId = doc(collection(this.firestore, `${this.basePath}/${businessId}/intake`)).id;
+    const intakeRef = doc(this.firestore, `${this.basePath}/${businessId}/intake/${intakeId}`);
 
-    // Set the intake form data in the Firestore document
     return new Observable(observer => {
-      intakeRef.set(intakeForm).then(() => {
-        // After the data is saved, return the saved data
+      setDoc(intakeRef, intakeForm).then(() => {
         observer.next(intakeForm);
         observer.complete();
       }).catch(error => {
@@ -30,31 +30,25 @@ export class IntakeService {
     });
   }
 
-  // Get all intake form data for a specific business
   getIntakeForms(businessId: string): Observable<IntakeForm[]> {
-    return this.afs.collection(`${this.basePath}/${businessId}/intake`).snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as IntakeForm;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
-    );
+    const intakeRef = collection(this.firestore, `${this.basePath}/${businessId}/intake`);
+    return collectionData(intakeRef, { idField: 'id' }) as Observable<IntakeForm[]>;
   }
 
-  // Get a specific intake form by its ID
   getIntakeForm(businessId: string, intakeId: string): Observable<IntakeForm | undefined> {
-    return this.afs.collection(`${this.basePath}/${businessId}/intake`).doc<IntakeForm>(intakeId).valueChanges().pipe(
-      map(intakeForm => intakeForm ? intakeForm : undefined)
+    const intakeDocRef = doc(this.firestore, `${this.basePath}/${businessId}/intake/${intakeId}`);
+    return docData(intakeDocRef).pipe(
+      map(data => data as IntakeForm | undefined)
     );
   }
 
-  // Update an existing intake form
   updateIntakeForm(businessId: string, intakeId: string, intakeForm: Partial<IntakeForm>): Promise<void> {
-    return this.afs.collection(`${this.basePath}/${businessId}/intake`).doc(intakeId).update(intakeForm);
+    const intakeDocRef = doc(this.firestore, `${this.basePath}/${businessId}/intake/${intakeId}`);
+    return updateDoc(intakeDocRef, intakeForm);
   }
 
-  // Delete an intake form
   deleteIntakeForm(businessId: string, intakeId: string): Promise<void> {
-    return this.afs.collection(`${this.basePath}/${businessId}/intake`).doc(intakeId).delete();
+    const intakeDocRef = doc(this.firestore, `${this.basePath}/${businessId}/intake/${intakeId}`);
+    return deleteDoc(intakeDocRef);
   }
 }
