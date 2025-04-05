@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 
 @Component({
-  selector: 'app-call-to-action',
-  templateUrl: './call-to-action.component.html',
-  styleUrls: ['./call-to-action.component.css']
+    selector: 'app-call-to-action',
+    templateUrl: './call-to-action.component.html',
+    styleUrls: ['./call-to-action.component.css'],
+    standalone: false
 })
 export class CallToActionComponent implements OnInit {
 

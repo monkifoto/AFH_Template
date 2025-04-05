@@ -9,9 +9,10 @@ import { filter, Observable, of, switchMap } from 'rxjs';
 
 declare var google: any;
 @Component({
-  selector: 'app-testimonials-list',
-  templateUrl: './testimonials.component.html',
-  styleUrls: ['./testimonials.component.css'],
+    selector: 'app-testimonials-list',
+    templateUrl: './testimonials.component.html',
+    styleUrls: ['./testimonials.component.css'],
+    standalone: false
 })
 export class TestimonialsListComponent implements OnInit {
   testimonials: any[] = [];

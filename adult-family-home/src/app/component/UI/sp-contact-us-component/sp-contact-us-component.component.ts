@@ -10,9 +10,10 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { EmailService } from 'src/app/services/email.service';
 
 @Component({
-  selector: 'app-sp-contact-us-component',
-  templateUrl: './sp-contact-us-component.component.html',
-  styleUrls: ['./sp-contact-us-component.component.css'],
+    selector: 'app-sp-contact-us-component',
+    templateUrl: './sp-contact-us-component.component.html',
+    styleUrls: ['./sp-contact-us-component.component.css'],
+    standalone: false
 })
 export class SpContactUsComponentComponent implements OnInit {
   business: Business | null = null;

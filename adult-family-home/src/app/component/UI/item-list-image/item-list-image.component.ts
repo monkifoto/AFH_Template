@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-item-list-image',
-  templateUrl: './item-list-image.component.html',
-  styleUrls: ['./item-list-image.component.css']
+    selector: 'app-item-list-image',
+    templateUrl: './item-list-image.component.html',
+    styleUrls: ['./item-list-image.component.css'],
+    standalone: false
 })
 export class ItemListImageComponent implements OnInit {
   @Input() title: string = 'Our Services';

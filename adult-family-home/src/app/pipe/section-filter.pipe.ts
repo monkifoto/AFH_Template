@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Section } from '../model/section.model';
 
 @Pipe({
-  name: 'sectionFilter'
+    name: 'sectionFilter',
+    standalone: false
 })
 export class SectionFilterPipe implements PipeTransform {
   transform(sections: Section[], page: string, location: string): Section | null {

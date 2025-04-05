@@ -7,9 +7,10 @@ import { Observable } from 'rxjs';
 import { BusinessService } from 'src/app/services/business.service';
 
 @Component({
-  selector: 'app-hero-manager',
-  templateUrl: './hero-manager.component.html',
-  styleUrls: ['./hero-manager.component.css']
+    selector: 'app-hero-manager',
+    templateUrl: './hero-manager.component.html',
+    styleUrls: ['./hero-manager.component.css'],
+    standalone: false
 })
 export class HeroManagerComponent implements OnInit {
   @Input() businessId!: string;

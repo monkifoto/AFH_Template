@@ -6,9 +6,10 @@ import { Business } from './model/business-questions.model';
 import { ThemeService } from './services/theme-service.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent implements OnInit {
   title = 'adult-family-home';

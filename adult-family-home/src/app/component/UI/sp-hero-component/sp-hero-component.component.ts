@@ -6,9 +6,10 @@ import { Business } from 'src/app/model/business-questions.model';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 
 @Component({
-  selector: 'app-sp-hero-component',
-  templateUrl: './sp-hero-component.component.html',
-  styleUrls: ['./sp-hero-component.component.css']
+    selector: 'app-sp-hero-component',
+    templateUrl: './sp-hero-component.component.html',
+    styleUrls: ['./sp-hero-component.component.css'],
+    standalone: false
 })
 export class SpHeroComponentComponent  implements OnInit, OnDestroy {
   slides: any[] = [];

@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-why-us',
-  templateUrl: './why-us.component.html',
-  styleUrls: ['./why-us.component.css']
+    selector: 'app-why-us',
+    templateUrl: './why-us.component.html',
+    styleUrls: ['./why-us.component.css'],
+    standalone: false
 })
 export class WhyUsComponent implements OnInit {
   @Input() themeType!: string;

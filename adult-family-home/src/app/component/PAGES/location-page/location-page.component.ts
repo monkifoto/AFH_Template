@@ -12,9 +12,10 @@ import { Router } from '@angular/router';
 declare var google: any;
 
 @Component({
-  selector: 'app-location-page',
-  templateUrl: './location-page.component.html',
-  styleUrls: ['./location-page.component.css']
+    selector: 'app-location-page',
+    templateUrl: './location-page.component.html',
+    styleUrls: ['./location-page.component.css'],
+    standalone: false
 })
 export class LocationPageComponent implements OnInit {
   business: Business | null = null;

@@ -4,9 +4,10 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-center-text',
-  templateUrl: './center-text.component.html',
-  styleUrls: ['./center-text.component.css']
+    selector: 'app-center-text',
+    templateUrl: './center-text.component.html',
+    styleUrls: ['./center-text.component.css'],
+    standalone: false
 })
 export class CenterTextComponent implements OnInit {
   @Input() themeType!: string;

@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule, inject, provideAppInitializer } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -84,6 +84,7 @@ import { PhoneFormatPipe } from './pipe/phone-format.pipe';
 import { ItemListImageComponent } from './component/UI/item-list-image/item-list-image.component';
 import { HeroManagerComponent } from './admin/hero-manager/hero-manager.component';
 import { TextWrapperComponent } from './component/text-wrapper/text-wrapper.component';
+import { CommonModule } from '@angular/common';
 
 
     // Map hostnames to business IDs
@@ -247,6 +248,7 @@ export function combinedInitializer(
     TextWrapperComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     RouterModule,
     AppRoutingModule,
@@ -263,18 +265,14 @@ export function combinedInitializer(
     BrowserAnimationsModule,
   ],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: themeInitializerFactory,
-      deps: [ThemeInitializerService, Location, Router],
-      multi: true
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeBusinessData,
-      deps: [BusinessDataService, Location, Router],
-      multi: true
-    }
+    provideAppInitializer(() => {
+        const initializerFn = (themeInitializerFactory)(inject(ThemeInitializerService), inject(Location), inject(Router));
+        return initializerFn();
+      }),
+    provideAppInitializer(() => {
+        const initializerFn = (initializeBusinessData)(inject(BusinessDataService), inject(Location), inject(Router));
+        return initializerFn();
+      })
   ],
   // providers: [
   //   {
