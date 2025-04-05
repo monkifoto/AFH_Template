@@ -1,20 +1,29 @@
 import { Injectable } from '@angular/core';
 import {
-  AngularFireStorage,
-  AngularFireUploadTask,
-} from '@angular/fire/compat/storage';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+  Storage,
+  ref as storageRef,
+  uploadBytesResumable,
+  getDownloadURL,
+  deleteObject
+} from '@angular/fire/storage';
+import {
+  Firestore,
+  doc,
+  collection,
+  addDoc,
+  query,
+  where,
+  getDocs,
+  deleteDoc
+} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class UploadService {
-  constructor(
-    private storage: AngularFireStorage,
-    private firestore: AngularFirestore
-  ) {}
+  constructor(private storage: Storage, private firestore: Firestore) {}
 
   uploadFile(
     file: File,
@@ -22,8 +31,8 @@ export class UploadService {
     location: string,
     title: string = '',
     description: string = '',
-    link: string='',
-    order:string=''
+    link: string = '',
+    order: string = ''
   ): { uploadProgress: Observable<number>; downloadUrl: Observable<string> } {
     let filePath: string;
 
@@ -43,7 +52,7 @@ export class UploadService {
       case 'lifeStyle':
         filePath = `businesses/${businessId}/lifeStyle/${file.name}`;
         break;
-        case 'sectionsImages':
+      case 'sectionsImages':
         filePath = `businesses/${businessId}/sectionsImages/${file.name}`;
         break;
       case 'gallery':
@@ -52,68 +61,66 @@ export class UploadService {
         break;
     }
 
-    const fileRef = this.storage.ref(filePath);
-    const task: AngularFireUploadTask = this.storage.upload(filePath, file);
+    const fileRef = storageRef(this.storage, filePath);
+    const task = uploadBytesResumable(fileRef, file);
 
-    // Observe percentage changes
-    const uploadProgress = task.percentageChanges().pipe(
-      map((progress) => progress ?? 0) // Provide a default value if progress is undefined
-    );
+    const uploadProgress = new Observable<number>((observer) => {
+      task.on(
+        'state_changed',
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          observer.next(progress);
+        },
+        (error) => observer.error(error),
+        () => observer.complete()
+      );
+    });
 
-    // Get notified when the download URL is available
     const downloadUrl = new Observable<string>((observer) => {
-      task
-        .snapshotChanges()
-        .pipe(
-          finalize(() => {
-            fileRef.getDownloadURL().subscribe((url) => {
-              // Save the URL to Firestore (you can customize this part if needed)
-              this.firestore
-                .collection('businesses')
-                .doc(businessId)
-                .collection(location)
-                .add({ url, title, description, link, order })
-              observer.next(url);
-              observer.complete();
-            });
-          })
-        )
-        .subscribe();
+      task.on(
+        'state_changed',
+        () => {},
+        (error) => observer.error(error),
+        async () => {
+          const url = await getDownloadURL(fileRef);
+          await addDoc(collection(this.firestore, `businesses/${businessId}/${location}`), {
+            url,
+            title,
+            description,
+            link,
+            order
+          });
+          observer.next(url);
+          observer.complete();
+        }
+      );
     });
 
     return { uploadProgress, downloadUrl };
   }
 
-  deleteFile(imageUrl: string, businessId: string, location: string): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      // Extract the file path from the image URL
-      const filePath = decodeURIComponent(imageUrl.split('/').pop()?.split('?')[0] || '');
-      const storageRef = this.storage.ref(filePath);
+  async deleteFile(imageUrl: string, businessId: string, location: string): Promise<void> {
+    try {
+      const pathSegments = imageUrl.split('/');
+      const fileNameWithQuery = pathSegments[pathSegments.length - 1];
+      const fileName = decodeURIComponent(fileNameWithQuery.split('?')[0]);
+      const fullPath = `businesses/${businessId}/${location}/${fileName}`;
 
-      // Step 1: Delete from Firebase Storage
-      storageRef.delete().subscribe({
-        next: () => {
-          // Step 2: Delete from Firestore
-          this.firestore
-            .collection('businesses')
-            .doc(businessId)
-            .collection(location)
-            .ref.where('url', '==', imageUrl)
-            .get()
-            .then((querySnapshot) => {
-              querySnapshot.forEach((doc) => doc.ref.delete());
-              resolve();
-            })
-            .catch((error) => {
-              console.error('Error deleting from Firestore:', error);
-              reject(error);
-            });
-        },
-        error: (error) => {
-          console.error('Error deleting from Storage:', error);
-          reject(error);
-        },
-      });
-    });
+      const fileRef = storageRef(this.storage, fullPath);
+      await deleteObject(fileRef);
+
+      const q = query(
+        collection(this.firestore, `businesses/${businessId}/${location}`),
+        where('url', '==', imageUrl)
+      );
+
+      const querySnapshot = await getDocs(q);
+      for (const docSnap of querySnapshot.docs) {
+        await deleteDoc(docSnap.ref);
+      }
+    } catch (error) {
+      console.error('Error deleting file:', error);
+      throw error;
+    }
   }
 }

@@ -1,44 +1,38 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+  Firestore, collection, collectionData, doc, setDoc,
+  deleteDoc, addDoc
+} from '@angular/fire/firestore';
 import { PageHero } from '../model/business-questions.model';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class BusinessPageHeroService {
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestore: Firestore) {}
 
   generateNewId(): string {
-    return this.firestore.createId();
+    return doc(collection(this.firestore, 'temp')).id; // For ID generation only
   }
 
-
-  getPageHeroes(businessId: string) {
-    return this.firestore
-      .collection<PageHero>(`businesses/${businessId}/pageHeroes`)
-      .snapshotChanges()
-      .pipe(
-        map(actions =>
-          actions.map(a => {
-            const data = a.payload.doc.data() as PageHero;
-            const id = a.payload.doc.id;
-            return { id, ...data };
-          })
-        )
-      );
+  getPageHeroes(businessId: string): Observable<PageHero[]> {
+    const heroesRef = collection(this.firestore, `businesses/${businessId}/pageHeroes`);
+    return collectionData(heroesRef, { idField: 'id' }) as Observable<PageHero[]>;
   }
 
-  savePageHero(businessId: string, hero: PageHero) {
-    const heroRef = this.firestore.collection(`businesses/${businessId}/pageHeroes`);
+  savePageHero(businessId: string, hero: PageHero): Promise<void | any> {
+    const heroRef = collection(this.firestore, `businesses/${businessId}/pageHeroes`);
     if (hero.id) {
-      return heroRef.doc(hero.id).set(hero);
+      return setDoc(doc(this.firestore, `businesses/${businessId}/pageHeroes/${hero.id}`), hero);
     } else {
-      return heroRef.add(hero);
+      return addDoc(heroRef, hero);
     }
   }
 
-  deletePageHero(businessId: string, heroId: string) {
-    return this.firestore.doc(`businesses/${businessId}/pageHeroes/${heroId}`).delete();
+  deletePageHero(businessId: string, heroId: string): Promise<void> {
+    const heroDocRef = doc(this.firestore, `businesses/${businessId}/pageHeroes/${heroId}`);
+    return deleteDoc(heroDocRef);
   }
 }
