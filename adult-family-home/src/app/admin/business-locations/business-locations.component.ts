@@ -5,9 +5,10 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 import { take } from 'rxjs';
 
 @Component({
-  selector: 'app-business-locations',
-  templateUrl: './business-locations.component.html',
-  styleUrls: ['./business-locations.component.css']
+    selector: 'app-business-locations',
+    templateUrl: './business-locations.component.html',
+    styleUrls: ['./business-locations.component.css'],
+    standalone: false
 })
 export class BusinessLocationsComponent implements OnInit {
   @Input() businessId!: string;

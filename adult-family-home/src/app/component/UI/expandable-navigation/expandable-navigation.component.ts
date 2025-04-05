@@ -4,9 +4,10 @@ import { Business } from 'src/app/model/business-questions.model';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 
 @Component({
-  selector: 'app-expandable-navigation',
-  templateUrl: './expandable-navigation.component.html',
-  styleUrls: ['./expandable-navigation.component.css']
+    selector: 'app-expandable-navigation',
+    templateUrl: './expandable-navigation.component.html',
+    styleUrls: ['./expandable-navigation.component.css'],
+    standalone: false
 })
 export class ExpandableNavigationComponent  implements OnInit {
   businessId: string = '';

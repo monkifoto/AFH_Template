@@ -4,9 +4,10 @@ import { Router } from '@angular/router';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 
 @Component({
-  selector: 'app-consultation',
-  templateUrl: './consultation.component.html',
-  styleUrls: ['./consultation.component.css']
+    selector: 'app-consultation',
+    templateUrl: './consultation.component.html',
+    styleUrls: ['./consultation.component.css'],
+    standalone: false
 })
 export class ConsultationComponent{
  @Input() themeType!: string;

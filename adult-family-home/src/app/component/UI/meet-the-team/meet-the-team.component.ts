@@ -6,9 +6,10 @@ import { catchError, switchMap, filter } from 'rxjs/operators';
 import { Employee } from 'src/app/model/business-questions.model';
 
 @Component({
-  selector: 'app-meet-the-team',
-  templateUrl: './meet-the-team.component.html',
-  styleUrls: ['./meet-the-team.component.css']
+    selector: 'app-meet-the-team',
+    templateUrl: './meet-the-team.component.html',
+    styleUrls: ['./meet-the-team.component.css'],
+    standalone: false
 })
 export class MeetTheTeamComponent implements OnInit {
   employees$!: Observable<Employee[]>;

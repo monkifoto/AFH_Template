@@ -25,10 +25,11 @@ import { BusinessLocationsComponent } from '../business-locations/business-locat
 import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-edit-business',
-  templateUrl: './edit-business.component.html',
-  styleUrls: ['./edit-business.component.css'],
-  encapsulation: ViewEncapsulation.Emulated, // Default, isolates styles to this component
+    selector: 'app-edit-business',
+    templateUrl: './edit-business.component.html',
+    styleUrls: ['./edit-business.component.css'],
+    encapsulation: ViewEncapsulation.Emulated,
+    standalone: false
 })
 export class EditBusinessComponent implements OnInit, AfterViewInit {
   @ViewChild(EmployeeComponent) employeeComponent!: EmployeeComponent;

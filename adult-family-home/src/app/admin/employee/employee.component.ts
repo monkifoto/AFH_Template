@@ -5,9 +5,10 @@ import { Business, Employee } from 'src/app/model/business-questions.model';
 import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
-  selector: 'app-employee',
-  templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.css']
+    selector: 'app-employee',
+    templateUrl: './employee.component.html',
+    styleUrls: ['./employee.component.css'],
+    standalone: false
 })
 export class EmployeeComponent {
   @Input() form!: FormGroup;

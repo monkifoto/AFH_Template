@@ -5,9 +5,10 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 import { PageHero } from 'src/app/model/business-questions.model';
 
 @Component({
-  selector: 'app-hero',
-  templateUrl: './hero.component.html',
-  styleUrls: ['./hero.component.css']
+    selector: 'app-hero',
+    templateUrl: './hero.component.html',
+    styleUrls: ['./hero.component.css'],
+    standalone: false
 })
 export class HeroComponent implements OnInit {
   @Input() layoutType: string = 'hh';

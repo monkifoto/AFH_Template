@@ -8,9 +8,10 @@ import { BusinessService } from 'src/app/services/business.service';
 
 declare var $: any;
 @Component({
-  selector: 'app-color-admin',
-  templateUrl: './color-admin.component.html',
-  styleUrls: ['./color-admin.component.css']
+    selector: 'app-color-admin',
+    templateUrl: './color-admin.component.html',
+    styleUrls: ['./color-admin.component.css'],
+    standalone: false
 })
 export class ColorAdminComponent implements OnInit {
   themeColors$: Observable<any> | undefined;

@@ -3,9 +3,10 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Business, ListItem } from 'src/app/model/business-questions.model';
 
 @Component({
-  selector: 'app-services-page',
-  templateUrl: './services-page.component.html',
-  styleUrls: ['./services-page.component.css']
+    selector: 'app-services-page',
+    templateUrl: './services-page.component.html',
+    styleUrls: ['./services-page.component.css'],
+    standalone: false
 })
 export class ServicesPageComponent implements OnInit {
   @Input() form!: FormGroup;

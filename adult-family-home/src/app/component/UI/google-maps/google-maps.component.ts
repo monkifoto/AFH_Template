@@ -5,9 +5,10 @@ import { environment } from 'src/environments/environment';
 declare var google: any; // Declare google object for TypeScript
 
 @Component({
-  selector: 'app-google-maps',
-  templateUrl: './google-maps.component.html',
-  styleUrls: ['./google-maps.component.css'],
+    selector: 'app-google-maps',
+    templateUrl: './google-maps.component.html',
+    styleUrls: ['./google-maps.component.css'],
+    standalone: false
 })
 export class GoogleMapsComponent implements OnInit, OnChanges {
   @Input() address: string = ''; // Input for the address to display on the map

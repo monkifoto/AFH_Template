@@ -3,9 +3,10 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-right-text',
-  templateUrl: './right-text.component.html',
-  styleUrls: ['./right-text.component.css']
+    selector: 'app-right-text',
+    templateUrl: './right-text.component.html',
+    styleUrls: ['./right-text.component.css'],
+    standalone: false
 })
 export class RightTextComponent {
   @Input() themeType!: string;

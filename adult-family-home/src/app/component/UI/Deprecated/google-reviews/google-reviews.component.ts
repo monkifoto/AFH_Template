@@ -9,9 +9,10 @@ import { environment } from 'src/environments/environment';
 declare var google: any;
 
 @Component({
-  selector: 'app-google-reviews',
-  templateUrl: './google-reviews.component.html',
-  styleUrls: ['./google-reviews.component.css'],
+    selector: 'app-google-reviews',
+    templateUrl: './google-reviews.component.html',
+    styleUrls: ['./google-reviews.component.css'],
+    standalone: false
 })
 export class GoogleReviewsComponent implements OnInit {
   @Input() placeId: string = ''; // Place ID passed to the component

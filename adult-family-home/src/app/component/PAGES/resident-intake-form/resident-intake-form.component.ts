@@ -11,9 +11,10 @@ import { Business } from 'src/app/model/business-questions.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-resident-intake-form',
-  templateUrl: './resident-intake-form.component.html',
-  styleUrls: ['./resident-intake-form.component.css']
+    selector: 'app-resident-intake-form',
+    templateUrl: './resident-intake-form.component.html',
+    styleUrls: ['./resident-intake-form.component.css'],
+    standalone: false
 })
 export class ResidentIntakeFormComponent implements OnInit {
   businessId: string | null = null;

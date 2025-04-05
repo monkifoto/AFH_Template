@@ -7,9 +7,10 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 
 
 @Component({
-  selector: 'app-sp-gallery-component',
-  templateUrl: './sp-gallery-component.component.html',
-  styleUrls: ['./sp-gallery-component.component.css']
+    selector: 'app-sp-gallery-component',
+    templateUrl: './sp-gallery-component.component.html',
+    styleUrls: ['./sp-gallery-component.component.css'],
+    standalone: false
 })
 export class SpGalleryComponentComponent {
   @Input()

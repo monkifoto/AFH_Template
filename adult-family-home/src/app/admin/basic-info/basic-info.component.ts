@@ -3,9 +3,10 @@ import { FormGroup } from '@angular/forms';
 import { Business } from 'src/app/model/business-questions.model';
 
 @Component({
-  selector: 'app-basic-info',
-  templateUrl: './basic-info.component.html',
-  styleUrls: ['./basic-info.component.css']
+    selector: 'app-basic-info',
+    templateUrl: './basic-info.component.html',
+    styleUrls: ['./basic-info.component.css'],
+    standalone: false
 })
 export class BasicInfoComponent  implements OnChanges, OnInit{
   @Input() form!: FormGroup;
