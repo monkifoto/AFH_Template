@@ -14,9 +14,10 @@ import { ConsultationComponent } from '../../UI/consultation/consultation.compon
 import { ItemListImageComponent } from '../../UI/item-list-image/item-list-image.component';
 
 @Component({
-  selector: 'app-services',
-  templateUrl: './services.component.html',
-  styleUrls: ['./services.component.css']
+    selector: 'app-services',
+    templateUrl: './services.component.html',
+    styleUrls: ['./services.component.css'],
+    standalone: false
 })
 export class ServicesComponent implements OnInit, AfterViewInit {
   sections: any[] = [];

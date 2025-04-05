@@ -12,9 +12,10 @@ import { GoogleMapsComponent } from '../UI/google-maps/google-maps.component';
 import { ComponentRef } from '@angular/core';
 
 @Component({
-  selector: 'app-theme-loader',
-  template: `<div #themeContainer></div>`,
-  styleUrls: ['./dynamic-theme-loader.component.css']
+    selector: 'app-theme-loader',
+    template: `<div #themeContainer></div>`,
+    styleUrls: ['./dynamic-theme-loader.component.css'],
+    standalone: false
 })
 export class DynamicThemeLoaderComponent implements OnChanges {
   @Input() businessId: string = '';

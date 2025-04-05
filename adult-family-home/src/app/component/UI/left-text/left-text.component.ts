@@ -3,9 +3,10 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-left-text',
-  templateUrl: './left-text.component.html',
-  styleUrls: ['./left-text.component.css']
+    selector: 'app-left-text',
+    templateUrl: './left-text.component.html',
+    styleUrls: ['./left-text.component.css'],
+    standalone: false
 })
 export class LeftTextComponent {
   @Input() themeType!: string;

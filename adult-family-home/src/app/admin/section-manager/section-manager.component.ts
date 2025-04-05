@@ -12,9 +12,10 @@ import { UploadService } from 'src/app/services/upload.service';
 import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
-  selector: 'app-section-manager',
-  templateUrl: './section-manager.component.html',
-  styleUrls: ['./section-manager.component.css'],
+    selector: 'app-section-manager',
+    templateUrl: './section-manager.component.html',
+    styleUrls: ['./section-manager.component.css'],
+    standalone: false
 })
 export class SectionManagerComponent implements OnInit {
   @Input() form!: FormGroup;

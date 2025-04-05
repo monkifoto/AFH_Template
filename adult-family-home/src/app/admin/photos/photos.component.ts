@@ -5,9 +5,10 @@ import { Business } from 'src/app/model/business-questions.model';
 import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
-  selector: 'app-photos',
-  templateUrl: './photos.component.html',
-  styleUrls: ['./photos.component.css']
+    selector: 'app-photos',
+    templateUrl: './photos.component.html',
+    styleUrls: ['./photos.component.css'],
+    standalone: false
 })
 export class PhotosComponent implements OnInit{
   @Input() form!: FormGroup;

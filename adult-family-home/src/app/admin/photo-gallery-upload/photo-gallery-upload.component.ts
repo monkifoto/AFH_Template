@@ -8,9 +8,10 @@ import { UploadService } from 'src/app/services/upload.service';
 import { WebContentService } from 'src/app/services/web-content.service';
 
 @Component({
-  selector: 'app-photo-gallery-upload',
-  templateUrl: './photo-gallery-upload.component.html',
-  styleUrls: ['./photo-gallery-upload.component.css']
+    selector: 'app-photo-gallery-upload',
+    templateUrl: './photo-gallery-upload.component.html',
+    styleUrls: ['./photo-gallery-upload.component.css'],
+    standalone: false
 })
 export class PhotoGalleryUploadComponent implements OnInit {
   @Input()

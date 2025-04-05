@@ -3,9 +3,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
-  selector: 'app-latest-products',
-  templateUrl: './latest-products.component.html',
-  styleUrls: ['./latest-products.component.scss']
+    selector: 'app-latest-products',
+    templateUrl: './latest-products.component.html',
+    styleUrls: ['./latest-products.component.scss'],
+    standalone: false
 })
 export class LatestProductsComponent implements OnInit {
   @Input() layoutType: string = '';

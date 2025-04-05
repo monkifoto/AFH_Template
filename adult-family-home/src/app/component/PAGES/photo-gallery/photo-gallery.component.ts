@@ -17,9 +17,10 @@ import { CallToActionComponent } from '../../UI/call-to-action/call-to-action.co
 
 
 @Component({
-  selector: 'app-photo-gallery',
-  templateUrl: './photo-gallery.component.html',
-  styleUrls: ['./photo-gallery.component.css']
+    selector: 'app-photo-gallery',
+    templateUrl: './photo-gallery.component.html',
+    styleUrls: ['./photo-gallery.component.css'],
+    standalone: false
 })
 export class PhotoGalleryComponent implements OnInit {
   @Input()

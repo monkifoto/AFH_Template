@@ -5,9 +5,10 @@ import { BusinessService } from 'src/app/services/business.service';
 import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
-  selector: 'app-admin-hero-slider',
-  templateUrl: './admin-hero-slider.component.html',
-  styleUrls: ['./admin-hero-slider.component.css']
+    selector: 'app-admin-hero-slider',
+    templateUrl: './admin-hero-slider.component.html',
+    styleUrls: ['./admin-hero-slider.component.css'],
+    standalone: false
 })
 export class AdminHeroSliderComponent implements OnInit {
   sliderForm: FormGroup;

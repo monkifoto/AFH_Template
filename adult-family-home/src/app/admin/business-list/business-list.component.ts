@@ -4,9 +4,10 @@ import { Business } from 'src/app/model/business-questions.model';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-business-list',
-  templateUrl: './business-list.component.html',
-  styleUrls: ['./business-list.component.css']
+    selector: 'app-business-list',
+    templateUrl: './business-list.component.html',
+    styleUrls: ['./business-list.component.css'],
+    standalone: false
 })
 export class BusinessListComponent implements OnInit {
   businesses: Business[] = [];

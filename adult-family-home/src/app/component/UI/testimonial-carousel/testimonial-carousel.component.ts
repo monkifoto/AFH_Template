@@ -13,32 +13,33 @@ import { environment } from 'src/environments/environment';
 declare var google: any;
 
 @Component({
-  selector: 'app-testimonial-carousel',
-  templateUrl: './testimonial-carousel.component.html',
-  styleUrls: ['./testimonial-carousel.component.css'],
-  animations: [
-    trigger('slideIn', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateX(-100%)' }),
-        animate('0.5s ease-in', style({ opacity: 1, transform: 'translateX(0)' })),
-      ]),
-      transition(':leave', [
-        animate('0.5s ease-out', style({ opacity: 0, transform: 'translateX(-100%)' })),
-      ]),
-    ]),
-    trigger('fadeInLeft', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateX(-100%)' }),
-        animate('0.5s ease-in', style({ opacity: 1, transform: 'translateX(0)' })),
-      ]),
-    ]),
-    trigger('fadeInRight', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateX(100%)' }),
-        animate('0.5s ease-in', style({ opacity: 1, transform: 'translateX(0)' })),
-      ]),
-    ]),
-  ],
+    selector: 'app-testimonial-carousel',
+    templateUrl: './testimonial-carousel.component.html',
+    styleUrls: ['./testimonial-carousel.component.css'],
+    animations: [
+        trigger('slideIn', [
+            transition(':enter', [
+                style({ opacity: 0, transform: 'translateX(-100%)' }),
+                animate('0.5s ease-in', style({ opacity: 1, transform: 'translateX(0)' })),
+            ]),
+            transition(':leave', [
+                animate('0.5s ease-out', style({ opacity: 0, transform: 'translateX(-100%)' })),
+            ]),
+        ]),
+        trigger('fadeInLeft', [
+            transition(':enter', [
+                style({ opacity: 0, transform: 'translateX(-100%)' }),
+                animate('0.5s ease-in', style({ opacity: 1, transform: 'translateX(0)' })),
+            ]),
+        ]),
+        trigger('fadeInRight', [
+            transition(':enter', [
+                style({ opacity: 0, transform: 'translateX(100%)' }),
+                animate('0.5s ease-in', style({ opacity: 1, transform: 'translateX(0)' })),
+            ]),
+        ]),
+    ],
+    standalone: false
 })
 export class TestimonialCarouselComponent implements OnInit, OnDestroy {
   @Input() businessId!: string;

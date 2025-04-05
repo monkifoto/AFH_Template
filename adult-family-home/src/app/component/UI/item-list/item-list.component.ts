@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-item-list',
-  templateUrl: './item-list.component.html',
-  styleUrls: ['./item-list.component.css']
+    selector: 'app-item-list',
+    templateUrl: './item-list.component.html',
+    styleUrls: ['./item-list.component.css'],
+    standalone: false
 })
 export class ItemListComponent implements OnInit {
   @Input() title: string = 'Our Services';  // ✅ Dynamically set from the section
