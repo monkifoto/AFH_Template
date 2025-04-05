@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "adult-family-home:build:production"
+              "buildTarget": "adult-family-home:build:production"
             },
             "development": {
-              "browserTarget": "adult-family-home:build:development"
+              "buildTarget": "adult-family-home:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "adult-family-home:build"
+            "buildTarget": "adult-family-home:build"
           }
         },
         "test": {
