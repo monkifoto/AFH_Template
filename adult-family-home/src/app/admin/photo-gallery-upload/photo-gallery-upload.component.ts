@@ -1,29 +1,30 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {
-  Firestore,
+  getStorage,
+  ref as storageRef,
+  deleteObject,
+} from 'firebase/storage';
+import {
+  getFirestore,
   collection,
-  doc,
   getDocs,
   query,
   where,
-  updateDoc,
-} from '@angular/fire/firestore';
-import {
-  Storage,
-  ref as storageRef,
-  deleteObject,
-} from '@angular/fire/storage';
+  updateDoc
+} from 'firebase/firestore';
 import { from, Observable } from 'rxjs';
 import { finalize, map, switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { UploadService } from 'src/app/services/upload.service';
 import { WebContentService } from 'src/app/services/web-content.service';
+import { environment } from 'src/environments/environment';
+import { initializeApp } from 'firebase/app';
 
 @Component({
   selector: 'app-photo-gallery-upload',
   templateUrl: './photo-gallery-upload.component.html',
   styleUrls: ['./photo-gallery-upload.component.css'],
-  standalone: false
+  standalone: false,
 })
 export class PhotoGalleryUploadComponent implements OnInit {
   @Input() businessId!: string;
@@ -34,9 +35,10 @@ export class PhotoGalleryUploadComponent implements OnInit {
   uploadLocation = 'gallery';
   selectedImageUrl: string | null = null;
 
+  private firestore = getFirestore(initializeApp(environment.firebase));
+  private storage = getStorage(initializeApp(environment.firebase));
+
   constructor(
-    private storage: Storage,
-    private firestore: Firestore,
     private uploadService: UploadService,
     private route: ActivatedRoute,
     private webContent: WebContentService
@@ -52,18 +54,10 @@ export class PhotoGalleryUploadComponent implements OnInit {
   uploadFiles(event: any) {
     const files: File[] = event.target.files;
     for (let file of files) {
-      const title = '';
-      const description = '';
-      const link = '';
-      const order = '';
       const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(
         file,
         this.businessId,
-        this.uploadLocation,
-        title,
-        description,
-        link,
-        order
+        this.uploadLocation
       );
       this.uploadProgress[file.name] = uploadProgress;
       downloadUrl.subscribe((url: string) => {
@@ -79,7 +73,7 @@ export class PhotoGalleryUploadComponent implements OnInit {
         .then(() => {
           this.images = this.images.filter((img) => img.url !== image.url);
         })
-        .catch((error) => {
+        .catch((error: any) => {
           console.error('Error deleting the image:', error);
         });
     }
@@ -139,19 +133,10 @@ export class PhotoGalleryUploadComponent implements OnInit {
   }
 
   async saveImageDetails(image: any) {
-    const collRef = collection(
-      this.firestore,
-      `businesses/${this.businessId}/${this.uploadLocation}`
+    await this.uploadService.updateImageMetadata(
+      this.businessId,
+      this.uploadLocation,
+      image
     );
-    const q = query(collRef, where('url', '==', image.url));
-    const snapshot = await getDocs(q);
-    snapshot.forEach(async (docSnap) => {
-      await updateDoc(docSnap.ref, {
-        title: image.title,
-        description: image.description,
-        link: image.link,
-        order: image.order,
-      });
-    });
   }
 }

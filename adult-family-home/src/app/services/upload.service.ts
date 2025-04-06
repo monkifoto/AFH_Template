@@ -1,5 +1,13 @@
 import { Injectable } from '@angular/core';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  where,
+  updateDoc
+} from 'firebase/firestore';
 import {
   getStorage, ref as storageRef, uploadBytesResumable, getDownloadURL, deleteObject
 } from 'firebase/storage';
@@ -103,6 +111,26 @@ export class UploadService {
     const baseIndex = decodedUrl.indexOf(`/o/`);
     const storagePath = decodedUrl.substring(baseIndex + 3).replace(/%2F/g, '/');
     return storagePath;
+  }
+
+  async updateImageMetadata(
+    businessId: string,
+    location: string,
+    image: { url: string; title: string; description: string; link: string; order: string }
+  ): Promise<void> {
+    const firestore = getFirestore();
+    const collRef = collection(firestore, `businesses/${businessId}/${location}`);
+    const q = query(collRef, where('url', '==', image.url));
+    const snapshot = await getDocs(q);
+
+    for (const docSnap of snapshot.docs) {
+      await updateDoc(docSnap.ref, {
+        title: image.title,
+        description: image.description,
+        link: image.link,
+        order: image.order,
+      });
+    }
   }
 
 }
