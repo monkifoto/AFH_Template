@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import {
-  Firestore, collection, collectionData, doc, setDoc,
-  deleteDoc, addDoc
-} from '@angular/fire/firestore';
-import { PageHero } from '../model/business-questions.model';
+  getFirestore, collection, getDocs, doc, setDoc, deleteDoc, addDoc
+} from 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { PageHero } from '../model/business-questions.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BusinessPageHeroService {
-  constructor(private firestore: Firestore) {}
+  private firestore = getFirestore(initializeApp(environment.firebase));
 
   generateNewId(): string {
     return doc(collection(this.firestore, 'temp')).id; // For ID generation only
@@ -19,7 +20,12 @@ export class BusinessPageHeroService {
 
   getPageHeroes(businessId: string): Observable<PageHero[]> {
     const heroesRef = collection(this.firestore, `businesses/${businessId}/pageHeroes`);
-    return collectionData(heroesRef, { idField: 'id' }) as Observable<PageHero[]>;
+    return from(getDocs(heroesRef)).pipe(
+      map(snapshot => snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      })) as PageHero[])
+    );
   }
 
   savePageHero(businessId: string, hero: PageHero): Promise<void | any> {
