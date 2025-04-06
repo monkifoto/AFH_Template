@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ThemeService } from './theme-service.service';
 import { BusinessService } from './business.service';
-import { Firestore, doc, docData } from '@angular/fire/firestore';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { environment } from '../../environments/environment';
 import { firstValueFrom } from 'rxjs';
 import { Theme } from '../model/business-questions.model';
 
@@ -10,6 +12,8 @@ import { Theme } from '../model/business-questions.model';
   providedIn: 'root'
 })
 export class ThemeInitializerService {
+  firestore = getFirestore(initializeApp(environment.firebase));
+
   colors: any = {
     primaryColor: '#fffaf2',
     secondaryColor: '#f8f3f0',
@@ -29,39 +33,42 @@ export class ThemeInitializerService {
     private http: HttpClient,
     private themeService: ThemeService,
     private businessService: BusinessService,
-    private firestore: Firestore
   ) {}
 
-  loadTheme(businessID: string): Promise<void> {
-    return new Promise<void>(async (resolve, reject) => {
-      try {
-        const themeRef = doc(this.firestore, `businesses/${businessID}/theme/themeDoc`);
-        const themeData = await firstValueFrom(docData(themeRef)) as Theme;
+  async loadTheme(businessID: string): Promise<void> {
+    try {
+      // Step 1: Get theme document
+      const themeRef = doc(this.firestore, `businesses/${businessID}/theme/themeDoc`);
+      const themeSnap = await getDoc(themeRef);
+      const themeData = themeSnap.data();
 
-        const themeFileName = themeData?.themeFileName || 'default.css';
-        await this.themeService.applyThemeFile(themeFileName);
+      const themeFileName = themeData?.['themeFileName'] || 'default.css';
 
-        this.themeService.getThemeColors(businessID).subscribe({
-          next: (themeColors) => {
-            this.applyTheme(themeColors);
-            resolve();
-          },
-          error: (err) => {
-            console.error('Error loading theme colors:', err);
-            resolve();
-          }
-        });
-      } catch (error) {
-        console.error('Error loading business theme:', error);
-        this.themeService.applyThemeFile('default.css')
-          .then(() => resolve())
-          .catch(err => {
-            console.error('Error applying default theme file:', err);
-            resolve();
-          });
-      }
-    });
+      // Step 2: Apply theme CSS file
+      await this.themeService.applyThemeFile(themeFileName);
+
+      // Step 3: Apply theme colors (optional - if this still uses AngularFire, make sure it's safe)
+      this.themeService.getThemeColors(businessID).subscribe({
+        next: (themeColors) => this.applyTheme(themeColors),
+        error: (err) => console.error('Error loading theme colors:', err),
+      });
+    } catch (error) {
+      console.error('Error loading business theme:', error);
+      await this.themeService.applyThemeFile('default.css');
+    }
   }
+
+  // async loadTheme(businessID: string): Promise<void> {
+  //   try {
+  //     const themeRef = doc(this.firestore, `businesses/${businessID}/theme/themeDoc`);
+  //     const themeSnap = await getDoc(themeRef);
+  //     const themeData = themeSnap.data();
+
+  //     console.log('✅ MOCK (modular SDK) theme data loaded:', themeData);
+  //   } catch (error) {
+  //     console.error('❌ MOCK (modular SDK) theme load failed:', error);
+  //   }
+  // }
 
   applyTheme(themeColors: any) {
     if (!this.colors || !this.hasValidColors(themeColors)) {

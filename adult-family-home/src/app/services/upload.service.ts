@@ -1,29 +1,18 @@
 import { Injectable } from '@angular/core';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import {
-  Storage,
-  ref as storageRef,
-  uploadBytesResumable,
-  getDownloadURL,
-  deleteObject
-} from '@angular/fire/storage';
-import {
-  Firestore,
-  doc,
-  collection,
-  addDoc,
-  query,
-  where,
-  getDocs,
-  deleteDoc
-} from '@angular/fire/firestore';
+  getStorage, ref as storageRef, uploadBytesResumable, getDownloadURL, deleteObject
+} from 'firebase/storage';
 import { Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
+import { initializeApp } from 'firebase/app';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UploadService {
-  constructor(private storage: Storage, private firestore: Firestore) {}
+  private firestore = getFirestore(initializeApp(environment.firebase));
+  private storage = getStorage(initializeApp(environment.firebase));
 
   uploadFile(
     file: File,
@@ -83,13 +72,17 @@ export class UploadService {
         (error) => observer.error(error),
         async () => {
           const url = await getDownloadURL(fileRef);
-          await addDoc(collection(this.firestore, `businesses/${businessId}/${location}`), {
+
+          // 🔁 Firestore metadata record
+          const metaRef = collection(this.firestore, `businesses/${businessId}/${location}`);
+          await addDoc(metaRef, {
             url,
             title,
             description,
             link,
             order
           });
+
           observer.next(url);
           observer.complete();
         }
@@ -98,29 +91,18 @@ export class UploadService {
 
     return { uploadProgress, downloadUrl };
   }
-
-  async deleteFile(imageUrl: string, businessId: string, location: string): Promise<void> {
-    try {
-      const pathSegments = imageUrl.split('/');
-      const fileNameWithQuery = pathSegments[pathSegments.length - 1];
-      const fileName = decodeURIComponent(fileNameWithQuery.split('?')[0]);
-      const fullPath = `businesses/${businessId}/${location}/${fileName}`;
-
-      const fileRef = storageRef(this.storage, fullPath);
-      await deleteObject(fileRef);
-
-      const q = query(
-        collection(this.firestore, `businesses/${businessId}/${location}`),
-        where('url', '==', imageUrl)
-      );
-
-      const querySnapshot = await getDocs(q);
-      for (const docSnap of querySnapshot.docs) {
-        await deleteDoc(docSnap.ref);
-      }
-    } catch (error) {
-      console.error('Error deleting file:', error);
-      throw error;
-    }
+  deleteFile(fileUrl: string, businessId: string, location: string): Promise<void> {
+    const filePath = this.extractPathFromUrl(fileUrl);
+    const fileRef = storageRef(this.storage, filePath);
+    return deleteObject(fileRef);
   }
+
+  private extractPathFromUrl(url: string): string {
+    // Assumes file URL includes the storage bucket and path
+    const decodedUrl = decodeURIComponent(url.split('?')[0]);
+    const baseIndex = decodedUrl.indexOf(`/o/`);
+    const storagePath = decodedUrl.substring(baseIndex + 3).replace(/%2F/g, '/');
+    return storagePath;
+  }
+
 }

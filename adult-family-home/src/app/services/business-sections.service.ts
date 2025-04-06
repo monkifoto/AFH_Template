@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
 import {
-  Firestore, collection, collectionData, doc, docData,
-  setDoc, deleteDoc, query, where, getDocs
-} from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+  getFirestore, collection, doc, setDoc, deleteDoc, getDocs, query, where
+} from 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Section } from '../model/section.model';
 import { UploadService } from './upload.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BusinessSectionsService {
+  private firestore = getFirestore(initializeApp(environment.firebase));
   private collectionName = 'businesses';
 
-  constructor(private firestore: Firestore, private uploadService: UploadService) {}
+  constructor(private uploadService: UploadService) {}
 
   generateNewId(): string {
     return doc(collection(this.firestore, this.collectionName)).id;
@@ -22,12 +24,16 @@ export class BusinessSectionsService {
 
   getAllBusinesses(): Observable<any[]> {
     const businessesRef = collection(this.firestore, this.collectionName);
-    return collectionData(businessesRef);
+    return from(getDocs(businessesRef)).pipe(
+      map(snapshot => snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })))
+    );
   }
 
   getAllBusinessSections(businessId: string): Observable<Section[]> {
     const sectionsRef = collection(this.firestore, `${this.collectionName}/${businessId}/sections`);
-    return collectionData(sectionsRef, { idField: 'id' }) as Observable<Section[]>;
+    return from(getDocs(sectionsRef)).pipe(
+      map(snapshot => snapshot.docs.map(doc => ({ id: doc.id, ...(doc.data() as Partial<Section>) })) as Section[])
+    );
   }
 
   getBusinessSections(businessId: string, page: string): Observable<Section[]> {
@@ -35,7 +41,9 @@ export class BusinessSectionsService {
       collection(this.firestore, `${this.collectionName}/${businessId}/sections`),
       where('page', '==', page)
     );
-    return collectionData(sectionsQuery, { idField: 'id' }) as Observable<Section[]>;
+    return from(getDocs(sectionsQuery)).pipe(
+      map(snapshot => snapshot.docs.map(doc => ({ id: doc.id, ...(doc.data() as Partial<Section>) })) as Section[])
+    );
   }
 
   saveSection(businessId: string, section: Section): Promise<void> {
