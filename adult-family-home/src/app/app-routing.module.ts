@@ -11,6 +11,7 @@ import { ResidentIntakeFormComponent } from './component/PAGES/resident-intake-f
 import { TestimonialsListComponent } from './component/PAGES/testimonials/testimonials.component';
 import { FaqComponent } from './component/UI/faq/faq.component';
 import { LocationPageComponent } from './component/PAGES/location-page/location-page.component';
+import { NotFoundComponent } from './component/PAGES/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -37,7 +38,7 @@ const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
 
     // Wildcard redirect
-   { path: '**', redirectTo: '/home' }
+    { path: '**', component: NotFoundComponent }
 
 ];
 
