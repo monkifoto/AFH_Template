@@ -71,28 +71,28 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     private businessService: BusinessService,
     private uploadService: UploadService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private storage: Storage
   ) {
     this.initializeForm();
   }
 
   ngOnInit(): void {
     this.route.paramMap.pipe(take(1)).subscribe((params) => {
-      // ✅ Take only the first subscription
       this.businessId = params.get('id')!;
 
       if (this.businessId) {
-        //console.log('Edit-Business: ngOnInit: Business', this.business);
+        console.log('Edit-Business: ngOnInit: Business', this.business);
         this.loadBusinessData();
       } else {
-        //console.log('Loading default data');
+        console.log('Loading default data');
         this.loadDefaultData();
       }
     });
   }
 
   loadBusinessData(): void {
-    const storage = inject(Storage);
+    // const storage = inject(Storage);
     this.businessService.getBusiness(this.businessId).subscribe(
       (business) => {
         if (business && !this.isFormPopulated) {
@@ -102,7 +102,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
 
           if (business.logoImage && this.isFirebaseStoragePath(business.logoImage)) {
 
-            const fileRef = storageRef(storage, business.logoImage);
+            const fileRef = storageRef(this.storage, business.logoImage);
             getDownloadURL(fileRef).then((url) => {
               business.logoImage = url;
             });

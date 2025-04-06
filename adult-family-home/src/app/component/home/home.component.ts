@@ -80,9 +80,16 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     const id = this.route.snapshot.queryParamMap.get('id');
-    if (id) {
-      window.history.replaceState({}, '', this.router.url.split('?')[0]);
-    }
+
+  // if (id) {
+  //   this.loadBusinessById(id).subscribe(() => {
+  //     // Clean up the URL only after state is set
+  //     window.history.replaceState({}, '', this.router.url.split('?')[0]);
+  //   });
+  // } else {
+  //   this.loadDefaultBusiness(); // Ensure this method is implemented below
+  // }
+
 
     this.businessDataService
       .getBusinessId()
@@ -103,6 +110,23 @@ export class HomeComponent implements OnInit {
         }
       });
   }
+
+  // loadBusinessById(id: string): Observable<any> {
+  //   return this.businessDataService.getBusinessById(id).pipe(
+  //     tap(business => {
+  //       // Set it in the service or local state
+  //       this.businessDataService.setBusiness(business);
+  //       // You can also do other logic here, like triggering UI updates
+  //     })
+  //   );
+  // }
+
+  // loadDefaultBusiness(): void {
+  //   // You can load a default by hardcoded ID, location, or fallback logic
+  //   this.businessDataService.getDefaultBusiness().subscribe(business => {
+  //     this.businessDataService.setBusiness(business);
+  //   });
+  // }
 
   loadSections() {
     this.sectionService
