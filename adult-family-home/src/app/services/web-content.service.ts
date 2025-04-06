@@ -1,34 +1,43 @@
 import { Injectable } from '@angular/core';
 import {
-  Firestore, doc, docData, collection, collectionData, getDoc
-} from '@angular/fire/firestore';
+  getFirestore,
+  doc,
+  getDoc,
+  collection,
+  getDocs,
+} from 'firebase/firestore';
 import {
-  Storage, ref as storageRef, getDownloadURL
-} from '@angular/fire/storage';
+  getStorage,
+  ref as storageRef,
+  getDownloadURL,
+} from 'firebase/storage';
 import { Observable, catchError, map, of, from } from 'rxjs';
 import { Business, Employee, HeroImage } from '../model/business-questions.model';
+import { initializeApp } from 'firebase/app';
+import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WebContentService {
+  private firestore = getFirestore(initializeApp(environment.firebase));
+  private storage = getStorage(initializeApp(environment.firebase));
   private defaultBusinessId = 'Z93oAAVwFAwhmdH2lLtB';
   private defaultImage = 'assets/sharedAssets/missingTestimonialImage.png';
-
-  constructor(private firestore: Firestore, private storage: Storage) {}
 
   getBusinessData(businessId: string | null | undefined): Observable<Business | undefined> {
     const resolvedId = businessId?.trim() || this.defaultBusinessId;
     const businessRef = doc(this.firestore, `businesses/${resolvedId}`);
 
-    return docData(businessRef).pipe(
-      map(data => {
-        if (!data) return undefined;
-        const { id: _, testimonials = [], ...rest } = data as Business;
+    return from(getDoc(businessRef)).pipe(
+      map((docSnap) => {
+        if (!docSnap.exists()) return undefined;
+        const data = docSnap.data() as Business;
+        const { id: _, testimonials = [], ...rest } = data;
 
-        const updatedTestimonials = testimonials.map(t => ({
+        const updatedTestimonials = testimonials.map((t) => ({
           ...t,
-          photoURL: t.photoURL?.trim() ? t.photoURL : this.defaultImage
+          photoURL: t.photoURL?.trim() ? t.photoURL : this.defaultImage,
         }));
 
         return { id: resolvedId, testimonials: updatedTestimonials, ...rest };
@@ -42,13 +51,17 @@ export class WebContentService {
 
   getEmployees(): Observable<Employee[]> {
     const employeesRef = collection(this.firestore, 'employees');
-    return collectionData(employeesRef, { idField: 'id' }) as Observable<Employee[]>;
+    return from(getDocs(employeesRef)).pipe(
+      map(snapshot =>
+        snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Employee))
+      )
+    );
   }
 
   getEmployeePhoto(photoPath: string): Observable<string> {
     const fileRef = storageRef(this.storage, photoPath);
     return from(getDownloadURL(fileRef)).pipe(
-      catchError(error => {
+      catchError((error) => {
         console.error('Error fetching photo URL:', error);
         return of('');
       })
@@ -60,16 +73,15 @@ export class WebContentService {
     const businessRef = doc(this.firestore, `businesses/${resolvedId}`);
 
     return from(getDoc(businessRef)).pipe(
-      map(docSnap => {
+      map((docSnap) => {
         if (!docSnap.exists()) {
           console.warn('Business document does not exist.');
           return [];
         }
-
         const data = docSnap.data();
         return (data && data['employees']) ? data['employees'] : [];
       }),
-      catchError(error => {
+      catchError((error) => {
         console.error('Error fetching employees:', error);
         return of([]);
       })
@@ -79,7 +91,9 @@ export class WebContentService {
   getBusinessGalleryImagesById(businessId: string): Observable<any[]> {
     const resolvedId = businessId?.trim() || this.defaultBusinessId;
     const galleryRef = collection(this.firestore, `businesses/${resolvedId}/gallery`);
-    return collectionData(galleryRef);
+    return from(getDocs(galleryRef)).pipe(
+      map(snapshot => snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })))
+    );
   }
 
   getBusinessLifeStyleGalleryImagesById(businessId: string): Observable<any[]> {
@@ -89,7 +103,12 @@ export class WebContentService {
   getBusinessUploadedImagesById(businessId: string, uploadLocation: string): Observable<HeroImage[]> {
     const resolvedId = businessId?.trim() || this.defaultBusinessId;
     const uploadRef = collection(this.firestore, `businesses/${resolvedId}/${uploadLocation}`);
-    return collectionData(uploadRef) as Observable<HeroImage[]>;
+    return from(getDocs(uploadRef)).pipe(
+      map(snapshot => snapshot.docs.map(doc => {
+        const data = doc.data();
+        return { id: doc.id, url: data['url'] || '', ...data } as HeroImage;
+      }))
+    );
   }
 
   checkImageExists(imageUrl: string): Promise<boolean> {
