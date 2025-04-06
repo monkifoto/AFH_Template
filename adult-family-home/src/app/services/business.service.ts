@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import {
-  Firestore, collection, collectionData, doc, docData, getDoc,
-  setDoc, updateDoc, deleteDoc, addDoc, query, where
+  Firestore,
 } from '@angular/fire/firestore';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, doc, getDoc, getDocs, collection ,
+  setDoc, updateDoc, deleteDoc, addDoc, query, where } from 'firebase/firestore';
+import { environment } from '../../environments/environment';
+
 import {
   Storage, ref as storageRef, uploadBytesResumable, getDownloadURL as storageGetDownloadURL
 } from '@angular/fire/storage';
@@ -15,20 +19,26 @@ import { Section } from '../model/section.model';
   providedIn: 'root'
 })
 export class BusinessService {
+  private firestore = getFirestore(initializeApp(environment.firebase));
   private basePath = 'businesses';
   private defaultBusinessId = 'Z93oAAVwFAwhmdH2lLtB';
 
-  constructor(private firestore: Firestore, private storage: Storage) {}
+  constructor( private storage: Storage) {}
 
   createBusiness(business: Business): Observable<Business> {
     const newDocRef = doc(collection(this.firestore, this.basePath));
     return from(setDoc(newDocRef, { ...business, id: newDocRef.id })).pipe(
-      switchMap(() => docData(newDocRef) as Observable<Business>)
+      switchMap(() => from(getDoc(newDocRef))),
+      map((docSnap) => ({ id: docSnap.id, ...docSnap.data() } as Business))
     );
   }
 
+
   getBusinesses(): Observable<Business[]> {
-    return collectionData(collection(this.firestore, this.basePath), { idField: 'id' }) as Observable<Business[]>;
+    const colRef = collection(this.firestore, this.basePath);
+    return from(getDocs(colRef)).pipe(
+      map((snap) => snap.docs.map((d) => ({ id: d.id, ...d.data() } as Business)))
+    );
   }
 
   getAllBusinesses(): Observable<Business[]> {
@@ -37,7 +47,9 @@ export class BusinessService {
 
   getActiveBusinesses(): Observable<Business[]> {
     const q = query(collection(this.firestore, this.basePath), where('isActive', '==', true));
-    return collectionData(q, { idField: 'id' }) as Observable<Business[]>;
+    return from(getDocs(q)).pipe(
+      map((snap) => snap.docs.map((d) => ({ id: d.id, ...d.data() } as Business)))
+    );
   }
 
   getBusiness(id: string): Observable<Business | undefined> {
@@ -48,21 +60,26 @@ export class BusinessService {
     const resolvedBusinessId = businessId?.trim() || this.defaultBusinessId;
     const businessRef = doc(this.firestore, `${this.basePath}/${resolvedBusinessId}`);
 
-    return docData(businessRef).pipe(
-      switchMap((business) => {
-        if (!business) return of(undefined);
-        const businessWithId = { ...business, id: resolvedBusinessId } as Business;
+    return from(getDoc(businessRef)).pipe(
+      switchMap((docSnap) => {
+        if (!docSnap.exists()) return of(undefined);
+        const business = { ...docSnap.data(), id: resolvedBusinessId } as Business;
 
         const sectionsRef = collection(this.firestore, `${this.basePath}/${resolvedBusinessId}/sections`);
-        return collectionData(sectionsRef, { idField: 'id' }).pipe(
-          switchMap((sections) => {
-            const typedSections = sections as Section[];
-            const updatedBusiness = { ...businessWithId, sections: typedSections };
-            const themeRef = doc(this.firestore, `${this.basePath}/${resolvedBusinessId}/theme/themeDoc`);
+        return from(getDocs(sectionsRef)).pipe(
+          switchMap((sectionSnaps) => {
+            const sections = sectionSnaps.docs.map(s => ({
+              id: s.id,
+              ...(s.data() as Partial<Section>)
+            })) as Section[];
+            const updatedBusiness = { ...business, sections };
 
+            const themeRef = doc(this.firestore, `${this.basePath}/${resolvedBusinessId}/theme/themeDoc`);
             return from(getDoc(themeRef)).pipe(
-              map(themeSnap => {
-                const themeData = themeSnap.exists() ? themeSnap.data() as Theme : this.getDefaultTheme();
+              map((themeSnap) => {
+                const themeData = themeSnap.exists()
+                  ? (themeSnap.data() as Theme)
+                  : this.getDefaultTheme();
                 updatedBusiness.theme = themeData;
                 return updatedBusiness;
               })
@@ -108,9 +125,11 @@ export class BusinessService {
     return addDoc(sectionsRef, section);
   }
 
-  getSections(businessId: string): Observable<any[]> {
+  getSections(businessId: string): Observable<Section[]> {
     const sectionsRef = collection(this.firestore, `${this.basePath}/${businessId}/sections`);
-    return collectionData(sectionsRef, { idField: 'sectionId' });
+    return from(getDocs(sectionsRef)).pipe(
+      map((snap) => snap.docs.map((d) => ({ id: d.id, ...(d.data() as Partial<Section>) })) as Section[])
+    );
   }
 
   updateSection(businessId: string, sectionId: string, section: any): Promise<void> {
@@ -129,7 +148,9 @@ export class BusinessService {
 
   getLocations(businessId: string): Observable<any[]> {
     const locationsRef = collection(this.firestore, `${this.basePath}/${businessId}/locations`);
-    return collectionData(locationsRef, { idField: 'id' });
+    return from(getDocs(locationsRef)).pipe(
+      map((snap) => snap.docs.map((d) => ({ id: d.id, ...d.data() })))
+    );
   }
 
   updateLocation(businessId: string, locationId: string, location: any): Promise<void> {

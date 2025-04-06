@@ -1,26 +1,25 @@
 import { Injectable } from '@angular/core';
-import {
-  Firestore, doc, getDoc, setDoc, collection,
-  collectionData, docData,
-  DocumentReference
-} from '@angular/fire/firestore';
+import { getFirestore, doc, getDoc, setDoc, DocumentReference } from 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
 import { from, Observable, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, take } from 'rxjs/operators';
 import { Theme } from '../model/business-questions.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
+  private firestore = getFirestore(initializeApp(environment.firebase));
   private themeLink: HTMLLinkElement;
 
-  constructor(private firestore: Firestore) {
+  constructor() {
     this.themeLink = document.createElement('link');
     this.themeLink.rel = 'stylesheet';
     document.head.appendChild(this.themeLink);
   }
 
-  public defaultTheme = {
+  public defaultTheme: Theme = {
     themeFileName: 'styles.css',
     primaryColor: '#fffaf2',
     secondaryColor: '#f8f3f0',
@@ -34,7 +33,7 @@ export class ThemeService {
     navActiveText: '#ffffff',
     buttonColor: '#D9A064',
     buttonHoverColor: '#c9605b',
-    themeType: 'demo' // Ensures required property
+    themeType: 'demo'
   };
 
   getBusinessTheme(businessId: string): Observable<Theme> {
@@ -44,12 +43,12 @@ export class ThemeService {
         const data = snapshot.exists() ? snapshot.data() : this.defaultTheme;
         return {
           ...data,
-          themeType: data.themeType || 'demo', // Ensures required property
+          themeType: data.themeType || 'demo',
         } as Theme;
       })
     );
   }
-  
+
   getThemeColors(businessId: string): Observable<any> {
     const businessRef = doc(this.firestore, `businesses/${businessId}`);
     const themeRef = doc(this.firestore, `businesses/${businessId}/theme/themeDoc`);
@@ -58,8 +57,8 @@ export class ThemeService {
       take(1),
       switchMap(businessSnap => {
         if (!businessSnap.exists()) {
-          console.error('Theme Service: - Business document does not exist!');
-          return throwError(() => new Error('Theme Service: - Business document does not exist'));
+          console.error('Theme Service - Business document does not exist!');
+          return throwError(() => new Error('Theme Service - Business document does not exist'));
         }
 
         return from(getDoc(themeRef)).pipe(
@@ -69,7 +68,7 @@ export class ThemeService {
             } else {
               return from(setDoc(themeRef, this.defaultTheme)).pipe(
                 switchMap(() => {
-                  this.applyThemeFile(this.defaultTheme.themeFileName);
+                  this.applyThemeFile(this.defaultTheme.themeFileName ?? 'styles.css');
                   return of(this.defaultTheme);
                 })
               );
@@ -79,7 +78,8 @@ export class ThemeService {
       }),
       catchError(error => {
         console.error('Error fetching theme:', error);
-        this.applyThemeFile(this.defaultTheme.themeFileName);
+        this.applyThemeFile(this.defaultTheme.themeFileName ?? 'styles.css');
+
         return of(this.defaultTheme);
       })
     );
@@ -94,7 +94,7 @@ export class ThemeService {
         }
       })
       .catch(error => {
-        console.error('Theme Service: - Error updating colors:', error);
+        console.error('Theme Service - Error updating colors:', error);
         throw new Error(error);
       });
   }
