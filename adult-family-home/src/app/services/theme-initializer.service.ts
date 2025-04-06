@@ -2,75 +2,69 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ThemeService } from './theme-service.service';
 import { BusinessService } from './business.service';
+import { Firestore, doc, docData } from '@angular/fire/firestore';
+import { firstValueFrom } from 'rxjs';
+import { Theme } from '../model/business-questions.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeInitializerService {
-
   colors: any = {
-    primaryColor: '#fffaf2', // default primary color
-    secondaryColor: '#f8f3f0', // default secondary color
-    accentColor: '#F0C987', // default accent color
-    backgroundColor: '#F5F3E7', // default background color
-    darkBackgroundColor: '#4C6A56', // default dark background color
-    textColor: '#2F2F2F', // default text color
-    navBackgroundColor: '#F5F3E7', // default nav background color
-    navTextColor: '#33372C', // default nav text color
-    navActiveBackground: '#33372C', // default nav active background color
-    navActiveText: '#ffffff', // default nav active text color
-    buttonColor: '#D9A064', // default button color
-    buttonHoverColor: '#c9605b' // default button hover color
+    primaryColor: '#fffaf2',
+    secondaryColor: '#f8f3f0',
+    accentColor: '#F0C987',
+    backgroundColor: '#F5F3E7',
+    darkBackgroundColor: '#4C6A56',
+    textColor: '#2F2F2F',
+    navBackgroundColor: '#F5F3E7',
+    navTextColor: '#33372C',
+    navActiveBackground: '#33372C',
+    navActiveText: '#ffffff',
+    buttonColor: '#D9A064',
+    buttonHoverColor: '#c9605b'
   };
-
 
   constructor(
     private http: HttpClient,
     private themeService: ThemeService,
-    private businessService: BusinessService
+    private businessService: BusinessService,
+    private firestore: Firestore
   ) {}
 
   loadTheme(businessID: string): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      // Fetch the business theme
-      this.themeService.getBusinessTheme(businessID).subscribe({
-        next: (themeData) => {
-          const themeFileName = themeData ? themeData.themeFileName : 'default.css';
-          // Apply the theme and resolve the promise after applying it
-          this.themeService.applyThemeFile(themeFileName)
-            .then(() => resolve())
-            .catch(error => {
-              console.error('Error applying theme file:', error);
-              resolve(); // Resolve even if there's an error to allow the app to load
-            });
+    return new Promise<void>(async (resolve, reject) => {
+      try {
+        const themeRef = doc(this.firestore, `businesses/${businessID}/theme/themeDoc`);
+        const themeData = await firstValueFrom(docData(themeRef)) as Theme;
 
-            this.themeService.getThemeColors(businessID).subscribe(
-              (themeColors) => {
-                this.applyTheme(themeColors);
-                resolve();
-              },
-              (error) => {
-                console.error('Error loading theme:', error);
-                resolve();  // Resolve even on error to avoid blocking app load
-              }
-            );
-        },
-        error: (error) => {
-          console.error('Error loading business theme:', error);
-          this.themeService.applyThemeFile('default.css')
-            .then(() => resolve())
-            .catch(err => {
-              console.error('Error applying default theme file:', err);
-              resolve(); // Resolve even if there's an error
-            });
-        }
-      });
+        const themeFileName = themeData?.themeFileName || 'default.css';
+        await this.themeService.applyThemeFile(themeFileName);
+
+        this.themeService.getThemeColors(businessID).subscribe({
+          next: (themeColors) => {
+            this.applyTheme(themeColors);
+            resolve();
+          },
+          error: (err) => {
+            console.error('Error loading theme colors:', err);
+            resolve();
+          }
+        });
+      } catch (error) {
+        console.error('Error loading business theme:', error);
+        this.themeService.applyThemeFile('default.css')
+          .then(() => resolve())
+          .catch(err => {
+            console.error('Error applying default theme file:', err);
+            resolve();
+          });
+      }
     });
   }
 
-   // Apply the theme colors to the document
-   applyTheme(themeColors: any) {
-    if (!this.colors || !this.hasValidColors(this.colors)) {
+  applyTheme(themeColors: any) {
+    if (!this.colors || !this.hasValidColors(themeColors)) {
       console.warn('Theme colors are not properly defined.');
       return;
     }
@@ -89,8 +83,6 @@ export class ThemeInitializerService {
     document.documentElement.style.setProperty('--button-hover-color', themeColors.buttonHoverColor);
   }
 
-
-  // Validate if theme colors are complete
   hasValidColors(themeColors: any): boolean {
     return (
       themeColors.primaryColor &&
@@ -107,6 +99,4 @@ export class ThemeInitializerService {
       themeColors.buttonHoverColor
     );
   }
-
-
 }

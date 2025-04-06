@@ -5,7 +5,7 @@ import { AboutUsComponent } from './component/PAGES/about-us/about-us.component'
 import { ServicesComponent } from './component/PAGES/services/services.component';
 import { ContactUsComponent } from './component/PAGES/contact-us/contact-us.component';
 import { PhotoGalleryComponent } from './component/PAGES/photo-gallery/photo-gallery.component';
-import { authGuard } from './auth.guard';
+import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './admin/login/login.component';
 import { ResidentIntakeFormComponent } from './component/PAGES/resident-intake-form/resident-intake-form.component';
 import { TestimonialsListComponent } from './component/PAGES/testimonials/testimonials.component';

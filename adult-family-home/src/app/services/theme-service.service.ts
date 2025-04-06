@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import {
   Firestore, doc, getDoc, setDoc, collection,
-  collectionData, docData, DocumentReference
+  collectionData, docData,
+  DocumentReference
 } from '@angular/fire/firestore';
 import { from, Observable, of, throwError } from 'rxjs';
-import { catchError, switchMap, take } from 'rxjs/operators';
+import { catchError, map, switchMap, take } from 'rxjs/operators';
+import { Theme } from '../model/business-questions.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,14 +33,23 @@ export class ThemeService {
     navActiveBackground: '#33372C',
     navActiveText: '#ffffff',
     buttonColor: '#D9A064',
-    buttonHoverColor: '#c9605b'
+    buttonHoverColor: '#c9605b',
+    themeType: 'demo' // Ensures required property
   };
 
-  getBusinessTheme(businessId: string): Observable<any> {
-    const themeRef = doc(this.firestore, `businesses/${businessId}/theme/themeDoc`);
-    return docData(themeRef);
+  getBusinessTheme(businessId: string): Observable<Theme> {
+    const themeRef = doc(this.firestore, `businesses/${businessId}/theme/themeDoc`) as DocumentReference<Theme>;
+    return from(getDoc(themeRef)).pipe(
+      map((snapshot) => {
+        const data = snapshot.exists() ? snapshot.data() : this.defaultTheme;
+        return {
+          ...data,
+          themeType: data.themeType || 'demo', // Ensures required property
+        } as Theme;
+      })
+    );
   }
-
+  
   getThemeColors(businessId: string): Observable<any> {
     const businessRef = doc(this.firestore, `businesses/${businessId}`);
     const themeRef = doc(this.firestore, `businesses/${businessId}/theme/themeDoc`);
@@ -54,16 +65,12 @@ export class ThemeService {
         return from(getDoc(themeRef)).pipe(
           switchMap(themeSnap => {
             if (themeSnap.exists()) {
-              const themeData = themeSnap.data();
-              if (themeData?.['themeFileName']) {
-                // this.applyThemeFile(themeData['themeFileName']);
-              }
-              return docData(themeRef);
+              return of(themeSnap.data());
             } else {
               return from(setDoc(themeRef, this.defaultTheme)).pipe(
                 switchMap(() => {
                   this.applyThemeFile(this.defaultTheme.themeFileName);
-                  return docData(themeRef);
+                  return of(this.defaultTheme);
                 })
               );
             }
@@ -94,7 +101,16 @@ export class ThemeService {
 
   resetToDefaultColors(): Observable<any> {
     const defaultRef = doc(this.firestore, 'defaultSettings/colors');
-    return docData(defaultRef);
+    return from(getDoc(defaultRef)).pipe(
+      switchMap(snapshot => {
+        if (snapshot.exists()) {
+          return of(snapshot.data());
+        } else {
+          console.warn('No default colors found in Firestore.');
+          return of(this.defaultTheme);
+        }
+      })
+    );
   }
 
   applyThemeFile(themeFileName: string): Promise<void> {
