@@ -4,8 +4,15 @@ import {
   OnInit,
   ViewChild,
   ViewEncapsulation,
+  inject
 } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormArray,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { BusinessService } from 'src/app/services/business.service';
 import { UploadService } from 'src/app/services/upload.service';
 import {
@@ -13,16 +20,20 @@ import {
   BusinessModel,
 } from 'src/app/model/business-questions.model';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { EmployeeComponent } from '../employee/employee.component';
 import { ReviewsComponent } from '../reviews/reviews.component';
 import { ServicesPageComponent } from '../services-page/services-page.component';
 import { AboutUsComponent } from 'src/app/component/PAGES/about-us/about-us.component';
 import { SectionManagerComponent } from '../section-manager/section-manager.component';
 import { BusinessLocationsComponent } from '../business-locations/business-locations.component';
-import { take } from 'rxjs/operators';
+import {
+  getDownloadURL,
+  ref as storageRef,
+Storage } from '@angular/fire/storage';
+import { S } from '@angular/core/weak_ref.d-DOjz-6fK';
+
 
 @Component({
     selector: 'app-edit-business',
@@ -58,7 +69,6 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private businessService: BusinessService,
     private uploadService: UploadService,
-    private storage: AngularFireStorage,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -84,43 +94,23 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     this.businessService.getBusiness(this.businessId).subscribe(
       (business) => {
         if (business && !this.isFormPopulated) {
-         // console.log('Business data:', business); // Debugging line
           this.business = business;
           this.populateForm(business);
           this.isFormPopulated = true;
 
-
-          // Ensure each section has an ID
-          if (business.sections) {
-            business.sections.forEach((s, index) => {
-             // console.log(`🔥 Load Business Data in Edit Business Section ${index}:`,  s);
-              if (!s.id) {
-                console.warn(`⚠️ Section at index ${index} is missing an ID!`);
-              }
+          if (business.logoImage && this.isFirebaseStoragePath(business.logoImage)) {
+            const storage = inject(Storage);
+            const fileRef = storageRef(storage, business.logoImage);
+            getDownloadURL(fileRef).then((url) => {
+              business.logoImage = url;
             });
           }
-          // Check if the logo image is a Firebase storage path
-          if (
-            business.logoImage &&
-            this.isFirebaseStoragePath(business.logoImage)
-          ) {
-            this.storage
-              .refFromURL(business.logoImage)
-              .getDownloadURL()
-              .subscribe((url) => {
-                business.logoImage = url; // Update the URL for display
-              });
-          }
-        }
-        else{
-          console.warn("⚠️ Form already populated, skipping redundant calls.");
         }
       },
-      (error) => {
-        console.error('Error loading business data:', error); // Debugging line
-      }
+      (error) => console.error('Error loading business data:', error)
     );
   }
+
 
   initializeForm(): void {
     this.businessForm = this.fb.group({

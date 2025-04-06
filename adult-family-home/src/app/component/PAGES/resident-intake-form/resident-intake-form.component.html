@@ -1,6 +1,7 @@
 <!-- <app-hero></app-hero> -->
 <div *ngIf="business">
-  <app-hero [layoutType]="business.theme.themeType"></app-hero>
+  <app-hero [layoutType]="business.theme.themeType || 'default'"></app-hero>
+
 
   <form [formGroup]="intakeForm" (ngSubmit)="onSubmit()">
     <!-- Personal Information -->

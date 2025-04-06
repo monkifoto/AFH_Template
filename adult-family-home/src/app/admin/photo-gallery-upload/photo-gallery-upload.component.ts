@@ -1,6 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+  Firestore,
+  collection,
+  doc,
+  getDocs,
+  query,
+  where,
+  updateDoc,
+} from '@angular/fire/firestore';
+import {
+  Storage,
+  ref as storageRef,
+  deleteObject,
+} from '@angular/fire/storage';
 import { from, Observable } from 'rxjs';
 import { finalize, map, switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
@@ -8,31 +20,30 @@ import { UploadService } from 'src/app/services/upload.service';
 import { WebContentService } from 'src/app/services/web-content.service';
 
 @Component({
-    selector: 'app-photo-gallery-upload',
-    templateUrl: './photo-gallery-upload.component.html',
-    styleUrls: ['./photo-gallery-upload.component.css'],
-    standalone: false
+  selector: 'app-photo-gallery-upload',
+  templateUrl: './photo-gallery-upload.component.html',
+  styleUrls: ['./photo-gallery-upload.component.css'],
+  standalone: false
 })
 export class PhotoGalleryUploadComponent implements OnInit {
-  @Input()
-  businessId!: string;
+  @Input() businessId!: string;
   images!: any[];
-  uploadProgress: { [key: string]: Observable<number> } = {};  // Track progress for each file
-  uploadedImages: { [key: string]: string } = {};  // Store the uploaded image URLs
-  filesToUpload: File[] = [];  // Files selected for upload
-  uploadLocation = 'gallery'; // Default location
+  uploadProgress: { [key: string]: Observable<number> } = {};
+  uploadedImages: { [key: string]: string } = {};
+  filesToUpload: File[] = [];
+  uploadLocation = 'gallery';
   selectedImageUrl: string | null = null;
 
   constructor(
-    private storage: AngularFireStorage,
-    private firestore: AngularFirestore,
+    private storage: Storage,
+    private firestore: Firestore,
     private uploadService: UploadService,
     private route: ActivatedRoute,
-    private webContent: WebContentService,
+    private webContent: WebContentService
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       this.businessId = params['id'];
       this.loadImages();
     });
@@ -41,16 +52,19 @@ export class PhotoGalleryUploadComponent implements OnInit {
   uploadFiles(event: any) {
     const files: File[] = event.target.files;
     for (let file of files) {
-      // const title = prompt('Enter image title:');
-      // const description = prompt('Enter image description:');
-      // const link = prompt('Enter image link:');
-      // const order = prompt('Enter image order:');
-      // const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, this.uploadLocation);
-      const title :string = '';
-      const description :string = '';
-      const link :string = '';
-      const order :string = '';
-      const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(file, this.businessId, this.uploadLocation, title || '', description || '', link || '', order ||'');
+      const title = '';
+      const description = '';
+      const link = '';
+      const order = '';
+      const { uploadProgress, downloadUrl } = this.uploadService.uploadFile(
+        file,
+        this.businessId,
+        this.uploadLocation,
+        title,
+        description,
+        link,
+        order
+      );
       this.uploadProgress[file.name] = uploadProgress;
       downloadUrl.subscribe((url: string) => {
         this.uploadedImages[file.name] = url;
@@ -63,7 +77,6 @@ export class PhotoGalleryUploadComponent implements OnInit {
       this.uploadService
         .deleteFile(image.url, this.businessId, this.uploadLocation)
         .then(() => {
-          // Step 3: Update the local array
           this.images = this.images.filter((img) => img.url !== image.url);
         })
         .catch((error) => {
@@ -71,7 +84,6 @@ export class PhotoGalleryUploadComponent implements OnInit {
         });
     }
   }
-
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
@@ -95,28 +107,27 @@ export class PhotoGalleryUploadComponent implements OnInit {
   }
 
   loadImages(): void {
-    this.webContent.getBusinessUploadedImagesById(this.businessId, this.uploadLocation).pipe(
-      switchMap(images => {
-        // Create an array of observables that check if the image exists
-        const checks = images.map(async image => {
-          const exists = await this.webContent.checkImageExists(image.url);
-          return exists ? image : null;  // Return image only if it exists
-        });
-
-        // Resolve all checks
-        return from(Promise.all(checks));
-      }),
-      map(images => images.filter(image => image !== null))  // Filter out null values
-    ).subscribe(filteredImages => {
-      this.images = filteredImages.map(img => ({
-        ...img,
-        title: (img as any).title || '',
-        description: (img as any).description || '',
-        link: (img as any).link || '',
-        order: (img as any).order || ''
-      }));
-    });
-
+    this.webContent
+      .getBusinessUploadedImagesById(this.businessId, this.uploadLocation)
+      .pipe(
+        switchMap((images) => {
+          const checks = images.map(async (image) => {
+            const exists = await this.webContent.checkImageExists(image.url);
+            return exists ? image : null;
+          });
+          return from(Promise.all(checks));
+        }),
+        map((images) => images.filter((image) => image !== null))
+      )
+      .subscribe((filteredImages) => {
+        this.images = filteredImages.map((img) => ({
+          ...img,
+          title: (img as any).title || '',
+          description: (img as any).description || '',
+          link: (img as any).link || '',
+          order: (img as any).order || '',
+        }));
+      });
   }
 
   onImageClick(imageUrl: string) {
@@ -127,20 +138,20 @@ export class PhotoGalleryUploadComponent implements OnInit {
     this.selectedImageUrl = null;
   }
 
-  saveImageDetails(image: any) {
-    this.firestore
-      .collection('businesses')
-      .doc(this.businessId)
-      .collection(this.uploadLocation)
-      .ref.where('url', '==', image.url)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          doc.ref.update({ title: image.title, description: image.description, link: image.link, order:image.order });
-        });
-      })
-      .catch((error) => console.error('Error updating image details:', error));
+  async saveImageDetails(image: any) {
+    const collRef = collection(
+      this.firestore,
+      `businesses/${this.businessId}/${this.uploadLocation}`
+    );
+    const q = query(collRef, where('url', '==', image.url));
+    const snapshot = await getDocs(q);
+    snapshot.forEach(async (docSnap) => {
+      await updateDoc(docSnap.ref, {
+        title: image.title,
+        description: image.description,
+        link: image.link,
+        order: image.order,
+      });
+    });
   }
-
-
 }

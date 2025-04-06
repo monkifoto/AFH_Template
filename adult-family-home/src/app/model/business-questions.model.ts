@@ -140,7 +140,7 @@ export interface Theme {
   buttonColor: string;
   buttonHoverColor: string;
 
-  themeType: string;
+  themeType?: string;
 }
 
 export class BusinessModel {
