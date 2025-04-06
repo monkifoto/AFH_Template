@@ -63,6 +63,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
   showAutoSaveMessage: boolean = false;
   private isSubmitting: boolean = false;
 
+
   uploads: { uploadProgress: number; downloadUrl?: string }[] = [];
 
   constructor(
@@ -91,6 +92,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
   }
 
   loadBusinessData(): void {
+    const storage = inject(Storage);
     this.businessService.getBusiness(this.businessId).subscribe(
       (business) => {
         if (business && !this.isFormPopulated) {
@@ -99,7 +101,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
           this.isFormPopulated = true;
 
           if (business.logoImage && this.isFirebaseStoragePath(business.logoImage)) {
-            const storage = inject(Storage);
+
             const fileRef = storageRef(storage, business.logoImage);
             getDownloadURL(fileRef).then((url) => {
               business.logoImage = url;
