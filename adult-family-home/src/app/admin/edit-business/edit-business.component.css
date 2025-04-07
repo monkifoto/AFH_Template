@@ -128,3 +128,15 @@ button[type="submit"]:hover {
     text-align: center;
   }
 }
+
+
+.business-id-link {
+  display: block;
+  margin-bottom: 1rem;
+  background: white;
+  padding: 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: black !important;
+  font-size: 0.9rem;
+}

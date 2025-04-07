@@ -269,6 +269,10 @@
                       </option>
                     </select>
                   </div>
+                  <div class="col">
+                    <label>Content Padding (px)</label>
+                    <input type="number" formControlName="contentPadding" class="form-control" />
+                  </div>
                 </div>
 
                 <!-- <p>Image URL: {{ section.get("sectionImageUrl")?.value }}</p> -->
@@ -312,6 +316,25 @@
                       formControlName="borderRadius"
                       class="form-control"
                     />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <label>Padding Top (px)</label>
+                    <input type="number" formControlName="paddingTop" class="form-control" />
+                  </div>
+                  <div class="col">
+                    <label>Padding Bottom (px)</label>
+                    <input type="number" formControlName="paddingBottom" class="form-control" />
+                  </div>
+                  <div class="col">
+                    <label>Padding Left (px)</label>
+                    <input type="number" formControlName="paddingLeft" class="form-control" />
+                  </div>
+                  <div class="col">
+                    <label>Padding Right (px)</label>
+                    <input type="number" formControlName="paddingRight" class="form-control" />
                   </div>
                 </div>
               </div>

@@ -45,4 +45,9 @@ export  interface Section {
   backgroundColor: any;
   boxShadow:boolean;
   borderRadius:number;
+  paddingTop: number,
+paddingBottom: number,
+paddingLeft: number,
+paddingRight: number,
+contentPadding:number,
 }
