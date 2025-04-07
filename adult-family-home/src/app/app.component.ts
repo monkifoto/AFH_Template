@@ -27,18 +27,16 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.businessId = params.get('id') || 'MGou3rzTVIbP77OLmZa7'; // Fallback if undefined
-      this.loadBusinessData();
-    });
     if (isPlatformBrowser(this.platformId)) {
-      if (typeof window !== 'undefined') {
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js';
-        document.body.appendChild(script);
-      }
+      this.route.paramMap.subscribe(params => {
+        this.businessId = params.get('id') || 'MGou3rzTVIbP77OLmZa7';
+        this.loadBusinessData();
+      });
+
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js';
+      document.body.appendChild(script);
     }
-      // this.loadBusinessData();
   }
 
   // Fetch business data

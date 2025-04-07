@@ -2,32 +2,20 @@ import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ThemeService } from './theme-service.service';
 import { BusinessService } from './business.service';
-import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { environment } from '../../environments/environment';
 import { isPlatformBrowser } from '@angular/common';
+import { initializeApp, getApps } from 'firebase/app';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThemeInitializerService {
-  private firestore = getFirestore(initializeApp(environment.firebase));
-  private isBrowser: boolean;
+  private firestore = getFirestore(
+    getApps().length ? getApps()[0] : initializeApp(environment.firebase)
+  );
 
-  colors: any = {
-    primaryColor: '#fffaf2',
-    secondaryColor: '#f8f3f0',
-    accentColor: '#F0C987',
-    backgroundColor: '#F5F3E7',
-    darkBackgroundColor: '#4C6A56',
-    textColor: '#2F2F2F',
-    navBackgroundColor: '#F5F3E7',
-    navTextColor: '#33372C',
-    navActiveBackground: '#33372C',
-    navActiveText: '#ffffff',
-    buttonColor: '#D9A064',
-    buttonHoverColor: '#c9605b'
-  };
+  private isBrowser: boolean;
 
   constructor(
     private http: HttpClient,
@@ -40,17 +28,14 @@ export class ThemeInitializerService {
 
   async loadTheme(businessID: string): Promise<void> {
     try {
-      // Step 1: Get theme document
       const themeRef = doc(this.firestore, `businesses/${businessID}/theme/themeDoc`);
       const themeSnap = await getDoc(themeRef);
-      const themeData = themeSnap.data();
 
+      const themeData = themeSnap.exists() ? themeSnap.data() : null;
       const themeFileName = themeData?.['themeFileName'] || 'default.css';
 
-      // Step 2: Apply theme CSS file
       await this.themeService.applyThemeFile(themeFileName);
 
-      // Step 3: Apply theme colors (browser-only)
       if (this.isBrowser) {
         this.themeService.getThemeColors(businessID).subscribe({
           next: (themeColors) => this.applyTheme(themeColors),
@@ -63,45 +48,42 @@ export class ThemeInitializerService {
     }
   }
 
-  applyTheme(themeColors: any) {
-    if (!this.colors || !this.hasValidColors(themeColors)) {
-      console.warn('Theme colors are not properly defined.');
+  applyTheme(themeColors: any): void {
+    if (!this.isBrowser || !this.hasValidColors(themeColors)) {
+      console.warn('Skipping theme application. Invalid data or not in browser.');
       return;
     }
 
-    if (this.isBrowser) {
-      const root = document.documentElement;
-      root.style.setProperty('--primary-color', themeColors.primaryColor);
-      root.style.setProperty('--secondary-color', themeColors.secondaryColor);
-      root.style.setProperty('--accent-color', themeColors.accentColor);
-      root.style.setProperty('--background-color', themeColors.backgroundColor);
-      root.style.setProperty('--dark-background-color', themeColors.darkBackgroundColor);
-      root.style.setProperty('--text-color', themeColors.textColor);
-      root.style.setProperty('--nav-background-color', themeColors.navBackgroundColor);
-      root.style.setProperty('--nav-text-color', themeColors.navTextColor);
-      root.style.setProperty('--nav-active-background', themeColors.navActiveBackground);
-      root.style.setProperty('--nav-active-text', themeColors.navActiveText);
-      root.style.setProperty('--button-color', themeColors.buttonColor);
-      root.style.setProperty('--button-hover-color', themeColors.buttonHoverColor);
-    } else {
-      console.log('⛔ Skipping CSS variable injection on server.');
-    }
+    const root = document.documentElement;
+    root.style.setProperty('--primary-color', themeColors.primaryColor);
+    root.style.setProperty('--secondary-color', themeColors.secondaryColor);
+    root.style.setProperty('--accent-color', themeColors.accentColor);
+    root.style.setProperty('--background-color', themeColors.backgroundColor);
+    root.style.setProperty('--dark-background-color', themeColors.darkBackgroundColor);
+    root.style.setProperty('--text-color', themeColors.textColor);
+    root.style.setProperty('--nav-background-color', themeColors.navBackgroundColor);
+    root.style.setProperty('--nav-text-color', themeColors.navTextColor);
+    root.style.setProperty('--nav-active-background', themeColors.navActiveBackground);
+    root.style.setProperty('--nav-active-text', themeColors.navActiveText);
+    root.style.setProperty('--button-color', themeColors.buttonColor);
+    root.style.setProperty('--button-hover-color', themeColors.buttonHoverColor);
   }
 
-  hasValidColors(themeColors: any): boolean {
-    return (
-      themeColors.primaryColor &&
-      themeColors.secondaryColor &&
-      themeColors.accentColor &&
-      themeColors.backgroundColor &&
-      themeColors.darkBackgroundColor &&
-      themeColors.textColor &&
-      themeColors.navBackgroundColor &&
-      themeColors.navTextColor &&
-      themeColors.navActiveBackground &&
-      themeColors.navActiveText &&
-      themeColors.buttonColor &&
-      themeColors.buttonHoverColor
-    );
+  private hasValidColors(themeColors: any): boolean {
+    const keys = [
+      'primaryColor',
+      'secondaryColor',
+      'accentColor',
+      'backgroundColor',
+      'darkBackgroundColor',
+      'textColor',
+      'navBackgroundColor',
+      'navTextColor',
+      'navActiveBackground',
+      'navActiveText',
+      'buttonColor',
+      'buttonHoverColor',
+    ];
+    return keys.every((key) => themeColors?.[key]);
   }
 }

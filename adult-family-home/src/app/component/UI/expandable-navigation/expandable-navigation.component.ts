@@ -15,7 +15,7 @@ export class ExpandableNavigationComponent  implements OnInit {
   businessId: string = '';
   business: Business | null = null;
   layoutType?: string = 'demo';
-  locations: any;
+  locations: any[] = [];
   isShrunk: boolean = false;
   menuOpen: boolean = false;
   locationsOpen: boolean = false;

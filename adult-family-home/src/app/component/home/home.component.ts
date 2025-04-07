@@ -33,6 +33,8 @@ import { ItemListImageComponent } from '../UI/item-list-image/item-list-image.co
 import { StatsComponent } from '../UI/stats/stats.component';
 import { VideoComponent } from '../UI/video/video.component';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
+import { PLATFORM_ID, Inject } from '@angular/core';
 
 @Component({
     selector: 'app-home',
@@ -75,6 +77,8 @@ export class HomeComponent implements OnInit {
     private metaService: MetaService,
     private businessDataService: BusinessDataService,
     private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object,
+
   ) {}
 
   ngOnInit(): void {
@@ -237,15 +241,14 @@ export class HomeComponent implements OnInit {
     }
 
     // Manually Load TestimonialCarouselComponent if Business Has a Google Place ID
-    if (this.business?.placeId) {
+    if (isPlatformBrowser(this.platformId) && this.business?.placeId) {
       const testimonialCarouselFactory =
-      this.resolver.resolveComponentFactory(TestimonialCarouselComponent);
+        this.resolver.resolveComponentFactory(TestimonialCarouselComponent);
       const testimonialCarouselRef =
-      this.container.createComponent(TestimonialCarouselComponent, {
+        this.container.createComponent(TestimonialCarouselComponent, {
           index: undefined,
           injector: this.injector,
-        }
-      );
+        });
 
       testimonialCarouselRef.instance.placeId = this.business.placeId;
     }

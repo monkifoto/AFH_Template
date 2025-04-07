@@ -84,6 +84,8 @@ import { TextWrapperComponent } from './component/text-wrapper/text-wrapper.comp
 import { SERVER_REQUEST } from './tokens/server-request.token';
 import { Request } from 'express';
 import { MetaService } from './services/meta-service.service';
+import { PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 
     // Map hostnames to business IDs
@@ -113,11 +115,13 @@ import { MetaService } from './services/meta-service.service';
       "www.sbmediahub.com": "MGou3rzTVIbP77OLmZa7",
     };
 
+
     export function initializerFactory() {
       const req = inject(SERVER_REQUEST, { optional: true }) as Request | undefined;
       const themeService = inject(ThemeInitializerService);
       const businessDataService = inject(BusinessDataService);
       const metaService = inject(MetaService);
+      const platformId = inject(PLATFORM_ID);
 
       let hostname = '';
       let businessId = '';
@@ -127,7 +131,7 @@ import { MetaService } from './services/meta-service.service';
         const idParam = Array.isArray(idRaw) ? idRaw[0] : idRaw;
         hostname = req.hostname;
         businessId = String(businessIdMap[hostname] || idParam || 'MGou3rzTVIbP77OLmZa7');
-      } else if (typeof window !== 'undefined') {
+      } else if (isPlatformBrowser(platformId)) {
         const url = new URL(window.location.href);
         hostname = window.location.hostname;
         businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
@@ -158,6 +162,7 @@ import { MetaService } from './services/meta-service.service';
         }
       };
     }
+
 
 @NgModule({
   declarations: [
@@ -242,61 +247,7 @@ import { MetaService } from './services/meta-service.service';
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
     provideAuth(() => getAuth()),
-
-  //   provideAppInitializer(async () => {
-  //     console.log('Initializing app...');
-  //     const req = inject(SERVER_REQUEST, { optional: true }) as Request | undefined;
-
-  //     if (!req) {
-  //       console.warn('SERVER_REQUEST not provided, skipping server-side initialization.');
-  //       return;
-  //     }
-
-  //     const themeService = inject(ThemeInitializerService);
-  //     const businessDataService = inject(BusinessDataService);
-  //     const metaService = inject(MetaService);
-
-  //     const hostname = req.hostname;
-  //     const idRaw = req.query['id'];
-  //     const idParam = Array.isArray(idRaw) ? idRaw[0] : idRaw;
-
-  //     const businessId = String(businessIdMap[hostname] || idParam || 'MGou3rzTVIbP77OLmZa7');
-
-  //     try {
-  //       await themeService.loadTheme(businessId);
-  //     } catch (err) {
-  //       console.error('Error loading theme:', err);
-  //     }
-
-  //     try {
-  //       await businessDataService.loadBusinessData(businessId).toPromise();
-  //     } catch (err) {
-  //       console.error('Error loading business data:', err);
-  //     }
-
-  //     try {
-  //       const business = await businessDataService.loadBusinessData(businessId).toPromise();
-  //       if (business) {
-  //         console.log('Setting meta tags for:', business.id);
-  //         metaService.updateMetaTags({
-  //           title: business.metaTitle || business.businessName || 'Default Title',
-  //           description: business.metaDescription || 'Compassionate care for your loved ones.',
-  //           keywords: business.metaKeywords || 'adult care, Renton, Kent',
-  //           image: business.metaImage || '/assets/default-og.jpg',
-  //           url: business.businessURL || `https://${hostname}`
-  //         });
-  //       }
-  //     } catch (err) {
-  //       console.error('Error loading business data for meta:', err);
-  //     }
-  //   }),
-
-
-
-
-  provideAppInitializer(() => initializerFactory()())
-
-
+    provideAppInitializer(() => initializerFactory()())
   ],
 
   bootstrap: [AppComponent],

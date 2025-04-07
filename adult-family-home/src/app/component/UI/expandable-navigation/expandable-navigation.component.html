@@ -19,12 +19,13 @@
       <ul class="clemo-navbar-nav">
         <li class="clemo-nav-linkitem"><span class="clemo-nav-link"  (click)="navigateTo('home')">Home</span></li>
 
-        <li class="clemo-nav-linkitem dropdown" *ngIf="locations.length>1">
+        <li class="clemo-nav-linkitem dropdown" *ngIf="locations!.length > 1">
+
           <span class="clemo-nav-link dropdown-toggle" (click)="toggleDropdown(0)" >
             Locations <!-- Locations ({{ locations.length }}) -->
           </span>
           <ul class="dropdown-menu" [class.show]="expandedDropdownIndex === 0">
-            <li *ngIf="locations && locations.length === 0" class="dropdown-item">No locations available</li>
+            <li *ngIf="locations?.length === 0" class="dropdown-item">No locations available</li>
             <li class="dropdown-item" *ngFor="let location of locations; let i = index">
               <span (click)="selectLocation(i)">{{ location.locationName || 'Unknown City' }}</span>
             </li>

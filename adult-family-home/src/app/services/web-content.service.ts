@@ -31,7 +31,10 @@ export class WebContentService {
 
     return from(getDoc(businessRef)).pipe(
       map((docSnap) => {
-        if (!docSnap.exists()) return undefined;
+        if (!docSnap.exists()) {
+          console.warn(`Business document not found for ID: ${resolvedId}`);
+          return undefined;
+        }
         const data = docSnap.data() as Business;
         const { id: _, testimonials = [], ...rest } = data;
 

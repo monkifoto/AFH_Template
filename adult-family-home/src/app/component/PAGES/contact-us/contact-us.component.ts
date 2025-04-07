@@ -8,7 +8,9 @@ import { MetaService } from 'src/app/services/meta-service.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { EmailService } from 'src/app/services/email.service';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment';import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
+
 
 
 @Component({
@@ -29,7 +31,7 @@ export class ContactUsComponent  implements OnInit{
     email: '',
     phone: '',
     message: '',
-    website: this.extractBaseDomain(window.location.hostname)
+    website: ''
   };
 
   modalTitle: string = '';
@@ -43,7 +45,8 @@ export class ContactUsComponent  implements OnInit{
     private route: ActivatedRoute,private http: HttpClient,
     private emailService: EmailService,
     private router: Router,
-    private metaService: MetaService){}
+    private metaService: MetaService,
+    @Inject(PLATFORM_ID) private platformId: Object){}
 
 
       get sanitizedBusinessHours(): SafeHtml {
@@ -53,8 +56,12 @@ export class ContactUsComponent  implements OnInit{
       }
 
       ngOnInit(): void {
+
+        if (isPlatformBrowser(this.platformId)) {
+          this.formData.website = this.extractBaseDomain(window.location.hostname);
+        }
         const id = this.route.snapshot.queryParamMap.get('id');
-        if (id) {
+        if (id && isPlatformBrowser(this.platformId)) {
           window.history.replaceState({}, '', this.router.url.split('?')[0]);
         }
 

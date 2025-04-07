@@ -37,19 +37,38 @@ export function app(): express.Express {
   }));
 
   server.get('*', (req, res) => {
-    res.render(indexHtml, { req }, (err, html) => {
-      if (err) {
-        console.error('❌ SSR Render Error:', err);
-        res.status(500).send(err.message);
-      } else {
-        console.log('\n🔍 --- BEGIN SSR HTML OUTPUT ---');
-        console.log(html.slice(0, 1000)); // print first 1000 characters of HTML
-        console.log('🔍 --- END SSR HTML OUTPUT ---\n');
+    const start = Date.now();
+    console.log('\n🟡 SSR render started for URL:', req.url);
+    console.log(`🧠 Memory usage at start: ${(process.memoryUsage().rss / 1024 / 1024).toFixed(2)} MB`);
 
-        res.send(html);
+    res.render(indexHtml, { req }, (err, html) => {
+      const duration = Date.now() - start;
+
+      if (err) {
+        console.error('❌ SSR Render Error:', err.message || err);
+        console.error(err.stack || '');
+        res.status(500).send(err.message);
+        return;
       }
+
+      console.log('✅ SSR finished rendering HTML');
+      console.log(`⏱️ Render duration: ${duration}ms`);
+      console.log(`🧠 Memory usage at end: ${(process.memoryUsage().rss / 1024 / 1024).toFixed(2)} MB`);
+
+      const preview = html?.slice(0, 1000) || '[no HTML returned]';
+      console.log('🔍 --- BEGIN SSR HTML OUTPUT ---');
+      console.log(preview);
+      console.log('🔍 --- END SSR HTML OUTPUT ---\n');
+
+      res.send(html);
     });
+
+    // Optional: detect if response is taking too long
+    setTimeout(() => {
+      console.warn('⏳ SSR render still running after 10s. Possible infinite loop or unresolved Promise?');
+    }, 10000);
   });
+
 
   return server;
 }
