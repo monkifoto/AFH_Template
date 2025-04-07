@@ -5,7 +5,7 @@ import { IntakeForm } from 'src/app/model/intake-form.model';
 import { IntakeService } from 'src/app/services/intake.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 import { EmailService } from 'src/app/services/email.service';
-import { Modal } from 'bootstrap';
+// import { Modal } from 'bootstrap';
 import { MetaService } from 'src/app/services/meta-service.service';
 import { Business } from 'src/app/model/business-questions.model';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -24,7 +24,7 @@ export class ResidentIntakeFormComponent implements OnInit {
   intakeForm: FormGroup;
   modalTitle: string = '';
     modalMessage: string = '';
-    responseModal!: Modal; // Modal instance
+    // responseModal!: Modal; // Modal instance
 
   constructor(private fb: FormBuilder, private intakeService: IntakeService,
     private businessDataService: BusinessDataService,

@@ -30,8 +30,7 @@
               "src/styles.css"
             ],
            "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-               "node_modules/jquery/dist/jquery.min.js"
+
             ],
             "browser": "src/main.ts"
           },
@@ -100,7 +99,16 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/adult-family-home/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          }
         }
+
       }
     }
   },

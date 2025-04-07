@@ -81,6 +81,8 @@ import { PhoneFormatPipe } from './pipe/phone-format.pipe';
 import { ItemListImageComponent } from './component/UI/item-list-image/item-list-image.component';
 import { HeroManagerComponent } from './admin/hero-manager/hero-manager.component';
 import { TextWrapperComponent } from './component/text-wrapper/text-wrapper.component';
+import { SERVER_REQUEST } from './tokens/server-request.token';
+import { Request } from 'express';
 
 
     // Map hostnames to business IDs
@@ -247,19 +249,39 @@ import { TextWrapperComponent } from './component/text-wrapper/text-wrapper.comp
     provideStorage(() => getStorage()),
     provideAuth(() => getAuth()),
 
-    provideAppInitializer(() => {
+    provideAppInitializer(async () => {
+      const req = inject(SERVER_REQUEST, { optional: true }) as Request | undefined;
+
+      if (!req) {
+        console.warn('SERVER_REQUEST not provided, skipping server-side initialization.');
+        return;
+      }
+
       const themeService = inject(ThemeInitializerService);
-      const location = inject(Location);
-      const router = inject(Router);
+      const businessDataService = inject(BusinessDataService);
 
-      const hostname = window.location.hostname;
-      const url = new URL(window.location.href);
-      const businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
+      const hostname = req.hostname;
+      const idRaw = req.query['id'];
+      const idParam = Array.isArray(idRaw) ? idRaw[0] : idRaw;
 
-      return themeService.loadTheme(businessId).catch((err) => {
+      const businessId = String(businessIdMap[hostname] || idParam || 'MGou3rzTVIbP77OLmZa7');
+
+      try {
+        await themeService.loadTheme(businessId);
+      } catch (err) {
         console.error('Error loading theme:', err);
-      });
+      }
+
+      try {
+        await businessDataService.loadBusinessData(businessId).toPromise();
+      } catch (err) {
+        console.error('Error loading business data:', err);
+      }
     }),
+
+
+
+
 
     provideAppInitializer(() => {
       const themeService = inject(ThemeInitializerService);
