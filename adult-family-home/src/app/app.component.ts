@@ -46,6 +46,15 @@ export class AppComponent implements OnInit {
     this.webContent.getBusinessData(this.businessId).subscribe((data) => {
       if (data) {
         this.business = data;
+
+
+          this.metaService.updateMetaTags({
+            title: data.metaTitle || data.businessName || 'Default Title',
+            description: data.metaDescription || 'Adult Family Home providing quality care.',
+            keywords: data.metaKeywords || 'adult care, Renton, Kent, Washington',
+            image: data.metaImage || '/assets/default-og.jpg',
+            url: data.businessURL || `https://${data.businessURL || 'defaultsite.com'}`
+          });
       }
     });
   }

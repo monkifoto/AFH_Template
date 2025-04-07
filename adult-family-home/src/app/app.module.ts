@@ -83,6 +83,7 @@ import { HeroManagerComponent } from './admin/hero-manager/hero-manager.componen
 import { TextWrapperComponent } from './component/text-wrapper/text-wrapper.component';
 import { SERVER_REQUEST } from './tokens/server-request.token';
 import { Request } from 'express';
+import { MetaService } from './services/meta-service.service';
 
 
     // Map hostnames to business IDs
@@ -112,58 +113,51 @@ import { Request } from 'express';
       "www.sbmediahub.com": "MGou3rzTVIbP77OLmZa7",
     };
 
+    export function initializerFactory() {
+      const req = inject(SERVER_REQUEST, { optional: true }) as Request | undefined;
+      const themeService = inject(ThemeInitializerService);
+      const businessDataService = inject(BusinessDataService);
+      const metaService = inject(MetaService);
 
-    // export function themeInitializerFactory() {
-    //   const themeService = inject(ThemeInitializerService);
-    //   const location = inject(Location);
-    //   const router = inject(Router);
+      let hostname = '';
+      let businessId = '';
 
-    //   const hostname = window.location.hostname;
-    //   const url = new URL(window.location.href);
-    //   const businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
+      if (req) {
+        const idRaw = req.query['id'];
+        const idParam = Array.isArray(idRaw) ? idRaw[0] : idRaw;
+        hostname = req.hostname;
+        businessId = String(businessIdMap[hostname] || idParam || 'MGou3rzTVIbP77OLmZa7');
+      } else if (typeof window !== 'undefined') {
+        const url = new URL(window.location.href);
+        hostname = window.location.hostname;
+        businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
+      }
 
-    //   return () => themeService.loadTheme(businessId);
-    // }
+      return async () => {
+        console.log('✅ Initializing app...');
+        try {
+          await themeService.loadTheme(businessId);
+        } catch (err) {
+          console.error('❌ Theme error:', err);
+        }
 
-    // // ✅ Initializer for business data
-    // export function initializeBusinessDataFactory() {
-    //   const businessDataService = inject(BusinessDataService);
-    //   const location = inject(Location);
-    //   const router = inject(Router);
-
-    //   const hostname = window.location.hostname;
-    //   const url = new URL(window.location.href);
-    //   const businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
-
-    //   return () =>
-    //     businessDataService.loadBusinessData(businessId).toPromise().catch((err) => {
-    //       console.error('Error loading business data:', err);
-    //     });
-    // }
-
-// export function combinedInitializer(
-//   themeInitializer: ThemeInitializerService,
-//   businessDataService: BusinessDataService,
-//   location: Location,
-//   router: Router
-// ): () => Promise<void> {
-//   return async () => {
-//     // Initialize theme
-//     const hostname = window.location.hostname;
-//     const url = new URL(window.location.href);
-//     let businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
-
-//     await themeInitializer.loadTheme(businessId);
-
-//     // Initialize business data
-//     try {
-//       await businessDataService.loadBusinessData(businessId).toPromise();
-//       console.log("Business data loaded successfully");
-//     } catch (error) {
-//       console.error("Error loading business data:", error);
-//     }
-//   };
-// }
+        try {
+          const business = await businessDataService.loadBusinessData(businessId).toPromise();
+          if (business) {
+            console.log('✅ Meta: Setting tags for', business.businessName);
+            metaService.updateMetaTags({
+              title: business.metaTitle || business.businessName || 'Default Title',
+              description: business.metaDescription || 'Caring and comfort.',
+              keywords: business.metaKeywords || 'adult care, family home, Renton, Kent',
+              image: business.metaImage || '/assets/default-og.jpg',
+              url: business.businessURL || `https://${hostname}`
+            });
+          }
+        } catch (err) {
+          console.error('❌ Business data error:', err);
+        }
+      };
+    }
 
 @NgModule({
   declarations: [
@@ -249,63 +243,60 @@ import { Request } from 'express';
     provideStorage(() => getStorage()),
     provideAuth(() => getAuth()),
 
-    provideAppInitializer(async () => {
-      const req = inject(SERVER_REQUEST, { optional: true }) as Request | undefined;
+  //   provideAppInitializer(async () => {
+  //     console.log('Initializing app...');
+  //     const req = inject(SERVER_REQUEST, { optional: true }) as Request | undefined;
 
-      if (!req) {
-        console.warn('SERVER_REQUEST not provided, skipping server-side initialization.');
-        return;
-      }
+  //     if (!req) {
+  //       console.warn('SERVER_REQUEST not provided, skipping server-side initialization.');
+  //       return;
+  //     }
 
-      const themeService = inject(ThemeInitializerService);
-      const businessDataService = inject(BusinessDataService);
+  //     const themeService = inject(ThemeInitializerService);
+  //     const businessDataService = inject(BusinessDataService);
+  //     const metaService = inject(MetaService);
 
-      const hostname = req.hostname;
-      const idRaw = req.query['id'];
-      const idParam = Array.isArray(idRaw) ? idRaw[0] : idRaw;
+  //     const hostname = req.hostname;
+  //     const idRaw = req.query['id'];
+  //     const idParam = Array.isArray(idRaw) ? idRaw[0] : idRaw;
 
-      const businessId = String(businessIdMap[hostname] || idParam || 'MGou3rzTVIbP77OLmZa7');
+  //     const businessId = String(businessIdMap[hostname] || idParam || 'MGou3rzTVIbP77OLmZa7');
 
-      try {
-        await themeService.loadTheme(businessId);
-      } catch (err) {
-        console.error('Error loading theme:', err);
-      }
+  //     try {
+  //       await themeService.loadTheme(businessId);
+  //     } catch (err) {
+  //       console.error('Error loading theme:', err);
+  //     }
 
-      try {
-        await businessDataService.loadBusinessData(businessId).toPromise();
-      } catch (err) {
-        console.error('Error loading business data:', err);
-      }
-    }),
+  //     try {
+  //       await businessDataService.loadBusinessData(businessId).toPromise();
+  //     } catch (err) {
+  //       console.error('Error loading business data:', err);
+  //     }
+
+  //     try {
+  //       const business = await businessDataService.loadBusinessData(businessId).toPromise();
+  //       if (business) {
+  //         console.log('Setting meta tags for:', business.id);
+  //         metaService.updateMetaTags({
+  //           title: business.metaTitle || business.businessName || 'Default Title',
+  //           description: business.metaDescription || 'Compassionate care for your loved ones.',
+  //           keywords: business.metaKeywords || 'adult care, Renton, Kent',
+  //           image: business.metaImage || '/assets/default-og.jpg',
+  //           url: business.businessURL || `https://${hostname}`
+  //         });
+  //       }
+  //     } catch (err) {
+  //       console.error('Error loading business data for meta:', err);
+  //     }
+  //   }),
 
 
 
 
+  provideAppInitializer(() => initializerFactory()())
 
-    provideAppInitializer(() => {
-      const themeService = inject(ThemeInitializerService);
-      const businessDataService = inject(BusinessDataService);
-      const location = inject(Location);
-      const router = inject(Router);
-      const hostname = window.location.hostname;
-      const url = new URL(window.location.href);
-      const businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
 
-      return (async () => {
-        try {
-          await themeService.loadTheme(businessId);
-        } catch (err) {
-          console.error('Error loading theme:', err);
-        }
-
-        try {
-          await businessDataService.loadBusinessData(businessId).toPromise();
-        } catch (err) {
-          console.error('Error loading business data:', err);
-        }
-      })();
-    }),
   ],
 
   bootstrap: [AppComponent],

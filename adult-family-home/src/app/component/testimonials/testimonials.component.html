@@ -5,7 +5,7 @@
   <div class="testimonial-section-heading">
     <span class="testimonial-section-title main">Testimonials</span>
   </div>
-  <div class="testimonial">
+  <div class="testimonial"   *ngIf="testimonials?.length; else noTestimonials">
     <div class="testimonial-container" *ngFor="let testimonial of testimonials">
       <div>
         <div class="testimonial-content garamond">
@@ -30,7 +30,7 @@
       </div>
 
       <div class="ae-testimonial-container">
-        <div class="ae-testimonial-grid">
+        <div class="ae-testimonial-grid"   *ngIf="testimonials?.length; else noTestimonials">
           <div class="ae-testimonial-card" *ngFor="let testimonial of testimonials | slice:0:4">
             <div class="ae-testimonial-content">
               <div class="ae-testimonial-quote-icon">❝</div>
@@ -60,7 +60,7 @@
       </div>
 
       <div class="ae-testimonial-container">
-        <div class="ae-testimonial-grid">
+        <div class="ae-testimonial-grid"   *ngIf="testimonials?.length; else noTestimonials">
           <div class="ae-testimonial-card" *ngFor="let testimonial of testimonials | slice:0:4">
             <div class="ae-testimonial-content">
               <div class="ae-testimonial-quote-icon">❝</div>
@@ -91,7 +91,7 @@
         </div>
 
         <div class="ae-testimonial-container">
-          <div class="ae-testimonial-grid">
+          <div class="ae-testimonial-grid"   *ngIf="testimonials?.length; else noTestimonials">
             <div class="ae-testimonial-card" *ngFor="let testimonial of testimonials | slice:0:4">
               <div class="ae-testimonial-content">
                 <div class="ae-testimonial-quote-icon">❝</div>
@@ -137,5 +137,9 @@
 
 
     </ng-container>
+
+    <ng-template #noTestimonials>
+      <p class="no-testimonials-message">No testimonials available at the moment.</p>
+    </ng-template>
 
     </div>

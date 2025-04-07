@@ -24,7 +24,7 @@
             Locations <!-- Locations ({{ locations.length }}) -->
           </span>
           <ul class="dropdown-menu" [class.show]="expandedDropdownIndex === 0">
-            <li *ngIf="locations.length === 0" class="dropdown-item">No locations available</li>
+            <li *ngIf="locations && locations.length === 0" class="dropdown-item">No locations available</li>
             <li class="dropdown-item" *ngFor="let location of locations; let i = index">
               <span (click)="selectLocation(i)">{{ location.locationName || 'Unknown City' }}</span>
             </li>

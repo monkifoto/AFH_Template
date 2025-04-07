@@ -1,8 +1,9 @@
+import 'source-map-support/register'
 import 'zone.js/node';
 import express from 'express';
 import { join } from 'path';
 import { existsSync } from 'fs';
-
+import { readFileSync } from 'fs';
 import { renderModule } from '@angular/platform-server';
 import { AppServerModule } from './src/app/app.server.module';
 import { APP_BASE_HREF } from '@angular/common';
@@ -17,7 +18,7 @@ export function app(): express.Express {
     const req = (options as any).req;
 
     renderModule(AppServerModule, {
-      document: join(distFolder, indexHtml),
+      document: readFileSync(join(distFolder, indexHtml)).toString(),
       url: req.url,
       extraProviders: [
         { provide: APP_BASE_HREF, useValue: req.baseUrl },
@@ -36,7 +37,18 @@ export function app(): express.Express {
   }));
 
   server.get('*', (req, res) => {
-    res.render(indexHtml, { req });
+    res.render(indexHtml, { req }, (err, html) => {
+      if (err) {
+        console.error('❌ SSR Render Error:', err);
+        res.status(500).send(err.message);
+      } else {
+        console.log('\n🔍 --- BEGIN SSR HTML OUTPUT ---');
+        console.log(html.slice(0, 1000)); // print first 1000 characters of HTML
+        console.log('🔍 --- END SSR HTML OUTPUT ---\n');
+
+        res.send(html);
+      }
+    });
   });
 
   return server;
@@ -51,8 +63,8 @@ function run(): void {
 }
 
 declare const __non_webpack_require__: NodeRequire;
-if (require.main === module) {
+//if (require.main === module) {
   run();
-}
+//}
 
 export * from './src/main.server';

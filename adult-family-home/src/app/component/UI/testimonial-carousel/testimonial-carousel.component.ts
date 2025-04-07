@@ -148,8 +148,9 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
   }
 
   get currentTestimonial() {
-    return this.testimonials.length > 0 ? this.testimonials[this.currentIndex] : null;
+    return (this.testimonials?.length || 0) > 0 ? this.testimonials[this.currentIndex] : null;
   }
+
 
   goToSlide(index: number) {
     this.currentIndex = index;
@@ -169,13 +170,13 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
   }
 
   previousSlide() {
-    if (this.testimonials.length > 0) {
+    if ((this.testimonials?.length || 0) > 0) {
       this.currentIndex =
         (this.currentIndex - 1 + this.testimonials.length) % this.testimonials.length;
     }
   }
   nextSlide() {
-    if (this.testimonials.length > 0) {
+    if ((this.testimonials?.length || 0) > 0) {
       this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
     }
   }
@@ -184,16 +185,15 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
     return index;
   }
 
-  truncateText(text: string): string {
-    return text.length > this.maxTextLength
-      ? text.slice(0, this.maxTextLength)
-      : text;
+  truncateText(text: string | undefined): string {
+    if (!text) return '';
+    return text.length > this.maxTextLength ? text.slice(0, this.maxTextLength) : text;
   }
 
-  isTruncated(text: string): boolean {
+  isTruncated(text: string | undefined): boolean {
+    if (!text) return false;
     return text.length > this.maxTextLength;
   }
-
   navigateToTestimonials() {
     this.router.navigate(['/testimonials']); // Update with your testimonials page route
   }
