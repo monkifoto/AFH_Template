@@ -4,7 +4,7 @@ import { Business } from 'src/app/model/business-questions.model';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MetaService } from 'src/app/services/meta-service.service';
-import { Modal } from 'bootstrap';
+// import { Modal } from 'bootstrap';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { EmailService } from 'src/app/services/email.service';
@@ -29,7 +29,7 @@ export class SpContactUsComponentComponent implements OnInit {
 
   modalTitle: string = '';
   modalMessage: string = '';
-  responseModal!: Modal; // Modal instance
+  // responseModal!: Modal; // Modal instance
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -65,13 +65,13 @@ export class SpContactUsComponentComponent implements OnInit {
           response => {
             this.modalTitle = 'Message Sent';
             this.modalMessage = 'Thank you for your message! We will get back to you soon.';
-            this.showModal();
+            // this.showModal();
           },
           error => {
             console.error('Error sending email', error);
             this.modalTitle = 'Error';
             this.modalMessage = 'There was an issue sending your message. Please try again later.';
-            this.showModal();
+            // this.showModal();
           }
         );
   }
@@ -85,9 +85,9 @@ export class SpContactUsComponentComponent implements OnInit {
     return hostname; // If no subdomains, return as is
   }
 
-  showModal() {
-    if (this.responseModal) {
-      this.responseModal.show(); // Use the Bootstrap modal instance to show the modal
-    }
-  }
+  // showModal() {
+  //   if (this.responseModal) {
+  //     this.responseModal.show(); // Use the Bootstrap modal instance to show the modal
+  //   }
+  // }
 }
