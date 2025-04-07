@@ -130,6 +130,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
       metaTitle: [''],
       metaKeywords: [''],
       metaDescription: [''],
+      metaImage: [''],
       placeId: [''],
 
       //Home Page

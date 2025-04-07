@@ -79,7 +79,7 @@ export class SpContactUsComponentComponent implements OnInit {
   private extractBaseDomain(hostname: string): string {
     const parts = hostname.split('.');
     // Check if hostname has subdomains (e.g., subdomain.example.com)
-    if (parts.length > 2) {
+    if (parts && parts.length > 2) {
       return parts.slice(-2).join('.'); // Keep the last two parts (e.g., example.com)
     }
     return hostname; // If no subdomains, return as is

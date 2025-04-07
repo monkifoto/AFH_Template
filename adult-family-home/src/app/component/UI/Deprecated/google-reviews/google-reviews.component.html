@@ -16,7 +16,7 @@
   </div>
 
   <!-- No reviews available -->
-  <div *ngIf="reviews.length === 0">
+  <div *ngIf="reviews && reviews.length === 0">
     <p class="no-reviews">No reviews available for this business.</p>
   </div>
 

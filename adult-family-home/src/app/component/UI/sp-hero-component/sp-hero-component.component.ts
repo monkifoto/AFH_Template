@@ -1,22 +1,22 @@
-
-
-import { Component, HostListener, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, HostListener, Inject, Input, OnInit, OnDestroy, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { Business } from 'src/app/model/business-questions.model';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 
 @Component({
-    selector: 'app-sp-hero-component',
-    templateUrl: './sp-hero-component.component.html',
-    styleUrls: ['./sp-hero-component.component.css'],
-    standalone: false
+  selector: 'app-sp-hero-component',
+  templateUrl: './sp-hero-component.component.html',
+  styleUrls: ['./sp-hero-component.component.css'],
+  standalone: false
 })
-export class SpHeroComponentComponent  implements OnInit, OnDestroy {
+export class SpHeroComponentComponent implements OnInit, OnDestroy {
   slides: any[] = [];
   currentSlide = 0;
   sliderOpacity = 1;
   autoSlideInterval: any;
   business: Business | null = null;
+  isBrowser = false;
 
   @Input() navigation: 'side' | 'bottom' = 'side';
   @Input() sideButtons: boolean = true;
@@ -25,17 +25,24 @@ export class SpHeroComponentComponent  implements OnInit, OnDestroy {
   @Input() subtitleSize: string = '1.5rem';
   @Input() subtitleWeight: string = '400';
 
-  constructor(private businessDataService: BusinessDataService) {}
+  constructor(
+    private businessDataService: BusinessDataService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnInit(): void {
     this.fetchHeroSliderData();
-    this.startAutoSlide();
+    if (this.isBrowser) {
+      this.startAutoSlide();
+    }
   }
 
   fetchHeroSliderData(): void {
     this.businessDataService.businessData$.subscribe((data) => {
       if (data) {
-        this.business = data;  // Store the business data
+        this.business = data;
         this.slides = data.heroSlider?.map(slide => ({
           ...slide,
           title: this.replaceKeywords(slide.title),
@@ -53,6 +60,7 @@ export class SpHeroComponentComponent  implements OnInit, OnDestroy {
     }
     return text.replace(/{{businessName}}/g, this.business.businessName);
   }
+
   navigateToSlide(index: number): void {
     this.currentSlide = index;
   }
@@ -73,12 +81,15 @@ export class SpHeroComponentComponent  implements OnInit, OnDestroy {
 
   @HostListener('window:scroll', ['$event'])
   onScroll(): void {
+    if (!this.isBrowser) return;
     const scrollY = window.scrollY;
     const viewportHeight = window.innerHeight;
     this.sliderOpacity = Math.max(1 - scrollY / viewportHeight, 0);
   }
 
   ngOnDestroy(): void {
-    clearInterval(this.autoSlideInterval);
+    if (this.autoSlideInterval) {
+      clearInterval(this.autoSlideInterval);
+    }
   }
 }

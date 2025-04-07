@@ -53,12 +53,13 @@
                   "maximumError": "8kb"
                 }
               ],
+              "sourceMap": true,
               "outputHashing": "all"
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": false,
+              "sourceMap": true,
               "namedChunks": true
             }
           },

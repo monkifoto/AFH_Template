@@ -118,7 +118,9 @@ export class HeroSliderComponent implements OnInit {
 
   autoSlide(): void {
     setInterval(() => {
-      this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+      if (this.slides?.length > 1) {
+        this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+      }
     }, 15000);
   }
   slideDirection: 'left' | 'right' = 'left';
