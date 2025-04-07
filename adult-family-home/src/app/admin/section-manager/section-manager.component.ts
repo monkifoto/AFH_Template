@@ -225,6 +225,13 @@ export class SectionManagerComponent implements OnInit {
                 : []
             ),
             activeBusinessId:[''],
+            paddingTop: [section.paddingTop ?? 80],
+            paddingBottom: [section.paddingBottom ?? 80],
+            paddingLeft: [section.paddingLeft ?? 0],
+            paddingRight: [section.paddingRight ?? 0],
+
+            contentPadding: [section.contentPadding ?? 20],
+
           });
 
           const pageKey = this.pageGroups.includes(section.page) ? section.page : 'uncategorized';
@@ -282,7 +289,13 @@ export class SectionManagerComponent implements OnInit {
       subtitleColor: ['#000000'],
       items: this.fb.array([]),
       activeBusinessId: [''],
-      fullWidth: [false]
+      fullWidth: [false],
+      paddingTop: [80],
+      paddingBottom: [80],
+      paddingLeft: [0],
+      paddingRight: [0],
+      contentPadding: [20],
+
     });
 
 
