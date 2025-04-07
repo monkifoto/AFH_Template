@@ -12,6 +12,9 @@ import { ItemListComponent } from '../../UI/item-list/item-list.component';
 import { CallToActionComponent } from '../../UI/call-to-action/call-to-action.component';
 import { ConsultationComponent } from '../../UI/consultation/consultation.component';
 import { ItemListImageComponent } from '../../UI/item-list-image/item-list-image.component';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
+
 
 @Component({
     selector: 'app-services',
@@ -45,6 +48,8 @@ export class ServicesComponent implements OnInit, AfterViewInit {
     private metaService: MetaService,
     private businessDataService: BusinessDataService,
     private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object,
+
   ) {}
 
   ngOnInit(): void {
@@ -206,27 +211,28 @@ export class ServicesComponent implements OnInit, AfterViewInit {
 }
   }
 
-
   createWrapper(group: any[]) {
-    if (!group.length) return;
+    if (!group.length || !isPlatformBrowser(this.platformId)) return;
 
-    // ✅ Create wrapper div dynamically
+    // ✅ Create wrapper div dynamically in the browser only
     const wrapperElement = document.createElement('div');
-    wrapperElement.className = 'text-wrapper'; // ✅ Apply CSS styles
+    wrapperElement.className = 'text-wrapper';
 
-    // ✅ Ensure left-text is inserted FIRST before right-text
+    // ✅ Sort left-text before right-text
     group.sort((a, b) => (a.component === 'left-text' ? -1 : 1));
 
-    // ✅ Insert left-text and right-text immediately inside the wrapper
+    // ✅ Create and append each component to the wrapper
     group.forEach((section) => {
       const componentRef = this.createComponent(section);
-      if (componentRef !== null) { // ✅ Ensures valid component
+      if (componentRef !== null && componentRef.location?.nativeElement) {
         wrapperElement.appendChild(componentRef.location.nativeElement);
       }
     });
 
-    // ✅ Append the wrapper to the container AFTER inserting left-text and right-text
-    this.container.element.nativeElement.appendChild(wrapperElement);
+    // ✅ Append the wrapper to the container
+    if (this.container?.element?.nativeElement) {
+      this.container.element.nativeElement.appendChild(wrapperElement);
+    }
   }
 
   createComponent(section: any, insertBeforeElement?: HTMLElement): ComponentRef<any> | null {
@@ -248,7 +254,9 @@ export class ServicesComponent implements OnInit, AfterViewInit {
         insertBeforeElement
       );
     } else {
-      this.container.element.nativeElement.appendChild(componentRef.location.nativeElement);
+      if (isPlatformBrowser(this.platformId)) {
+        this.container.element.nativeElement.appendChild(componentRef.location.nativeElement);
+      }
     }
 
     return componentRef;

@@ -106,7 +106,8 @@
           "options": {
             "outputPath": "dist/adult-family-home/server",
             "main": "server.ts",
-            "tsConfig": "tsconfig.server.json"
+            "tsConfig": "tsconfig.server.json",
+            "sourceMap": true
           }
         }
 

@@ -17,6 +17,7 @@ export class SpHeroComponentComponent implements OnInit, OnDestroy {
   autoSlideInterval: any;
   business: Business | null = null;
   isBrowser = false;
+  private businessSub: any;
 
   @Input() navigation: 'side' | 'bottom' = 'side';
   @Input() sideButtons: boolean = true;
@@ -40,7 +41,7 @@ export class SpHeroComponentComponent implements OnInit, OnDestroy {
   }
 
   fetchHeroSliderData(): void {
-    this.businessDataService.businessData$.subscribe((data) => {
+    this.businessSub = this.businessDataService.businessData$.subscribe((data) => {
       if (data) {
         this.business = data;
         this.slides = data.heroSlider?.map(slide => ({
@@ -53,7 +54,6 @@ export class SpHeroComponentComponent implements OnInit, OnDestroy {
       }
     });
   }
-
   replaceKeywords(text: string): string {
     if (!text || !this.business?.businessName) {
       return text;
@@ -72,10 +72,12 @@ export class SpHeroComponentComponent implements OnInit, OnDestroy {
   }
 
   prevSlide(): void {
+    if (!this.slides.length) return;
     this.currentSlide = (this.currentSlide === 0) ? this.slides.length - 1 : this.currentSlide - 1;
   }
 
   nextSlide(): void {
+    if (!this.slides.length) return;
     this.currentSlide = (this.currentSlide + 1) % this.slides.length;
   }
 
@@ -90,6 +92,9 @@ export class SpHeroComponentComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.autoSlideInterval) {
       clearInterval(this.autoSlideInterval);
+    }
+    if (this.businessSub) {
+      this.businessSub.unsubscribe();
     }
   }
 }

@@ -1,4 +1,5 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, Input, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { Business, SliderConfig } from 'src/app/model/business-questions.model';
 import { BusinessDataService } from 'src/app/services/business-data.service';
@@ -11,6 +12,7 @@ import {
   stagger,
   group,
 } from '@angular/animations';
+
 
 @Component({
     selector: 'app-hero-slider',
@@ -38,7 +40,8 @@ import {
     ],
     standalone: false
 })
-export class HeroSliderComponent implements OnInit {
+export class HeroSliderComponent implements OnInit ,OnDestroy {
+  isBrowser: boolean = false;
   business: Business | null = null;
   slides: any[] = [];
   @Input() navigation: 'side' | 'bottom' = 'side';  // Default: side navigation
@@ -52,15 +55,22 @@ export class HeroSliderComponent implements OnInit {
   sliderOpacity = 1; // Initial opacity for the slider
   enableTransitions = true;
 
-  constructor(private router: Router, private businessDataService: BusinessDataService) {
-    this.autoSlide();
+  constructor(
+    private router: Router,
+    private businessDataService: BusinessDataService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit(): void {
     setTimeout(() => this.enableTransitions = true, 50);
     console.log('HeroSliderComponent - ngOnInit');
     this.fetchHeroSliderData();
-    this.autoSlide();
+
+    if (this.isBrowser) {
+      this.autoSlide();
+    }
   }
 
   fetchHeroSliderData(): void {
@@ -115,14 +125,15 @@ export class HeroSliderComponent implements OnInit {
   // navigateToSlide(index: number): void {
   //   this.currentSlide = index;
   // }
-
+  private intervalId: any;
   autoSlide(): void {
-    setInterval(() => {
+    this.intervalId = setInterval(() => {
       if (this.slides?.length > 1) {
         this.currentSlide = (this.currentSlide + 1) % this.slides.length;
       }
     }, 15000);
   }
+
   slideDirection: 'left' | 'right' = 'left';
   previousSlide = 0;
   isTransitioning = false;
@@ -162,9 +173,15 @@ export class HeroSliderComponent implements OnInit {
   // Scroll event listener to adjust opacity
   @HostListener('window:scroll', ['$event'])
   onScroll(): void {
+    if (!this.isBrowser) return;
     const scrollY = window.scrollY;
     const viewportHeight = window.innerHeight;
-
     this.sliderOpacity = Math.max(1 - scrollY / viewportHeight, 0);
+  }
+
+  ngOnDestroy(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 }

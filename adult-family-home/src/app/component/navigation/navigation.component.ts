@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BusinessDataService } from 'src/app/services/business-data.service'; // Import BusinessDataService
 import { Business } from 'src/app/model/business-questions.model';
+import { Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
     selector: 'app-navigation',
@@ -20,7 +22,8 @@ export class NavigationComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private businessDataService: BusinessDataService // Inject BusinessDataService here
+    private businessDataService: BusinessDataService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit(): void {
@@ -53,11 +56,13 @@ export class NavigationComponent implements OnInit {
   }
 
   scrollToSection(sectionId: string) {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (isPlatformBrowser(this.platformId)) {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      this.menuOpen = false;
     }
-    this.menuOpen = false; // Close menu after clicking (optional)
   }
 
   toggleMenu(): void {

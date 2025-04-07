@@ -17,19 +17,17 @@ import { EmailService } from 'src/app/services/email.service';
 })
 export class SpContactUsComponentComponent implements OnInit {
   business: Business | null = null;
-
   layoutType: string | undefined = 'demo';
 
   formData = {
     name: '',
     email: '',
     message: '',
-    website: this.extractBaseDomain(window.location.hostname),
+    website: '', // defer initialization
   };
 
   modalTitle: string = '';
   modalMessage: string = '';
-  // responseModal!: Modal; // Modal instance
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -48,46 +46,39 @@ export class SpContactUsComponentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // ✅ SSR-safe window check
+    if (typeof window !== 'undefined') {
+      this.formData.website = this.extractBaseDomain(window.location.hostname);
+    }
+
     this.businessDataService.businessData$.subscribe((business) => {
       this.business = business;
 
       if (business?.id) {
-        this.metaService.loadAndApplyMeta(business?.id);
-        this.layoutType = this.business?.theme.themeType;
+        this.metaService.loadAndApplyMeta(business.id);
+        this.layoutType = business?.theme?.themeType;
       }
     });
   }
 
   onSubmit() {
     console.log(this.formData);
-        // Use the EmailService to send the email
-        this.emailService.sendEmail(this.formData).subscribe(
-          response => {
-            this.modalTitle = 'Message Sent';
-            this.modalMessage = 'Thank you for your message! We will get back to you soon.';
-            // this.showModal();
-          },
-          error => {
-            console.error('Error sending email', error);
-            this.modalTitle = 'Error';
-            this.modalMessage = 'There was an issue sending your message. Please try again later.';
-            // this.showModal();
-          }
-        );
+
+    this.emailService.sendEmail(this.formData).subscribe(
+      () => {
+        this.modalTitle = 'Message Sent';
+        this.modalMessage = 'Thank you for your message! We will get back to you soon.';
+      },
+      error => {
+        console.error('Error sending email', error);
+        this.modalTitle = 'Error';
+        this.modalMessage = 'There was an issue sending your message. Please try again later.';
+      }
+    );
   }
 
   private extractBaseDomain(hostname: string): string {
     const parts = hostname.split('.');
-    // Check if hostname has subdomains (e.g., subdomain.example.com)
-    if (parts && parts.length > 2) {
-      return parts.slice(-2).join('.'); // Keep the last two parts (e.g., example.com)
-    }
-    return hostname; // If no subdomains, return as is
+    return parts.length > 2 ? parts.slice(-2).join('.') : hostname;
   }
-
-  // showModal() {
-  //   if (this.responseModal) {
-  //     this.responseModal.show(); // Use the Bootstrap modal instance to show the modal
-  //   }
-  // }
 }

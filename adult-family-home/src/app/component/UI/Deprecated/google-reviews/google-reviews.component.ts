@@ -1,29 +1,39 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { GoogleMapsLoaderService } from 'src/app/services/google-maps-loader.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-
-
-
+import { isPlatformBrowser } from '@angular/common';
 
 declare var google: any;
 
 @Component({
-    selector: 'app-google-reviews',
-    templateUrl: './google-reviews.component.html',
-    styleUrls: ['./google-reviews.component.css'],
-    standalone: false
+  selector: 'app-google-reviews',
+  templateUrl: './google-reviews.component.html',
+  styleUrls: ['./google-reviews.component.css'],
+  standalone: false
 })
 export class GoogleReviewsComponent implements OnInit {
-  @Input() placeId: string = ''; // Place ID passed to the component
-  reviews: any[] = []; // Array to store reviews
-  currentReviewIndex: number = 0; // Index of the currently displayed review
-  intervalId: any; // ID of the interval for automatic rotation
+  @Input() placeId: string = '';
+  reviews: any[] = [];
+  currentReviewIndex: number = 0;
+  intervalId: any;
   useMockReviews = environment.useMockGoogleReviews;
+  isBrowser = false;
 
-  constructor(private googleMapsLoader: GoogleMapsLoaderService,   private http: HttpClient) {}
+  constructor(
+    private googleMapsLoader: GoogleMapsLoaderService,
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnInit(): void {
+    if (!this.isBrowser) {
+      console.warn('⛔ GoogleReviewsComponent skipped on server');
+      return;
+    }
+
     if (this.useMockReviews) {
       this.loadMockReviews();
       this.startCarousel();
@@ -44,6 +54,7 @@ export class GoogleReviewsComponent implements OnInit {
         });
     }
   }
+
   private loadMockReviews(): void {
     this.http.get<any[]>('/assets/mocks/mock-reviews.json').subscribe({
       next: (data) => {
@@ -54,8 +65,6 @@ export class GoogleReviewsComponent implements OnInit {
       }
     });
   }
-
-
 
   private fetchReviews(placeId: string): void {
     const service = new google.maps.places.PlacesService(document.createElement('div'));
@@ -76,12 +85,12 @@ export class GoogleReviewsComponent implements OnInit {
       if (this.reviews.length > 0) {
         this.currentReviewIndex = (this.currentReviewIndex + 1) % this.reviews.length;
       }
-    }, 10000); // Change review every 10 seconds
+    }, 10000);
   }
 
   selectReview(index: number): void {
     this.currentReviewIndex = index;
-    this.resetCarousel(); // Reset the rotation timer
+    this.resetCarousel();
   }
 
   private resetCarousel(): void {

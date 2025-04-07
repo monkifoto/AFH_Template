@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, take } from 'rxjs';
 import { Business } from 'src/app/model/business-questions.model';
 import { BusinessService } from 'src/app/services/business.service';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 
 declare var $: any;
 @Component({
@@ -54,7 +56,8 @@ export class ColorAdminComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
-    private businessService: BusinessService
+    private businessService: BusinessService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit(): void {
@@ -121,13 +124,19 @@ export class ColorAdminComponent implements OnInit {
     return null;
   }
 
+  showSaveModal = false;
+
   openSaveConfirmation() {
-    $('#saveConfirmationModal').modal('show');
+    this.showSaveModal = true;
   }
 
   confirmSave() {
-    this.onSubmit();  // Call the save functionality
-    $('#saveConfirmationModal').modal('hide');  // Close the modal
+    this.onSubmit();
+    this.showSaveModal = false;
+  }
+
+  cancelSave() {
+    this.showSaveModal = false;
   }
 
   onSubmit() {
