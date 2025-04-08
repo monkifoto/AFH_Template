@@ -7,6 +7,7 @@ import { BusinessDataService } from './services/business-data.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  // template: '<p>This is the app.component.html comented out template.</p>',
   styleUrls: ['./app.component.css'],
     standalone: false
 })
@@ -30,7 +31,7 @@ export class AppComponent implements OnInit {
     console.log('SSR SAFE: AppComponent initialized');
     // Subscribe to already-loaded business data (from APP_INITIALIZER)
     this.businessDataService.businessData$.subscribe((data) => {
-      console.log('📦 AppComponent got businessData:', data);
+      // console.log('📦 AppComponent got businessData:', data);
       if (data) {
         this.business = data;
 

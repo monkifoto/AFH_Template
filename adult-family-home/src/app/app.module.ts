@@ -87,6 +87,7 @@ import { MetaService } from './services/meta-service.service';
 import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { LoginComponent } from './admin/login/login.component';
+import { firstValueFrom } from 'rxjs';
 
 
     // Map hostnames to business IDs
@@ -155,7 +156,7 @@ import { LoginComponent } from './admin/login/login.component';
         // 🛑 Block this part during SSR to avoid Firebase issues
         if (isPlatformBrowser(platformId)) {
           try {
-            const business = await businessDataService.loadBusinessData(businessId).toPromise();
+            const business = await firstValueFrom(businessDataService.loadBusinessData(businessId));
             if (business) {
               console.log('✅ Meta: Setting tags for', business.businessName);
               metaService.updateMetaTags({
