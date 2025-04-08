@@ -51,7 +51,7 @@ import { IconListComponent } from './component/UI/Deprecated/icon-list/icon-list
 import { HeroComponent } from './component/UI/hero/hero.component';
 import { TestimonialImageComponent } from './component/UI/testimonial-image/testimonial-image.component';
 import { CallToActionComponent } from './component/UI/call-to-action/call-to-action.component';
-import { UiTestComponent } from './component/UI/ui-test/ui-test.component';
+import { UiTestComponent } from './component/UI/DEMO COMPONENTS/ui-test/ui-test.component';
 import { TestimonialsListComponent } from './component/PAGES/testimonials/testimonials.component';
 import { ParallaxTextComponent } from './component/UI/parallax-text/parallax-text.component';
 import { StatsComponent } from './component/UI/stats/stats.component';
