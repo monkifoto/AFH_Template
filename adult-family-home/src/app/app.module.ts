@@ -51,7 +51,7 @@ import { IconListComponent } from './component/UI/Deprecated/icon-list/icon-list
 import { HeroComponent } from './component/UI/hero/hero.component';
 import { TestimonialImageComponent } from './component/UI/testimonial-image/testimonial-image.component';
 import { CallToActionComponent } from './component/UI/call-to-action/call-to-action.component';
-import { UiTestComponent } from './component/UI/ui-test/ui-test.component';
+import { UiTestComponent } from './component/UI/DEMO COMPONENTS/ui-test/ui-test.component';
 import { TestimonialsListComponent } from './component/PAGES/testimonials/testimonials.component';
 import { ParallaxTextComponent } from './component/UI/parallax-text/parallax-text.component';
 import { StatsComponent } from './component/UI/stats/stats.component';
@@ -81,6 +81,7 @@ import { PhoneFormatPipe } from './pipe/phone-format.pipe';
 import { ItemListImageComponent } from './component/UI/item-list-image/item-list-image.component';
 import { HeroManagerComponent } from './admin/hero-manager/hero-manager.component';
 import { TextWrapperComponent } from './component/text-wrapper/text-wrapper.component';
+import { BloatingBubblesComponent } from './component/UI/DEMO COMPONENTS/bloating-bubbles/bloating-bubbles.component';
 
 
     // Map hostnames to business IDs
@@ -230,7 +231,8 @@ import { TextWrapperComponent } from './component/text-wrapper/text-wrapper.comp
     PhoneFormatPipe,
     ItemListImageComponent,
     HeroManagerComponent,
-    TextWrapperComponent
+    TextWrapperComponent,
+    BloatingBubblesComponent
   ],
   imports: [
     BrowserModule,

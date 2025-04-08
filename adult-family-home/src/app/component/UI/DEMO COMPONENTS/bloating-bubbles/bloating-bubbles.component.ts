@@ -12,9 +12,9 @@ interface Bubble {
 
 @Component({
   selector: 'app-bloating-bubbles',
-  standalone: true,
+  standalone: false,
   encapsulation: ViewEncapsulation.None,
-  imports: [CommonModule],
+  // imports: [CommonModule],
   templateUrl: './bloating-bubbles.component.html',
   styleUrls: ['./bloating-bubbles.component.css'],
 })
@@ -34,7 +34,7 @@ export class BloatingBubblesComponent implements OnInit, OnDestroy {
   private intervalId: any; // Variable to hold the interval ID
 
   constructor() {
-     this.generateBubbles(15); // Generate 50 bubbles
+     this.generateBubbles(25); // Generate 50 bubbles
   }
 
   ngOnInit(): void {
@@ -47,11 +47,11 @@ export class BloatingBubblesComponent implements OnInit, OnDestroy {
   }
 
   startRotatingText(): void {
-    // this.intervalId = setInterval(() => {
+     this.intervalId = setInterval(() => {
        this.updateText();
       console.log(this.overlayText); // Log the current text to the console
       console.log(this.currentTextIndex); // Log the current index to the console
-    // }, 5000); // Update every 5 seconds
+     }, 5000); // Update every 5 seconds
   }
 
 
