@@ -1,14 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { inject } from '@angular/core';
-import { Auth, getAuth, onAuthStateChanged } from '@angular/fire/auth';
+import { isPlatformBrowser } from '@angular/common';
+import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
-  private auth: Auth = inject(Auth);
-  constructor(private router: Router) {}
+  constructor(
+    private auth: Auth,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
-  async canActivate(): Promise<boolean> {
+  canActivate(): Promise<boolean> {
+    // SSR bypass
+    if (!isPlatformBrowser(this.platformId)) {
+      console.log('⛔ SSR: skipping AuthGuard');
+      return Promise.resolve(true);
+    }
+
     return new Promise((resolve) => {
       onAuthStateChanged(this.auth, (user) => {
         if (user) {

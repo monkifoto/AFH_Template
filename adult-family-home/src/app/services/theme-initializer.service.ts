@@ -27,6 +27,10 @@ export class ThemeInitializerService {
   }
 
   async loadTheme(businessID: string): Promise<void> {
+    if (!isPlatformBrowser(this.platformId)) {
+      console.log('⛔ Skipping theme load on server');
+      return;
+    }
     try {
       const themeRef = doc(this.firestore, `businesses/${businessID}/theme/themeDoc`);
       const themeSnap = await getDoc(themeRef);
