@@ -86,6 +86,7 @@ import { Request } from 'express';
 import { MetaService } from './services/meta-service.service';
 import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { LoginComponent } from './admin/login/login.component';
 
 
     // Map hostnames to business IDs
@@ -135,34 +136,75 @@ import { isPlatformBrowser } from '@angular/common';
         const url = new URL(window.location.href);
         hostname = window.location.hostname;
         businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
+      } else {
+        // SSR fallback
+        hostname = '';
+        businessId = 'MGou3rzTVIbP77OLmZa7';
       }
 
       return async () => {
         console.log('✅ Initializing app...');
+
+        // Always load theme (SSR-safe)
         try {
           await themeService.loadTheme(businessId);
         } catch (err) {
           console.error('❌ Theme error:', err);
         }
 
-        try {
-          const business = await businessDataService.loadBusinessData(businessId).toPromise();
-          if (business) {
-            console.log('✅ Meta: Setting tags for', business.businessName);
-            metaService.updateMetaTags({
-              title: business.metaTitle || business.businessName || 'Default Title',
-              description: business.metaDescription || 'Caring and comfort.',
-              keywords: business.metaKeywords || 'adult care, family home, Renton, Kent',
-              image: business.metaImage || '/assets/default-og.jpg',
-              url: business.businessURL || `https://${hostname}`
-            });
+        // 🛑 Block this part during SSR to avoid Firebase issues
+        if (isPlatformBrowser(platformId)) {
+          try {
+            const business = await businessDataService.loadBusinessData(businessId).toPromise();
+            if (business) {
+              console.log('✅ Meta: Setting tags for', business.businessName);
+              metaService.updateMetaTags({
+                title: business.metaTitle || business.businessName || 'Default Title',
+                description: business.metaDescription || 'Caring and comfort.',
+                keywords: business.metaKeywords || 'adult care, family home, Renton, Kent',
+                image: business.metaImage || '/assets/default-og.jpg',
+                url: business.businessURL || `https://${hostname}`
+              });
+            }
+          } catch (err) {
+            console.error('❌ Business data error:', err);
           }
-        } catch (err) {
-          console.error('❌ Business data error:', err);
+        } else {
+          console.log('⛔ Skipped businessData load on SSR');
         }
       };
     }
 
+    // export function initializerFactory() {
+    //   const req = inject(SERVER_REQUEST, { optional: true }) as Request | undefined;
+    //   const themeService = inject(ThemeInitializerService);
+    //   const platformId = inject(PLATFORM_ID);
+
+    //   let businessId = 'MGou3rzTVIbP77OLmZa7';
+
+    //   // SSR-safe ID resolution
+    //   if (req) {
+    //     const idRaw = req.query['id'];
+    //     const idParam = Array.isArray(idRaw) ? idRaw[0] : idRaw;
+    //     businessId = (idParam as string) || businessId;
+    //   } else if (isPlatformBrowser(platformId)) {
+    //     const url = new URL(window.location.href);
+    //     businessId = url.searchParams.get('id') || businessId;
+    //   }
+
+    //   return async () => {
+    //     console.log('✅ AppInitializer running with businessId:', businessId);
+
+    //     try {
+    //       await themeService.loadTheme(businessId);
+    //       console.log('✅ Theme loaded');
+    //     } catch (err) {
+    //       console.error('❌ Theme error:', err);
+    //     }
+
+    //     console.log('✅ AppInitializer complete (safe mode)');
+    //   };
+    // }
 
 @NgModule({
   declarations: [
@@ -231,7 +273,8 @@ import { isPlatformBrowser } from '@angular/common';
     PhoneFormatPipe,
     ItemListImageComponent,
     HeroManagerComponent,
-    TextWrapperComponent
+    TextWrapperComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -241,12 +284,13 @@ import { isPlatformBrowser } from '@angular/common';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    // BrowserModule.withServerTransition({ appId: 'serverApp' }),
   ],
   providers: [
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage()),
-    provideAuth(() => getAuth()),
+     provideFirebaseApp(() => initializeApp(environment.firebase)),
+     provideFirestore(() => getFirestore()),
+     provideStorage(() => getStorage()),
+     provideAuth(() => getAuth()),
     provideAppInitializer(() => initializerFactory()())
   ],
 

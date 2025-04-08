@@ -6,7 +6,6 @@ import { AdminComponent } from './admin/admin/admin.component';
 import { EditBusinessComponent } from './edit-business/edit-business.component';
 import { PhotoGalleryUploadComponent } from './photo-gallery-upload/photo-gallery-upload.component';
 import { HomeComponent } from '../component/home/home.component';
-import { A } from '@angular/core/weak_ref.d-DOjz-6fK';
 
 const routes: Routes = [
   {
@@ -18,8 +17,6 @@ const routes: Routes = [
       { path: 'new', component: EditBusinessComponent },
       { path: 'edit-business/:id', component: EditBusinessComponent },
       { path: 'gallery-upload', component: PhotoGalleryUploadComponent },
-      { path: 'edit-business/:id', component: EditBusinessComponent },
-      { path: 'gallery-upload', component: PhotoGalleryUploadComponent},
       { path: ':id', component: HomeComponent }
     ]
   }
