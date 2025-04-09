@@ -33,6 +33,7 @@ import {
   ref as storageRef,
 Storage } from '@angular/fire/storage';
 import { S } from '@angular/core/weak_ref.d-DOjz-6fK';
+import { BusinessSectionsService } from 'src/app/services/business-sections.service';
 
 
 @Component({
@@ -72,7 +73,8 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     private uploadService: UploadService,
     private route: ActivatedRoute,
     private router: Router,
-    private storage: Storage
+    private storage: Storage,
+    private businessSectionsService: BusinessSectionsService
   ) {
     this.initializeForm();
   }
@@ -170,6 +172,22 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
       isActive: true,
       //Employee Page
       employees: this.fb.array([]),
+      theme: this.fb.group({
+        themeFileName: [''],
+        themeType: [''],
+        backgroundColor: [''],
+        darkBackgroundColor: [''],
+        primaryColor: [''],
+        secondaryColor: [''],
+        accentColor: [''],
+        buttonColor: [''],
+        buttonHoverColor: [''],
+        textColor: [''],
+        navBackgroundColor: [''],
+        navTextColor: [''],
+        navActiveBackground: [''],
+        navActiveText: ['']
+      }),
     });
     this.serviceForm = this.fb.group({
       name: [''],
@@ -229,52 +247,86 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
   }
 
   loadDefaultData(): void {
-    this.business = BusinessModel.getDefaultBusiness();
     const defaultBusiness = BusinessModel.getDefaultBusiness();
+    this.business = defaultBusiness;
 
-    this.businessForm = this.fb.group({
-      businessName: [defaultBusiness.businessName],
-      metaTitle: [defaultBusiness.metaTitle],
-      metaKeywords: [defaultBusiness.metaKeywords],
-      metaDescription: [defaultBusiness.metaDescription],
-      keyWords: [defaultBusiness.keyWords],
-      businessURL: [defaultBusiness.businessURL],
-      providerName: [defaultBusiness.providerName],
-      tagline: [defaultBusiness.tagline],
-      certifications: [defaultBusiness.certifications],
-      logoImage: [defaultBusiness.logoImage],
-      faviconUrl: [defaultBusiness.faviconUrl],
-      address: [defaultBusiness.address],
-      phone: [defaultBusiness.phone],
-      fax: [defaultBusiness.fax],
-      email: [defaultBusiness.email],
-      businessHours: [defaultBusiness.businessHours],
-      socialMedia: [defaultBusiness.socialMedia],
-      contactFormDetails: [defaultBusiness.contactFormDetails],
-      contactUsImageUrl: [defaultBusiness.contactUsImageUrl],
-      isActive: [defaultBusiness.isActive],
-      theme: [defaultBusiness.theme],
-      placeId: [defaultBusiness.placeId],
-      // Initialize FormArrays
-      uniqueService: this.fb.array(
+    // ✅ Patch flat fields
+    this.businessForm.patchValue({
+      businessName: defaultBusiness.businessName,
+      metaTitle: defaultBusiness.metaTitle,
+      metaKeywords: defaultBusiness.metaKeywords,
+      metaDescription: defaultBusiness.metaDescription,
+      keyWords: defaultBusiness.keyWords,
+      businessURL: defaultBusiness.businessURL,
+      providerName: defaultBusiness.providerName,
+      tagline: defaultBusiness.tagline,
+      certifications: defaultBusiness.certifications,
+      logoImage: defaultBusiness.logoImage,
+      faviconUrl: defaultBusiness.faviconUrl,
+      address: defaultBusiness.address,
+      phone: defaultBusiness.phone,
+      fax: defaultBusiness.fax,
+      email: defaultBusiness.email,
+      businessHours: defaultBusiness.businessHours,
+      socialMedia: defaultBusiness.socialMedia,
+      contactFormDetails: defaultBusiness.contactFormDetails,
+      contactUsImageUrl: defaultBusiness.contactUsImageUrl,
+      isActive: defaultBusiness.isActive,
+      placeId: defaultBusiness.placeId,
+      sliderConfig: defaultBusiness.sliderConfig
+    });
+    (this.businessForm.get('theme') as FormGroup).patchValue(defaultBusiness.theme);
+    // ✅ Set heroSlider array
+    this.businessForm.setControl(
+      'heroSlider',
+      this.fb.array(
+        (defaultBusiness.heroSlider ?? []).map((slide) =>
+          this.fb.group({
+            title: [slide.title],
+            subtitle: [slide.subtitle],
+            backgroundImage: [slide.backgroundImage],
+            buttons: this.fb.array(
+              (slide.buttons ?? []).map((btn) =>
+                this.fb.group({
+                  text: [btn.text],
+                  link: [btn.link],
+                  outline: [btn.outline],
+                })
+              )
+            )
+          })
+        )
+      )
+    );
+
+    // ✅ Set other arrays
+    this.businessForm.setControl(
+      'uniqueService',
+      this.fb.array(
         (defaultBusiness.uniqueService ?? []).map((service) =>
           this.fb.group({
             name: [service.name],
             description: [service.description],
           })
         )
-      ),
+      )
+    );
 
-      whyChoose: this.fb.array(
-        defaultBusiness.whyChoose.map((choice) =>
+    this.businessForm.setControl(
+      'whyChoose',
+      this.fb.array(
+        (defaultBusiness.whyChoose ?? []).map((choice) =>
           this.fb.group({
             name: [choice.name],
             description: [choice.description],
           })
         )
-      ),
+      )
+    );
 
-      testimonials: this.fb.array(
+    this.businessForm.setControl(
+      'testimonials',
+      this.fb.array(
         (defaultBusiness.testimonials ?? []).map((testimonial) =>
           this.fb.group({
             name: [testimonial.name],
@@ -283,9 +335,12 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
             photoUrl: [testimonial.photoURL],
           })
         )
-      ),
+      )
+    );
 
-      employees: this.fb.array(
+    this.businessForm.setControl(
+      'employees',
+      this.fb.array(
         (defaultBusiness.employees ?? []).map((employee) =>
           this.fb.group({
             name: [employee.name],
@@ -294,22 +349,76 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
             photoURL: [employee.photoURL],
           })
         )
-      ),
+      )
+    );
 
-      locations: this.fb.array(
+    this.businessForm.setControl(
+      'locations',
+      this.fb.array(
         (defaultBusiness.locations ?? []).map((location) =>
           this.fb.group({
+            locationName: [location.locationName],
             street: [location.street],
             city: [location.city],
+            state: [location.state],
             zipcode: [location.zipcode],
             phone: [location.phone],
             fax: [location.fax],
             email: [location.email],
+            image: [location.image],
+            businessHours: [location.businessHours],
           })
         )
-      ),
-    });
+      )
+    );
+
+    this.businessForm.setControl(
+      'sections',
+      this.fb.array(
+        (defaultBusiness.sections ?? []).map((section) =>
+          this.fb.group({
+            id: [section.id],
+            isActive: [section.isActive],
+            page: [section.page],
+            location: [section.location],
+            component: [section.component],
+            sectionTitle: [section.sectionTitle],
+            sectionSubTitle: [section.sectionSubTitle],
+            sectionContent: [section.sectionContent],
+            order: [section.order],
+            backgroundColor: [section.backgroundColor],
+            textColor: [section.textColor],
+            textFontSize: [section.textFontSize],
+            textFontStyle: [section.textFontStyle],
+            titleColor: [section.titleColor],
+            subtitleColor: [section.subtitleColor],
+            fullWidth: [section.fullWidth],
+            showButton: [section.showButton],
+            buttonText: [section.buttonText],
+            buttonLink: [section.buttonLink],
+            alignText: [section.alignText],
+            boxShadow: [section.boxShadow],
+            borderRadius: [section.borderRadius],
+            paddingTop: [section.paddingTop],
+            paddingBottom: [section.paddingBottom],
+            paddingLeft: [section.paddingLeft],
+            paddingRight: [section.paddingRight],
+            contentPadding: [section.contentPadding],
+            sectionImageUrl: [section.sectionImageUrl],
+            showImage: [section.showImage],
+            isMinimal: [section.isMinimal],
+            isParallax: [section.isParallax],
+            titleFontSize: [section.titleFontSize],
+            titleFontStyle: [section.titleFontStyle],
+            subtitleFontSize: [section.subtitleFontSize],
+            subtitleFontStyle: [section.subtitleFontStyle],
+            items: this.fb.array([]),
+          })
+        )
+      )
+    );
   }
+
 
   // Helper function to populate form arrays
   private populateFormArray(formArray: FormArray, items: any[]) {
@@ -417,56 +526,131 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     if (this.isSubmitting) return; // Prevent multiple submissions
     this.isSubmitting = true;
 
-    console.log('onSubmit() called'); // Debugging
-    const locations = this.businessForm.get('locations')?.value || [];
-    const formValue: Business = {
-      ...this.businessForm.value,
-      locations: this.businessForm.get('locations')?.value || [], // 🔥 Ensure locations are included
-    };
+    console.log('onSubmit() called');
 
-   // console.log('Final Data to Save:', formValue); // ✅ Debugging
+    // 🔥 Mark all controls as touched to trigger validation UI
+    this.markAllControlsTouched(this.businessForm);
 
     if (this.businessForm.valid) {
-   //  console.log('Form Value Before Saving:', this.businessForm.value); // 🔍 Debugging
+      const formValue: Business = {
+        ...this.businessForm.value,
+        locations: this.businessForm.get('locations')?.value || [],
+      };
 
       if (this.businessId) {
         this.businessService
           .updateBusiness(this.businessId, formValue)
           .then(() => {
-            console.log('Business details updated successfully!');
+            console.log('✅ Business details updated successfully!');
             this.isSubmitting = false;
           })
           .catch((err) => {
-            console.error('Error updating business details', err);
+            console.error('❌ Error updating business details', err);
             this.isSubmitting = false;
           });
       } else {
         this.businessService
           .createBusiness(formValue)
-          .pipe(take(1)) // ✅ Ensure only one execution
+          .pipe(take(1))
           .subscribe(
             (bus) => {
               if (bus && bus.id) {
                 this.business = bus;
-                this.businessId = bus.id; // ✅ Save the new business ID
-                //console.log('Business created with ID:', this.businessId);
+                this.businessId = bus.id;
               }
-              this.confirmationMessage =
-                'Business has been successfully created!';
+              this.confirmationMessage = '✅ Business has been successfully created!';
               this.showConfirmation = true;
               this.isSubmitting = false;
+              this.saveSectionsToFirestore();
+              this.saveLocationsToFirestore();
             },
             (err) => {
-              console.error('Error creating business:', err);
+              console.error('❌ Error creating business:', err);
               this.isSubmitting = false;
             }
           );
       }
     } else {
-      console.log('Business Form is not valid!');
+      console.warn('❌ Business Form is not valid!');
+
+      // 🔍 Log invalid controls and missing required fields
+      Object.entries(this.businessForm.controls).forEach(([key, ctrl]) => {
+        if (ctrl.invalid) {
+          const errors = ctrl.errors;
+          if (errors?.['required']) {
+            console.warn(`⚠️ Required field missing: ${key}`);
+          } else {
+            console.warn(`❌ Invalid field: ${key}`, errors);
+          }
+        }
+      });
+
+      // Extra: Log issues inside FormArrays like locations
+      const locationsArray = this.businessForm.get('locations') as FormArray;
+      if (locationsArray && locationsArray.controls.length) {
+        locationsArray.controls.forEach((locCtrl, index) => {
+          if (locCtrl.invalid) {
+            console.warn(`❌ Invalid Location[${index}]`, locCtrl.errors);
+            Object.entries((locCtrl as FormGroup).controls).forEach(([field, control]) => {
+              if (control.invalid) {
+                console.warn(`⚠️ Location[${index}].${field} is invalid`, control.errors);
+              }
+            });
+          }
+        });
+      }
+
       this.isSubmitting = false;
     }
   }
+
+  private markAllControlsTouched(formGroup: FormGroup | FormArray): void {
+    Object.values(formGroup.controls).forEach((control) => {
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup || control instanceof FormArray) {
+        this.markAllControlsTouched(control);
+      }
+    });
+  }
+
+  private saveSectionsToFirestore(): void {
+    const sectionsArray = this.businessForm.get('sections') as FormArray;
+
+    if (!sectionsArray || !sectionsArray.length) return;
+
+    sectionsArray.controls.forEach(sectionControl => {
+      const section = sectionControl.value;
+
+      this.businessSectionsService
+        .saveSection(this.businessId, section)
+        .then(() => console.log(`✅ Section saved: ${section.sectionTitle || 'Untitled'}`))
+        .catch(err => console.error('❌ Error saving section:', err));
+    });
+  }
+
+
+  private saveLocationsToFirestore(): void {
+    const locationsArray = this.businessForm.get('locations') as FormArray;
+
+    if (!locationsArray || !locationsArray.length) return;
+
+    locationsArray.controls.forEach(locationControl => {
+      const location = locationControl.value;
+
+      this.businessService
+        .addLocation(this.businessId, location)
+        .then(() => console.log(`✅ Location saved: ${location.locationName || 'Unnamed'}`))
+        .catch(err => console.error('❌ Error saving location:', err));
+    });
+  }
+
+  // Optional UUID fallback if you don't have generateNewId()
+  private generateUUID(): string {
+    return crypto.randomUUID();
+  }
+
+
 
   closeConfirmation(): void {
     this.showConfirmation = false;

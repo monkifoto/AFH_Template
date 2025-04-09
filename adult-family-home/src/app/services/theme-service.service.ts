@@ -69,7 +69,7 @@ export class ThemeService {
       take(1),
       switchMap(businessSnap => {
         if (!businessSnap.exists()) {
-          console.error('Theme Service - Business document does not exist!');
+          console.error('Theme Service - GetTheme Colors - Business document does not exist! for Business ID:', businessId);
           return throwError(() => new Error('Theme Service - Business document does not exist'));
         }
 
