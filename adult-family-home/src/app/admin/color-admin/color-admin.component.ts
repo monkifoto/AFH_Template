@@ -62,6 +62,7 @@ export class ColorAdminComponent implements OnInit {
       this.businessId = params.get('id')!;
       if (this.businessId) {
         // Fetch the theme colors from the service
+        console.log("Color-admin: - Business ID:", this.businessId);
         this.themeColors$ = this.themeService.getThemeColors(this.businessId);
 
         // Initialize the form with controls

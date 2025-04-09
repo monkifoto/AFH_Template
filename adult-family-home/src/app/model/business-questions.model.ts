@@ -227,6 +227,7 @@ export class BusinessModel {
           paddingLeft: 0,
           paddingRight: 0,
           contentPadding: 20,
+
         },
         {
           id:'',
@@ -260,6 +261,8 @@ export class BusinessModel {
           paddingLeft: 0,
           paddingRight: 0,
           contentPadding: 20,
+          sectionImageUrl: 'http://localhost:4200/assets/sharedAssets/istockphoto-1162510523-2048x2048.jpg',
+          showImage: 'null',
         },
         {
           id:'',
@@ -293,6 +296,8 @@ export class BusinessModel {
           paddingLeft: 0,
           paddingRight: 0,
           contentPadding: 20,
+          sectionImageUrl: 'http://localhost:4200/assets/sharedAssets/istockphoto-1162510523-2048x2048.jpg',
+          showImage: 'null',
         },
         {
           id:'',
@@ -326,6 +331,8 @@ export class BusinessModel {
           paddingLeft: 0,
           paddingRight: 0,
           contentPadding: 20,
+          sectionImageUrl: 'http://localhost:4200/assets/sharedAssets/istockphoto-1162510523-2048x2048.jpg',
+          showImage: 'null',
         },
         {
           id:'',
@@ -359,6 +366,8 @@ export class BusinessModel {
           paddingLeft: 0,
           paddingRight: 0,
           contentPadding: 20,
+          sectionImageUrl: 'http://localhost:4200/assets/sharedAssets/istockphoto-1162510523-2048x2048.jpg',
+          showImage: 'null',
         },
         {
           id:'',
@@ -488,21 +497,7 @@ export class BusinessModel {
       businessData: '',
       id: '',
       faqs: '',
-      //to be removed
-    //   toursImageUrl: '',
-    //   consultingImageUrl: '',
-    //   ownerImagesBios: 'Sarah Caregiver, RN, Founder.',
-    //   staffImagesBios:
-    //      'Emily Nurse, CNA, Head Nurse; Jack Therapist, PT, Physical Therapist',
 
-    //   specialPrograms:
-    //   'Holiday celebrations, birthday parties, outdoor activities, exercise programs, arts & crafts, movie nights.',
-    // tours: 'Yes, facility tours are available by appointment.',
-    // freeConsulting: 'Yes, initial consulting services are offered for free.',
-    // websiteGoals:
-    //   'To inform, encourage visits, and offer a means to request consultations.',
-
-  // to be removed
       businessName: 'Careful Living AFH',
       keyWords: 'Adult Family Home Bellevue, Senior Care Bellevue WA, Elderly Care Services Bellevue, Assisted Living Bellevue Washington, Memory Care Bellevue, Dementia Care Bellevue WA, Respite Care Bellevue, Long-Term Care Bellevue, Home Care for Seniors Bellevue,Skilled Nursing Bellevue WA,Personalized Senior Care Bellevue, Senior Living Bellevue Washington, Compassionate Elderly Care Bellevue, Family Home Care Bellevue WA, Professional Senior Care Services Bellevue, Senior Assisted Living Bellevue, Senior Home Assistance Bellevue WA, Senior Housing Bellevue Washington, Helping Hand AFH Bellevue, Senior Caregivers Bellevue WA',
       businessURL: 'https://www.carefullivingafh.com',
@@ -515,9 +510,6 @@ export class BusinessModel {
       logoImage: '../assets/sharedAssets/Demologo2.png',
       faviconUrl: '../../assets/sharedAssets/icons/hh_favicon.ico',
 
-
-      // mediaFeatures: 'Featured in Healthcare Journal, Senior Care Monthly.',
-      // ratings: 'Google: 4.8 stars, Yelp: 5 stars',
       locations:[
         {
           locationName:'Location 1',
@@ -533,9 +525,9 @@ export class BusinessModel {
         }
       ],
       address: '',
-      phone: '',
-      fax: '',
-      email: '',
+      phone: '4253904204',
+      fax: '4253904204',
+      email: 'toxicsanity@gmail.com',
 
       businessHours: 'Mon-Fri: 8am-6pm, Sat-Sun: 9am-5pm',
       socialMedia:
@@ -610,7 +602,7 @@ export class BusinessModel {
       metaDescription: '',
       metaKeywords: '',
       theme: {
-        themeFileName: 'styles.css',
+        themeFileName: 'prestige.css',
         primaryColor: '#fffaf2',
         secondaryColor: '#f8f3f0',
         accentColor: '#F0C987',
@@ -623,7 +615,7 @@ export class BusinessModel {
         navActiveText: '#ffffff',
         buttonColor: '#D9A064',
         buttonHoverColor: '#c9605b',
-        themeType: 'hh',
+        themeType: 'prestige',
       },
     };
   }

@@ -140,3 +140,10 @@ button[type="submit"]:hover {
   color: black !important;
   font-size: 0.9rem;
 }
+
+.alert {
+  position: relative;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+}
