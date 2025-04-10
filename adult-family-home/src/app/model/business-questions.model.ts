@@ -49,6 +49,7 @@ export interface Business {
   metaTitle: string;
   metaKeywords: string;
   metaDescription: string;
+  metaImage: string;
   theme: Theme;
 }
 
@@ -601,6 +602,7 @@ export class BusinessModel {
       metaTitle: '',
       metaDescription: '',
       metaKeywords: '',
+      metaImage: '',
       theme: {
         themeFileName: 'prestige.css',
         primaryColor: '#fffaf2',

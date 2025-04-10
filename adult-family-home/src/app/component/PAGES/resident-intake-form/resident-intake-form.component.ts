@@ -5,10 +5,12 @@ import { IntakeForm } from 'src/app/model/intake-form.model';
 import { IntakeService } from 'src/app/services/intake.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 import { EmailService } from 'src/app/services/email.service';
-import { Modal } from 'bootstrap';
+// import { Modal } from 'bootstrap';
 import { MetaService } from 'src/app/services/meta-service.service';
 import { Business } from 'src/app/model/business-questions.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
     selector: 'app-resident-intake-form',
@@ -24,14 +26,16 @@ export class ResidentIntakeFormComponent implements OnInit {
   intakeForm: FormGroup;
   modalTitle: string = '';
     modalMessage: string = '';
-    responseModal!: Modal; // Modal instance
+    // responseModal!: Modal; // Modal instance
 
   constructor(private fb: FormBuilder, private intakeService: IntakeService,
     private businessDataService: BusinessDataService,
     private emailService: EmailService,
     private metaService: MetaService,
     private router: Router,
-    private route: ActivatedRoute)
+    private route: ActivatedRoute,
+    @Inject(PLATFORM_ID) private platformId: Object
+  )
     {
 
     this.intakeForm = this.fb.group({
@@ -99,10 +103,10 @@ export class ResidentIntakeFormComponent implements OnInit {
 
       // Construct the payload to match the expected structure
       const emailPayload = {
-        name: formData.name, // Use the name field from the form
-        email: formData.email, // Use the email field from the form
-        message: this.generateEmailMessage(formData), // Generate a detailed message from the form data
-        website: window.location.hostname // Use the current hostname as the website field
+        name: formData.name,
+        email: formData.email,
+        message: this.generateEmailMessage(formData),
+        website: isPlatformBrowser(this.platformId) ? window.location.hostname : ''
       };
 
       // Send the email

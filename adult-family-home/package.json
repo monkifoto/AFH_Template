@@ -9,7 +9,13 @@
     "test": "ng test",
     "build:prod": "ng build --configuration=production",
     "deploy": "firebase deploy",
-    "build-and-deploy": "npm run build:prod && firebase deploy --only hosting"
+    "start:test": "ng serve --configuration=test",
+    "build:test": "ng build --configuration=test",
+    "deploy:test": "npm run build:test && firebase deploy --only hosting --project test",
+    "build-and-deploy": "npm run build:prod && firebase deploy --only hosting",
+    "dev:ssr": "ng run adult-family-home:serve-ssr",
+    "build:ssr": "ng build && ng run adult-family-home:server",
+    "serve:ssr": "node dist/adult-family-home/server/main.js"
   },
   "private": true,
   "dependencies": {

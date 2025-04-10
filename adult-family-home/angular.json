@@ -30,8 +30,7 @@
               "src/styles.css"
             ],
            "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-               "node_modules/jquery/dist/jquery.min.js"
+
             ],
             "browser": "src/main.ts"
           },
@@ -54,6 +53,7 @@
                   "maximumError": "8kb"
                 }
               ],
+              "sourceMap": true,
               "outputHashing": "all"
             },
             "test": {"fileReplacements": [
@@ -79,7 +79,7 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": false,
+              "sourceMap": true,
               "namedChunks": true
             }
           },
@@ -123,7 +123,17 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/adult-family-home/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "sourceMap": true
+          }
         }
+
       }
     }
   },

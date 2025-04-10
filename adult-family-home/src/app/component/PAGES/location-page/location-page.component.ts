@@ -6,6 +6,9 @@ import { GoogleMapsLoaderService } from 'src/app/services/google-maps-loader.ser
 import { switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+
 
 
 
@@ -30,6 +33,7 @@ export class LocationPageComponent implements OnInit {
     private businessDataService: BusinessDataService,
     private googleMapsLoader: GoogleMapsLoaderService,
     private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit(): void {
@@ -104,8 +108,9 @@ export class LocationPageComponent implements OnInit {
     });
   }
 
-
   private loadMap(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     if (this.useMockMap) {
       console.log('Mock map mode: displaying static map image.');
       return;
@@ -120,13 +125,15 @@ export class LocationPageComponent implements OnInit {
   }
 
   private initializeMap(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     this.map = new google.maps.Map(document.getElementById('map'), {
       center: { lat: -34.397, lng: 150.644 },
       zoom: 8
     });
     this.geocoder = new google.maps.Geocoder();
   }
-
+  
   private showAddressOnMap(address: string): void {
     this.geocoder.geocode({ address }, (results: any, status: any) => {
       if (status === 'OK') {

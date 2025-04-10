@@ -22,7 +22,7 @@
     <input type="file" multiple (change)="uploadFiles($event)" />
   </div>
 
-  <div *ngIf="filesToUpload.length > 0">
+  <div *ngIf="filesToUpload && filesToUpload.length > 0">
     <h3>Files to be uploaded:</h3>
     <ul>
       <li *ngFor="let file of filesToUpload">{{ file.name }}</li>

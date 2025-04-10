@@ -1,23 +1,35 @@
-import { Injectable } from '@angular/core';
+
 import { getFirestore, doc, getDoc, setDoc, DocumentReference } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
 import { from, Observable, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, take } from 'rxjs/operators';
 import { Theme } from '../model/business-questions.model';
 import { environment } from '../../environments/environment';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
   private firestore = getFirestore(initializeApp(environment.firebase));
-  private themeLink: HTMLLinkElement;
+  // private themeLink: HTMLLinkElement;
+  private isBrowser: boolean;
 
-  constructor() {
-    this.themeLink = document.createElement('link');
-    this.themeLink.rel = 'stylesheet';
-    document.head.appendChild(this.themeLink);
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.isBrowser = isPlatformBrowser(platformId);
+
+    if (this.isBrowser) {
+      const existing = document.getElementById('theme-link');
+      if (!existing) {
+        const link = document.createElement('link');
+        link.id = 'theme-link';
+        link.rel = 'stylesheet';
+        document.head.appendChild(link);
+      }
+    }
   }
+
 
   public defaultTheme: Theme = {
     themeFileName: 'styles.css',
@@ -114,11 +126,13 @@ export class ThemeService {
   }
 
   applyThemeFile(themeFileName: string): Promise<void> {
+    if (!this.isBrowser) return Promise.resolve(); // SSR-safe
     const themePath = `assets/themes/${themeFileName}`;
     return this.loadCss(themePath);
   }
 
   private loadCss(url: string): Promise<void> {
+    if (!this.isBrowser) return Promise.resolve();
     return new Promise((resolve, reject) => {
       const link = document.createElement('link');
       link.rel = 'stylesheet';

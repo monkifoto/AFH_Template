@@ -2,7 +2,7 @@
   <div *ngFor="let slide of slides; let i = index"
        [class.active]="i === currentSlide"
        class="slide">
-    <div class="overlay" [style.backgroundImage]="'url(' + slide.backgroundImage + ')'"></div>
+       <div class="overlay" *ngIf="slide.backgroundImage" [style.backgroundImage]="'url(' + slide.backgroundImage + ')'"></div>
     <div class="content" *ngIf="slide.title">
       <h1>{{ slide.title }}</h1>
       <div class="separator"></div>
@@ -10,18 +10,18 @@
 
       <div class="buttons">
         <a *ngFor="let button of slide.buttons"
-           [routerLink]="button.link"
-           [class.btn-outline]="button.outline"
-           class="btn"
-           [style.borderRadius]="buttonBorderRadius">
-          {{ button.text }}
-        </a>
+        [routerLink]="button.link"
+        [class.btn-outline]="button.outline"
+        class="btn"
+        [style.borderRadius]="buttonBorderRadius">
+       {{ button.text }}
+     </a>
       </div>
     </div>
   </div>
 
   <!-- Navigation -->
-  <div *ngIf="slides.length > 1">
+  <div *ngIf="slides && slides.length > 1">
   <div class="navigation" [ngClass]="{ 'bottom-nav': navigation === 'bottom' }">
     <div *ngFor="let slide of slides; let i = index"
          [class.active]="i === currentSlide"

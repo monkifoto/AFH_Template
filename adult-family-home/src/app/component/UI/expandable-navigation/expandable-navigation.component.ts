@@ -2,6 +2,8 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Business } from 'src/app/model/business-questions.model';
 import { BusinessDataService } from 'src/app/services/business-data.service';
+import { Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
     selector: 'app-expandable-navigation',
@@ -13,7 +15,7 @@ export class ExpandableNavigationComponent  implements OnInit {
   businessId: string = '';
   business: Business | null = null;
   layoutType?: string = 'demo';
-  locations: any;
+  locations: any[] = [];
   isShrunk: boolean = false;
   menuOpen: boolean = false;
   locationsOpen: boolean = false;
@@ -24,10 +26,12 @@ export class ExpandableNavigationComponent  implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private businessDataService: BusinessDataService // Inject BusinessDataService here
+    private businessDataService: BusinessDataService ,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
     this.businessDataService.getBusinessId().subscribe((businessId) => {
       if (businessId) {
         this.businessId = businessId;
@@ -35,22 +39,16 @@ export class ExpandableNavigationComponent  implements OnInit {
         this.businessDataService.getBusinessData().subscribe((data) => {
           this.business = data;
           this.layoutType = this.business?.theme.themeType;
-          // this.locations = this.business?.locations || []; // Store locations
-
-          // console.log("🔍 Loaded Locations:", this.locations); // ✅ Debugging
-          // if (this.locations.length === 0) {
-          //   console.warn("⚠️ No locations found for this business.");
-          // }
         });
 
         this.businessDataService.getLocations().subscribe((locations) => {
           this.locations = locations;
-         // console.log("📍 Locations Updated in Navigation:", this.locations);
         });
       }
     });
 
     this.checkScroll();
+  }
   }
 
   @HostListener('window:scroll', [])
@@ -59,7 +57,9 @@ export class ExpandableNavigationComponent  implements OnInit {
   }
 
   private checkScroll(): void {
+    if (isPlatformBrowser(this.platformId)) {
     this.isShrunk = window.scrollY > 100;
+    }
   }
 
   toggleMenu(): void {

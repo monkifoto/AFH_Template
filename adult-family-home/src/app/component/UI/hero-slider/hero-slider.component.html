@@ -11,7 +11,7 @@
 >
 <ng-container *ngFor="let slide of slides; let i = index">
   <div
-  *ngIf="i === currentSlide || i === previousSlide"
+  *ngIf="i === currentSlide || i === previousSlide && slide"
   class="clemo-slides clemo-single-home-slider"
   [@slideTransition]="{
     value: i === currentSlide ? 'enter' : 'leave',
@@ -25,7 +25,7 @@
     <!-- Background -->
     <div
       class="clemo-home-overlay"
-      [ngStyle]="{
+      [ngStyle]="slide?.backgroundImage && {
         backgroundImage: 'url(' + slide.backgroundImage + ')',
         'background-size': 'cover',
         'background-position': 'center',
@@ -39,12 +39,13 @@
         <h1>{{ slide.title }}</h1>
         <div class="clemo-separator"></div>
         <h2
-          class="clemo-subtitle"
-          [ngStyle]="{ 'font-size': subtitleSize, 'font-weight': subtitleWeight }"
-          [innerHTML]="slide.subtitle"
+        class="clemo-subtitle"
+        *ngIf="slide?.subtitle"
+        [ngStyle]="{ 'font-size': subtitleSize, 'font-weight': subtitleWeight }"
+        [innerHTML]="slide.subtitle"
         ></h2>
 
-        <div class="clemo-home-btn">
+        <div class="clemo-home-btn" *ngIf="slide?.buttons?.length">
           <ng-container *ngFor="let button of slide.buttons">
             <a
               [routerLink]="button.link"
@@ -70,7 +71,7 @@
   </div>
 </ng-container>
   <!-- Navigation -->
-  <div *ngIf="slides.length > 1">
+  <div *ngIf="slides && slides.length > 1">
     <div class="clemo-slider-navigation" [ngClass]="{ 'bottom-nav': navigation === 'bottom' }">
       <div
         *ngFor="let slide of slides; let i = index"

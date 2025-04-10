@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth, authState, signInWithEmailAndPassword, signOut, User } from '@angular/fire/auth';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,21 @@ import { map } from 'rxjs/operators';
 export class AuthService {
   user$: Observable<User | null>;
 
-  constructor(private auth: Auth, private router: Router) {
+  constructor(
+    private auth: Auth,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
     this.user$ = authState(this.auth);
   }
 
   login(email: string, password: string): Promise<User | null> {
     return signInWithEmailAndPassword(this.auth, email, password)
-      .then((userCredential) => userCredential.user);
+      .then(userCredential => userCredential.user)
+      .catch(error => {
+        console.error('Login failed:', error);
+        throw error;
+      });
   }
 
   logout(): Promise<void> {
@@ -29,8 +38,15 @@ export class AuthService {
     return this.user$.pipe(map(user => !!user));
   }
 
+  getCurrentUser(): User | null {
+    return this.auth.currentUser;
+  }
+
+  // SSR-safe version (optional, not critical)
   isLoggedIn(): boolean {
-    // Optional: use a more reliable state system here if needed
-    return !!localStorage.getItem('user');
+    if (isPlatformBrowser(this.platformId)) {
+      return !!localStorage.getItem('user');
+    }
+    return false;
   }
 }

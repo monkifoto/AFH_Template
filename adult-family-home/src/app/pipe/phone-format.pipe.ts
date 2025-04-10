@@ -10,7 +10,7 @@ export class PhoneFormatPipe implements PipeTransform {
 
     let phone = value.toString().replace(/\D/g, ''); // Remove non-numeric characters
 
-    if (phone.length !== 10) return value.toString(); // ✅ Return original if not 10 digits
+    if (phone && phone.length !== 10) return value.toString(); // ✅ Return original if not 10 digits
 
     return `${phone.slice(0, 3)}.${phone.slice(3, 6)}.${phone.slice(6)}`;
   }
