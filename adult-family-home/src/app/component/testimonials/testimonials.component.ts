@@ -16,13 +16,9 @@ export class TestimonialsComponent {
   autoAdvanceInterval: any;
 
   ngOnInit() {
-<<<<<<< HEAD
     if (Array.isArray(this.testimonials) && this.testimonials.length > 0) {
       this.startAutoAdvance();
     }
-=======
-    this.startAutoAdvance();
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   }
 
   ngOnDestroy() {
@@ -35,19 +31,11 @@ export class TestimonialsComponent {
   }
 
   startAutoAdvance() {
-<<<<<<< HEAD
     if (Array.isArray(this.testimonials) && this.testimonials.length > 1) {
       this.autoAdvanceInterval = setInterval(() => {
         this.currentIndex = (this.currentIndex + 1) % this.testimonials!.length;
       }, 5000);
     }
-=======
-    this.autoAdvanceInterval = setInterval(() => {
-      if (Array.isArray(this.testimonials)) {
-        this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
-      }
-    }, 5000); // 5 seconds
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   }
 
   stopAutoAdvance() {

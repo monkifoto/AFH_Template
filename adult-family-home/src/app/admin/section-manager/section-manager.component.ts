@@ -529,8 +529,4 @@ async duplicateSection(sectionId: string, targetBusinessId: string) {
   logActiveBusinessId(section: FormGroup) {
     console.log("🔍 Selected Business ID:", section.get('activeBusinessId')?.value);
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 }

@@ -12,12 +12,9 @@ import { ItemListComponent } from '../../UI/item-list/item-list.component';
 import { CallToActionComponent } from '../../UI/call-to-action/call-to-action.component';
 import { ConsultationComponent } from '../../UI/consultation/consultation.component';
 import { ItemListImageComponent } from '../../UI/item-list-image/item-list-image.component';
-<<<<<<< HEAD
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
 
-=======
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
 @Component({
     selector: 'app-services',
@@ -51,11 +48,8 @@ export class ServicesComponent implements OnInit, AfterViewInit {
     private metaService: MetaService,
     private businessDataService: BusinessDataService,
     private router: Router,
-<<<<<<< HEAD
     @Inject(PLATFORM_ID) private platformId: Object,
 
-=======
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   ) {}
 
   ngOnInit(): void {
@@ -217,7 +211,6 @@ export class ServicesComponent implements OnInit, AfterViewInit {
 }
   }
 
-<<<<<<< HEAD
   createWrapper(group: any[]) {
     if (!group.length || !isPlatformBrowser(this.platformId)) return;
 
@@ -232,36 +225,14 @@ export class ServicesComponent implements OnInit, AfterViewInit {
     group.forEach((section) => {
       const componentRef = this.createComponent(section);
       if (componentRef !== null && componentRef.location?.nativeElement) {
-=======
-
-  createWrapper(group: any[]) {
-    if (!group.length) return;
-
-    // ✅ Create wrapper div dynamically
-    const wrapperElement = document.createElement('div');
-    wrapperElement.className = 'text-wrapper'; // ✅ Apply CSS styles
-
-    // ✅ Ensure left-text is inserted FIRST before right-text
-    group.sort((a, b) => (a.component === 'left-text' ? -1 : 1));
-
-    // ✅ Insert left-text and right-text immediately inside the wrapper
-    group.forEach((section) => {
-      const componentRef = this.createComponent(section);
-      if (componentRef !== null) { // ✅ Ensures valid component
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
         wrapperElement.appendChild(componentRef.location.nativeElement);
       }
     });
 
-<<<<<<< HEAD
     // ✅ Append the wrapper to the container
     if (this.container?.element?.nativeElement) {
       this.container.element.nativeElement.appendChild(wrapperElement);
     }
-=======
-    // ✅ Append the wrapper to the container AFTER inserting left-text and right-text
-    this.container.element.nativeElement.appendChild(wrapperElement);
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   }
 
   createComponent(section: any, insertBeforeElement?: HTMLElement): ComponentRef<any> | null {
@@ -283,13 +254,9 @@ export class ServicesComponent implements OnInit, AfterViewInit {
         insertBeforeElement
       );
     } else {
-<<<<<<< HEAD
       if (isPlatformBrowser(this.platformId)) {
         this.container.element.nativeElement.appendChild(componentRef.location.nativeElement);
       }
-=======
-      this.container.element.nativeElement.appendChild(componentRef.location.nativeElement);
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
     }
 
     return componentRef;

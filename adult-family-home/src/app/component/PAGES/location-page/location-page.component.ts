@@ -6,12 +6,9 @@ import { GoogleMapsLoaderService } from 'src/app/services/google-maps-loader.ser
 import { switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-<<<<<<< HEAD
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
-=======
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
 
 
@@ -36,10 +33,7 @@ export class LocationPageComponent implements OnInit {
     private businessDataService: BusinessDataService,
     private googleMapsLoader: GoogleMapsLoaderService,
     private router: Router,
-<<<<<<< HEAD
     @Inject(PLATFORM_ID) private platformId: Object
-=======
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   ) {}
 
   ngOnInit(): void {
@@ -114,14 +108,9 @@ export class LocationPageComponent implements OnInit {
     });
   }
 
-<<<<<<< HEAD
   private loadMap(): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
-=======
-
-  private loadMap(): void {
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
     if (this.useMockMap) {
       console.log('Mock map mode: displaying static map image.');
       return;
@@ -136,22 +125,14 @@ export class LocationPageComponent implements OnInit {
   }
 
   private initializeMap(): void {
-<<<<<<< HEAD
     if (!isPlatformBrowser(this.platformId)) return;
 
-=======
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
     this.map = new google.maps.Map(document.getElementById('map'), {
       center: { lat: -34.397, lng: 150.644 },
       zoom: 8
     });
     this.geocoder = new google.maps.Geocoder();
   }
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   private showAddressOnMap(address: string): void {
     this.geocoder.geocode({ address }, (results: any, status: any) => {
       if (status === 'OK') {

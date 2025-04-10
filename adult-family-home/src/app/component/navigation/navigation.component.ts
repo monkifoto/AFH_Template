@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BusinessDataService } from 'src/app/services/business-data.service'; // Import BusinessDataService
 import { Business } from 'src/app/model/business-questions.model';
-<<<<<<< HEAD
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-=======
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
 @Component({
     selector: 'app-navigation',
@@ -25,12 +22,8 @@ export class NavigationComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-<<<<<<< HEAD
     private businessDataService: BusinessDataService,
     @Inject(PLATFORM_ID) private platformId: Object
-=======
-    private businessDataService: BusinessDataService // Inject BusinessDataService here
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   ) {}
 
   ngOnInit(): void {
@@ -63,7 +56,6 @@ export class NavigationComponent implements OnInit {
   }
 
   scrollToSection(sectionId: string) {
-<<<<<<< HEAD
     if (isPlatformBrowser(this.platformId)) {
       const section = document.getElementById(sectionId);
       if (section) {
@@ -71,13 +63,6 @@ export class NavigationComponent implements OnInit {
       }
       this.menuOpen = false;
     }
-=======
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    this.menuOpen = false; // Close menu after clicking (optional)
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   }
 
   toggleMenu(): void {

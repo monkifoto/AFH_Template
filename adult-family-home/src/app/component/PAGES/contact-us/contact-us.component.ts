@@ -4,7 +4,6 @@ import { Business, BusinessLocation } from 'src/app/model/business-questions.mod
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MetaService } from 'src/app/services/meta-service.service';
-<<<<<<< HEAD
 // import { Modal } from 'bootstrap';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -12,13 +11,6 @@ import { EmailService } from 'src/app/services/email.service';
 import { environment } from 'src/environments/environment';import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
 
-=======
-import { Modal } from 'bootstrap';
-import { BusinessDataService } from 'src/app/services/business-data.service';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { EmailService } from 'src/app/services/email.service';
-import { environment } from 'src/environments/environment';
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
 
 @Component({
@@ -39,20 +31,12 @@ export class ContactUsComponent  implements OnInit{
     email: '',
     phone: '',
     message: '',
-<<<<<<< HEAD
     website: ''
-=======
-    website: this.extractBaseDomain(window.location.hostname)
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   };
 
   modalTitle: string = '';
   modalMessage: string = '';
-<<<<<<< HEAD
   // responseModal!: Modal; // Modal instance
-=======
-  responseModal!: Modal; // Modal instance
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -61,12 +45,8 @@ export class ContactUsComponent  implements OnInit{
     private route: ActivatedRoute,private http: HttpClient,
     private emailService: EmailService,
     private router: Router,
-<<<<<<< HEAD
     private metaService: MetaService,
     @Inject(PLATFORM_ID) private platformId: Object){}
-=======
-    private metaService: MetaService){}
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
 
       get sanitizedBusinessHours(): SafeHtml {
@@ -76,17 +56,12 @@ export class ContactUsComponent  implements OnInit{
       }
 
       ngOnInit(): void {
-<<<<<<< HEAD
 
         if (isPlatformBrowser(this.platformId)) {
           this.formData.website = this.extractBaseDomain(window.location.hostname);
         }
         const id = this.route.snapshot.queryParamMap.get('id');
         if (id && isPlatformBrowser(this.platformId)) {
-=======
-        const id = this.route.snapshot.queryParamMap.get('id');
-        if (id) {
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
           window.history.replaceState({}, '', this.router.url.split('?')[0]);
         }
 
@@ -117,11 +92,7 @@ export class ContactUsComponent  implements OnInit{
     setTimeout(() => {
       const modalElement = document.getElementById('responseModal');
       if (modalElement) {
-<<<<<<< HEAD
         // this.responseModal = new Modal(modalElement); // Bootstrap modal instance
-=======
-        this.responseModal = new Modal(modalElement); // Bootstrap modal instance
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
       } else {
         console.error('Modal element not found.');
       }
@@ -135,21 +106,13 @@ export class ContactUsComponent  implements OnInit{
           response => {
             this.modalTitle = 'Message Sent';
             this.modalMessage = 'Thank you for your message! We will get back to you soon.';
-<<<<<<< HEAD
             // this.showModal();
-=======
-            this.showModal();
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
           },
           error => {
             console.error('Error sending email', error);
             this.modalTitle = 'Error';
             this.modalMessage = 'There was an issue sending your message. Please try again later.';
-<<<<<<< HEAD
             // this.showModal();
-=======
-            this.showModal();
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
           }
         );
   }
@@ -175,18 +138,10 @@ export class ContactUsComponent  implements OnInit{
     .join(' '); // ✅ Join into a single string
   }
 
-<<<<<<< HEAD
   // showModal() {
   //   if (this.responseModal) {
   //     this.responseModal.show();  // Use the Bootstrap modal instance to show the modal
   //   }
   // }
-=======
-  showModal() {
-    if (this.responseModal) {
-      this.responseModal.show();  // Use the Bootstrap modal instance to show the modal
-    }
-  }
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
 }

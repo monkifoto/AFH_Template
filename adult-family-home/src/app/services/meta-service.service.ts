@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { isPlatformBrowser } from '@angular/common';
-=======
-import { Injectable } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 import { BusinessDataService } from './business-data.service';
 import { Business } from '../model/business-questions.model';
 
@@ -16,7 +11,6 @@ export class MetaService {
   constructor(
     private meta: Meta,
     private title: Title,
-<<<<<<< HEAD
     private businessDataService: BusinessDataService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
@@ -49,20 +43,6 @@ export class MetaService {
   updateFavicon(faviconUrl: string) {
     if (!isPlatformBrowser(this.platformId)) return;
 
-=======
-    private businessDataService: BusinessDataService
-  ) {}
-
-  updateMetaTags(metaData: { title: string; description: string; keywords: string }) {
-    this.title.setTitle(metaData.title);
-    this.meta.updateTag({ name: 'description', content: metaData.description });
-    this.meta.updateTag({ name: 'keywords', content: metaData.keywords });
-    this.meta.updateTag({ property: 'og:title', content: metaData.title });
-    this.meta.updateTag({ property: 'og:description', content: metaData.description });
-  }
-
-  updateFavicon(faviconUrl: string) {
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
     const head = document.getElementsByTagName('head')[0];
     let link: HTMLLinkElement | null = document.querySelector("link[rel*='icon']");
 
@@ -78,7 +58,6 @@ export class MetaService {
   loadAndApplyMeta(businessId: string): void {
     this.businessDataService.loadBusinessData(businessId).subscribe((business: Business | null) => {
       if (business) {
-<<<<<<< HEAD
         const metaData = {
           title: business.metaTitle || business.businessName || 'Default Title',
           description: business.metaDescription || 'Default Description',
@@ -89,17 +68,6 @@ export class MetaService {
 
         this.updateMetaTags(metaData);
 
-=======
-        // Update meta tags
-        const metaData = {
-          title: business.metaTitle || 'Default Title',
-          description: business.metaDescription || 'Default Description',
-          keywords: business.metaKeywords || 'default, keywords',
-        };
-        this.updateMetaTags(metaData);
-
-        // Update favicon if available
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
         if (business.faviconUrl) {
           this.updateFavicon(business.faviconUrl);
         }

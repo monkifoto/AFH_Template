@@ -14,11 +14,8 @@ import { LeftTextComponent } from '../../UI/left-text/left-text.component';
 import { ItemListComponent } from '../../UI/item-list/item-list.component';
 import { BusinessSectionsService } from 'src/app/services/business-sections.service';
 import { CallToActionComponent } from '../../UI/call-to-action/call-to-action.component';
-<<<<<<< HEAD
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
-=======
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
 
 @Component({
@@ -63,28 +60,16 @@ export class PhotoGalleryComponent implements OnInit {
       private router: Router,
       private sectionService: BusinessSectionsService,
       private resolver: ComponentFactoryResolver,
-<<<<<<< HEAD
       private injector: Injector,
       @Inject(PLATFORM_ID) private platformId: Object
-=======
-      private injector: Injector
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
     ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.queryParamMap.get('id');
-<<<<<<< HEAD
     if (id && isPlatformBrowser(this.platformId)) {
       window.history.replaceState({}, '', this.router.url.split('?')[0]);
     }
 
-=======
-    if (id) {
-      window.history.replaceState({}, '', this.router.url.split('?')[0]);
-    }
-
-
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
     this.businessDataService.businessData$.subscribe((business) => {
       this.business = business;
       this.layoutType = business?.theme.themeType || '';

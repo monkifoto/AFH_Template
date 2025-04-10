@@ -30,12 +30,6 @@
               "src/styles.css"
             ],
            "scripts": [
-<<<<<<< HEAD
-
-=======
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-               "node_modules/jquery/dist/jquery.min.js"
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
             ],
             "browser": "src/main.ts"
           },
@@ -95,12 +89,9 @@
           "configurations": {
             "production": {
               "buildTarget": "adult-family-home:build:production"
-<<<<<<< HEAD
             },
             "test": {
               "buildTarget": "adult-family-home:build:test"
-=======
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
             },
             "development": {
               "buildTarget": "adult-family-home:build:development"

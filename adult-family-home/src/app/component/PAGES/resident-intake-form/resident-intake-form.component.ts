@@ -5,19 +5,12 @@ import { IntakeForm } from 'src/app/model/intake-form.model';
 import { IntakeService } from 'src/app/services/intake.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 import { EmailService } from 'src/app/services/email.service';
-<<<<<<< HEAD
 // import { Modal } from 'bootstrap';
 import { MetaService } from 'src/app/services/meta-service.service';
 import { Business } from 'src/app/model/business-questions.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-=======
-import { Modal } from 'bootstrap';
-import { MetaService } from 'src/app/services/meta-service.service';
-import { Business } from 'src/app/model/business-questions.model';
-import { Router, ActivatedRoute } from '@angular/router';
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
 @Component({
     selector: 'app-resident-intake-form',
@@ -33,24 +26,16 @@ export class ResidentIntakeFormComponent implements OnInit {
   intakeForm: FormGroup;
   modalTitle: string = '';
     modalMessage: string = '';
-<<<<<<< HEAD
     // responseModal!: Modal; // Modal instance
-=======
-    responseModal!: Modal; // Modal instance
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
   constructor(private fb: FormBuilder, private intakeService: IntakeService,
     private businessDataService: BusinessDataService,
     private emailService: EmailService,
     private metaService: MetaService,
     private router: Router,
-<<<<<<< HEAD
     private route: ActivatedRoute,
     @Inject(PLATFORM_ID) private platformId: Object
   )
-=======
-    private route: ActivatedRoute)
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
     {
 
     this.intakeForm = this.fb.group({
@@ -118,17 +103,10 @@ export class ResidentIntakeFormComponent implements OnInit {
 
       // Construct the payload to match the expected structure
       const emailPayload = {
-<<<<<<< HEAD
         name: formData.name,
         email: formData.email,
         message: this.generateEmailMessage(formData),
         website: isPlatformBrowser(this.platformId) ? window.location.hostname : ''
-=======
-        name: formData.name, // Use the name field from the form
-        email: formData.email, // Use the email field from the form
-        message: this.generateEmailMessage(formData), // Generate a detailed message from the form data
-        website: window.location.hostname // Use the current hostname as the website field
->>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
       };
 
       // Send the email
