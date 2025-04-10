@@ -9,7 +9,11 @@
   <div *ngIf="googleReviewsLoading && business?.placeId != '0'" class="spinner"></div>
       <p *ngIf="googleReviewsLoading && business?.placeId != '0'" class="loading-text">Loading Google Reviews...</p>
   <div class="testimonial-grid">
+<<<<<<< HEAD
     <div class="testimonial-card" *ngFor="let testimonial of testimonials"  [ngClass]="{ 'full-width': (testimonial.rawQuote?.length || 0) > 1000 }">
+=======
+    <div class="testimonial-card" *ngFor="let testimonial of testimonials"  [ngClass]="{ 'full-width': testimonial.rawQuote.length > 1000 }">
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
       <div class="author-info">
         <img

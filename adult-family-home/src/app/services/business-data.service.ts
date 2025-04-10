@@ -4,7 +4,10 @@ import { map, switchMap, tap } from 'rxjs/operators';
 import { BusinessService } from './business.service';
 import { BusinessPageHeroService } from './business-page-hero.service';
 import { Business } from '../model/business-questions.model';
+<<<<<<< HEAD
 import { first } from 'rxjs/operators';
+=======
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
 @Injectable({
   providedIn: 'root',

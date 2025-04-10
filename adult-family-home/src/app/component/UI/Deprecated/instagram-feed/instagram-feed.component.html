@@ -1,6 +1,10 @@
 <div class="instagram-feed">
   <h2>Instagram Feed</h2>
+<<<<<<< HEAD
   <div *ngIf="instagramPosts && instagramPosts.length === 0">Loading feed...</div>
+=======
+  <div *ngIf="instagramPosts.length === 0">Loading feed...</div>
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   <div *ngFor="let post of instagramPosts" class="instagram-post">
     <a [href]="post.permalink" target="_blank">
       <img *ngIf="post.media_type === 'IMAGE' || post.media_type === 'CAROUSEL_ALBUM'" [src]="post.media_url" [alt]="post.caption || 'Instagram Post'" />

@@ -82,6 +82,11 @@ export class ServicesPageComponent implements OnInit {
   initializeCollapsedStates() {
     this.collapsedServices = new Array(this.services.length).fill(true);
     this.collapsedBenefits = new Array(this.benefits.length).fill(true);
+<<<<<<< HEAD
+=======
+    // this.collapsedServices = this.services.controls.map(() => true);
+    // this.collapsedBenefits = this.benefits.controls.map(() => true);
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   }
 
   toggleService(index: number): void {

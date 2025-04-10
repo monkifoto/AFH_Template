@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import { Component, HostListener, Inject, Input, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+=======
+import { Component, HostListener, Input, OnInit } from '@angular/core';
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 import { Router } from '@angular/router';
 import { Business, SliderConfig } from 'src/app/model/business-questions.model';
 import { BusinessDataService } from 'src/app/services/business-data.service';
@@ -13,7 +17,10 @@ import {
   group,
 } from '@angular/animations';
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 @Component({
     selector: 'app-hero-slider',
     templateUrl: './hero-slider.component.html',
@@ -40,8 +47,12 @@ import {
     ],
     standalone: false
 })
+<<<<<<< HEAD
 export class HeroSliderComponent implements OnInit ,OnDestroy {
   isBrowser: boolean = false;
+=======
+export class HeroSliderComponent implements OnInit {
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   business: Business | null = null;
   slides: any[] = [];
   @Input() navigation: 'side' | 'bottom' = 'side';  // Default: side navigation
@@ -55,22 +66,31 @@ export class HeroSliderComponent implements OnInit ,OnDestroy {
   sliderOpacity = 1; // Initial opacity for the slider
   enableTransitions = true;
 
+<<<<<<< HEAD
   constructor(
     private router: Router,
     private businessDataService: BusinessDataService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
+=======
+  constructor(private router: Router, private businessDataService: BusinessDataService) {
+    this.autoSlide();
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   }
 
   ngOnInit(): void {
     setTimeout(() => this.enableTransitions = true, 50);
     console.log('HeroSliderComponent - ngOnInit');
     this.fetchHeroSliderData();
+<<<<<<< HEAD
 
     if (this.isBrowser) {
       this.autoSlide();
     }
+=======
+    this.autoSlide();
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   }
 
   fetchHeroSliderData(): void {
@@ -125,6 +145,7 @@ export class HeroSliderComponent implements OnInit ,OnDestroy {
   // navigateToSlide(index: number): void {
   //   this.currentSlide = index;
   // }
+<<<<<<< HEAD
   private intervalId: any;
   autoSlide(): void {
     this.intervalId = setInterval(() => {
@@ -134,6 +155,14 @@ export class HeroSliderComponent implements OnInit ,OnDestroy {
     }, 15000);
   }
 
+=======
+
+  autoSlide(): void {
+    setInterval(() => {
+      this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+    }, 15000);
+  }
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   slideDirection: 'left' | 'right' = 'left';
   previousSlide = 0;
   isTransitioning = false;
@@ -173,6 +202,7 @@ export class HeroSliderComponent implements OnInit ,OnDestroy {
   // Scroll event listener to adjust opacity
   @HostListener('window:scroll', ['$event'])
   onScroll(): void {
+<<<<<<< HEAD
     if (!this.isBrowser) return;
     const scrollY = window.scrollY;
     const viewportHeight = window.innerHeight;
@@ -184,4 +214,11 @@ export class HeroSliderComponent implements OnInit ,OnDestroy {
       clearInterval(this.intervalId);
     }
   }
+=======
+    const scrollY = window.scrollY;
+    const viewportHeight = window.innerHeight;
+
+    this.sliderOpacity = Math.max(1 - scrollY / viewportHeight, 0);
+  }
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 }

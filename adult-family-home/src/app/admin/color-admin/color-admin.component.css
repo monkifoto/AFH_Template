@@ -38,6 +38,7 @@ button {
 button:hover {
   background-color: var(--button-hover-color);
 }
+<<<<<<< HEAD
 
 .modal-backdrop {
   position: fixed;
@@ -84,3 +85,5 @@ button:hover {
   float: right;
 }
 
+=======
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4

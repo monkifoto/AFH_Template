@@ -228,7 +228,6 @@ export class BusinessModel {
           paddingLeft: 0,
           paddingRight: 0,
           contentPadding: 20,
-
         },
         {
           id:'',
@@ -498,7 +497,6 @@ export class BusinessModel {
       businessData: '',
       id: '',
       faqs: '',
-
       businessName: 'Careful Living AFH',
       keyWords: 'Adult Family Home Bellevue, Senior Care Bellevue WA, Elderly Care Services Bellevue, Assisted Living Bellevue Washington, Memory Care Bellevue, Dementia Care Bellevue WA, Respite Care Bellevue, Long-Term Care Bellevue, Home Care for Seniors Bellevue,Skilled Nursing Bellevue WA,Personalized Senior Care Bellevue, Senior Living Bellevue Washington, Compassionate Elderly Care Bellevue, Family Home Care Bellevue WA, Professional Senior Care Services Bellevue, Senior Assisted Living Bellevue, Senior Home Assistance Bellevue WA, Senior Housing Bellevue Washington, Helping Hand AFH Bellevue, Senior Caregivers Bellevue WA',
       businessURL: 'https://www.carefullivingafh.com',

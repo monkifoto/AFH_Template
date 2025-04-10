@@ -2,8 +2,11 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Business } from 'src/app/model/business-questions.model';
 import { BusinessDataService } from 'src/app/services/business-data.service';
+<<<<<<< HEAD
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+=======
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
 @Component({
     selector: 'app-expandable-navigation',
@@ -15,7 +18,11 @@ export class ExpandableNavigationComponent  implements OnInit {
   businessId: string = '';
   business: Business | null = null;
   layoutType?: string = 'demo';
+<<<<<<< HEAD
   locations: any[] = [];
+=======
+  locations: any;
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   isShrunk: boolean = false;
   menuOpen: boolean = false;
   locationsOpen: boolean = false;
@@ -26,12 +33,19 @@ export class ExpandableNavigationComponent  implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+<<<<<<< HEAD
     private businessDataService: BusinessDataService ,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
+=======
+    private businessDataService: BusinessDataService // Inject BusinessDataService here
+  ) {}
+
+  ngOnInit(): void {
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
     this.businessDataService.getBusinessId().subscribe((businessId) => {
       if (businessId) {
         this.businessId = businessId;
@@ -39,17 +53,33 @@ export class ExpandableNavigationComponent  implements OnInit {
         this.businessDataService.getBusinessData().subscribe((data) => {
           this.business = data;
           this.layoutType = this.business?.theme.themeType;
+<<<<<<< HEAD
+=======
+          // this.locations = this.business?.locations || []; // Store locations
+
+          // console.log("🔍 Loaded Locations:", this.locations); // ✅ Debugging
+          // if (this.locations.length === 0) {
+          //   console.warn("⚠️ No locations found for this business.");
+          // }
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
         });
 
         this.businessDataService.getLocations().subscribe((locations) => {
           this.locations = locations;
+<<<<<<< HEAD
+=======
+         // console.log("📍 Locations Updated in Navigation:", this.locations);
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
         });
       }
     });
 
     this.checkScroll();
   }
+<<<<<<< HEAD
   }
+=======
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
@@ -57,9 +87,13 @@ export class ExpandableNavigationComponent  implements OnInit {
   }
 
   private checkScroll(): void {
+<<<<<<< HEAD
     if (isPlatformBrowser(this.platformId)) {
     this.isShrunk = window.scrollY > 100;
     }
+=======
+    this.isShrunk = window.scrollY > 100;
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   }
 
   toggleMenu(): void {

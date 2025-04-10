@@ -15,8 +15,11 @@ import { Observable, catchError, map, of, from } from 'rxjs';
 import { Business, Employee, HeroImage } from '../model/business-questions.model';
 import { initializeApp } from 'firebase/app';
 import { environment } from '../../environments/environment';
+<<<<<<< HEAD
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID, Inject } from '@angular/core';
+=======
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +30,7 @@ export class WebContentService {
   private defaultBusinessId = 'Z93oAAVwFAwhmdH2lLtB';
   private defaultImage = 'assets/sharedAssets/missingTestimonialImage.png';
 
+<<<<<<< HEAD
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   getBusinessData(businessId: string | null | undefined): Observable<Business | undefined> {
@@ -34,15 +38,22 @@ export class WebContentService {
       console.log('⛔ SSR detected, skipping getBusinessData call');
       return of(undefined);
     }
+=======
+  getBusinessData(businessId: string | null | undefined): Observable<Business | undefined> {
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
     const resolvedId = businessId?.trim() || this.defaultBusinessId;
     const businessRef = doc(this.firestore, `businesses/${resolvedId}`);
 
     return from(getDoc(businessRef)).pipe(
       map((docSnap) => {
+<<<<<<< HEAD
         if (!docSnap.exists()) {
           console.warn(`Business document not found for ID: ${resolvedId}`);
           return undefined;
         }
+=======
+        if (!docSnap.exists()) return undefined;
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
         const data = docSnap.data() as Business;
         const { id: _, testimonials = [], ...rest } = data;
 

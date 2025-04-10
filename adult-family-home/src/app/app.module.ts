@@ -51,7 +51,11 @@ import { IconListComponent } from './component/UI/Deprecated/icon-list/icon-list
 import { HeroComponent } from './component/UI/hero/hero.component';
 import { TestimonialImageComponent } from './component/UI/testimonial-image/testimonial-image.component';
 import { CallToActionComponent } from './component/UI/call-to-action/call-to-action.component';
+<<<<<<< HEAD
 import { UiTestComponent } from './component/UI/DEMO COMPONENTS/ui-test/ui-test.component';
+=======
+import { UiTestComponent } from './component/UI/ui-test/ui-test.component';
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 import { TestimonialsListComponent } from './component/PAGES/testimonials/testimonials.component';
 import { ParallaxTextComponent } from './component/UI/parallax-text/parallax-text.component';
 import { StatsComponent } from './component/UI/stats/stats.component';
@@ -81,6 +85,7 @@ import { PhoneFormatPipe } from './pipe/phone-format.pipe';
 import { ItemListImageComponent } from './component/UI/item-list-image/item-list-image.component';
 import { HeroManagerComponent } from './admin/hero-manager/hero-manager.component';
 import { TextWrapperComponent } from './component/text-wrapper/text-wrapper.component';
+<<<<<<< HEAD
 import { BloatingBubblesComponent } from './component/UI/DEMO COMPONENTS/bloating-bubbles/bloating-bubbles.component';
 import { SERVER_REQUEST } from './tokens/server-request.token';
 import { Request } from 'express';
@@ -89,6 +94,8 @@ import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { LoginComponent } from './admin/login/login.component';
 import { firstValueFrom } from 'rxjs';
+=======
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
 
     // Map hostnames to business IDs
@@ -119,6 +126,7 @@ import { firstValueFrom } from 'rxjs';
     };
 
 
+<<<<<<< HEAD
     export function initializerFactory() {
       const req = inject(SERVER_REQUEST, { optional: true }) as Request | undefined;
       const themeService = inject(ThemeInitializerService);
@@ -207,6 +215,59 @@ import { firstValueFrom } from 'rxjs';
     //     console.log('✅ AppInitializer complete (safe mode)');
     //   };
     // }
+=======
+    // export function themeInitializerFactory() {
+    //   const themeService = inject(ThemeInitializerService);
+    //   const location = inject(Location);
+    //   const router = inject(Router);
+
+    //   const hostname = window.location.hostname;
+    //   const url = new URL(window.location.href);
+    //   const businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
+
+    //   return () => themeService.loadTheme(businessId);
+    // }
+
+    // // ✅ Initializer for business data
+    // export function initializeBusinessDataFactory() {
+    //   const businessDataService = inject(BusinessDataService);
+    //   const location = inject(Location);
+    //   const router = inject(Router);
+
+    //   const hostname = window.location.hostname;
+    //   const url = new URL(window.location.href);
+    //   const businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
+
+    //   return () =>
+    //     businessDataService.loadBusinessData(businessId).toPromise().catch((err) => {
+    //       console.error('Error loading business data:', err);
+    //     });
+    // }
+
+// export function combinedInitializer(
+//   themeInitializer: ThemeInitializerService,
+//   businessDataService: BusinessDataService,
+//   location: Location,
+//   router: Router
+// ): () => Promise<void> {
+//   return async () => {
+//     // Initialize theme
+//     const hostname = window.location.hostname;
+//     const url = new URL(window.location.href);
+//     let businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
+
+//     await themeInitializer.loadTheme(businessId);
+
+//     // Initialize business data
+//     try {
+//       await businessDataService.loadBusinessData(businessId).toPromise();
+//       console.log("Business data loaded successfully");
+//     } catch (error) {
+//       console.error("Error loading business data:", error);
+//     }
+//   };
+// }
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
 @NgModule({
   declarations: [
@@ -275,9 +336,13 @@ import { firstValueFrom } from 'rxjs';
     PhoneFormatPipe,
     ItemListImageComponent,
     HeroManagerComponent,
+<<<<<<< HEAD
     TextWrapperComponent,
     BloatingBubblesComponent,
     LoginComponent
+=======
+    TextWrapperComponent
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   ],
   imports: [
     BrowserModule,
@@ -287,6 +352,7 @@ import { firstValueFrom } from 'rxjs';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+<<<<<<< HEAD
     // BrowserModule.withServerTransition({ appId: 'serverApp' }),
   ],
   providers: [
@@ -295,6 +361,52 @@ import { firstValueFrom } from 'rxjs';
      provideStorage(() => getStorage()),
      provideAuth(() => getAuth()),
     provideAppInitializer(() => initializerFactory()())
+=======
+  ],
+  providers: [
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
+    provideAuth(() => getAuth()),
+
+    provideAppInitializer(() => {
+      const themeService = inject(ThemeInitializerService);
+      const location = inject(Location);
+      const router = inject(Router);
+
+      const hostname = window.location.hostname;
+      const url = new URL(window.location.href);
+      const businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
+
+      return themeService.loadTheme(businessId).catch((err) => {
+        console.error('Error loading theme:', err);
+      });
+    }),
+
+    provideAppInitializer(() => {
+      const themeService = inject(ThemeInitializerService);
+      const businessDataService = inject(BusinessDataService);
+      const location = inject(Location);
+      const router = inject(Router);
+      const hostname = window.location.hostname;
+      const url = new URL(window.location.href);
+      const businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
+
+      return (async () => {
+        try {
+          await themeService.loadTheme(businessId);
+        } catch (err) {
+          console.error('Error loading theme:', err);
+        }
+
+        try {
+          await businessDataService.loadBusinessData(businessId).toPromise();
+        } catch (err) {
+          console.error('Error loading business data:', err);
+        }
+      })();
+    }),
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   ],
 
   bootstrap: [AppComponent],

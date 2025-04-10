@@ -6,8 +6,11 @@ import { GoogleMapsLoaderService } from 'src/app/services/google-maps-loader.ser
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
 import { filter, Observable, of, switchMap } from 'rxjs';
+<<<<<<< HEAD
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID, Inject } from '@angular/core';
+=======
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
 declare var google: any;
 @Component({
@@ -26,8 +29,12 @@ export class TestimonialsListComponent implements OnInit {
     private metaService: MetaService,
     private googleMapsLoader: GoogleMapsLoaderService,
     private sanitizer: DomSanitizer,
+<<<<<<< HEAD
     private route: ActivatedRoute,
     @Inject(PLATFORM_ID) private platformId: Object
+=======
+    private route: ActivatedRoute
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   ) {}
 
   ngOnInit(): void {
@@ -52,14 +59,48 @@ export class TestimonialsListComponent implements OnInit {
     });
   }
 
+<<<<<<< HEAD
 
   private loadData(): void {
     this.loadTestimonials();
     if (isPlatformBrowser(this.platformId) && this.business?.placeId !== '0') {
+=======
+  // ngOnInit(): void {
+  //   this.businessDataService.businessData$
+  //     .pipe(
+  //       switchMap((data: Business | null): Observable<Business | null> => {
+  //         if (data) {
+  //           return of(data);
+  //         }
+
+  //         return this.route.queryParams.pipe(
+  //           switchMap((params: Params): Observable<Business | null> => {
+  //             const businessId = params['id'];
+  //             if (businessId) {
+  //               return this.businessDataService.loadBusinessData(businessId);
+  //             } else {
+  //               return of(null);
+  //             }
+  //           })
+  //         );
+  //       }),
+  //       filter((business: Business | null): business is Business => !!business)
+  //     )
+  //     .subscribe((business: Business) => {
+  //       this.business = business;
+  //       this.loadData();
+  //     });
+  // }
+
+  private loadData(): void {
+    this.loadTestimonials();
+    if (this.business?.placeId !== '0') {
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
       this.loadGoogleReviews();
     }
   }
 
+<<<<<<< HEAD
   // private loadTestimonials(): void {
   //   this.businessDataService
   //     .loadBusinessData(this.business?.id || '')
@@ -93,6 +134,27 @@ export class TestimonialsListComponent implements OnInit {
   }
 
 
+=======
+  private loadTestimonials(): void {
+    this.businessDataService
+      .loadBusinessData(this.business?.id || '')
+      .subscribe((business) => {
+        if (business && business.testimonials) {
+          const formattedTestimonials = business.testimonials.map(
+            (testimonial: any) => ({
+              ...testimonial,
+              relationship: 'Testimonial', // Set the relationship property
+              rawQuote: testimonial.quote,
+              quote: this.sanitizeHtml(testimonial.quote),
+              isGoogle: false,
+            })
+          );
+          this.testimonials = [...this.testimonials, ...formattedTestimonials];
+        }
+      });
+  }
+
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   private loadGoogleReviews(): void {
     if (!this.business?.placeId) {
       console.error('Place ID is required to fetch Google reviews.');

@@ -24,8 +24,11 @@ import { LatestProductsComponent } from '../../UI/latest-products/latest-product
 import { MeetTheTeamComponent } from '../../UI/meet-the-team/meet-the-team.component';
 import { TextWrapperComponent } from '../../text-wrapper/text-wrapper.component';
 import { Router } from '@angular/router';
+<<<<<<< HEAD
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID, Inject } from '@angular/core';
+=======
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
 @Component({
     selector: 'app-about-us',
@@ -60,16 +63,27 @@ export class AboutUsComponent implements OnInit {
     private route: ActivatedRoute,
     private metaService: MetaService,
     private businessDataService: BusinessDataService,
+<<<<<<< HEAD
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
+=======
+    private router: Router
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   ) {}
 
   ngOnInit(): void {
 
+<<<<<<< HEAD
     const id = this.route.snapshot.queryParamMap.get('id');
     if (id && isPlatformBrowser(this.platformId)) {
       window.history.replaceState({}, '', this.router.url.split('?')[0]);
     }
+=======
+  const id = this.route.snapshot.queryParamMap.get('id');
+  if (id) {
+    window.history.replaceState({}, '', this.router.url.split('?')[0]);
+  }
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
     this.businessDataService
       .getBusinessId()

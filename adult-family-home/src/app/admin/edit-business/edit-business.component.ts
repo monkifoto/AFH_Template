@@ -33,7 +33,10 @@ import {
   ref as storageRef,
 Storage } from '@angular/fire/storage';
 import { S } from '@angular/core/weak_ref.d-DOjz-6fK';
+<<<<<<< HEAD
 import { BusinessSectionsService } from 'src/app/services/business-sections.service';
+=======
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
 
 @Component({
@@ -73,8 +76,12 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     private uploadService: UploadService,
     private route: ActivatedRoute,
     private router: Router,
+<<<<<<< HEAD
     private storage: Storage,
     private businessSectionsService: BusinessSectionsService
+=======
+    private storage: Storage
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   ) {
     this.initializeForm();
   }
@@ -132,7 +139,10 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
       metaTitle: [''],
       metaKeywords: [''],
       metaDescription: [''],
+<<<<<<< HEAD
       metaImage: [''],
+=======
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
       placeId: [''],
 
       //Home Page
@@ -172,6 +182,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
       isActive: true,
       //Employee Page
       employees: this.fb.array([]),
+<<<<<<< HEAD
       theme: this.fb.group({
         themeFileName: [''],
         themeType: [''],
@@ -188,6 +199,8 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
         navActiveBackground: [''],
         navActiveText: ['']
       }),
+=======
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
     });
     this.serviceForm = this.fb.group({
       name: [''],
@@ -247,6 +260,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
   }
 
   loadDefaultData(): void {
+<<<<<<< HEAD
     const defaultBusiness = BusinessModel.getDefaultBusiness();
     this.business = defaultBusiness;
 
@@ -303,12 +317,43 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     this.businessForm.setControl(
       'uniqueService',
       this.fb.array(
+=======
+    this.business = BusinessModel.getDefaultBusiness();
+    const defaultBusiness = BusinessModel.getDefaultBusiness();
+
+    this.businessForm = this.fb.group({
+      businessName: [defaultBusiness.businessName],
+      metaTitle: [defaultBusiness.metaTitle],
+      metaKeywords: [defaultBusiness.metaKeywords],
+      metaDescription: [defaultBusiness.metaDescription],
+      keyWords: [defaultBusiness.keyWords],
+      businessURL: [defaultBusiness.businessURL],
+      providerName: [defaultBusiness.providerName],
+      tagline: [defaultBusiness.tagline],
+      certifications: [defaultBusiness.certifications],
+      logoImage: [defaultBusiness.logoImage],
+      faviconUrl: [defaultBusiness.faviconUrl],
+      address: [defaultBusiness.address],
+      phone: [defaultBusiness.phone],
+      fax: [defaultBusiness.fax],
+      email: [defaultBusiness.email],
+      businessHours: [defaultBusiness.businessHours],
+      socialMedia: [defaultBusiness.socialMedia],
+      contactFormDetails: [defaultBusiness.contactFormDetails],
+      contactUsImageUrl: [defaultBusiness.contactUsImageUrl],
+      isActive: [defaultBusiness.isActive],
+      theme: [defaultBusiness.theme],
+      placeId: [defaultBusiness.placeId],
+      // Initialize FormArrays
+      uniqueService: this.fb.array(
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
         (defaultBusiness.uniqueService ?? []).map((service) =>
           this.fb.group({
             name: [service.name],
             description: [service.description],
           })
         )
+<<<<<<< HEAD
       )
     );
 
@@ -316,17 +361,29 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
       'whyChoose',
       this.fb.array(
         (defaultBusiness.whyChoose ?? []).map((choice) =>
+=======
+      ),
+
+      whyChoose: this.fb.array(
+        defaultBusiness.whyChoose.map((choice) =>
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
           this.fb.group({
             name: [choice.name],
             description: [choice.description],
           })
         )
+<<<<<<< HEAD
       )
     );
 
     this.businessForm.setControl(
       'testimonials',
       this.fb.array(
+=======
+      ),
+
+      testimonials: this.fb.array(
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
         (defaultBusiness.testimonials ?? []).map((testimonial) =>
           this.fb.group({
             name: [testimonial.name],
@@ -335,12 +392,18 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
             photoUrl: [testimonial.photoURL],
           })
         )
+<<<<<<< HEAD
       )
     );
 
     this.businessForm.setControl(
       'employees',
       this.fb.array(
+=======
+      ),
+
+      employees: this.fb.array(
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
         (defaultBusiness.employees ?? []).map((employee) =>
           this.fb.group({
             name: [employee.name],
@@ -349,6 +412,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
             photoURL: [employee.photoURL],
           })
         )
+<<<<<<< HEAD
       )
     );
 
@@ -361,10 +425,20 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
             street: [location.street],
             city: [location.city],
             state: [location.state],
+=======
+      ),
+
+      locations: this.fb.array(
+        (defaultBusiness.locations ?? []).map((location) =>
+          this.fb.group({
+            street: [location.street],
+            city: [location.city],
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
             zipcode: [location.zipcode],
             phone: [location.phone],
             fax: [location.fax],
             email: [location.email],
+<<<<<<< HEAD
             image: [location.image],
             businessHours: [location.businessHours],
           })
@@ -420,6 +494,14 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
   }
 
 
+=======
+          })
+        )
+      ),
+    });
+  }
+
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   // Helper function to populate form arrays
   private populateFormArray(formArray: FormArray, items: any[]) {
     formArray.clear(); // Clear any existing controls
@@ -526,6 +608,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     if (this.isSubmitting) return; // Prevent multiple submissions
     this.isSubmitting = true;
 
+<<<<<<< HEAD
     console.log('onSubmit() called');
 
     // 🔥 Mark all controls as touched to trigger validation UI
@@ -536,26 +619,52 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
         ...this.businessForm.value,
         locations: this.businessForm.get('locations')?.value || [],
       };
+=======
+    console.log('onSubmit() called'); // Debugging
+    const locations = this.businessForm.get('locations')?.value || [];
+    const formValue: Business = {
+      ...this.businessForm.value,
+      locations: this.businessForm.get('locations')?.value || [], // 🔥 Ensure locations are included
+    };
+
+   // console.log('Final Data to Save:', formValue); // ✅ Debugging
+
+    if (this.businessForm.valid) {
+   //  console.log('Form Value Before Saving:', this.businessForm.value); // 🔍 Debugging
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
       if (this.businessId) {
         this.businessService
           .updateBusiness(this.businessId, formValue)
           .then(() => {
+<<<<<<< HEAD
             console.log('✅ Business details updated successfully!');
             this.isSubmitting = false;
           })
           .catch((err) => {
             console.error('❌ Error updating business details', err);
+=======
+            console.log('Business details updated successfully!');
+            this.isSubmitting = false;
+          })
+          .catch((err) => {
+            console.error('Error updating business details', err);
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
             this.isSubmitting = false;
           });
       } else {
         this.businessService
           .createBusiness(formValue)
+<<<<<<< HEAD
           .pipe(take(1))
+=======
+          .pipe(take(1)) // ✅ Ensure only one execution
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
           .subscribe(
             (bus) => {
               if (bus && bus.id) {
                 this.business = bus;
+<<<<<<< HEAD
                 this.businessId = bus.id;
               }
               this.confirmationMessage = '✅ Business has been successfully created!';
@@ -566,11 +675,24 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
             },
             (err) => {
               console.error('❌ Error creating business:', err);
+=======
+                this.businessId = bus.id; // ✅ Save the new business ID
+                //console.log('Business created with ID:', this.businessId);
+              }
+              this.confirmationMessage =
+                'Business has been successfully created!';
+              this.showConfirmation = true;
+              this.isSubmitting = false;
+            },
+            (err) => {
+              console.error('Error creating business:', err);
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
               this.isSubmitting = false;
             }
           );
       }
     } else {
+<<<<<<< HEAD
       console.warn('❌ Business Form is not valid!');
 
       // 🔍 Log invalid controls and missing required fields
@@ -600,10 +722,14 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
         });
       }
 
+=======
+      console.log('Business Form is not valid!');
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
       this.isSubmitting = false;
     }
   }
 
+<<<<<<< HEAD
   private markAllControlsTouched(formGroup: FormGroup | FormArray): void {
     Object.values(formGroup.controls).forEach((control) => {
       if (control instanceof FormControl) {
@@ -652,6 +778,8 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
 
 
 
+=======
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   closeConfirmation(): void {
     this.showConfirmation = false;
     this.router.navigate(['/admin/businessList']);

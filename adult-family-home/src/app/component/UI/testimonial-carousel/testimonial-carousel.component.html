@@ -1,4 +1,91 @@
+<<<<<<< HEAD
 
+=======
+<!-- <div class="testimonials-container">
+  <h1 class="clemo-head-title clemo-text-center">clients say’s</h1>
+  <div
+    class="testimonial-row"
+    *ngFor="let testimonial of [currentTestimonial]; trackBy: trackByIndex"
+    [@slideIn]
+  >
+    <div class="author" [@fadeInRight]>
+      <h3 class="name">{{ testimonial.name }}</h3>
+      <div class="separator5"></div>
+      <p class="role">{{ testimonial.relationship }}</p>
+      <div *ngIf="testimonial.isGoogle" class="google-stars">★★★★★</div>
+    </div>
+    <div class="feedback" [@fadeInLeft]>
+      <p>
+        {{ truncateText(testimonial.quote) }}
+        <span *ngIf="isTruncated(testimonial.quote)">[...]<button
+          *ngIf="isTruncated(testimonial.quote)"
+          class="btn read-more"
+          (click)="navigateToTestimonials()"
+        >
+          Read More
+        </button></span>
+
+      </p>
+    </div>
+  </div>
+  <div class="carousel-navigation">
+    <button
+      *ngFor="let testimonial of testimonials; let i = index"
+      [class.active]="i === currentIndex"
+      (click)="goToSlide(i)"
+    >
+      ●
+    </button>
+  </div>
+</div> -->
+
+<!-- <div class="testimonials-container" *ngIf="business?.theme?.themeType !== 'prestige' && business?.theme?.themeType !== 'sb'">
+  <h1 class="clemo-head-title clemo-text-center">clients say’s</h1>
+
+  <ng-container *ngIf="currentTestimonial; else noTestimonials">
+    <div
+      class="testimonial-row"
+      *ngFor="let testimonial of [currentTestimonial]; trackBy: trackByIndex"
+      [@slideIn]
+    >
+      <div class="author" [@fadeInRight]>
+        <h3 class="name">{{ testimonial.name }}</h3>
+        <div class="separator5"></div>
+        <p class="role">{{ testimonial.relationship }}</p>
+        <div *ngIf="testimonial.isGoogle" class="google-stars">★★★★★</div>
+      </div>
+      <div class="feedback" [@fadeInLeft]>
+        <p>
+          {{ truncateText(testimonial.quote) }}
+          <span *ngIf="isTruncated(testimonial.quote)">[...]<button
+            class="btn read-more"
+            (click)="navigateToTestimonials()"
+          >
+            Read More
+          </button></span>
+        </p>
+      </div>
+    </div>
+    <div class="carousel-navigation">
+      <button
+        *ngFor="let testimonial of testimonials; let i = index"
+        [class.active]="i === currentIndex"
+        (click)="goToSlide(i)"
+      >
+        ●
+      </button>
+    </div>
+    <a *ngIf="placeId" [href]="googleReviewLink" target="_blank" rel="noopener noreferrer" class="afhBtn leave-review">
+      Leave a Google Review
+    </a>
+  </ng-container>
+
+
+  <ng-template #noTestimonials>
+    <p class="no-testimonials-message">No testimonials available at the moment.</p>
+  </ng-template>
+</div> -->
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
 <div >
   <div class="mock-data">
@@ -32,6 +119,7 @@
           [@slideIn]
         >
           <div class="quote-icon">“</div>
+<<<<<<< HEAD
         <!-- Google reviews: plain text -->
         <p class="quote-text" *ngIf="testimonial.isGoogle">
           {{ truncateText(testimonial.quote) }}
@@ -46,6 +134,23 @@
             ... <button class="read-more" (click)="navigateTo('testimonials')">Read More</button>
           </span>
         </p>
+=======
+ <!-- Google reviews: plain text -->
+<p class="quote-text" *ngIf="testimonial.isGoogle">
+  {{ truncateText(testimonial.quote) }}
+  <span *ngIf="isTruncated(testimonial.quote)">
+    ... <button class="read-more" (click)="navigateTo('testimonials')">Read More</button>
+  </span>
+</p>
+
+<!-- Testimonials: sanitized HTML -->
+<p class="quote-text" *ngIf="!testimonial.isGoogle">
+  <span [innerHTML]="truncateText(testimonial.rawQuote)"></span>
+  <span *ngIf="isTruncated(testimonial.rawQuote)">
+    ... <button class="read-more" (click)="navigateTo('testimonials')">Read More</button>
+  </span>
+</p>
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
           <div class="author-info">
             <img
@@ -56,7 +161,11 @@
             />
             <ng-template #fallbackAvatar>
               <div class="author-photo placeholder">
+<<<<<<< HEAD
                 {{ testimonial.name?.charAt(0)?.toUpperCase() || '?' }}
+=======
+                {{ testimonial.name.charAt(0).toUpperCase() }}
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
               </div>
             </ng-template>
             <div>

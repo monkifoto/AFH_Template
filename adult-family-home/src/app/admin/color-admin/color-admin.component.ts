@@ -5,8 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, take } from 'rxjs';
 import { Business } from 'src/app/model/business-questions.model';
 import { BusinessService } from 'src/app/services/business.service';
+<<<<<<< HEAD
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
+=======
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
 
 declare var $: any;
 @Component({
@@ -56,8 +59,12 @@ export class ColorAdminComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
+<<<<<<< HEAD
     private businessService: BusinessService,
     @Inject(PLATFORM_ID) private platformId: Object
+=======
+    private businessService: BusinessService
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   ) {}
 
   ngOnInit(): void {
@@ -65,7 +72,10 @@ export class ColorAdminComponent implements OnInit {
       this.businessId = params.get('id')!;
       if (this.businessId) {
         // Fetch the theme colors from the service
+<<<<<<< HEAD
         console.log("Color-admin: - Business ID:", this.businessId);
+=======
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
         this.themeColors$ = this.themeService.getThemeColors(this.businessId);
 
         // Initialize the form with controls
@@ -125,6 +135,7 @@ export class ColorAdminComponent implements OnInit {
     return null;
   }
 
+<<<<<<< HEAD
   showSaveModal = false;
 
   openSaveConfirmation() {
@@ -138,6 +149,15 @@ export class ColorAdminComponent implements OnInit {
 
   cancelSave() {
     this.showSaveModal = false;
+=======
+  openSaveConfirmation() {
+    $('#saveConfirmationModal').modal('show');
+  }
+
+  confirmSave() {
+    this.onSubmit();  // Call the save functionality
+    $('#saveConfirmationModal').modal('hide');  // Close the modal
+>>>>>>> 83fb2715cd57eca82a0c70109b053b42859ddbd4
   }
 
   onSubmit() {
