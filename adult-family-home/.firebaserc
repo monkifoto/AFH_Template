@@ -1,8 +1,18 @@
 {
   "projects": {
     "default": "afhdynamicwebsite",
-    "ae-afh": "ae-afh"
+    "ae-afh": "ae-afh",
+    "test": "afhdynamicwebsite-test"
   },
-  "targets": {},
+  "targets": {
+    "afhdynamicwebsite-test": {
+      "hosting": {
+        "site": "afhdynamicwebsite-test",
+        "afhdynamicwebsite-test": [
+          "1:1002197390799:web:29c47245feee9fcefb2eba"
+        ]
+      }
+    }
+  },
   "etags": {}
 }

@@ -28,7 +28,6 @@ const routes: Routes = [
 
 
     // Admin routes (must come before the dynamic :id route to avoid conflicts)
-    { path: 'login', component: LoginComponent },
     { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
 
     // Dynamic route for HomeComponent

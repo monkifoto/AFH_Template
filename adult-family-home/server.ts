@@ -1,5 +1,6 @@
 /**********************************************************************
  * Angular Universal Express Server with Firebase Admin Meta Injection
+ * + Email Cloud Function Export
  **********************************************************************/
 
 import 'zone.js/node';
@@ -13,8 +14,13 @@ import { APP_BASE_HREF } from '@angular/common';
 import { SERVER_REQUEST } from './src/app/tokens/server-request.token';
 import admin from 'firebase-admin';
 import { getFirestore } from 'firebase-admin/firestore';
+import * as functions from 'firebase-functions';
+import * as nodemailer from 'nodemailer';
+import cors from 'cors';
 
-// 🧠 Initialize Firebase Admin SDK
+/**********************************************************************
+ * Firebase Admin SDK Initialization
+ **********************************************************************/
 const serviceAccount = JSON.parse(
   readFileSync(join(process.cwd(), 'server/firebase/afhdynamicwebsite-firebase-adminsdk-hbemk-514f2fcfe2.json'), 'utf-8')
 );
@@ -25,11 +31,9 @@ admin.initializeApp({
 
 const adminFirestore = getFirestore(admin.app());
 
-// 🌐 Angular build paths
-const distFolder = join(process.cwd(), 'dist/adult-family-home/browser');
-const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index.html';
-
-// 🧠 Business ID map by hostname
+/**********************************************************************
+ * Business ID Mapping by Hostname
+ **********************************************************************/
 const businessIdMap: Record<string, string> = {
   "helpinghandafh.com": "vfCMoPjAu2ROVBbKvk0D",
   "www.helpinghandafh.com": "vfCMoPjAu2ROVBbKvk0D",
@@ -51,10 +55,13 @@ const businessIdMap: Record<string, string> = {
   "prestige.sbmediahub.com": "pDJgpl34XUnRblyIlBA7",
 };
 
-// 🛠️ Create Express server
+/**********************************************************************
+ * Express Server Setup (for SSR)
+ **********************************************************************/
 const server = express();
+const distFolder = join(process.cwd(), 'dist/adult-family-home/browser');
+const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index.html';
 
-// 🖼️ View engine for Angular Universal
 server.engine('html', (_, options, callback) => {
   const req = (options as any).req;
 
@@ -72,13 +79,8 @@ server.engine('html', (_, options, callback) => {
 
 server.set('view engine', 'html');
 server.set('views', distFolder);
+server.get('*.*', express.static(distFolder, { maxAge: '1y' }));
 
-// 📦 Serve static files
-server.get('*.*', express.static(distFolder, {
-  maxAge: '1y'
-}));
-
-// 🧠 SSR handler
 server.get('*', async (req, res) => {
   const start = Date.now();
   const hostname = req.hostname;
@@ -88,7 +90,6 @@ server.get('*', async (req, res) => {
   console.log('🌐 Hostname:', hostname, '| 🔑 Business ID:', businessId);
 
   let businessData: any = null;
-
   try {
     const doc = await adminFirestore.collection('businesses').doc(businessId).get();
     if (doc.exists) {
@@ -102,19 +103,13 @@ server.get('*', async (req, res) => {
   res.render(indexHtml, { req }, (err, html) => {
     const duration = Date.now() - start;
 
-    if (err) {
-      console.error('❌ SSR Render Error:', err.message || err);
-      return res.status(500).send(err.message);
-    }
-
-    if (!html) {
-      console.error('❌ SSR Render Error: No HTML returned');
-      return res.status(500).send('Server Error: No HTML returned');
+    if (err || !html) {
+      console.error('❌ SSR Render Error:', err?.message || err || 'No HTML returned');
+      return res.status(500).send(err?.message || 'Server Error');
     }
 
     if (businessData) {
       console.log('🟢 SSR - Injecting meta tags');
-      console.log('🟢 SSR - Business Data:', businessData);
       html = html.replace(
         /<meta name="description" content=".*?">/,
         `<meta name="description" content="${businessData.metaDescription || 'Adult Family Home'}">`
@@ -135,13 +130,11 @@ server.get('*', async (req, res) => {
 
     console.log('✅ SSR finished rendering HTML');
     console.log(`⏱️ Render duration: ${duration}ms`);
-
     res.send(html);
     return;
   });
 });
 
-// 🚀 Start the server
 function run(): void {
   const port = process.env['PORT'] || 4000;
   server.listen(port, () => {
@@ -150,5 +143,60 @@ function run(): void {
 }
 
 run();
+
+/**********************************************************************
+ * Firebase Function Exports
+ **********************************************************************/
+
+export const ssr = functions.https.onRequest(server);
+
+export const sendEmail = functions.https.onRequest((req, res) => {
+  const corsHandler = cors({ origin: true });
+  corsHandler(req, res, async () => {
+    const { to, subject, text, domain } = req.body;
+
+    const credentialsMap: Record<string, { user: string; pass: string }> = {
+      'helpinghandafh.com': {
+        user: 'helpinghand99.afh@gmail.com',
+        pass: 'your-app-password-here'
+      },
+      'aefamilyhome.com': {
+        user: 'narteae@gmail.com',
+        pass: 'fggv tyqw cnkt feex',
+      },
+      'sbmediahub.com': {
+        user: 'sorin.bucse@gmail.com',
+        pass: 'ybdv kmuc ciox nifm',
+      },
+      'countrycrestafh.com': {
+        user: 'countrycrestafh@gmail.com',
+        pass: 'xemf vinl sfub dbez',
+      },
+      'prestigecareafh.com': {
+        user: 'Prestigecare202@gmail.com',
+        pass: 'zgaa sbuk ipcd sbkj',
+      },
+      // Add other domains as needed
+    };
+
+    const creds = credentialsMap[domain];
+    if (!creds) {
+      return res.status(400).send({ error: 'Invalid domain' });
+    }
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: creds
+    });
+
+    try {
+      await transporter.sendMail({ from: creds.user, to, subject, text });
+      return res.status(200).send({ success: true });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).send({ error: err instanceof Error ? err.message : 'An unknown error occurred' });
+    }
+  });
+});
 
 export * from './src/main.server';

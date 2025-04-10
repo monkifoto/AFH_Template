@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/component/UI/faq/faq.component.css"],
+  "sourcesContent": [".faq-container {\n  max-width: var(--site-max-width);\n  margin: 0 auto;\n  padding: 20px;\n  background-color: var(--background-color);\n  border-radius: 8px;\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n}\n\nh2 {\n  text-align: center;\n  color: #333;\n  margin-bottom: 20px;\n  font-size: 2rem;\n}\n\n.faq-item {\n  margin-bottom: 15px;\n  border-bottom: 1px solid #ddd;\n}\n\n.faq-question {\n  width: 100%;\n  padding: 15px;\n  background-color: var(--dark-background-color);\n  color: white;\n  border: none;\n  text-align: left;\n  font-size: 1.1em;\n  font-weight: bold;\n  border-radius: 5px;\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n}\n\n.faq-question:hover {\n  background-color: #45a049;\n}\n\n.faq-answer {\n  padding: 15px;\n  background-color: #fff;\n  border-radius: 5px;\n  margin-top: 10px;\n  font-size: 1.05em;\n  color: #555;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n"],
+  "mappings": "AAAA,CAAC,cACC,UAAW,IAAI,kBADjB,OAEU,EAAE,KAFZ,QAGW,KACT,iBAAkB,IAAI,oBAJxB,cAKiB,IACf,WAAY,EAAE,IAAI,IAAI,SACxB,CAEA,GACE,WAAY,OACZ,MAAO,KACP,cAAe,KACf,UAAW,IACb,CAEA,CAAC,SACC,cAAe,KACf,cAAe,IAAI,MAAM,IAC3B,CAEA,CAAC,aACC,MAAO,KAtBT,QAuBW,KACT,iBAAkB,IAAI,yBACtB,MAAO,KACP,OAAQ,KACR,WAAY,KACZ,UAAW,MACX,YAAa,IA7Bf,cA8BiB,IACf,OAAQ,QACR,WAAY,iBAAiB,IAAK,IACpC,CAEA,CAdC,YAcY,OACX,iBAAkB,OACpB,CAEA,CAAC,WAvCD,QAwCW,KACT,iBAAkB,KAzCpB,cA0CiB,IACf,WAAY,KACZ,UAAW,OACX,MAAO,KACP,WAAY,EAAE,IAAI,IAAI,SACxB",
+  "names": []
+}
