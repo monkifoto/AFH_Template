@@ -2,19 +2,31 @@
   "name": "adult-family-home",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "build:prod": "ng build --configuration=production",
-    "deploy": "firebase deploy",
-    "build-and-deploy": "npm run build:prod && firebase deploy --only hosting",
-    "dev:ssr": "ng run adult-family-home:serve-ssr",
-    "build:ssr": "ng build && ng run adult-family-home:server",
-    "serve:ssr": "node dist/adult-family-home/server/main.js",
-     "build:ssr:test": "ng build --configuration=test && ng run adult-family-home:server:test"
-  },
+  "ng": "ng",
+  "start": "ng serve",
+  "build": "ng build",
+  "watch": "ng build --watch --configuration development",
+  "test": "ng test",
+  "lint": "eslint --ext .js,.ts .",
+
+  "build:prod": "ng build --configuration=production",
+  "build:ssr": "ng build --configuration=production && ng run adult-family-home:server:production",
+  "build:ssr:test": "ng build --configuration=test && ng run adult-family-home:server:test",
+
+  "serve:ssr": "node dist/adult-family-home/server/main.js",
+  "dev:ssr": "ng run adult-family-home:serve-ssr",
+
+  "copy:angular": "mkdir -p functions/lib/angular/browser && cp -r dist/adult-family-home/browser/* functions/lib/angular/browser/ && cp dist/adult-family-home/server/main.js functions/lib/angular/main.js",
+
+  "deploy": "firebase deploy",
+  "build-and-deploy": "npm run build:prod && firebase deploy --only hosting",
+
+  "deploy:prod": "npm run build:ssr && npm run copy:angular && firebase deploy --only functions,hosting --project afhdynamicwebsite",
+  "deploy:test": "npm run build:ssr:test && npm run copy:angular && firebase deploy --only functions,hosting --project afhdynamicwebsite-test",
+
+  "deploy:functions:prod": "firebase deploy --only functions --project afhdynamicwebsite",
+  "deploy:functions:test": "firebase deploy --only functions --project afhdynamicwebsite-test"
+},
   "private": true,
   "dependencies": {
     "@angular/animations": "^19.2.5",
