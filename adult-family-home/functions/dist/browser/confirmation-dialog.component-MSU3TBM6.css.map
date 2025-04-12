@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/component/UI/confirmation-dialog/confirmation-dialog.component.css"],
+  "sourcesContent": [".confirmation-dialog-overlay {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.5);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n.confirmation-dialog {\n  background-color: var(--background-color);\n  padding: 20px;\n  border-radius: 8px;\n  max-width: 400px;\n  width: 90%;\n  text-align: center;\n}\n\n.confirmation-dialog h2 {\n  margin-bottom: 20px;\n}\n\n.confirmation-dialog p {\n  margin-bottom: 20px;\n}\n\n.confirmation-dialog .actions {\n  display: flex;\n  justify-content: center;\n}\n\n.confirmation-dialog .actions button {\n  padding: 10px 20px;\n  border: none;\n  border-radius: 5px;\n  background-color: var(--button-color);\n  color: #fff;\n  cursor: pointer;\n}\n\n.confirmation-dialog .actions button:hover {\n  background-color: var(--button-hover-color);\n}\n"],
+  "mappings": "AAAA,CAAC,4BACC,SAAU,MACV,IAAK,EACL,KAAM,EACN,MAAO,KACP,OAAQ,KACR,iBAAkB,UAClB,QAAS,KACT,gBAAiB,OACjB,YAAa,MACf,CAEA,CAAC,oBACC,iBAAkB,IAAI,oBAbxB,QAcW,KAdX,cAeiB,IACf,UAAW,MACX,MAAO,IACP,WAAY,MACd,CAEA,CATC,oBASoB,GAIrB,CAbC,oBAaoB,EAHnB,cAAe,IACjB,CAMA,CAjBC,oBAiBoB,CAAC,QACpB,QAAS,KACT,gBAAiB,MACnB,CAEA,CAtBC,oBAsBoB,CALC,QAKQ,OAlC9B,QAmCW,KAAK,KACd,OAAQ,KApCV,cAqCiB,IACf,iBAAkB,IAAI,gBACtB,MAAO,KACP,OAAQ,OACV,CAEA,CA/BC,oBA+BoB,CAdC,QAcQ,MAAM,OAClC,iBAAkB,IAAI,qBACxB",
+  "names": []
+}

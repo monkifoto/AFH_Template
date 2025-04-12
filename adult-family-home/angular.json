@@ -127,8 +127,8 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/adult-family-home/server",
-            "main": "server.ts",
+            "outputPath": "functions/lib",
+            "main": "src/main.server.ts",
             "tsConfig": "tsconfig.server.json",
             "sourceMap": true
           }
