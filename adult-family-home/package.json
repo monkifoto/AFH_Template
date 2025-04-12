@@ -12,7 +12,8 @@
     "build-and-deploy": "npm run build:prod && firebase deploy --only hosting",
     "dev:ssr": "ng run adult-family-home:serve-ssr",
     "build:ssr": "ng build && ng run adult-family-home:server",
-    "serve:ssr": "node dist/adult-family-home/server/main.js"
+    "serve:ssr": "node dist/adult-family-home/server/main.js",
+     "build:ssr:test": "ng build --configuration=test && ng run adult-family-home:server:test"
   },
   "private": true,
   "dependencies": {
