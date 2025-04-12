@@ -1,0 +1,4 @@
+dist/
+dist-adult-family-home/
+**/*.js
+dist/adult-family-home/browser/

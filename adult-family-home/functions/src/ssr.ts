@@ -22,7 +22,11 @@ const serviceAccount = JSON.parse(
 admin.initializeApp({credential: admin.credential.cert(serviceAccount)});
 const adminFirestore = getFirestore(admin.app());
 
-const distFolder = join(__dirname, 'dist/adult-family-home/browser');
+// const distFolder = join(process.cwd(), 'dist/adult-family-home/browser');
+// const distFolder = join(__dirname, '../../dist/adult-family-home/browser');
+// const distFolder = join(__dirname, 'angular/browser');
+const distFolder = join(process.cwd(), 'lib/angular/browser');
+
 const indexHtml = existsSync(join(distFolder, 'index.original.html'))?
  'index.original.html': 'index.html';
 
@@ -66,8 +70,9 @@ server.engine('html', async (_filePath, options: any, callback) => {
 
   try {
     // @ts-expect-error: Angular server bundle has no type declarations
-    const {AppServerModule, renderModule} = await import('../lib/main.js');
-
+    // const {AppServerModule, renderModule} = await import('../lib/main.js');
+    // eslint-disable-next-line import/no-unresolved
+    const {AppServerModule, renderModule} = await import('./angular/main.js');
 
     const html = await renderModule(AppServerModule, {
       document: readFileSync(join(distFolder, indexHtml)).toString(),
@@ -91,13 +96,15 @@ server.get('*.*', express.static(distFolder, {maxAge: '1y'}));
 // 🧠 Dynamic SSR handler
 server.get('*', async (req: Request, res: Response) => {
   const start = Date.now();
-  const hostname = req.hostname;
+  const hostname = (req.headers['x-forwarded-host'] || req.hostname || '').toString().toLowerCase();
   const urlId = new URL(`http://${hostname}${req.url}`).searchParams.get('id');
   const businessId = urlId || businessIdMap[hostname] || 'MGou3rzTVIbP77OLmZa7';
 
   console.log('\n🟡 SSR for:', req.url, '| Host:', hostname, '| Business ID:', businessId);
   console.log(`🟡 SSR HIT -> URL: ${req.url} | HOST: ${req.hostname}`);
-  console.log('🟡 SSR HIT -> URL ID:', urlId);
+  console.log('🧪 SSR hostname:', req.hostname);
+  console.log('🧪 SSR x-forwarded-host:', req.headers['x-forwarded-host']);
+  console.log('🧪 SSR resolved hostname:', hostname);
 
   interface BusinessMeta {
     metaTitle?: string;

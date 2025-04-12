@@ -36,12 +36,13 @@
         "firebase-debug.*.log",
         "*.local"
       ],
-      "predeploy": [
-        "npm --prefix \"$RESOURCE_DIR\" run lint",
-        "npm --prefix \"$RESOURCE_DIR\" run build",
-        "npm run build:ssr",
-        "cp -r dist/adult-family-home ./functions/dist"
-      ]
+     "predeploy": [
+      "npm --prefix \"$RESOURCE_DIR\" run lint",
+      "npm run build:ssr",
+      "mkdir -p functions/lib/angular/browser",
+      "cp -r dist/adult-family-home/browser/* functions/lib/angular/browser/",
+      "cp dist/adult-family-home/server/main.js functions/lib/angular/main.js"
+    ]
     }
   ]
 }
