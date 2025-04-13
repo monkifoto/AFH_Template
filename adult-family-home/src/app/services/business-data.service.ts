@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformServer } from '@angular/common';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { BusinessService } from './business.service';
@@ -20,16 +21,47 @@ export class BusinessDataService {
 
   constructor(
     private businessService: BusinessService,
-    private businessPageHeroService: BusinessPageHeroService
+    private businessPageHeroService: BusinessPageHeroService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   // ✅ Called at app start
+  // loadBusinessData(businessId: string): Observable<Business | null> {
+  //   console.log('BusinessDataService - loadBusinessData for ID:', businessId);
+
+  //   if (this.businessDataSubject.value) {
+  //     return this.businessDataSubject.asObservable();
+  //   }
+
+  //   return this.businessService.getBusinessData(businessId).pipe(
+  //     map((business) => {
+  //       if (!business) return null;
+
+  //       // Ensure sections are always defined
+  //       if (!business.sections) {
+  //         business.sections = [];
+  //         console.warn('⚠️ No sections found in Firestore. Initializing empty array.');
+  //       }
+
+  //       return business;
+  //     }),
+  //     tap((business) => {
+  //       this.businessDataSubject.next(business);
+  //       this.businessIdSubject.next(businessId);
+
+  //       this.businessService.getLocations(businessId).subscribe((locations) => {
+  //         this.locationsSubject.next(locations);
+  //       });
+
+  //       this.businessPageHeroService.getPageHeroes(businessId).subscribe((pageHero) => {
+  //         this.pageHeroSubject.next(pageHero);
+  //       });
+  //     })
+  //   );
+  // }
+
   loadBusinessData(businessId: string): Observable<Business | null> {
     console.log('BusinessDataService - loadBusinessData for ID:', businessId);
-
-    if (this.businessDataSubject.value) {
-      return this.businessDataSubject.asObservable();
-    }
 
     return this.businessService.getBusinessData(businessId).pipe(
       map((business) => {
@@ -47,13 +79,16 @@ export class BusinessDataService {
         this.businessDataSubject.next(business);
         this.businessIdSubject.next(businessId);
 
-        this.businessService.getLocations(businessId).subscribe((locations) => {
-          this.locationsSubject.next(locations);
-        });
+        // These calls only make sense in browser context
+        if (!isPlatformServer(this.platformId)) {
+          this.businessService.getLocations(businessId).subscribe((locations) => {
+            this.locationsSubject.next(locations);
+          });
 
-        this.businessPageHeroService.getPageHeroes(businessId).subscribe((pageHero) => {
-          this.pageHeroSubject.next(pageHero);
-        });
+          this.businessPageHeroService.getPageHeroes(businessId).subscribe((pageHero) => {
+            this.pageHeroSubject.next(pageHero);
+          });
+        }
       })
     );
   }

@@ -145,7 +145,9 @@ server.get('*', async (req: Request, res: Response) => {
     if (businessData) {
       const {metaTitle, metaDescription, metaImage, businessName} = businessData;
 
-      html = html
+      html = html.replace('</body>',
+          `<script>window.__BUSINESS_ID__="${businessId}";</script></body>`
+      )
           .replace(/<meta name="description" content=".*?">/,
               `<meta name="description" content="${metaDescription || ''}">`)
           .replace(/<meta property="og:title" content=".*?">/,

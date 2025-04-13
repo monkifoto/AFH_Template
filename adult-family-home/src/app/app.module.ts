@@ -176,6 +176,14 @@ import { firstValueFrom } from 'rxjs';
       };
     }
 
+    export function preloadBusinessFactory(businessDataService: BusinessDataService): () => Promise<void> {
+      return async () => {
+        const idFromSSR = (window as any)['__BUSINESS_ID__']; // Optional: inject from SSR if needed
+        const businessId = idFromSSR || 'MGou3rzTVIbP77OLmZa7'; // fallback if not passed
+        await businessDataService.loadBusinessData(businessId).toPromise();
+      };
+    }
+
     // export function initializerFactory() {
     //   const req = inject(SERVER_REQUEST, { optional: true }) as Request | undefined;
     //   const themeService = inject(ThemeInitializerService);
