@@ -11,14 +11,24 @@ import {getFirestore} from 'firebase-admin/firestore';
 
 
 const APP_BASE_HREF = Symbol.for('APP_BASE_HREF');
+
+const isTestEnv = process.env.GCLOUD_PROJECT === 'afhdynamicwebsite-test';
+const credentialPath = isTestEnv ?
+'server/firebase/afhdynamicwebsite-test.json':
+'server/firebase/afhdynamicwebsite-prod.json';
+
 // 🔐 Firebase Admin Init
 const serviceAccount = JSON.parse(
-    readFileSync(
-        join(process.cwd(),
-            'server/firebase/afhdynamicwebsite-firebase-adminsdk-hbemk-514f2fcfe2.json'),
-        'utf-8'
-    )
+    readFileSync(join(process.cwd(), credentialPath), 'utf-8')
 );
+// const serviceAccount = JSON.parse(
+//     readFileSync(
+//         join(process.cwd(),
+//             'server/firebase/afhdynamicwebsite-firebase-adminsdk-hbemk-514f2fcfe2.json'),
+//         'utf-8'
+//     )
+// );
+console.log('🧪 GCLOUD_PROJECT:', process.env.GCLOUD_PROJECT);
 admin.initializeApp({credential: admin.credential.cert(serviceAccount)});
 const adminFirestore = getFirestore(admin.app());
 

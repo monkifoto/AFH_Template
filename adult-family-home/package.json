@@ -13,6 +13,8 @@
   "build:ssr": "ng build --configuration=production && ng run adult-family-home:server:production",
   "build:ssr:test": "ng build --configuration=test && ng run adult-family-home:server:test",
 
+
+
   "serve:ssr": "node dist/adult-family-home/server/main.js",
   "dev:ssr": "ng run adult-family-home:serve-ssr",
 
@@ -23,6 +25,8 @@
 
   "deploy:prod": "npm run build:ssr && npm run copy:angular && firebase deploy --only functions,hosting --project afhdynamicwebsite",
   "deploy:test": "npm run build:ssr:test && npm run copy:angular && firebase deploy --only functions,hosting --project afhdynamicwebsite-test",
+
+
 
   "deploy:functions:prod": "firebase deploy --only functions --project afhdynamicwebsite",
   "deploy:functions:test": "firebase deploy --only functions --project afhdynamicwebsite-test"

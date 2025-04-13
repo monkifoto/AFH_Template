@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/component/UI/testimonial-carousel/testimonial-carousel.component.css"],
-  "sourcesContent": ["\n.mock-data{\n  max-width: var(--site-max-width);\n  width: 100%;\n  margin: 0 auto;\n  text-align: center;\n}\n.mock-badge {\n  background-color: #fff3cd;\n  border: 1px solid #ffeeba;\n  color: #856404;\n  padding: 4px 10px;\n  font-size: 12px;\n  font-weight: 600;\n  border-radius: 4px;\n  margin-bottom: 10px;\n  display: inline-block;\n  margin: 0 auto;\n}\n"],
-  "mappings": "AACA,CAAC,UACC,UAAW,IAAI,kBACf,MAAO,KAHT,OAIU,EAAE,KACV,WAAY,MACd,CACA,CAAC,WACC,iBAAkB,QAClB,OAAQ,IAAI,MAAM,QAClB,MAAO,QAVT,QAWW,IAAI,KACb,UAAW,KACX,YAAa,IAbf,cAciB,IAEf,QAAS,aAhBX,OAiBU,EAAE,IACZ",
-  "names": []
-}
