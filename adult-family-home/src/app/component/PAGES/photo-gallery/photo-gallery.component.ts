@@ -63,24 +63,28 @@ export class PhotoGalleryComponent implements OnInit {
       private injector: Injector,
       @Inject(PLATFORM_ID) private platformId: Object
     ) {}
+    ngOnInit(): void {
+      const id = this.route.snapshot.queryParamMap.get('id');
 
-  ngOnInit(): void {
-    const id = this.route.snapshot.queryParamMap.get('id');
-    if (id && isPlatformBrowser(this.platformId)) {
-      window.history.replaceState({}, '', this.router.url.split('?')[0]);
-    }
+      // Clean up the URL if an ID param was used
+      if (id && isPlatformBrowser(this.platformId)) {
+        window.history.replaceState({}, '', this.router.url.split('?')[0]);
+      }
 
-    this.businessDataService.businessData$.subscribe((business) => {
-      this.business = business;
-      this.layoutType = business?.theme.themeType || '';
-      if (business?.id) {
+      // Subscribe to the loaded business data
+      this.businessDataService.businessData$.subscribe((business) => {
+        if (!business) return;
+
+        this.business = business;
         this.businessId = business.id;
+        this.layoutType = business.theme?.themeType || '';
+
         this.loadImages();
         this.metaService.loadAndApplyMeta(this.businessId);
         this.loadSections();
-      }
-    });
-  }
+      });
+    }
+
 
 
   loadSections() {
@@ -113,45 +117,6 @@ export class PhotoGalleryComponent implements OnInit {
     gallerySections.forEach((section) => {
       this.createDynamicComponent(section, this.container);
     });
-    // this.sections.forEach((section) => {
-    //   const componentType = this.componentsMap[section.component as keyof typeof this.componentsMap] as Type<any>;
-    //   if (!componentType) {
-    //     console.error(`❌ Component Not Found:`, section.component);
-    //     return;
-    //   }
-
-    //   const factory = this.resolver.resolveComponentFactory(componentType);
-    //   const componentRef = this.container.createComponent(factory, undefined, this.injector);
-
-    //   Object.assign(componentRef.instance, {
-    //     title: this.applyReplaceKeyword(section.sectionTitle || ''),
-    //     subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
-    //     content: this.applyReplaceKeyword(section.sectionContent || ''),
-    //     imageURL: section.sectionImageUrl || '',
-    //     showBtn: section.showLearnMore || false,
-    //     _businessName: this.business?.businessName || '',
-    //     showImage: !!section.sectionImageUrl,
-    //     themeType: this.business?.theme?.themeType,
-    //     items: section.items || [],
-    //     isMinimal: section.isMinimal || false,
-    //     isParallax: section.isParallax ?? true,
-    //     backgroundColor: section.backgroundColor || '#ffffff',
-    //     textColor: section.textColor || '#000000',
-    //     titleColor: section.titleColor || '#000000',
-    //     subtitleColor: section.subtitleColor || '#000000',
-    //     fullWidth: section.fullWidth || false,
-    //     showButton: section.showButton || false,
-    //     buttonText: section.buttonText || 'Learn More',
-    //     buttonLink: section.buttonLink || '',
-    //     titleFontSize: section.titleFontSize || '36',
-    //     subtitleFontSize: section.subtitleFontSize || '14',
-    //     alignText: section.alignText || 'left',
-    //     boxShadow: section.boxShadow || false,
-    //     borderRadius: section.borderRadius ?? 10,
-    //     page: section.page,
-    //     location: section.location
-    //   });
-    // });
   }
 
   loadCTAComponent() {

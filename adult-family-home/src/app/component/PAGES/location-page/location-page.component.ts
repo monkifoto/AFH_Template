@@ -35,11 +35,11 @@ export class LocationPageComponent implements OnInit {
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
-
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.locationIndex = Number(params['locationIndex']);
 
+      // 🔄 Clean up URL if locationIndex was in query params
       if (params['locationIndex']) {
         this.router.navigate([], {
           relativeTo: this.route,
@@ -48,38 +48,18 @@ export class LocationPageComponent implements OnInit {
         });
       }
 
-      //console.log("🔢 Location Index from URL:", this.locationIndex);
-
-      if (this.locationIndex !== null) {
-        this.businessDataService.getBusinessId().pipe(
-          switchMap((businessId) => {
-            if (businessId) {
-             // console.log("✅ Business ID Found:", businessId);
-              return this.businessDataService.loadBusinessData(businessId);
-            }
-            return [];
-          })
-        ).subscribe((business) => {
-          if (business) {
-           // console.log("✅ Business Data Ready:", business);
-            this.business = business;
-            this.loadBusinessData(); // 🔥 Now call loadBusinessData AFTER ensuring business data is available
-          }
-        });
-      }
+      // ✅ Business data already loaded in AppInitializer
+      this.businessDataService.getBusinessData().subscribe(business => {
+        if (business) {
+          this.business = business;
+          this.loadBusinessData(); // 🔥 still needed to use the locationIndex
+        }
+      });
     });
   }
 
-
   private loadBusinessData(): void {
-    this.businessDataService.getBusinessId().pipe(
-      switchMap((businessId) => {
-        if (businessId) {
-          return this.businessDataService.loadBusinessData(businessId);
-        }
-        return [];
-      })
-    ).subscribe((business) => {
+    this.businessDataService.getBusinessData().subscribe((business) => {
       if (!business) {
         console.error("❌ Business data is null.");
         return;
@@ -93,9 +73,8 @@ export class LocationPageComponent implements OnInit {
       // 🔥 Debug: Log locations BEFORE using locationIndex
       console.log("📍 Locations in Business Data:", business.locations);
       console.log("🔢 Requested Location Index:", this.locationIndex);
-      this.businessDataService.getLocations().subscribe((locations) => {
-       // console.log("📍 Firestore Locations Retrieved:", locations);
 
+      this.businessDataService.getLocations().subscribe((locations) => {
         if (locations && this.locationIndex! < locations.length) {
           this.location = locations[this.locationIndex!];
           console.log("✅ Loaded Firestore Location:", this.location);
@@ -104,9 +83,9 @@ export class LocationPageComponent implements OnInit {
           console.error("❌ Location index is out of range. Available Firestore locations:", locations.length);
         }
       });
-
     });
   }
+
 
   private loadMap(): void {
     if (!isPlatformBrowser(this.platformId)) return;
@@ -133,7 +112,7 @@ export class LocationPageComponent implements OnInit {
     });
     this.geocoder = new google.maps.Geocoder();
   }
-  
+
   private showAddressOnMap(address: string): void {
     this.geocoder.geocode({ address }, (results: any, status: any) => {
       if (status === 'OK') {

@@ -176,44 +176,7 @@ import { firstValueFrom } from 'rxjs';
       };
     }
 
-    export function preloadBusinessFactory(businessDataService: BusinessDataService): () => Promise<void> {
-      return async () => {
-        const idFromSSR = (window as any)['__BUSINESS_ID__']; // Optional: inject from SSR if needed
-        const businessId = idFromSSR || 'MGou3rzTVIbP77OLmZa7'; // fallback if not passed
-        await businessDataService.loadBusinessData(businessId).toPromise();
-      };
-    }
 
-    // export function initializerFactory() {
-    //   const req = inject(SERVER_REQUEST, { optional: true }) as Request | undefined;
-    //   const themeService = inject(ThemeInitializerService);
-    //   const platformId = inject(PLATFORM_ID);
-
-    //   let businessId = 'MGou3rzTVIbP77OLmZa7';
-
-    //   // SSR-safe ID resolution
-    //   if (req) {
-    //     const idRaw = req.query['id'];
-    //     const idParam = Array.isArray(idRaw) ? idRaw[0] : idRaw;
-    //     businessId = (idParam as string) || businessId;
-    //   } else if (isPlatformBrowser(platformId)) {
-    //     const url = new URL(window.location.href);
-    //     businessId = url.searchParams.get('id') || businessId;
-    //   }
-
-    //   return async () => {
-    //     console.log('✅ AppInitializer running with businessId:', businessId);
-
-    //     try {
-    //       await themeService.loadTheme(businessId);
-    //       console.log('✅ Theme loaded');
-    //     } catch (err) {
-    //       console.error('❌ Theme error:', err);
-    //     }
-
-    //     console.log('✅ AppInitializer complete (safe mode)');
-    //   };
-    // }
 
 @NgModule({
   declarations: [

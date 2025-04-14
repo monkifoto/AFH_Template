@@ -80,7 +80,7 @@ export class ResidentIntakeFormComponent implements OnInit {
       this.business = business;
 
       if (business?.id) {
-        this.metaService.loadAndApplyMeta(business?.id);
+        // this.metaService.loadAndApplyMeta(business?.id);
         this.layoutType = this.business?.theme.themeType;
         this.businessId = this.business?.id || '';
       }

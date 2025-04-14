@@ -65,32 +65,23 @@ export class AboutUsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
-    const id = this.route.snapshot.queryParamMap.get('id');
-    if (id && isPlatformBrowser(this.platformId)) {
-      window.history.replaceState({}, '', this.router.url.split('?')[0]);
+    if (isPlatformBrowser(this.platformId)) {
+      const id = this.route.snapshot.queryParamMap.get('id');
+      if (id) {
+        window.history.replaceState({}, '', this.router.url.split('?')[0]);
+      }
     }
 
     this.businessDataService
-      .getBusinessId()
-      .pipe(
-        switchMap((businessId) => {
-          if (businessId) {
-            this.businessId = businessId;
-            this.metaService.loadAndApplyMeta(businessId);
-            return this.businessDataService.loadBusinessData(businessId);
-          }
-          return [];
-        })
-      )
+      .getBusinessData()
       .subscribe((business) => {
         if (business) {
+          this.businessId = business.id;
           this.business = business;
           this.loadSections();
         }
       });
   }
-
   ngAfterViewInit(): void {
     if (this.business) {
       this.loadComponents();

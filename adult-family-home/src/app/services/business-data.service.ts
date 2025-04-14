@@ -26,42 +26,12 @@ export class BusinessDataService {
   ) {}
 
   // ✅ Called at app start
-  // loadBusinessData(businessId: string): Observable<Business | null> {
-  //   console.log('BusinessDataService - loadBusinessData for ID:', businessId);
-
-  //   if (this.businessDataSubject.value) {
-  //     return this.businessDataSubject.asObservable();
-  //   }
-
-  //   return this.businessService.getBusinessData(businessId).pipe(
-  //     map((business) => {
-  //       if (!business) return null;
-
-  //       // Ensure sections are always defined
-  //       if (!business.sections) {
-  //         business.sections = [];
-  //         console.warn('⚠️ No sections found in Firestore. Initializing empty array.');
-  //       }
-
-  //       return business;
-  //     }),
-  //     tap((business) => {
-  //       this.businessDataSubject.next(business);
-  //       this.businessIdSubject.next(businessId);
-
-  //       this.businessService.getLocations(businessId).subscribe((locations) => {
-  //         this.locationsSubject.next(locations);
-  //       });
-
-  //       this.businessPageHeroService.getPageHeroes(businessId).subscribe((pageHero) => {
-  //         this.pageHeroSubject.next(pageHero);
-  //       });
-  //     })
-  //   );
-  // }
-
   loadBusinessData(businessId: string): Observable<Business | null> {
     console.log('BusinessDataService - loadBusinessData for ID:', businessId);
+
+    if (this.businessDataSubject.value) {
+      return this.businessDataSubject.asObservable();
+    }
 
     return this.businessService.getBusinessData(businessId).pipe(
       map((business) => {
@@ -79,19 +49,49 @@ export class BusinessDataService {
         this.businessDataSubject.next(business);
         this.businessIdSubject.next(businessId);
 
-        // These calls only make sense in browser context
-        if (!isPlatformServer(this.platformId)) {
-          this.businessService.getLocations(businessId).subscribe((locations) => {
-            this.locationsSubject.next(locations);
-          });
+        this.businessService.getLocations(businessId).subscribe((locations) => {
+          this.locationsSubject.next(locations);
+        });
 
-          this.businessPageHeroService.getPageHeroes(businessId).subscribe((pageHero) => {
-            this.pageHeroSubject.next(pageHero);
-          });
-        }
+        this.businessPageHeroService.getPageHeroes(businessId).subscribe((pageHero) => {
+          this.pageHeroSubject.next(pageHero);
+        });
       })
     );
   }
+
+  // loadBusinessData(businessId: string): Observable<Business | null> {
+  //   console.log('BusinessDataService - loadBusinessData for ID:', businessId);
+
+  //   return this.businessService.getBusinessData(businessId).pipe(
+  //     map((business) => {
+  //       if (!business) return null;
+
+  //       // Ensure sections are always defined
+  //       if (!business.sections) {
+  //         business.sections = [];
+  //         console.warn('⚠️ No sections found in Firestore. Initializing empty array.');
+  //       }
+
+  //       return business;
+  //     }),
+  //     tap((business) => {
+  //       this.businessDataSubject.next(business);
+  //       this.businessIdSubject.next(businessId);
+
+  //       // These calls only make sense in browser context
+  //       if (!isPlatformServer(this.platformId)) {
+  //         this.businessService.getLocations(businessId).subscribe((locations) => {
+  //           this.locationsSubject.next(locations);
+  //         });
+
+  //         this.businessPageHeroService.getPageHeroes(businessId).subscribe((pageHero) => {
+  //           this.pageHeroSubject.next(pageHero);
+  //         });
+  //       }
+  //     })
+  //   );
+  // }
 
   getBusinessData(): Observable<Business | null> {
     return this.businessDataSubject.asObservable();

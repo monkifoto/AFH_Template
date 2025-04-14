@@ -5,7 +5,7 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 import { GoogleMapsLoaderService } from 'src/app/services/google-maps-loader.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
-import { filter, Observable, of, switchMap } from 'rxjs';
+import { filter, first, Observable, of, switchMap } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID, Inject } from '@angular/core';
 
@@ -31,23 +31,23 @@ export class TestimonialsListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.businessDataService.businessData$.subscribe((data) => {
+    this.businessDataService.businessData$.pipe(
+      first()
+    ).subscribe((data) => {
       if (data) {
         this.business = data;
         this.loadData();
       } else {
-        // If no data from service, try getting business ID from query params
-        this.route.queryParams.subscribe((params) => {
-          const businessId = params['id'];
-          if (businessId) {
-            this.businessDataService.loadBusinessData(businessId).subscribe((business) => {
-              if (business) {
-                this.business = business;
-                this.loadData();
-              }
-            });
-          }
-        });
+        // fallback only if needed (likely never hit with AppInitializer)
+        const businessId = this.route.snapshot.queryParamMap.get('id');
+        if (businessId) {
+          this.businessDataService.loadBusinessData(businessId).pipe(first()).subscribe((business) => {
+            if (business) {
+              this.business = business;
+              this.loadData();
+            }
+          });
+        }
       }
     });
   }
@@ -60,25 +60,7 @@ export class TestimonialsListComponent implements OnInit {
     }
   }
 
-  // private loadTestimonials(): void {
-  //   this.businessDataService
-  //     .loadBusinessData(this.business?.id || '')
-  //     .subscribe((business) => {
-  //       if (business && business.testimonials) {
-  //         const formattedTestimonials = business.testimonials.map(
-  //           (testimonial: any) => ({
-  //             ...testimonial,
-  //             relationship: 'Testimonial', // Set the relationship property
-  //             rawQuote: testimonial.quote,
-  //             quote: this.sanitizeHtml(testimonial.quote),
-  //             isGoogle: false,
-  //           })
-  //         );
-  //         this.testimonials = [...this.testimonials, ...formattedTestimonials];
-  //       }
-  //     });
-  // }
-
+  
   private loadTestimonials(): void {
     if (this.business?.testimonials) {
       const formattedTestimonials = this.business.testimonials.map((testimonial: any) => ({

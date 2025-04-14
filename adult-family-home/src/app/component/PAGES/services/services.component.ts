@@ -54,25 +54,19 @@ export class ServicesComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.queryParamMap.get('id');
-    if (id) {
+
+    // Clean URL if ?id= was passed
+    if (id && isPlatformBrowser(this.platformId)) {
       window.history.replaceState({}, '', this.router.url.split('?')[0]);
     }
 
+    this.businessDataService.businessData$.subscribe((business) => {
+      if (!business) return;
 
-    this.businessDataService.getBusinessId().pipe(
-      switchMap((businessId) => {
-        if (businessId) {
-          this.businessId = businessId;
-          this.metaService.loadAndApplyMeta(businessId);
-          return this.businessDataService.loadBusinessData(businessId);
-        }
-        return [];
-      })
-    ).subscribe((business) => {
-      if (business) {
-        this.business = business;
-        this.loadSections();
-      }
+      this.business = business;
+      this.businessId = business.id;
+      this.metaService.loadAndApplyMeta(this.businessId);
+      this.loadSections();
     });
   }
 

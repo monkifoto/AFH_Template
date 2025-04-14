@@ -56,35 +56,32 @@ export class ContactUsComponent  implements OnInit{
       }
 
       ngOnInit(): void {
-
         if (isPlatformBrowser(this.platformId)) {
           this.formData.website = this.extractBaseDomain(window.location.hostname);
         }
+
         const id = this.route.snapshot.queryParamMap.get('id');
         if (id && isPlatformBrowser(this.platformId)) {
           window.history.replaceState({}, '', this.router.url.split('?')[0]);
         }
 
-
         this.businessDataService.businessData$.subscribe((business) => {
-          if (business) {
-            this.business = business;
+          if (!business) return;
 
-            this.businessDataService.getLocations().subscribe((locations) => {
-              if (locations.length > 0) {
-                this.location = locations[0]; // ✅ Set first available location
-                console.log('📍 Updated Location [0]:', this.location);
-              } else {
-                console.warn('⚠️ No locations available.');
-                this.location = null;
-              }
-            });
+          this.business = business;
+          this.layoutType = business.theme?.themeType || 'demo';
+          this.metaService.loadAndApplyMeta(business.id);
 
-            if (business?.id) {
-              this.metaService.loadAndApplyMeta(business.id);
-              this.layoutType = business.theme?.themeType || 'demo';
+          // Flatten: get locations once business is confirmed
+          this.businessDataService.getLocations().subscribe((locations) => {
+            if (locations.length > 0) {
+              this.location = locations[0];
+              console.log('📍 Updated Location [0]:', this.location);
+            } else {
+              console.warn('⚠️ No locations available.');
+              this.location = null;
             }
-          }
+          });
         });
       }
 
