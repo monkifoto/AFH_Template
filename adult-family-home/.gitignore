@@ -44,3 +44,4 @@ Thumbs.db
 #environments
 environments/
 server/firebase/*.json
+package-lock.json
