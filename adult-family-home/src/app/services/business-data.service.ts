@@ -1,4 +1,4 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID, Optional } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
@@ -6,6 +6,7 @@ import { BusinessService } from './business.service';
 import { BusinessPageHeroService } from './business-page-hero.service';
 import { Business } from '../model/business-questions.model';
 import { first } from 'rxjs/operators';
+import { SSR_BUSINESS_ID } from '../tokens/server-request.token';
 
 @Injectable({
   providedIn: 'root',
@@ -19,11 +20,27 @@ export class BusinessDataService {
   public businessData$: Observable<Business | null> =
     this.businessDataSubject.asObservable();
 
-  constructor(
-    private businessService: BusinessService,
-    private businessPageHeroService: BusinessPageHeroService,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+    constructor(
+      private businessService: BusinessService,
+      private businessPageHeroService: BusinessPageHeroService,
+      @Inject(PLATFORM_ID) private platformId: Object,
+      @Optional() @Inject(SSR_BUSINESS_ID) private ssrBusinessId: string
+    ) {
+      if (isPlatformServer(this.platformId) && this.ssrBusinessId) {
+        console.log('✅ Using SSR businessId:', this.ssrBusinessId);
+        this.businessIdSubject.next(this.ssrBusinessId);
+
+        // ✅ Preload data on the server
+        this.loadBusinessData(this.ssrBusinessId).pipe(first()).subscribe({
+          next: (business) => {
+            console.log('✅ Preloaded business data on server:', business?.businessName);
+          },
+          error: (err) => {
+            console.error('❌ Error preloading business data on server:', err);
+          }
+        });
+      }
+    }
 
   // ✅ Called at app start
   loadBusinessData(businessId: string): Observable<Business | null> {
@@ -99,6 +116,10 @@ export class BusinessDataService {
 
   getBusinessId(): Observable<string | null> {
     return this.businessIdSubject.asObservable();
+  }
+
+  setBusinessId(id: string) {
+    this.businessIdSubject.next(id);
   }
 
   getLocations(): Observable<any[]> {

@@ -2,14 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>AdultFamilyHome</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Hardcoded Description for Test">
-  <meta property="og:title" content="Hardcoded OG Title for Test">
-  <meta property="og:description" content="Hardcoded OG Description for Test">
-  <meta property="og:image" content="https://example.com/image.jpg">
-  <meta property="og:url" content="https://example.com">
+  <!-- HTML Meta Tags -->
+<!-- <title>Hardcoded OG Title for Test</title>
+<meta name="description" content="Hardcoded OG Description for Test"> -->
+
+<!-- Facebook Meta Tags -->
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+<meta property="og:title" content="{{ogTitle}}">
+<meta property="og:description" content="{{ogDescription}}">
+<meta property="og:image" content="{{ogImage}}">
+<meta property="og:url" content="{{ogUrl}}">
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="{{ogImage}}">
+<meta property="twitter:domain" content="{{ogUrl}}">
+<meta property="twitter:url"  content="{{ogUrl}}">
+<meta name="twitter:title" content="{{ogTitle}}">
+<meta name="twitter:description" content="{{ogDescription}}">
+<meta name="twitter:card" content="summary_large_image">
+
 
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <!-- <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"> -->

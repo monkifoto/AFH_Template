@@ -26,30 +26,36 @@ export class AppComponent implements OnInit {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
+
   ngOnInit(): void {
     console.log('🧪 AppComponent - ngOnInit');
     console.log('SSR SAFE: AppComponent initialized');
-    // Subscribe to already-loaded business data (from APP_INITIALIZER)
-    this.businessDataService.businessData$.subscribe((data) => {
-      // console.log('📦 AppComponent got businessData:', data);
+
+    this.businessDataService.getBusinessData().subscribe((data) => {
       if (data) {
         this.business = data;
 
-        this.metaService.updateMetaTags({
-          title: data.metaTitle || data.businessName || 'Default Title',
-          description: data.metaDescription || 'Adult Family Home providing quality care.',
-          keywords: data.metaKeywords || 'adult care, Renton, Kent, Washington',
-          image: data.metaImage || '/assets/default-og.jpg',
-          url: data.businessURL || `https://${data.businessURL || 'defaultsite.com'}`,
-        });
-        console.log('✅ Meta tags updated from AppComponent');
-      }
-      else {
+        if (this.isBrowser) {
+          this.metaService.updateMetaTags({
+            title: data.metaTitle || data.businessName || 'Default Title',
+            description: data.metaDescription || 'Adult Family Home providing quality care.',
+            keywords: data.metaKeywords || 'adult care, Renton, Kent, Washington',
+            image: data.metaImage || '/assets/default-og.jpg',
+            url: data.businessURL || `https://${data.businessURL || 'defaultsite.com'}`,
+          });
+
+          if (data.faviconUrl) {
+            this.metaService.updateFavicon(data.faviconUrl);
+          }
+
+          console.log('✅ Meta tags updated in browser from AppComponent');
+        }
+      } else {
         console.error('❌ No business data found in AppComponent');
       }
     });
 
-    // Optionally load browser-specific scripts
+    // ✅ Load browser-specific JS (Bootstrap etc.)
     if (this.isBrowser) {
       const script = document.createElement('script');
       script.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js';

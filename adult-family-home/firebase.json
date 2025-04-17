@@ -4,26 +4,64 @@
     "indexes": "firestore.indexes.json"
   },
 
-  "hosting": {
-    "public": "dist/adult-family-home/browser",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "function": "ssrFunction"
-      }
-    ]
-  },
-
+  "hosting": [
+    {
+      "target": "afhdynamicwebsite",
+      "public": "dist/adult-family-home/browser",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "function": "ssrFunction"
+        }
+      ],
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target": "afhdynamicwebsite-test",
+      "public": "dist/adult-family-home/browser",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "function": "ssrFunction"
+        }
+      ],
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
+            }
+          ]
+        }
+      ]
+    }
+  ],
 
   "storage": {
     "rules": "storage.rules"
   },
-
 
   "functions": [
     {
@@ -36,13 +74,13 @@
         "firebase-debug.*.log",
         "*.local"
       ],
-     "predeploy": [
-      "npm --prefix \"$RESOURCE_DIR\" run lint",
-
-      "mkdir -p functions/lib/angular/browser",
-      "cp -r dist/adult-family-home/browser/* functions/lib/angular/browser/",
-      "cp dist/adult-family-home/server/main.js functions/lib/angular/main.js"
-    ]
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint",
+        "mkdir -p functions/lib/angular/browser",
+        "cp -r dist/adult-family-home/browser/* functions/lib/angular/browser/",
+        "cp dist/adult-family-home/browser/index.html functions/lib/angular/browser/index.original.html",
+        "cp dist/adult-family-home/server/main.js functions/lib/angular/main.js"
+      ]
     }
   ]
 }

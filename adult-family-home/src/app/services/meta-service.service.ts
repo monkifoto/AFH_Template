@@ -55,25 +55,39 @@ export class MetaService {
     link.href = faviconUrl;
   }
 
-  loadAndApplyMeta(businessId: string): void {
-    this.businessDataService.loadBusinessData(businessId).subscribe((business: Business | null) => {
-      if (business) {
-        const metaData = {
-          title: business.metaTitle || business.businessName || 'Default Title',
-          description: business.metaDescription || 'Default Description',
-          keywords: business.metaKeywords || 'default, keywords',
-          image: business.metaImage || '/assets/default-og.jpg',
-          url: business.businessURL || ''
-        };
-
-        this.updateMetaTags(metaData);
-
-        if (business.faviconUrl) {
-          this.updateFavicon(business.faviconUrl);
+  loadAndApplyMeta(businessId?: string): void {
+    if (businessId) {
+      // Explicit load (used in detail pages or dynamic components)
+      this.businessDataService.loadBusinessData(businessId).subscribe((business) => {
+        if (business) {
+          this.applyTags(business);
         }
-      } else {
-        console.warn('MetaService: No business data found for the given ID.');
-      }
-    });
+      });
+    } else {
+      // Default: use already-loaded data (SSR-safe)
+      this.businessDataService.getBusinessData().subscribe((business) => {
+        if (business) {
+          this.applyTags(business);
+        }
+      });
+    }
   }
+
+  private applyTags(business: Business): void {
+    const metaData = {
+      title: business.metaTitle || business.businessName || 'Default Title',
+      description: business.metaDescription || 'Default Description',
+      keywords: business.metaKeywords || 'default, keywords',
+      image: business.metaImage || '/assets/default-og.jpg',
+      url: business.businessURL || '',
+    };
+
+    this.updateMetaTags(metaData);
+
+    if (isPlatformBrowser(this.platformId) && business.faviconUrl) {
+      this.updateFavicon(business.faviconUrl);
+    }
+  }
+
+
 }

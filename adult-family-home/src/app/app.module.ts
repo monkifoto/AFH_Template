@@ -1,4 +1,6 @@
 import { NgModule, inject, provideAppInitializer } from '@angular/core';
+
+import { APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -115,8 +117,12 @@ import { firstValueFrom } from 'rxjs';
       "hh.sbmediahub.com": "vfCMoPjAu2ROVBbKvk0D",
       "ae.sbmediahub.com": "UiSDf9elSjwcbQs2HZb1",
       "www.sbmediahub.com": "MGou3rzTVIbP77OLmZa7",
-    };
 
+      'test.helpinghandafh.com': 'vfCMoPjAu2ROVBbKvk0D',
+      'test.aefamilyhome.com': 'UiSDf9elSjwcbQs2HZb1',
+      'test.countrycrestafh.com': 'yrNc50SvfPqwTSkvvygA',
+      'test.prestigecareafh.com': 'pDJgpl34XUnRblyIlBA7',
+    };
 
     export function initializerFactory() {
       const req = inject(SERVER_REQUEST, { optional: true }) as Request | undefined;
@@ -132,13 +138,14 @@ import { firstValueFrom } from 'rxjs';
         const idRaw = req.query['id'];
         const idParam = Array.isArray(idRaw) ? idRaw[0] : idRaw;
         hostname = req.hostname;
-        businessId = String(businessIdMap[hostname] || idParam || 'MGou3rzTVIbP77OLmZa7');
+        // Don't fallback to MGou3rz... — SSR_BUSINESS_ID will already be injected
+        businessId = (req as any).businessId || businessIdMap[hostname] || idParam || 'MGou3rzTVIbP77OLmZa7';
       } else if (isPlatformBrowser(platformId)) {
         const url = new URL(window.location.href);
         hostname = window.location.hostname;
         businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
       } else {
-        // SSR fallback
+        // Fallback in unknown environments (not recommended)
         hostname = '';
         businessId = 'MGou3rzTVIbP77OLmZa7';
       }
@@ -146,14 +153,14 @@ import { firstValueFrom } from 'rxjs';
       return async () => {
         console.log('✅ Initializing app...');
 
-        // Always load theme (SSR-safe)
+        // ✅ Always load theme (safe in SSR + browser)
         try {
           await themeService.loadTheme(businessId);
         } catch (err) {
           console.error('❌ Theme error:', err);
         }
 
-        // 🛑 Block this part during SSR to avoid Firebase issues
+        // ⚠️ Only load business data and meta on browser
         if (isPlatformBrowser(platformId)) {
           try {
             const business = await firstValueFrom(businessDataService.loadBusinessData(businessId));
@@ -166,15 +173,77 @@ import { firstValueFrom } from 'rxjs';
                 image: business.metaImage || '/assets/default-og.jpg',
                 url: business.businessURL || `https://${hostname}`
               });
+
+              if (business.faviconUrl) {
+                metaService.updateFavicon(business.faviconUrl);
+              }
             }
           } catch (err) {
             console.error('❌ Business data error:', err);
           }
         } else {
-          console.log('⛔ Skipped businessData load on SSR');
+          console.log('⛔ Skipped businessData/meta load on SSR (SSR_BUSINESS_ID used)');
         }
       };
     }
+
+    // export function initializerFactory() {
+    //   const req = inject(SERVER_REQUEST, { optional: true }) as Request | undefined;
+    //   const themeService = inject(ThemeInitializerService);
+    //   const businessDataService = inject(BusinessDataService);
+    //   const metaService = inject(MetaService);
+    //   const platformId = inject(PLATFORM_ID);
+
+    //   let hostname = '';
+    //   let businessId = '';
+
+    //   if (req) {
+    //     const idRaw = req.query['id'];
+    //     const idParam = Array.isArray(idRaw) ? idRaw[0] : idRaw;
+    //     hostname = req.hostname;
+    //     businessId = String(businessIdMap[hostname] || idParam || 'MGou3rzTVIbP77OLmZa7');
+    //   } else if (isPlatformBrowser(platformId)) {
+    //     const url = new URL(window.location.href);
+    //     hostname = window.location.hostname;
+    //     businessId = businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
+    //   } else {
+    //     // SSR fallback
+    //     hostname = '';
+    //     businessId = 'MGou3rzTVIbP77OLmZa7';
+    //   }
+
+    //   return async () => {
+    //     console.log('✅ Initializing app...');
+
+    //     // Always load theme (SSR-safe)
+    //     try {
+    //       await themeService.loadTheme(businessId);
+    //     } catch (err) {
+    //       console.error('❌ Theme error:', err);
+    //     }
+
+    //     // 🛑 Block this part during SSR to avoid Firebase issues
+    //     //if (isPlatformBrowser(platformId)) {
+    //       try {
+    //         const business = await firstValueFrom(businessDataService.loadBusinessData(businessId));
+    //         if (business) {
+    //           console.log('✅ Meta: Setting tags for', business.businessName);
+    //           metaService.updateMetaTags({
+    //             title: business.metaTitle || business.businessName || 'Default Title',
+    //             description: business.metaDescription || 'Caring and comfort.',
+    //             keywords: business.metaKeywords || 'adult care, family home, Renton, Kent',
+    //             image: business.metaImage || '/assets/default-og.jpg',
+    //             url: business.businessURL || `https://${hostname}`
+    //           });
+    //         }
+    //       } catch (err) {
+    //         console.error('❌ Business data error:', err);
+    //       }
+    //     //} else {
+    //       console.log('⛔ Skipped businessData load on SSR');
+    //     //}
+    //   };
+    // }
 
 
 
@@ -258,12 +327,24 @@ import { firstValueFrom } from 'rxjs';
     BrowserAnimationsModule,
     // BrowserModule.withServerTransition({ appId: 'serverApp' }),
   ],
+  // providers: [
+  //    provideFirebaseApp(() => initializeApp(environment.firebase)),
+  //    provideFirestore(() => getFirestore()),
+  //    provideStorage(() => getStorage()),
+  //    provideAuth(() => getAuth()),
+  //   provideAppInitializer(() => initializerFactory()())
+  // ],
   providers: [
-     provideFirebaseApp(() => initializeApp(environment.firebase)),
-     provideFirestore(() => getFirestore()),
-     provideStorage(() => getStorage()),
-     provideAuth(() => getAuth()),
-    provideAppInitializer(() => initializerFactory()())
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
+    provideAuth(() => getAuth()),
+
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializerFactory,
+      multi: true
+    }
   ],
 
   bootstrap: [AppComponent],

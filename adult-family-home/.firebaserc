@@ -4,6 +4,21 @@
     "ae-afh": "ae-afh",
     "test": "afhdynamicwebsite-test"
   },
-  "targets": {},
+  "targets": {
+    "afhdynamicwebsite": {
+      "hosting": {
+        "afhdynamicwebsite": [
+          "afhdynamicwebsite"
+        ]
+      }
+    },
+    "afhdynamicwebsite-test": {
+      "hosting": {
+        "afhdynamicwebsite-test": [
+          "afhdynamicwebsite-test"
+        ]
+      }
+    }
+  },
   "etags": {}
 }

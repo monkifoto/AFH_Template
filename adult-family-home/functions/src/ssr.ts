@@ -10,6 +10,7 @@ import admin from 'firebase-admin';
 import {getFirestore} from 'firebase-admin/firestore';
 
 
+const SSR_BUSINESS_ID = Symbol.for('SSR_BUSINESS_ID');
 const APP_BASE_HREF = Symbol.for('APP_BASE_HREF');
 
 const isTestEnv = process.env.GCLOUD_PROJECT === 'afhdynamicwebsite-test';
@@ -76,19 +77,40 @@ const server = express();
 // import { renderModule } from '@angular/platform-server';
 
 server.engine('html', async (_filePath, options: any, callback) => {
+  console.log('🟢 SSR Engine Invoked');
   const req = options.req;
+  const businessId = options.businessId;
+  const hostname = (req.headers['x-forwarded-host'] || req.hostname || '').toString().toLowerCase();
 
   try {
-    // @ts-expect-error: Angular server bundle has no type declarations
-    // const {AppServerModule, renderModule} = await import('../lib/main.js');
-    // eslint-disable-next-line import/no-unresolved
-    const {AppServerModule, renderModule} = await import('./angular/main.js');
+    const {AppServerModule, renderModule} =
+    await import(join(__dirname, '../lib/angular/main.js'));
+
+    const businessDoc = await adminFirestore.collection('businesses').doc(businessId).get();
+    const businessData = businessDoc.exists ? businessDoc.data() : {};
+
+    const htmlTemplate = readFileSync(join(distFolder, indexHtml)).toString();
+
+    const injectedHtml = htmlTemplate
+        .replace(/{{title}}/gi, businessData?.metaTitle || businessData?.businessName || '')
+        .replace(/{{description}}/gi, businessData?.metaDescription || '')
+        .replace(/{{ogTitle}}/gi, businessData?.metaTitle || businessData?.businessName || '')
+        .replace(/{{ogDescription}}/gi, businessData?.metaDescription || '')
+        .replace(/{{ogImage}}/gi, businessData?.metaImage || '/assets/default-og.jpg')
+        .replace(/{{ogUrl}}/gi, `https://${hostname}${req.url}`); // ✅ hostname used here
 
     const html = await renderModule(AppServerModule, {
-      document: readFileSync(join(distFolder, indexHtml)).toString(),
+      document: injectedHtml,
       url: req.url,
-      extraProviders: [{provide: APP_BASE_HREF, useValue: req.baseUrl}],
+      extraProviders: [
+        {provide: APP_BASE_HREF, useValue: req.baseUrl},
+        {provide: SSR_BUSINESS_ID, useValue: businessId},
+      ],
     });
+
+
+    const userAgent = req.headers['user-agent'] || '';
+    console.log('👀 SSR User Agent:', userAgent);
 
     callback(null, html);
   } catch (err) {
@@ -96,6 +118,7 @@ server.engine('html', async (_filePath, options: any, callback) => {
     callback(err as Error);
   }
 });
+
 
 server.set('view engine', 'html');
 server.set('views', distFolder);
@@ -105,6 +128,7 @@ server.get('*.*', express.static(distFolder, {maxAge: '1y'}));
 
 // 🧠 Dynamic SSR handler
 server.get('*', async (req: Request, res: Response) => {
+  console.log('🔵 SSR FUNCTION HIT');
   const start = Date.now();
   const hostname = (req.headers['x-forwarded-host'] || req.hostname || '').toString().toLowerCase();
   const urlId = new URL(`http://${hostname}${req.url}`).searchParams.get('id');
@@ -135,7 +159,7 @@ server.get('*', async (req: Request, res: Response) => {
     console.error('❌ Failed to fetch business meta:', err);
   }
 
-  res.render(indexHtml, {req}, (err, html) => {
+  res.render(indexHtml, {req, businessId}, (err, html) => {
     const duration = Date.now() - start;
     if (err || !html) {
       console.error('❌ SSR Render Failed:', err);
@@ -144,22 +168,39 @@ server.get('*', async (req: Request, res: Response) => {
 
     if (businessData) {
       const {metaTitle, metaDescription, metaImage, businessName} = businessData;
+      console.error('❌ No business data found:', businessData);
+      html = html
+          .replace('</body>', `<script>window.__BUSINESS_ID__="${businessId}";</script></body>`)
+          .replace(/<title>.*<\/title>/i,
+              `<title>${metaTitle || businessName || 'Adult Family Home'}</title>`)
 
-      html = html.replace('</body>',
-          `<script>window.__BUSINESS_ID__="${businessId}";</script></body>`
-      )
-          .replace(/<meta name="description" content=".*?">/,
+          // Standard description meta
+          .replace(/<meta\s+name="description"\s+content="[^"]*"\s*\/?>/i,
               `<meta name="description" content="${metaDescription || ''}">`)
-          .replace(/<meta property="og:title" content=".*?">/,
-              `<meta property="og:title" content="${metaTitle || businessName || ''}">`)
-          .replace(/<meta property="og:description" content=".*?">/,
-              `<meta property="og:description" content="${metaDescription || ''}">`)
-          .replace(/<meta property="og:image" content=".*?">/,
-              `<meta property="og:image" content="${metaImage || '/assets/default-og.jpg'}">`)
-          .replace(/<meta property="og:url" content=".*?">/,
-              `<meta property="og:url" content="https://${hostname}${req.url}">`)
-          .replace(/<title>.*<\/title>/,
-              `<title>${metaTitle || businessName || 'Adult Family Home'}</title>`);
+
+
+          // Literal replacements for template placeholders
+          .replace(/{{title}}/gi, metaTitle || businessName || 'Adult Family Home')
+          .replace(/{{description}}/gi, metaDescription || '')
+          .replace(/{{ogTitle}}/gi, metaTitle || businessName || '')
+          .replace(/{{ogDescription}}/gi, metaDescription || '')
+          .replace(/{{ogImage}}/gi, metaImage || '/assets/default-og.jpg')
+          .replace(/{{ogUrl}}/gi, `https://${hostname}${req.url}`)
+
+
+          // Twitter meta
+          .replace(/<meta\s+name="twitter:card"\s+content="[^"]*"\s*\/?>/i,
+              `<meta name="twitter:card" content="summary_large_image">`)
+          .replace(/<meta\s+property="twitter:domain"\s+content="[^"]*"\s*\/?>/i,
+              `<meta property="twitter:domain" content="${hostname}">`)
+          .replace(/<meta\s+property="twitter:url"\s+content="[^"]*"\s*\/?>/i,
+              `<meta property="twitter:url" content="https://${hostname}${req.url}">`)
+          .replace(/<meta\s+name="twitter:title"\s+content="[^"]*"\s*\/?>/i,
+              `<meta name="twitter:title" content="${metaTitle || businessName || ''}">`)
+          .replace(/<meta\s+name="twitter:description"\s+content="[^"]*"\s*\/?>/i,
+              `<meta name="twitter:description" content="${metaDescription || ''}">`)
+          .replace(/<meta\s+name="twitter:image"\s+content="[^"]*"\s*\/?>/i,
+              `<meta name="twitter:image" content="${metaImage || '/assets/default-og.jpg'}">`);
     }
 
     console.log(`✅ SSR complete (${duration}ms)`);
@@ -185,4 +226,4 @@ if (require.main === module) {
 }
 
 // Export for Firebase Function
-export const ssr = server;
+export const ssrFunction = server;
