@@ -63,3 +63,9 @@ h2 {
   color: red;
   font-size: 0.8rem;
 }
+
+.required::after {
+  content: ' *';
+  color: red;
+  font-weight: bold;
+}

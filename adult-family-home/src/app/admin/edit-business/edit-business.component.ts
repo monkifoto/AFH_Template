@@ -32,7 +32,6 @@ import {
   getDownloadURL,
   ref as storageRef,
 Storage } from '@angular/fire/storage';
-import { S } from '@angular/core/weak_ref.d-DOjz-6fK';
 import { BusinessSectionsService } from 'src/app/services/business-sections.service';
 
 
@@ -68,7 +67,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
   uploads: { uploadProgress: number; downloadUrl?: string }[] = [];
 
   constructor(
-    private fb: FormBuilder,
+    private fb: FormBuilder = inject(FormBuilder),
     private businessService: BusinessService,
     private uploadService: UploadService,
     private route: ActivatedRoute,
@@ -446,13 +445,14 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
       new FormArray(
         business.locations.map((loc) =>
           this.fb.group({
-            street: [loc.street, Validators.required],
-            city: [loc.city, Validators.required],
-            state: [loc.state, Validators.required],
-            zipcode: [loc.zipcode, Validators.required],
-            phone: [loc.phone, [Validators.required, Validators.pattern(/^\d{10}$/)]],
-            fax: [loc.fax, [Validators.required, Validators.pattern(/^\d{10}$/)]],
-            email: [loc.email, [Validators.required, Validators.email]],
+            locationName: [loc.locationName],
+            street: [loc.street],
+            city: [loc.city],
+            state: [loc.state],
+            zipcode: [loc.zipcode],
+            phone: [loc.phone],
+            fax: [loc.fax],
+            email: [loc.email],
           })
         )
       )
