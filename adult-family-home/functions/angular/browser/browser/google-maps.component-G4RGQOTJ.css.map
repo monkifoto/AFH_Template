@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/component/UI/google-maps/google-maps.component.css"],
-  "sourcesContent": ["#map {\n  width: 100%;\n  height: 400px; /* Default height */\n  max-width: 100%;\n}\n\n.mock-map{\n  max-width: var(--site-max-width);\n  width: 100%;\n  height: 600px;\n  max-width: 100%;\n  overflow: hidden;\n}\n.mock-data{\n  max-width: var(--site-max-width);\n  width: 100%;\n  margin: 0 auto;\n  text-align: center;\n}\n.mock-badge {\n  background-color: #fff3cd;\n  border: 1px solid #ffeeba;\n  color: #856404;\n  padding: 4px 10px;\n  font-size: 12px;\n  font-weight: 600;\n  border-radius: 4px;\n  margin-bottom: 10px;\n  display: inline-block;\n  margin: 0 auto;\n}\n\n@media (max-width: 768px) {\n  #map {\n    height: 300px; /* Reduce height for smaller screens */\n  }\n}\n\n@media (max-width: 480px) {\n  #map {\n    height: 250px; /* Further reduce height on very small screens */\n  }\n}\n"],
-  "mappings": "AAAA,CAAC,IACC,MAAO,KACP,OAAQ,MACR,UAAW,IACb,CAEA,CAAC,SACC,UAAW,IAAI,kBACf,MAAO,KACP,OAAQ,MACR,UAAW,KACX,SAAU,MACZ,CACA,CAAC,UACC,UAAW,IAAI,kBACf,MAAO,KAfT,OAgBU,EAAE,KACV,WAAY,MACd,CACA,CAAC,WACC,iBAAkB,QAClB,OAAQ,IAAI,MAAM,QAClB,MAAO,QAtBT,QAuBW,IAAI,KACb,UAAW,KACX,YAAa,IAzBf,cA0BiB,IAEf,QAAS,aA5BX,OA6BU,EAAE,IACZ,CAEA,OAAO,CAAC,SAAS,EAAE,OACjB,CAjCD,IAkCG,OAAQ,KACV,CACF,CAEA,OAAO,CAAC,SAAS,EAAE,OACjB,CAvCD,IAwCG,OAAQ,KACV,CACF",
-  "names": []
-}

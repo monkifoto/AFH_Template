@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/component/UI/Deprecated/instagram-feed/instagram-feed.component.css"],
-  "sourcesContent": [".instagram-feed {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin: 20px;\n}\n\n.instagram-post {\n  margin-bottom: 20px;\n}\n\n.instagram-post img,\n.instagram-post video {\n  max-width: 100%;\n  height: auto;\n  border-radius: 8px;\n}\n"],
-  "mappings": "AAAA,CAAC,eACC,QAAS,KACT,eAAgB,OAChB,YAAa,OAHf,OAIU,IACV,CAEA,CAAC,eACC,cAAe,IACjB,CAEA,CAJC,eAIe,IAChB,CALC,eAKe,MACd,UAAW,KACX,OAAQ,KAdV,cAeiB,GACjB",
-  "names": []
-}

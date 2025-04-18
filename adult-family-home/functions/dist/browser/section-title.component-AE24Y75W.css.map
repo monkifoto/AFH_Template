@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/component/UI/section-title/section-title.component.css"],
-  "sourcesContent": [".center-text-section {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n  /* padding: 4rem 2rem; */\n  /* max-width: calc(var(--cell-max-width) * 24); */\n  margin: 0 auto;\n}\n\n.center-text-title {\n  color: var(--text-color);\n  /* padding-bottom: 3rem; */\n}\n"],
-  "mappings": "AAAA,CAAC,oBACC,QAAS,KACT,eAAgB,OAChB,YAAa,OACb,WAAY,OAJd,OAOU,EAAE,IACZ,CAEA,CAAC,kBACC,MAAO,IAAI,aAEb",
-  "names": []
-}
