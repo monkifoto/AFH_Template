@@ -4,25 +4,17 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "site": "afhdynamicwebsite-test",
-    "public": ".output/public",
+    "source": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [
-      {
-        "source": "**",
-        "function": "ssr"
-      }
-    ]
+    "frameworksBackend": {
+      "region": "us-central1"
+    }
   },
   "storage": {
     "rules": "storage.rules"
-  },
-  "functions": {
-    "source": ".output/functions",
-    "runtime": "nodejs22"
   }
 }

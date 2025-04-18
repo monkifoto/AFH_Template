@@ -151,41 +151,33 @@ import { firstValueFrom } from 'rxjs';
         businessId = 'MGou3rzTVIbP77OLmZa7';
       }
 
-      return async () => {
-        console.log('✅ Initializing app...');
+      return () =>
+        new Promise<void>(async (resolve, reject) => {
+          try {
+            // your full existing logic
+            await themeService.loadTheme(businessId);
+            const business = await firstValueFrom(businessDataService.loadBusinessData(businessId));
 
-        // ✅ Always load theme (safe in SSR + browser)
-        try {
-          await themeService.loadTheme(businessId);
-        } catch (err) {
-          console.error('❌ Theme error:', err);
-        }
+            if (business) {
+              metaService.updateMetaTags({
+                title: business.metaTitle?.trim() || business.businessName || 'Default Title',
+                description: business.metaDescription?.trim() || 'Adult Family Home providing quality care.',
+                keywords: business.metaKeywords || 'adult care, Renton, Kent, Washington',
+                image: business.metaImage || '/assets/default-og.jpg',
+                url: `https://${hostname}`
+              });
 
-        const business = await firstValueFrom(businessDataService.loadBusinessData(businessId));
-        if (business) {
-          console.log('🔥 SSR Meta Tags:', {
-            businessId,
-            title: business.metaTitle,
-            description: business.metaDescription,
-            url: business.businessURL,
-          });
-          console.log('✅ Loaded business:', business);
-          metaService.updateMetaTags({
-            title: business.metaTitle?.trim() || business.businessName || 'Default Title',
-            description: business.metaDescription?.trim() || 'Adult Family Home providing quality care.',
-            keywords: business.metaKeywords || 'adult care, Renton, Kent, Washington',
-            image: business.metaImage || '/assets/default-og.jpg',
-            url: `https://${hostname}`
-          });
+              if (isPlatformBrowser(platformId) && business.faviconUrl) {
+                metaService.updateFavicon(business.faviconUrl);
+              }
+            }
 
-          if (isPlatformBrowser(platformId) && business.faviconUrl) {
-            metaService.updateFavicon(business.faviconUrl);
+            resolve();
+          } catch (err) {
+            console.error('❌ Error in meta initializer:', err);
+            reject(err);
           }
-        }
-        else{
-          console.log('❌ No business data available.', );
-        }
-      };
+        });
     }
 
     // export function initializerFactory() {

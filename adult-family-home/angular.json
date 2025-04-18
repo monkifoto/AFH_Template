@@ -10,125 +10,150 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
-  "build": {
-    "builder": "@angular-devkit/build-angular:application",
-    "options": {
-      "outputPath": "dist/adult-family-home",
-      "index": "src/index.html",
-      "polyfills": ["zone.js"],
-      "tsConfig": "tsconfig.app.json",
-      "assets": ["src/favicon.ico", "src/assets"],
-      "styles": [
-        "node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "src/styles.css"
-      ],
-      "scripts": [],
-      "browser": "src/main.ts"
-    },
-    "configurations": {
-      "production": {
-        "fileReplacements": [
-          {
-            "replace": "src/environments/environment.ts",
-            "with": "src/environments/environment.prod.ts"
-          }
-        ],
-        "budgets": [
-          {
-            "type": "initial",
-            "maximumWarning": "2000kb",
-            "maximumError": "2mb"
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/adult-family-home",
+            "index": "src/index.html",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css"
+            ],
+            "scripts": [],
+            "browser": "src/main.ts"
           },
-          {
-            "type": "anyComponentStyle",
-            "maximumWarning": "6kb",
-            "maximumError": "8kb"
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2000kb",
+                  "maximumError": "2mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "8kb"
+                }
+              ],
+              "sourceMap": true,
+              "outputHashing": "all"
+            },
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.test.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "adult-family-home:build:production"
+            },
+            "test": {
+              "buildTarget": "adult-family-home:build:test"
+            },
+            "development": {
+              "buildTarget": "adult-family-home:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "adult-family-home:build"
           }
-        ],
-        "sourceMap": true,
-        "outputHashing": "all"
-      },
-      "test": {
-        "fileReplacements": [
-          {
-            "replace": "src/environments/environment.ts",
-            "with": "src/environments/environment.test.ts"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
           }
-        ],
-        "outputHashing": "all"
-      },
-      "development": {
-        "optimization": false,
-        "extractLicenses": false,
-        "sourceMap": true,
-        "namedChunks": true
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/adult-family-home/server",
+            "main": "src/main.server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            },
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.test.ts"
+                }
+              ],
+              "sourceMap": true,
+              "optimization": true
+            }
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "site": "afhdynamicwebsite"
+          }
+        },
+        "deploy-test": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "configuration": "test",
+            "site": "afhdynamicwebsite-test"
+          }
+        }
       }
-    },
-    "defaultConfiguration": "production"
-  },
-  "serve": {
-    "builder": "@angular-devkit/build-angular:dev-server",
-    "configurations": {
-      "production": {
-        "buildTarget": "adult-family-home:build:production"
-      },
-      "test": {
-        "buildTarget": "adult-family-home:build:test"
-      },
-      "development": {
-        "buildTarget": "adult-family-home:build:development"
-      }
-    },
-    "defaultConfiguration": "development"
-  },
-  "extract-i18n": {
-    "builder": "@angular-devkit/build-angular:extract-i18n",
-    "options": {
-      "buildTarget": "adult-family-home:build"
-    }
-  },
-  "test": {
-    "builder": "@angular-devkit/build-angular:karma",
-    "options": {
-      "polyfills": ["zone.js", "zone.js/testing"],
-      "tsConfig": "tsconfig.spec.json",
-      "assets": ["src/favicon.ico", "src/assets"],
-      "styles": ["src/styles.css"],
-      "scripts": []
-    }
-  },
-  "server": {
-    "builder": "@angular-devkit/build-angular:server",
-    "options": {
-      "outputPath": "dist/adult-family-home/server",
-      "main": "src/main.server.ts",
-      "tsConfig": "tsconfig.server.json"
-    },
-    "configurations": {
-      "production": {
-        "fileReplacements": [
-          {
-            "replace": "src/environments/environment.ts",
-            "with": "src/environments/environment.prod.ts"
-          }
-        ],
-        "sourceMap": false,
-        "optimization": true
-      },
-      "test": {
-        "fileReplacements": [
-          {
-            "replace": "src/environments/environment.ts",
-            "with": "src/environments/environment.test.ts"
-          }
-        ],
-        "sourceMap": true,
-        "optimization": true
-      }
-    }
-  }
-}
-
     }
   },
   "cli": {
