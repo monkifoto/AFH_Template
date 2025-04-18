@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "afhdynamicwebsite",
+    "default": "afhdynamicwebsite-test",
     "ae-afh": "ae-afh",
     "test": "afhdynamicwebsite-test"
   },

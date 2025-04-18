@@ -12,6 +12,7 @@
   "build:prod": "ng build --configuration=production",
   "build:ssr": "ng build --configuration=production && ng run adult-family-home:server:production",
   "build:ssr:test": "ng build --configuration=test && ng run adult-family-home:server:test",
+  "serve:ssr:test": "node dist/adult-family-home/server/main.js",
 
 
 

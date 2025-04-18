@@ -11,6 +11,7 @@ import { BusinessDataService } from './services/business-data.service';
   styleUrls: ['./app.component.css'],
     standalone: false
 })
+
 export class AppComponent implements OnInit {
   title = 'adult-family-home';
   businessId!: string;
@@ -35,21 +36,19 @@ export class AppComponent implements OnInit {
       if (data) {
         this.business = data;
 
-        if (this.isBrowser) {
-          this.metaService.updateMetaTags({
-            title: data.metaTitle || data.businessName || 'Default Title',
-            description: data.metaDescription || 'Adult Family Home providing quality care.',
-            keywords: data.metaKeywords || 'adult care, Renton, Kent, Washington',
-            image: data.metaImage || '/assets/default-og.jpg',
-            url: data.businessURL || `https://${data.businessURL || 'defaultsite.com'}`,
-          });
+        // this.metaService.updateMetaTags({
+        //   title: data.metaTitle || data.businessName || 'Default Title',
+        //   description: data.metaDescription || 'Adult Family Home providing quality care.',
+        //   keywords: data.metaKeywords || 'adult care, Renton, Kent, Washington',
+        //   image: data.metaImage || '/assets/default-og.jpg',
+        //   url: `https://${data.businessURL || 'defaultdomain.com'}`
+        // });
 
-          if (data.faviconUrl) {
-            this.metaService.updateFavicon(data.faviconUrl);
-          }
-
-          console.log('✅ Meta tags updated in browser from AppComponent');
+        if (this.isBrowser && data.faviconUrl) {
+          this.metaService.updateFavicon(data.faviconUrl);
         }
+
+        console.log('✅ Meta tags updated', this.isBrowser ? 'in browser' : 'on server');
       } else {
         console.error('❌ No business data found in AppComponent');
       }
