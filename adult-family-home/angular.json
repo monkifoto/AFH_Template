@@ -1,34 +1,27 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
   "projects": {
     "adult-family-home": {
       "projectType": "application",
-      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/adult-family-home",
+            "outputPath": "dist/adult-family-home/browser",
             "index": "src/index.html",
-            "polyfills": [
-              "zone.js"
-            ],
+            "main": "src/main.ts",
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": [],
-            "browser": "src/main.ts"
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -38,20 +31,10 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2000kb",
-                  "maximumError": "2mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "8kb"
-                }
-              ],
-              "sourceMap": true,
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "sourceMap": false,
+              "optimization": true,
+              "extractLicenses": true
             },
             "test": {
               "fileReplacements": [
@@ -60,17 +43,13 @@
                   "with": "src/environments/environment.test.ts"
                 }
               ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "optimization": false,
-              "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "optimization": false
             }
           },
           "defaultConfiguration": "production"
         },
+
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
@@ -79,37 +58,11 @@
             },
             "test": {
               "buildTarget": "adult-family-home:build:test"
-            },
-            "development": {
-              "buildTarget": "adult-family-home:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "production"
         },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "buildTarget": "adult-family-home:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
-            "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
-            "scripts": []
-          }
-        },
+
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
@@ -136,27 +89,21 @@
                 }
               ],
               "sourceMap": true,
-              "optimization": true
+              "optimization": false
             }
           }
         },
+
         "deploy": {
           "builder": "@angular/fire:deploy",
           "options": {
             "site": "afhdynamicwebsite"
-          }
-        },
-        "deploy-test": {
-          "builder": "@angular/fire:deploy",
-          "options": {
-            "configuration": "test",
-            "site": "afhdynamicwebsite-test"
           }
         }
       }
     }
   },
   "cli": {
-    "analytics": "5fd84e1a-7818-4317-9f11-c625b3e37454"
+    "analytics": false
   }
 }

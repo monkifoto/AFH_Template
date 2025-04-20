@@ -1,4 +1,3 @@
-// functions/sendContactEmail.ts
 import * as functions from 'firebase-functions';
 import * as nodemailer from 'nodemailer';
 import cors from 'cors';

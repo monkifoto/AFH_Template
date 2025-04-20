@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions';
 // import {ssrFunction} from '../../in work/ssr';
-import {sendContactEmail} from './sendContactEmail';
+import {sendContactEmail} from './sendContactEmail.ts_old';
 
 console.log('✅ Exporting SSR and email functions');
 

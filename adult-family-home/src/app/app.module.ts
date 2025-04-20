@@ -90,6 +90,7 @@ import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { LoginComponent } from './admin/login/login.component';
 import { firstValueFrom } from 'rxjs';
+import { BloatingBubblesComponent } from './component/UI/DEMO COMPONENTS/bloating-bubbles/bloating-bubbles.component';
 
 
     // Map hostnames to business IDs
@@ -308,7 +309,8 @@ import { firstValueFrom } from 'rxjs';
     ItemListImageComponent,
     HeroManagerComponent,
     TextWrapperComponent,
-    LoginComponent
+    LoginComponent,
+    BloatingBubblesComponent
   ],
   imports: [
     BrowserModule,
